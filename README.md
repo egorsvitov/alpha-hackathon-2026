@@ -1,6 +1,6 @@
 # Новостная аналитика для бизнеса
 
-Основные папки проекта: `backend/`, `ranking/`, `data/` и `llm/`. Frontend команда добавит отдельно, когда определит структуру.
+Основные папки проекта: `backend/`, `frontend/`, `ranking/`, `data/` и `llm/`.
 
 ```text
 backend/                   # FastAPI-сервис (API для фронтенда и интеграции)
@@ -11,6 +11,7 @@ backend/                   # FastAPI-сервис (API для фронтенда
         schemas/            # Pydantic-схемы (контракт данных)
     main.py                # Точка входа API
     requirements.txt       # Зависимости бэкенда
+frontend/                  # Прототип интерфейса (Vite, React, TypeScript), запуск: frontend/README.md
 ranking/                   # Профили компаний, отбор и ранжирование
     audit_data.py          # Готовая заготовка аудита CSV
 llm/
@@ -78,6 +79,7 @@ uvicorn main:app --reload --port 8000
 
 ## Документация
 
+- [Контракт API для фронтенда](docs/frontend-api-contract.md) и [примеры ответов](docs/api-examples/)
 - [Анализ кейса и план](reports/ANALYSIS_AND_PLAN_RU.md)
 - [Сверка с заданием и ответами организаторов](reports/PLAN_RECHECK_RU.md)
 - [Адаптация SIGMA](reports/SIGMA_MAPPING_RU.md)

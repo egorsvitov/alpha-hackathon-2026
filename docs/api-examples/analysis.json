@@ -1,0 +1,145 @@
+{
+  "run_id": "r_2283712e",
+  "company_id": "SYNTHETIC_U_1042",
+  "profile_version": "p-2026-10-20-a1",
+  "user_role": "cfo",
+  "status": "ok",
+  "generated_by": "live",
+  "event": {
+    "event_id": "e5_coke_supplier",
+    "title": "Поставщик коксующегося угля «КоксРесурс» приостановил отгрузки",
+    "date": "2026-10-17",
+    "topic": "counterparty",
+    "topic_label": "Контрагенты",
+    "sources_count": 2,
+    "is_synthetic": true,
+    "synthetic_link": "Синтетическое соответствие: новость о вымышленном поставщике сопоставлена с компанией по платёжной сети."
+  },
+  "relevance": {
+    "score": 0.84,
+    "level": "high",
+    "explanation": "Связано: ваш крупный поставщик, зависимость отрасли от коксующегося угля",
+    "factors": [
+      { "feature_key": "counterparty:coke_resource", "label": "Контрагент: «КоксРесурс»", "contribution": 0.55, "detail": "событие у значимого контрагента из платёжной сети" },
+      { "feature_key": "industry:metallurgy", "label": "Отрасль: металлургия", "contribution": 0.2, "detail": "коксующийся уголь — ключевое сырьё чёрной металлургии" }
+    ]
+  },
+  "what_happened": {
+    "summary": "Поставщик коксующегося угля приостановил отгрузки из-за аварии на шахте; срок возобновления не назван.",
+    "facts": [
+      { "text": "«КоксРесурс» сообщил о приостановке отгрузок коксующегося угля из-за аварии на шахте.", "evidence_ids": ["n_e5_1"] },
+      { "text": "Срок возобновления отгрузок не назван.", "evidence_ids": ["n_e5_2"] }
+    ]
+  },
+  "why_it_matters": [
+    {
+      "text": "«КоксРесурс» — крупнейший получатель платежей компании в наблюдаемом исходящем потоке: 21% исходящих платежей.",
+      "evidence_ids": [],
+      "features": ["counterparty:coke_resource"]
+    },
+    {
+      "text": "Коксующийся уголь — ключевое сырьё чёрной металлургии: перебои в поставках быстро отражаются на производстве.",
+      "evidence_ids": ["n_e5_1"],
+      "features": ["industry:metallurgy"]
+    }
+  ],
+  "risks": [
+    {
+      "text": "Остановка или сокращение производства, если запасы сырья ограничены, а срок возобновления отгрузок не назван.",
+      "evidence_ids": ["n_e5_2"],
+      "features": ["counterparty:coke_resource"],
+      "conditional": true
+    }
+  ],
+  "opportunities": [
+    {
+      "text": "Диверсифицировать поставщиков сырья; банк может поддержать закупки у новых поставщиков торговым финансированием.",
+      "evidence_ids": [],
+      "features": ["counterparty:coke_resource"],
+      "conditional": true
+    }
+  ],
+  "next_actions": [
+    {
+      "text": "Оценить потребность в дополнительном оборотном финансировании на период замещения поставок.",
+      "evidence_ids": [],
+      "features": ["product.loans"],
+      "roles": ["cfo", "treasurer"]
+    },
+    {
+      "text": "Связаться с поставщиком, уточнить сроки и объёмы; оценить запасы сырья на складах в днях производства.",
+      "evidence_ids": ["n_e5_2"],
+      "features": ["counterparty:coke_resource"],
+      "roles": ["ceo"]
+    }
+  ],
+  "bank_position": null,
+  "ai_conclusion": {
+    "text": "Событие у крупнейшего поставщика важнее для компании, чем общеотраслевые новости: на «КоксРесурс» приходится 21% исходящих платежей. Если запасы ограничены, риск касается производства; в любом случае вырастет потребность в оборотном капитале.",
+    "evidence_ids": ["n_e5_1", "n_e5_2"],
+    "features": ["counterparty:coke_resource", "industry:metallurgy"]
+  },
+  "unknowns": [
+    {
+      "text": "Срок возобновления отгрузок, остатки сырья на складах и наличие альтернативных поставщиков неизвестны.",
+      "how_to_clarify": "Запросить у производственного блока запасы сырья в днях и перечень поставщиков-заменителей.",
+      "question": "На сколько дней хватит запасов и кто может заменить поставщика?"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "n_e5_1",
+      "type": "synthetic",
+      "title": "«КоксРесурс» приостановил отгрузки угля",
+      "publisher": "Отраслевой вестник (демо)",
+      "date": "2026-10-17",
+      "quote": "Компания «КоксРесурс» сообщила о приостановке отгрузок коксующегося угля из-за аварии на шахте.",
+      "is_synthetic": true
+    },
+    {
+      "evidence_id": "n_e5_2",
+      "type": "synthetic",
+      "title": "Авария на шахте: когда возобновят добычу",
+      "publisher": "Деловая лента (демо)",
+      "date": "2026-10-17",
+      "quote": "Срок возобновления отгрузок не назван; потребителям рекомендуют уточнять графики поставок.",
+      "is_synthetic": true
+    },
+    {
+      "evidence_id": "cf:counterparty:coke_resource",
+      "type": "company_feature",
+      "title": "Контрагент: «КоксРесурс»",
+      "publisher": "Профиль компании",
+      "date": null,
+      "doc": "PAYER → BENEFICIARY (платежи)",
+      "quote": "PAYER → BENEFICIARY = 21% наблюдаемого исходящего потока",
+      "is_synthetic": true
+    },
+    {
+      "evidence_id": "cf:industry:metallurgy",
+      "type": "company_feature",
+      "title": "Отрасль: металлургия",
+      "publisher": "Профиль компании",
+      "date": null,
+      "doc": "MAINOKVED_CODE",
+      "quote": "MAINOKVED_CODE = 24.10 Производство чугуна, стали и ферросплавов",
+      "is_synthetic": true
+    },
+    {
+      "evidence_id": "cf:product.loans",
+      "type": "company_feature",
+      "title": "Кредитные продукты",
+      "publisher": "Профиль компании",
+      "date": null,
+      "doc": "CL_PRODUCT_LOA_MARK",
+      "quote": "CL_PRODUCT_LOA_MARK = 1 (есть)",
+      "is_synthetic": true
+    }
+  ],
+  "trace": [
+    { "n": 1, "tool": "get_company_profile", "summary": "Профиль SYNTHETIC_U_1042", "result": "Версия p-2026-10-20-a1; признаков: 8", "status": "ok" },
+    { "n": 2, "tool": "search_bank_research", "summary": "Аналитика банка по теме события", "result": "0 релевантных фрагментов", "status": "retry" },
+    { "n": 3, "tool": "search_bank_research", "summary": "Повторный поиск по смежным темам", "result": "по-прежнему нет — позиция банка не формируется", "status": "warn" },
+    { "n": 4, "tool": "verify", "summary": "Проверка ссылок и чисел", "result": "7 из 8 утверждений подтверждены источниками", "status": "ok" }
+  ]
+}

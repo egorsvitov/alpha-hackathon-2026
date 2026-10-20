@@ -1,0 +1,49 @@
+{
+  "run_id": "r_min_001",
+  "company_id": "SYNTHETIC_U_1042",
+  "profile_version": "p-2026-10-20-a1",
+  "user_role": "cfo",
+  "status": "ok",
+  "generated_by": "live",
+  "event": {
+    "event_id": "e1_key_rate",
+    "title": "Банк России сохранил ключевую ставку на уровне 14%",
+    "date": "2026-09-11",
+    "topic_label": "Ставки и кредит",
+    "sources_count": 1,
+    "is_synthetic": false
+  },
+  "relevance": {
+    "score": 0.6,
+    "level": "high",
+    "explanation": "В профиле есть кредитный продукт",
+    "factors": []
+  },
+  "what_happened": {
+    "summary": "Ставка сохранена на уровне 14%.",
+    "facts": [
+      { "text": "11 сентября 2026 года совет директоров Банка России сохранил ключевую ставку на уровне 14% годовых.", "evidence_ids": ["n1"] }
+    ]
+  },
+  "why_it_matters": [
+    { "text": "У компании есть кредитный продукт, стоимость обслуживания долга в ближайшее время не снизится.", "evidence_ids": ["n1"], "features": ["product.loans"], "conditional": true }
+  ],
+  "risks": [],
+  "opportunities": [],
+  "next_actions": [],
+  "bank_position": null,
+  "ai_conclusion": null,
+  "unknowns": [],
+  "evidence": [
+    {
+      "evidence_id": "n1",
+      "type": "news",
+      "title": "Банк России сохранил ключевую ставку на уровне 14%",
+      "publisher": "Банк России",
+      "date": "2026-09-11",
+      "quote": "Совет директоров принял решение сохранить ключевую ставку на уровне 14% годовых.",
+      "is_synthetic": false
+    }
+  ],
+  "trace": []
+}
