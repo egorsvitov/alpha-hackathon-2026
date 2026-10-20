@@ -17,3 +17,4 @@ __pycache__/
 /data/processed/previews/
 /data/processed/extracted/
 /data/processed/rag_chunks.jsonl
+/data/processed/ranking/

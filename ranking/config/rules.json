@@ -1,0 +1,35 @@
+{
+  "version": "rules-v0.2",
+  "lookback_days": 30,
+  "min_feed_score": 15,
+  "max_per_topic": 2,
+  "priority_override_score": 75,
+  "weights": {
+    "industry": 34, "okved": 42, "region": 14, "country": 18,
+    "direct_entity": 65, "counterparty_base": 20, "counterparty_share": 35,
+    "freshness": 10, "upcoming": 8, "labor_presence": 8, "macro": 4, "lexical": 10
+  },
+  "product_rules": {
+    "key_rate": {"loan": 28, "leasing": 15, "deposit": 20},
+    "leasing": {"leasing": 30},
+    "factoring": {"factoring": 30},
+    "guarantees": {"guarantee": 30}
+  },
+  "mechanism_rules": {
+    "fuel": {"transport": 25},
+    "labor": {"information": 24, "manufacturing": 18, "construction": 18, "transport": 14},
+    "demand": {"trade": 24, "hospitality": 22, "manufacturing": 12},
+    "cyber": {"information": 25},
+    "steel": {"manufacturing": 20, "construction": 15},
+    "weather": {"transport": 15, "agriculture": 20}
+  },
+  "mechanism_missing_fields": {
+    "key_rate": ["interest_rate_type", "loan_balance", "repricing_dates"],
+    "fuel": ["own_fleet", "fuel_cost_share", "tariff_pass_through"],
+    "labor": ["hiring_plan", "staff_cost_share"],
+    "demand": ["customer_segments", "sales_mix"],
+    "trade_restriction": ["customs_flow_direction", "country_exposure_share"],
+    "weather": ["operating_locations", "affected_routes"]
+  },
+  "mechanism_okved_filters": {"steel": ["24", "25", "41", "42", "43"]}
+}

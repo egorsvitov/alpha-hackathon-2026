@@ -99,6 +99,16 @@ No embedding model, neural reranker or multi-agent framework was used.
 
 - data/examples/synthetic_profiles.json: three handcrafted fictional companies.
 - data/examples/synthetic_news.json: one handcrafted fictional news item.
+- data/examples/ranking/events.json: 20 handcrafted fictional messages, including
+  reprints, a material update, a future and an undated publication.
+- data/examples/ranking/labels.json: 48 provisional company/cluster relevance
+  judgments authored by the same coding agent; not expert-reviewed or independent.
+- data/examples/ranking/selection.json: three supplied anonymized company IDs;
+  actual profiles are loaded from the supplied CSV, not invented.
+- ranking/config/rules.json and ranking/lexical.py: authored heuristics and
+  a small authored stop-word list, not trained models or downloaded datasets.
+- ranking/graph.py: implemented aggregation of the supplied payment sample;
+  demo graph probes use explicit synthetic ID mapping only.
 - llm/agent/contracts/insight.example.json: handwritten contract example, not LLM output.
 - llm/agent/model_policy.json: proposed routing/budget configuration, not an
   implemented gateway.

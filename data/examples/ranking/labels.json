@@ -1,0 +1,303 @@
+{
+  "status": "provisional_not_expert_reviewed",
+  "independent_benchmark": false,
+  "author": "coding_agent",
+  "warning": "Метки и baseline подготовлены одним агентом. Нужны независимая проверка аналитиком и отдельный скрытый набор. Метки не вычислены формулой скоринга.",
+  "rubric": {
+    "0": "Существенная связь по доступному контексту не выявлена",
+    "1": "Возможная косвенная связь",
+    "2": "Понятный условный механизм",
+    "3": "Обоснованный высокий приоритет",
+    "null": "Недостаточно информации для оценки"
+  },
+  "labels": [
+    {
+      "company_id": "U_3263",
+      "cluster_id": "fuel",
+      "grade": 3,
+      "rationale": "Перевозки: вероятна топливная чувствительность, но собственный парк неизвестен."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "fuel",
+      "grade": 0,
+      "rationale": "Нет прямой связи с ПО по доступным признакам."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "fuel",
+      "grade": 1,
+      "rationale": "Возможен косвенный транспортный эффект, структура затрат неизвестна."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "rate",
+      "grade": 1,
+      "rationale": "Есть лизинг, но тип ставки и договоры неизвестны."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "rate",
+      "grade": 1,
+      "rationale": "Общий макроконтекст без отмеченного продукта."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "rate",
+      "grade": 3,
+      "rationale": "В записи есть кредит и лизинг, требуется проверка договоров."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "labor",
+      "grade": 2,
+      "rationale": "Известна численность; возможна конкуренция за труд."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "labor",
+      "grade": 3,
+      "rationale": "Трудоемкая разработка ПО, но планы найма неизвестны."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "labor",
+      "grade": 2,
+      "rationale": "Известна численность; возможное влияние на персонал."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "demand",
+      "grade": 1,
+      "rationale": "Косвенная зависимость от спроса грузоотправителей не раскрыта."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "demand",
+      "grade": 1,
+      "rationale": "Зависимость от конечного спроса клиентов неизвестна."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "demand",
+      "grade": 3,
+      "rationale": "Основная деятельность — торговля бытовыми товарами."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "software_tax",
+      "grade": 0,
+      "rationale": "Указанные коды 62/63 не совпадают с основной деятельностью."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "software_tax",
+      "grade": 3,
+      "rationale": "ОКВЭД 62.01 прямо входит в заданный охват."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "software_tax",
+      "grade": 0,
+      "rationale": "В охвате нет торгового ОКВЭД."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "cyber",
+      "grade": 0,
+      "rationale": "Не указан отдельный охват перевозок."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "cyber",
+      "grade": 3,
+      "rationale": "Прямо затронуты программные сервисы."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "cyber",
+      "grade": 1,
+      "rationale": "Специфическая зависимость от программных сервисов не раскрыта."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "china",
+      "grade": 0,
+      "rationale": "В сведениях ФТС указан Азербайджан, связь с Китаем не наблюдается."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "china",
+      "grade": 0,
+      "rationale": "Данных о торговле с Китаем нет."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "china",
+      "grade": 3,
+      "rationale": "Китай указан в сведениях ФТС; направление и доля неизвестны."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "azer",
+      "grade": 2,
+      "rationale": "Азербайджан указан в сведениях ФТС."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "azer",
+      "grade": 0,
+      "rationale": "Данных об Азербайджане нет."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "azer",
+      "grade": 0,
+      "rationale": "В сведениях ФТС указаны другие страны."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "weather_tatar",
+      "grade": 2,
+      "rationale": "Совпадают отрасль и регион регистрации; маршруты неизвестны."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "weather_tatar",
+      "grade": 0,
+      "rationale": "Не наблюдается связь с грузоперевозками Татарстана."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "weather_tatar",
+      "grade": 0,
+      "rationale": "Не наблюдается соответствующая связь."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "moscow_power",
+      "grade": 0,
+      "rationale": "Зарегистрирована в другом регионе, места операций неизвестны."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "moscow_power",
+      "grade": 1,
+      "rationale": "Москва — регион регистрации, точная зона отключений неизвестна."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "moscow_power",
+      "grade": 1,
+      "rationale": "Москва — регион регистрации, точная зона отключений неизвестна."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "leasing",
+      "grade": 2,
+      "rationale": "В банковской записи есть лизинг."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "leasing",
+      "grade": 0,
+      "rationale": "Лизинг в банковской записи не отмечен."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "leasing",
+      "grade": 2,
+      "rationale": "В банковской записи есть лизинг."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "pharma",
+      "grade": 0,
+      "rationale": "Не совпадает основная деятельность."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "pharma",
+      "grade": 0,
+      "rationale": "Не совпадает основная деятельность."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "pharma",
+      "grade": 0,
+      "rationale": "Оптовая торговля бытовыми товарами не равна оптовой торговле лекарствами."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "steel",
+      "grade": 0,
+      "rationale": "Прямой механизм по доступным данным не установлен."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "steel",
+      "grade": 0,
+      "rationale": "Прямой механизм по доступным данным не установлен."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "steel",
+      "grade": 0,
+      "rationale": "Торговая компания не относится к указанным кодам."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "sports",
+      "grade": 0,
+      "rationale": "По доступным данным связи с футболом нет."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "sports",
+      "grade": 0,
+      "rationale": "По доступным данным связи с футболом нет."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "sports",
+      "grade": 0,
+      "rationale": "По доступным данным связи с футболом нет."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "company_notice",
+      "grade": 3,
+      "rationale": "В тесте явно сопоставлен тот же ID; это только синтетический сценарий."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "company_notice",
+      "grade": 0,
+      "rationale": "Другой ID, связи не загружены."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "company_notice",
+      "grade": 0,
+      "rationale": "Другой ID, связи не загружены."
+    },
+    {
+      "company_id": "U_3263",
+      "cluster_id": "old_effective",
+      "grade": 2,
+      "rationale": "Есть лизинг; изменение скоро вступает в силу."
+    },
+    {
+      "company_id": "U_44792",
+      "cluster_id": "old_effective",
+      "grade": 0,
+      "rationale": "Лизинг не отмечен."
+    },
+    {
+      "company_id": "U_1941",
+      "cluster_id": "old_effective",
+      "grade": 2,
+      "rationale": "Есть лизинг; изменение скоро вступает в силу."
+    }
+  ]
+}

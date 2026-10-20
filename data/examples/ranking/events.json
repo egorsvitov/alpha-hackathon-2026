@@ -1,0 +1,280 @@
+{
+  "dataset_status": "handcrafted_synthetic_not_live_news",
+  "as_of": "2026-10-20T18:00:00+03:00",
+  "events": [
+    {
+      "event_id": "fuel",
+      "cluster_id": "fuel",
+      "version": 1,
+      "title": "Рост цен на топливо",
+      "text": "Синтетическое тестовое сообщение: Рост цен на топливо. Это вымышленное событие, не реальная новость.",
+      "event_type": "fuel",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/fuel",
+      "synthetic": true,
+      "industries": [
+        "transport"
+      ]
+    },
+    {
+      "event_id": "rate",
+      "cluster_id": "rate",
+      "version": 1,
+      "title": "Сохранение ключевой ставки",
+      "text": "Синтетическое тестовое сообщение: Сохранение ключевой ставки. Это вымышленное событие, не реальная новость.",
+      "event_type": "key_rate",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/rate",
+      "synthetic": true
+    },
+    {
+      "event_id": "labor",
+      "cluster_id": "labor",
+      "version": 1,
+      "title": "Усиление конкуренции за работников",
+      "text": "Синтетическое тестовое сообщение: Усиление конкуренции за работников. Это вымышленное событие, не реальная новость.",
+      "event_type": "labor",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/labor",
+      "synthetic": true
+    },
+    {
+      "event_id": "demand",
+      "cluster_id": "demand",
+      "version": 1,
+      "title": "Замедление потребительского спроса",
+      "text": "Синтетическое тестовое сообщение: Замедление потребительского спроса. Это вымышленное событие, не реальная новость.",
+      "event_type": "demand",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/demand",
+      "synthetic": true,
+      "industries": [
+        "trade",
+        "hospitality"
+      ]
+    },
+    {
+      "event_id": "software_tax",
+      "cluster_id": "software_tax",
+      "version": 1,
+      "title": "Изменение отчетности разработчиков ПО",
+      "text": "Синтетическое тестовое сообщение: Изменение отчетности разработчиков ПО. Это вымышленное событие, не реальная новость.",
+      "event_type": "regulation",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/software_tax",
+      "synthetic": true,
+      "okved_prefixes": [
+        "62",
+        "63"
+      ],
+      "effective_at": "2026-10-23T00:00:00+03:00"
+    },
+    {
+      "event_id": "cyber",
+      "cluster_id": "cyber",
+      "version": 1,
+      "title": "Новый обязательный порядок защиты программных сервисов",
+      "text": "Синтетическое тестовое сообщение: Новый обязательный порядок защиты программных сервисов. Это вымышленное событие, не реальная новость.",
+      "event_type": "cyber",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/cyber",
+      "synthetic": true,
+      "industries": [
+        "information"
+      ]
+    },
+    {
+      "event_id": "china",
+      "cluster_id": "china",
+      "version": 1,
+      "title": "Новые правила оформления торговли с Китаем",
+      "text": "Синтетическое тестовое сообщение: Новые правила оформления торговли с Китаем. Это вымышленное событие, не реальная новость.",
+      "event_type": "trade_restriction",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/china",
+      "synthetic": true,
+      "countries": [
+        "КИТАЙ"
+      ],
+      "industries": [
+        "trade"
+      ]
+    },
+    {
+      "event_id": "azer",
+      "cluster_id": "azer",
+      "version": 1,
+      "title": "Изменение таможенного оформления по Азербайджану",
+      "text": "Синтетическое тестовое сообщение: Изменение таможенного оформления по Азербайджану. Это вымышленное событие, не реальная новость.",
+      "event_type": "trade_restriction",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/azer",
+      "synthetic": true,
+      "countries": [
+        "АЗЕРБАЙДЖАН"
+      ]
+    },
+    {
+      "event_id": "weather_tatar",
+      "cluster_id": "weather_tatar",
+      "version": 1,
+      "title": "Ограничения движения грузовиков в Татарстане",
+      "text": "Синтетическое тестовое сообщение: Ограничения движения грузовиков в Татарстане. Это вымышленное событие, не реальная новость.",
+      "event_type": "weather",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/weather_tatar",
+      "synthetic": true,
+      "regions": [
+        "Республика Татарстан"
+      ]
+    },
+    {
+      "event_id": "moscow_power",
+      "cluster_id": "moscow_power",
+      "version": 1,
+      "title": "Плановые ограничения электроснабжения в Москве",
+      "text": "Синтетическое тестовое сообщение: Плановые ограничения электроснабжения в Москве. Это вымышленное событие, не реальная новость.",
+      "event_type": "infrastructure",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/moscow_power",
+      "synthetic": true,
+      "regions": [
+        "Москва"
+      ]
+    },
+    {
+      "event_id": "leasing",
+      "cluster_id": "leasing",
+      "version": 1,
+      "title": "Новые требования к лизинговым договорам",
+      "text": "Синтетическое тестовое сообщение: Новые требования к лизинговым договорам. Это вымышленное событие, не реальная новость.",
+      "event_type": "leasing",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/leasing",
+      "synthetic": true
+    },
+    {
+      "event_id": "pharma",
+      "cluster_id": "pharma",
+      "version": 1,
+      "title": "Изменение правил оптового оборота лекарств",
+      "text": "Синтетическое тестовое сообщение: Изменение правил оптового оборота лекарств. Это вымышленное событие, не реальная новость.",
+      "event_type": "regulation",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/pharma",
+      "synthetic": true,
+      "okved_prefixes": [
+        "46.46"
+      ]
+    },
+    {
+      "event_id": "steel",
+      "cluster_id": "steel",
+      "version": 1,
+      "title": "Изменение требований к стальным конструкциям",
+      "text": "Синтетическое тестовое сообщение: Изменение требований к стальным конструкциям. Это вымышленное событие, не реальная новость.",
+      "event_type": "steel",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/steel",
+      "synthetic": true,
+      "okved_prefixes": [
+        "24",
+        "25",
+        "41",
+        "42",
+        "43"
+      ]
+    },
+    {
+      "event_id": "sports",
+      "cluster_id": "sports",
+      "version": 1,
+      "title": "Результат товарищеского футбольного матча",
+      "text": "Синтетическое тестовое сообщение: Результат товарищеского футбольного матча. Это вымышленное событие, не реальная новость.",
+      "event_type": "sports",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/sports",
+      "synthetic": true
+    },
+    {
+      "event_id": "company_notice",
+      "cluster_id": "company_notice",
+      "version": 1,
+      "title": "Сообщение по синтетически сопоставленному ID U_3263",
+      "text": "Синтетическое тестовое сообщение: Сообщение по синтетически сопоставленному ID U_3263. Это вымышленное событие, не реальная новость.",
+      "event_type": "counterparty",
+      "published_at": "2026-10-19T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/company_notice",
+      "synthetic": true,
+      "entity_ids": [
+        "U_3263"
+      ],
+      "entity_resolution": "synthetic"
+    },
+    {
+      "event_id": "old_effective",
+      "cluster_id": "old_effective",
+      "version": 1,
+      "title": "Ранее опубликованные требования к лизингу вступают в силу",
+      "text": "Синтетическое тестовое сообщение: Ранее опубликованные требования к лизингу вступают в силу. Это вымышленное событие, не реальная новость.",
+      "event_type": "leasing",
+      "published_at": "2026-09-01T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/old_effective",
+      "synthetic": true,
+      "effective_at": "2026-10-22T00:00:00+03:00"
+    },
+    {
+      "event_id": "future",
+      "cluster_id": "future",
+      "version": 1,
+      "title": "Еще не опубликованное событие о топливе",
+      "text": "Синтетическое тестовое сообщение: Еще не опубликованное событие о топливе. Это вымышленное событие, не реальная новость.",
+      "event_type": "fuel",
+      "published_at": "2026-10-21T12:00:00+03:00",
+      "source_id": "synthetic://ranking-test/future",
+      "synthetic": true,
+      "industries": [
+        "transport"
+      ]
+    },
+    {
+      "event_id": "undated",
+      "cluster_id": "undated",
+      "version": 1,
+      "title": "Сообщение без установленной даты публикации",
+      "text": "Синтетическое тестовое сообщение: Сообщение без установленной даты публикации. Это вымышленное событие, не реальная новость.",
+      "event_type": "key_rate",
+      "published_at": null,
+      "source_id": "synthetic://ranking-test/undated",
+      "synthetic": true
+    },
+    {
+      "event_id": "fuel_copy",
+      "cluster_id": "fuel",
+      "version": 1,
+      "title": "Перепечатка сообщения о топливе",
+      "text": "Синтетическое тестовое сообщение: Перепечатка сообщения о топливе. Это вымышленное событие, не реальная новость.",
+      "event_type": "fuel",
+      "published_at": "2026-10-19T13:00:00+03:00",
+      "source_id": "synthetic://ranking-test/fuel_copy",
+      "synthetic": true,
+      "industries": [
+        "transport"
+      ]
+    },
+    {
+      "event_id": "fuel_update",
+      "cluster_id": "fuel",
+      "version": 2,
+      "title": "Уточнение масштаба изменения цен на топливо",
+      "text": "Синтетическое тестовое сообщение: Уточнение масштаба изменения цен на топливо. Это вымышленное событие, не реальная новость.",
+      "event_type": "fuel",
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "source_id": "synthetic://ranking-test/fuel_update",
+      "synthetic": true,
+      "industries": [
+        "transport"
+      ]
+    }
+  ]
+}
