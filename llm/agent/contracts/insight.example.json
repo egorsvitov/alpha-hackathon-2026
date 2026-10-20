@@ -1,0 +1,137 @@
+{
+  "schema_version": "0.1",
+  "run_id": "manual-contract-example-001",
+  "company_id": "DEMO_MANUFACTURER",
+  "user_role": "cfo",
+  "as_of": "2026-09-14T10:00:00+03:00",
+  "status": "limited",
+  "event_id": "DEMO_RATE_PAUSE",
+  "changes_since_previous": {
+    "status": "unknown",
+    "previous_insight_id": null,
+    "summary": "В этом ручном примере история прежних показов пользователю не загружалась.",
+    "claim_ids": []
+  },
+  "significance": {
+    "score": 0.8,
+    "level": "high",
+    "method": "manual_synthetic_example_not_calibrated_probability",
+    "reasons": [
+      "В синтетическом профиле есть кредитный продукт."
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "C1",
+      "section": "what_happened",
+      "kind": "source_fact",
+      "text": "В синтетической тестовой новости ставка сохранена на уровне 14%.",
+      "source_ids": [
+        "N1"
+      ],
+      "feature_ids": [],
+      "assumptions": [],
+      "support_status": "supported"
+    },
+    {
+      "claim_id": "C2",
+      "section": "bank_view",
+      "kind": "bank_view",
+      "text": "В предоставленном материале от 11 сентября банк пересмотрел прогноз ставки на конец 2026 года до 14%.",
+      "source_ids": [
+        "B1"
+      ],
+      "feature_ids": [],
+      "assumptions": [],
+      "support_status": "supported"
+    },
+    {
+      "claim_id": "C3",
+      "section": "risk",
+      "kind": "ai_inference",
+      "text": "Если стоимость долга пересматривается вслед за ключевой ставкой, сценарий ее быстрого снижения в бюджете компании требует проверки. Наличие кредитного продукта не раскрывает условия договора.",
+      "source_ids": [
+        "B1",
+        "N1"
+      ],
+      "feature_ids": [
+        "F_LOAN"
+      ],
+      "assumptions": [
+        "Чувствительность действующего долга зависит от неизвестных условий ставки и пересмотра."
+      ],
+      "support_status": "conditional"
+    },
+    {
+      "claim_id": "C4",
+      "section": "next_step",
+      "kind": "ai_inference",
+      "text": "Уточнить тип ставки, даты пересмотра и объем долга, затем сопоставить договорные условия со сценарием бюджета.",
+      "source_ids": [
+        "B1"
+      ],
+      "feature_ids": [
+        "F_LOAN"
+      ],
+      "assumptions": [
+        "Условия договора отсутствуют в текущем профиле."
+      ],
+      "support_status": "conditional"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "N1",
+      "type": "synthetic_news",
+      "locator": "data/examples/synthetic_news.json",
+      "published_at": "2026-09-11T15:00:00+03:00",
+      "quote": "Тестовая новость: ключевая ставка сохранена на уровне 14%.",
+      "verification_status": "synthetic"
+    },
+    {
+      "source_id": "B1",
+      "type": "bank_analytics",
+      "locator": "data/analytics/ALFA-Macro_Insights-Policy_Rate_11Sep.pdf#page=1",
+      "published_at": "2026-09-11",
+      "document_sha256": "92a96805f2b720f76bd0c52d2491044812b38401ab62d0f4a9157b4ca81c49bb",
+      "chunk_id": "92a96805f2b7:p1:3731-5257:e396dfaa",
+      "page": 1,
+      "quote": "теперь мы ожидаем ее сохранения на текущем значении 14,0% до конца года.",
+      "verification_status": "visually_checked_excerpt"
+    }
+  ],
+  "features_used": [
+    {
+      "feature_id": "F_LOAN",
+      "path": "products.loan",
+      "value": true,
+      "origin": {
+        "file": "data/examples/synthetic_profiles.json",
+        "company_id": "DEMO_MANUFACTURER",
+        "profile_version": "demo-v1"
+      },
+      "quality": "synthetic"
+    }
+  ],
+  "limitations": [
+    "Пример написан вручную; LLM и агент не запускались.",
+    "Новость и профиль синтетические.",
+    "Неизвестны тип ставки, объем долга и даты пересмотра.",
+    "Полный OCR-чанк остается pending_review; проверен только используемый фрагмент первой страницы."
+  ],
+  "trace": {
+    "artifact_ids": [
+      "data/examples/synthetic_news.json",
+      "data/examples/synthetic_profiles.json",
+      "data/processed/rag_chunks.jsonl"
+    ],
+    "qa_status": "not_run",
+    "retry_count": 0
+  },
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_rub": 0,
+    "pricing_status": "no_llm_calls"
+  }
+}
