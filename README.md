@@ -77,6 +77,22 @@ uvicorn main:app --reload --port 8000
 
 Интерактивная Swagger-документация: `http://localhost:8000/docs`
 
+## Запуск Frontend (Vite + React)
+
+Нужен Node.js 20 или новее. Из папки `frontend/`:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Интерфейс откроется на `http://localhost:5173`. По умолчанию он работает на моках в браузере, backend и ключ LLM не нужны.
+
+Чтобы подключить backend, скопируйте `frontend/.env.example` в `frontend/.env` и поставьте `VITE_API_MODE=http`. Адрес API берётся из `VITE_API_URL` (по умолчанию `http://localhost:8000`), сам backend запускается по инструкции выше. Какие данные и в каком виде фронт ждёт от backend, описано в [docs/frontend-api-contract.md](docs/frontend-api-contract.md). Пока заглушки backend отдают ответы в старом формате, так что для демо лучше оставить режим `mock`.
+
+Подробнее: [frontend/README.md](frontend/README.md).
+
 ## Документация
 
 - [Контракт API для фронтенда](docs/frontend-api-contract.md) и [примеры ответов](docs/api-examples/)
