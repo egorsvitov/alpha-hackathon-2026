@@ -61,6 +61,16 @@ export function SignificanceBadge({ level }: { level: SignificanceLevel }) {
   );
 }
 
+/** Плитка-иконка в углу карточки (как на тёмных карточках сайта банка). */
+export function IconTile({ tone = 'neutral', children }: { tone?: 'neutral' | 'cyan' | 'lime' | 'salmon' | 'peach' | 'blue' | 'violet' | 'red' | 'dark'; children: ReactNode }) {
+  return <span className={`icon-tile icon-tile--${tone}`} aria-hidden>{children}</span>;
+}
+
+/** Небольшая «таблетка» с белой подложкой на цветных карточках. */
+export function Pill({ children, tone }: { children: ReactNode; tone?: 'warn' | 'info' | 'dark' }) {
+  return <span className={`pill${tone ? ` pill--${tone}` : ''}`}>{children}</span>;
+}
+
 /* ---------------- Мелкие элементы ---------------- */
 
 export function Badge({ tone = 'neutral', children, icon }: { tone?: 'neutral' | 'info' | 'warning' | 'success' | 'ai' | 'error'; children: ReactNode; icon?: ReactNode }) {
@@ -85,7 +95,7 @@ export function FeedSkeleton({ count = 4 }: { count?: number }) {
     <div className="feed-list" aria-busy="true">
       <p className="sr-only" role="status">Загружаем события…</p>
       {Array.from({ length: count }).map((_, i) => (
-        <div className="feed-row feed-row--skeleton" key={i} aria-hidden>
+        <div className="topic-card topic-card--skeleton" key={i} aria-hidden>
           <Skeleton h={14} w={140} r={4} />
           <Skeleton h={26} w="80%" />
           <Skeleton h={16} w="55%" />
