@@ -48,10 +48,10 @@ export function FeedPage() {
           </div>
         )}
 
-        <div className="tabs" role="group" aria-label="Фильтр по значимости">
+        <div className="segmented segmented--wide" role="group" aria-label="Фильтр по значимости">
           {FILTERS.map((f) => (
-            <button type="button" key={f.id} className="tab" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
-              {f.label}{items ? <span className="tab__n">{counts[f.id]}</span> : null}
+            <button type="button" key={f.id} className="segmented__item" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
+              {f.label}{items ? <span className="segmented__n">{counts[f.id]}</span> : null}
             </button>
           ))}
         </div>
@@ -67,7 +67,7 @@ export function FeedPage() {
           />
         )}
         {!loading && !error && shown.length > 0 && (
-          <div className="feed-list">
+          <div className="feed-grid">
             {shown.map((it, i) => <FeedCard key={it.event.event_id} item={it} lead={i === 0 && filter === 'all'} read={readEvents.has(it.event.event_id)} />)}
           </div>
         )}
@@ -75,8 +75,8 @@ export function FeedPage() {
       </div>
 
       <aside className="feed-aside">
-        <section aria-labelledby="prof-title">
-          <h2 id="prof-title" className="section-label">Что мы знаем о вашей компании</h2>
+        <section className="profile-card" aria-labelledby="prof-title">
+          <h2 id="prof-title" className="sec-title">Что мы знаем о вашей компании</h2>
           <dl className="facts">
             {company && profileChips(company).map((c) => {
               const i = c.label.indexOf(': ');

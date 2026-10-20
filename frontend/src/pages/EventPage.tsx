@@ -1,24 +1,15 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
-import { Link2, MessageCircleQuestion, ThumbsDown, ThumbsUp, TriangleAlert } from 'lucide-react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link2, ListChecks, MessageCircleQuestion, Newspaper, Target, ThumbsDown, ThumbsUp, TrendingUp, TriangleAlert } from 'lucide-react';
 import { api } from '../api';
 import { href } from '../router';
 import { useApp, useAsync } from '../store';
 import { CiteContext, ClaimList } from '../components/Claims';
-import { AiBlock, BankBlock, RelevanceBadge, SourcesPanel, TraceBlock, UnknownBlock } from '../components/EventBlocks';
+import { AiBlock, BankBlock, RelevanceBadge, Sec, SourcesPanel, TraceBlock, UnknownBlock } from '../components/EventBlocks';
 import { fmtShort, plural } from '../components/FeedCard';
+import { TopicArt } from '../components/Illustrations';
 import { QaPanel, type Seed } from '../components/QaPanel';
-import { Button, ErrorState, Skeleton, StateBlock } from '../components/ui';
+import { Button, ErrorState, Pill, Skeleton, StateBlock } from '../components/ui';
 import { readEvents } from './readState';
-
-/** Раздел записки: слева метка, справа содержание. На узких экранах метка встаёт над текстом. */
-function Row({ id, label, children, tone }: { id: string; label: string; children: ReactNode; tone?: 'bank' | 'ai' | 'unknown' }) {
-  return (
-    <section className={`rowsec${tone ? ` rowsec--${tone}` : ''}`} aria-labelledby={id}>
-      <h2 id={id} className="rowsec__label">{label}</h2>
-      <div className="rowsec__body">{children}</div>
-    </section>
-  );
-}
 
 export function EventPage({ eventId }: { eventId: string }) {
   const { company, role } = useApp();
@@ -52,83 +43,72 @@ export function EventPage({ eventId }: { eventId: string }) {
       {loading && (
         <div className="stack gap-24" aria-busy="true">
           <p className="sr-only" role="status">Готовим интерпретацию…</p>
-          <Skeleton h={14} w={220} r={4} /><Skeleton h={40} w="75%" /><Skeleton h={20} w="45%" />
-          <Skeleton h={120} r={12} /><Skeleton h={160} r={12} />
+          <Skeleton h={220} r={40} /><Skeleton h={140} r={32} /><Skeleton h={180} r={32} />
         </div>
       )}
       {error && <ErrorState message={error} onRetry={reload} />}
 
       {ins && (
         <CiteContext.Provider value={{ evidence: ins.evidence, onCite, role }}>
+          {ins.generated_by === 'cached' && (
+            <div className="note note--info" role="status"><span>Новые выводы AI временно недоступны, показан сохранённый результат.</span></div>
+          )}
+
+          <header className="event-hero" data-topic={ins.event.topic}>
+            <div className="event-hero__text">
+              <div className="event-hero__meta">
+                <RelevanceBadge rel={ins.relevance} />
+                <Pill>{fmtShort(ins.event.date)}</Pill>
+                <Pill>{ins.event.topic_label}</Pill>
+                <Pill>{ins.event.sources_count} {plural(ins.event.sources_count, 'публикация', 'публикации', 'публикаций')}</Pill>
+                {ins.event.is_synthetic && !ins.event.user_uploaded && <Pill tone="warn">демо-данные</Pill>}
+                {ins.event.user_uploaded && <Pill tone="info">загружено вами</Pill>}
+              </div>
+              <h1 className="event-title">{ins.event.title}</h1>
+              <p className="event-why">{ins.relevance.explanation}</p>
+            </div>
+            <div className="event-hero__art" aria-hidden><TopicArt topic={ins.event.topic} /></div>
+          </header>
+          {ins.event.synthetic_link && (
+            <p className="note note--warn" role="note"><Link2 size={16} aria-hidden /><span>{ins.event.synthetic_link}</span></p>
+          )}
+
           <div className="event-grid">
             <article className="event-main">
-              {ins.generated_by === 'cached' && (
-                <div className="note note--info" role="status"><span>Новые выводы AI временно недоступны, показан сохранённый результат.</span></div>
-              )}
-
-              <header className="event-head">
-                <div className="event-head__meta">
-                  <RelevanceBadge rel={ins.relevance} />
-                  <span>{fmtShort(ins.event.date)}</span>
-                  <span>{ins.event.topic_label}</span>
-                  <span>{ins.event.sources_count} {plural(ins.event.sources_count, 'публикация', 'публикации', 'публикаций')}{ins.event.dedup_note ? `, объединены` : ''}</span>
-                  {ins.event.is_synthetic && !ins.event.user_uploaded && <span className="tag-note">демо-данные</span>}
-                  {ins.event.user_uploaded && <span className="tag-note tag-note--info">загружено вами</span>}
-                </div>
-                <h1 className="event-title">{ins.event.title}</h1>
-                <p className="lead muted event-why">{ins.relevance.explanation}</p>
-                {ins.event.synthetic_link && (
-                  <p className="note note--warn" role="note"><Link2 size={16} aria-hidden /><span>{ins.event.synthetic_link}</span></p>
-                )}
-              </header>
-
               {ins.status === 'insufficient_data' ? (
-                <Row id="h-ins" label="Недостаточно данных" tone="unknown">
-                  <p className="lead">Вывод не сформирован.</p>
+                <section className="sec sec--unknown" aria-labelledby="h-ins">
+                  <h2 id="h-ins" className="sec__title">Недостаточно данных для вывода</h2>
                   <p>Что есть: {ins.what_happened.summary}</p>
                   <p>Чего не хватает: связи события с признаками вашей компании и подтверждающей аналитики банка.</p>
                   <ul className="unknown-list">
                     {ins.unknowns.map((u, i) => <li key={i}><p className="small muted">{u.how_to_clarify ?? u.text}</p></li>)}
                   </ul>
                   <Button variant="secondary" onClick={() => ask('Почему это событие не связано с моей компанией?')}>Уточнить</Button>
-                </Row>
+                </section>
               ) : (
                 <>
-                  <Row id="h-what" label="Что случилось">
+                  <Sec id="h-what" title="Что случилось" icon={<Newspaper size={22} />}>
                     <ClaimList claims={ins.what_happened.facts} />
-                  </Row>
+                  </Sec>
 
-                  <Row id="h-why" label="Почему важно вам">
+                  <Sec id="h-why" title="Почему важно вам" icon={<Target size={22} />}>
                     <ClaimList claims={ins.why_it_matters} />
-                  </Row>
+                  </Sec>
 
-                  <Row id="h-risk" label="Риски">
-                    <ClaimList claims={ins.risks} tone="risk" empty="Существенных рисков для вашей компании не выявлено." />
-                  </Row>
+                  <Sec id="h-risk" title="Риски" icon={<TriangleAlert size={22} />}>
+                      <ClaimList claims={ins.risks} tone="risk" empty="Существенных рисков для вашей компании не выявлено." />
+                    </Sec>
+                    <Sec id="h-opp" title="Возможности" icon={<TrendingUp size={22} />}>
+                      <ClaimList claims={ins.opportunities} tone="opp" empty="Явных возможностей не выявлено." />
+                    </Sec>
 
-                  <Row id="h-opp" label="Возможности">
-                    <ClaimList claims={ins.opportunities} tone="opp" empty="Явных возможностей не выявлено." />
-                  </Row>
-
-                  <Row id="h-next" label="Следующий шаг">
+                  <Sec id="h-next" title="Следующий шаг" icon={<ListChecks size={22} />}>
                     <ClaimList claims={ins.next_actions} className="steps" empty="Конкретных действий не сформировано: связь с профилем слабая." />
-                  </Row>
+                  </Sec>
 
-                  <Row id="h-bank" label="Позиция банка" tone="bank">
-                    <BankBlock data={ins.bank_position} />
-                  </Row>
-
-                  {ins.ai_conclusion && (
-                    <Row id="h-ai" label="Вывод AI" tone="ai">
-                      <AiBlock data={ins.ai_conclusion} />
-                    </Row>
-                  )}
-
-                  {ins.unknowns.length > 0 && (
-                    <Row id="h-unk" label="Что неизвестно" tone="unknown">
-                      <UnknownBlock items={ins.unknowns} onAsk={ask} />
-                    </Row>
-                  )}
+                  <BankBlock data={ins.bank_position} />
+                  {ins.ai_conclusion && <AiBlock data={ins.ai_conclusion} />}
+                  {ins.unknowns.length > 0 && <UnknownBlock items={ins.unknowns} onAsk={ask} />}
                 </>
               )}
 
@@ -143,7 +123,7 @@ export function EventPage({ eventId }: { eventId: string }) {
             </article>
 
             <aside className="event-aside">
-              <Button variant="primary" size="l" block icon={<MessageCircleQuestion size={20} aria-hidden />} onClick={() => setQaOpen(true)} className="ask-btn">Задать вопрос</Button>
+              <Button variant="primary" size="xl" block icon={<MessageCircleQuestion size={20} aria-hidden />} onClick={() => setQaOpen(true)} className="ask-btn">Задать вопрос</Button>
               <SourcesPanel evidence={ins.evidence} highlight={highlight} />
             </aside>
           </div>

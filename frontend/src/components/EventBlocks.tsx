@@ -1,59 +1,91 @@
-import { useState } from 'react';
-import { ChevronDown, Sparkles } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+import { ChevronDown, HelpCircle, Landmark, Sparkles } from 'lucide-react';
 import type { Evidence, Insight, TraceStep } from '../types';
 import { fmtDate } from './FeedCard';
 import { Basis, Cites } from './Claims';
-import { SignificanceBadge, usePopover } from './ui';
+import { ArtSpark } from './Illustrations';
+import { IconTile, SignificanceBadge, usePopover } from './ui';
 
-/* Содержимое блоков; заголовки-метки ставит страница (EventPage → Row). */
+/* ---------------- Раздел-карточка с плиткой-иконкой ---------------- */
 
-/* ---------------- Позиция банка: цитата с засечками и красной линией ---------------- */
+export function Sec({ id, title, icon, children, className = '' }: { id: string; title: string; icon: ReactNode; children: ReactNode; className?: string }) {
+  return (
+    <section className={`sec ${className}`} aria-labelledby={id}>
+      <header className="sec__head">
+        <h2 id={id} className="sec__title">{title}</h2>
+        <IconTile tone="neutral">{icon}</IconTile>
+      </header>
+      <div className="sec__body">{children}</div>
+    </section>
+  );
+}
+
+/* ---------------- Позиция банка: красная фирменная карточка ---------------- */
 
 export function BankBlock({ data }: { data: Insight['bank_position'] }) {
   if (!data) {
-    return <p className="muted">Позиции банка по этому событию в доступных материалах нет. Мы не формируем её за банк — выводы ниже принадлежат модели.</p>;
+    return (
+      <section className="sec sec--bank-empty" aria-labelledby="h-bank">
+        <header className="sec__head">
+          <h2 id="h-bank" className="sec__title">Позиция банка</h2>
+          <IconTile tone="neutral"><Landmark size={22} /></IconTile>
+        </header>
+        <p className="muted">Позиции банка по этому событию в доступных материалах нет. Мы не формируем её за банк: выводы ниже принадлежат модели.</p>
+      </section>
+    );
   }
   return (
-    <figure className="bank-quote">
-      <blockquote>
+    <section className="sec sec--bank" aria-labelledby="h-bank">
+      <div className="sec--bank__art" aria-hidden><ArtSpark /></div>
+      <p className="bank-label"><Landmark size={16} aria-hidden /> Позиция Альфа-Банка</p>
+      <h2 id="h-bank" className="sr-only">Позиция банка</h2>
+      <blockquote className="bank-quote">
         {data.claims.map((c, i) => (
           <p key={i} className={i === 0 ? 'bank-quote__lead' : ''}>{c.text}<Cites ids={c.evidence_ids} /></p>
         ))}
       </blockquote>
-      <figcaption>
-        Аналитика Альфа-Банка{data.as_of ? ` · по состоянию на ${fmtDate(data.as_of)}` : ''}
-        <span className="bank-quote__demo"> · в демо тексты — иллюстрация, не материалы банка</span>
-      </figcaption>
-    </figure>
+      <p className="bank-meta">
+        Аналитика Альфа-Банка{data.as_of ? ` · по состоянию на ${fmtDate(data.as_of)}` : ''} · в демо тексты — иллюстрация, не материалы банка
+      </p>
+    </section>
   );
 }
 
-/* ---------------- Вывод AI: обычный текст с фиолетовой линией и явной пометкой ---------------- */
+/* ---------------- Вывод AI: светлая карточка с фиолетовой рамкой и пометкой ---------------- */
 
 export function AiBlock({ data }: { data: NonNullable<Insight['ai_conclusion']> }) {
   return (
-    <div className="ai-note">
-      <p className="ai-note__label"><Sparkles size={14} aria-hidden /> Вывод AI — не позиция банка</p>
-      <p>{data.text}<Cites ids={data.evidence_ids} /></p>
+    <section className="sec sec--ai" aria-labelledby="h-ai">
+      <header className="sec__head">
+        <h2 id="h-ai" className="sec__title">Вывод AI</h2>
+        <span className="ai-flag"><Sparkles size={14} aria-hidden /> не позиция банка</span>
+      </header>
+      <p className="sec__text">{data.text}<Cites ids={data.evidence_ids} /></p>
       <Basis keys={data.features} />
-      <p className="small muted ai-note__disclaimer">Сгенерировано моделью на основе указанных источников и может содержать ошибки.</p>
-    </div>
+      <p className="small muted">Сгенерировано моделью на основе указанных источников и может содержать ошибки.</p>
+    </section>
   );
 }
 
-/* ---------------- Что неизвестно ---------------- */
+/* ---------------- Что неизвестно: пунктирная карточка ---------------- */
 
 export function UnknownBlock({ items, onAsk }: { items: Insight['unknowns']; onAsk(q: string): void }) {
   return (
-    <ul className="unknown-list">
-      {items.map((u, i) => (
-        <li key={i}>
-          <p>{u.text}</p>
-          {u.how_to_clarify && <p className="small muted">Как уточнить: {u.how_to_clarify}</p>}
-          {u.question && <button type="button" className="link-btn" onClick={() => onAsk(u.question!)}>Спросить об этом</button>}
-        </li>
-      ))}
-    </ul>
+    <section className="sec sec--unknown" aria-labelledby="h-unk">
+      <header className="sec__head">
+        <h2 id="h-unk" className="sec__title">Что неизвестно</h2>
+        <IconTile tone="neutral"><HelpCircle size={22} /></IconTile>
+      </header>
+      <ul className="unknown-list">
+        {items.map((u, i) => (
+          <li key={i}>
+            <p>{u.text}</p>
+            {u.how_to_clarify && <p className="small muted">Как уточнить: {u.how_to_clarify}</p>}
+            {u.question && <button type="button" className="ask-chip" onClick={() => onAsk(u.question!)}>Спросить об этом</button>}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
@@ -71,7 +103,7 @@ export function SourcesPanel({ evidence, highlight }: { evidence: Evidence[]; hi
   const feats = evidence.filter((e) => e.type === 'company_feature');
   return (
     <section className="sources" aria-labelledby="h-src">
-      <h2 id="h-src" className="section-label">Источники · {docs.length}</h2>
+      <h2 id="h-src" className="sec-title">Источники · {docs.length}</h2>
       <ol className="source-list">
         {docs.map((e, i) => (
           <li key={e.evidence_id} id={`src-${e.evidence_id}`} className={`source${highlight === e.evidence_id ? ' is-highlight' : ''}`}>
@@ -89,7 +121,7 @@ export function SourcesPanel({ evidence, highlight }: { evidence: Evidence[]; hi
       </ol>
       {feats.length > 0 && (
         <>
-          <h3 className="section-label sources__sub">Признаки клиента</h3>
+          <h3 className="sec-title sources__sub">Признаки клиента</h3>
           <ul className="feature-sources">
             {feats.map((e) => (
               <li key={e.evidence_id} className="small"><span className="medium">{e.title}</span><code>{e.quote}</code></li>

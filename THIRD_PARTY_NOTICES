@@ -90,7 +90,6 @@ frontend/package-lock.json; transitive packages are listed there too.
 - TypeScript 5.9.3, Apache-2.0. https://github.com/microsoft/TypeScript
 - lucide-react 1.60.0 (icons), ISC. https://github.com/lucide-icons/lucide
 - @fontsource-variable/inter 5.3.0 (Inter font), OFL-1.1. https://github.com/fontsource/font-files
-- @fontsource-variable/literata 5.3.0 (Literata font), OFL-1.1. https://github.com/fontsource/font-files
 
 Node.js 20 or newer is needed to build; it is not distributed with the project.
 Visual style was derived from public alfabank.ru pages; the bank's proprietary font,
@@ -124,6 +123,8 @@ No embedding model, neural reranker or multi-agent framework was used.
   All of it is marked as synthetic in the interface. Bank quotes there are invented
   illustrations, not text from the supplied PDFs. The only real text is the 11 September 2026
   key-rate example taken from the case brief.
+- frontend/src/components/Illustrations.tsx: original SVG illustrations drawn by the team;
+  no bank artwork is copied.
 - frontend/src/api/mock/: in-browser mock of the backend used when VITE_API_MODE=mock.
 - The online-banking home screen, accounts and payments in the frontend are a mock-up of the
   bank interface, not an integration.

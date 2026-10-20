@@ -20,7 +20,7 @@ button, input, textarea, select { font: inherit; letter-spacing: inherit; color:
 button { cursor: pointer; background: none; border: 0; padding: 0; }
 a { color: var(--color-link); text-decoration: none; }
 a:hover { color: var(--color-link-hover); }
-code { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: .9em; }
+code { font-family: inherit; font-size: inherit; color: var(--color-text-secondary); }
 time { white-space: nowrap; }
 
 :focus { outline: none; }
@@ -50,7 +50,7 @@ time { white-space: nowrap; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .link-btn { color: var(--color-link); font-size: var(--text-small-size); line-height: var(--text-small-lh); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; text-align: left; }
-.link-btn:hover { color: var(--color-link-hover); text-decoration: underline; }
+.link-btn:hover { color: var(--color-link-hover); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

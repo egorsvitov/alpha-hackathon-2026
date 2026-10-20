@@ -4,9 +4,10 @@ import { useApp } from '../store';
 import { roleLabel } from '../data/companies';
 import { useFeed } from './Shell';
 import { plural } from './FeedCard';
+import { ArtChart } from './Illustrations';
 import { ErrorState, SignalMark, SIG_LABEL, Skeleton } from './ui';
 
-/** Точка входа на главном экране (критерий 09): светлый блок с крупной цифрой, sticky справа. */
+/** Точка входа на главном экране (критерий 09): яркая пастельная карточка, sticky справа. */
 export function NewsWidget() {
   const { company, role } = useApp();
   const { items, loading, error, reload } = useFeed();
@@ -15,18 +16,23 @@ export function NewsWidget() {
 
   return (
     <section className="news-widget" aria-labelledby="nw-title">
-      <p className="overline widget-eyebrow">Новости и аналитика</p>
-      <h2 id="nw-title" className="widget-title">
-        {loading || error ? 'События для вас' : high > 0
-          ? <><span className="widget-num">{high}</span> {plural(high, 'важное событие', 'важных события', 'важных событий')} для вас</>
-          : 'Важных событий нет'}
-      </h2>
-      <p className="small widget-sub">{company?.name} · {role ? roleLabel(role) : ''}</p>
+      <div className="news-widget__top">
+        <div className="news-widget__head">
+          <p className="widget-eyebrow">Новости и аналитика</p>
+          <h2 id="nw-title" className="widget-title">
+            {loading || error ? 'События для вас' : high > 0
+              ? <><span className="widget-num">{high}</span> {plural(high, 'важное событие', 'важных события', 'важных событий')} для вас</>
+              : 'Важных событий нет'}
+          </h2>
+          <p className="small widget-sub">{company?.name} · {role ? roleLabel(role) : ''}</p>
+        </div>
+        <div className="news-widget__art" aria-hidden><ArtChart /></div>
+      </div>
 
       {loading && (
-        <div className="stack gap-16" aria-busy="true">
+        <div className="widget-list" aria-busy="true">
           <p className="sr-only" role="status">Загружаем события…</p>
-          {[0, 1, 2].map((i) => (<div key={i} className="stack gap-8"><Skeleton h={14} w={80} /><Skeleton h={18} w="90%" /></div>))}
+          {[0, 1, 2].map((i) => (<div key={i} className="widget-item widget-item--skeleton"><Skeleton h={14} w={80} /><Skeleton h={18} w="90%" /></div>))}
         </div>
       )}
 
