@@ -1,0 +1,53 @@
+[
+  {
+    "company_id": "SYNTHETIC_U_1042",
+    "name": "ООО «Уралметпром»",
+    "industry": "Металлургия",
+    "okved_code": "24.10",
+    "okved_name": "Производство чугуна, стали и ферросплавов",
+    "stage": "Зрелый бизнес",
+    "revenue_bn_rub": 62.4,
+    "age_label": "Более 20 лет",
+    "workers_label": "5 000 – 10 000 человек",
+    "region": "Челябинская область",
+    "city": "Челябинск",
+    "products": {
+      "rko": true,
+      "guarantees": true,
+      "loans": true,
+      "leasing": true,
+      "deposits": false,
+      "payroll": true,
+      "factoring": false
+    },
+    "fts": { "flag": true, "country": "Казахстан" },
+    "group_id": "GRP-0317",
+    "counterparties": [
+      { "name": "ООО «КоксРесурс»", "direction": "out", "share_pct": 21, "note": "поставщик коксующегося угля" },
+      { "name": "ООО «МеталлТрейд Холдинг»", "direction": "in", "share_pct": 17, "note": "оптовый покупатель" }
+    ],
+    "feature_keys": ["product.loans", "product.leasing", "fts", "industry:metallurgy"],
+    "profile_version": "p-2026-10-20-a1",
+    "is_synthetic": true
+  },
+  {
+    "company_id": "SYNTHETIC_U_3305",
+    "name": "ПАО «Нордфуд Ритейл»",
+    "industry": "Розничная торговля продуктами",
+    "revenue_bn_rub": 41.8,
+    "age_label": "10 – 20 лет",
+    "region": "Санкт-Петербург",
+    "products": {
+      "rko": true,
+      "guarantees": false,
+      "loans": false,
+      "leasing": null,
+      "deposits": true,
+      "payroll": true,
+      "factoring": false
+    },
+    "fts": { "flag": false, "country": null },
+    "profile_version": "p-2026-10-20-a1",
+    "is_synthetic": true
+  }
+]
