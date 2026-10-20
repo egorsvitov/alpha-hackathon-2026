@@ -1,0 +1,100 @@
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import type { CompanyProfile, DemoSettings, Role } from './types';
+import { api, demoSettings } from './api';
+import { COMPANIES } from './data/companies';
+
+type Theme = 'light' | 'dark';
+const KEY = 'alfa-news-demo-state-v1';
+
+interface Persisted { companyId: string | null; role: Role | null; theme: Theme }
+
+const read = (): Persisted => {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) return JSON.parse(raw) as Persisted;
+  } catch { /* localStorage недоступен */ }
+  const dark = typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+  return { companyId: null, role: null, theme: dark ? 'dark' : 'light' };
+};
+
+interface AppState {
+  companies: CompanyProfile[];
+  company: CompanyProfile | null;
+  role: Role | null;
+  theme: Theme;
+  demo: DemoSettings;
+  /** увеличивается при загрузке новой новости — лента и виджет перезапрашиваются */
+  feedVersion: number;
+  select(companyId: string, role: Role): void;
+  setRole(role: Role): void;
+  setCompany(companyId: string): void;
+  toggleTheme(): void;
+  updateDemo(patch: Partial<DemoSettings>): void;
+  bumpFeed(): void;
+}
+
+const Ctx = createContext<AppState | null>(null);
+
+export function AppProvider({ children }: { children: ReactNode }) {
+  const [p, setP] = useState<Persisted>(read);
+  const [companies, setCompanies] = useState<CompanyProfile[]>(COMPANIES);
+  const [demo, setDemo] = useState<DemoSettings>({ ...demoSettings });
+  const [feedVersion, setFeedVersion] = useState(0);
+
+  useEffect(() => {
+    api.getCompanies().then(setCompanies).catch(() => undefined);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = p.theme;
+    try { localStorage.setItem(KEY, JSON.stringify(p)); } catch { /* ignore */ }
+  }, [p]);
+
+  const value = useMemo<AppState>(
+    () => ({
+      companies,
+      company: companies.find((c) => c.company_id === p.companyId) ?? null,
+      role: p.role,
+      theme: p.theme,
+      demo,
+      feedVersion,
+      select: (companyId, role) => setP((s) => ({ ...s, companyId, role })),
+      setRole: (role) => setP((s) => ({ ...s, role })),
+      setCompany: (companyId) => setP((s) => ({ ...s, companyId })),
+      toggleTheme: () => setP((s) => ({ ...s, theme: s.theme === 'light' ? 'dark' : 'light' })),
+      updateDemo: (patch) => {
+        Object.assign(demoSettings, patch);
+        setDemo({ ...demoSettings });
+      },
+      bumpFeed: () => setFeedVersion((v) => v + 1),
+    }),
+    [companies, p, demo, feedVersion],
+  );
+
+  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+}
+
+export function useApp(): AppState {
+  const v = useContext(Ctx);
+  if (!v) throw new Error('AppProvider отсутствует');
+  return v;
+}
+
+/* ---------- простой async-хук ---------- */
+
+export function useAsync<T>(fn: () => Promise<T>, deps: unknown[]) {
+  const [state, setState] = useState<{ data: T | null; error: string | null; loading: boolean }>({ data: null, error: null, loading: true });
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    let alive = true;
+    setState((s) => ({ ...s, loading: true, error: null }));
+    fn().then(
+      (data) => alive && setState({ data, error: null, loading: false }),
+      (e: unknown) => alive && setState({ data: null, error: e instanceof Error ? e.message : 'Неизвестная ошибка', loading: false }),
+    );
+    return () => { alive = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...deps, tick]);
+  const reload = useCallback(() => setTick((t) => t + 1), []);
+  return { ...state, reload };
+}

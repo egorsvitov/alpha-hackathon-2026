@@ -1,0 +1,414 @@
+/*
+ * tokens.css — дизайн-токены прототипа «Новости и аналитика» в стиле Альфа-Бизнеса.
+ * Источник каждого значения указан в пометках ниже.
+ * Пометки в комментариях:
+ *   [HTML]  — значение взято из CSS материалов 1.html / 2.html / 3.html дословно;
+ *   [SCR]   — измерено по скриншоту, приблизительно;
+ *   [ВЫВ]   — выведено (нет в референсах или заменено ради WCAG AA).
+ * Шрифт Alfa Interface Sans проприетарный — не подключаем, используем Inter (Google Fonts).
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---------- Шрифты ---------- */
+  --font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* [ВЫВ] замена Alfa Interface Sans; хвост фоллбэков — [HTML] */
+  --font-weight-regular: 400;   /* [HTML] */
+  --font-weight-medium: 500;    /* [HTML] */
+  --font-weight-semibold: 600;  /* [HTML] */
+  --font-weight-bold: 700;      /* [HTML] */
+  --font-numeric: tabular-nums; /* [ВЫВ] для сумм и дат в таблицах */
+
+  /* Типошкала: size / line-height / letter-spacing — [HTML], классы типографики сайта */
+  --text-display-size: 48px;  --text-display-lh: 52px; --text-display-ls: 0.1px;   /* h1 маркетинговых страниц */
+  --text-h1-size: 40px;       --text-h1-lh: 48px;      --text-h1-ls: 0.1px;        /* h2 разделов сайта */
+  --text-h2-size: 30px;       --text-h2-lh: 36px;      --text-h2-ls: 0.1px;
+  --text-h3-size: 22px;       --text-h3-lh: 26px;      --text-h3-ls: 0.2px;
+  --text-h4-size: 18px;       --text-h4-lh: 24px;      --text-h4-ls: 0.38px;
+  --text-lead-size: 18px;     --text-lead-lh: 24px;    --text-lead-ls: -0.36px;
+  --text-body-size: 16px;     --text-body-lh: 24px;    --text-body-ls: -0.24px;
+  --text-body-medium-ls: -0.05px;                                                  /* 16px / 500: кнопки 48–56, навигация */
+  --text-small-size: 14px;    --text-small-lh: 20px;   --text-small-ls: -0.08px;
+  --text-small-medium-ls: 0.07px;                                                  /* 14px / 500: кнопки 32–40, ссылки */
+  --text-caption-size: 12px;  --text-caption-lh: 16px; --text-caption-ls: 0.06px;
+  --text-overline-size: 12px; --text-overline-lh: 16px; --text-overline-ls: 1.25px; /* uppercase, заголовки колонок футера */
+  --text-micro-size: 11px;    --text-micro-lh: 16px;   --text-micro-ls: 0.15px;
+  --text-badge-size: 12px;    --text-badge-lh: 16px;   --text-badge-ls: 0.19px;    /* статус 20px, weight 500 */
+
+  /* ---------- Отступы (шаг из утилит отступов сайта) — [HTML] ---------- */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-72: 72px;
+  --space-96: 96px;
+  --space-128: 128px;
+
+  /* ---------- Сетка и раскладка ---------- */
+  --container-max: 1140px;       /* [HTML] */
+  --grid-columns: 12;            /* [ВЫВ] 12 × 73px + 11 × 24px = 1140 */
+  --grid-gutter: 24px;           /* [HTML] gap между карточками */
+  --page-gutter-mobile: 16px;    /* [ВЫВ] */
+  --page-gutter-tablet: 24px;    /* [ВЫВ] */
+  --site-header-h: 104px;        /* [HTML] шапка сайта */
+  --app-header-h: 64px;          /* [ВЫВ] шапка интернет-банка */
+  --app-sidebar-w: 248px;        /* [ВЫВ] */
+  --app-sidebar-w-collapsed: 72px; /* [ВЫВ] */
+  --qa-panel-w: 420px;           /* [ВЫВ] панель уточняющего вопроса */
+  --control-h-s: 32px;           /* [HTML] размеры кнопок */
+  --control-h-m: 40px;
+  --control-h-l: 48px;
+  --control-h-xl: 56px;
+
+  /* ---------- Радиусы — [HTML] ---------- */
+  --radius-4: 4px;
+  --radius-6: 6px;    /* бейдж-статус */
+  --radius-8: 8px;    /* кнопка 32 */
+  --radius-10: 10px;  /* кнопки 40 и 48 */
+  --radius-12: 12px;  /* кнопка 56 */
+  --radius-16: 16px;
+  --radius-24: 24px;  /* карточка */
+  --radius-32: 32px;  /* крупная карточка, секция-форма */
+  --radius-64: 64px;  /* скругление «листа» страницы */
+  --radius-pill: 99px;
+
+  /* ---------- Границы, тени, движение ---------- */
+  --border-width: 1px;                                                            /* [HTML] */
+  --shadow-raised: 0 12px 16px rgba(0,0,0,.04), 0 4px 8px rgba(0,0,0,.04), 0 0 1px rgba(0,0,0,.04); /* [HTML] */
+  --shadow-popover: 0 16px 32px rgba(0,0,0,.08), 0 4px 8px rgba(0,0,0,.04), 0 0 1px rgba(0,0,0,.08); /* [ВЫВ] */
+  --shadow-inset-border: inset 0 0 0 1px rgba(228,228,228,.9);                   /* [HTML] */
+  --focus-ring-width: 2px;   /* [ВЫВ] */
+  --focus-ring-offset: 2px;  /* [ВЫВ] */
+  --duration-fast: 50ms;     /* [HTML] смена цвета ссылки */
+  --duration-base: 200ms;    /* [HTML] кнопки */
+  --duration-slow: 300ms;    /* [HTML] */
+  --easing-base: ease;       /* [HTML] */
+  --icon-size-s: 16px;       /* [ВЫВ] */
+  --icon-size-m: 24px;       /* [SCR] */
+  --icon-stroke: 2px;        /* [SCR] */
+
+  /* ---------- Цвета: фоны и поверхности ---------- */
+  --color-bg-page: #ffffff;              /* [HTML] */
+  --color-bg-surface: #f2f3f5;           /* [HTML] фон карточек */
+  --color-bg-surface-hover: #edeef0;     /* [HTML] hover аккордеона */
+  --color-bg-surface-strong: #e7e8ea;    /* [HTML] inline-стиль, контекст не установлен */
+  --color-bg-elevated: #ffffff;          /* [HTML] поповеры, карточки поверх серого */
+  --color-bg-inverted: #121213;          /* [HTML] шапка, тёмные карточки */
+  --color-bg-inverted-raised: #1c1c1e;   /* [HTML] */
+  --color-bg-overlay: rgba(18,18,19,.48);/* [ВЫВ] подложка модалки/панели */
+
+  /* ---------- Цвета: границы ---------- */
+  --color-border: #d5d6dc;                 /* [HTML] */
+  --color-border-subtle: rgba(228,228,228,.9); /* [HTML] */
+  --color-border-control: rgba(3,3,6,.352);    /* [HTML] подчёркивание ссылки/поля */
+  --color-border-control-hover: rgba(3,3,6,.704); /* [HTML] */
+  --color-border-dashed: #b6bcc3;          /* [HTML] цвет из скелетона; применение — [ВЫВ] */
+
+  /* ---------- Цвета: текст ---------- */
+  --color-text-primary: rgba(3,3,6,.88);     /* [HTML] ≈ #212124, 16.1:1 на белом */
+  --color-text-secondary: rgba(3,3,6,.616);  /* [HTML] ≈ #646466, 5.9:1 на белом, 5.7:1 на #f2f3f5 */
+  --color-text-tertiary: rgba(4,4,19,.55);   /* [HTML] 4.57:1 на белом; на #f2f3f5 — 4.43, только ≥18px */
+  --color-text-disabled: rgba(5,8,29,.38);   /* [HTML] */
+  --color-text-on-inverted: rgba(255,255,255,.94);           /* [HTML] */
+  --color-text-on-inverted-secondary: rgba(238,238,251,.55); /* [HTML] 5.5:1 на #121213 */
+  --color-text-on-accent: #ffffff;           /* [ВЫВ] на сайте .94-белый; чистый белый нужен для AA */
+  --color-link: #1f63d1;                     /* [ВЫВ] у сайта #2a77ef (4.2:1, не AA) → затемнено до 5.6:1 */
+  --color-link-hover: #ef3124;               /* [HTML] ссылки футера краснеют на hover */
+
+  /* ---------- Акцент (бренд) ---------- */
+  --color-accent: #ef3124;          /* [HTML] фирменный красный: логотипные/декоративные метки, полоса «позиции банка» */
+  --color-accent-hover: #e32a17;    /* [HTML] */
+  --color-accent-active: #d72505;   /* [HTML] */
+
+  /* ---------- Кнопки ---------- */
+  --button-primary-bg: #e32a17;          /* [ВЫВ] сайт: #ef3124 + белый .94 = 3.8:1; #e32a17 + #fff = 4.56:1 */
+  --button-primary-bg-hover: #d72505;    /* [HTML] active сайта */
+  --button-primary-bg-active: #c51f06;   /* [ВЫВ] */
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: rgba(15,25,55,.1);         /* [HTML] */
+  --button-secondary-bg-hover: rgba(5,12,41,.14);   /* [HTML] */
+  --button-secondary-bg-active: rgba(5,11,44,.18);  /* [HTML] */
+  --button-secondary-text: rgba(3,3,6,.88);         /* [HTML] */
+  --button-ghost-bg-hover: rgba(38,55,88,.06);      /* [HTML] */
+  --button-ghost-bg-active: rgba(30,43,68,.08);     /* [HTML] */
+  --button-text-hover: rgba(1,1,12,.63);            /* [HTML] текстовая кнопка */
+  --button-text-active: rgba(4,4,19,.55);           /* [HTML] */
+  --button-disabled-bg: rgba(38,55,88,.06);         /* [HTML] */
+  --button-disabled-text: rgba(5,8,29,.38);         /* [HTML] */
+  --segmented-track-bg: rgba(30,43,68,.08);         /* [HTML] */
+  --segmented-item-hover-bg: rgba(15,25,55,.1);     /* [HTML] */
+  --segmented-active-bg: #212124;                   /* [HTML] */
+  --segmented-active-text: rgba(255,255,255,.94);   /* [HTML] */
+
+  /* ---------- Поле ввода ---------- */
+  --input-bg: #f2f3f5;                         /* [SCR] материал скрин 5 */
+  --input-bg-hover: #edeef0;                   /* [ВЫВ] по hover аккордеона */
+  --input-border: rgba(3,3,6,.352);            /* [ВЫВ] по подчёркиванию ссылок */
+  --input-border-focus: rgba(3,3,6,.88);       /* [ВЫВ] */
+
+  /* ---------- Фокус ---------- */
+  --color-focus-ring: #1f63d1;                 /* [ВЫВ] в CSS сайта фокус-стилей нет */
+
+  /* ---------- Семантика ---------- */
+  --color-success: #0cc44d;          /* [HTML] заливка «contrast» */
+  --color-success-bg: #d1f1d7;       /* [HTML] */
+  --color-success-text: #0b7a2e;     /* [ВЫВ] у сайта #0d9336 (3.3:1 на фоне) → 4.5:1 */
+  --color-warning: #fa9313;          /* [HTML] inline border; как текст не годится (2.3:1) */
+  --color-warning-bg: #ffefd9;       /* [HTML] inline-фон */
+  --color-warning-text: #8a4b00;     /* [ВЫВ] 6.0:1 на фоне */
+  --color-error: #ef3124;            /* [HTML] = акцент */
+  --color-error-bg: #ffdbd8;         /* [HTML] inline-фон */
+  --color-error-text: #b3200f;       /* [ВЫВ] 5.2:1 на фоне, 6.7:1 на белом */
+  --color-info-bg: #e4f0ff;          /* [HTML] inline-фон */
+  --color-info-text: #1f5fbf;        /* [ВЫВ] 5.3:1 на фоне */
+  --color-neutral-marker: #898991;   /* [HTML] иконка стрелки карусели */
+
+  /* ---------- Значимость события ---------- */
+  --sig-high-bg: var(--color-error-bg);
+  --sig-high-text: var(--color-error-text);
+  --sig-high-marker: var(--color-accent);
+  --sig-medium-bg: var(--color-warning-bg);
+  --sig-medium-text: var(--color-warning-text);
+  --sig-medium-marker: var(--color-warning);
+  --sig-low-bg: var(--color-bg-surface);
+  --sig-low-text: var(--color-text-secondary);
+  --sig-low-marker: var(--color-neutral-marker);
+
+  /* ---------- Позиция банка / вывод AI / неизвестное / источники ---------- */
+  --bank-bg: var(--color-bg-inverted);               /* [ВЫВ] по тёмным промо-карточкам сайта */
+  --bank-text: var(--color-text-on-inverted);
+  --bank-text-secondary: var(--color-text-on-inverted-secondary);
+  --bank-bar: var(--color-accent);
+  --bank-label: #ff6b5e;                             /* [ВЫВ] 6.1–6.9:1 на тёмном */
+  --ai-bg: #f7f6ff;                                  /* [ВЫВ] */
+  --ai-border: #c9c1fb;                              /* [ВЫВ] */
+  --ai-label-bg: #e3e6fe;                            /* [HTML] статус purple muted */
+  --ai-label-text: #5a43d6;                          /* [ВЫВ] у сайта #7a63f1 (3.5:1) → 5.3:1 */
+  --ai-accent: #897eff;                              /* [HTML] статус purple contrast */
+  --unknown-bg: transparent;
+  --unknown-border: var(--color-border-dashed);
+  --unknown-text: var(--color-text-secondary);
+  --source-highlight-bg: var(--color-info-bg);       /* подсветка источника по клику */
+  --source-highlight-ring: var(--color-info-text);
+
+  /* ---------- Скелетон ---------- */
+  --skeleton-base: #f2f3f5;                          /* [ВЫВ] */
+  --skeleton-shine: #e7e8ea;                         /* [HTML]-цвет; применение — [ВЫВ] */
+  --skeleton-duration: 1.5s;                         /* [ВЫВ] */
+
+  /* ---------- Промо-пастели (только для декоративных плашек категорий) — [HTML] inline ---------- */
+  --pastel-salmon: #fcb1a7;
+  --pastel-green: #bff0a8;
+  --pastel-peach: #ffe5c7;
+  --pastel-cyan: #9df2f5;
+  --pastel-lime: #eaffb3;
+  --pastel-blue: #d6e6ff;
+}
+
+/* ===================== Тёмная тема ===================== */
+/* Значения с [HTML] взяты из тёмных секций сайта (шапка, меню, футер, тёмные кнопки).
+   Всё остальное — [ВЫВ]. */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg-page: #121213;                  /* [HTML] */
+  --color-bg-surface: #1c1c1e;               /* [HTML] */
+  --color-bg-surface-hover: #27272a;         /* [HTML] inline rgb(39,39,42) */
+  --color-bg-surface-strong: #2d2d2f;        /* [ВЫВ] = rgba(222,222,238,.13) поверх #121213 */
+  --color-bg-elevated: #27272a;              /* [ВЫВ] */
+  --color-bg-inverted: #f2f3f5;              /* [ВЫВ] */
+  --color-bg-inverted-raised: #ffffff;       /* [ВЫВ] */
+  --color-bg-overlay: rgba(0,0,0,.6);        /* [ВЫВ] */
+
+  --color-border: #36363a;                   /* [HTML] */
+  --color-border-subtle: #2d2d2f;            /* [ВЫВ] */
+  --color-border-control: rgba(255,255,255,.376);   /* [HTML] */
+  --color-border-control-hover: rgba(255,255,255,.752); /* [HTML] */
+  --color-border-dashed: #49494f;            /* [HTML] */
+
+  --color-text-primary: rgba(255,255,255,.94);        /* [HTML] 16.6:1 на #121213 */
+  --color-text-secondary: rgba(238,238,251,.55);      /* [HTML] 5.5:1 на #121213, 5.0:1 на #27272a */
+  --color-text-tertiary: rgba(255,255,255,.564);      /* [HTML] */
+  --color-text-disabled: rgba(233,233,250,.37);       /* [HTML] */
+  --color-text-on-inverted: rgba(3,3,6,.88);          /* [ВЫВ] */
+  --color-text-on-inverted-secondary: rgba(3,3,6,.616);
+  --color-text-on-accent: #ffffff;
+  --color-link: #5c9dff;                     /* [ВЫВ] 6.9:1 */
+  --color-link-hover: #ff6b5e;               /* [ВЫВ] */
+
+  --color-accent: #f83a2a;                   /* [HTML] тёмная кнопка primary */
+  --color-accent-hover: #ff503e;             /* [HTML] */
+  --color-accent-active: #fd624e;            /* [HTML] */
+
+  --button-primary-bg: #e32a17;              /* [ВЫВ] у тёмной кнопки сайта #f83a2a + белый = 3.7:1 */
+  --button-primary-bg-hover: #f83a2a;        /* [HTML] */
+  --button-primary-bg-active: #d72505;       /* [ВЫВ] */
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: rgba(222,222,238,.13);      /* [HTML] */
+  --button-secondary-bg-hover: rgba(234,234,248,.15);/* [HTML] */
+  --button-secondary-bg-active: rgba(231,231,248,.18); /* [HTML] */
+  --button-secondary-text: rgba(255,255,255,.94);    /* [HTML] */
+  --button-ghost-bg-hover: rgba(234,234,248,.08);    /* [ВЫВ] */
+  --button-ghost-bg-active: rgba(231,231,248,.12);   /* [ВЫВ] */
+  --button-text-hover: rgba(255,255,255,.7);         /* [HTML] */
+  --button-text-active: rgba(238,238,251,.55);       /* [HTML] */
+  --button-disabled-bg: rgba(214,214,229,.07);       /* [HTML] */
+  --button-disabled-text: rgba(233,233,250,.37);     /* [HTML] */
+  --segmented-track-bg: rgba(222,222,238,.13);       /* [ВЫВ] */
+  --segmented-item-hover-bg: rgba(234,234,248,.15);  /* [ВЫВ] */
+  --segmented-active-bg: #f2f3f5;                    /* [ВЫВ] */
+  --segmented-active-text: rgba(3,3,6,.88);          /* [ВЫВ] */
+
+  --input-bg: #1c1c1e;
+  --input-bg-hover: #27272a;
+  --input-border: rgba(255,255,255,.376);            /* [HTML] */
+  --input-border-focus: rgba(255,255,255,.94);
+
+  --color-focus-ring: #5c9dff;
+
+  --color-success: #0cc44d;
+  --color-success-bg: #12301d;
+  --color-success-text: #7fe0a0;
+  --color-warning: #fa9313;
+  --color-warning-bg: #33260f;
+  --color-warning-text: #ffc56b;
+  --color-error: #f83a2a;
+  --color-error-bg: #3d1714;
+  --color-error-text: #ffb3ab;
+  --color-info-bg: #172338;
+  --color-info-text: #9fc2ff;
+  --color-neutral-marker: #898991;
+
+  --sig-low-bg: #27272a;
+  --sig-low-text: #d0d0d6;
+
+  --bank-bg: #27272a;
+  --bank-text: rgba(255,255,255,.94);
+  --bank-text-secondary: rgba(238,238,251,.55);
+  --bank-bar: #f83a2a;
+  --bank-label: #ff6b5e;
+  --ai-bg: #1b1930;
+  --ai-border: #3b3470;
+  --ai-label-bg: #231f3d;
+  --ai-label-text: #b9adff;
+  --ai-accent: #897eff;
+
+  --skeleton-base: #1c1c1e;
+  --skeleton-shine: #27272a;
+
+  --shadow-raised: 0 12px 16px rgba(0,0,0,.24), 0 4px 8px rgba(0,0,0,.24), 0 0 1px rgba(255,255,255,.08);
+  --shadow-popover: 0 16px 32px rgba(0,0,0,.4), 0 0 1px rgba(255,255,255,.12);
+  --shadow-inset-border: inset 0 0 0 1px #36363a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-bg-page: #121213;
+    --color-bg-surface: #1c1c1e;
+    --color-bg-surface-hover: #27272a;
+    --color-bg-surface-strong: #2d2d2f;
+    --color-bg-elevated: #27272a;
+    --color-bg-inverted: #f2f3f5;
+    --color-bg-inverted-raised: #ffffff;
+    --color-bg-overlay: rgba(0,0,0,.6);
+
+    --color-border: #36363a;
+    --color-border-subtle: #2d2d2f;
+    --color-border-control: rgba(255,255,255,.376);
+    --color-border-control-hover: rgba(255,255,255,.752);
+    --color-border-dashed: #49494f;
+
+    --color-text-primary: rgba(255,255,255,.94);
+    --color-text-secondary: rgba(238,238,251,.55);
+    --color-text-tertiary: rgba(255,255,255,.564);
+    --color-text-disabled: rgba(233,233,250,.37);
+    --color-text-on-inverted: rgba(3,3,6,.88);
+    --color-text-on-inverted-secondary: rgba(3,3,6,.616);
+    --color-text-on-accent: #ffffff;
+    --color-link: #5c9dff;
+    --color-link-hover: #ff6b5e;
+
+    --color-accent: #f83a2a;
+    --color-accent-hover: #ff503e;
+    --color-accent-active: #fd624e;
+
+    --button-primary-bg: #e32a17;
+    --button-primary-bg-hover: #f83a2a;
+    --button-primary-bg-active: #d72505;
+    --button-primary-text: #ffffff;
+    --button-secondary-bg: rgba(222,222,238,.13);
+    --button-secondary-bg-hover: rgba(234,234,248,.15);
+    --button-secondary-bg-active: rgba(231,231,248,.18);
+    --button-secondary-text: rgba(255,255,255,.94);
+    --button-ghost-bg-hover: rgba(234,234,248,.08);
+    --button-ghost-bg-active: rgba(231,231,248,.12);
+    --button-text-hover: rgba(255,255,255,.7);
+    --button-text-active: rgba(238,238,251,.55);
+    --button-disabled-bg: rgba(214,214,229,.07);
+    --button-disabled-text: rgba(233,233,250,.37);
+    --segmented-track-bg: rgba(222,222,238,.13);
+    --segmented-item-hover-bg: rgba(234,234,248,.15);
+    --segmented-active-bg: #f2f3f5;
+    --segmented-active-text: rgba(3,3,6,.88);
+
+    --input-bg: #1c1c1e;
+    --input-bg-hover: #27272a;
+    --input-border: rgba(255,255,255,.376);
+    --input-border-focus: rgba(255,255,255,.94);
+
+    --color-focus-ring: #5c9dff;
+
+    --color-success: #0cc44d;
+    --color-success-bg: #12301d;
+    --color-success-text: #7fe0a0;
+    --color-warning: #fa9313;
+    --color-warning-bg: #33260f;
+    --color-warning-text: #ffc56b;
+    --color-error: #f83a2a;
+    --color-error-bg: #3d1714;
+    --color-error-text: #ffb3ab;
+    --color-info-bg: #172338;
+    --color-info-text: #9fc2ff;
+    --color-neutral-marker: #898991;
+
+    --sig-low-bg: #27272a;
+    --sig-low-text: #d0d0d6;
+
+    --bank-bg: #27272a;
+    --bank-text: rgba(255,255,255,.94);
+    --bank-text-secondary: rgba(238,238,251,.55);
+    --bank-bar: #f83a2a;
+    --bank-label: #ff6b5e;
+    --ai-bg: #1b1930;
+    --ai-border: #3b3470;
+    --ai-label-bg: #231f3d;
+    --ai-label-text: #b9adff;
+    --ai-accent: #897eff;
+
+    --skeleton-base: #1c1c1e;
+    --skeleton-shine: #27272a;
+
+    --shadow-raised: 0 12px 16px rgba(0,0,0,.24), 0 4px 8px rgba(0,0,0,.24), 0 0 1px rgba(255,255,255,.08);
+    --shadow-popover: 0 16px 32px rgba(0,0,0,.4), 0 0 1px rgba(255,255,255,.12);
+    --shadow-inset-border: inset 0 0 0 1px #36363a;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+    --skeleton-duration: 0s;
+  }
+}

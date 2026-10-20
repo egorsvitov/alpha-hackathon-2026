@@ -1,0 +1,50 @@
+[
+  {
+    "event": {
+      "event_id": "e5_coke_supplier",
+      "title": "Поставщик коксующегося угля «КоксРесурс» приостановил отгрузки",
+      "date": "2026-10-17",
+      "topic": "counterparty",
+      "topic_label": "Контрагенты",
+      "sources_count": 2,
+      "is_synthetic": true,
+      "synthetic_link": "Синтетическое соответствие: новость о вымышленном поставщике сопоставлена с компанией по платёжной сети."
+    },
+    "relevance": {
+      "score": 0.84,
+      "level": "high",
+      "explanation": "Связано: ваш крупный поставщик, зависимость отрасли от коксующегося угля",
+      "factors": [
+        { "feature_key": "counterparty:coke_resource", "label": "Контрагент: «КоксРесурс»", "contribution": 0.55, "detail": "событие у значимого контрагента из платёжной сети" },
+        { "feature_key": "industry:metallurgy", "label": "Отрасль: металлургия", "contribution": 0.2, "detail": "коксующийся уголь — ключевое сырьё чёрной металлургии" },
+        { "feature_key": "meta:freshness", "label": "Свежесть события", "contribution": 0.07, "detail": "событие вышло 3 дн. назад" },
+        { "feature_key": "meta:sources", "label": "Подтверждение источниками", "contribution": 0.02, "detail": "2 независимых публикации" }
+      ]
+    },
+    "why_short": "Связано: ваш крупный поставщик, зависимость отрасли от коксующегося угля",
+    "has_bank_position": false,
+    "profile_version": "p-2026-10-20-a1"
+  },
+  {
+    "event": {
+      "event_id": "e1_key_rate",
+      "title": "Банк России сохранил ключевую ставку на уровне 14%",
+      "date": "2026-09-11T15:00:00+03:00",
+      "topic": "rates",
+      "topic_label": "Ставки и кредит",
+      "sources_count": 3,
+      "dedup_note": "3 публикации объединены в одно событие",
+      "is_synthetic": false
+    },
+    "relevance": {
+      "score": 0.6,
+      "level": "high",
+      "explanation": "Связано: ваши кредитные продукты, лизинг",
+      "factors": [],
+      "reasons": ["В профиле есть кредитный продукт", "В профиле есть лизинговый продукт"]
+    },
+    "why_short": "Связано: ваши кредитные продукты, лизинг",
+    "has_bank_position": true,
+    "profile_version": "p-2026-10-20-a1"
+  }
+]

@@ -1,6 +1,6 @@
 # Новостная аналитика для бизнеса
 
-Основные папки проекта: `backend/`, `ranking/`, `data/` и `llm/`. Frontend команда добавит отдельно, когда определит структуру.
+Основные папки проекта: `backend/`, `frontend/`, `ranking/`, `data/` и `llm/`.
 
 ```text
 backend/                   # FastAPI-сервис (API для фронтенда и интеграции)
@@ -11,6 +11,7 @@ backend/                   # FastAPI-сервис (API для фронтенда
         schemas/            # Pydantic-схемы (контракт данных)
     main.py                # Точка входа API
     requirements.txt       # Зависимости бэкенда
+frontend/                  # Прототип интерфейса (Vite, React, TypeScript), запуск: frontend/README.md
 ranking/                   # Профили компаний, отбор и ранжирование
     audit_data.py          # Готовая заготовка аудита CSV
 llm/
@@ -76,6 +77,23 @@ uvicorn main:app --reload --port 8000
 
 Интерактивная Swagger-документация: `http://localhost:8000/docs`
 
+## Запуск Frontend (Vite + React)
+
+Нужен Node.js 20 или новее. Из папки `frontend/`:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Интерфейс откроется на `http://localhost:5173`. По умолчанию он работает на моках в браузере, backend и ключ LLM не нужны.
+
+Чтобы подключить backend, скопируйте `frontend/.env.example` в `frontend/.env` и поставьте `VITE_API_MODE=http`. Адрес API берётся из `VITE_API_URL` (по умолчанию `http://localhost:8000`), сам backend запускается по инструкции выше. Какие данные и в каком виде фронт ждёт от backend, описано в [docs/frontend-api-contract.md](docs/frontend-api-contract.md). Пока заглушки backend отдают ответы в старом формате, так что для демо лучше оставить режим `mock`.
+
+Подробнее: [frontend/README.md](frontend/README.md).
+
 ## Документация
 
+- [Контракт API для фронтенда](docs/frontend-api-contract.md) и [примеры ответов](docs/api-examples/)
 - [Использованные компоненты и материалы](THIRD_PARTY_NOTICES)
