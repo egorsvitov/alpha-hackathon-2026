@@ -1,0 +1,324 @@
+{
+  "companies": {
+    "rows": 85525,
+    "columns": [
+      "SYNTHETIC_U",
+      "ORG_TYPE",
+      "OKFS_NAME",
+      "COMPANY_AGE_YEARS_GRADATION",
+      "ECO_MARK_LABEL",
+      "MAINOKVED_CODE",
+      "MAINOKVED_NAME",
+      "NEGATIVEMARK",
+      "AMOUNT_WORKERS_FNS_GRADATION",
+      "AMOUNT_WORKERS_SPARK_GRADATION",
+      "CL_TYPE",
+      "CL_PRODUCT_RKO_MARK",
+      "CL_PRODUCT_GAR_MARK",
+      "CL_PRODUCT_LOA_MARK",
+      "CL_PRODUCT_LEA_MARK",
+      "CL_PRODUCT_DEP_MARK",
+      "CL_PRODUCT_ZPP_MARK",
+      "FTS_FLAG",
+      "FTS_COUNTRY_NAME",
+      "FACTORING_MARK",
+      "REVENUE_COMPANY",
+      "GROUP_ID",
+      "CITY",
+      "REGION"
+    ],
+    "missing": {
+      "SYNTHETIC_U": 0,
+      "ORG_TYPE": 0,
+      "OKFS_NAME": 0,
+      "COMPANY_AGE_YEARS_GRADATION": 0,
+      "ECO_MARK_LABEL": 4157,
+      "MAINOKVED_CODE": 0,
+      "MAINOKVED_NAME": 0,
+      "NEGATIVEMARK": 0,
+      "AMOUNT_WORKERS_FNS_GRADATION": 0,
+      "AMOUNT_WORKERS_SPARK_GRADATION": 85357,
+      "CL_TYPE": 0,
+      "CL_PRODUCT_RKO_MARK": 0,
+      "CL_PRODUCT_GAR_MARK": 0,
+      "CL_PRODUCT_LOA_MARK": 0,
+      "CL_PRODUCT_LEA_MARK": 0,
+      "CL_PRODUCT_DEP_MARK": 0,
+      "CL_PRODUCT_ZPP_MARK": 0,
+      "FTS_FLAG": 0,
+      "FTS_COUNTRY_NAME": 77179,
+      "FACTORING_MARK": 0,
+      "REVENUE_COMPANY": 0,
+      "GROUP_ID": 0,
+      "CITY": 0,
+      "REGION": 0
+    },
+    "distinct": {
+      "SYNTHETIC_U": 85514,
+      "ORG_TYPE": 1,
+      "OKFS_NAME": 12,
+      "COMPANY_AGE_YEARS_GRADATION": 4,
+      "ECO_MARK_LABEL": 4,
+      "MAINOKVED_CODE": 546,
+      "MAINOKVED_NAME": 536,
+      "NEGATIVEMARK": 2,
+      "AMOUNT_WORKERS_FNS_GRADATION": 4,
+      "AMOUNT_WORKERS_SPARK_GRADATION": 4,
+      "CL_TYPE": 3,
+      "CL_PRODUCT_RKO_MARK": 2,
+      "CL_PRODUCT_GAR_MARK": 2,
+      "CL_PRODUCT_LOA_MARK": 2,
+      "CL_PRODUCT_LEA_MARK": 2,
+      "CL_PRODUCT_DEP_MARK": 2,
+      "CL_PRODUCT_ZPP_MARK": 2,
+      "FTS_FLAG": 2,
+      "FTS_COUNTRY_NAME": 1392,
+      "FACTORING_MARK": 2,
+      "REVENUE_COMPANY": 83914,
+      "GROUP_ID": 18098,
+      "CITY": 267,
+      "REGION": 82
+    },
+    "distributions": {
+      "ORG_TYPE": {
+        "КОММ_ОРГ": 85525
+      },
+      "OKFS_NAME": {
+        "ЧАСТНАЯ СОБСТВЕННОСТЬ": 82282,
+        "СОВМЕСТНАЯ ЧАСТНАЯ И ИНОСТРАННАЯ СОБСТВЕННОСТЬ": 1130,
+        "СОБСТВЕННОСТЬ ИНОСТРАННЫХ ГРАЖДАН И ЛИЦ БЕЗ ГРАЖДАНСТВА": 856,
+        "СОБСТВЕННОСТЬ ИНОСТРАННЫХ ЮРИДИЧЕСКИХ ЛИЦ": 728,
+        "ФЕДЕРАЛЬНАЯ СОБСТВЕННОСТЬ": 167,
+        "ИНАЯ СМЕШАННАЯ РОССИЙСКАЯ СОБСТВЕННОСТЬ": 94,
+        "СМЕШАННАЯ РОССИЙСКАЯ СОБСТВЕННОСТЬ С ДОЛЕЙ ФЕДЕРАЛЬНОЙ СОБСТВЕННОСТИ": 85,
+        "СМЕШАННАЯ РОССИЙСКАЯ СОБСТВЕННОСТЬ С ДОЛЕЙ СОБСТВЕННОСТИ СУБЪЕКТОВ РОССИЙСКОЙ ФЕДЕРАЦИИ": 65,
+        "СОБСТВЕННОСТЬ СУБЪЕКТОВ РОССИЙСКОЙ ФЕДЕРАЦИИ": 52,
+        "СМЕШАННАЯ ИНОСТРАННАЯ СОБСТВЕННОСТЬ": 34,
+        "МУНИЦИПАЛЬНАЯ СОБСТВЕННОСТЬ": 19,
+        "СОБСТВЕННОСТЬ ОБЩЕСТВЕННЫХ ОБЪЕДИНЕНИЙ": 13
+      },
+      "COMPANY_AGE_YEARS_GRADATION": {
+        "8-15": 33103,
+        "16-25": 21288,
+        "0-3": 16250,
+        "4-7": 14884
+      },
+      "ECO_MARK_LABEL": {
+        "Оптимизация": 51157,
+        "Бизнес в новой реальности": 25279,
+        "<missing>": 4157,
+        "Рождение": 3372,
+        "Стремительный рост": 1560
+      },
+      "MAINOKVED_CODE": {
+        "68.20": 5819,
+        "41.20": 5038,
+        "56.10": 4174,
+        "68.20.2": 4015,
+        "46.90": 3151,
+        "62.01": 2772,
+        "71.12.2": 2458,
+        "70.22": 1916,
+        "68.32": 1634,
+        "52.29": 1545,
+        "72.19": 1356,
+        "68.10": 1080
+      },
+      "NEGATIVEMARK": {
+        "0.0": 74449,
+        "1.0": 11076
+      },
+      "AMOUNT_WORKERS_FNS_GRADATION": {
+        "Менее 15": 59111,
+        "16-100": 23264,
+        "101-250": 2380,
+        "Более 251": 770
+      },
+      "AMOUNT_WORKERS_SPARK_GRADATION": {
+        "<missing>": 85357,
+        "Менее 15": 134,
+        "16-100": 26,
+        "101-250": 4,
+        "Более 251": 4
+      },
+      "CL_TYPE": {
+        "CLIENT": 41968,
+        "PROSPECT": 36699,
+        "CLOSE_CLIENT": 6858
+      },
+      "CL_PRODUCT_RKO_MARK": {
+        "0.0": 45862,
+        "1.0": 39663
+      },
+      "CL_PRODUCT_GAR_MARK": {
+        "0.0": 82737,
+        "1.0": 2788
+      },
+      "CL_PRODUCT_LOA_MARK": {
+        "0.0": 80580,
+        "1.0": 4945
+      },
+      "CL_PRODUCT_LEA_MARK": {
+        "0.0": 70514,
+        "1.0": 15011
+      },
+      "CL_PRODUCT_DEP_MARK": {
+        "0.0": 81242,
+        "1.0": 4283
+      },
+      "CL_PRODUCT_ZPP_MARK": {
+        "0.0": 59041,
+        "1.0": 26484
+      },
+      "FTS_FLAG": {
+        "0.0": 77161,
+        "1.0": 8364
+      },
+      "FTS_COUNTRY_NAME": {
+        "<missing>": 77179,
+        "КИТАЙ": 2091,
+        "ТУРЦИЯ": 291,
+        "КИТАЙ, ТУРЦИЯ": 269,
+        "УЗБЕКИСТАН": 175,
+        "ОАЭ, ИНДИЯ, КИТАЙ": 142,
+        "ИНДИЯ, КИТАЙ, ТУРЦИЯ": 140,
+        "КИТАЙ, ГОНКОНГ": 128,
+        "ИНДИЯ, КИТАЙ, ЛИТВА": 116,
+        "КИТАЙ, УЗБЕКИСТАН": 90,
+        "КИТАЙ, ЮЖНАЯ КОРЕЯ": 83,
+        "КИТАЙ, ЛИТВА, ИТАЛИЯ": 82
+      },
+      "FACTORING_MARK": {
+        "0.0": 85312,
+        "1.0": 213
+      },
+      "REGION": {
+        "Москва": 31915,
+        "Санкт-Петербург": 12780,
+        "Новосибирская область": 3919,
+        "Свердловская область": 3750,
+        "Республика Татарстан": 2770,
+        "Московская область": 2026,
+        "Краснодарский край": 1996,
+        "Челябинская область": 1865,
+        "Нижегородская область": 1710,
+        "Красноярский край": 1454,
+        "Ростовская область": 1426,
+        "Приморский край": 1363
+      }
+    },
+    "duplicate_ids": 11,
+    "revenue_raw_quantiles": {
+      "0": 1000.0,
+      "0.25": 883500.0,
+      "0.5": 33583428.0,
+      "0.75": 240141459.0,
+      "0.9": 909878835.0,
+      "0.99": 5271890834.0,
+      "1": 105596467908.0
+    },
+    "revenue_zero": 0,
+    "revenue_negative": 0,
+    "revenue_above_15bn_if_unit_is_rub": 115,
+    "fts_flag_without_country": 224,
+    "client_rows_above_15bn_if_unit_is_rub": 102,
+    "conflicting_ids": {
+      "U_428697": {
+        "rows": 12,
+        "different_fields": [
+          "OKFS_NAME",
+          "COMPANY_AGE_YEARS_GRADATION",
+          "ECO_MARK_LABEL",
+          "MAINOKVED_CODE",
+          "MAINOKVED_NAME",
+          "NEGATIVEMARK",
+          "AMOUNT_WORKERS_FNS_GRADATION",
+          "AMOUNT_WORKERS_SPARK_GRADATION",
+          "REVENUE_COMPANY",
+          "GROUP_ID",
+          "CITY",
+          "REGION"
+        ]
+      }
+    },
+    "groups_with_multiple_companies": 5229
+  },
+  "person_links": {
+    "rows": 12514,
+    "columns": [
+      "SYNTHETIC_F",
+      "CITY_NAME",
+      "RC_NAME",
+      "SYNTHETIC_U"
+    ],
+    "missing": {
+      "SYNTHETIC_F": 0,
+      "CITY_NAME": 14,
+      "RC_NAME": 14,
+      "SYNTHETIC_U": 0
+    },
+    "distinct": {
+      "SYNTHETIC_F": 11120,
+      "CITY_NAME": 221,
+      "RC_NAME": 10,
+      "SYNTHETIC_U": 12307
+    },
+    "companies_covered": 4519,
+    "unknown_company_rows": 7885,
+    "people_linked_to_multiple_rows": 969,
+    "duplicate_pairs": 0
+  },
+  "payments": {
+    "rows": 1380585,
+    "columns": [
+      "BENEFICIARY",
+      "PAYER",
+      "PAY_AMT",
+      "PAY_CNT"
+    ],
+    "missing": {
+      "BENEFICIARY": 0,
+      "PAYER": 0,
+      "PAY_AMT": 0,
+      "PAY_CNT": 0
+    },
+    "distinct": {
+      "BENEFICIARY": 115271,
+      "PAYER": 163363,
+      "PAY_AMT": 79818,
+      "PAY_CNT": 1554
+    },
+    "unique_nodes": 178159,
+    "known_nodes": 63607,
+    "unknown_nodes": 114552,
+    "companies_without_payments": 21907,
+    "rows_both_endpoints_known": 389396,
+    "self_loop_rows": 27406,
+    "duplicate_directed_pairs": 17,
+    "amount_raw_quantiles": {
+      "0": 1000.0,
+      "0.25": 44000.0,
+      "0.5": 212000.0,
+      "0.75": 1367000.0,
+      "0.9": 8561000.0,
+      "0.99": 234673000.0,
+      "1": 1118581311000.0
+    },
+    "count_quantiles": {
+      "0": 1.0,
+      "0.25": 2.0,
+      "0.5": 5.0,
+      "0.75": 13.0,
+      "0.9": 32.0,
+      "0.99": 219.0,
+      "1": 124671.0
+    },
+    "amount_nonpositive": 0,
+    "count_nonpositive": 0
+  },
+  "input_sha256": {
+    "df_Uid_data_hack.csv": "cb48983806ce7ca0ae045a40c9627ccbe47cc72bfb54058db04df2386da4a983",
+    "df_Uid_payment_hack.csv": "30095f75bead1a1dac0d7232b0da09a326b7ef643ee3b77b36ad3b4458a1cab3",
+    "df_Fid_Uid_link_hack.csv": "3d9c718e2a87304f48bbc7447607116bb8e4bd61dded70b0a1d0558f086a1b58"
+  }
+}

@@ -1,0 +1,128 @@
+# Third-party notices — preparation snapshot, 2026-10-20
+
+Scope: components actually used for the local audit/OCR/search preparation, supplied
+materials, and a clearly separate register of proposed LLM integrations.
+This is not a complete dependency/license inventory of a future deployed service.
+
+## Software actually used
+
+1. CPython 3.13.5 and standard library
+   Purpose: CSV audit, JSON serialization, hashes, subprocess orchestration, BM25.
+   License family: Python Software Foundation License; includes component notices.
+   Source: https://www.python.org/
+   Notice copy: reports/licenses/python3.13.copyright
+
+2. Poppler utilities 25.03.0, Debian 25.03.0-5+deb13u4
+   Executables: pdftotext, pdftoppm.
+   Purpose: text-layer detection and PDF rasterization.
+   Source: https://poppler.freedesktop.org/
+   Licensing: GPL family and bundled component terms; exact file-specific terms
+   are in reports/licenses/poppler-utils.copyright.
+   libpoppler147 of the same Debian version was present.
+
+3. Tesseract OCR 5.5.0, Debian 5.5.0-1+b1; libtesseract5 same version
+   Purpose: local Russian/English OCR; not a generative LLM.
+   Source: https://github.com/tesseract-ocr/tesseract
+   Main license: Apache-2.0; packaged component notices preserved in
+   reports/licenses/tesseract-ocr.copyright.
+
+4. tessdata_fast Russian and English traineddata
+   Debian tesseract-ocr-rus / tesseract-ocr-eng, version 1:4.1.0-2.
+   Purpose: local OCR language models.
+   Source: https://github.com/tesseract-ocr/tessdata_fast
+   License: Apache-2.0.
+   Notices: reports/licenses/tessdata-rus.copyright,
+   reports/licenses/tessdata-eng.copyright.
+   tesseract-ocr-osd 1:4.1.0-2 was also downloaded as the package dependency;
+   the chosen PSM 3 run did not request OSD. Notice preserved separately.
+
+5. Leptonica 1.84.1, Debian libleptonica6 1.84.1-4
+   Purpose: image-processing dependency of Tesseract.
+   Source: https://github.com/DanBloomberg/leptonica
+   Main license: BSD-2-Clause-style; exact bundled notices preserved in
+   reports/licenses/leptonica.copyright.
+
+Tesseract packages were downloaded from the configured Debian archive and
+extracted into /tmp/alpha-ocr; they were not globally installed or copied into
+the project. Dynamic system libraries are not distributed with this project.
+The ldd runtime snapshot is in data/processed/ocr_runtime_dependencies.txt.
+Before packaging a container, inventory its exact base image and transitive
+packages and carry their notices; this preparation snapshot is not that SBOM.
+
+## Supplied datasets and documents
+
+Provider/context: Alfa-Bank hackathon materials supplied by the user.
+No independent open-data license was supplied in the folder.
+
+- data/task/Альфа Хак_Новостная аналитика.pdf — case brief, 19 pages.
+- data/companies/df_Uid_data_hack.csv — anonymized company attributes.
+- data/companies/df_Fid_Uid_link_hack.csv — anonymized person/company links.
+- data/companies/df_Uid_payment_hack.csv — anonymized payment aggregates.
+- data/analytics/ALFA-7M26.pdf
+- data/analytics/ALFA-Macro_Insights-Policy_Rate_11Sep.pdf
+- data/analytics/ALFA-consumption.pdf
+- data/analytics/ALFA-macro_stat1H26.pdf
+- data/analytics/ALFA_Russian_Steels_1К21PreviewUpdate_15Apr2021.pdf
+- data/analytics/FI_Strategy_3Q26_22072026.pdf
+- data/analytics/Gold_digest_August26.pdf
+- data/analytics/Inflation_tracker_02.pdf
+- data/analytics/Бонд_Бриф_14092026.pdf
+
+Analytics carry Alfa-Bank copyright and distribution restrictions in the PDFs.
+Local OCR and previews are derivatives of those materials, not newly licensed
+open data. Case-provided access does not establish unrestricted public
+redistribution rights. Check case terms before public repository/deployment.
+Analytical source references inside PDFs (e.g. statistical agencies, exchanges)
+do not mean those external datasets were separately ingested in this work.
+
+Dataset SHA-256: data/processed/data_audit.json.
+Analytics SHA-256: data/processed/pdf_manifest.json.
+Case brief SHA-256: data/processed/environment_observed.json.
+
+## Models permitted by the case but NOT called or downloaded
+
+Source of allowlist: case brief, page 18.
+
+- Gemma 4 26B A4B
+- GLM-5.3-Flash
+- Qwen3.6 35B A3B
+- DeepSeek-V4.1-Flash
+- Qwen3-VL-30B-A3B-Instruct
+- Kimi-K2.6
+
+Status: design candidates only. Endpoint, exact provider model IDs, actual
+model revision, model license, API terms and pricing remain unverified.
+No permissive license is inferred from the model name.
+No embedding model, neural reranker or multi-agent framework was used.
+
+## Simulated integrations and authored examples
+
+- data/examples/synthetic_profiles.json: three handcrafted fictional companies.
+- data/examples/synthetic_news.json: one handcrafted fictional news item.
+- llm/agent/contracts/insight.example.json: handwritten contract example, not LLM output.
+- llm/agent/model_policy.json: proposed routing/budget configuration, not an
+  implemented gateway.
+- API paths and orchestrator in the report: architecture proposals only.
+
+No live news feed, bank API, LLM provider, production bank interface or real
+counterparty identity resolution has been connected. No external system was
+used as the core runtime of the proposed hackathon solution.
+
+The analysis/code preparation was assisted by the chat coding assistant.
+The assistant's internal model/deployment identifier is not available as a
+project dependency and is not claimed to be one of the allowed runtime LLMs.
+It is not wired into the resulting scripts or proposed application.
+
+## Development-only tools
+
+The shell, Debian package download/extraction utilities and the environment's
+web search were used during preparation. One public search attempted to
+identify the initially unspecified SIGMA reference; no matching reference was
+established from that search. The user subsequently supplied a SIGMA description,
+which informed the architecture plan (reports/SIGMA_MAPPING_RU.md). No SIGMA
+source code or LangChain runtime was imported. No external news dataset was
+downloaded by that search.
+
+License texts for Apache-2.0 and GPL-2 are retained under reports/licenses.
+Before release, append every newly added library, image/container, model,
+embedding service, news provider and dataset with exact version and terms.

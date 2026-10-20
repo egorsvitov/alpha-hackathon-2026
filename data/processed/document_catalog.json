@@ -1,0 +1,75 @@
+{
+  "ALFA-7M26.pdf": {
+    "title": "Макростатистика 7М26: данные по рынку труда не подтверждают охлаждения экономики",
+    "published_at": "2026-09-07",
+    "date_status": "read_from_ocr_page_1",
+    "topics": ["labor", "consumption", "gdp", "policy_rate"],
+    "exclude_pages": [4],
+    "historical_only": false
+  },
+  "ALFA-Macro_Insights-Policy_Rate_11Sep.pdf": {
+    "title": "Ключевая ставка ЦБ РФ: ставка без изменения на 14,0%, риторика стала жестче",
+    "published_at": "2026-09-11",
+    "date_status": "visually_checked_page_1",
+    "topics": ["policy_rate", "inflation", "credit"],
+    "exclude_pages": [4],
+    "historical_only": false
+  },
+  "ALFA-consumption.pdf": {
+    "title": "Потребление на пике",
+    "published_at": "2026-08-05",
+    "date_status": "read_from_ocr_page_1",
+    "topics": ["consumption", "labor", "gdp"],
+    "exclude_pages": [4],
+    "historical_only": false
+  },
+  "ALFA-macro_stat1H26.pdf": {
+    "title": "Макростатистика 1П26: слабый рост 1П26 смещает прогноз роста ВВП на 0,1% за год",
+    "published_at": "2026-07-31",
+    "date_status": "visually_checked_page_1",
+    "topics": ["gdp", "labor", "inflation", "policy_rate"],
+    "exclude_pages": [5],
+    "historical_only": false
+  },
+  "ALFA_Russian_Steels_1К21PreviewUpdate_15Apr2021.pdf": {
+    "title": "Российская сталь: ралли цен продолжается; прогноз результатов за 1К21",
+    "published_at": "2021-04-15",
+    "date_status": "visually_checked_page_1_conflicting_2026_footer_on_last_page",
+    "topics": ["steel", "commodities"],
+    "exclude_pages": [4],
+    "historical_only": true
+  },
+  "FI_Strategy_3Q26_22072026.pdf": {
+    "title": "Тактический взгляд на 3-й квартал 2026: время собирать камни",
+    "published_at": "2026-07-22",
+    "date_status": "read_from_ocr_page_1",
+    "topics": ["bonds", "policy_rate", "credit", "inflation"],
+    "exclude_pages": [1, 4, 7, 14, 20, 25, 27],
+    "historical_only": false
+  },
+  "Gold_digest_August26.pdf": {
+    "title": "Обзор рынка золота, август 2026",
+    "published_at": null,
+    "reference_period": "2026-08",
+    "date_status": "publication_date_unknown_contains_data_as_of_2026-09-07_on_page_6",
+    "topics": ["gold", "commodities"],
+    "exclude_pages": [1, 8],
+    "historical_only": false
+  },
+  "Inflation_tracker_02.pdf": {
+    "title": "Инфляция 25–31 августа: основные выводы",
+    "published_at": "2026-09-02",
+    "date_status": "read_from_ocr_page_1",
+    "topics": ["inflation", "fuel", "consumption"],
+    "exclude_pages": [3],
+    "historical_only": false
+  },
+  "Бонд_Бриф_14092026.pdf": {
+    "title": "Бонд Бриф: итоги недели",
+    "published_at": "2026-09-14",
+    "date_status": "read_from_ocr_page_1",
+    "topics": ["bonds", "policy_rate", "counterparties"],
+    "exclude_pages": [5],
+    "historical_only": false
+  }
+}

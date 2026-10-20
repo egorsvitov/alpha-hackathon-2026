@@ -1,0 +1,122 @@
+{
+  "provenance_checks": "passed",
+  "temporal_and_history_filters": "passed",
+  "manual_contract_example_references": "passed",
+  "json_schema_draft_2020_12_validation": "not_run",
+  "chunks_total": 109,
+  "retrieval_eligible": 84,
+  "default_search_chunks": 76,
+  "retrieval_probes": [
+    {
+      "query": "сохранение ставки прогноз конец года",
+      "topic_filter": "policy_rate",
+      "target_page_in_top3": true,
+      "hits": [
+        {
+          "file": "data/analytics/ALFA-macro_stat1H26.pdf",
+          "page": 3,
+          "score": 8.5352
+        },
+        {
+          "file": "data/analytics/ALFA-Macro_Insights-Policy_Rate_11Sep.pdf",
+          "page": 1,
+          "score": 8.0629
+        },
+        {
+          "file": "data/analytics/ALFA-macro_stat1H26.pdf",
+          "page": 1,
+          "score": 7.6297
+        }
+      ]
+    },
+    {
+      "query": "инфляция бензин август",
+      "topic_filter": "inflation",
+      "target_page_in_top3": true,
+      "hits": [
+        {
+          "file": "data/analytics/Inflation_tracker_02.pdf",
+          "page": 1,
+          "score": 8.6788
+        },
+        {
+          "file": "data/analytics/Inflation_tracker_02.pdf",
+          "page": 1,
+          "score": 7.7367
+        },
+        {
+          "file": "data/analytics/ALFA-macro_stat1H26.pdf",
+          "page": 2,
+          "score": 3.9041
+        }
+      ]
+    },
+    {
+      "query": "золото покупки центробанков",
+      "topic_filter": "gold",
+      "target_page_in_top3": true,
+      "hits": [
+        {
+          "file": "data/analytics/Gold_digest_August26.pdf",
+          "page": 5,
+          "score": 2.1455
+        },
+        {
+          "file": "data/analytics/Gold_digest_August26.pdf",
+          "page": 7,
+          "score": 2.1045
+        },
+        {
+          "file": "data/analytics/Gold_digest_August26.pdf",
+          "page": 2,
+          "score": 1.4485
+        }
+      ]
+    },
+    {
+      "query": "рынок труда вакансии зарплаты",
+      "topic_filter": "labor",
+      "target_page_in_top3": true,
+      "hits": [
+        {
+          "file": "data/analytics/ALFA-7M26.pdf",
+          "page": 2,
+          "score": 6.9159
+        },
+        {
+          "file": "data/analytics/ALFA-consumption.pdf",
+          "page": 2,
+          "score": 3.5693
+        },
+        {
+          "file": "data/analytics/ALFA-7M26.pdf",
+          "page": 1,
+          "score": 3.3822
+        }
+      ]
+    },
+    {
+      "query": "ВВП инвестиции прогноз",
+      "topic_filter": "gdp",
+      "target_page_in_top3": true,
+      "hits": [
+        {
+          "file": "data/analytics/ALFA-macro_stat1H26.pdf",
+          "page": 1,
+          "score": 4.0651
+        },
+        {
+          "file": "data/analytics/ALFA-consumption.pdf",
+          "page": 1,
+          "score": 3.9013
+        },
+        {
+          "file": "data/analytics/ALFA-macro_stat1H26.pdf",
+          "page": 3,
+          "score": 3.7975
+        }
+      ]
+    }
+  ],
+  "limitation": "Five manually selected topic-filtered smoke probes, not an independent retrieval-quality benchmark. OCR numbers and all chart interpretations remain unverified."
+}

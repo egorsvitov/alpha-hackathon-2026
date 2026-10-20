@@ -1,0 +1,55 @@
+{
+  "status": "design_only_provider_not_connected",
+  "allowlist_source": "data/task/Альфа Хак_Новостная аналитика.pdf, page 18",
+  "allowed_display_names": [
+    "Gemma 4 26B A4B",
+    "GLM-5.3-Flash",
+    "Qwen3.6 35B A3B",
+    "DeepSeek-V4.1-Flash",
+    "Qwen3-VL-30B-A3B-Instruct",
+    "Kimi-K2.6"
+  ],
+  "routes": {
+    "extract_classify": {
+      "candidate": "Qwen3.6 35B A3B",
+      "alternative_after_benchmark": "Gemma 4 26B A4B",
+      "provider_model_id": null,
+      "enabled": false
+    },
+    "interpret_and_repair": {
+      "candidate": "GLM-5.3-Flash",
+      "provider_model_id": null,
+      "enabled": false
+    },
+    "complex_counterparty_explanation": {
+      "candidate": "DeepSeek-V4.1-Flash",
+      "provider_model_id": null,
+      "enabled": false
+    },
+    "chart_extraction": {
+      "candidate": "Qwen3-VL-30B-A3B-Instruct",
+      "provider_model_id": null,
+      "enabled": false
+    },
+    "optional_editor": {
+      "candidate": "Kimi-K2.6",
+      "provider_model_id": null,
+      "enabled": false
+    }
+  },
+  "budget": {
+    "daily_rub_ceiling": 500,
+    "scope": "shared_team_key",
+    "unused_balance_carries_over": false,
+    "team_rub_quota": null,
+    "daily_token_limit": null,
+    "reset_timezone": "Europe/Moscow",
+    "reset_local_time": "00:00",
+    "clarification_source": "data/context/messages.html#message6151",
+    "pricing_per_million_tokens_rub": null,
+    "fail_closed_without_limits_and_pricing": true,
+    "max_retrieval_retries": 2,
+    "max_generation_repairs": 1
+  },
+  "note": "Allowlist is confirmed by the case PDF. Selection and API availability are not benchmarked. This JSON does not implement a budget guard."
+}

@@ -1,0 +1,19 @@
+# Runtime and secrets
+__pycache__/
+*.pyc
+.env
+.venv/
+.cache/
+
+# Supplied materials remain local; publication terms pending.
+/data/companies/
+/data/analytics/
+/data/task/
+/data/context/
+*.pdf
+
+# Full-text derivatives and generated images remain local.
+/data/processed/ocr/
+/data/processed/previews/
+/data/processed/extracted/
+/data/processed/rag_chunks.jsonl

@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-20",
+  "python": "3.13.5",
+  "poppler": "25.03.0",
+  "poppler_debian": "25.03.0-5+deb13u4",
+  "tesseract": "5.5.0",
+  "tesseract_debian": "5.5.0-1+b1",
+  "leptonica": "1.84.1",
+  "leptonica_debian": "1.84.1-4",
+  "traineddata_debian": "1:4.1.0-2",
+  "ocr_languages": "rus+eng",
+  "ocr_dpi": 180,
+  "ocr_psm": 3,
+  "ocr_max_workers": 4,
+  "case_pdf_sha256": "e9dcd7e0f68ff8664e2fcc5b3124632acb7accc671a29fcdd971daf6353143ef",
+  "note": "Observed versions, not a deployment lockfile; no third-party Python packages."
+}

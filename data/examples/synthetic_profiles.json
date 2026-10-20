@@ -1,0 +1,85 @@
+{
+  "status": "handcrafted_synthetic_contract_examples_not_real_companies",
+  "profiles": [
+    {
+      "company_id": "DEMO_MANUFACTURER",
+      "name": "Синтетический производитель",
+      "synthetic": true,
+      "profile_version": "demo-v1",
+      "user_role": "cfo",
+      "industry": "manufacturing",
+      "revenue": {
+        "value": 22000000000,
+        "currency": "RUB",
+        "period": "synthetic_year"
+      },
+      "products": {
+        "loan": true,
+        "leasing": true,
+        "deposit": false
+      },
+      "missing_fields": [
+        "loan_balance",
+        "interest_rate_type",
+        "repricing_date"
+      ],
+      "counterparty_features": []
+    },
+    {
+      "company_id": "DEMO_TRADE",
+      "name": "Синтетическая торговая компания",
+      "synthetic": true,
+      "profile_version": "demo-v1",
+      "user_role": "treasurer",
+      "industry": "trade",
+      "revenue": {
+        "value": 30000000000,
+        "currency": "RUB",
+        "period": "synthetic_year"
+      },
+      "products": {
+        "loan": false,
+        "leasing": false,
+        "deposit": true
+      },
+      "missing_fields": [
+        "free_liquidity",
+        "deposit_maturity",
+        "other_bank_loans"
+      ],
+      "counterparty_features": []
+    },
+    {
+      "company_id": "DEMO_LOGISTICS",
+      "name": "Синтетическая логистика",
+      "synthetic": true,
+      "profile_version": "demo-v1",
+      "user_role": "ceo",
+      "industry": "logistics",
+      "revenue": {
+        "value": 18000000000,
+        "currency": "RUB",
+        "period": "synthetic_year"
+      },
+      "products": {
+        "loan": false,
+        "leasing": true,
+        "deposit": false
+      },
+      "missing_fields": [
+        "leasing_rate_type",
+        "payment_window",
+        "payment_currency"
+      ],
+      "counterparty_features": [
+        {
+          "counterparty_id": "DEMO_COUNTERPARTY_1",
+          "direction": "incoming",
+          "observed_payment_share": 0.42,
+          "synthetic": true,
+          "meaning": "Доля в синтетической наблюдаемой платежной выборке, не доля выручки."
+        }
+      ]
+    }
+  ]
+}
