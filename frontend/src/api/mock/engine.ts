@@ -273,6 +273,7 @@ export async function getInsight(eventId: string, companyId: string, role: Role)
     risks,
     opportunities: opps,
     next_actions: sortByRole(actions, role),
+    impact_estimate: rel.level === 'high' && impact?.estimate ? impact.estimate : null,
     bank_position: bankClaims.length ? { as_of: def.bank_as_of, claims: bankClaims } : null,
     ai_conclusion: ai,
     unknowns,
@@ -394,15 +395,41 @@ export async function ask(insight: Insight, question: string): Promise<QaAnswer>
 
 export async function ingestNews(title: string, text: string): Promise<NewsEvent> {
   await guard();
+  return createEvent(title, text, true);
+}
+
+/** Демо «пришло новое событие из источников»: то же, что загрузка, но без пометки «загружено вами». */
+const INCOMING = [
+  {
+    title: 'Банк России ужесточил требования к резервированию по корпоративным кредитам',
+    text: 'Банк России повысил коэффициенты резервирования по части корпоративных кредитов. Банки могут пересмотреть условия по действующим займам. Изменения вступают в силу со следующего квартала.',
+  },
+  {
+    title: 'Цены на коксующийся уголь выросли на фоне перебоев поставок',
+    text: 'Стоимость коксующегося угля выросла за неделю. Металлурги отмечают сокращение запасов сырья на складах и рост издержек.',
+  },
+  {
+    title: 'Правительство изменило порядок возмещения НДС для экспортёров',
+    text: 'Правительство утвердило новый порядок возмещения НДС для экспортёров. Срок возврата налога может вырасти. Изменение касается экспортных поставок с начала следующего года.',
+  },
+];
+let incomingN = 0;
+export async function simulateIncoming(): Promise<NewsEvent> {
+  await guard();
+  const s = INCOMING[incomingN++ % INCOMING.length];
+  return createEvent(s.title, s.text, false);
+}
+
+function createEvent(title: string, text: string, uploaded: boolean): NewsEvent {
   const body = `${title}. ${text}`;
   const tpl = classify(body);
-  const id = `u_${Date.now().toString(36)}`;
+  const id = `u_${Date.now().toString(36)}${Math.floor(Math.random() * 1296).toString(36)}`;
   const evId = `n_${id}_1`;
   const evidence: Evidence = {
     evidence_id: evId,
     type: 'synthetic',
     title,
-    publisher: 'Загружено пользователем (демо)',
+    publisher: uploaded ? 'Загружено пользователем (демо)' : 'Поток источников (демо)',
     date: DEMO_TODAY,
     quote: text.trim().slice(0, 320) || title,
     is_synthetic: true,
@@ -419,9 +446,9 @@ export async function ingestNews(title: string, text: string): Promise<NewsEvent
     date: DEMO_TODAY,
     topic: tpl.topic,
     topic_label: TOPIC_LABELS[tpl.topic],
-    sources_count: 1,
+    sources_count: uploaded ? 1 : 2,
     is_synthetic: true,
-    user_uploaded: true,
+    user_uploaded: uploaded,
   };
   const def: EventDef = {
     event,

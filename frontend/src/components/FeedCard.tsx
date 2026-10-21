@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Landmark, ThumbsDown, ThumbsUp } from 'lucide-react';
+import { EyeOff, Landmark, ThumbsDown, ThumbsUp } from 'lucide-react';
 import type { FeedItem } from '../types';
 import { href } from '../router';
 import { TopicArt } from './Illustrations';
@@ -24,7 +24,7 @@ export function plural(n: number, one: string, few: string, many: string) {
 }
 
 /** Карточка ленты в стиле бенто: цвет и иллюстрация задаются темой события. */
-export function FeedCard({ item, read, lead }: { item: FeedItem; read: boolean; lead?: boolean }) {
+export function FeedCard({ item, read, lead, onHide }: { item: FeedItem; read: boolean; lead?: boolean; onHide?: () => void }) {
   const [vote, setVote] = useState<'up' | 'down' | null>(null);
   const { event, relevance } = item;
   const linked = relevance.factors.some((f) => !f.feature_key.startsWith('meta:')) || (relevance.reasons?.length ?? 0) > 0;
@@ -49,6 +49,7 @@ export function FeedCard({ item, read, lead }: { item: FeedItem; read: boolean; 
         <span className="topic-card__votes">
           <button type="button" className={`vote${vote === 'up' ? ' is-on' : ''}`} aria-pressed={vote === 'up'} aria-label="Полезно" onClick={() => setVote(vote === 'up' ? null : 'up')}><ThumbsUp size={16} /></button>
           <button type="button" className={`vote${vote === 'down' ? ' is-on' : ''}`} aria-pressed={vote === 'down'} aria-label="Не релевантно" onClick={() => setVote(vote === 'down' ? null : 'down')}><ThumbsDown size={16} /></button>
+          {onHide && <button type="button" className="vote" aria-label="Скрыть карточку" title="Скрыть" onClick={onHide}><EyeOff size={16} /></button>}
         </span>
       </footer>
       <div className="topic-card__art" aria-hidden><TopicArt topic={event.topic} /></div>

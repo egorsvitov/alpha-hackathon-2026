@@ -64,4 +64,6 @@ export const api: Api = MODE === 'http' ? httpApi : mockApi;
 /** Демо-переключатели (задержка, ошибка, исчерпанный бюджет) работают только в mock-режиме. */
 export const demoSettings: DemoSettings = mock.settings;
 export const resetDemoNews = mock.resetUserEvents;
+/** Имитация «пришло новое событие из источников» (демо, только mock). */
+export const simulateIncoming = mock.simulateIncoming;
 export const DEMO_TODAY = mock.DEMO_TODAY;
