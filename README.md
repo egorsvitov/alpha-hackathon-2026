@@ -128,4 +128,5 @@ sh backend/update-lock.sh          # пересобрать backend/requirements
 ## Документация
 
 - [Контракт API для фронтенда](docs/frontend-api-contract.md) и [примеры ответов](docs/api-examples/)
+- [Контракт выхода NLP-блока B6 для аналитики компании](docs/b6-event-contract.md), JSON Schema и синтетические примеры событий
 - [Использованные компоненты и материалы](THIRD_PARTY_NOTICES)

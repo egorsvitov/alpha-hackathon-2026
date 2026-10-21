@@ -1,0 +1,854 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "B6 EventBundle v0.1 — integration contract",
+  "description": "Company-independent event bundle. Publication grounding is not independent fact verification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event",
+    "ranking_features",
+    "claims",
+    "sources",
+    "evidence",
+    "conflicts",
+    "relations",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "event_version",
+        "title",
+        "event_type",
+        "first_published_at",
+        "updated_at",
+        "availability",
+        "quality"
+      ],
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_type": {
+          "enum": [
+            "policy_rate",
+            "fx_rate",
+            "price_change",
+            "regulation",
+            "sanction_or_trade_restriction",
+            "market_indicator",
+            "company_results",
+            "investment",
+            "corporate_action",
+            "operational_incident",
+            "other"
+          ]
+        },
+        "first_published_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "availability": {
+          "enum": [
+            "active",
+            "withdrawn"
+          ]
+        },
+        "quality": {
+          "enum": [
+            "complete",
+            "partial",
+            "insufficient"
+          ]
+        }
+      }
+    },
+    "ranking_features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topics",
+        "industries",
+        "geographies",
+        "objects",
+        "metrics",
+        "factors"
+      ],
+      "properties": {
+        "topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "rates",
+              "sanctions",
+              "fx",
+              "trade",
+              "inflation",
+              "counterparty",
+              "industry",
+              "other"
+            ]
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "industries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "geographies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "factors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      },
+      "minItems": 0
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      },
+      "minItems": 0
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      },
+      "minItems": 0
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/conflict"
+      },
+      "minItems": 0
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      },
+      "minItems": 0
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "text"
+      ],
+      "properties": {
+        "start": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "end": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_id",
+        "name"
+      ],
+      "properties": {
+        "entity_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "participant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_id",
+        "name",
+        "role"
+      ],
+      "properties": {
+        "entity_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurement_id",
+        "metric",
+        "kind",
+        "value",
+        "unit",
+        "qualifier",
+        "comparison_period"
+      ],
+      "properties": {
+        "measurement_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "level",
+            "absolute_change",
+            "relative_change"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "min",
+                "max"
+              ],
+              "properties": {
+                "min": {
+                  "type": "string",
+                  "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                },
+                "max": {
+                  "type": "string",
+                  "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                }
+              }
+            }
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "qualifier": {
+          "enum": [
+            "exact",
+            "approximate",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ]
+        },
+        "comparison_period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/period"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "object"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "qualifier": {
+                "enum": [
+                  "exact",
+                  "approximate"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "text",
+        "modality",
+        "polarity",
+        "stage",
+        "attribution",
+        "participants",
+        "action",
+        "object",
+        "geographies",
+        "time",
+        "measurements",
+        "evidence_ids",
+        "field_evidence"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "modality": {
+          "enum": [
+            "asserted",
+            "forecast",
+            "plan",
+            "proposal",
+            "opinion",
+            "unknown"
+          ]
+        },
+        "polarity": {
+          "enum": [
+            "affirmed",
+            "negated",
+            "unknown"
+          ]
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "announced",
+                "proposed",
+                "approved",
+                "effective",
+                "repealed",
+                "observed"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attribution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/entity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "participants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/participant"
+          },
+          "minItems": 0
+        },
+        "action": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "object": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "geographies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "time": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "occurred_at",
+            "effective_at",
+            "observation_period",
+            "forecast_horizon"
+          ],
+          "properties": {
+            "occurred_at": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/period"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "effective_at": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/period"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "observation_period": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/period"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "forecast_horizon": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/period"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "measurements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/measurement"
+          },
+          "minItems": 0
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "field_evidence": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^/"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "article_id",
+        "article_version",
+        "title",
+        "publisher",
+        "url",
+        "published_at",
+        "content_kind",
+        "is_full_original_text",
+        "is_synthetic"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "article_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "article_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "content_kind": {
+          "enum": [
+            "original",
+            "source_based_paraphrase",
+            "synthetic",
+            "user_provided",
+            "unknown"
+          ]
+        },
+        "is_full_original_text": {
+          "type": "boolean"
+        },
+        "is_synthetic": {
+          "type": "boolean"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "source_id",
+        "field",
+        "start",
+        "end",
+        "quote"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "field": {
+          "enum": [
+            "title",
+            "text"
+          ]
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "conflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conflict_id",
+        "description",
+        "variants"
+      ],
+      "properties": {
+        "conflict_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim_id",
+              "field_path"
+            ],
+            "properties": {
+              "claim_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "field_path": {
+                "type": "string",
+                "pattern": "^/"
+              }
+            }
+          },
+          "minItems": 2
+        }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "from_id",
+        "to_id",
+        "target_kind"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "duplicate_claim",
+            "updates",
+            "related_stage"
+          ]
+        },
+        "from_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_kind": {
+          "enum": [
+            "claim",
+            "event"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "related_stage"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target_kind": {
+                "const": "event"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "target_kind": {
+                "const": "claim"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "properties": {
+              "availability": {
+                "const": "active"
+              },
+              "quality": {
+                "enum": [
+                  "complete",
+                  "partial"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claims": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}
