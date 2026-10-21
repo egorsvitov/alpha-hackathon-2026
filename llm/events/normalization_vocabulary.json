@@ -1,0 +1,22 @@
+{
+  "version": "b4.1",
+  "entity_aliases": [
+    {"entity_id":"org:bank_of_russia","canonical_name":"Банк России","aliases":["Банк России","ЦБ РФ","Центробанк РФ"],"condition":"always"},
+    {"entity_id":"org:bank_of_russia","canonical_name":"Банк России","aliases":["ЦБ","Центробанк"],"condition":"russia_context"},
+    {"entity_id":"org:severstal","canonical_name":"Северсталь","aliases":["Северсталь","ПАО «Северсталь»"],"condition":"always"},
+    {"entity_id":"org:gazprom","canonical_name":"Газпром","aliases":["Газпром","ПАО «Газпром»"],"condition":"always"},
+    {"entity_id":"org:rosnano","canonical_name":"Роснано","aliases":["Роснано","АО «Роснано»"],"condition":"always"},
+    {"entity_id":"org:rshb","canonical_name":"Россельхозбанк","aliases":["Россельхозбанк"],"condition":"always"},
+    {"entity_id":"org:rshb","canonical_name":"Россельхозбанк","aliases":["РСХБ"],"condition":"rshb_context"},
+    {"entity_id":"org:stormwall","canonical_name":"StormWall","aliases":["StormWall"],"condition":"always"},
+    {"entity_id":"org:sinara_bank","canonical_name":"Синара","aliases":["Синара","инвестиционный банк «Синара»"],"condition":"sinara_bank_context"}
+  ],
+  "metric_aliases": [
+    {"canonical":"policy_rate","aliases":["ключевая ставка","policy_rate"],"condition":"always"},
+    {"canonical":"steel_consumption","aliases":["потребление стали","steel_consumption"],"condition":"always"},
+    {"canonical":"net_profit_ras","aliases":["чистая прибыль","чистая прибыль по РСБУ","net_profit_ras"],"condition":"ras_context"},
+    {"canonical":"net_profit_ifrs","aliases":["чистая прибыль","чистая прибыль по МСФО","net_profit_ifrs"],"condition":"ifrs_context"},
+    {"canonical":"m2","aliases":["денежная масса М2","агрегат М2","m2"],"condition":"always"},
+    {"canonical":"broad_money_ex_fx_revaluation","aliases":["широкая денежная масса без валютной переоценки","broad_money_ex_fx_revaluation"],"condition":"always"}
+  ]
+}

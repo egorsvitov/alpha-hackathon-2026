@@ -37,13 +37,25 @@ class LeaseHeartbeat:
         self.thread.join()
 
 
-class ExtractionRunner:
+class OneShotRunner:
     def __init__(self,store,provider,*,worker_id='b3-worker',heartbeat=LeaseHeartbeat):
         self.store,self.provider,self.worker_id,self.heartbeat=store,provider,worker_id,heartbeat
         self.ledger=CallLedger(store,offline=not provider.is_live)
 
+    def profile_for_spec(self,spec):
+        raise NotImplementedError
+
+    def request_for(self,record,profile):
+        raise NotImplementedError
+
+    def output_for(self,content,record,spec):
+        raise NotImplementedError
+
+    def reservation_guard(self):
+        return None
+
     def _preflight(self,spec,limits,*,probe=False):
-        profile=profile_from_spec(spec)
+        profile=self.profile_for_spec(spec)
         if self.provider.is_live != (profile.execution_mode=='live'):
             raise StorageError('execution_mode_mismatch','Offline responses cannot populate a live processing cache')
         # Probes may test unverified parameters, but never bypass monetary gates.
@@ -78,11 +90,11 @@ class ExtractionRunner:
             return RunOutcome(status='idle')
         token=job.active_attempt.token
         record=self.store.get_article(job.source_id)
-        request=build_request(record,profile)
+        request=self.request_for(record,profile)
         if len(canonical_json(request).encode('utf-8'))>profile.max_request_bytes:
             return self._terminal(job,token,'input_too_large',defer=True)
         try:
-            call_id=self.ledger.reserve(token,request,profile,limits)
+            call_id=self.ledger.reserve(token,request,profile,limits,guard=self.reservation_guard())
         except StorageError as exc:
             if exc.code.startswith('budget_'):
                 return self._terminal(job,token,exc.code,defer=True,stop=True)
@@ -131,13 +143,11 @@ class ExtractionRunner:
             if choice.get('finish_reason')!='stop':
                 return self._terminal(job,token,'unexpected_finish_reason',stop=blocked,call_id=call_id)
             try:
-                extracted=parse_extraction(msg.get('content'))
+                payload,kind,version=self.output_for(msg.get('content'),record,spec)
             except StorageError as exc:
                 self.store.save_artifact(token,'extraction_errors',[i.model_dump() for i in exc.issues])
                 return self._terminal(job,token,exc.code,stop=blocked,call_id=call_id)
-            result=ExtractionResult(source_id=record.source_id,article_sha256=article_sha256(record.article),
-                processing_spec_hash=processing_hash(spec),extraction=extracted)
-            self.store.complete_attempt(token,result.model_dump(mode='json'),kind='extraction_candidates',schema_version='b3.1')
+            self.store.complete_attempt(token,payload,kind=kind,schema_version=version)
             return RunOutcome(status='succeeded',job_id=job.job_id,call_id=call_id,
                 reason='budget_overrun' if blocked else 'cost_unknown' if call['state']=='unknown' else None,stop=blocked)
         except StorageError as exc:
@@ -155,3 +165,18 @@ class ExtractionRunner:
             if result.status=='idle' or result.stop:
                 break
         return results
+
+
+class ExtractionRunner(OneShotRunner):
+    """Original B3 API and cache contract, implemented by the shared call worker."""
+    def profile_for_spec(self,spec):
+        return profile_from_spec(spec)
+
+    def request_for(self,record,profile):
+        return build_request(record,profile)
+
+    def output_for(self,content,record,spec):
+        extracted=parse_extraction(content)
+        result=ExtractionResult(source_id=record.source_id,article_sha256=article_sha256(record.article),
+            processing_spec_hash=processing_hash(spec),extraction=extracted)
+        return result.model_dump(mode='json'),'extraction_candidates','b3.1'

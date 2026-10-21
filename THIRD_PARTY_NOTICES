@@ -132,6 +132,15 @@ backend package list above. No model weights or provider-specific tokenizer
 were downloaded. Offline SDK tests use a mock HTTP transport; live generation
 remains disabled until confirmed tariffs, model bounds and a quota are supplied.
 
+## B4 normalization (added 2026-10-21)
+
+B4 uses the existing pinned B1-B3 dependencies and Python's standard-library
+Decimal, calendar, datetime, re and UUID implementations; no new NLP package,
+model weights or external tokenizer is added. Machine-checkable alias data,
+numeric/date rules and synthetic examples are authored in this repository.
+Source-based B4 development inputs for the 15 supplied articles remain local
+under ignored data/context/events/b4/ and are separate from the original B1 gold.
+
 ## Frontend packages (added 2026-10-20)
 
 Used by frontend/ (Vite + React prototype). Exact versions are pinned in

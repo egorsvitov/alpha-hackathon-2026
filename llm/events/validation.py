@@ -8,7 +8,7 @@ from decimal import Decimal
 
 from pydantic import ValidationError
 
-from .models import ArticleInput, ArticleRecord, EventBundle, GoldSet, Issue
+from .models import ArticleInput, ArticleRecord, EventBundle, GoldSet, Issue, SourceClaim, Source, Evidence
 
 
 class ContractValidationError(ValueError):
@@ -67,22 +67,21 @@ def _covers(parent, child):
     return child == parent or child.startswith(parent + "/")
 
 
-def validate_bundle(payload) -> EventBundle:
-    bundle = _parse(EventBundle, payload)
-    data = bundle.model_dump(mode="json")
+def claim_evidence_issues(claims, sources, evidence, *, check_ids=True):
+    """Shared B1/B4 structural checks; inputs are already typed JSON dictionaries."""
+    data = {"claims": claims, "sources": sources, "evidence": evidence}
+    indexes = {"sources": {s["source_id"]: s for s in sources},
+               "evidence": {e["evidence_id"]: e for e in evidence}}
     issues = []
-
     def fail(code, path, message):
         issues.append(Issue(code=code, path=path, message=message))
-
-    indexes = {}
-    for group, key in [("claims", "claim_id"), ("sources", "source_id"), ("evidence", "evidence_id"), ("conflicts", "conflict_id")]:
-        index = {}
-        for i, item in enumerate(data[group]):
-            if item[key] in index:
-                fail("duplicate_id", f"/{group}/{i}/{key}", item[key])
-            index[item[key]] = item
-        indexes[group] = index
+    if check_ids:
+        for group, key in [("claims", "claim_id"), ("sources", "source_id"), ("evidence", "evidence_id")]:
+            seen = set()
+            for i, item in enumerate(data[group]):
+                if item[key] in seen:
+                    fail("duplicate_id", f"/{group}/{i}/{key}", item[key])
+                seen.add(item[key])
     measurements = set()
     source_versions = set()
     for i, source in enumerate(data["sources"]):
@@ -139,6 +138,26 @@ def validate_bundle(payload) -> EventBundle:
         for path, period in periods:
             if period and period["start"] and period["end"] and period["start"] > period["end"]:
                 fail("reversed_period", path, "start > end")
+    return issues
+
+
+def validate_bundle(payload) -> EventBundle:
+    bundle = _parse(EventBundle, payload)
+    data = bundle.model_dump(mode="json")
+    issues = []
+
+    def fail(code, path, message):
+        issues.append(Issue(code=code, path=path, message=message))
+
+    indexes = {}
+    for group, key in [("claims", "claim_id"), ("sources", "source_id"), ("evidence", "evidence_id"), ("conflicts", "conflict_id")]:
+        index = {}
+        for i, item in enumerate(data[group]):
+            if item[key] in index:
+                fail("duplicate_id", f"/{group}/{i}/{key}", item[key])
+            index[item[key]] = item
+        indexes[group] = index
+    issues.extend(claim_evidence_issues(data["claims"], data["sources"], data["evidence"], check_ids=False))
     for i, conflict in enumerate(data["conflicts"]):
         values, scenarios, seen, measurement_scopes = [], set(), set(), set()
         for j, variant in enumerate(conflict["variants"]):
@@ -198,8 +217,8 @@ def validate_bundle(payload) -> EventBundle:
     return bundle
 
 
-def validate_grounding(bundle, articles: list[ArticleRecord]) -> EventBundle:
-    bundle = validate_bundle(bundle)
+def grounding_issues(claims, sources, evidences, articles):
+    """Exact archived metadata, spans and quoted expressions, without an event."""
     records = {}
     issues = []
     for raw in articles:
@@ -207,7 +226,7 @@ def validate_grounding(bundle, articles: list[ArticleRecord]) -> EventBundle:
         if record.source_id in records:
             issues.append(Issue(code="duplicate_article_source", path="/articles", message=record.source_id))
         records[record.source_id] = record
-    for i, source in enumerate(bundle.sources):
+    for i, source in enumerate(sources):
         record = records.get(source.source_id)
         if record is None:
             issues.append(Issue(code="missing_article", path=f"/sources/{i}", message=source.source_id))
@@ -221,15 +240,15 @@ def validate_grounding(bundle, articles: list[ArticleRecord]) -> EventBundle:
         for key, value in expected.items():
             if getattr(source, key) != value:
                 issues.append(Issue(code="source_version_mismatch", path=f"/sources/{i}/{key}", message="Metadata differs from archived article"))
-    for i, evidence in enumerate(bundle.evidence):
+    for i, evidence in enumerate(evidences):
         record = records.get(evidence.source_id)
         if record is None:
             continue
         text = getattr(record.article, evidence.field)
         if evidence.end > len(text) or text[evidence.start:evidence.end] != evidence.quote:
             issues.append(Issue(code="quote_mismatch", path=f"/evidence/{i}", message="Quote does not match versioned article slice"))
-    evidence_by_id = {e.evidence_id: e for e in bundle.evidence}
-    for i, claim in enumerate(bundle.claims):
+    evidence_by_id = {e.evidence_id: e for e in evidences}
+    for i, claim in enumerate(claims):
         raw = claim.model_dump(mode="json")
         expressions = [(f"/time/{key}/text", p.text) for key, p in claim.time if p is not None]
         expressions += [(f"/measurements/{j}/comparison_period/text", m.comparison_period.text) for j, m in enumerate(claim.measurements) if m.comparison_period]
@@ -239,6 +258,26 @@ def validate_grounding(bundle, articles: list[ArticleRecord]) -> EventBundle:
             eids = {eid for parent, ids in raw["field_evidence"].items() if _covers(parent, path) for eid in ids}
             if not any(expression in evidence_by_id[eid].quote for eid in eids):
                 issues.append(Issue(code="expression_not_quoted", path=f"/claims/{i}{path}", message=expression))
+    return issues
+
+
+def validate_claim_collection(claims, sources, evidence, articles):
+    claims = [_parse(SourceClaim, c) for c in claims]
+    sources = [_parse(Source, s) for s in sources]
+    evidence = [_parse(Evidence, e) for e in evidence]
+    issues = claim_evidence_issues([c.model_dump(mode="json") for c in claims],
+        [s.model_dump(mode="json") for s in sources], [e.model_dump(mode="json") for e in evidence])
+    if issues:
+        raise ContractValidationError(issues)
+    issues = grounding_issues(claims, sources, evidence, articles)
+    if issues:
+        raise ContractValidationError(issues)
+    return claims, sources, evidence
+
+
+def validate_grounding(bundle, articles: list[ArticleRecord]) -> EventBundle:
+    bundle = validate_bundle(bundle)
+    issues = grounding_issues(bundle.claims, bundle.sources, bundle.evidence, articles)
     if issues:
         raise ContractValidationError(issues)
     return bundle

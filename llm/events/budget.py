@@ -66,7 +66,7 @@ class CallLedger:
             ctx.prec=100
             return sum((Decimal(r[0]) for r in conn.execute('SELECT accounted_rub FROM llm_calls WHERE budget_day=?',(day,))),Decimal(0))
 
-    def reserve(self, token, request, profile, limits):
+    def reserve(self, token, request, profile, limits, *, guard=None):
         inp,out,quota=validate_limits(profile,limits,live=False)
         reserved=maximum_cost(profile,limits)
         tariffs={'input_rub_per_million':str(inp),'output_rub_per_million':str(out),
@@ -74,6 +74,8 @@ class CallLedger:
         with self.store._transaction(write=True) as conn:
             now=self.store.clock()
             attempt=self.store._active_attempt(conn,token,now)
+            if guard is not None:
+                guard(conn)
             if conn.execute('SELECT 1 FROM llm_calls WHERE attempt_id=?',(attempt['attempt_id'],)).fetchone():
                 raise StorageError('attempt_already_called','Each attempt allows at most one reserved provider call')
             # An overrun is a persistent circuit breaker, including across dates.
