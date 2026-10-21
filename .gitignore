@@ -37,6 +37,9 @@ news/*.csv
 news/*.pdf
 news/.DS_Store
 
+# macOS metadata everywhere.
+.DS_Store
+
 # SQLite и логи (не в git)
 *.db
 *.sqlite
