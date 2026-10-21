@@ -1,7 +1,10 @@
-# News pipeline — зависимости (пункт 2)
+# News pipeline (пункт 2) — зависимости
 # Версии зафиксированы в news/requirements.lock.
 feedparser>=6.0.10
 requests>=2.31.0
 trafilatura>=1.6.0
 lxml_html_clean>=0.3.0
 pydantic>=2.8.0
+openai>=1.30.0
+httpx>=0.27.0
+python-dotenv>=1.0.0
