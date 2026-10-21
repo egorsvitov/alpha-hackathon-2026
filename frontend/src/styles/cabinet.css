@@ -74,18 +74,18 @@ html[data-design="cabinet"] body { background: var(--cab-bg); }
 .cab-h2 { font-size: 20px; line-height: 26px; font-weight: 700; letter-spacing: -0.01em; }
 .cab-card { background: var(--cab-card); border-radius: 24px; padding: 24px; }
 
-.cab-home { display: grid; grid-template-columns: minmax(0, 1fr) 360px; grid-template-areas: "head head" "quick quick" "status status" "acc aside" "ops ops"; column-gap: 16px; row-gap: 16px; align-items: stretch; }
+.cab-home { display: grid; grid-template-columns: minmax(0, 1fr) 360px; grid-template-areas: "head head" "quick quick" "acc aside" "ops ops"; column-gap: 16px; row-gap: 16px; align-items: stretch; }
 .cab-home .cab-head { grid-area: head; margin-bottom: 4px; }
-.cab-quick-wrap { grid-area: quick; display: grid; grid-template-columns: minmax(0, 1fr) 56px; gap: 12px; }
+.cab-quick-wrap { grid-area: quick; }
 .cab-status { grid-area: status; }
 .cab-account-card { grid-area: acc; }
 .cab-home__aside { grid-area: aside; display: flex; flex-direction: column; min-width: 0; }
 .cab-home__aside > * { flex: 1; }
 .cab-home__ops { grid-area: ops; min-width: 0; }
 
-.cab-quick { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
-.cab-quick__item { display: flex; flex-direction: column; gap: 14px; height: 100%; min-height: 108px; padding: 14px 14px 16px; border-radius: 20px; background: var(--cab-card); font-size: 14px; line-height: 19px; cursor: not-allowed; }
-.cab-quick__icon { width: 40px; height: 40px; border-radius: 12px; background: var(--cab-fill); color: var(--color-text-secondary); display: grid; place-items: center; }
+.cab-quick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.cab-quick__item { display: flex; align-items: center; gap: 12px; height: 100%; min-height: 68px; padding: 12px 14px; border-radius: 20px; background: var(--cab-card); font-size: 14px; line-height: 19px; cursor: not-allowed; }
+.cab-quick__icon { width: 40px; height: 40px; border-radius: 12px; background: var(--cab-fill); color: var(--color-text-secondary); display: grid; place-items: center; flex: none; }
 .cab-quick__more { display: flex; flex-direction: column; gap: 8px; }
 .cab-quick__more span { flex: 1; border-radius: 14px; border: 1.5px dashed var(--color-border-dashed); display: grid; place-items: center; color: var(--color-text-secondary); }
 .cab-quick__more .is-blue { border-color: #5a9bf5; color: #3b82e6; }
@@ -95,10 +95,10 @@ html[data-design="cabinet"] body { background: var(--cab-bg); }
 .cab-status b { min-width: 26px; height: 26px; padding: 0 7px; border-radius: 99px; background: var(--cab-fill); font-size: 13px; line-height: 26px; font-weight: 500; text-align: center; }
 .cab-status b.is-hot { background: var(--color-accent); color: #fff; }
 
-.cab-account-card { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, .8fr); grid-template-rows: 1fr auto; padding: 0; }
+.cab-account-card { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); grid-template-rows: 1fr auto; padding: 0; }
 .cab-account-card > div { padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; min-width: 0; }
 .cab-account-card__main { padding-left: 24px !important; }
-.cab-account-card__credit, .cab-account-card__card { border-left: 1.5px dashed var(--cab-line); }
+.cab-account-card__credit { border-left: 1.5px dashed var(--cab-line); }
 .cab-money { font-size: 30px; line-height: 36px; font-weight: 700; letter-spacing: -0.03em; }
 .cab-money span { color: var(--color-text-secondary); }
 .cab-own { margin-top: 6px; padding: 8px 14px; border-radius: 12px; background: var(--cab-fill); font-size: 14px; line-height: 20px; }
@@ -124,7 +124,7 @@ html[data-design="cabinet"] body { background: var(--cab-bg); }
 .cab-ops__head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--cab-line); margin: 0 -24px; padding-inline: 24px; }
 .cab-ops__toggle { width: 36px; height: 36px; border-radius: 99px; display: grid; place-items: center; color: var(--color-text-primary); }
 @media (hover: hover) { .cab-ops__toggle:hover { background: var(--cab-fill); } }
-.cab-ops__bar { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 12px; }
+.cab-ops__bar { display: block; }
 .cab-date { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 48px; padding: 0 14px; border-radius: 12px; background: var(--cab-fill); cursor: not-allowed; }
 .cab-date span { flex: 1; text-align: center; font-weight: 500; }
 .cab-ops__search { display: flex; align-items: center; gap: 10px; height: 48px; padding: 0 16px; border-radius: 12px; background: var(--cab-fill); color: var(--color-text-secondary); }
@@ -187,10 +187,9 @@ button.cab-chip[aria-pressed="true"] { background: var(--color-bg-inverted); col
   .cab-nav .count { position: absolute; top: 2px; right: 0; min-width: 18px; height: 18px; line-height: 18px; padding: 0 4px; font-size: 11px; }
     .cab-main { padding: 8px 24px 80px; }
   .cab-top { padding: 0 24px; }
-  .cab-home { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "quick" "status" "acc" "aside" "ops"; }
+  .cab-home { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "quick" "acc" "aside" "ops"; }
   .cab-quick { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .cab-quick-wrap { grid-template-columns: minmax(0, 1fr); }
-  .cab-quick__more { display: none; }
 }
 
 /* ---------- Телефон ---------- */
@@ -210,9 +209,8 @@ button.cab-chip[aria-pressed="true"] { background: var(--color-bg-inverted); col
   .cab-title { font-size: 30px; line-height: 36px; }
   .cab-quick { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cab-quick__item { min-height: 0; flex-direction: row; align-items: center; }
-  .cab-status { justify-content: flex-start; }
   .cab-account-card { grid-template-columns: minmax(0, 1fr); }
-  .cab-account-card__credit, .cab-account-card__card { border-left: 0; border-top: 1.5px dashed var(--cab-line); }
+  .cab-account-card__credit { border-left: 0; border-top: 1.5px dashed var(--cab-line); }
   .cab-money { font-size: 28px; line-height: 34px; }
   .cab-account-card__more { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .cab-account-card__more li + li { border-top: 1px solid var(--cab-line) !important; }

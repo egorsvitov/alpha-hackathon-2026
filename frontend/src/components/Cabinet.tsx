@@ -1,8 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import {
-  ArrowDown, ArrowLeftRight, ArrowRight, ArrowUp, Briefcase, Calculator, Calendar, Check, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Copy,
-  FileInput, FilePlus, FileSpreadsheet, FileText, Globe, Home, Landmark, Mail, MoreHorizontal, Newspaper, Pencil, Percent, PiggyBank, Plus,
-  Receipt, Search, ShoppingCart, SlidersHorizontal, Sparkles, Users, Wallet, X,
+  ArrowDown, ArrowLeftRight, ArrowRight, ArrowUp, Briefcase, Check, ChevronDown, ChevronUp, Copy, FileInput, FilePlus, FileSpreadsheet, FileText,
+  Home, Landmark, MoreHorizontal, Newspaper, Pencil, Percent, Plus, Search, Users, Wallet, X,
 } from 'lucide-react';
 import { ROLES, roleLabel } from '../data/companies';
 import { href, navigate, type Route } from '../router';
@@ -10,7 +9,7 @@ import { useApp } from '../store';
 import { Disclaimer } from './EventBlocks';
 import { plural } from './FeedCard';
 import { DemoControls, NotificationsBell, UserMenu, useFeed, useHighCount } from './Shell';
-import { ErrorState, IconButton, Pill, SignalMark, Skeleton, usePopover } from './ui';
+import { ErrorState, Pill, SignalMark, Skeleton, usePopover } from './ui';
 
 /* Кабинет по образцу Альфа-Бизнеса: серый фон страницы, белые карточки с крупным скруглением, слева меню, сверху поиск и компания.
    Разделы вне демо показаны, но не работают (как и в первой версии). Оформление переключается в меню профиля. */
@@ -45,7 +44,6 @@ function CabSidebar({ route }: { route: Route }) {
           <Home size={22} aria-hidden /><span className="cab-nav__label">Главная</span>
         </a>
         <Dummy icon={ArrowLeftRight} label="Платежи в работе" />
-        <Dummy icon={FileInput} label="Реестры платежей" />
         <Dummy icon={FileText} label="Выписка" />
         <Dummy icon={Wallet} label="Счета" />
         <Dummy icon={Users} label="Контрагенты" />
@@ -57,18 +55,8 @@ function CabSidebar({ route }: { route: Route }) {
         </a>
         <Dummy icon={Percent} label="Кредитные продукты" />
         <Dummy icon={Landmark} label="Депозиты" tag="НОВОЕ" />
-        <Dummy icon={Globe} label="ВЭД" />
-        <hr className="cab-nav__sep" />
-        <Dummy icon={Calculator} label="Бухгалтерия" />
-        <Dummy icon={Receipt} label="Госзакупки" />
-        <Dummy icon={PiggyBank} label="Зарплатный проект" />
-        <Dummy icon={Wallet} label="Налоговая копилка" />
       </nav>
       <div className="cab-side__bottom">
-        <div className="cab-tiles">
-          <span className="cab-tile" title={OUT} aria-disabled="true"><ShoppingCart size={18} aria-hidden />Все сервисы и продукты</span>
-          <span className="cab-tile" title={OUT} aria-disabled="true"><Sparkles size={18} aria-hidden />Кэшбэк и привилегии</span>
-        </div>
         <button type="button" className="cab-side__prev" onClick={() => setDesign('classic')}>Классическое оформление</button>
       </div>
     </aside>
@@ -127,9 +115,6 @@ function CabTopbar() {
       <div className="cab-top__tools">
         {demo.budgetExhausted && <Pill tone="warn">Бюджет LLM исчерпан</Pill>}
         <span className="cab-search" title={OUT}><Search size={20} aria-hidden /><span>Поиск</span></span>
-        <span className="cab-top__sep" aria-hidden />
-        <IconButton label="Календарь" className="cab-top__dummy hide-m" disabled><Calendar size={22} /></IconButton>
-        <IconButton label="Сообщения" className="cab-top__dummy hide-m" disabled><Mail size={22} /></IconButton>
         <NotificationsBell />
         <span className="cab-top__sep" aria-hidden />
         <CabAccount />
@@ -174,11 +159,6 @@ const QUICK = [
   { icon: FileSpreadsheet, label: 'Сформировать выписку' },
   { icon: FileInput, label: 'Импорт платежей из 1С' },
   { icon: FilePlus, label: 'Выставить счёт' },
-  { icon: Globe, label: 'Предоставить сведения о ВО' },
-];
-
-const STATUSES: [string, number, boolean?][] = [
-  ['Оплатить', 1, true], ['Подписать', 7], ['Отправить', 7], ['Доработать', 4], ['Отклонённые', 7], ['Черновики', 5], ['В работе у банка', 8],
 ];
 
 const OPS = [
@@ -186,7 +166,6 @@ const OPS = [
   { name: 'ООО «ТоргСнаб»', doc: 'оплата по договору 12/Д', amount: '+27 600 000,00', out: false },
   { name: 'АО «ЛогистикПро»', doc: 'акт № 88', amount: '−4 905 300,00', out: true },
   { name: 'АО «МеталлТрейд»', doc: 'оплата по счёту 311', amount: '+9 150 000,00', out: false },
-  { name: 'ООО «СтальИнвест»', doc: 'аванс по договору 7/П', amount: '−95 000,00', out: true },
 ];
 
 /** Блок «Новости и аналитика»: дополнительный сервис рядом со счётом, на месте рекламных плиток банка. */
@@ -236,19 +215,6 @@ function NewsCompact() {
   );
 }
 
-function MoneySummary({ label, value, dir }: { label: string; value: string; dir?: 'up' | 'down' }) {
-  return (
-    <div className="cab-sum">
-      <p className="cab-sum__label">
-        {label}
-        {dir === 'up' && <ArrowUp size={14} className="cab-sum__up" aria-hidden />}
-        {dir === 'down' && <ArrowDown size={14} className="cab-sum__down" aria-hidden />}
-      </p>
-      <p className="cab-sum__value num">{value} ₽</p>
-    </div>
-  );
-}
-
 type OpFilter = 'in' | 'out' | null;
 
 /** История операций: фильтры «Входящие» и «Исходящие» и поиск по контрагенту работают, остальное — внешний вид. */
@@ -268,7 +234,6 @@ function Operations() {
       {open && (
         <>
           <div className="cab-ops__bar">
-            <span className="cab-date" title={OUT} aria-disabled="true"><ChevronLeft size={18} aria-hidden /><span>Сегодня</span><ChevronRight size={18} aria-hidden /><Calendar size={20} aria-hidden /></span>
             <label className="cab-ops__search">
               <span className="sr-only">Поиск по контрагенту</span>
               <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Название контрагента, ИНН или КПП" />
@@ -276,21 +241,10 @@ function Operations() {
             </label>
           </div>
           <div className="cab-ops__filters">
-            <span className="cab-chip cab-chip--icon" title={OUT} aria-disabled="true"><SlidersHorizontal size={18} aria-hidden /></span>
             <button type="button" className="cab-chip" aria-pressed={dir === 'in'} onClick={() => setDir(dir === 'in' ? null : 'in')}>Входящие</button>
             <button type="button" className="cab-chip" aria-pressed={dir === 'out'} onClick={() => setDir(dir === 'out' ? null : 'out')}>Исходящие</button>
-            <span className="cab-chip" title={OUT} aria-disabled="true">Тип платежа <ChevronDown size={16} aria-hidden /></span>
-            <span className="cab-chip" title={OUT} aria-disabled="true">Карта <ChevronDown size={16} aria-hidden /></span>
-            <span className="cab-chip" title={OUT} aria-disabled="true">Сумма <ChevronDown size={16} aria-hidden /></span>
             <span className="cab-ops__spacer" />
-            <span className="cab-link-dummy" title={OUT} aria-disabled="true">Скачать ОСВ</span>
             <span className="cab-btn cab-btn--red" title={OUT} aria-disabled="true">Скачать выписку</span>
-          </div>
-          <div className="cab-ops__sums">
-            <MoneySummary label="Входящий остаток" value="388 995 240,12" />
-            <MoneySummary label="Поступления" value="36 750 000,00" dir="up" />
-            <MoneySummary label="Списания" value="23 240 300,00" dir="down" />
-            <MoneySummary label="Исходящий остаток" value="412 380 940,12" />
           </div>
           {rows.length === 0 && <p className="cab-muted cab-ops__empty">Операций по этим условиям нет.</p>}
           <ul className="cab-rows cab-oplist">
@@ -324,17 +278,7 @@ export function CabinetHome() {
             <li key={label}><span className="cab-quick__item" title={OUT} aria-disabled="true"><span className="cab-quick__icon" aria-hidden><Icon size={20} /></span>{label}</span></li>
           ))}
         </ul>
-        <div className="cab-quick__more" aria-hidden>
-          <span><Plus size={20} /></span>
-          <span className="is-blue"><ChevronDown size={20} /></span>
-        </div>
       </div>
-
-      <ul className="cab-status" aria-label="Платежи по статусам">
-        {STATUSES.map(([label, n, hot]) => (
-          <li key={label}><span title={OUT} aria-disabled="true">{label}<b className={hot ? 'is-hot' : undefined}>{n}</b></span></li>
-        ))}
-      </ul>
 
       <section className="cab-card cab-account-card" aria-label="Счёт">
         <div className="cab-account-card__main">
@@ -348,10 +292,6 @@ export function CabinetHome() {
           <p className="cab-offer"><span className="cab-offer__tag">КРЕДИТ ДЛЯ БИЗНЕСА</span><X size={14} aria-hidden /></p>
           <p className="cab-offer__sum num"><span className="cab-offer__plus" aria-hidden><Plus size={14} strokeWidth={3} /></span>50 000 000 ₽</p>
           <p className="cab-muted">от 1,9% — на весь срок</p>
-        </div>
-        <div className="cab-account-card__card">
-          <span className="cab-minicard" aria-hidden><i /></span>
-          <p>Альфа-Бизнес<span className="cab-muted cab-sub-line num">··4821</span></p>
           <p className="cab-tariff">Тариф «Удачный выбор»</p>
         </div>
         <ul className="cab-account-card__more cab-rows">
