@@ -19,9 +19,11 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-# Загружаем .env из корня проекта (выше news/), если он есть.
-_ROOT = Path(__file__).resolve().parent.parent.parent
-load_dotenv(_ROOT / ".env")
+# Загружаем .env из папки news/ (там хранятся LLM-настройки пайплайна).
+# Не читаем корневой .env backend: у него extra="forbid", и чужие переменные
+# ломают запуск backend (например test_e2e).
+_NEWS_ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(_NEWS_ROOT / ".env")
 
 # Константы по умолчанию (значения из инструкции трека).
 DEFAULT_BASE_URL = "https://changellenge.up.railway.app/v1"

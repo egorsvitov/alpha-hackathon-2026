@@ -23,6 +23,9 @@ __pycache__/
 /data/processed/news/
 /data/processed/news_cache/
 
+# News pipeline secrets (LLM key), separate from backend .env.
+news/.env
+
 # SQLite и логи (не в git)
 *.db
 *.sqlite
