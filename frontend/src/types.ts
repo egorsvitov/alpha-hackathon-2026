@@ -78,8 +78,13 @@ export interface Evidence {
   is_synthetic: boolean;
 }
 
+/** Природа утверждения: факт из источника, вывод модели или гипотеза (условное допущение). */
+export type ClaimKind = 'fact' | 'inference' | 'hypothesis';
+
 export interface Claim {
   text: string;
+  /** если не указано, фронт берёт по разделу: «что случилось» — факт, остальное — вывод; conditional → гипотеза */
+  kind?: ClaimKind;
   evidence_ids: string[];
   /** ключи признаков клиента, повлиявших на вывод */
   features?: string[];
@@ -117,6 +122,14 @@ export interface TraceStep {
   status: 'ok' | 'retry' | 'warn';
 }
 
+/** Сценарная количественная оценка эффекта. Показывается только при высокой значимости и всегда как сценарий с допущениями. */
+export interface ImpactEstimate {
+  metric: string;
+  summary: string;
+  assumptions: string[];
+  evidence_ids: string[];
+}
+
 export interface Insight {
   run_id: string;
   company_id: string;
@@ -131,6 +144,7 @@ export interface Insight {
   risks: Claim[];
   opportunities: Claim[];
   next_actions: Claim[];
+  impact_estimate?: ImpactEstimate | null;
   bank_position: { as_of: string | null; claims: Claim[] } | null;
   ai_conclusion: { text: string; evidence_ids: string[]; features: string[] } | null;
   unknowns: UnknownItem[];
@@ -155,6 +169,13 @@ export interface QaAnswer {
   extra_search_note?: string;
   from_cache: boolean;
   insufficient: boolean;
+}
+
+export type ActionKind = 'manager' | 'request' | 'callback';
+
+export interface DemoUser {
+  login: string;
+  name: string;
 }
 
 export interface DemoSettings {

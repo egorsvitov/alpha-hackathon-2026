@@ -1,10 +1,10 @@
 import { useState, type ReactNode } from 'react';
-import { ChevronDown, HelpCircle, Landmark, Sparkles } from 'lucide-react';
-import type { Evidence, Insight, TraceStep } from '../types';
+import { CalendarClock, CheckCircle2, ChevronDown, HelpCircle, Landmark, MessageSquareText, PhoneCall, Scale, Sparkles } from 'lucide-react';
+import type { ActionKind, Evidence, Insight, TraceStep } from '../types';
 import { fmtDate } from './FeedCard';
 import { Basis, Cites } from './Claims';
 import { ArtSpark } from './Illustrations';
-import { IconTile, SignificanceBadge, usePopover } from './ui';
+import { Button, IconTile, Modal, SIG_CRITERIA, SIG_LABEL, SignificanceBadge, usePopover } from './ui';
 
 /* ---------------- Раздел-карточка с плиткой-иконкой ---------------- */
 
@@ -62,8 +62,127 @@ export function AiBlock({ data }: { data: NonNullable<Insight['ai_conclusion']> 
       </header>
       <p className="sec__text">{data.text}<Cites ids={data.evidence_ids} /></p>
       <Basis keys={data.features} />
-      <p className="small muted">Сгенерировано моделью на основе указанных источников и может содержать ошибки.</p>
+      <p className="small muted">Сгенерировано моделью на основе указанных источников и может содержать ошибки. Это не официальная позиция Альфа-Банка и не инвестиционная рекомендация.</p>
     </section>
+  );
+}
+
+/* ---------------- Оценка эффекта: сценарий с допущениями ---------------- */
+
+export function ImpactBlock({ data }: { data: NonNullable<Insight['impact_estimate']> }) {
+  return (
+    <section className="sec sec--impact" aria-labelledby="h-impact">
+      <header className="sec__head">
+        <h2 id="h-impact" className="sec__title">Оценка эффекта</h2>
+        <span className="ai-flag"><Scale size={14} aria-hidden /> сценарий, не прогноз</span>
+      </header>
+      <p className="impact__metric small muted">{data.metric}</p>
+      <p className="sec__text">{data.summary}<Cites ids={data.evidence_ids} /></p>
+      <div>
+        <p className="small medium">Допущения</p>
+        <ul className="impact__list small">
+          {data.assumptions.map((a) => <li key={a}>{a}</li>)}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- Действия: связаться с банком (имитация интеграции с CRM) ---------------- */
+
+const ACTIONS: { kind: ActionKind; label: string; title: string; icon: ReactNode; done: string }[] = [
+  { kind: 'manager', label: 'Написать менеджеру', title: 'Сообщение персональному менеджеру', icon: <MessageSquareText size={18} aria-hidden />, done: 'Сообщение передано менеджеру' },
+  { kind: 'request', label: 'Оставить заявку', title: 'Заявка на консультацию', icon: <CheckCircle2 size={18} aria-hidden />, done: 'Заявка принята' },
+  { kind: 'callback', label: 'Заказать звонок', title: 'Обратный звонок', icon: <PhoneCall size={18} aria-hidden />, done: 'Звонок заказан' },
+];
+
+export function ActionsBlock({ insight }: { insight: Insight }) {
+  const [active, setActive] = useState<ActionKind | null>(null);
+  const [sent, setSent] = useState<Partial<Record<ActionKind, string>>>({});
+  const def = ACTIONS.find((a) => a.kind === active);
+  return (
+    <section className="sec sec--actions" aria-labelledby="h-act">
+      <header className="sec__head">
+        <h2 id="h-act" className="sec__title">Обсудить с банком</h2>
+        <IconTile tone="neutral"><CalendarClock size={22} /></IconTile>
+      </header>
+      <p className="muted">Менеджер увидит, по какому событию вы обращаетесь, и подготовится. Мы не навязываем продукты: разговор о том, что важно вашему бизнесу.</p>
+      <div className="row gap-8 wrap">
+        {ACTIONS.map((a) => (
+          <Button key={a.kind} size="l" variant={sent[a.kind] ? 'ghost' : 'secondary'} icon={sent[a.kind] ? <CheckCircle2 size={18} aria-hidden /> : a.icon} onClick={() => setActive(a.kind)}>
+            {sent[a.kind] ? a.done : a.label}
+          </Button>
+        ))}
+      </div>
+      {Object.values(sent).length > 0 && (
+        <p className="small muted" role="status">В демо обращение сохраняется только на этой странице. В банке оно уходит менеджеру через уже подключённые каналы.</p>
+      )}
+      {def && (
+        <ActionModal
+          title={def.title}
+          kind={def.kind}
+          insight={insight}
+          onClose={() => setActive(null)}
+          onSent={(id) => { setSent((s) => ({ ...s, [def.kind]: id })); setActive(null); }}
+        />
+      )}
+    </section>
+  );
+}
+
+function ActionModal({ title, kind, insight, onClose, onSent }: { title: string; kind: ActionKind; insight: Insight; onClose(): void; onSent(id: string): void }) {
+  const [text, setText] = useState(`Хочу обсудить событие «${insight.event.title}».`);
+  const [phone, setPhone] = useState('');
+  const [when, setWhen] = useState('today');
+  const [busy, setBusy] = useState(false);
+  const needPhone = kind === 'callback';
+  const submit = () => {
+    setBusy(true);
+    window.setTimeout(() => onSent(`REQ-${Math.floor(1000 + Math.random() * 9000)}`), 600);
+  };
+  return (
+    <Modal
+      title={title}
+      onClose={onClose}
+      footer={
+        <>
+          <Button variant="secondary" size="l" onClick={onClose}>Отмена</Button>
+          <Button variant="primary" size="l" loading={busy} disabled={needPhone ? phone.replace(/\D/g, '').length < 10 : text.trim().length < 3} onClick={submit}>Отправить</Button>
+        </>
+      }
+    >
+      <p className="muted small">Событие: {insight.event.title}</p>
+      {needPhone && (
+        <>
+          <div className="field">
+            <label htmlFor="act-phone">Телефон</label>
+            <input id="act-phone" type="tel" autoComplete="tel" placeholder="+7 900 000-00-00" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          </div>
+          <div className="field">
+            <label htmlFor="act-when">Когда удобно</label>
+            <select id="act-when" value={when} onChange={(e) => setWhen(e.target.value)}>
+              <option value="today">Сегодня</option>
+              <option value="tomorrow">Завтра</option>
+              <option value="week">В течение недели</option>
+            </select>
+          </div>
+        </>
+      )}
+      <div className="field">
+        <label htmlFor="act-text">{needPhone ? 'Комментарий для менеджера' : 'Сообщение'}</label>
+        <textarea id="act-text" rows={4} value={text} onChange={(e) => setText(e.target.value)} />
+      </div>
+    </Modal>
+  );
+}
+
+/* ---------------- Дисклеймер ---------------- */
+
+export function Disclaimer() {
+  return (
+    <footer className="disclaimer small muted">
+      Материалы носят информационный характер и не являются инвестиционной рекомендацией или офертой. Выводы AI подготовлены моделью и не выражают официальную позицию Альфа-Банка. В демо все данные синтетические.
+    </footer>
   );
 }
 
@@ -147,6 +266,7 @@ export function RelevanceBadge({ rel }: { rel: Insight['relevance'] }) {
       {open && (
         <div className="popover popover--left relevance__pop" role="dialog" aria-label="Вклад факторов в значимость">
           <p className="popover__title">{rel.factors.length ? 'Вклад факторов' : 'Причины'} · итого {rel.score.toFixed(2).replace('.', ',')}</p>
+          <p className="small"><span className="medium">{SIG_LABEL[rel.level]} значимость ({SIG_CRITERIA[rel.level].range}).</span> {SIG_CRITERIA[rel.level].text}</p>
           {rel.factors.length === 0 && (
             <ul className="factor-list">
               {(rel.reasons ?? [rel.explanation]).map((r) => <li key={r} className="small">{r}</li>)}
