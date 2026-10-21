@@ -30,6 +30,16 @@ __pycache__/
 news/.env
 llm/events/.env
 
+# News pipeline confidential source data (must NOT be committed):
+# Alpha-Bank analytics PDFs, company/payment/individual CSV datasets.
+news/drive-download-*/
+news/*.csv
+news/*.pdf
+news/.DS_Store
+
+# macOS metadata everywhere.
+.DS_Store
+
 # SQLite и логи (не в git)
 *.db
 *.sqlite
