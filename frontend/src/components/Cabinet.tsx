@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import {
   ArrowDown, ArrowLeftRight, ArrowRight, ArrowUp, Briefcase, Check, ChevronDown, ChevronUp, Copy, FileInput, FilePlus, FileSpreadsheet, FileText,
-  Home, Landmark, MoreHorizontal, Newspaper, Pencil, Percent, Plus, Search, Users, Wallet, X,
+  Home, Landmark, MoreHorizontal, Moon, Newspaper, Pencil, Percent, Plus, Search, Sun, Users, Wallet, X,
 } from 'lucide-react';
 import { ROLES, roleLabel } from '../data/companies';
 import { href, navigate, type Route } from '../router';
@@ -9,7 +9,7 @@ import { useApp } from '../store';
 import { Disclaimer } from './EventBlocks';
 import { plural } from './FeedCard';
 import { DemoControls, NotificationsBell, UserMenu, useFeed, useHighCount } from './Shell';
-import { ErrorState, Pill, SignalMark, Skeleton, usePopover } from './ui';
+import { ErrorState, IconButton, Pill, SignalMark, Skeleton, usePopover } from './ui';
 
 /* Кабинет по образцу Альфа-Бизнеса: серый фон страницы, белые карточки с крупным скруглением, слева меню, сверху поиск и компания.
    Разделы вне демо показаны, но не работают (как и в первой версии). Оформление переключается в меню профиля. */
@@ -108,7 +108,7 @@ function CabAccount() {
 }
 
 function CabTopbar() {
-  const { demo } = useApp();
+  const { demo, theme, toggleTheme } = useApp();
   return (
     <header className="cab-top">
       <a className="cab-top__logo" href={href.home} aria-label="Альфа-Бизнес, главная"><span className="brand__mark" aria-hidden /></a>
@@ -119,6 +119,9 @@ function CabTopbar() {
         <span className="cab-top__sep" aria-hidden />
         <CabAccount />
         <DemoControls />
+        <IconButton label={theme === 'light' ? 'Тёмная тема' : 'Светлая тема'} onClick={toggleTheme}>
+          {theme === 'light' ? <Moon size={22} /> : <Sun size={22} />}
+        </IconButton>
         <UserMenu />
       </div>
     </header>

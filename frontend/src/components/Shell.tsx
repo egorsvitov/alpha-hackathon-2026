@@ -118,7 +118,7 @@ export function NotificationsBell() {
 /* ---------------- Меню пользователя ---------------- */
 
 export function UserMenu() {
-  const { user, logout, design, setDesign, theme, toggleTheme } = useApp();
+  const { user, logout, design, setDesign } = useApp();
   const { open, setOpen, ref } = usePopover();
   if (!user) return null;
   const initials = user.name.split(' ').map((w) => w[0]).slice(0, 2).join('');
@@ -138,10 +138,6 @@ export function UserMenu() {
               ))}
             </div>
           </fieldset>
-          <label className="switch-row design-switch__theme">
-            <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme} />
-            <span>Тёмная тема</span>
-          </label>
           <Button size="m" block icon={<LogOut size={18} aria-hidden />} onClick={() => { setOpen(false); logout(); navigate(href.login); }}>Выйти</Button>
         </div>
       )}
