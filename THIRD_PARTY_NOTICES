@@ -114,6 +114,13 @@ local under ignored data/context/events/. Research papers linked from
 llm/events/ANNOTATION.md inform the representation; their model weights, code
 and datasets are not included as runtime dependencies.
 
+## B2 event storage (added 2026-10-21)
+
+B2 additionally uses Python's standard-library sqlite3 module (PSF-2.0 as part
+of Python) and the linked SQLite library (public domain). No extra package or
+model was added; tested with Python 3.13.5 and SQLite 3.46.1. Its database and
+source batch archive remain local under ignored data/processed/events/.
+
 ## Frontend packages (added 2026-10-20)
 
 Used by frontend/ (Vite + React prototype). Exact versions are pinned in
