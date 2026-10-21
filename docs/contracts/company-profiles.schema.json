@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://alpha.local/contracts/company-profiles.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profiles"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "$ref": "company-profile.schema.json"
+      }
+    }
+  }
+}

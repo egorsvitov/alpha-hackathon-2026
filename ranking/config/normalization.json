@@ -1,0 +1,9 @@
+{
+  "version": "company-normalization-0.1",
+  "decimal_policy": "unsigned-dot-decimal-no-thousands",
+  "payment_count_policy": "positive-dot-decimal-integer",
+  "graph_policy": "exclude-all-repeated-directed-pairs-v1",
+  "industry_ranges": [[1,3,"agriculture"],[5,9,"mining"],[10,33,"manufacturing"],[35,39,"utilities"],[41,43,"construction"],[45,47,"trade"],[49,53,"transport"],[55,56,"hospitality"],[58,63,"it"],[64,66,"finance"],[68,68,"real_estate"]],
+  "country_aliases": {"КИТАЙ":"CN","CHINA":"CN","CN":"CN","РОССИЯ":"RU","RUSSIA":"RU","RU":"RU","ТУРЦИЯ":"TR","TURKEY":"TR","TR":"TR","КАЗАХСТАН":"KZ","KAZAKHSTAN":"KZ","KZ":"KZ"},
+  "region_aliases": {"МОСКВА":"Москва","Г. МОСКВА":"Москва","МОСКОВСКАЯ ОБЛАСТЬ":"Московская область","САНКТ-ПЕТЕРБУРГ":"Санкт-Петербург"}
+}
