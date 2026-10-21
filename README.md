@@ -93,6 +93,38 @@ npm run dev
 
 Подробнее: [frontend/README.md](frontend/README.md).
 
+## Запуск через Docker
+
+Нужны Docker и Docker Compose v2.24 или новее (подойдёт Docker Desktop). Из корня проекта:
+
+```bash
+cp .env.example .env      # необязательно: значения по умолчанию рабочие
+docker compose up --build
+```
+
+Когда оба сервиса станут healthy, интерфейс откроется на `http://localhost:8080`, Swagger backend на `http://localhost:8000/docs`.
+
+Что поднимается:
+
+- `backend`: FastAPI, база SQLite лежит в томе `backend-data` и переживает пересоздание контейнера.
+- `frontend`: nginx раздаёт собранный интерфейс и проксирует `/api/` на backend, поэтому фронт и API живут на одном адресе без CORS. Фронт стартует только после того, как backend стал healthy.
+
+Откуда фронт берёт данные, задаёт `APP_API_MODE` в `.env`:
+
+- `mock` (по умолчанию): всё считается в браузере, backend не нужен;
+- `http`: фронт ходит в backend через `/api/`. Менять режим можно без пересборки: поправьте `.env` и выполните `docker compose up -d`. Пока заглушки backend отдают ответы в старом формате, в этом режиме откроется экран «Не удалось показать данные»; формат ответов описан в [docs/frontend-api-contract.md](docs/frontend-api-contract.md).
+
+Полезное:
+
+```bash
+docker compose logs -f backend     # логи
+docker compose down                # остановить, база сохранится
+docker compose down -v             # остановить и удалить базу
+sh backend/update-lock.sh          # пересобрать backend/requirements.lock после правки requirements.txt
+```
+
+Контейнеры работают без root, у backend файловая система только для чтения (пишет лишь в `/data`), порт backend открыт только на `127.0.0.1`. Порты меняются в `.env` (`FRONTEND_PORT`, `BACKEND_PORT`). Ключи LLM кладите только в `.env`: он в `.gitignore` и попадает только в контейнер backend.
+
 ## Документация
 
 - [Контракт API для фронтенда](docs/frontend-api-contract.md) и [примеры ответов](docs/api-examples/)

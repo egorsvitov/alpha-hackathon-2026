@@ -1,0 +1,8 @@
+# Файлы, которые выполняются или читаются внутри Linux-контейнеров, всегда хранятся с LF.
+# Иначе на Windows git превращает переводы строк в CRLF, и скрипт в контейнере не запускается.
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.conf text eol=lf
+*.template text eol=lf
+docker-compose.yml text eol=lf
+.dockerignore text eol=lf

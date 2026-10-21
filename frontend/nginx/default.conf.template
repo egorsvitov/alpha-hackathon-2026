@@ -1,0 +1,66 @@
+# Шаблон конфигурации nginx. Переменные ${...} подставляет официальный образ при старте
+# (см. /docker-entrypoint.d/20-envsubst-on-templates.sh), остальные $-переменные nginx остаются как есть.
+#   BACKEND_URL  — адрес backend внутри сети, например http://backend:8000
+#   DNS_RESOLVER — DNS, которым nginx находит backend (в Docker Compose это 127.0.0.11)
+
+server {
+    listen 8080;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    gzip on;
+    gzip_comp_level 5;
+    gzip_min_length 512;
+    gzip_types text/css application/javascript application/json image/svg+xml text/plain;
+
+    include /etc/nginx/snippets/security-headers.conf;
+
+    # Проверка живости для Docker и внешних мониторингов.
+    location = /healthz {
+        access_log off;
+        default_type text/plain;
+        return 200 "ok\n";
+    }
+
+    # Запросы к API идут на тот же адрес, что и сайт: без CORS и без жёстко прописанных хостов.
+    # Адрес backend задан переменной, чтобы nginx находил его в момент запроса,
+    # а не при старте: фронт не падает, если backend перезапускается.
+    location /api/ {
+        resolver ${DNS_RESOLVER} valid=10s ipv6=off;
+        set $backend ${BACKEND_URL};
+        proxy_pass $backend;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # Ответы с LLM могут идти долго.
+        proxy_connect_timeout 5s;
+        proxy_read_timeout 120s;
+    }
+
+    # Настройки запуска меняются без пересборки, поэтому не кэшируем.
+    location = /config.js {
+        add_header Cache-Control "no-store" always;
+        include /etc/nginx/snippets/security-headers.conf;
+    }
+
+    # Файлы с хэшем в имени можно кэшировать надолго.
+    location /assets/ {
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
+        include /etc/nginx/snippets/security-headers.conf;
+        try_files $uri =404;
+    }
+
+    location = /index.html {
+        add_header Cache-Control "no-cache" always;
+        include /etc/nginx/snippets/security-headers.conf;
+    }
+
+    # Маршрутизация у приложения на hash (#/news), но запасной возврат к index.html не мешает.
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

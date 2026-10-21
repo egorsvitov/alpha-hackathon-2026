@@ -4,8 +4,14 @@ import * as mock from './mock/engine';
 /* Единая точка доступа UI к данным. Режим выбирается VITE_API_MODE=mock|http.
    Контракт HTTP-режима — docs/frontend-api-contract.md; пути можно поменять только здесь. */
 
-const MODE = (import.meta.env.VITE_API_MODE as string | undefined) ?? 'mock';
-const BASE = ((import.meta.env.VITE_API_URL as string | undefined) ?? '').replace(/\/$/, '');
+/* Настройки читаем сначала из public/config.js (в Docker его подставляет контейнер при старте),
+   потом из VITE_* на этапе сборки. Пустой apiUrl означает «тот же адрес, откуда открыт сайт». */
+declare global {
+  interface Window { __APP_CONFIG__?: { apiMode?: string; apiUrl?: string } }
+}
+const cfg = window.__APP_CONFIG__ ?? {};
+const MODE = cfg.apiMode || (import.meta.env.VITE_API_MODE as string | undefined) || 'mock';
+const BASE = (cfg.apiUrl ?? (import.meta.env.VITE_API_URL as string | undefined) ?? '').replace(/\/$/, '');
 
 async function http<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}${path}`, { headers: { 'Content-Type': 'application/json' }, ...init });
