@@ -1,0 +1,141 @@
+{
+  "schema_version": "0.1",
+  "event": {
+    "event_id": "demo:rate-forecast",
+    "event_version": 1,
+    "title": "Учебный пример: прогноз ставки",
+    "event_type": "policy_rate",
+    "first_published_at": "2026-10-20T10:00:00+03:00",
+    "updated_at": "2026-10-20T10:01:00+03:00",
+    "availability": "active",
+    "quality": "complete"
+  },
+  "ranking_features": {
+    "topics": [
+      "rates"
+    ],
+    "industries": [],
+    "geographies": [
+      "RU"
+    ],
+    "objects": [
+      "policy_rate"
+    ],
+    "metrics": [
+      "policy_rate"
+    ],
+    "factors": [
+      "interest_rates"
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "demo:rate-forecast:claim-1",
+      "text": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+      "modality": "forecast",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": {
+        "entity_id": "demo:analyst",
+        "name": "Учебный аналитический центр"
+      },
+      "participants": [
+        {
+          "entity_id": "demo:regulator",
+          "name": "Учебный регулятор",
+          "role": "decision_maker"
+        }
+      ],
+      "action": "hold",
+      "object": "policy_rate",
+      "geographies": [
+        "RU"
+      ],
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": {
+          "start": "2026-10-23",
+          "end": "2026-10-23",
+          "text": "2026-10-23"
+        }
+      },
+      "measurements": [
+        {
+          "measurement_id": "demo:rate-forecast:measurement-1",
+          "metric": "policy_rate",
+          "kind": "level",
+          "value": "14",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null
+        }
+      ],
+      "evidence_ids": [
+        "demo:rate-forecast:evidence-1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/modality": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/polarity": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/attribution": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/participants/0": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/action": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/object": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/geographies/0": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/measurements/0": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "/time/forecast_horizon": [
+          "demo:rate-forecast:evidence-1"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "demo:rate-forecast:article-1:v1",
+      "article_id": "demo:rate-forecast:article-1",
+      "article_version": 1,
+      "title": "Синтетическая новость для проверки контракта",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "demo:rate-forecast:evidence-1",
+      "source_id": "demo:rate-forecast:article-1:v1",
+      "field": "text",
+      "start": 0,
+      "end": 128,
+      "quote": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%."
+    }
+  ],
+  "conflicts": [],
+  "relations": [],
+  "limitations": [
+    "Полностью синтетический пример; не является сообщением о реальном событии."
+  ]
+}

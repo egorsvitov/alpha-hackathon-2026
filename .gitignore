@@ -22,3 +22,15 @@ __pycache__/
 *.sqlite3
 alfa_hack.db
 *.log
+
+# Personalization local data and packaging
+/data/processed/personalization/
+/data/processed/ranking/
+/data/processed/events/
+*.db-wal
+*.db-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.egg-info/
+build/
+dist/

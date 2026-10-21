@@ -1,0 +1,739 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://alpha.local/contracts/company-profile.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "company_id",
+    "profile_version",
+    "is_synthetic",
+    "display_name",
+    "okved",
+    "industry",
+    "products",
+    "region",
+    "city",
+    "age_band",
+    "employees_band",
+    "development_stage",
+    "group_id",
+    "client_type",
+    "countries",
+    "fts_present",
+    "revenue",
+    "graph",
+    "features",
+    "missing_fields",
+    "limitations",
+    "normalization_version",
+    "source_snapshot"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "company_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "is_synthetic": {
+      "type": "boolean"
+    },
+    "display_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "okved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name"
+      ],
+      "properties": {
+        "code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "industry": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "products": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rko",
+        "guarantee",
+        "loan",
+        "leasing",
+        "deposit",
+        "payroll",
+        "factoring"
+      ],
+      "properties": {
+        "rko": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "guarantee": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "loan": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "leasing": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "deposit": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "payroll": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "factoring": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "region": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "city": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "age_band": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "employees_band": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "development_stage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "group_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "client_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "countries": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "fts_present": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "revenue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw",
+        "unit",
+        "unit_status",
+        "period"
+      ],
+      "properties": {
+        "raw": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "unit_status": {
+          "enum": [
+            "confirmed",
+            "unconfirmed"
+          ]
+        },
+        "period": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "graph_version",
+        "period",
+        "currency",
+        "neighbors",
+        "profile_coverage_by_nodes",
+        "graph_coverage",
+        "limitations"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_loaded",
+            "loaded",
+            "unavailable"
+          ]
+        },
+        "graph_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "period": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "currency": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "neighbors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "company_id",
+              "direction",
+              "observed_amount_raw",
+              "payment_count",
+              "observed_share",
+              "profile_known",
+              "feature_id"
+            ],
+            "properties": {
+              "company_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "direction": {
+                "enum": [
+                  "incoming",
+                  "outgoing"
+                ]
+              },
+              "observed_amount_raw": {
+                "type": "string",
+                "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+              },
+              "payment_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "observed_share": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "profile_known": {
+                "type": "boolean"
+              },
+              "feature_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "profile_coverage_by_nodes": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "graph_coverage": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "incoming",
+                "outgoing"
+              ],
+              "properties": {
+                "incoming": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "input_records",
+                    "retained_records",
+                    "excluded_ambiguous_records",
+                    "excluded_invalid_records",
+                    "retained_record_fraction",
+                    "retained_amount_raw",
+                    "valid_positive_input_amount_raw",
+                    "retained_positive_amount_fraction",
+                    "share_quality"
+                  ],
+                  "properties": {
+                    "input_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "retained_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "excluded_ambiguous_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "excluded_invalid_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "retained_record_fraction": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "retained_amount_raw": {
+                      "type": "string",
+                      "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                    },
+                    "valid_positive_input_amount_raw": {
+                      "type": "string",
+                      "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                    },
+                    "retained_positive_amount_fraction": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "share_quality": {
+                      "enum": [
+                        "clean_observed",
+                        "limited",
+                        "unavailable"
+                      ]
+                    }
+                  }
+                },
+                "outgoing": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "input_records",
+                    "retained_records",
+                    "excluded_ambiguous_records",
+                    "excluded_invalid_records",
+                    "retained_record_fraction",
+                    "retained_amount_raw",
+                    "valid_positive_input_amount_raw",
+                    "retained_positive_amount_fraction",
+                    "share_quality"
+                  ],
+                  "properties": {
+                    "input_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "retained_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "excluded_ambiguous_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "excluded_invalid_records": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "retained_record_fraction": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "retained_amount_raw": {
+                      "type": "string",
+                      "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                    },
+                    "valid_positive_input_amount_raw": {
+                      "type": "string",
+                      "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$"
+                    },
+                    "retained_positive_amount_fraction": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "share_quality": {
+                      "enum": [
+                        "clean_observed",
+                        "limited",
+                        "unavailable"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "feature_id",
+          "path",
+          "value",
+          "quality",
+          "origin"
+        ],
+        "properties": {
+          "feature_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^/"
+          },
+          "value": {},
+          "quality": {
+            "enum": [
+              "observed",
+              "derived",
+              "synthetic",
+              "unknown",
+              "conflicting"
+            ]
+          },
+          "origin": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "source_path",
+                  "source_sha256",
+                  "data_record_numbers",
+                  "columns"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "csv"
+                  },
+                  "source_path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "source_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "data_record_numbers": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  },
+                  "columns": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "input_feature_ids",
+                  "rule_version",
+                  "artifact_id",
+                  "artifact_sha256"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "derived"
+                  },
+                  "input_feature_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "rule_version": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "artifact_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "artifact_sha256": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "fixture_id",
+                  "fixture_sha256"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "synthetic"
+                  },
+                  "fixture_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "fixture_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "source_path",
+                  "source_sha256",
+                  "field_path"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "manifest"
+                  },
+                  "source_path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "source_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "field_path": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "missing_fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^/"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "normalization_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_sha256",
+        "imported_at",
+        "exported_at",
+        "data_as_of",
+        "historical_applicability"
+      ],
+      "properties": {
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "imported_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exported_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "data_as_of": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "historical_applicability": {
+          "enum": [
+            "unknown",
+            "dated_snapshot"
+          ]
+        }
+      }
+    }
+  }
+}
