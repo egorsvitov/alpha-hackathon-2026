@@ -8,7 +8,7 @@ from .catalog_store import CatalogService
 from .catalog_checks import check_fixtures, evaluate_gold
 from .extraction_cli import load_cli_env, read_model
 from .extraction_models import ProviderProfile, ExecutionLimits
-from .migration import migrate_v1_to_v2, migrate_v2_to_v3
+from .migration import migrate_v1_to_v2, migrate_v2_to_v3, migrate_v3_to_v4
 from .provider import OfflineProvider, ProviderResponse
 from .storage import EventStore, DEFAULT_DB, StorageError
 from .validation import ContractValidationError
@@ -28,7 +28,7 @@ def main(argv=None):
     p=commands.add_parser('schema');p.add_argument('--check',action='store_true')
     p=commands.add_parser('check');p.add_argument('--inputs',type=Path,default=Path(__file__).parent/'fixtures/catalog.b5.1.json')
     p=commands.add_parser('evaluate');p.add_argument('--gold',type=Path,required=True);p.add_argument('--articles',type=Path)
-    p=commands.add_parser('migrate');p.add_argument('--to',type=int,choices=(2,3),default=3);p.add_argument('--backup',type=Path)
+    p=commands.add_parser('migrate');p.add_argument('--to',type=int,choices=(2,3,4),default=4);p.add_argument('--backup',type=Path)
     for name in ('init','rebuild'):
         p=commands.add_parser(name);p.add_argument('--config',type=Path)
     for name in ('plan','apply'):
@@ -66,7 +66,9 @@ def main(argv=None):
             steps=[]
             if version==1:
                 steps.append(migrate_v1_to_v2(args.db,args.backup));version=2
-            if args.to==3 and version==2:steps.append(migrate_v2_to_v3(args.db,args.backup if not steps else None))
+            if args.to>=3 and version==2:
+                steps.append(migrate_v2_to_v3(args.db,args.backup if not steps else None));version=3
+            if args.to==4 and version==3:steps.append(migrate_v3_to_v4(args.db,args.backup if not steps else None))
             if not steps:raise StorageError('unsupported_storage_schema','No supported migration step was selected')
             result={'status':'migrated','steps':steps}
         else:

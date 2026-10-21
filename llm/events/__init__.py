@@ -1,4 +1,4 @@
-"""Economic event contracts, extraction and auditable normalization (B1–B5)."""
+"""Economic event contracts, extraction and auditable normalization (B1–B6)."""
 
 from .models import ArticleInput, ArticleRecord, EventBundle
 from .validation import ContractValidationError, validate_bundle, validate_grounding
@@ -15,6 +15,7 @@ from .catalog_models import CatalogConfig, ClaimContext, IdentityDescriptor, Pai
 from .catalog_store import CatalogService
 from .matching import describe_identity, compare_claims
 from .catalog_validation import validate_catalog_record
+from .bundle_store import EventBundleService
 
 __all__ = [
     "ArticleInput", "ArticleRecord", "EventBundle", "ContractValidationError",
@@ -26,4 +27,5 @@ __all__ = [
     "NormalizedArticleResult", "NormalizationService",
     "CatalogService", "CatalogConfig", "ClaimContext", "IdentityDescriptor", "PairDecision",
     "CanonicalEventRecord", "ReviewRequest", "describe_identity", "compare_claims", "validate_catalog_record",
+    "EventBundleService",
 ]
