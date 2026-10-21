@@ -1,0 +1,84 @@
+{
+  "sources": [
+    {
+      "name": "cbr_rss",
+      "kind": "rss",
+      "url": "https://www.cbr.ru/rss/",
+      "category": "official",
+      "limit": 50,
+      "language": "ru"
+    },
+    {
+      "name": "cbr_press",
+      "kind": "rss",
+      "url": "https://www.cbr.ru/rss/press/",
+      "category": "official",
+      "limit": 50,
+      "language": "ru"
+    },
+    {
+      "name": "minfin_ru",
+      "kind": "html",
+      "url": "https://minfin.gov.ru/ru/press-center/",
+      "category": "official",
+      "limit": 50,
+      "language": "ru"
+    },
+    {
+      "name": "lenta_ru",
+      "kind": "rss",
+      "url": "https://lenta.ru/rss",
+      "category": "business",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "rbc_ru",
+      "kind": "rss",
+      "url": "https://www.rbc.ru/rss/",
+      "category": "business",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "interfax_rss",
+      "kind": "rss",
+      "url": "https://www.interfax.ru/rss.asp",
+      "category": "business",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "kommersant",
+      "kind": "rss",
+      "url": "https://www.kommersant.ru/RSS/news.xml",
+      "category": "business",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "vedomosti",
+      "kind": "rss",
+      "url": "https://www.vedomosti.ru/rss/news",
+      "category": "business",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "1prime",
+      "kind": "rss",
+      "url": "https://1prime.ru/export/rss2/index.xml",
+      "category": "macro",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "banki_ru",
+      "kind": "rss",
+      "url": "https://www.banki.ru/news/lenta/rss/",
+      "category": "macro",
+      "limit": 100,
+      "language": "ru"
+    }
+  ]
+}

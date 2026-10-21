@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .env
 .venv/
+.venv_news/
 .cache/
 
 # Supplied materials remain local; publication terms pending.
@@ -17,3 +18,5 @@ __pycache__/
 /data/processed/previews/
 /data/processed/extracted/
 /data/processed/rag_chunks.jsonl
+/data/processed/news/
+/data/processed/news_cache/
