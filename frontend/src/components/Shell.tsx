@@ -66,7 +66,7 @@ export function FeedProvider({ children }: { children: ReactNode }) {
 
 /* ---------------- Уведомления ---------------- */
 
-function NotificationsBell() {
+export function NotificationsBell() {
   const { push, setPush, hidden } = useApp();
   const { items } = useFeed();
   const { open, setOpen, ref } = usePopover();
@@ -117,8 +117,8 @@ function NotificationsBell() {
 
 /* ---------------- Меню пользователя ---------------- */
 
-function UserMenu() {
-  const { user, logout } = useApp();
+export function UserMenu() {
+  const { user, logout, design, setDesign } = useApp();
   const { open, setOpen, ref } = usePopover();
   if (!user) return null;
   const initials = user.name.split(' ').map((w) => w[0]).slice(0, 2).join('');
@@ -130,6 +130,14 @@ function UserMenu() {
           <p className="popover__title">Вы вошли как</p>
           <p className="user-pop__name medium">{user.name}</p>
           <p className="small muted user-pop__login">Логин: {user.login}</p>
+          <fieldset className="demo-field design-switch">
+            <legend className="small medium">Оформление</legend>
+            <div className="segmented" role="radiogroup" aria-label="Оформление">
+              {([['cabinet', 'Кабинет'], ['classic', 'Классическое']] as const).map(([id, label]) => (
+                <button type="button" role="radio" aria-checked={design === id} key={id} className="segmented__item" onClick={() => setDesign(id)}>{label}</button>
+              ))}
+            </div>
+          </fieldset>
           <Button size="m" block icon={<LogOut size={18} aria-hidden />} onClick={() => { setOpen(false); logout(); navigate(href.login); }}>Выйти</Button>
         </div>
       )}
@@ -214,7 +222,7 @@ function RoleSwitcher() {
 
 /* ---------------- Демо-панель ---------------- */
 
-function DemoControls() {
+export function DemoControls() {
   const { demo, updateDemo, bumpFeed } = useApp();
   const { open, setOpen, ref } = usePopover();
   return (
@@ -282,7 +290,7 @@ export function Header() {
 
 /* ---------------- Навигация ---------------- */
 
-function useHighCount() {
+export function useHighCount() {
   const { items } = useFeed();
   return items ? items.filter((i) => i.relevance.level === 'high').length : 0;
 }
