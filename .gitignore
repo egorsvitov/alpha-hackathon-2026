@@ -18,5 +18,14 @@ __pycache__/
 /data/processed/previews/
 /data/processed/extracted/
 /data/processed/rag_chunks.jsonl
+
+# News pipeline derived data (full text, cache) remain local.
 /data/processed/news/
 /data/processed/news_cache/
+
+# SQLite и логи (не в git)
+*.db
+*.sqlite
+*.sqlite3
+alfa_hack.db
+*.log
