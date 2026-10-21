@@ -42,6 +42,13 @@ export function IconButton({ label, children, className = '', ...rest }: ButtonH
 
 export const SIG_LABEL: Record<SignificanceLevel, string> = { high: 'Высокая', medium: 'Средняя', low: 'Низкая' };
 
+/** Что означает каждый уровень. Пороги заданы в mock-движке; backend обязан возвращать значимость по тем же правилам. */
+export const SIG_CRITERIA: Record<SignificanceLevel, { range: string; text: string }> = {
+  high: { range: 'от 0,50', text: 'Несколько признаков вашей компании напрямую связаны с событием. Стоит принять решение или проверить расчёты в ближайшее время.' },
+  medium: { range: '0,25–0,49', text: 'Связь есть через один-два признака. Учтите при планировании, срочных действий обычно не требуется.' },
+  low: { range: 'ниже 0,25', text: 'Прямой связи с профилем почти нет. Событие показано для сведения.' },
+};
+
 /** Знак значимости: три столбца «уровня сигнала», заполнено 1–3. Смысл дублируется словом. */
 export function SignalMark({ level }: { level: SignificanceLevel }) {
   const n = level === 'high' ? 3 : level === 'medium' ? 2 : 1;

@@ -188,6 +188,9 @@ No embedding model, neural reranker or multi-agent framework was used.
 - frontend/src/components/Illustrations.tsx: original SVG illustrations drawn by the team;
   no bank artwork is copied.
 - frontend/src/api/mock/: in-browser mock of the backend used when VITE_API_MODE=mock.
+- The demo login, the manager message / request / callback buttons and the browser
+  notifications in the frontend simulate bank integrations (authorisation, CRM,
+  push channel). Nothing is sent outside the browser.
 - The online-banking home screen, accounts and payments in the frontend are a mock-up of the
   bank interface, not an integration.
 

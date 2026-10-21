@@ -270,6 +270,26 @@ export function ArtChart() {
   );
 }
 
+/* ---------------- Вход: телефон с замком ---------------- */
+export function ArtLogin() {
+  const u = useUid();
+  return (
+    <Svg u={u}>
+      <Shadow u={u} rx={70} />
+      <rect x="62" y="20" width="116" height="156" rx="28" fill={`url(#${u}-purple)`} />
+      {gloss(62, 20, 116, 156, 28)}
+      <rect x="74" y="34" width="92" height="128" rx="18" fill={`url(#${u}-white)`} />
+      <path d="M102 92 V80 a18 18 0 0 1 36 0 V92" fill="none" stroke={`url(#${u}-steel)`} strokeWidth="9" strokeLinecap="round" />
+      <rect x="94" y="90" width="52" height="42" rx="13" fill={`url(#${u}-red)`} />
+      <circle cx="120" cy="108" r="6" fill="#fff" />
+      <rect x="117" y="110" width="6" height="14" rx="3" fill="#fff" />
+      <Coin u={u} cx={190} cy={142} r={24} g="gold" label="₽" rot={8} />
+      <Spark u={u} cx={36} cy={52} s={18} />
+      <Spark u={u} cx={206} cy={44} s={12} g="blue" />
+    </Svg>
+  );
+}
+
 /* ---------------- Подбор по теме ---------------- */
 export const TOPIC_ART: Record<Topic, ComponentType> = {
   rates: ArtRates,

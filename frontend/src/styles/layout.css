@@ -120,7 +120,7 @@
 /* ---------- Выбор компании ---------- */
 .select-page { min-height: 100vh; background: var(--color-bg-page); padding: var(--space-32) var(--space-24); }
 .select-grid { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 24px; align-items: start; }
-.select-hero { position: sticky; top: var(--space-32); background: var(--tint-widget); color: #212124; border-radius: 40px; padding: 40px; min-height: calc(100vh - 64px); display: flex; flex-direction: column; gap: 16px; align-items: flex-start; overflow: hidden; }
+.select-hero { position: relative; background: var(--tint-widget); color: #212124; border-radius: 40px; padding: 40px; min-height: max(calc(100vh - 64px), 820px); display: flex; flex-direction: column; gap: 16px; align-items: flex-start; overflow: hidden; }
 :root[data-theme="dark"] .select-hero { background: color-mix(in srgb, var(--tint-widget) 24%, #1c1c1e); color: var(--color-text-primary); }
 .select-title { font-size: 56px; line-height: 58px; font-weight: 700; letter-spacing: -0.04em; max-width: 11ch; margin-top: 8px; }
 .select-lead { font-size: 18px; line-height: 26px; max-width: 30ch; }
@@ -171,7 +171,7 @@
   .event-grid { grid-template-columns: minmax(0, 1fr); }
   .event-aside { position: static; max-height: none; overflow: visible; }
   .select-grid { grid-template-columns: minmax(0, 1fr); }
-  .select-hero { position: relative; top: 0; min-height: 420px; }
+  .select-hero { min-height: 560px; }
 }
 
 /* ---------- Телефон ---------- */
@@ -202,7 +202,8 @@
   .acc-card__amount { width: 100%; }
   .feed-grid { grid-template-columns: 1fr; gap: 12px; }
   .select-page { padding: var(--space-16); }
-  .select-hero { padding: 28px 24px; border-radius: 32px; min-height: 360px; }
+  .select-hero { padding: 28px 24px 0; border-radius: 32px; min-height: 0; }
+  .select-hero__art { position: relative; right: auto; bottom: auto; align-self: flex-end; margin: 8px -24px 0 0; width: min(320px, 92%); }
   .select-title { font-size: 36px; line-height: 40px; }
   .select-lead { font-size: 16px; line-height: 24px; }
   .pick-card { grid-template-columns: 72px minmax(0, 1fr) 28px; height: 112px; gap: 12px; }
@@ -219,3 +220,8 @@
 
 /* ---------- Экран критической ошибки ---------- */
 .fatal { max-width: 640px; margin: 15vh auto 0; padding: 0 var(--space-24); display: flex; flex-direction: column; gap: var(--space-16); align-items: flex-start; }
+
+/* Закреплённая карточка только там, где она целиком помещается в окно. */
+@media (min-width: 1280px) and (min-height: 900px) {
+  .select-hero { position: sticky; top: var(--space-32); }
+}

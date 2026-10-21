@@ -3,8 +3,8 @@ import { Link2, ListChecks, MessageCircleQuestion, Newspaper, Target, ThumbsDown
 import { api } from '../api';
 import { href } from '../router';
 import { useApp, useAsync } from '../store';
-import { CiteContext, ClaimList } from '../components/Claims';
-import { AiBlock, BankBlock, RelevanceBadge, Sec, SourcesPanel, TraceBlock, UnknownBlock } from '../components/EventBlocks';
+import { CiteContext, ClaimList, KindLegend } from '../components/Claims';
+import { ActionsBlock, AiBlock, BankBlock, ImpactBlock, RelevanceBadge, Sec, SourcesPanel, TraceBlock, UnknownBlock } from '../components/EventBlocks';
 import { fmtShort, plural } from '../components/FeedCard';
 import { TopicArt } from '../components/Illustrations';
 import { QaPanel, type Seed } from '../components/QaPanel';
@@ -87,13 +87,17 @@ export function EventPage({ eventId }: { eventId: string }) {
                 </section>
               ) : (
                 <>
+                  <KindLegend />
+
                   <Sec id="h-what" title="Что случилось" icon={<Newspaper size={22} />}>
-                    <ClaimList claims={ins.what_happened.facts} />
+                    <ClaimList claims={ins.what_happened.facts} fallback="fact" />
                   </Sec>
 
                   <Sec id="h-why" title="Почему важно вам" icon={<Target size={22} />}>
                     <ClaimList claims={ins.why_it_matters} />
                   </Sec>
+
+                  {ins.impact_estimate && <ImpactBlock data={ins.impact_estimate} />}
 
                   <Sec id="h-risk" title="Риски" icon={<TriangleAlert size={22} />}>
                       <ClaimList claims={ins.risks} tone="risk" empty="Существенных рисков для вашей компании не выявлено." />
@@ -105,6 +109,8 @@ export function EventPage({ eventId }: { eventId: string }) {
                   <Sec id="h-next" title="Следующий шаг" icon={<ListChecks size={22} />}>
                     <ClaimList claims={ins.next_actions} className="steps" empty="Конкретных действий не сформировано: связь с профилем слабая." />
                   </Sec>
+
+                  <ActionsBlock insight={ins} />
 
                   <BankBlock data={ins.bank_position} />
                   {ins.ai_conclusion && <AiBlock data={ins.ai_conclusion} />}
