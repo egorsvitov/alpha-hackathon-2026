@@ -26,6 +26,7 @@ from llm.events.provider import OfflineProvider,ProviderResponse,ProviderFailure
 from llm.events.runner import ExtractionRunner
 from llm.events.schemas import ROOT
 from llm.events.storage import EventStore,StorageError,processing_hash
+from llm.events.storage_schema import SCHEMA_VERSION
 from llm.events.validation import (validate_claim_collection,validate_grounding,ContractValidationError,article_sha256)
 
 
@@ -386,12 +387,12 @@ class NormalizationTests(unittest.TestCase):
         second=self.service.repair_input({'artifact_id':aid},self.profile,self.limits,provider=provider,heartbeat=NoHeartbeat)
         self.assertEqual(len(provider.requests),1)
 
-    def test_check_fixture_cli_and_no_new_database_version(self):
+    def test_check_fixture_cli_and_current_database_version(self):
         result=subprocess.run([sys.executable,'-m','llm.events.normalization_cli','check'],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         self.assertEqual(json.loads(result.stdout)['cases'],22)
         conn=sqlite3.connect(self.store.path)
-        try:self.assertEqual(conn.execute('PRAGMA user_version').fetchone()[0],2)
+        try:self.assertEqual(conn.execute('PRAGMA user_version').fetchone()[0],SCHEMA_VERSION)
         finally:conn.close()
 
     def test_level_cannot_invent_minus_and_calendar_ranges_preserve_both_bounds(self):

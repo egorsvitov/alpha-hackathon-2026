@@ -216,3 +216,15 @@ downloaded by that search.
 License texts for Apache-2.0 and GPL-2 are retained under licenses.
 Before release, append every newly added library, image/container, model,
 embedding service, news provider and dataset with exact version and terms.
+
+## B5 event catalog (added 2026-10-21)
+
+B5 adds no dependencies, pretrained models or external code. The BM25 scorer,
+structured comparison and snapshot implementation are authored for this project
+using the Python standard library and existing Pydantic/jsonschema dependencies.
+Choubey & Huang, EMNLP 2017 (https://aclanthology.org/D17-1226/) informs the
+separation of retrieval, argument-aware event identity and cluster checks;
+its code, weights, trained classifiers and thresholds are not reproduced.
+The B5 regression corpus is independently authored fictional data. Supplied
+news texts, B1 development annotations and B5 development reports remain local
+under ignored data/context/events/.

@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "IdentityBasis": {
+      "additionalProperties": false,
+      "properties": {
+        "feature": {
+          "minLength": 1,
+          "title": "Feature",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "transformation_paths": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Transformation Paths",
+          "type": "array"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "enum": [
+                "title",
+                "text"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End"
+        }
+      },
+      "required": [
+        "feature",
+        "path",
+        "evidence_ids"
+      ],
+      "title": "IdentityBasis",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "claim_id": {
+      "minLength": 1,
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "event_type": {
+      "enum": [
+        "policy_rate",
+        "fx_rate",
+        "price_change",
+        "regulation",
+        "sanction_or_trade_restriction",
+        "market_indicator",
+        "company_results",
+        "investment",
+        "corporate_action",
+        "operational_incident",
+        "other"
+      ],
+      "title": "Event Type",
+      "type": "string"
+    },
+    "features": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Features",
+      "type": "object"
+    },
+    "missing": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing",
+      "type": "array"
+    },
+    "bases": {
+      "items": {
+        "$ref": "#/$defs/IdentityBasis"
+      },
+      "title": "Bases",
+      "type": "array"
+    }
+  },
+  "required": [
+    "claim_id",
+    "event_type",
+    "features",
+    "missing",
+    "bases"
+  ],
+  "title": "IdentityDescriptor",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

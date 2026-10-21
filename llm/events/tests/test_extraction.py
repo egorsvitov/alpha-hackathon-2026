@@ -20,7 +20,7 @@ from llm.events.extraction import (parse_extraction, extraction_schema, build_pr
     build_request, profile_from_spec)
 from llm.events.extraction_models import ProviderProfile, ExecutionLimits
 from llm.events.extraction_cli import load_cli_env
-from llm.events.migration import migrate_v1_to_v2
+from llm.events.migration import migrate_v1_to_v2, migrate_v2_to_v3
 from llm.events.provider import OpenAIProvider, OfflineProvider, ProviderResponse, ProviderFailure
 from llm.events.runner import ExtractionRunner, LeaseHeartbeat
 from llm.events.storage import EventStore, StorageError, processing_hash
@@ -354,6 +354,8 @@ class ExtractionTests(unittest.TestCase):
         backup=Path(self.temp.name)/'snapshot.sqlite3'
         result=migrate_v1_to_v2(path,backup)
         self.assertEqual(result['schema_version'],2)
+        self.error('storage_migration_required',EventStore,path)
+        migrate_v2_to_v3(path)
         self.assertEqual(EventStore(path).get_article(record.source_id),record)
         with closing(sqlite3.connect(backup)) as conn:
             self.assertEqual(conn.execute('PRAGMA user_version').fetchone()[0],1)

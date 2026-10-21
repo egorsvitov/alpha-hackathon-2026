@@ -163,9 +163,9 @@ class EventStore:
                     conn.execute(statement)
                 conn.execute(f"PRAGMA application_id={APPLICATION_ID}")
                 conn.execute(f"PRAGMA user_version={SCHEMA_VERSION}")
-            elif app == APPLICATION_ID and version == 1:
-                raise StorageError("storage_migration_required", "B2 database requires explicit migration: python -m llm.events.extraction_cli migrate --db <path>")
-            elif (app, version) != (APPLICATION_ID, SCHEMA_VERSION) or not TABLES.issubset(tables):
+            elif app == APPLICATION_ID and version in (1, 2):
+                raise StorageError("storage_migration_required", "Database requires explicit migration: python -m llm.events.catalog_cli --db <path> migrate")
+            elif (app, version) != (APPLICATION_ID, SCHEMA_VERSION) or not TABLES.issubset(tables) or (version == 3 and conn.execute("SELECT 1 FROM sqlite_master WHERE type='trigger' AND name='catalog_article_invalidated'").fetchone() is None):
                 raise StorageError("unsupported_storage_schema", "Database is foreign, incomplete or has an unsupported schema; it was not recreated")
             conn.commit()
             conn.execute("PRAGMA journal_mode=WAL")
