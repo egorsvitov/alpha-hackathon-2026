@@ -1,0 +1,62 @@
+# Запуск всего проекта одной командой:  docker compose up --build
+# Настройки — в .env (шаблон: .env.example). Подробнее: README, раздел «Запуск через Docker».
+
+name: alfa-news
+
+services:
+  backend:
+    build:
+      context: ./backend
+    image: alfa-news-backend:local
+    restart: unless-stopped
+    environment:
+      # Не секреты. Ключи LLM и прочие секреты сюда не пишем, они читаются из .env (см. env_file).
+      MOCK_MODE: ${MOCK_MODE:-true}
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - backend-data:/data
+    ports:
+      # Наружу только на этом компьютере: для Swagger и отладки. Фронт ходит в backend по внутренней сети.
+      - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/', timeout=2)"]
+      interval: 15s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+
+  frontend:
+    build:
+      context: ./frontend
+    image: alfa-news-frontend:local
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      # mock: данные из браузера, backend не нужен. http: фронт ходит в backend через /api/ (см. README).
+      APP_API_MODE: ${APP_API_MODE:-mock}
+      APP_API_URL: ${APP_API_URL:-}
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "${FRONTEND_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/healthz"]
+      interval: 15s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  backend-data:
