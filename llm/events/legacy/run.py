@@ -5,9 +5,9 @@
 и прогоняет их через process_batch. Выход — каталог событий и отчёт.
 
 Запуск из корня:
-    .venv_news/bin/python llm/events/run.py
-    .venv_news/bin/python llm/events/run.py --limit 20
-    .venv_news/bin/python llm/events/run.py --dry-run
+    .venv_news/bin/python llm/events/legacy/run.py
+    .venv_news/bin/python llm/events/legacy/run.py --limit 20
+    .venv_news/bin/python llm/events/legacy/run.py --dry-run
 
 ВНИМАНИЕ: извлечение вызывает LLM (тратит бюджет). На корпоративной сети
 шлюз заблокирован — реальные вызовы работают вне прокси.
@@ -18,10 +18,10 @@ import argparse
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from news.core.model import Article  # noqa: E402
-from llm.events.pipeline import EventsPipeline  # noqa: E402
+from llm.events.legacy.pipeline import EventsPipeline  # noqa: E402
 
 
 def load_articles(jsonl_path: str | Path, limit: int | None = None) -> list[Article]:

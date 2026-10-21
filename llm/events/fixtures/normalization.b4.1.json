@@ -1,0 +1,2063 @@
+[
+  {
+    "name": "percent",
+    "article": {
+      "source_id": "b4:percent:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:percent",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример percent",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Ключевая ставка составляет 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:percent:v1",
+      "article_sha256": "c7ffeab40f1ca915949affdef5dc5007328b63e3e9f24f4556074b8496e17174",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Ключевая ставка составляет 14%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "level",
+                "value_text": "14",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Ключевая ставка составляет 14%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "14"
+      ],
+      "units": [
+        "percent"
+      ],
+      "quality": "complete"
+    }
+  },
+  {
+    "name": "growth",
+    "article": {
+      "source_id": "b4:growth:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:growth",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример growth",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Выручка выросла на 12%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:growth:v1",
+      "article_sha256": "67e58133d6ba9fc5ffbd7991c58cb468c0aa95f9600c197908a338f1e13b7881",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Выручка выросла на 12%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "выручка",
+                "kind": "relative_change",
+                "value_text": "12",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Выручка выросла на 12%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "12"
+      ]
+    }
+  },
+  {
+    "name": "forecast_decline",
+    "article": {
+      "source_id": "b4:forecast_decline:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:forecast_decline",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример forecast_decline",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Компания ожидает снижения спроса на 0,5%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:forecast_decline:v1",
+      "article_sha256": "6ed864f8500b3c0e01858c9e65dde73dec52fdee53bb3c69c8700ef1cb4e1eb5",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Компания ожидает снижения спроса на 0,5%.",
+            "event_type": "policy_rate",
+            "modality": "forecast",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "спрос",
+                "kind": "relative_change",
+                "value_text": "0,5",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Компания ожидает снижения спроса на 0,5%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "-0.5"
+      ]
+    }
+  },
+  {
+    "name": "forecast_revision",
+    "article": {
+      "source_id": "b4:forecast_revision:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:forecast_revision",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример forecast_revision",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Прогноз падения спроса улучшен с 7% до 0,5%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:forecast_revision:v1",
+      "article_sha256": "60e60c6a50cb445139b128bfa5392c2add4542665f60cec8b816d90f3dcdcd4c",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Прогноз падения спроса улучшен с 7% до 0,5%.",
+            "event_type": "policy_rate",
+            "modality": "forecast",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "спрос",
+                "kind": "relative_change",
+                "value_text": "7",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "before",
+                "comparison_period": null
+              },
+              {
+                "measurement_id": "m2",
+                "metric": "спрос",
+                "kind": "relative_change",
+                "value_text": "0,5",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "after",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Прогноз падения спроса улучшен с 7% до 0,5%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "-7",
+        "-0.5"
+      ]
+    }
+  },
+  {
+    "name": "investment_revision",
+    "article": {
+      "source_id": "b4:investment_revision:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:investment_revision",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример investment_revision",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Газпром сократил финансирование с 1,1 трлн до 1,096 трлн рублей.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:investment_revision:v1",
+      "article_sha256": "d5ba046d74662019948fc6d30626cde526554de63b08e5c0aef7d7e0a660a9fd",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Газпром сократил финансирование с 1,1 трлн до 1,096 трлн рублей.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [
+              {
+                "name": "Газпром",
+                "role": "authority"
+              }
+            ],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "финансирование",
+                "kind": "level",
+                "value_text": "1,1",
+                "unit_text": "трлн рублей",
+                "qualifier": "exact",
+                "value_role": "before",
+                "comparison_period": null
+              },
+              {
+                "measurement_id": "m2",
+                "metric": "финансирование",
+                "kind": "level",
+                "value_text": "1,096",
+                "unit_text": "трлн рублей",
+                "qualifier": "exact",
+                "value_role": "after",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/participants": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Газпром сократил финансирование с 1,1 трлн до 1,096 трлн рублей."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "1100000000000",
+        "1096000000000"
+      ],
+      "units": [
+        "RUB",
+        "RUB"
+      ]
+    }
+  },
+  {
+    "name": "range",
+    "article": {
+      "source_id": "b4:range:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:range",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример range",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Доход прогнозируется в диапазоне 185–190 млрд рублей.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:range:v1",
+      "article_sha256": "cfb3f489f6495126c258aee2be8906cc1c400cab612b43f13d9e696e518c3b15",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Доход прогнозируется в диапазоне 185–190 млрд рублей.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "доход",
+                "kind": "level",
+                "value_text": "185–190",
+                "unit_text": "млрд рублей",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Доход прогнозируется в диапазоне 185–190 млрд рублей."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        {
+          "min": "185000000000",
+          "max": "190000000000"
+        }
+      ]
+    }
+  },
+  {
+    "name": "points",
+    "article": {
+      "source_id": "b4:points:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:points",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример points",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Доля снизилась на 0,5 процентного пункта.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:points:v1",
+      "article_sha256": "7ba441c8835f8b591f5bd5937451ab8eed8a3c1aa39b9c9ed694b81a94674e50",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Доля снизилась на 0,5 процентного пункта.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "доля",
+                "kind": "absolute_change",
+                "value_text": "0,5",
+                "unit_text": "процентного пункта",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Доля снизилась на 0,5 процентного пункта."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "-0.5"
+      ],
+      "units": [
+        "percentage_point"
+      ]
+    }
+  },
+  {
+    "name": "basis_points",
+    "article": {
+      "source_id": "b4:basis_points:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:basis_points",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример basis_points",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Ставка снизилась на 25 базисных пунктов.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:basis_points:v1",
+      "article_sha256": "e6a3ad660030b3e406829eae993d69af172476b2be4e7c30b646a96f43229a38",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Ставка снизилась на 25 базисных пунктов.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "absolute_change",
+                "value_text": "25",
+                "unit_text": "базисных пунктов",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Ставка снизилась на 25 базисных пунктов."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "-25"
+      ],
+      "units": [
+        "basis_point"
+      ]
+    }
+  },
+  {
+    "name": "kopecks",
+    "article": {
+      "source_id": "b4:kopecks:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:kopecks",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример kopecks",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Стоимость составляет 3,75 копейки.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:kopecks:v1",
+      "article_sha256": "a438b7cc62e0ce7d99aac48a3193f1d57e7be98d72aaea77eb957009f2980e1e",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Стоимость составляет 3,75 копейки.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "стоимость",
+                "kind": "level",
+                "value_text": "3,75",
+                "unit_text": "копейки",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Стоимость составляет 3,75 копейки."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "0.0375"
+      ],
+      "units": [
+        "RUB"
+      ]
+    }
+  },
+  {
+    "name": "oil_bases",
+    "article": {
+      "source_id": "b4:oil_bases:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:oil_bases",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример oil_bases",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "В сентябре 2026 года поставки — около 2,42 млн баррелей в сутки, на 20% больше, чем годом ранее, но на 8,5% меньше, чем в августе.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:oil_bases:v1",
+      "article_sha256": "f7b55b337086827c46345489e09089edf528355e454772bf09ccce5d643e5086",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "В сентябре 2026 года поставки — около 2,42 млн баррелей в сутки, на 20% больше, чем годом ранее, но на 8,5% меньше, чем в августе.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": {
+                "text": "В сентябре 2026 года"
+              },
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "поставки",
+                "kind": "level",
+                "value_text": "2,42",
+                "unit_text": "млн баррелей в сутки",
+                "qualifier": "approximate",
+                "value_role": "reported",
+                "comparison_period": null
+              },
+              {
+                "measurement_id": "m2",
+                "metric": "поставки",
+                "kind": "relative_change",
+                "value_text": "20",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": {
+                  "text": "годом ранее"
+                }
+              },
+              {
+                "measurement_id": "m3",
+                "metric": "поставки",
+                "kind": "relative_change",
+                "value_text": "8,5",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": {
+                  "text": "в августе"
+                }
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ],
+              "/time": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "В сентябре 2026 года поставки — около 2,42 млн баррелей в сутки, на 20% больше, чем годом ранее, но на 8,5% меньше, чем в августе."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "2420000",
+        "20",
+        "-8.5"
+      ]
+    }
+  },
+  {
+    "name": "unicode",
+    "article": {
+      "source_id": "b4:unicode:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:unicode",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример unicode",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "😀 Ключевая ставка — 14 %.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:unicode:v1",
+      "article_sha256": "e08586d2816a295b6e0c0f6502dd8c8461cdac7b5979797ce8f8d463ea9d99af",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "😀 Ключевая ставка — 14 %.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "level",
+                "value_text": "14",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "😀 Ключевая ставка — 14 %."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "values": [
+        "14"
+      ]
+    }
+  },
+  {
+    "name": "past_september",
+    "article": {
+      "source_id": "b4:past_september:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:past_september",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример past_september",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "В сентябре опубликован показатель.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:past_september:v1",
+      "article_sha256": "ffb0b56fd410f6f4060057a29acae6f79e54293017941416cd14b4d104581f32",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "В сентябре опубликован показатель.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": {
+                "text": "В сентябре"
+              },
+              "forecast_horizon": null
+            },
+            "measurements": [],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/time": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "В сентябре опубликован показатель."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "period_start": "2026-09-01",
+      "warning": "nearest_period_year"
+    }
+  },
+  {
+    "name": "future_september",
+    "article": {
+      "source_id": "b4:future_september:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:future_september",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример future_september",
+        "published_at": "2026-08-15T12:00:00+03:00",
+        "language": "ru",
+        "text": "В сентябре ожидается показатель.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:future_september:v1",
+      "article_sha256": "6d5eb9ee5d14de9cff6bec766c489d0452b8b51fca7e2ca5636b62955813c585",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "В сентябре ожидается показатель.",
+            "event_type": "policy_rate",
+            "modality": "forecast",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": {
+                "text": "В сентябре"
+              },
+              "forecast_horizon": null
+            },
+            "measurements": [],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/time": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "В сентябре ожидается показатель."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "period_start": "2026-09-01",
+      "warning": "nearest_period_year"
+    }
+  },
+  {
+    "name": "next_january",
+    "article": {
+      "source_id": "b4:next_january:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:next_january",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример next_january",
+        "published_at": "2026-12-27T12:00:00+03:00",
+        "language": "ru",
+        "text": "В январе ожидается показатель.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:next_january:v1",
+      "article_sha256": "687aae8ddaa60d6a1cf50bf63377d1c29903b2e70f7b3e8fbfe6b15adec9e1f2",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "В январе ожидается показатель.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": {
+                "text": "В январе"
+              },
+              "forecast_horizon": null
+            },
+            "measurements": [],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/time": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "В январе ожидается показатель."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "period_start": "2027-01-01",
+      "warning": "nearest_period_year"
+    }
+  },
+  {
+    "name": "leap",
+    "article": {
+      "source_id": "b4:leap:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:leap",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример leap",
+        "published_at": "2025-03-01T12:00:00+03:00",
+        "language": "ru",
+        "text": "На 29 февраля приведён показатель.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:leap:v1",
+      "article_sha256": "efbfdf7c857e9425f8b657dec7f619a46eebe75ac645015965f040e6801d4971",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "На 29 февраля приведён показатель.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": {
+                "text": "29 февраля"
+              },
+              "forecast_horizon": null
+            },
+            "measurements": [],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/time": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "На 29 февраля приведён показатель."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "period_start": "2024-02-29",
+      "warning": "nearest_period_year"
+    }
+  },
+  {
+    "name": "repeated",
+    "article": {
+      "source_id": "b4:repeated:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:repeated",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример repeated",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Ключевая ставка — 14%. Ключевая ставка — 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:repeated:v1",
+      "article_sha256": "070143a1ede4dff141be0f1c0133476af78cd1e053ce82a3e2d0ea56b6c56e08",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Ключевая ставка — 14%. Ключевая ставка — 14%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "level",
+                "value_text": "14",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Ключевая ставка — 14%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "rejected": "quote_ambiguous"
+    }
+  },
+  {
+    "name": "missing_quote",
+    "article": {
+      "source_id": "b4:missing_quote:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:missing_quote",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример missing_quote",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Ключевая ставка — 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:missing_quote:v1",
+      "article_sha256": "302da53cb3dce2472ea72a7c0c287c8636bf6143c4e144ee9aa4c67998099108",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Ключевая ставка — 14%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "level",
+                "value_text": "14",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Ключевая ставка — 15%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "rejected": "quote_not_found"
+    }
+  },
+  {
+    "name": "uncovered",
+    "article": {
+      "source_id": "b4:uncovered:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:uncovered",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример uncovered",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Ключевая ставка — 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:uncovered:v1",
+      "article_sha256": "4fe72ff14715ee67c2c8eb66f87f1e1c81f64a2cb5dcdcc9a4e34d1418e5f1b5",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Ключевая ставка — 14%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "level",
+                "value_text": "14",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Ключевая ставка — 14%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "rejected": "uncovered_field"
+    }
+  },
+  {
+    "name": "ambiguous_cb",
+    "article": {
+      "source_id": "b4:ambiguous_cb:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:ambiguous_cb",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример ambiguous_cb",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "ЦБ сохранил ключевую ставку 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:ambiguous_cb:v1",
+      "article_sha256": "33efbc70b655195151a9ad6816c589e8bb815dd2269e7ef885d0cd8c6786e642",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "ЦБ сохранил ключевую ставку 14%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [
+              {
+                "name": "ЦБ",
+                "role": "authority"
+              }
+            ],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "level",
+                "value_text": "14",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/participants": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "ЦБ сохранил ключевую ставку 14%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "entity_id": null,
+      "warning": "entity_unresolved"
+    }
+  },
+  {
+    "name": "ambiguous_direction",
+    "article": {
+      "source_id": "b4:ambiguous_direction:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:ambiguous_direction",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример ambiguous_direction",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Показатель составил 12%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:ambiguous_direction:v1",
+      "article_sha256": "70cb6d7340dbbf56352044acc36107b1a5bd943ef60f41a627481882aa3012ef",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Показатель составил 12%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "relative_change",
+                "value_text": "12",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Показатель составил 12%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "rejected": "ambiguous_direction"
+    }
+  },
+  {
+    "name": "zero",
+    "article": {
+      "source_id": "b4:zero:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:zero",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример zero",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Общая описательная фраза.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:zero:v1",
+      "article_sha256": "d98f9a4ed84cb106d76eed4ed8b8b11066acf31afc8f8d9b47e78071641b9c1c",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [],
+        "evidence": [],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "quality": "complete",
+      "accepted": 0
+    }
+  },
+  {
+    "name": "partial",
+    "article": {
+      "source_id": "b4:partial:v1",
+      "article_version": 1,
+      "article": {
+        "article_id": "b4:partial",
+        "source": "Synthetic B4",
+        "url": null,
+        "title": "Вымышленный пример partial",
+        "published_at": "2026-10-20T12:00:00+03:00",
+        "language": "ru",
+        "text": "Ключевая ставка — 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      }
+    },
+    "input": {
+      "schema_version": "b3.1",
+      "source_id": "b4:partial:v1",
+      "article_sha256": "8b1d7f536ae1f2e40a9914012393b330431ac5caa59bf364af0f1c116522d42c",
+      "processing_spec_hash": "fixture:hand-authored",
+      "verification_status": "unverified",
+      "extraction": {
+        "claims": [
+          {
+            "claim_id": "c1",
+            "text": "Ключевая ставка — 14%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [
+              {
+                "measurement_id": "m1",
+                "metric": "ключевая ставка",
+                "kind": "level",
+                "value_text": "14",
+                "unit_text": "%",
+                "qualifier": "exact",
+                "value_role": "reported",
+                "comparison_period": null
+              }
+            ],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/modality": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          },
+          {
+            "claim_id": "c2",
+            "text": "Ключевая ставка — 14%.",
+            "event_type": "policy_rate",
+            "modality": "asserted",
+            "polarity": "affirmed",
+            "stage": null,
+            "attribution": null,
+            "participants": [],
+            "action": null,
+            "object": null,
+            "geographies": [],
+            "scenario": null,
+            "time": {
+              "occurred_at": null,
+              "effective_at": null,
+              "observation_period": null,
+              "forecast_horizon": null
+            },
+            "measurements": [],
+            "evidence_ids": [
+              "e1"
+            ],
+            "field_evidence": {
+              "/text": [
+                "e1"
+              ],
+              "/polarity": [
+                "e1"
+              ],
+              "/measurements": [
+                "e1"
+              ]
+            }
+          }
+        ],
+        "evidence": [
+          {
+            "evidence_id": "e1",
+            "field": "text",
+            "quote": "Ключевая ставка — 14%."
+          }
+        ],
+        "excluded": [],
+        "limitations": []
+      }
+    },
+    "expected": {
+      "quality": "partial",
+      "accepted": 1,
+      "rejected": "uncovered_field"
+    }
+  }
+]

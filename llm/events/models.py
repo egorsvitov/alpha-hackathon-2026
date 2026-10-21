@@ -1,182 +1,252 @@
-"""B1-совместимые Pydantic-модели для событий новостей.
+"""Source of truth for v0.2 JSON contracts; no extraction or entity resolution."""
 
-Эти сущности соответствуют контракту B6 (docs/contracts/event-bundle.schema.json),
-но сгруппированы для внутренней обработки:
-  - SourceClaim — одно утверждение источника (атом);
-  - CanonicalEvent — событие с привязанными утверждениями, включая конфликтующие.
+from datetime import date, datetime
+from typing import Annotated, Literal
+from urllib.parse import urlsplit
 
-Идентичность события и эквивалентность утверждений — разные решения
-(см. план B1). Здесь они моделируются отдельно.
-"""
-from __future__ import annotations
-
-from typing import Any
-
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import AfterValidator, BaseModel, ConfigDict, Field
 
 
-class TimePeriod(BaseModel):
-    """Период: {start, end} — включительные календарные границы YYYY-MM-DD.
-
-    Одна дата задаётся равными границами; месяц — календарными границами.
-    text — исходное выражение времени из статьи.
-    """
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
-
-    start: str | None = None
-    end: str | None = None
-    text: str | None = None
+def iso_date(value: str) -> str:
+    date.fromisoformat(value)
+    return value
 
 
-class ClaimTime(BaseModel):
-    """Четыре независимых времени утверждения (см. B6)."""
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
-
-    occurred_at: TimePeriod | None = None
-    effective_at: TimePeriod | None = None
-    observation_period: TimePeriod | None = None
-    forecast_horizon: TimePeriod | None = None
+def timestamp(value: str) -> str:
+    parsed = datetime.fromisoformat(value)
+    if "T" not in value or parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError("Expected ISO datetime with explicit timezone")
+    return value
 
 
-class Measurement(BaseModel):
-    """Одно измерение: показатель, значение, единица, период сравнения."""
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
-
-    measurement_id: str
-    metric: str
-    kind: str  # level | absolute_change | relative_change
-    value: Any  # str (десятичное) или {"min":..,"max":..}
-    unit: str
-    qualifier: str = "exact"  # exact | approximate | gt | gte | lt | lte
-    comparison_period: TimePeriod | None = None
+def uri(value: str) -> str:
+    parts = urlsplit(value)
+    if not parts.scheme or (parts.scheme in ("http", "https") and not parts.netloc):
+        raise ValueError("Expected absolute URI")
+    return value
 
 
-class EntityRef(BaseModel):
-    """Сущность (организация, человек, показатель)."""
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
-
-    entity_id: str | None = None
-    name: str
+def unique(values: list[str]) -> list[str]:
+    if len(values) != len(set(values)):
+        raise ValueError("Items must be unique")
+    return values
 
 
-class Participant(EntityRef):
-    """Участник утверждения с ролью."""
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
-
-    role: str = "unknown"
-
-
-class SourceClaim(BaseModel):
-    """Одно атомарное утверждение источника (B1).
-
-    Уровень одного показателя и его изменения к явным базам сравнения могут
-    храниться вместе (как связанные измерения). Самостоятельные действия —
-    это отдельные SourceClaim.
-    """
-
-    model_config = ConfigDict(frozen=True, extra="forbid")
-
-    claim_id: str
-    text: str = Field(min_length=1)
-    modality: str = "asserted"  # asserted | forecast | plan | proposal | opinion | unknown
-    polarity: str = "affirmed"  # affirmed | negated | unknown
-    stage: str | None = None  # announced | proposed | approved | effective | repealed | observed
-    attribution: EntityRef | None = None
-    participants: list[Participant] = Field(default_factory=list)
-    action: str | None = None
-    object: str | None = None
-    geographies: list[str] = Field(default_factory=list)
-    time: ClaimTime = Field(default_factory=ClaimTime)
-    measurements: list[Measurement] = Field(default_factory=list)
-    evidence_ids: list[str] = Field(default_factory=list)
-    field_evidence: dict[str, list[str]] = Field(default_factory=dict)
+Text = Annotated[str, Field(min_length=1)]
+Date = Annotated[str, Field(pattern=r"^\d{4}-\d{2}-\d{2}$", json_schema_extra={"format": "date"}), AfterValidator(iso_date)]
+Timestamp = Annotated[Text, AfterValidator(timestamp), Field(json_schema_extra={"format": "date-time"})]
+URI = Annotated[Text, AfterValidator(uri), Field(json_schema_extra={"format": "uri"})]
+DecimalText = Annotated[str, Field(pattern=r"^-?(0|[1-9][0-9]*)(\.[0-9]+)?$")]
+Pointer = Annotated[str, Field(pattern=r"^/")]
+PositiveInt = Annotated[int, Field(ge=1)]
+NonNegativeInt = Annotated[int, Field(ge=0)]
+Labels = Annotated[list[Text], AfterValidator(unique), Field(json_schema_extra={"uniqueItems": True})]
+ContentKind = Literal["original", "source_based_paraphrase", "synthetic", "user_provided", "unknown"]
+EventType = Literal[
+    "policy_rate", "fx_rate", "price_change", "regulation", "sanction_or_trade_restriction",
+    "market_indicator", "company_results", "investment", "corporate_action",
+    "operational_incident", "other",
+]
+Topic = Literal["rates", "sanctions", "fx", "trade", "inflation", "counterparty", "industry", "other"]
+Modality = Literal["asserted", "forecast", "plan", "proposal", "opinion", "unknown"]
 
 
-class CanonicalEvent(BaseModel):
-    """Экономическое событие/наблюдение с привязанными утверждениями.
+class ContractModel(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True, revalidate_instances="always")
 
-    Происхождение и ограничения сохраняются. Спорные значения остаются
-    отдельными SourceClaim, а не сливаются в одно «каноническое» число.
-    """
 
-    model_config = ConfigDict(extra="forbid")
+class ArticleInput(ContractModel):
+    article_id: Text
+    source: Text | None
+    url: URI | None
+    title: Text
+    published_at: Timestamp | None
+    language: Text
+    text: Text
+    content_kind: ContentKind
+    is_full_original_text: bool
+    is_synthetic: bool = False
 
-    event_id: str
-    event_version: int = 1
-    title: str
-    event_type: str = "other"  # policy_rate | fx_rate | price_change | ... | other
-    first_published_at: str | None = None
-    updated_at: str | None = None
-    availability: str = "active"  # active | withdrawn
-    quality: str = "complete"  # complete | partial | insufficient
-    claims: list[SourceClaim] = Field(default_factory=list)
-    sources: list[dict[str, Any]] = Field(default_factory=list)
-    evidence: list[dict[str, Any]] = Field(default_factory=list)
-    conflicts: list[dict[str, Any]] = Field(default_factory=list)
-    relations: list[dict[str, Any]] = Field(default_factory=list)
-    limitations: list[str] = Field(default_factory=list)
 
-    def to_bundle(self) -> dict[str, Any]:
-        """Сериализует событие в структуру EventBundle (B6)."""
-        return {
-            "schema_version": "0.1",
-            "event": {
-                "event_id": self.event_id,
-                "event_version": self.event_version,
-                "title": self.title,
-                "event_type": self.event_type,
-                "first_published_at": self.first_published_at,
-                "updated_at": self.updated_at,
-                "availability": self.availability,
-                "quality": self.quality,
-            },
-            "ranking_features": self._ranking_features(),
-            "claims": [c.model_dump() for c in self.claims],
-            "sources": self.sources,
-            "evidence": self.evidence,
-            "conflicts": self.conflicts,
-            "relations": self.relations,
-            "limitations": self.limitations,
-        }
+class ArticleRecord(ContractModel):
+    article: ArticleInput
+    article_version: PositiveInt
+    source_id: Text
 
-    def _ranking_features(self) -> dict[str, list[str]]:
-        """Грубые тематические признаки для ранжировщика (B1)."""
-        topics: set[str] = set()
-        industries: set[str] = set()
-        geographies: set[str] = set()
-        objects: set[str] = set()
-        metrics: set[str] = set()
-        factors: set[str] = set()
 
-        # Примитивный маппинг типа события → тема.
-        TYPE_TOPIC = {
-            "policy_rate": "rates",
-            "fx_rate": "fx",
-            "price_change": "industry",
-            "regulation": "trade",
-            "sanction_or_trade_restriction": "sanctions",
-            "market_indicator": "market",
-            "company_results": "industry",
-            "investment": "industry",
-        }
-        topics.add(TYPE_TOPIC.get(self.event_type, "other"))
-        for c in self.claims:
-            geographies.update(c.geographies)
-            if c.object:
-                objects.add(c.object)
-            for m in c.measurements:
-                if m.metric:
-                    metrics.add(m.metric)
-        return {
-            "topics": sorted(topics),
-            "industries": sorted(industries),
-            "geographies": sorted(geographies),
-            "objects": sorted(objects),
-            "metrics": sorted(metrics),
-            "factors": sorted(factors),
-        }
+class Period(ContractModel):
+    start: Date | None
+    end: Date | None
+    text: Text
+
+
+class Entity(ContractModel):
+    entity_id: Text | None
+    name: Text
+
+
+class Participant(Entity):
+    role: Text
+
+
+class ValueRange(ContractModel):
+    min: DecimalText
+    max: DecimalText
+
+
+class Measurement(ContractModel):
+    measurement_id: Text
+    metric: Text
+    kind: Literal["level", "absolute_change", "relative_change"]
+    value: DecimalText | ValueRange
+    unit: Text
+    qualifier: Literal["exact", "approximate", "gt", "gte", "lt", "lte"]
+    comparison_period: Period | None
+    value_role: Literal["reported", "before", "after", "comparison"]
+
+
+class Scenario(ContractModel):
+    kind: Literal["baseline", "alternative", "unspecified"]
+    text: Text
+
+
+class ClaimTime(ContractModel):
+    occurred_at: Period | None
+    effective_at: Period | None
+    observation_period: Period | None
+    forecast_horizon: Period | None
+
+
+class SourceClaim(ContractModel):
+    claim_id: Text
+    text: Text
+    modality: Modality
+    polarity: Literal["affirmed", "negated", "unknown"]
+    stage: Literal["announced", "proposed", "approved", "effective", "repealed", "observed"] | None
+    attribution: Entity | None
+    participants: list[Participant]
+    action: Text | None
+    object: Text | None
+    geographies: Labels
+    time: ClaimTime
+    measurements: list[Measurement]
+    evidence_ids: Annotated[Labels, Field(min_length=1)]
+    field_evidence: Annotated[dict[Pointer, Annotated[Labels, Field(min_length=1)]], Field(min_length=1)]
+    scenario: Scenario | None
+
+
+class Source(ContractModel):
+    source_id: Text
+    article_id: Text
+    article_version: PositiveInt
+    title: Text
+    publisher: Text | None
+    url: URI | None
+    published_at: Timestamp | None
+    content_kind: ContentKind
+    is_full_original_text: bool
+    is_synthetic: bool
+
+
+class Evidence(ContractModel):
+    evidence_id: Text
+    source_id: Text
+    field: Literal["title", "text"]
+    start: NonNegativeInt
+    end: PositiveInt
+    quote: Text
+
+
+class ConflictVariant(ContractModel):
+    claim_id: Text
+    field_path: Pointer
+
+
+class Conflict(ContractModel):
+    conflict_id: Text
+    description: Text
+    variants: Annotated[list[ConflictVariant], Field(min_length=2)]
+
+
+class Relation(ContractModel):
+    type: Literal["duplicate_claim", "updates", "related_stage"]
+    from_id: Text
+    to_id: Text
+    target_kind: Literal["claim", "event"]
+
+
+class Event(ContractModel):
+    event_id: Text
+    event_version: PositiveInt
+    title: Text
+    event_type: EventType
+    first_published_at: Timestamp | None
+    updated_at: Timestamp
+    availability: Literal["active", "withdrawn"]
+    quality: Literal["complete", "partial", "insufficient"]
+
+
+class RankingFeatures(ContractModel):
+    topics: Annotated[list[Topic], AfterValidator(unique), Field(json_schema_extra={"uniqueItems": True})]
+    industries: Labels
+    geographies: Labels
+    objects: Labels
+    metrics: Labels
+    factors: Labels
+
+
+class EventBundle(ContractModel):
+    schema_version: Literal["0.2"]
+    event: Event
+    ranking_features: RankingFeatures
+    claims: list[SourceClaim]
+    sources: list[Source]
+    evidence: list[Evidence]
+    conflicts: list[Conflict]
+    relations: list[Relation]
+    limitations: Labels
+
+
+class AnnotatedClaim(ContractModel):
+    claim_id: Text
+    event_type: EventType
+    expected_event_id: Text | None
+    identity_note: Text
+
+
+class ExcludedFragment(ContractModel):
+    quote: Text
+    reason: Text
+
+
+class ArticleAnnotation(ContractModel):
+    article_id: Text
+    article_version: PositiveInt
+    article_sha256: Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
+    claims: list[AnnotatedClaim]
+    excluded: list[ExcludedFragment]
+    limitations: list[Text]
+
+
+class ExpectedLink(ContractModel):
+    from_claim_id: Text
+    to_claim_id: Text
+    relation: Literal["duplicate_claim", "same_event", "conflicts_with", "updates", "different_event", "uncertain"]
+    reason: Text
+
+
+class GoldSet(ContractModel):
+    schema_version: Literal["0.2"]
+    annotation_version: Literal["b1.1"]
+    annotation_status: Literal["single_annotator_draft"]
+    dataset_kind: Literal["development_paraphrases", "synthetic_regression"]
+    articles: list[ArticleRecord]
+    annotations: list[ArticleAnnotation]
+    bundles: list[EventBundle]
+    expected_links: list[ExpectedLink]
+
+
+class Issue(ContractModel):
+    code: str
+    path: str
+    message: str

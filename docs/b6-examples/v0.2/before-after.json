@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.2",
+  "event": {
+    "event_id": "synthetic:investment",
+    "event_version": 1,
+    "title": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей.",
+    "event_type": "investment",
+    "first_published_at": "2026-11-02T10:00:00+03:00",
+    "updated_at": "2026-11-02T12:00:00+03:00",
+    "availability": "active",
+    "quality": "complete"
+  },
+  "ranking_features": {
+    "topics": [
+      "other"
+    ],
+    "industries": [],
+    "geographies": [],
+    "objects": [
+      "investment_program"
+    ],
+    "metrics": [
+      "investment_program"
+    ],
+    "factors": []
+  },
+  "claims": [
+    {
+      "claim_id": "s10:c1",
+      "text": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей.",
+      "modality": "asserted",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": null,
+      "participants": [],
+      "action": "revise",
+      "object": "investment_program",
+      "geographies": [],
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": {
+          "start": "2026-01-01",
+          "end": "2026-12-31",
+          "text": "2026 год"
+        },
+        "forecast_horizon": null
+      },
+      "measurements": [
+        {
+          "measurement_id": "s10:c1:m1",
+          "metric": "investment_program",
+          "kind": "level",
+          "value": "1100000000000",
+          "unit": "RUB",
+          "qualifier": "exact",
+          "comparison_period": null,
+          "value_role": "before"
+        },
+        {
+          "measurement_id": "s10:c1:m2",
+          "metric": "investment_program",
+          "kind": "level",
+          "value": "1096000000000",
+          "unit": "RUB",
+          "qualifier": "exact",
+          "comparison_period": null,
+          "value_role": "after"
+        }
+      ],
+      "evidence_ids": [
+        "s10:c1:e1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "s10:c1:e1"
+        ],
+        "/modality": [
+          "s10:c1:e1"
+        ],
+        "/polarity": [
+          "s10:c1:e1"
+        ],
+        "/action": [
+          "s10:c1:e1"
+        ],
+        "/object": [
+          "s10:c1:e1"
+        ],
+        "/time": [
+          "s10:c1:e1"
+        ],
+        "/measurements": [
+          "s10:c1:e1"
+        ]
+      },
+      "scenario": null
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "s10:v1",
+      "article_id": "s10",
+      "article_version": 1,
+      "title": "Синтетический случай 10",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": "2026-11-02T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "s10:c1:e1",
+      "source_id": "s10:v1",
+      "field": "text",
+      "start": 0,
+      "end": 92,
+      "quote": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей."
+    }
+  ],
+  "conflicts": [],
+  "relations": [],
+  "limitations": [
+    "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+  ]
+}

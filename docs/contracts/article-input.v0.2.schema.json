@@ -1,0 +1,97 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "article_id": {
+      "minLength": 1,
+      "title": "Article Id",
+      "type": "string"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source"
+    },
+    "url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Url"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Published At"
+    },
+    "language": {
+      "minLength": 1,
+      "title": "Language",
+      "type": "string"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "content_kind": {
+      "enum": [
+        "original",
+        "source_based_paraphrase",
+        "synthetic",
+        "user_provided",
+        "unknown"
+      ],
+      "title": "Content Kind",
+      "type": "string"
+    },
+    "is_full_original_text": {
+      "title": "Is Full Original Text",
+      "type": "boolean"
+    },
+    "is_synthetic": {
+      "default": false,
+      "title": "Is Synthetic",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "article_id",
+    "source",
+    "url",
+    "title",
+    "published_at",
+    "language",
+    "text",
+    "content_kind",
+    "is_full_original_text"
+  ],
+  "title": "ArticleInput",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

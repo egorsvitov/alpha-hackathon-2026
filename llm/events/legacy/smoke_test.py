@@ -9,7 +9,7 @@
 Извлечение (extract_article) здесь подменяется фейковой функцией, чтобы не
 тратить бюджет и не зависеть от сети. Реальный вызов LLM — в extract.py.
 
-Запуск:  .venv_news/bin/python llm/events/smoke_test.py
+Запуск:  .venv_news/bin/python llm/events/legacy/smoke_test.py
 """
 from __future__ import annotations
 
@@ -17,13 +17,13 @@ import sys
 import tempfile
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from news.core.model import Article  # noqa: E402
 
-import llm.events.pipeline as pipeline_mod  # noqa: E402
-from llm.events.pipeline import EventsPipeline  # noqa: E402
-from llm.events.models import SourceClaim  # noqa: E402
+import llm.events.legacy.pipeline as pipeline_mod  # noqa: E402
+from llm.events.legacy.pipeline import EventsPipeline  # noqa: E402
+from llm.events.legacy.models import SourceClaim  # noqa: E402
 
 
 def fake_extract(article: Article):

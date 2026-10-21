@@ -1,0 +1,7 @@
+{
+  "live_enabled": false,
+  "tariffs_confirmed": true,
+  "input_rub_per_million": "0",
+  "output_rub_per_million": "0",
+  "daily_quota_rub": "1"
+}

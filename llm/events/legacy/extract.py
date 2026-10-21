@@ -16,8 +16,8 @@ from typing import Any
 from news.core.model import Article
 from news.llm import budget, client, config, model_policy
 
-from llm.events.models import SourceClaim
-from llm.events.state import BatchResult
+from llm.events.legacy.models import SourceClaim
+from llm.events.legacy.state import BatchResult
 
 # Промпт извлечения: требует строгую структуру и цитаты.
 SYSTEM_PROMPT = """Ты — модуль извлечения экономических событий из русскоязычных новостей.

@@ -1,0 +1,18 @@
+{
+  "execution_mode": "offline",
+  "base_url": "https://changellenge.up.railway.app/v1",
+  "model": "offline:scripted",
+  "max_tokens": 4096,
+  "max_request_bytes": 100000,
+  "response_format": "text",
+  "format_verified": false,
+  "thinking": null,
+  "thinking_verified": false,
+  "reasoning_effort": null,
+  "connect_timeout": 5.0,
+  "read_timeout": 60.0,
+  "limits_confirmed": true,
+  "max_input_tokens": 20000,
+  "max_output_tokens": 4096,
+  "context_window_tokens": 24096
+}

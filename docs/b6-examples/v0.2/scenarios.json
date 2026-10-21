@@ -1,0 +1,206 @@
+{
+  "schema_version": "0.2",
+  "event": {
+    "event_id": "synthetic:scenarios",
+    "event_version": 1,
+    "title": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+    "event_type": "policy_rate",
+    "first_published_at": "2026-11-02T10:00:00+03:00",
+    "updated_at": "2026-11-02T12:00:00+03:00",
+    "availability": "active",
+    "quality": "complete"
+  },
+  "ranking_features": {
+    "topics": [
+      "other"
+    ],
+    "industries": [],
+    "geographies": [],
+    "objects": [
+      "policy_rate"
+    ],
+    "metrics": [
+      "policy_rate"
+    ],
+    "factors": []
+  },
+  "claims": [
+    {
+      "claim_id": "s14:c1",
+      "text": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+      "modality": "forecast",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": {
+        "entity_id": "demo:analyst-А",
+        "name": "Учебный аналитик А"
+      },
+      "participants": [],
+      "action": null,
+      "object": "policy_rate",
+      "geographies": [],
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": {
+          "start": "2026-12-31",
+          "end": "2026-12-31",
+          "text": "конец 2026 года"
+        }
+      },
+      "measurements": [
+        {
+          "measurement_id": "s14:c1:m1",
+          "metric": "policy_rate",
+          "kind": "level",
+          "value": "13.75",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null,
+          "value_role": "reported"
+        }
+      ],
+      "evidence_ids": [
+        "s14:c1:e1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "s14:c1:e1"
+        ],
+        "/modality": [
+          "s14:c1:e1"
+        ],
+        "/polarity": [
+          "s14:c1:e1"
+        ],
+        "/attribution": [
+          "s14:c1:e1"
+        ],
+        "/object": [
+          "s14:c1:e1"
+        ],
+        "/time": [
+          "s14:c1:e1"
+        ],
+        "/measurements": [
+          "s14:c1:e1"
+        ],
+        "/scenario": [
+          "s14:c1:e1"
+        ]
+      },
+      "scenario": {
+        "kind": "baseline",
+        "text": "базовом сценарии"
+      }
+    },
+    {
+      "claim_id": "s14:c2",
+      "text": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+      "modality": "forecast",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": {
+        "entity_id": "demo:analyst-А",
+        "name": "Учебный аналитик А"
+      },
+      "participants": [],
+      "action": null,
+      "object": "policy_rate",
+      "geographies": [],
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": {
+          "start": "2026-12-31",
+          "end": "2026-12-31",
+          "text": "конец 2026 года"
+        }
+      },
+      "measurements": [
+        {
+          "measurement_id": "s14:c2:m1",
+          "metric": "policy_rate",
+          "kind": "level",
+          "value": "14",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null,
+          "value_role": "reported"
+        }
+      ],
+      "evidence_ids": [
+        "s14:c2:e1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "s14:c2:e1"
+        ],
+        "/modality": [
+          "s14:c2:e1"
+        ],
+        "/polarity": [
+          "s14:c2:e1"
+        ],
+        "/attribution": [
+          "s14:c2:e1"
+        ],
+        "/object": [
+          "s14:c2:e1"
+        ],
+        "/time": [
+          "s14:c2:e1"
+        ],
+        "/measurements": [
+          "s14:c2:e1"
+        ],
+        "/scenario": [
+          "s14:c2:e1"
+        ]
+      },
+      "scenario": {
+        "kind": "alternative",
+        "text": "альтернативном сценарии"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "s14:v1",
+      "article_id": "s14",
+      "article_version": 1,
+      "title": "Синтетический случай 14",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": "2026-11-02T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "s14:c1:e1",
+      "source_id": "s14:v1",
+      "field": "text",
+      "start": 0,
+      "end": 133,
+      "quote": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года."
+    },
+    {
+      "evidence_id": "s14:c2:e1",
+      "source_id": "s14:v1",
+      "field": "text",
+      "start": 0,
+      "end": 133,
+      "quote": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года."
+    }
+  ],
+  "conflicts": [],
+  "relations": [],
+  "limitations": [
+    "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+  ]
+}

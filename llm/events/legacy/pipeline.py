@@ -24,9 +24,9 @@ from typing import Any
 from news.core.model import Article
 from news.llm import budget, client
 
-from llm.events.extract import ExtractionError, extract_article
-from llm.events.models import CanonicalEvent, SourceClaim
-from llm.events.state import BatchResult, StateStore
+from llm.events.legacy.extract import ExtractionError, extract_article
+from llm.events.legacy.models import CanonicalEvent, SourceClaim
+from llm.events.legacy.state import BatchResult, StateStore
 
 
 class EventCatalog:
