@@ -1,3 +1,4 @@
+from typing import Any
 from fastapi import APIRouter, HTTPException, Query, Response, status
 
 from app.schemas.base import (
@@ -76,3 +77,8 @@ async def upload_news(body: NewsUploadRequest) -> NewsEvent:
 )
 async def send_feedback(body: FeedbackRequest) -> Response:
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@api_router.get("/metrics")
+async def get_metrics() -> dict[str, Any]:
+    return store.get_metrics()
