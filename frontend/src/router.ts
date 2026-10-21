@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 
 export type Route =
   | { name: 'home' }
+  | { name: 'login' }
   | { name: 'select' }
   | { name: 'feed' }
   | { name: 'event'; eventId: string };
 
 export function parse(hash: string): Route {
   const path = hash.replace(/^#/, '').split('?')[0] || '/';
+  if (path === '/login') return { name: 'login' };
   if (path === '/select') return { name: 'select' };
   if (path === '/news') return { name: 'feed' };
   const m = path.match(/^\/news\/(.+)$/);
@@ -17,6 +19,7 @@ export function parse(hash: string): Route {
 
 export const href = {
   home: '#/',
+  login: '#/login',
   select: '#/select',
   feed: '#/news',
   event: (id: string) => `#/news/${encodeURIComponent(id)}`,

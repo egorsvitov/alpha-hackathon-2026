@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { Claim, Evidence, Role } from '../types';
+import type { Claim, ClaimKind, Evidence, Role } from '../types';
 import { featureLabel, roleLabel } from '../data/companies';
 
 /* Связь «утверждение ↔ источник»: клик по [n] подсвечивает строку в панели источников (критерий 12). */
@@ -39,7 +39,32 @@ export function Basis({ keys }: { keys?: string[] }) {
   );
 }
 
-export function ClaimItem({ claim, tone }: { claim: Claim; tone?: 'risk' | 'opp' }) {
+export const KIND_LABEL: Record<ClaimKind, string> = { fact: 'Факт', inference: 'Вывод модели', hypothesis: 'Гипотеза' };
+export const KIND_HINT: Record<ClaimKind, string> = {
+  fact: 'подтверждено источником',
+  inference: 'оценка модели на основе источников и профиля',
+  hypothesis: 'условное допущение, зависит от неизвестных данных',
+};
+
+/** Метка природы утверждения: факт / вывод модели / гипотеза. Условное утверждение всегда гипотеза. */
+export const kindOf = (claim: Claim, fallback: ClaimKind): ClaimKind => (claim.conditional ? 'hypothesis' : claim.kind ?? fallback);
+
+export function KindTag({ kind }: { kind: ClaimKind }) {
+  return <span className={`kind kind--${kind}`} title={KIND_HINT[kind]}>{KIND_LABEL[kind]}</span>;
+}
+
+/** Расшифровка меток под заголовком карточки: читатель видит, чему верить как факту, а что оценка. */
+export function KindLegend() {
+  return (
+    <ul className="kind-legend small" aria-label="Что означают метки">
+      {(['fact', 'inference', 'hypothesis'] as const).map((k) => (
+        <li key={k}><KindTag kind={k} /> {KIND_HINT[k]}</li>
+      ))}
+    </ul>
+  );
+}
+
+export function ClaimItem({ claim, tone, fallback }: { claim: Claim; tone?: 'risk' | 'opp'; fallback: ClaimKind }) {
   const { role } = useContext(CiteContext);
   const forRole = Boolean(role && claim.roles?.includes(role));
   return (
@@ -50,7 +75,7 @@ export function ClaimItem({ claim, tone }: { claim: Claim; tone?: 'risk' | 'opp'
         </span>
       )}
       <p className="claim__text">
-        {claim.conditional && <span className="cond">Условно: </span>}
+        <KindTag kind={kindOf(claim, fallback)} />{' '}
         {claim.text}<Cites ids={claim.evidence_ids} />
       </p>
       <Basis keys={claim.features} />
@@ -58,7 +83,7 @@ export function ClaimItem({ claim, tone }: { claim: Claim; tone?: 'risk' | 'opp'
   );
 }
 
-export function ClaimList({ claims, tone, empty, className = '' }: { claims: Claim[]; tone?: 'risk' | 'opp'; empty?: string; className?: string }) {
+export function ClaimList({ claims, tone, empty, className = '', fallback = 'inference' }: { claims: Claim[]; tone?: 'risk' | 'opp'; empty?: string; className?: string; fallback?: ClaimKind }) {
   if (!claims.length) return <p className="muted">{empty ?? 'Не выявлено.'}</p>;
-  return <ul className={`claim-list ${className}`}>{claims.map((c, i) => <ClaimItem key={i} claim={c} tone={tone} />)}</ul>;
+  return <ul className={`claim-list ${className}`}>{claims.map((c, i) => <ClaimItem key={i} claim={c} tone={tone} fallback={fallback} />)}</ul>;
 }

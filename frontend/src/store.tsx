@@ -1,20 +1,32 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import type { CompanyProfile, DemoSettings, Role } from './types';
+import type { CompanyProfile, DemoSettings, DemoUser, Role } from './types';
 import { api, demoSettings } from './api';
 import { COMPANIES } from './data/companies';
 
 type Theme = 'light' | 'dark';
 const KEY = 'alfa-news-demo-state-v1';
 
-interface Persisted { companyId: string | null; role: Role | null; theme: Theme }
+interface Persisted {
+  companyId: string | null;
+  role: Role | null;
+  theme: Theme;
+  user: DemoUser | null;
+  /** скрытые карточки по компании: companyId → event_id[] */
+  hidden: Record<string, string[]>;
+  /** включены ли браузерные уведомления о важных событиях */
+  push: boolean;
+}
+
+/** Демо-вход. В банке логин привязан к физлицу, у которого есть доступ к нескольким компаниям. */
+export const DEMO_LOGIN = { login: 'demo', password: 'alfa2026', name: 'Иван Иванович Иванов' };
 
 const read = (): Persisted => {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw) as Persisted;
+    if (raw) return { user: null, hidden: {}, push: false, ...(JSON.parse(raw) as Partial<Persisted>) } as Persisted;
   } catch { /* localStorage недоступен */ }
   const dark = typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  return { companyId: null, role: null, theme: dark ? 'dark' : 'light' };
+  return { companyId: null, role: null, theme: dark ? 'dark' : 'light', user: null, hidden: {}, push: false };
 };
 
 interface AppState {
@@ -22,9 +34,18 @@ interface AppState {
   company: CompanyProfile | null;
   role: Role | null;
   theme: Theme;
+  user: DemoUser | null;
+  /** event_id скрытых карточек текущей компании */
+  hidden: string[];
+  push: boolean;
   demo: DemoSettings;
   /** увеличивается при загрузке новой новости — лента и виджет перезапрашиваются */
   feedVersion: number;
+  login(login: string, password: string): boolean;
+  logout(): void;
+  hide(eventId: string): void;
+  unhide(eventId: string): void;
+  setPush(on: boolean): void;
   select(companyId: string, role: Role): void;
   setRole(role: Role): void;
   setCompany(companyId: string): void;
@@ -56,8 +77,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
       company: companies.find((c) => c.company_id === p.companyId) ?? null,
       role: p.role,
       theme: p.theme,
+      user: p.user,
+      hidden: (p.companyId && p.hidden[p.companyId]) || [],
+      push: p.push,
       demo,
       feedVersion,
+      login: (login, password) => {
+        const ok = login.trim().toLowerCase() === DEMO_LOGIN.login && password === DEMO_LOGIN.password;
+        if (ok) setP((s) => ({ ...s, user: { login: DEMO_LOGIN.login, name: DEMO_LOGIN.name } }));
+        return ok;
+      },
+      logout: () => setP((s) => ({ ...s, user: null, companyId: null, role: null })),
+      hide: (eventId) => setP((s) => {
+        if (!s.companyId) return s;
+        const cur = s.hidden[s.companyId] ?? [];
+        return cur.includes(eventId) ? s : { ...s, hidden: { ...s.hidden, [s.companyId]: [...cur, eventId] } };
+      }),
+      unhide: (eventId) => setP((s) => (s.companyId
+        ? { ...s, hidden: { ...s.hidden, [s.companyId]: (s.hidden[s.companyId] ?? []).filter((x) => x !== eventId) } }
+        : s)),
+      setPush: (on) => setP((s) => ({ ...s, push: on })),
       select: (companyId, role) => setP((s) => ({ ...s, companyId, role })),
       setRole: (role) => setP((s) => ({ ...s, role })),
       setCompany: (companyId) => setP((s) => ({ ...s, companyId })),

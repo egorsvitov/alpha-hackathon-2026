@@ -2,19 +2,32 @@ import { useEffect } from 'react';
 import { AppProvider, useApp } from './store';
 import { href, navigate, useRoute } from './router';
 import { BottomNav, FeedProvider, Header, Sidebar } from './components/Shell';
+import { LoginPage } from './pages/LoginPage';
 import { SelectPage } from './pages/SelectPage';
+import { Disclaimer } from './components/EventBlocks';
 import { HomePage } from './pages/HomePage';
 import { FeedPage } from './pages/FeedPage';
 import { EventPage } from './pages/EventPage';
 
 function Routes() {
   const route = useRoute();
-  const { company, role } = useApp();
+  const { user, company, role } = useApp();
   const authed = Boolean(company && role);
 
   useEffect(() => {
-    if (!authed && route.name !== 'select') navigate(href.select);
-  }, [authed, route.name]);
+    if (!user) { if (route.name !== 'login') navigate(href.login); }
+    else if (!authed && route.name !== 'select') navigate(href.select);
+    else if (authed && route.name === 'login') navigate(href.home);
+  }, [user, authed, route.name]);
+
+  if (!user || route.name === 'login') {
+    return (
+      <>
+        <a className="skip-link" href="#main">К содержимому</a>
+        <main id="main"><LoginPage /></main>
+      </>
+    );
+  }
 
   if (!authed || route.name === 'select') {
     return (
@@ -35,6 +48,7 @@ function Routes() {
           {route.name === 'home' && <HomePage />}
           {route.name === 'feed' && <FeedPage />}
           {route.name === 'event' && <EventPage eventId={route.eventId} />}
+          <Disclaimer />
         </main>
       </div>
       <BottomNav route={route} />
