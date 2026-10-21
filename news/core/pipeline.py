@@ -43,7 +43,14 @@ class NewsPipeline:
         self.fetcher = fetcher
         self.store = store
 
-    def run(self, categories: list[str] | None = None, headlines_only: bool = False) -> PipelineReport:
+    def run(self, categories: list[str] | None = None, headlines_only: bool = False,
+            topic_filter=None) -> PipelineReport:
+        """Собирает статьи.
+
+        topic_filter — опциональный TopicFilter (из плана батча по аудитории).
+        Если задан, кандидаты, не релевантные темам/странам плана, отбрасываются
+        на этапе сбора (без LLM, дёшево).
+        """
         report = PipelineReport()
         sources = self.registry.enabled(categories)
         new_articles: list[Article] = []
@@ -55,6 +62,10 @@ class NewsPipeline:
             except Exception as e:  # noqa: BLE001
                 report.sources_failed.append((spec.name, str(e)))
                 continue
+
+            # Тематический фильтр по плану аудитории (если задан).
+            if topic_filter is not None:
+                candidates = topic_filter.filter_candidates(candidates)
 
             # Без полного текста берём только заголовок/ссылку.
             if headlines_only or spec.headlines_only:

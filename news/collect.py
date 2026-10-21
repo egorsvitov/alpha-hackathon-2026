@@ -45,6 +45,9 @@ def main() -> int:
     parser.add_argument("--registry", default="news/sources.json", help="Путь к реестру источников.")
     parser.add_argument("--out-dir", default="data/processed/news", help="Куда писать JSONL.")
     parser.add_argument("--cache-dir", default="data/processed/news_cache", help="Кэш скачанного.")
+    parser.add_argument("--audience-csv", default=None,
+                        help="CSV юрлиц целевой аудитории (df_Uid_data_hack.csv). Если задан, "
+                             "строит тематический план батча и фильтрует новости под аудиторию.")
     args = parser.parse_args()
 
     try:
@@ -54,8 +57,24 @@ def main() -> int:
         print(f"Ошибка инициализации: {e}", file=sys.stderr)
         return 2
 
+    # Если задан CSV аудитории — строим тематический фильтр и применяем к сбору.
+    topic_filter = None
+    if args.audience_csv:
+        try:
+            from news.profile.audience import analyze_audience
+            from news.profile.batch_plan import build_batch_plan
+            from news.profile.topic_filter import TopicFilter
+            profile = analyze_audience(args.audience_csv, None, None)
+            plan = build_batch_plan(profile, pipeline.registry.sources)
+            topic_filter = TopicFilter(plan)
+            print(f"[audience] темы: {', '.join(plan.top_topics)}")
+            print(f"[audience] страны ВЭД: {', '.join(plan.priority_countries[:6])}")
+        except Exception as e:  # noqa: BLE001
+            print(f"Предупреждение: не удалось построить фильтр аудитории: {e}", file=sys.stderr)
+
     try:
-        report = pipeline.run(categories=args.category, headlines_only=args.headlines_only)
+        report = pipeline.run(categories=args.category, headlines_only=args.headlines_only,
+                              topic_filter=topic_filter)
     except Exception as e:  # noqa: BLE001
         print(f"Ошибка сбора: {e}", file=sys.stderr)
         return 3

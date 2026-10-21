@@ -40,6 +40,10 @@ news/.DS_Store
 # macOS metadata everywhere.
 .DS_Store
 
+# Tool/agent scratch dirs.
+.nessy/
+news/profile/__pycache__/
+
 # SQLite и логи (не в git)
 *.db
 *.sqlite
