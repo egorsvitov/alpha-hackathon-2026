@@ -1,0 +1,39 @@
+{
+  "version": "b1.1",
+  "note": "Начальный расширяемый словарь, не модель влияния и не реализованный нормализатор.",
+  "factors": ["interest_rates", "credit", "liquidity", "fx", "tariffs", "sanctions", "commodity_prices", "inflation", "demand", "labor", "logistics", "regulation", "investments", "trade"],
+  "industries": ["steel", "mining_metallurgy", "oil_gas_chemicals", "construction", "energy", "logistics", "utilities", "agriculture", "retail", "apparel", "online_services"],
+  "roles": ["subject", "decision_maker", "authority", "forecaster", "buyer", "seller", "affected_party"],
+  "units": ["percent", "percentage_point", "basis_point", "RUB", "USD", "EUR", "CNY", "tonne", "barrel_per_day", "count", "rank", "hour", "bit_per_second", "ip_address_count", "RUB/USD", "RUB/EUR", "RUB/CNY"],
+  "metric_examples": {
+    "policy_rate": "Уровень ключевой ставки; география и регулятор задаются контекстом утверждения.",
+    "steel_consumption": "Потребление стали: уровень или относительное изменение, различаемые kind.",
+    "net_profit_ras": "Чистая прибыль именно по РСБУ; не сопоставлять с net_profit_ifrs.",
+    "broad_money_ex_fx_revaluation": "Широкая денежная масса без валютной переоценки; не отождествлять с M2.",
+    "corporate_agriculture_credit_arrears_ratio": "Просрочка корпоративного портфеля АПК, отдельный охват относительно общей просрочки.",
+    "official_exchange_rate": "Официальный курс; пара задаётся object и unit, дата действия — effective_at."
+  },
+  "identity_by_type": {
+    "policy_rate": ["регулятор", "инструмент", "заседание/дата решения", "стадия"],
+    "fx_rate": ["орган/площадка", "валютная пара", "официальный или рыночный курс", "дата действия/срез"],
+    "price_change": ["товар/инструмент и спецификация", "рынок/география", "вид цены", "период/срез"],
+    "regulation": ["орган", "документ/предмет регулирования", "юрисдикция", "решение/дата", "стадия"],
+    "sanction_or_trade_restriction": ["орган/инициатор", "мера", "затронутые лица/товары/маршрут", "юрисдикция", "решение/дата", "стадия"],
+    "market_indicator": ["показатель", "субъект/совокупность", "география", "методика/охват", "период/срез"],
+    "company_results": ["компания/группа/сегмент", "показатель", "стандарт отчётности/охват", "период/срез"],
+    "investment": ["инвестор/совокупность", "проект/программа/отрасль", "география", "версия решения или период", "план или исполнение"],
+    "corporate_action": ["участники", "действие", "сделка/актив/проект", "дата/идентификатор", "стадия"],
+    "operational_incident": ["пострадавший/объект", "конкретный инцидент или агрегированная совокупность", "место", "время/период"],
+    "other": ["явный идентификатор либо совокупность конкретных участников, действия, объекта и времени; иначе соответствие неизвестно"]
+  },
+  "forecast_identity_additions": ["автор", "предмет прогноза", "горизонт", "выпуск/явный пересмотр"],
+  "claim_compatibility_additions": ["scenario", "polarity", "modality", "kind", "value_role", "unit", "comparison_period", "охват показателя"],
+  "entity_aliases": [
+    {"entity_id": "org:bank_of_russia", "canonical_name": "Банк России", "aliases": ["Банк России", "ЦБ РФ", "Центробанк РФ", "Центробанк", "ЦБ"], "context_rule": "Сокращения ЦБ/Центробанк разрешать только при установленном российском контексте, иначе оставить entity_id неизвестным."},
+    {"entity_id": "org:severstal", "canonical_name": "Северсталь", "aliases": ["Северсталь", "ПАО «Северсталь»"], "context_rule": "Не распространять идентичность компании на всех участников группы автоматически."},
+    {"entity_id": "org:gazprom", "canonical_name": "Газпром", "aliases": ["Газпром", "ПАО «Газпром»"], "context_rule": "Головная компания и группа — разные охваты показателей."},
+    {"entity_id": "org:rosnano", "canonical_name": "Роснано", "aliases": ["Роснано", "АО «Роснано»"], "context_rule": "Управляющая компания и АО не считаются одним юрлицом автоматически."},
+    {"entity_id": "org:rshb", "canonical_name": "Россельхозбанк", "aliases": ["Россельхозбанк", "РСХБ"], "context_rule": "Сокращение требует контекста; АПК-портфель не равен всему портфелю."},
+    {"entity_id": "org:stormwall", "canonical_name": "StormWall", "aliases": ["StormWall"], "context_rule": "Источник оценки кибератак, а не доказанный организатор атаки."}
+  ]
+}

@@ -1,0 +1,3452 @@
+{
+  "schema_version": "0.2",
+  "annotation_version": "b1.1",
+  "annotation_status": "single_annotator_draft",
+  "dataset_kind": "synthetic_regression",
+  "articles": [
+    {
+      "article": {
+        "article_id": "s01",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 01",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "20 октября 2026 года Учебный регулятор сохранил ключевую ставку на уровне 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s01:v1"
+    },
+    {
+      "article": {
+        "article_id": "s02",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 02",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Учебный регулятор на заседании 20 октября 2026 года оставил ключевую ставку без изменения: 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s02:v1"
+    },
+    {
+      "article": {
+        "article_id": "s03",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 03",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "20 октября 2026 года Учебный регулятор сохранил ключевую ставку на уровне 15%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s03:v1"
+    },
+    {
+      "article": {
+        "article_id": "s04",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 04",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Учебный аналитик А ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s04:v1"
+    },
+    {
+      "article": {
+        "article_id": "s05",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 05",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "23 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s05:v1"
+    },
+    {
+      "article": {
+        "article_id": "s06",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 06",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "На заседании 22 октября 2026 года Учебный регулятор не повысил ключевую ставку.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s06:v1"
+    },
+    {
+      "article": {
+        "article_id": "s07",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 07",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "1 октября 2026 года Учебное министерство предложило повысить пошлину на сталь до 20%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s07:v1"
+    },
+    {
+      "article": {
+        "article_id": "s08",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 08",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "10 октября 2026 года Учебное министерство утвердило пошлину на сталь 20%; она начнет действовать с 1 ноября 2026 года.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s08:v1"
+    },
+    {
+      "article": {
+        "article_id": "s09",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 09",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "1 ноября 2026 года вступило в силу решение Учебного министерства о пошлине на сталь 20%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s09:v1"
+    },
+    {
+      "article": {
+        "article_id": "s10",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 10",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s10:v1"
+    },
+    {
+      "article": {
+        "article_id": "s11",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 11",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Демо-банк прогнозирует доход за 2026 год в диапазоне 185–190 млрд рублей.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s11:v1"
+    },
+    {
+      "article": {
+        "article_id": "s12",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 12",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Демо-банк сообщил, что за январь—сентябрь 2026 года доля просрочки снизилась на 0,5 процентного пункта и составила 1,7%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s12:v1"
+    },
+    {
+      "article": {
+        "article_id": "s13",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 13",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "В сентябре 2026 года поставки нефти из России в Китай составили 2,42 млн баррелей в сутки: на 20% больше, чем в сентябре 2025 года, и на 8,5% меньше, чем в августе 2026 года.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s13:v1"
+    },
+    {
+      "article": {
+        "article_id": "s14",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 14",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s14:v1"
+    },
+    {
+      "article": {
+        "article_id": "s15",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 15",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "За 2026 год Демо-завод увеличил выручку на 12% и сократил персонал на 8% по сравнению с 2025 годом.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s15:v1"
+    },
+    {
+      "article": {
+        "article_id": "s16",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 16",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Учебный аналитик Б ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s16:v1"
+    },
+    {
+      "article": {
+        "article_id": "s17",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 17",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "27 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s17:v1"
+    },
+    {
+      "article": {
+        "article_id": "s18",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 18",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Учебное министерство планирует изменить пошлину на сталь; срок и величина не названы.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s18:v1"
+    },
+    {
+      "article": {
+        "article_id": "s19",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 19",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "Заседание Учебного регулятора состоялось 19 октября 2026 года. На нем ключевую ставку сохранили на уровне 14%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 1,
+      "source_id": "s19:v1"
+    },
+    {
+      "article": {
+        "article_id": "s20",
+        "source": "Учебное издание",
+        "url": null,
+        "title": "Синтетический случай 20",
+        "published_at": "2026-11-02T10:00:00+03:00",
+        "language": "ru",
+        "text": "📰 Исправление: 18 октября 2026 года Учебный регулятор сохранил ставку 14%. Ранее в этой публикации ошибочно указывалось 15%.",
+        "content_kind": "synthetic",
+        "is_full_original_text": false,
+        "is_synthetic": true
+      },
+      "article_version": 2,
+      "source_id": "s20:v2"
+    }
+  ],
+  "annotations": [
+    {
+      "article_id": "s01",
+      "article_version": 1,
+      "article_sha256": "15e57e8969e07d067815ab2baaff28ac30eff97302839dd010ef7daaedc21a5c",
+      "claims": [
+        {
+          "claim_id": "s01:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:meeting20",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s02",
+      "article_version": 1,
+      "article_sha256": "b62a8614faa9580f3a68863da40a6cd106be4a32eaeb238be90f4d3e1b4ab421",
+      "claims": [
+        {
+          "claim_id": "s02:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:meeting20",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s03",
+      "article_version": 1,
+      "article_sha256": "4f6122d6b23cbf63bb4e1283e0379b48a90efce04d8600a28079c0c84b00831b",
+      "claims": [
+        {
+          "claim_id": "s03:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:meeting20",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s04",
+      "article_version": 1,
+      "article_sha256": "6cd327ab9b0b195a85f3522931d5781d2967f0b1389d152e5ec60a69b2c2552b",
+      "claims": [
+        {
+          "claim_id": "s04:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:forecast-А",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s05",
+      "article_version": 1,
+      "article_sha256": "dad0942292b218e16382cfe65b5d9e3d2d3a0cf73b1a484644886b29b026e90f",
+      "claims": [
+        {
+          "claim_id": "s05:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:meeting23",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s06",
+      "article_version": 1,
+      "article_sha256": "5cf40751cb128aa2bc08ea1c40ef770a62a9da1b19221bc21fe2f3193cd2612c",
+      "claims": [
+        {
+          "claim_id": "s06:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:meeting22",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s07",
+      "article_version": 1,
+      "article_sha256": "f60be2d525e532f18186b1b706fa50427600101c38cfe35789c28e77eb5837f9",
+      "claims": [
+        {
+          "claim_id": "s07:c1",
+          "event_type": "sanction_or_trade_restriction",
+          "expected_event_id": "synthetic:tariff-proposed",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s08",
+      "article_version": 1,
+      "article_sha256": "f627a9bc52f44d8c8f13c86bef657124a703fafca75a04d5985011461e07d0d7",
+      "claims": [
+        {
+          "claim_id": "s08:c1",
+          "event_type": "sanction_or_trade_restriction",
+          "expected_event_id": "synthetic:tariff-approved",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s09",
+      "article_version": 1,
+      "article_sha256": "da9a1307cd22726edcad663ad5e376c667266971f5daf410a23426ed1f026934",
+      "claims": [
+        {
+          "claim_id": "s09:c1",
+          "event_type": "sanction_or_trade_restriction",
+          "expected_event_id": "synthetic:tariff-effective",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s10",
+      "article_version": 1,
+      "article_sha256": "c1344fc2120e800e68e01b3f5bbc0f914d7f6f4c1634f82f7a374c729b3b1f24",
+      "claims": [
+        {
+          "claim_id": "s10:c1",
+          "event_type": "investment",
+          "expected_event_id": "synthetic:investment",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s11",
+      "article_version": 1,
+      "article_sha256": "0b8b92c11466fe638654a8e0b3d8dc34a7b461d0f75aaa9366807e17de130827",
+      "claims": [
+        {
+          "claim_id": "s11:c1",
+          "event_type": "company_results",
+          "expected_event_id": "synthetic:income-forecast",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s12",
+      "article_version": 1,
+      "article_sha256": "7dfb24b812f8fc133d0008eaad5aacb8e3f837b8063900aefc8796544b4e0238",
+      "claims": [
+        {
+          "claim_id": "s12:c1",
+          "event_type": "company_results",
+          "expected_event_id": "synthetic:arrears",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s13",
+      "article_version": 1,
+      "article_sha256": "ce9c2e3ea7176ee742c22d43c4bc6265648e189dc528c344cd9d6105ad07b3c3",
+      "claims": [
+        {
+          "claim_id": "s13:c1",
+          "event_type": "market_indicator",
+          "expected_event_id": "synthetic:oil",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s14",
+      "article_version": 1,
+      "article_sha256": "2877cde4ff1879f28705e8cef83b2f9e34bdf2b4ed75de61064f26693925c8f1",
+      "claims": [
+        {
+          "claim_id": "s14:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:scenarios",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        },
+        {
+          "claim_id": "s14:c2",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:scenarios",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s15",
+      "article_version": 1,
+      "article_sha256": "ba28f5f192985fa6f37b084992b523c1da563159d6fb3234882aedf6a3ec8a03",
+      "claims": [
+        {
+          "claim_id": "s15:c1",
+          "event_type": "company_results",
+          "expected_event_id": "synthetic:revenue",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        },
+        {
+          "claim_id": "s15:c2",
+          "event_type": "company_results",
+          "expected_event_id": "synthetic:headcount",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s16",
+      "article_version": 1,
+      "article_sha256": "dd16747e6dc78642068c5c92d17143663276388ddcca1a9f5578fcaca2733d30",
+      "claims": [
+        {
+          "claim_id": "s16:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:forecast-Б",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s17",
+      "article_version": 1,
+      "article_sha256": "d532d06c90a1fd9ffdade16d7722136850d7262a136023186e371f6a13febb0b",
+      "claims": [
+        {
+          "claim_id": "s17:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:meeting27",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s18",
+      "article_version": 1,
+      "article_sha256": "bd81eff5443fb47cf8e36547e5100e64e433d03c2c32a55b5df1b6cdc2f1f9ac",
+      "claims": [
+        {
+          "claim_id": "s18:c1",
+          "event_type": "sanction_or_trade_restriction",
+          "expected_event_id": null,
+          "identity_note": "Даты и параметры нет; соответствие другим стадиям не установлено."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s19",
+      "article_version": 1,
+      "article_sha256": "07d0bd0e1b80969e237f71b7ac39004168c623dff2d47cf4fa546f76cb2b01df",
+      "claims": [
+        {
+          "claim_id": "s19:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:cross-sentence",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [],
+      "limitations": []
+    },
+    {
+      "article_id": "s20",
+      "article_version": 2,
+      "article_sha256": "6f2b9b96ac22fa63d0b31cbcbb4eeb670d1195c2b3586c4d0d170dcbf38f3d5d",
+      "claims": [
+        {
+          "claim_id": "s20:c1",
+          "event_type": "policy_rate",
+          "expected_event_id": "synthetic:corrected",
+          "identity_note": "Принадлежность задана вручную по субъекту, предмету и времени."
+        }
+      ],
+      "excluded": [
+        {
+          "quote": "Ранее в этой публикации ошибочно указывалось 15%.",
+          "reason": "Архивное ошибочное значение не является текущим свидетельством."
+        }
+      ],
+      "limitations": []
+    }
+  ],
+  "bundles": [
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:meeting20",
+        "event_version": 1,
+        "title": "20 октября 2026 года Учебный регулятор сохранил ключевую ставку на уровне 14%.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "rates"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": [
+          "interest_rates"
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "s01:c1",
+          "text": "20 октября 2026 года Учебный регулятор сохранил ключевую ставку на уровне 14%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": "approved",
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-20",
+              "end": "2026-10-20",
+              "text": "20 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s01:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s01:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s01:c1:e1"
+            ],
+            "/modality": [
+              "s01:c1:e1"
+            ],
+            "/polarity": [
+              "s01:c1:e1"
+            ],
+            "/stage": [
+              "s01:c1:e1"
+            ],
+            "/participants": [
+              "s01:c1:e1"
+            ],
+            "/action": [
+              "s01:c1:e1"
+            ],
+            "/object": [
+              "s01:c1:e1"
+            ],
+            "/time": [
+              "s01:c1:e1"
+            ],
+            "/measurements": [
+              "s01:c1:e1"
+            ]
+          },
+          "scenario": null
+        },
+        {
+          "claim_id": "s02:c1",
+          "text": "Учебный регулятор на заседании 20 октября 2026 года оставил ключевую ставку без изменения: 14%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": "approved",
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-20",
+              "end": "2026-10-20",
+              "text": "20 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s02:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s02:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s02:c1:e1"
+            ],
+            "/modality": [
+              "s02:c1:e1"
+            ],
+            "/polarity": [
+              "s02:c1:e1"
+            ],
+            "/stage": [
+              "s02:c1:e1"
+            ],
+            "/participants": [
+              "s02:c1:e1"
+            ],
+            "/action": [
+              "s02:c1:e1"
+            ],
+            "/object": [
+              "s02:c1:e1"
+            ],
+            "/time": [
+              "s02:c1:e1"
+            ],
+            "/measurements": [
+              "s02:c1:e1"
+            ]
+          },
+          "scenario": null
+        },
+        {
+          "claim_id": "s03:c1",
+          "text": "20 октября 2026 года Учебный регулятор сохранил ключевую ставку на уровне 15%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": "approved",
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-20",
+              "end": "2026-10-20",
+              "text": "20 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s03:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "15",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s03:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s03:c1:e1"
+            ],
+            "/modality": [
+              "s03:c1:e1"
+            ],
+            "/polarity": [
+              "s03:c1:e1"
+            ],
+            "/stage": [
+              "s03:c1:e1"
+            ],
+            "/participants": [
+              "s03:c1:e1"
+            ],
+            "/action": [
+              "s03:c1:e1"
+            ],
+            "/object": [
+              "s03:c1:e1"
+            ],
+            "/time": [
+              "s03:c1:e1"
+            ],
+            "/measurements": [
+              "s03:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s01:v1",
+          "article_id": "s01",
+          "article_version": 1,
+          "title": "Синтетический случай 01",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        },
+        {
+          "source_id": "s02:v1",
+          "article_id": "s02",
+          "article_version": 1,
+          "title": "Синтетический случай 02",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        },
+        {
+          "source_id": "s03:v1",
+          "article_id": "s03",
+          "article_version": 1,
+          "title": "Синтетический случай 03",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s01:c1:e1",
+          "source_id": "s01:v1",
+          "field": "text",
+          "start": 0,
+          "end": 78,
+          "quote": "20 октября 2026 года Учебный регулятор сохранил ключевую ставку на уровне 14%."
+        },
+        {
+          "evidence_id": "s02:c1:e1",
+          "source_id": "s02:v1",
+          "field": "text",
+          "start": 0,
+          "end": 95,
+          "quote": "Учебный регулятор на заседании 20 октября 2026 года оставил ключевую ставку без изменения: 14%."
+        },
+        {
+          "evidence_id": "s03:c1:e1",
+          "source_id": "s03:v1",
+          "field": "text",
+          "start": 0,
+          "end": 78,
+          "quote": "20 октября 2026 года Учебный регулятор сохранил ключевую ставку на уровне 15%."
+        }
+      ],
+      "conflicts": [
+        {
+          "conflict_id": "synthetic:rate-conflict",
+          "description": "Разные значения ставки на одном заседании.",
+          "variants": [
+            {
+              "claim_id": "s01:c1",
+              "field_path": "/measurements/0/value"
+            },
+            {
+              "claim_id": "s03:c1",
+              "field_path": "/measurements/0/value"
+            }
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "type": "duplicate_claim",
+          "from_id": "s02:c1",
+          "to_id": "s01:c1",
+          "target_kind": "claim"
+        }
+      ],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:forecast-А",
+        "event_version": 1,
+        "title": "Учебный аналитик А ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "rates"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s04:c1",
+          "text": "Учебный аналитик А ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%.",
+          "modality": "forecast",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": {
+            "entity_id": "demo:analyst-А",
+            "name": "Учебный аналитик А"
+          },
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": {
+              "start": "2026-10-23",
+              "end": "2026-10-23",
+              "text": "23 октября 2026 года"
+            }
+          },
+          "measurements": [
+            {
+              "measurement_id": "s04:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s04:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s04:c1:e1"
+            ],
+            "/modality": [
+              "s04:c1:e1"
+            ],
+            "/polarity": [
+              "s04:c1:e1"
+            ],
+            "/attribution": [
+              "s04:c1:e1"
+            ],
+            "/participants": [
+              "s04:c1:e1"
+            ],
+            "/action": [
+              "s04:c1:e1"
+            ],
+            "/object": [
+              "s04:c1:e1"
+            ],
+            "/time": [
+              "s04:c1:e1"
+            ],
+            "/measurements": [
+              "s04:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s04:v1",
+          "article_id": "s04",
+          "article_version": 1,
+          "title": "Синтетический случай 04",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s04:c1:e1",
+          "source_id": "s04:v1",
+          "field": "text",
+          "start": 0,
+          "end": 100,
+          "quote": "Учебный аналитик А ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:forecast-Б",
+        "event_version": 1,
+        "title": "Учебный аналитик Б ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "rates"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s16:c1",
+          "text": "Учебный аналитик Б ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%.",
+          "modality": "forecast",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": {
+            "entity_id": "demo:analyst-Б",
+            "name": "Учебный аналитик Б"
+          },
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": {
+              "start": "2026-10-23",
+              "end": "2026-10-23",
+              "text": "23 октября 2026 года"
+            }
+          },
+          "measurements": [
+            {
+              "measurement_id": "s16:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s16:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s16:c1:e1"
+            ],
+            "/modality": [
+              "s16:c1:e1"
+            ],
+            "/polarity": [
+              "s16:c1:e1"
+            ],
+            "/attribution": [
+              "s16:c1:e1"
+            ],
+            "/participants": [
+              "s16:c1:e1"
+            ],
+            "/action": [
+              "s16:c1:e1"
+            ],
+            "/object": [
+              "s16:c1:e1"
+            ],
+            "/time": [
+              "s16:c1:e1"
+            ],
+            "/measurements": [
+              "s16:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s16:v1",
+          "article_id": "s16",
+          "article_version": 1,
+          "title": "Синтетический случай 16",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s16:c1:e1",
+          "source_id": "s16:v1",
+          "field": "text",
+          "start": 0,
+          "end": 100,
+          "quote": "Учебный аналитик Б ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку 14%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:meeting23",
+        "event_version": 1,
+        "title": "23 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s05:c1",
+          "text": "23 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": "approved",
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-23",
+              "end": "2026-10-23",
+              "text": "23 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s05:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s05:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s05:c1:e1"
+            ],
+            "/modality": [
+              "s05:c1:e1"
+            ],
+            "/polarity": [
+              "s05:c1:e1"
+            ],
+            "/stage": [
+              "s05:c1:e1"
+            ],
+            "/participants": [
+              "s05:c1:e1"
+            ],
+            "/action": [
+              "s05:c1:e1"
+            ],
+            "/object": [
+              "s05:c1:e1"
+            ],
+            "/time": [
+              "s05:c1:e1"
+            ],
+            "/measurements": [
+              "s05:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s05:v1",
+          "article_id": "s05",
+          "article_version": 1,
+          "title": "Синтетический случай 05",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s05:c1:e1",
+          "source_id": "s05:v1",
+          "field": "text",
+          "start": 0,
+          "end": 68,
+          "quote": "23 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:meeting22",
+        "event_version": 1,
+        "title": "На заседании 22 октября 2026 года Учебный регулятор не повысил ключевую ставку.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s06:c1",
+          "text": "На заседании 22 октября 2026 года Учебный регулятор не повысил ключевую ставку.",
+          "modality": "asserted",
+          "polarity": "negated",
+          "stage": null,
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "raise",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-22",
+              "end": "2026-10-22",
+              "text": "22 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [],
+          "evidence_ids": [
+            "s06:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s06:c1:e1"
+            ],
+            "/modality": [
+              "s06:c1:e1"
+            ],
+            "/polarity": [
+              "s06:c1:e1"
+            ],
+            "/participants": [
+              "s06:c1:e1"
+            ],
+            "/action": [
+              "s06:c1:e1"
+            ],
+            "/object": [
+              "s06:c1:e1"
+            ],
+            "/time": [
+              "s06:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s06:v1",
+          "article_id": "s06",
+          "article_version": 1,
+          "title": "Синтетический случай 06",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s06:c1:e1",
+          "source_id": "s06:v1",
+          "field": "text",
+          "start": 0,
+          "end": 79,
+          "quote": "На заседании 22 октября 2026 года Учебный регулятор не повысил ключевую ставку."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:tariff-proposed",
+        "event_version": 1,
+        "title": "1 октября 2026 года Учебное министерство предложило повысить пошлину на сталь до 20%.",
+        "event_type": "sanction_or_trade_restriction",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "trade"
+        ],
+        "industries": [
+          "steel"
+        ],
+        "geographies": [],
+        "objects": [
+          "steel_tariff"
+        ],
+        "metrics": [
+          "tariff"
+        ],
+        "factors": [
+          "tariffs"
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "s07:c1",
+          "text": "1 октября 2026 года Учебное министерство предложило повысить пошлину на сталь до 20%.",
+          "modality": "proposal",
+          "polarity": "affirmed",
+          "stage": "proposed",
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:ministry",
+              "name": "Учебное министерство",
+              "role": "authority"
+            }
+          ],
+          "action": "raise_tariff",
+          "object": "steel_tariff",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "text": "1 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s07:c1:m1",
+              "metric": "tariff",
+              "kind": "level",
+              "value": "20",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s07:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s07:c1:e1"
+            ],
+            "/modality": [
+              "s07:c1:e1"
+            ],
+            "/polarity": [
+              "s07:c1:e1"
+            ],
+            "/stage": [
+              "s07:c1:e1"
+            ],
+            "/participants": [
+              "s07:c1:e1"
+            ],
+            "/action": [
+              "s07:c1:e1"
+            ],
+            "/object": [
+              "s07:c1:e1"
+            ],
+            "/time": [
+              "s07:c1:e1"
+            ],
+            "/measurements": [
+              "s07:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s07:v1",
+          "article_id": "s07",
+          "article_version": 1,
+          "title": "Синтетический случай 07",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s07:c1:e1",
+          "source_id": "s07:v1",
+          "field": "text",
+          "start": 0,
+          "end": 85,
+          "quote": "1 октября 2026 года Учебное министерство предложило повысить пошлину на сталь до 20%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:tariff-approved",
+        "event_version": 1,
+        "title": "10 октября 2026 года Учебное министерство утвердило пошлину на сталь 20%; она начнет действовать с 1 ноября 2026 года.",
+        "event_type": "sanction_or_trade_restriction",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "trade"
+        ],
+        "industries": [
+          "steel"
+        ],
+        "geographies": [],
+        "objects": [
+          "steel_tariff"
+        ],
+        "metrics": [
+          "tariff"
+        ],
+        "factors": [
+          "tariffs"
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "s08:c1",
+          "text": "10 октября 2026 года Учебное министерство утвердило пошлину на сталь 20%; она начнет действовать с 1 ноября 2026 года.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": "approved",
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:ministry",
+              "name": "Учебное министерство",
+              "role": "authority"
+            }
+          ],
+          "action": "approve_tariff",
+          "object": "steel_tariff",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-10",
+              "end": "2026-10-10",
+              "text": "10 октября 2026 года"
+            },
+            "effective_at": {
+              "start": "2026-11-01",
+              "end": "2026-11-01",
+              "text": "1 ноября 2026 года"
+            },
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s08:c1:m1",
+              "metric": "tariff",
+              "kind": "level",
+              "value": "20",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s08:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s08:c1:e1"
+            ],
+            "/modality": [
+              "s08:c1:e1"
+            ],
+            "/polarity": [
+              "s08:c1:e1"
+            ],
+            "/stage": [
+              "s08:c1:e1"
+            ],
+            "/participants": [
+              "s08:c1:e1"
+            ],
+            "/action": [
+              "s08:c1:e1"
+            ],
+            "/object": [
+              "s08:c1:e1"
+            ],
+            "/time": [
+              "s08:c1:e1"
+            ],
+            "/measurements": [
+              "s08:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s08:v1",
+          "article_id": "s08",
+          "article_version": 1,
+          "title": "Синтетический случай 08",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s08:c1:e1",
+          "source_id": "s08:v1",
+          "field": "text",
+          "start": 0,
+          "end": 118,
+          "quote": "10 октября 2026 года Учебное министерство утвердило пошлину на сталь 20%; она начнет действовать с 1 ноября 2026 года."
+        }
+      ],
+      "conflicts": [],
+      "relations": [
+        {
+          "type": "related_stage",
+          "from_id": "synthetic:tariff-approved",
+          "to_id": "synthetic:tariff-proposed",
+          "target_kind": "event"
+        }
+      ],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:tariff-effective",
+        "event_version": 1,
+        "title": "1 ноября 2026 года вступило в силу решение Учебного министерства о пошлине на сталь 20%.",
+        "event_type": "sanction_or_trade_restriction",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "trade"
+        ],
+        "industries": [
+          "steel"
+        ],
+        "geographies": [],
+        "objects": [
+          "steel_tariff"
+        ],
+        "metrics": [
+          "tariff"
+        ],
+        "factors": [
+          "tariffs"
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "s09:c1",
+          "text": "1 ноября 2026 года вступило в силу решение Учебного министерства о пошлине на сталь 20%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": "effective",
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:ministry",
+              "name": "Учебное министерство",
+              "role": "authority"
+            }
+          ],
+          "action": "tariff_effective",
+          "object": "steel_tariff",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": {
+              "start": "2026-11-01",
+              "end": "2026-11-01",
+              "text": "1 ноября 2026 года"
+            },
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s09:c1:m1",
+              "metric": "tariff",
+              "kind": "level",
+              "value": "20",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s09:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s09:c1:e1"
+            ],
+            "/modality": [
+              "s09:c1:e1"
+            ],
+            "/polarity": [
+              "s09:c1:e1"
+            ],
+            "/stage": [
+              "s09:c1:e1"
+            ],
+            "/participants": [
+              "s09:c1:e1"
+            ],
+            "/action": [
+              "s09:c1:e1"
+            ],
+            "/object": [
+              "s09:c1:e1"
+            ],
+            "/time": [
+              "s09:c1:e1"
+            ],
+            "/measurements": [
+              "s09:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s09:v1",
+          "article_id": "s09",
+          "article_version": 1,
+          "title": "Синтетический случай 09",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s09:c1:e1",
+          "source_id": "s09:v1",
+          "field": "text",
+          "start": 0,
+          "end": 88,
+          "quote": "1 ноября 2026 года вступило в силу решение Учебного министерства о пошлине на сталь 20%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [
+        {
+          "type": "related_stage",
+          "from_id": "synthetic:tariff-effective",
+          "to_id": "synthetic:tariff-approved",
+          "target_kind": "event"
+        }
+      ],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:investment",
+        "event_version": 1,
+        "title": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей.",
+        "event_type": "investment",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "investment_program"
+        ],
+        "metrics": [
+          "investment_program"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s10:c1",
+          "text": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [],
+          "action": "revise",
+          "object": "investment_program",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": {
+              "start": "2026-01-01",
+              "end": "2026-12-31",
+              "text": "2026 год"
+            },
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s10:c1:m1",
+              "metric": "investment_program",
+              "kind": "level",
+              "value": "1100000000000",
+              "unit": "RUB",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "before"
+            },
+            {
+              "measurement_id": "s10:c1:m2",
+              "metric": "investment_program",
+              "kind": "level",
+              "value": "1096000000000",
+              "unit": "RUB",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "after"
+            }
+          ],
+          "evidence_ids": [
+            "s10:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s10:c1:e1"
+            ],
+            "/modality": [
+              "s10:c1:e1"
+            ],
+            "/polarity": [
+              "s10:c1:e1"
+            ],
+            "/action": [
+              "s10:c1:e1"
+            ],
+            "/object": [
+              "s10:c1:e1"
+            ],
+            "/time": [
+              "s10:c1:e1"
+            ],
+            "/measurements": [
+              "s10:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s10:v1",
+          "article_id": "s10",
+          "article_version": 1,
+          "title": "Синтетический случай 10",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s10:c1:e1",
+          "source_id": "s10:v1",
+          "field": "text",
+          "start": 0,
+          "end": 92,
+          "quote": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:income-forecast",
+        "event_version": 1,
+        "title": "Демо-банк прогнозирует доход за 2026 год в диапазоне 185–190 млрд рублей.",
+        "event_type": "company_results",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "operating_income"
+        ],
+        "metrics": [
+          "operating_income"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s11:c1",
+          "text": "Демо-банк прогнозирует доход за 2026 год в диапазоне 185–190 млрд рублей.",
+          "modality": "forecast",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [],
+          "action": null,
+          "object": "operating_income",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": {
+              "start": "2026-01-01",
+              "end": "2026-12-31",
+              "text": "2026 год"
+            }
+          },
+          "measurements": [
+            {
+              "measurement_id": "s11:c1:m1",
+              "metric": "operating_income",
+              "kind": "level",
+              "value": {
+                "min": "185000000000",
+                "max": "190000000000"
+              },
+              "unit": "RUB",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s11:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s11:c1:e1"
+            ],
+            "/modality": [
+              "s11:c1:e1"
+            ],
+            "/polarity": [
+              "s11:c1:e1"
+            ],
+            "/object": [
+              "s11:c1:e1"
+            ],
+            "/time": [
+              "s11:c1:e1"
+            ],
+            "/measurements": [
+              "s11:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s11:v1",
+          "article_id": "s11",
+          "article_version": 1,
+          "title": "Синтетический случай 11",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s11:c1:e1",
+          "source_id": "s11:v1",
+          "field": "text",
+          "start": 0,
+          "end": 73,
+          "quote": "Демо-банк прогнозирует доход за 2026 год в диапазоне 185–190 млрд рублей."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:arrears",
+        "event_version": 1,
+        "title": "Демо-банк сообщил, что за январь—сентябрь 2026 года доля просрочки снизилась на 0,5 процентного пункта и составила 1,7%.",
+        "event_type": "company_results",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "arrears_ratio"
+        ],
+        "metrics": [
+          "arrears_ratio"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s12:c1",
+          "text": "Демо-банк сообщил, что за январь—сентябрь 2026 года доля просрочки снизилась на 0,5 процентного пункта и составила 1,7%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [],
+          "action": null,
+          "object": "arrears_ratio",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": {
+              "start": "2026-01-01",
+              "end": "2026-09-30",
+              "text": "январь—сентябрь 2026 года"
+            },
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s12:c1:m1",
+              "metric": "arrears_ratio",
+              "kind": "absolute_change",
+              "value": "-0.5",
+              "unit": "percentage_point",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            },
+            {
+              "measurement_id": "s12:c1:m2",
+              "metric": "arrears_ratio",
+              "kind": "level",
+              "value": "1.7",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s12:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s12:c1:e1"
+            ],
+            "/modality": [
+              "s12:c1:e1"
+            ],
+            "/polarity": [
+              "s12:c1:e1"
+            ],
+            "/object": [
+              "s12:c1:e1"
+            ],
+            "/time": [
+              "s12:c1:e1"
+            ],
+            "/measurements": [
+              "s12:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s12:v1",
+          "article_id": "s12",
+          "article_version": 1,
+          "title": "Синтетический случай 12",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s12:c1:e1",
+          "source_id": "s12:v1",
+          "field": "text",
+          "start": 0,
+          "end": 120,
+          "quote": "Демо-банк сообщил, что за январь—сентябрь 2026 года доля просрочки снизилась на 0,5 процентного пункта и составила 1,7%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:oil",
+        "event_version": 1,
+        "title": "В сентябре 2026 года поставки нефти из России в Китай составили 2,42 млн баррелей в сутки: на 20% больше, чем в сентябре 2025 года, и на 8,5% меньше, чем в августе 2026 года.",
+        "event_type": "market_indicator",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "oil_import_ru_cn"
+        ],
+        "metrics": [
+          "oil_import_ru_cn"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s13:c1",
+          "text": "В сентябре 2026 года поставки нефти из России в Китай составили 2,42 млн баррелей в сутки: на 20% больше, чем в сентябре 2025 года, и на 8,5% меньше, чем в августе 2026 года.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [],
+          "action": null,
+          "object": "oil_import_ru_cn",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": {
+              "start": "2026-09-01",
+              "end": "2026-09-30",
+              "text": "сентябре 2026 года"
+            },
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s13:c1:m1",
+              "metric": "oil_import_ru_cn",
+              "kind": "level",
+              "value": "2420000",
+              "unit": "barrel_per_day",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            },
+            {
+              "measurement_id": "s13:c1:m2",
+              "metric": "oil_import_ru_cn",
+              "kind": "relative_change",
+              "value": "20",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": {
+                "start": "2025-09-01",
+                "end": "2025-09-30",
+                "text": "сентябре 2025 года"
+              },
+              "value_role": "reported"
+            },
+            {
+              "measurement_id": "s13:c1:m3",
+              "metric": "oil_import_ru_cn",
+              "kind": "relative_change",
+              "value": "-8.5",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": {
+                "start": "2026-08-01",
+                "end": "2026-08-31",
+                "text": "августе 2026 года"
+              },
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s13:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s13:c1:e1"
+            ],
+            "/modality": [
+              "s13:c1:e1"
+            ],
+            "/polarity": [
+              "s13:c1:e1"
+            ],
+            "/object": [
+              "s13:c1:e1"
+            ],
+            "/time": [
+              "s13:c1:e1"
+            ],
+            "/measurements": [
+              "s13:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s13:v1",
+          "article_id": "s13",
+          "article_version": 1,
+          "title": "Синтетический случай 13",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s13:c1:e1",
+          "source_id": "s13:v1",
+          "field": "text",
+          "start": 0,
+          "end": 174,
+          "quote": "В сентябре 2026 года поставки нефти из России в Китай составили 2,42 млн баррелей в сутки: на 20% больше, чем в сентябре 2025 года, и на 8,5% меньше, чем в августе 2026 года."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:scenarios",
+        "event_version": 1,
+        "title": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s14:c1",
+          "text": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+          "modality": "forecast",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": {
+            "entity_id": "demo:analyst-А",
+            "name": "Учебный аналитик А"
+          },
+          "participants": [],
+          "action": null,
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": {
+              "start": "2026-12-31",
+              "end": "2026-12-31",
+              "text": "конец 2026 года"
+            }
+          },
+          "measurements": [
+            {
+              "measurement_id": "s14:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "13.75",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s14:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s14:c1:e1"
+            ],
+            "/modality": [
+              "s14:c1:e1"
+            ],
+            "/polarity": [
+              "s14:c1:e1"
+            ],
+            "/attribution": [
+              "s14:c1:e1"
+            ],
+            "/object": [
+              "s14:c1:e1"
+            ],
+            "/time": [
+              "s14:c1:e1"
+            ],
+            "/measurements": [
+              "s14:c1:e1"
+            ],
+            "/scenario": [
+              "s14:c1:e1"
+            ]
+          },
+          "scenario": {
+            "kind": "baseline",
+            "text": "базовом сценарии"
+          }
+        },
+        {
+          "claim_id": "s14:c2",
+          "text": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+          "modality": "forecast",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": {
+            "entity_id": "demo:analyst-А",
+            "name": "Учебный аналитик А"
+          },
+          "participants": [],
+          "action": null,
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": {
+              "start": "2026-12-31",
+              "end": "2026-12-31",
+              "text": "конец 2026 года"
+            }
+          },
+          "measurements": [
+            {
+              "measurement_id": "s14:c2:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s14:c2:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s14:c2:e1"
+            ],
+            "/modality": [
+              "s14:c2:e1"
+            ],
+            "/polarity": [
+              "s14:c2:e1"
+            ],
+            "/attribution": [
+              "s14:c2:e1"
+            ],
+            "/object": [
+              "s14:c2:e1"
+            ],
+            "/time": [
+              "s14:c2:e1"
+            ],
+            "/measurements": [
+              "s14:c2:e1"
+            ],
+            "/scenario": [
+              "s14:c2:e1"
+            ]
+          },
+          "scenario": {
+            "kind": "alternative",
+            "text": "альтернативном сценарии"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s14:v1",
+          "article_id": "s14",
+          "article_version": 1,
+          "title": "Синтетический случай 14",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s14:c1:e1",
+          "source_id": "s14:v1",
+          "field": "text",
+          "start": 0,
+          "end": 133,
+          "quote": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года."
+        },
+        {
+          "evidence_id": "s14:c2:e1",
+          "source_id": "s14:v1",
+          "field": "text",
+          "start": 0,
+          "end": 133,
+          "quote": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:revenue",
+        "event_version": 1,
+        "title": "За 2026 год Демо-завод увеличил выручку на 12% и сократил персонал на 8% по сравнению с 2025 годом.",
+        "event_type": "company_results",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "revenue"
+        ],
+        "metrics": [
+          "revenue"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s15:c1",
+          "text": "За 2026 год Демо-завод увеличил выручку на 12% и сократил персонал на 8% по сравнению с 2025 годом.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [],
+          "action": null,
+          "object": "revenue",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": {
+              "start": "2026-01-01",
+              "end": "2026-12-31",
+              "text": "2026 год"
+            },
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s15:c1:m1",
+              "metric": "revenue",
+              "kind": "relative_change",
+              "value": "12",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": {
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "text": "2025 годом"
+              },
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s15:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s15:c1:e1"
+            ],
+            "/modality": [
+              "s15:c1:e1"
+            ],
+            "/polarity": [
+              "s15:c1:e1"
+            ],
+            "/object": [
+              "s15:c1:e1"
+            ],
+            "/time": [
+              "s15:c1:e1"
+            ],
+            "/measurements": [
+              "s15:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s15:v1",
+          "article_id": "s15",
+          "article_version": 1,
+          "title": "Синтетический случай 15",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s15:c1:e1",
+          "source_id": "s15:v1",
+          "field": "text",
+          "start": 0,
+          "end": 99,
+          "quote": "За 2026 год Демо-завод увеличил выручку на 12% и сократил персонал на 8% по сравнению с 2025 годом."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:headcount",
+        "event_version": 1,
+        "title": "За 2026 год Демо-завод увеличил выручку на 12% и сократил персонал на 8% по сравнению с 2025 годом.",
+        "event_type": "company_results",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "headcount"
+        ],
+        "metrics": [
+          "headcount"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s15:c2",
+          "text": "За 2026 год Демо-завод увеличил выручку на 12% и сократил персонал на 8% по сравнению с 2025 годом.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [],
+          "action": null,
+          "object": "headcount",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": {
+              "start": "2026-01-01",
+              "end": "2026-12-31",
+              "text": "2026 год"
+            },
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s15:c2:m1",
+              "metric": "headcount",
+              "kind": "relative_change",
+              "value": "-8",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": {
+                "start": "2025-01-01",
+                "end": "2025-12-31",
+                "text": "2025 годом"
+              },
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s15:c2:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s15:c2:e1"
+            ],
+            "/modality": [
+              "s15:c2:e1"
+            ],
+            "/polarity": [
+              "s15:c2:e1"
+            ],
+            "/object": [
+              "s15:c2:e1"
+            ],
+            "/time": [
+              "s15:c2:e1"
+            ],
+            "/measurements": [
+              "s15:c2:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s15:v1",
+          "article_id": "s15",
+          "article_version": 1,
+          "title": "Синтетический случай 15",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s15:c2:e1",
+          "source_id": "s15:v1",
+          "field": "text",
+          "start": 0,
+          "end": 99,
+          "quote": "За 2026 год Демо-завод увеличил выручку на 12% и сократил персонал на 8% по сравнению с 2025 годом."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:meeting27",
+        "event_version": 1,
+        "title": "27 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s17:c1",
+          "text": "27 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-27",
+              "end": "2026-10-27",
+              "text": "27 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s17:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s17:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s17:c1:e1"
+            ],
+            "/modality": [
+              "s17:c1:e1"
+            ],
+            "/polarity": [
+              "s17:c1:e1"
+            ],
+            "/participants": [
+              "s17:c1:e1"
+            ],
+            "/action": [
+              "s17:c1:e1"
+            ],
+            "/object": [
+              "s17:c1:e1"
+            ],
+            "/time": [
+              "s17:c1:e1"
+            ],
+            "/measurements": [
+              "s17:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s17:v1",
+          "article_id": "s17",
+          "article_version": 1,
+          "title": "Синтетический случай 17",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s17:c1:e1",
+          "source_id": "s17:v1",
+          "field": "text",
+          "start": 0,
+          "end": 68,
+          "quote": "27 октября 2026 года Учебный регулятор сохранил ключевую ставку 14%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:unknown-plan",
+        "event_version": 1,
+        "title": "Учебное министерство планирует изменить пошлину на сталь; срок и величина не названы.",
+        "event_type": "sanction_or_trade_restriction",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "partial"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "steel_tariff"
+        ],
+        "metrics": [],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s18:c1",
+          "text": "Учебное министерство планирует изменить пошлину на сталь; срок и величина не названы.",
+          "modality": "plan",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:ministry",
+              "name": "Учебное министерство",
+              "role": "authority"
+            }
+          ],
+          "action": "change",
+          "object": "steel_tariff",
+          "geographies": [],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [],
+          "evidence_ids": [
+            "s18:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s18:c1:e1"
+            ],
+            "/modality": [
+              "s18:c1:e1"
+            ],
+            "/polarity": [
+              "s18:c1:e1"
+            ],
+            "/participants": [
+              "s18:c1:e1"
+            ],
+            "/action": [
+              "s18:c1:e1"
+            ],
+            "/object": [
+              "s18:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s18:v1",
+          "article_id": "s18",
+          "article_version": 1,
+          "title": "Синтетический случай 18",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s18:c1:e1",
+          "source_id": "s18:v1",
+          "field": "text",
+          "start": 0,
+          "end": 85,
+          "quote": "Учебное министерство планирует изменить пошлину на сталь; срок и величина не названы."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена.",
+        "Неизвестны дата, направление и величина изменения."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:cross-sentence",
+        "event_version": 1,
+        "title": "Заседание Учебного регулятора состоялось 19 октября 2026 года. На нем ключевую ставку сохранили на уровне 14%.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s19:c1",
+          "text": "Заседание Учебного регулятора состоялось 19 октября 2026 года. На нем ключевую ставку сохранили на уровне 14%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-19",
+              "end": "2026-10-19",
+              "text": "19 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s19:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s19:c1:e1",
+            "s19:c1:e2"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ],
+            "/modality": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ],
+            "/polarity": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ],
+            "/participants": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ],
+            "/action": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ],
+            "/object": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ],
+            "/time": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ],
+            "/measurements": [
+              "s19:c1:e1",
+              "s19:c1:e2"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s19:v1",
+          "article_id": "s19",
+          "article_version": 1,
+          "title": "Синтетический случай 19",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s19:c1:e1",
+          "source_id": "s19:v1",
+          "field": "text",
+          "start": 0,
+          "end": 62,
+          "quote": "Заседание Учебного регулятора состоялось 19 октября 2026 года."
+        },
+        {
+          "evidence_id": "s19:c1:e2",
+          "source_id": "s19:v1",
+          "field": "text",
+          "start": 63,
+          "end": 110,
+          "quote": "На нем ключевую ставку сохранили на уровне 14%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    },
+    {
+      "schema_version": "0.2",
+      "event": {
+        "event_id": "synthetic:corrected",
+        "event_version": 1,
+        "title": "📰 Исправление: 18 октября 2026 года Учебный регулятор сохранил ставку 14%. Ранее в этой публикации ошибочно указывалось 15%.",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-11-02T10:00:00+03:00",
+        "updated_at": "2026-11-02T12:00:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "other"
+        ],
+        "industries": [],
+        "geographies": [],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": []
+      },
+      "claims": [
+        {
+          "claim_id": "s20:c1",
+          "text": "📰 Исправление: 18 октября 2026 года Учебный регулятор сохранил ставку 14%. Ранее в этой публикации ошибочно указывалось 15%.",
+          "modality": "asserted",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": null,
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [],
+          "time": {
+            "occurred_at": {
+              "start": "2026-10-18",
+              "end": "2026-10-18",
+              "text": "18 октября 2026 года"
+            },
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": null
+          },
+          "measurements": [
+            {
+              "measurement_id": "s20:c1:m1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null,
+              "value_role": "reported"
+            }
+          ],
+          "evidence_ids": [
+            "s20:c1:e1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "s20:c1:e1"
+            ],
+            "/modality": [
+              "s20:c1:e1"
+            ],
+            "/polarity": [
+              "s20:c1:e1"
+            ],
+            "/participants": [
+              "s20:c1:e1"
+            ],
+            "/action": [
+              "s20:c1:e1"
+            ],
+            "/object": [
+              "s20:c1:e1"
+            ],
+            "/time": [
+              "s20:c1:e1"
+            ],
+            "/measurements": [
+              "s20:c1:e1"
+            ]
+          },
+          "scenario": null
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "s20:v2",
+          "article_id": "s20",
+          "article_version": 2,
+          "title": "Синтетический случай 20",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-11-02T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "s20:c1:e1",
+          "source_id": "s20:v2",
+          "field": "text",
+          "start": 0,
+          "end": 74,
+          "quote": "📰 Исправление: 18 октября 2026 года Учебный регулятор сохранил ставку 14%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [
+        {
+          "type": "updates",
+          "from_id": "s20:c1",
+          "to_id": "archive:s20:v1:c1",
+          "target_kind": "claim"
+        }
+      ],
+      "limitations": [
+        "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+      ]
+    }
+  ],
+  "expected_links": [
+    {
+      "from_claim_id": "s01:c1",
+      "to_claim_id": "s02:c1",
+      "relation": "duplicate_claim",
+      "reason": "Перефразирование того же решения и значения."
+    },
+    {
+      "from_claim_id": "s01:c1",
+      "to_claim_id": "s03:c1",
+      "relation": "conflicts_with",
+      "reason": "Установлено то же заседание, но числа несовместимы."
+    },
+    {
+      "from_claim_id": "s04:c1",
+      "to_claim_id": "s05:c1",
+      "relation": "different_event",
+      "reason": "Прогноз и состоявшееся решение."
+    },
+    {
+      "from_claim_id": "s04:c1",
+      "to_claim_id": "s16:c1",
+      "relation": "different_event",
+      "reason": "Прогнозы разных авторов."
+    },
+    {
+      "from_claim_id": "s14:c1",
+      "to_claim_id": "s14:c2",
+      "relation": "same_event",
+      "reason": "Разные сценарии одного прогноза, не конфликт."
+    },
+    {
+      "from_claim_id": "s15:c1",
+      "to_claim_id": "s15:c2",
+      "relation": "different_event",
+      "reason": "Самостоятельные показатели."
+    },
+    {
+      "from_claim_id": "s01:c1",
+      "to_claim_id": "s17:c1",
+      "relation": "different_event",
+      "reason": "Даты заседаний различаются."
+    },
+    {
+      "from_claim_id": "s18:c1",
+      "to_claim_id": "s07:c1",
+      "relation": "uncertain",
+      "reason": "Одна тема не устанавливает идентичность."
+    }
+  ]
+}

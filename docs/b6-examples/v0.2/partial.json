@@ -1,0 +1,123 @@
+{
+  "schema_version": "0.2",
+  "event": {
+    "event_id": "demo:partial",
+    "event_version": 1,
+    "title": "Учебный пример: неполные сведения о планах",
+    "event_type": "policy_rate",
+    "first_published_at": null,
+    "updated_at": "2026-10-20T10:01:00+03:00",
+    "availability": "active",
+    "quality": "partial"
+  },
+  "ranking_features": {
+    "topics": [
+      "rates"
+    ],
+    "industries": [],
+    "geographies": [
+      "RU"
+    ],
+    "objects": [
+      "policy_rate"
+    ],
+    "metrics": [
+      "policy_rate"
+    ],
+    "factors": [
+      "interest_rates"
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "demo:partial:claim-1",
+      "text": "Учебный регулятор сообщил о планах изменить ключевую ставку в России.",
+      "modality": "plan",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": {
+        "entity_id": "demo:regulator",
+        "name": "Учебный регулятор"
+      },
+      "participants": [
+        {
+          "entity_id": "demo:regulator",
+          "name": "Учебный регулятор",
+          "role": "decision_maker"
+        }
+      ],
+      "action": "change",
+      "object": "policy_rate",
+      "geographies": [
+        "RU"
+      ],
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": null
+      },
+      "measurements": [],
+      "evidence_ids": [
+        "demo:partial:evidence-1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "demo:partial:evidence-1"
+        ],
+        "/modality": [
+          "demo:partial:evidence-1"
+        ],
+        "/polarity": [
+          "demo:partial:evidence-1"
+        ],
+        "/attribution": [
+          "demo:partial:evidence-1"
+        ],
+        "/participants/0": [
+          "demo:partial:evidence-1"
+        ],
+        "/action": [
+          "demo:partial:evidence-1"
+        ],
+        "/object": [
+          "demo:partial:evidence-1"
+        ],
+        "/geographies/0": [
+          "demo:partial:evidence-1"
+        ]
+      },
+      "scenario": null
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "demo:partial:article-1:v1",
+      "article_id": "demo:partial:article-1",
+      "article_version": 1,
+      "title": "Синтетическая новость для проверки контракта",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": null,
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "demo:partial:evidence-1",
+      "source_id": "demo:partial:article-1:v1",
+      "field": "text",
+      "start": 0,
+      "end": 69,
+      "quote": "Учебный регулятор сообщил о планах изменить ключевую ставку в России."
+    }
+  ],
+  "conflicts": [],
+  "relations": [],
+  "limitations": [
+    "Полностью синтетический пример; не является сообщением о реальном событии.",
+    "В переданном тексте не указаны срок, направление и величина изменения; дата публикации неизвестна."
+  ]
+}

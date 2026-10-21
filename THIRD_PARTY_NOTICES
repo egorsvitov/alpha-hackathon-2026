@@ -100,6 +100,20 @@ Base images (not modified, not redistributed; pulled from Docker Hub at build ti
 - node:24-alpine (build stage only; Node.js MIT, Alpine packages under their own licenses)
 - nginxinc/nginx-unprivileged:1.27-alpine (nginx, BSD-2-Clause)
 
+## B1 event contracts (added 2026-10-21)
+
+Versions are pinned in llm/events/requirements.lock. In addition to the shared
+Pydantic packages listed above, contract verification uses jsonschema 4.26.0,
+jsonschema-specifications 2025.9.1, attrs 26.1.0, referencing 0.37.0 and
+rpds-py 2026.9.1, all MIT according to installed package metadata.
+
+llm/events/fixtures/ and docs/b6-examples/v0.2/ contain hand-authored fictional
+news/annotations; no LLM or external runtime service generates them. Supplied
+source-based paraphrases and their single-annotator development labels remain
+local under ignored data/context/events/. Research papers linked from
+llm/events/ANNOTATION.md inform the representation; their model weights, code
+and datasets are not included as runtime dependencies.
+
 ## Frontend packages (added 2026-10-20)
 
 Used by frontend/ (Vite + React prototype). Exact versions are pinned in

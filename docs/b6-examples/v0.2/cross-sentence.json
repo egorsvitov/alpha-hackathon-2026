@@ -1,0 +1,145 @@
+{
+  "schema_version": "0.2",
+  "event": {
+    "event_id": "synthetic:cross-sentence",
+    "event_version": 1,
+    "title": "Заседание Учебного регулятора состоялось 19 октября 2026 года. На нем ключевую ставку сохранили на уровне 14%.",
+    "event_type": "policy_rate",
+    "first_published_at": "2026-11-02T10:00:00+03:00",
+    "updated_at": "2026-11-02T12:00:00+03:00",
+    "availability": "active",
+    "quality": "complete"
+  },
+  "ranking_features": {
+    "topics": [
+      "other"
+    ],
+    "industries": [],
+    "geographies": [],
+    "objects": [
+      "policy_rate"
+    ],
+    "metrics": [
+      "policy_rate"
+    ],
+    "factors": []
+  },
+  "claims": [
+    {
+      "claim_id": "s19:c1",
+      "text": "Заседание Учебного регулятора состоялось 19 октября 2026 года. На нем ключевую ставку сохранили на уровне 14%.",
+      "modality": "asserted",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": null,
+      "participants": [
+        {
+          "entity_id": "demo:regulator",
+          "name": "Учебный регулятор",
+          "role": "decision_maker"
+        }
+      ],
+      "action": "hold",
+      "object": "policy_rate",
+      "geographies": [],
+      "time": {
+        "occurred_at": {
+          "start": "2026-10-19",
+          "end": "2026-10-19",
+          "text": "19 октября 2026 года"
+        },
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": null
+      },
+      "measurements": [
+        {
+          "measurement_id": "s19:c1:m1",
+          "metric": "policy_rate",
+          "kind": "level",
+          "value": "14",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null,
+          "value_role": "reported"
+        }
+      ],
+      "evidence_ids": [
+        "s19:c1:e1",
+        "s19:c1:e2"
+      ],
+      "field_evidence": {
+        "/text": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ],
+        "/modality": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ],
+        "/polarity": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ],
+        "/participants": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ],
+        "/action": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ],
+        "/object": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ],
+        "/time": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ],
+        "/measurements": [
+          "s19:c1:e1",
+          "s19:c1:e2"
+        ]
+      },
+      "scenario": null
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "s19:v1",
+      "article_id": "s19",
+      "article_version": 1,
+      "title": "Синтетический случай 19",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": "2026-11-02T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "s19:c1:e1",
+      "source_id": "s19:v1",
+      "field": "text",
+      "start": 0,
+      "end": 62,
+      "quote": "Заседание Учебного регулятора состоялось 19 октября 2026 года."
+    },
+    {
+      "evidence_id": "s19:c1:e2",
+      "source_id": "s19:v1",
+      "field": "text",
+      "start": 63,
+      "end": 110,
+      "quote": "На нем ключевую ставку сохранили на уровне 14%."
+    }
+  ],
+  "conflicts": [],
+  "relations": [],
+  "limitations": [
+    "Ручная разметка одного аннотатора; смысловая корректность независимо не проверена."
+  ]
+}

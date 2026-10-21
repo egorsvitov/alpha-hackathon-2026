@@ -1,0 +1,266 @@
+{
+  "schema_version": "0.2",
+  "event": {
+    "event_id": "demo:rate-conflict",
+    "event_version": 1,
+    "title": "Учебный пример: противоречащие сообщения о решении по ставке",
+    "event_type": "policy_rate",
+    "first_published_at": "2026-10-20T10:00:00+03:00",
+    "updated_at": "2026-10-20T10:01:00+03:00",
+    "availability": "active",
+    "quality": "complete"
+  },
+  "ranking_features": {
+    "topics": [
+      "rates"
+    ],
+    "industries": [],
+    "geographies": [
+      "RU"
+    ],
+    "objects": [
+      "policy_rate"
+    ],
+    "metrics": [
+      "policy_rate"
+    ],
+    "factors": [
+      "interest_rates"
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "demo:rate-conflict:claim-1",
+      "text": "20 октября 2026 года Учебный регулятор принял решение повысить ключевую ставку в России до 20%.",
+      "modality": "asserted",
+      "polarity": "affirmed",
+      "stage": "approved",
+      "attribution": {
+        "entity_id": "demo:regulator",
+        "name": "Учебный регулятор"
+      },
+      "participants": [
+        {
+          "entity_id": "demo:regulator",
+          "name": "Учебный регулятор",
+          "role": "decision_maker"
+        }
+      ],
+      "action": "raise",
+      "object": "policy_rate",
+      "geographies": [
+        "RU"
+      ],
+      "time": {
+        "occurred_at": {
+          "start": "2026-10-20",
+          "end": "2026-10-20",
+          "text": "20 октября 2026 года"
+        },
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": null
+      },
+      "measurements": [
+        {
+          "measurement_id": "demo:rate-conflict:measurement-1",
+          "metric": "policy_rate",
+          "kind": "level",
+          "value": "20",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null,
+          "value_role": "reported"
+        }
+      ],
+      "evidence_ids": [
+        "demo:rate-conflict:evidence-1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/modality": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/polarity": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/attribution": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/participants/0": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/action": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/object": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/geographies/0": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/measurements/0": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/time/occurred_at": [
+          "demo:rate-conflict:evidence-1"
+        ],
+        "/stage": [
+          "demo:rate-conflict:evidence-1"
+        ]
+      },
+      "scenario": null
+    },
+    {
+      "claim_id": "demo:rate-conflict:claim-2",
+      "text": "20 октября 2026 года Учебный регулятор принял решение повысить ключевую ставку в России до 21%.",
+      "modality": "asserted",
+      "polarity": "affirmed",
+      "stage": "approved",
+      "attribution": {
+        "entity_id": "demo:regulator",
+        "name": "Учебный регулятор"
+      },
+      "participants": [
+        {
+          "entity_id": "demo:regulator",
+          "name": "Учебный регулятор",
+          "role": "decision_maker"
+        }
+      ],
+      "action": "raise",
+      "object": "policy_rate",
+      "geographies": [
+        "RU"
+      ],
+      "time": {
+        "occurred_at": {
+          "start": "2026-10-20",
+          "end": "2026-10-20",
+          "text": "20 октября 2026 года"
+        },
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": null
+      },
+      "measurements": [
+        {
+          "measurement_id": "demo:rate-conflict:measurement-2",
+          "metric": "policy_rate",
+          "kind": "level",
+          "value": "21",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null,
+          "value_role": "reported"
+        }
+      ],
+      "evidence_ids": [
+        "demo:rate-conflict:evidence-2"
+      ],
+      "field_evidence": {
+        "/text": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/modality": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/polarity": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/attribution": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/participants/0": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/action": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/object": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/geographies/0": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/measurements/0": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/time/occurred_at": [
+          "demo:rate-conflict:evidence-2"
+        ],
+        "/stage": [
+          "demo:rate-conflict:evidence-2"
+        ]
+      },
+      "scenario": null
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "demo:rate-conflict:article-1:v1",
+      "article_id": "demo:rate-conflict:article-1",
+      "article_version": 1,
+      "title": "Синтетическая новость для проверки контракта",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    },
+    {
+      "source_id": "demo:rate-conflict:article-2:v1",
+      "article_id": "demo:rate-conflict:article-2",
+      "article_version": 1,
+      "title": "Синтетическая новость для проверки контракта",
+      "publisher": "Второе учебное издание",
+      "url": null,
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "demo:rate-conflict:evidence-1",
+      "source_id": "demo:rate-conflict:article-1:v1",
+      "field": "text",
+      "start": 0,
+      "end": 95,
+      "quote": "20 октября 2026 года Учебный регулятор принял решение повысить ключевую ставку в России до 20%."
+    },
+    {
+      "evidence_id": "demo:rate-conflict:evidence-2",
+      "source_id": "demo:rate-conflict:article-2:v1",
+      "field": "text",
+      "start": 0,
+      "end": 95,
+      "quote": "20 октября 2026 года Учебный регулятор принял решение повысить ключевую ставку в России до 21%."
+    }
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "demo:rate-conflict:conflict-1",
+      "description": "Сообщения о том же решении расходятся в новом уровне ставки: 20% и 21%.",
+      "variants": [
+        {
+          "claim_id": "demo:rate-conflict:claim-1",
+          "field_path": "/measurements/0/value"
+        },
+        {
+          "claim_id": "demo:rate-conflict:claim-2",
+          "field_path": "/measurements/0/value"
+        }
+      ]
+    }
+  ],
+  "relations": [],
+  "limitations": [
+    "Полностью синтетический пример; не является сообщением о реальном событии.",
+    "Новое значение ставки не согласовано; запрещено выбирать вариант по числу публикаций."
+  ]
+}

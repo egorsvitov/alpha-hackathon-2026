@@ -16,3 +16,5 @@
 Для загрузки в новом checkout получите файлы из материалов хакатона и положите CSV в `data/companies/`, банковские PDF — в `data/analytics/`. Имена файлов приведены в корневом THIRD_PARTY_NOTICES. Далее выполните из корня `python3 ranking/audit_data.py` и `python3 llm/rag/prepare_rag.py`.
 
 В `processed/document_catalog.json` сохранены даты, темы и исключаемые страницы. У обзора золота точная дата выпуска неизвестна; обзор стали относится к 2021 году. Даты футеров не заменяют дату содержания.
+
+`context/events/development-gold.json` — локальная ручная разметка 15 предоставленных новостных пересказов: полные неизменённые тексты, 73 утверждения, 66 кандидатных событий и основания разметки. Статус `single_annotator_draft`, набор предназначен для разработки. Файл и локальный сценарий авторства исключены из Git вместе с `context/`. Проверка с исходным корпусом: `python -m llm.events.check_contracts --gold data/context/events/development-gold.json --articles ../alpha-context/articles.json` в окружении B1. Пути можно заменить. Синтетические проверочные данные для чистого checkout находятся в `llm/events/fixtures/`.

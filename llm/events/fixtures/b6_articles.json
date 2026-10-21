@@ -1,0 +1,130 @@
+[
+  {
+    "source_id": "demo:rate-conflict:article-1:v1",
+    "article_version": 1,
+    "article": {
+      "article_id": "demo:rate-conflict:article-1",
+      "source": "Учебное издание",
+      "url": null,
+      "title": "Синтетическая новость для проверки контракта",
+      "text": "20 октября 2026 года Учебный регулятор принял решение повысить ключевую ставку в России до 20%.",
+      "language": "ru",
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  },
+  {
+    "source_id": "demo:rate-conflict:article-2:v1",
+    "article_version": 1,
+    "article": {
+      "article_id": "demo:rate-conflict:article-2",
+      "source": "Второе учебное издание",
+      "url": null,
+      "title": "Синтетическая новость для проверки контракта",
+      "text": "20 октября 2026 года Учебный регулятор принял решение повысить ключевую ставку в России до 21%.",
+      "language": "ru",
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  },
+  {
+    "source_id": "demo:rate-forecast:article-1:v1",
+    "article_version": 1,
+    "article": {
+      "article_id": "demo:rate-forecast:article-1",
+      "source": "Учебное издание",
+      "url": null,
+      "title": "Синтетическая новость для проверки контракта",
+      "text": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+      "language": "ru",
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  },
+  {
+    "source_id": "demo:rate-hold:article-1:v1",
+    "article_version": 1,
+    "article": {
+      "article_id": "demo:rate-hold:article-1",
+      "source": "Учебное издание",
+      "url": null,
+      "title": "Синтетическая новость для проверки контракта",
+      "text": "20 октября 2026 года Учебный регулятор принял решение сохранить ключевую ставку в России на уровне 14%.",
+      "language": "ru",
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  },
+  {
+    "source_id": "demo:partial:article-1:v1",
+    "article_version": 1,
+    "article": {
+      "article_id": "demo:partial:article-1",
+      "source": "Учебное издание",
+      "url": null,
+      "title": "Синтетическая новость для проверки контракта",
+      "text": "Учебный регулятор сообщил о планах изменить ключевую ставку в России.",
+      "language": "ru",
+      "published_at": null,
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  },
+  {
+    "article": {
+      "article_id": "s10",
+      "source": "Учебное издание",
+      "url": null,
+      "title": "Синтетический случай 10",
+      "published_at": "2026-11-02T10:00:00+03:00",
+      "language": "ru",
+      "text": "Демо-завод пересмотрел инвестиционную программу на 2026 год с 1,1 трлн до 1,096 трлн рублей.",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    },
+    "article_version": 1,
+    "source_id": "s10:v1"
+  },
+  {
+    "article": {
+      "article_id": "s14",
+      "source": "Учебное издание",
+      "url": null,
+      "title": "Синтетический случай 14",
+      "published_at": "2026-11-02T10:00:00+03:00",
+      "language": "ru",
+      "text": "Учебный аналитик А в базовом сценарии ожидает ставку 13,75% на конец 2026 года, а в альтернативном сценарии — 14% на конец 2026 года.",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    },
+    "article_version": 1,
+    "source_id": "s14:v1"
+  },
+  {
+    "article": {
+      "article_id": "s19",
+      "source": "Учебное издание",
+      "url": null,
+      "title": "Синтетический случай 19",
+      "published_at": "2026-11-02T10:00:00+03:00",
+      "language": "ru",
+      "text": "Заседание Учебного регулятора состоялось 19 октября 2026 года. На нем ключевую ставку сохранили на уровне 14%.",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    },
+    "article_version": 1,
+    "source_id": "s19:v1"
+  }
+]
