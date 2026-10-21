@@ -28,7 +28,7 @@ from llm.events.normalization_models import NormalizationConfig, Transformation
 from llm.events.pair_check import parse_recommendation
 from llm.events.storage import EventStore,StorageError
 from llm.events.storage_schema import V2_DDL,V2_TABLES,SCHEMA_VERSION
-from llm.events.migration import migrate_v2_to_v3
+from llm.events.migration import migrate_v2_to_v3, migrate_v3_to_v4
 from llm.events.validation import ContractValidationError,validate_claim_collection
 
 ROOT=Path(__file__).resolve().parents[3]
@@ -343,7 +343,9 @@ class CatalogTests(unittest.TestCase):
             ledger.finish(call_id,response=self.response({}).payload())
             done=old.complete_attempt(running.active_attempt.token,{'legacy':'artifact'})
         self.error('storage_migration_required',EventStore,legacy)
-        result=migrate_v2_to_v3(legacy);reopened=EventStore(legacy)
+        result=migrate_v2_to_v3(legacy)
+        self.error('storage_migration_required',EventStore,legacy)
+        migrate_v3_to_v4(legacy);reopened=EventStore(legacy)
         self.assertEqual(reopened.get_artifact(done.result_artifact_id).payload,{'legacy':'artifact'})
         self.assertEqual(reopened.get_article(sid).article.article_id,'legacy')
         self.assertEqual(CallLedger(reopened,offline=True).get(call_id)['state'],'settled')
@@ -474,7 +476,7 @@ class CatalogTests(unittest.TestCase):
         with closing(sqlite3.connect(legacy)) as conn:
             self.assertEqual(conn.execute('PRAGMA user_version').fetchone()[0],2)
             self.assertIsNone(conn.execute("SELECT name FROM sqlite_master WHERE name='temp_b5'").fetchone())
-        migrate_v2_to_v3(legacy);EventStore(legacy)
+        migrate_v2_to_v3(legacy);migrate_v3_to_v4(legacy);EventStore(legacy)
 
     def test_two_connections_only_one_snapshot_publishes(self):
         a,b=self.publish('a'),self.publish('b');self.initialize(a)
