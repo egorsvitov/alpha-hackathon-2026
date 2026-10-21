@@ -3,7 +3,7 @@ from pathlib import Path
 import sqlite3
 from uuid import uuid4
 from .storage import StorageError, EventStore
-from .storage_schema import APPLICATION_ID, B2_TABLES, B3_DDL, B5_DDL, V2_TABLES
+from .storage_schema import APPLICATION_ID, B2_TABLES, B3_DDL, B5_DDL, V2_TABLES, B6_DDL, V3_TABLES
 
 
 def _migrate(db_path, backup_path, source_version, target_version, required_tables, statements, forbidden_tables):
@@ -60,3 +60,8 @@ def migrate_v1_to_v2(db_path, backup_path=None):
 
 def migrate_v2_to_v3(db_path, backup_path=None):
     return _migrate(db_path,backup_path,2,3,V2_TABLES,B5_DDL,{'catalogs','catalog_runs'})
+
+
+def migrate_v3_to_v4(db_path, backup_path=None):
+    return _migrate(db_path, backup_path, 3, 4, V3_TABLES, B6_DDL,
+                    {'bundle_publications', 'bundle_versions', 'bundle_publication_events'})

@@ -1,7 +1,7 @@
-"""SQLite schema v3, retaining the v1 DDL for explicit migrations and tests."""
+"""SQLite schema v4, retaining the v1 DDL for explicit migrations and tests."""
 
 APPLICATION_ID = 0x414C5048
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 TABLES = {"article_versions", "article_heads", "batches", "batch_items", "jobs", "attempts", "artifacts"}
 
 DDL = [
@@ -191,3 +191,38 @@ for table in ('catalog_runs','catalog_events','catalog_event_versions','catalog_
 DDL.extend(B5_DDL)
 TABLES |= {'catalogs','catalog_inputs','catalog_runs','catalog_events','catalog_event_versions',
            'catalog_run_events','catalog_memberships','catalog_reviews'}
+
+# Frozen v3 remains the source for explicit B6 migration.
+V3_DDL = tuple(DDL)
+V3_TABLES = frozenset(TABLES)
+B6_DDL = [
+    """CREATE TABLE bundle_publications (
+        publication_id TEXT PRIMARY KEY,
+        catalog_id TEXT NOT NULL REFERENCES catalogs(catalog_id),
+        sequence INTEGER NOT NULL CHECK(sequence > 0),
+        run_id TEXT NOT NULL REFERENCES catalog_runs(run_id),
+        catalog_generation INTEGER NOT NULL,
+        rules_json TEXT NOT NULL, created_at TEXT NOT NULL,
+        UNIQUE(catalog_id, sequence)
+    )""",
+    """CREATE TABLE bundle_versions (
+        event_id TEXT NOT NULL REFERENCES catalog_events(event_id),
+        event_version INTEGER NOT NULL CHECK(event_version > 0),
+        payload_json TEXT NOT NULL, payload_hash TEXT NOT NULL,
+        PRIMARY KEY(event_id, event_version)
+    )""",
+    """CREATE TABLE bundle_publication_events (
+        publication_id TEXT NOT NULL REFERENCES bundle_publications(publication_id),
+        event_id TEXT NOT NULL, event_version INTEGER NOT NULL,
+        catalog_event_version INTEGER NOT NULL,
+        PRIMARY KEY(publication_id, event_id),
+        FOREIGN KEY(event_id, event_version) REFERENCES bundle_versions(event_id, event_version),
+        FOREIGN KEY(event_id, catalog_event_version) REFERENCES catalog_event_versions(event_id, event_version)
+    )""",
+]
+for table in ('bundle_publications', 'bundle_versions', 'bundle_publication_events'):
+    for action in ('UPDATE', 'DELETE'):
+        B6_DDL.append(f"""CREATE TRIGGER {table}_{action.lower()}_immutable BEFORE {action} ON {table}
+            BEGIN SELECT RAISE(ABORT,'{table} is immutable'); END""")
+DDL.extend(B6_DDL)
+TABLES |= {'bundle_publications', 'bundle_versions', 'bundle_publication_events'}
