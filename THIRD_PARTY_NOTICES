@@ -228,3 +228,25 @@ its code, weights, trained classifiers and thresholds are not reproduced.
 The B5 regression corpus is independently authored fictional data. Supplied
 news texts, B1 development annotations and B5 development reports remain local
 under ignored data/context/events/.
+## Personalization Python runtime (2026-10-21)
+
+Root pyproject.toml and uv.lock now pin the isolated personalization runtime;
+backend requirements and lock remain separate. Draft 2020-12 validation uses
+jsonschema with FormatChecker and explicitly installed RFC3339/URI validators.
+No neural model, API client or GPU package is added.
+
+- jsonschema 4.25.1 — MIT; https://github.com/python-jsonschema/jsonschema
+- attrs 26.1.0 — MIT; https://github.com/python-attrs/attrs
+- jsonschema-specifications 2025.9.1 — MIT;
+  https://github.com/python-jsonschema/jsonschema-specifications
+- referencing 0.37.0 — MIT; https://github.com/python-jsonschema/referencing
+- rpds-py 2026.9.1 — MIT; https://github.com/crate-py/rpds
+- rfc3339-validator 0.1.4 — MIT; https://github.com/naimetti/rfc3339-validator
+- rfc3986-validator 0.1.1 — MIT; https://github.com/naimetti/rfc3986-validator
+- six 1.17.0 — MIT; https://github.com/benjaminp/six
+
+License declarations are from distribution metadata/license files. Setuptools
+is a build dependency (MIT); its exact isolated build resolution is controlled
+by the build frontend, not a backend runtime dependency. Contract fixtures in
+data/examples/personalization/contracts/ are handcrafted, entirely fictional,
+and contain no supplied company/payment/bank-document derivatives.

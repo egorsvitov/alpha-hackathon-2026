@@ -57,9 +57,18 @@ class DataStore:
         fts = company.get("fts", {})
         industry = company.get("industry", "")
 
-        score = 0.2
+        score = 0.05 if topic == "other" else 0.2
         factors: list[RelevanceFactor] = []
         reasons: list[str] = []
+
+        if topic == "other":
+            return Relevance(
+                score=0.05,
+                level="low",
+                factors=[],
+                explanation="Событие не влияет на операционную и финансовую деятельность",
+                reasons=["Нерелевантный внешний инфоповод, отфильтровано алгоритмом отбора"],
+            )
 
         if topic == "rates":
             if products.get("loans"):

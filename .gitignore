@@ -49,3 +49,14 @@ alfa_hack.db
 
 # Internal reports removed from public history.
 /reports/
+# Personalization local data and packaging
+/data/processed/personalization/
+/data/processed/ranking/
+/data/processed/events/
+*.db-wal
+*.db-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.egg-info/
+build/
+dist/

@@ -89,6 +89,10 @@ class RelevanceFactor(BaseModel):
     label: str
     contribution: float
     detail: str
+    feature_ids: list[str] = Field(default_factory=list)
+    event_fields: list[str] = Field(default_factory=list)
+    basis: str | None = None
+    provenance: dict[str, Any] | None = None
 
 
 class Relevance(BaseModel):
@@ -97,6 +101,9 @@ class Relevance(BaseModel):
     factors: list[RelevanceFactor] = Field(default_factory=list)
     explanation: str
     reasons: list[str] | None = None
+    candidate_channels: list[str] = Field(default_factory=list)
+    missing_context: list[str] = Field(default_factory=list)
+    evidence_status: str | None = None
 
 
 class FeedItem(BaseModel):

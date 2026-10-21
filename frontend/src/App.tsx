@@ -4,6 +4,7 @@ import { href, navigate, useRoute } from './router';
 import { BottomNav, FeedProvider, Header, Sidebar } from './components/Shell';
 import { LoginPage } from './pages/LoginPage';
 import { SelectPage } from './pages/SelectPage';
+import { CabinetHome, CabinetShell } from './components/Cabinet';
 import { Disclaimer } from './components/EventBlocks';
 import { HomePage } from './pages/HomePage';
 import { FeedPage } from './pages/FeedPage';
@@ -11,7 +12,7 @@ import { EventPage } from './pages/EventPage';
 
 function Routes() {
   const route = useRoute();
-  const { user, company, role } = useApp();
+  const { user, company, role, design } = useApp();
   const authed = Boolean(company && role);
 
   useEffect(() => {
@@ -35,6 +36,18 @@ function Routes() {
         <a className="skip-link" href="#main">К содержимому</a>
         <main id="main"><SelectPage /></main>
       </>
+    );
+  }
+
+  if (design === 'cabinet') {
+    return (
+      <FeedProvider>
+        <CabinetShell route={route}>
+          {route.name === 'home' && <CabinetHome />}
+          {route.name === 'feed' && <FeedPage />}
+          {route.name === 'event' && <EventPage eventId={route.eventId} />}
+        </CabinetShell>
+      </FeedProvider>
     );
   }
 
