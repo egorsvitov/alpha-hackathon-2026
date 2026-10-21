@@ -1,11 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import { href, navigate } from '../router';
 import { DEMO_LOGIN, useApp } from '../store';
-import { ArtChart } from '../components/Illustrations';
-import { Button } from '../components/ui';
+import { ArtLogin } from '../components/Illustrations';
 
-/** Вход в демо. В банке логин и пароль принадлежат физлицу, а доступ к компаниям и группам определяется его правами;
-    здесь проверка условная, данные для входа показаны на экране, чтобы эксперты могли пройти сценарий. */
+/** Вход в демо. Компоновка повторяет страницу входа в интернет-банк: белая страница, одна колонка, крупный заголовок,
+    серые поля, тёмная кнопка, серая карточка с картинкой. В банке логин и пароль принадлежат физлицу, а доступ к компаниям
+    определяется его правами; здесь проверка условная, данные для входа показаны на экране, чтобы эксперты могли пройти сценарий. */
 export function LoginPage() {
   const { login } = useApp();
   const [name, setName] = useState('');
@@ -17,42 +17,50 @@ export function LoginPage() {
     if (login(name, pass)) navigate(href.select);
     else setError(true);
   };
+  const fill = () => { setName(DEMO_LOGIN.login); setPass(DEMO_LOGIN.password); setError(false); };
 
   return (
-    <div className="select-page">
-      <div className="select-grid">
-        <header className="select-hero">
-          <span className="brand__mark brand__mark--lg" aria-hidden />
-          <h1 className="select-title">Новости, которые касаются именно вас</h1>
-          <p className="select-lead">Войдите, чтобы увидеть события, значимые для ваших компаний, и понять почему.</p>
-          <p className="small select-note">Демо-вход. Компании и данные синтетические, настоящий интернет-банк не затрагивается.</p>
-          <div className="select-hero__art" aria-hidden><ArtChart /></div>
-        </header>
+    <div className="login">
+      <header className="login__top">
+        <span className="brand">
+          <span className="brand__mark" aria-hidden />
+          <span className="brand__name">Альфа-Бизнес</span>
+        </span>
+        <span className="login__demo">Демо-режим</span>
+      </header>
 
-        <form className="select-form login-form" onSubmit={submit} noValidate>
-          <h2 className="sec-title">Вход в Альфа-Бизнес</h2>
-          <div className="field">
+      <div className="login__col">
+        <h1 className="login__title">Привет! Войдите<br />в интернет-банк</h1>
+
+        <form className="login__form" onSubmit={submit} noValidate>
+          <div className="login-field" data-invalid={error}>
             <label htmlFor="login-name">Логин</label>
             <input id="login-name" autoComplete="username" value={name} onChange={(e) => { setName(e.target.value); setError(false); }} aria-invalid={error} />
           </div>
-          <div className="field">
+          <div className="login-field" data-invalid={error}>
             <label htmlFor="login-pass">Пароль</label>
             <input id="login-pass" type="password" autoComplete="current-password" value={pass} onChange={(e) => { setPass(e.target.value); setError(false); }} aria-invalid={error} aria-describedby={error ? 'login-err' : undefined} />
           </div>
           {error && <p id="login-err" className="field-error" role="alert">Неверный логин или пароль. Данные для демо указаны ниже.</p>}
-          <Button type="submit" variant="primary" size="xl" block disabled={!name || !pass}>Войти</Button>
+          <button type="submit" className="login__submit" disabled={!name || !pass}>Войти</button>
+          <button type="button" className="link-btn login__alt" onClick={fill}>Подставить данные для демо</button>
+        </form>
 
-          <section className="login-hint" aria-label="Данные для демо-входа">
-            <p className="medium">Данные для демо-входа</p>
-            <dl className="small">
+        <section className="login-card" aria-labelledby="demo-creds">
+          <div className="login-card__art" aria-hidden><ArtLogin /></div>
+          <div>
+            <h2 id="demo-creds">Демо-вход</h2>
+            <dl>
               <div><dt>Логин</dt><dd><code>{DEMO_LOGIN.login}</code></dd></div>
               <div><dt>Пароль</dt><dd><code>{DEMO_LOGIN.password}</code></dd></div>
               <div><dt>Пользователь</dt><dd>{DEMO_LOGIN.name}</dd></div>
             </dl>
-            <p className="small muted">После входа вы выберете компанию из тех, к которым у пользователя есть доступ, и роль.</p>
-            <Button size="s" onClick={() => { setName(DEMO_LOGIN.login); setPass(DEMO_LOGIN.password); setError(false); }}>Подставить</Button>
-          </section>
-        </form>
+          </div>
+        </section>
+
+        <p className="small muted login__note">
+          После входа вы выберете компанию из тех, к которым у пользователя есть доступ, и роль. Компании и данные синтетические, настоящий интернет-банк не затрагивается.
+        </p>
       </div>
     </div>
   );
