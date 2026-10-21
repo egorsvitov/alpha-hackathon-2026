@@ -1,3 +1,5 @@
 # Runtime and contract checks; Pydantic matches backend/requirements.lock.
 pydantic==2.14.1
 jsonschema==4.26.0
+openai==2.54.0
+httpx==0.28.1

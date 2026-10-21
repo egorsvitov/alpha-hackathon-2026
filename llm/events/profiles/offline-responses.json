@@ -1,0 +1,20 @@
+[
+  {
+    "body": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "message": {
+            "content": "{\"claims\": [], \"evidence\": [], \"excluded\": [], \"limitations\": [\"Scripted offline response; no extraction performed.\"]}"
+          }
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      }
+    },
+    "status_code": 200,
+    "headers": {}
+  }
+]

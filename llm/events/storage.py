@@ -163,6 +163,8 @@ class EventStore:
                     conn.execute(statement)
                 conn.execute(f"PRAGMA application_id={APPLICATION_ID}")
                 conn.execute(f"PRAGMA user_version={SCHEMA_VERSION}")
+            elif app == APPLICATION_ID and version == 1:
+                raise StorageError("storage_migration_required", "B2 database requires explicit migration: python -m llm.events.extraction_cli migrate --db <path>")
             elif (app, version) != (APPLICATION_ID, SCHEMA_VERSION) or not TABLES.issubset(tables):
                 raise StorageError("unsupported_storage_schema", "Database is foreign, incomplete or has an unsupported schema; it was not recreated")
             conn.commit()
@@ -431,13 +433,14 @@ class EventStore:
                 VALUES (?,?,?,?,'pending',?,?)""", (job_id, source_id, digest, canonical_json(spec.model_dump(mode="json")), now, now))
             return self._job_record(conn, job_id)
 
-    def claim_next(self, spec: ProcessingSpec, worker_id: str, *, lease_seconds=LEASE_SECONDS) -> JobRecord | None:
+    def claim_next(self, spec: ProcessingSpec, worker_id: str, *, lease_seconds=LEASE_SECONDS, source_id=None) -> JobRecord | None:
         spec = self._spec(spec)
         _text(worker_id, "worker_id")
         _positive(lease_seconds, "lease_seconds")
         with self._transaction(write=True) as conn:
             row = conn.execute("""SELECT j.* FROM jobs j JOIN article_heads h ON h.current_source_id=j.source_id
-                WHERE j.spec_hash=? AND j.state='pending' ORDER BY j.created_at,j.job_id LIMIT 1""", (processing_hash(spec),)).fetchone()
+                WHERE j.spec_hash=? AND j.state='pending' AND (? IS NULL OR j.source_id=?)
+                ORDER BY j.created_at,j.job_id LIMIT 1""", (processing_hash(spec),source_id,source_id)).fetchone()
             if row is None:
                 return None
             job_id, now = row["job_id"], self.clock()

@@ -1,0 +1,195 @@
+{
+  "claims": [
+    {
+      "claim_id": "c1",
+      "text": "Изменение выручки за девять месяцев",
+      "event_type": "company_results",
+      "modality": "asserted",
+      "polarity": "affirmed",
+      "stage": "observed",
+      "attribution": null,
+      "participants": [
+        {
+          "name": "ТестСталь",
+          "role": "company"
+        }
+      ],
+      "action": "сообщила",
+      "object": "выручка",
+      "geographies": [],
+      "scenario": null,
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": {
+          "text": "за девять месяцев"
+        },
+        "forecast_horizon": null
+      },
+      "measurements": [
+        {
+          "measurement_id": "m1",
+          "metric": "выручка",
+          "kind": "relative_change",
+          "value_text": "12",
+          "unit_text": "%",
+          "qualifier": "exact",
+          "value_role": "reported",
+          "comparison_period": {
+            "text": "год к году"
+          }
+        },
+        {
+          "measurement_id": "m2",
+          "metric": "выручка",
+          "kind": "relative_change",
+          "value_text": "2",
+          "unit_text": "%",
+          "qualifier": "exact",
+          "value_role": "reported",
+          "comparison_period": {
+            "text": "за месяц"
+          }
+        }
+      ],
+      "evidence_ids": [
+        "e1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "e1"
+        ],
+        "/measurements": [
+          "e1"
+        ]
+      }
+    },
+    {
+      "claim_id": "c2",
+      "text": "Пересмотр базового прогноза падения спроса",
+      "event_type": "market_indicator",
+      "modality": "forecast",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": null,
+      "participants": [
+        {
+          "name": "ТестСталь",
+          "role": "company"
+        }
+      ],
+      "action": "сообщила",
+      "object": "спрос",
+      "geographies": [],
+      "scenario": {
+        "kind": "baseline",
+        "text": "Базовый прогноз"
+      },
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": {
+          "text": "на год"
+        }
+      },
+      "measurements": [
+        {
+          "measurement_id": "m3",
+          "metric": "падение спроса",
+          "kind": "relative_change",
+          "value_text": "7",
+          "unit_text": "%",
+          "qualifier": "exact",
+          "value_role": "before",
+          "comparison_period": null
+        },
+        {
+          "measurement_id": "m4",
+          "metric": "падение спроса",
+          "kind": "relative_change",
+          "value_text": "0,5",
+          "unit_text": "%",
+          "qualifier": "exact",
+          "value_role": "after",
+          "comparison_period": null
+        }
+      ],
+      "evidence_ids": [
+        "e1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "e1"
+        ],
+        "/measurements": [
+          "e1"
+        ]
+      }
+    },
+    {
+      "claim_id": "c3",
+      "text": "Альтернативный прогноз падения спроса",
+      "event_type": "market_indicator",
+      "modality": "forecast",
+      "polarity": "affirmed",
+      "stage": null,
+      "attribution": null,
+      "participants": [
+        {
+          "name": "ТестСталь",
+          "role": "company"
+        }
+      ],
+      "action": "сообщила",
+      "object": "спрос",
+      "geographies": [],
+      "scenario": {
+        "kind": "alternative",
+        "text": "Альтернативный сценарий"
+      },
+      "time": {
+        "occurred_at": null,
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": {
+          "text": "на год"
+        }
+      },
+      "measurements": [
+        {
+          "measurement_id": "m5",
+          "metric": "падение спроса",
+          "kind": "relative_change",
+          "value_text": "3",
+          "unit_text": "%",
+          "qualifier": "exact",
+          "value_role": "reported",
+          "comparison_period": null
+        }
+      ],
+      "evidence_ids": [
+        "e1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "e1"
+        ],
+        "/measurements": [
+          "e1"
+        ]
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "e1",
+      "field": "text",
+      "quote": "Компания «ТестСталь» сообщила: выручка за девять месяцев выросла на 12% год к году и снизилась на 2% за месяц. Базовый прогноз падения спроса на год улучшен с 7% до 0,5%. Альтернативный сценарий предусматривает падение на 3%."
+    }
+  ],
+  "excluded": [],
+  "limitations": [
+    "Даты не нормализованы; исходный пример вымышленный."
+  ]
+}

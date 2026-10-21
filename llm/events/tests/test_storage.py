@@ -1,4 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from copy import deepcopy
 from datetime import datetime, timezone
 import json
@@ -63,7 +64,7 @@ class StorageTests(unittest.TestCase):
         self.assertTrue(caught.exception.issues[0].path.startswith("/"))
 
     def count(self, table):
-        with sqlite3.connect(self.path) as conn:
+        with closing(sqlite3.connect(self.path)) as conn, conn:
             return conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
 
     def test_initial_fifteen_repeat_and_reordered_keys(self):
@@ -385,7 +386,7 @@ class StorageTests(unittest.TestCase):
 
     def test_immutable_archive_and_artifact(self):
         job=self.running(); artifact=self.store.save_artifact(job.active_attempt.token,"raw","original")
-        with sqlite3.connect(self.path) as conn:
+        with closing(sqlite3.connect(self.path)) as conn, conn:
             for sql,params in [("UPDATE article_versions SET payload_json='{}'",()),
                                ("DELETE FROM article_versions",()),
                                ("UPDATE artifacts SET payload_json='null' WHERE artifact_id=?",(artifact.artifact_id,)),
@@ -407,14 +408,14 @@ class StorageTests(unittest.TestCase):
 
     def test_foreign_database_and_newer_schema_are_not_recreated(self):
         foreign=Path(self.temp.name)/"foreign.sqlite3"
-        with sqlite3.connect(foreign) as conn:
+        with closing(sqlite3.connect(foreign)) as conn, conn:
             conn.execute("CREATE TABLE unrelated (value TEXT)")
             conn.execute("INSERT INTO unrelated VALUES ('keep')")
         self.assert_error("unsupported_storage_schema",EventStore,foreign)
-        with sqlite3.connect(foreign) as conn:
+        with closing(sqlite3.connect(foreign)) as conn, conn:
             self.assertEqual(conn.execute("SELECT value FROM unrelated").fetchone()[0],"keep")
             self.assertEqual(conn.execute("PRAGMA application_id").fetchone()[0],0)
-        with sqlite3.connect(self.path) as conn: conn.execute("PRAGMA user_version=2")
+        with closing(sqlite3.connect(self.path)) as conn, conn: conn.execute(f"PRAGMA user_version={SCHEMA_VERSION + 1}")
         self.assert_error("unsupported_storage_schema",EventStore,self.path)
 
     def test_storage_busy_without_sleep(self):

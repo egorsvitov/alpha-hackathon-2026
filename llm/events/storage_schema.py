@@ -1,7 +1,7 @@
-"""SQLite state schema v1. No implicit migrations or external SQL dependencies."""
+"""SQLite schema v2, retaining the v1 DDL for explicit migrations and tests."""
 
 APPLICATION_ID = 0x414C5048
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 TABLES = {"article_versions", "article_heads", "batches", "batch_items", "jobs", "attempts", "artifacts"}
 
 DDL = [
@@ -90,3 +90,40 @@ for table in ("article_versions", "batch_items", "artifacts"):
     for action in ("UPDATE", "DELETE"):
         DDL.append(f"""CREATE TRIGGER {table}_{action.lower()}_immutable BEFORE {action} ON {table}
             BEGIN SELECT RAISE(ABORT,'{table} is immutable'); END""")
+
+# Keep the exact B2 DDL available for explicit migration regression tests.
+B2_DDL = tuple(DDL)
+B2_TABLES = frozenset(TABLES)
+B3_DDL = [
+    """CREATE TABLE budget_days (
+        budget_day TEXT PRIMARY KEY,
+        quota_rub TEXT NOT NULL,
+        blocked INTEGER NOT NULL DEFAULT 0 CHECK(blocked IN (0,1)),
+        block_reason TEXT
+    )""",
+    """CREATE TABLE llm_calls (
+        call_id TEXT PRIMARY KEY,
+        attempt_id TEXT NOT NULL UNIQUE REFERENCES attempts(attempt_id),
+        budget_day TEXT NOT NULL REFERENCES budget_days(budget_day),
+        created_at REAL NOT NULL,
+        finished_at REAL,
+        request_json TEXT NOT NULL,
+        tariffs_json TEXT NOT NULL,
+        reserved_rub TEXT NOT NULL,
+        accounted_rub TEXT NOT NULL,
+        state TEXT NOT NULL CHECK(state IN ('reserved','settled','unknown','reconciled')),
+        response_json TEXT,
+        error_json TEXT,
+        reconciliation_reason TEXT
+    )""",
+    "CREATE INDEX calls_day ON llm_calls(budget_day,created_at)",
+    """CREATE TRIGGER call_identity_immutable BEFORE UPDATE OF attempt_id,budget_day,created_at,request_json,tariffs_json,reserved_rub ON llm_calls
+        BEGIN SELECT RAISE(ABORT,'call identity and reservation are immutable'); END""",
+    """CREATE TRIGGER call_delete_immutable BEFORE DELETE ON llm_calls
+        BEGIN SELECT RAISE(ABORT,'call audit cannot be deleted'); END""",
+    """CREATE TRIGGER call_response_immutable BEFORE UPDATE OF response_json,error_json,finished_at ON llm_calls
+        WHEN OLD.finished_at IS NOT NULL
+        BEGIN SELECT RAISE(ABORT,'call response is immutable'); END""",
+]
+DDL.extend(B3_DDL)
+TABLES = TABLES | {'budget_days','llm_calls'}

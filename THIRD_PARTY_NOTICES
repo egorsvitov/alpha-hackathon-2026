@@ -121,6 +121,17 @@ of Python) and the linked SQLite library (public domain). No extra package or
 model was added; tested with Python 3.13.5 and SQLite 3.46.1. Its database and
 source batch archive remain local under ignored data/processed/events/.
 
+## B3 extraction transport (added 2026-10-21)
+
+Versions are pinned in llm/events/requirements.lock. Added openai 2.54.0
+(Apache-2.0), distro 1.9.0 (Apache-2.0), jiter 0.17.0 (MIT),
+sniffio 1.3.1 (MIT OR Apache-2.0), tqdm 4.70.1 (MPL-2.0 AND MIT),
+according to installed distribution metadata. The Apache license text is in
+licenses/Apache-2.0.txt. HTTPX 0.28.1 and its dependencies are shared with the
+backend package list above. No model weights or provider-specific tokenizer
+were downloaded. Offline SDK tests use a mock HTTP transport; live generation
+remains disabled until confirmed tariffs, model bounds and a quota are supplied.
+
 ## Frontend packages (added 2026-10-20)
 
 Used by frontend/ (Vite + React prototype). Exact versions are pinned in
