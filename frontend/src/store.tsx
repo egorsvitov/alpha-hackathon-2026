@@ -4,6 +4,8 @@ import { api, demoSettings } from './api';
 import { COMPANIES } from './data/companies';
 
 type Theme = 'light' | 'dark';
+/** Оформление: «cabinet» — кабинет по образцу Альфа-Бизнеса, «classic» — первая версия (бенто). */
+export type Design = 'cabinet' | 'classic';
 const KEY = 'alfa-news-demo-state-v1';
 
 interface Persisted {
@@ -15,6 +17,7 @@ interface Persisted {
   hidden: Record<string, string[]>;
   /** включены ли браузерные уведомления о важных событиях */
   push: boolean;
+  design: Design;
 }
 
 /** Демо-вход. В банке логин привязан к физлицу, у которого есть доступ к нескольким компаниям. */
@@ -23,10 +26,10 @@ export const DEMO_LOGIN = { login: 'demo', password: 'alfa2026', name: 'Иван
 const read = (): Persisted => {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return { user: null, hidden: {}, push: false, ...(JSON.parse(raw) as Partial<Persisted>) } as Persisted;
+    if (raw) return { user: null, hidden: {}, push: false, design: 'cabinet', ...(JSON.parse(raw) as Partial<Persisted>) } as Persisted;
   } catch { /* localStorage недоступен */ }
   const dark = typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-  return { companyId: null, role: null, theme: dark ? 'dark' : 'light', user: null, hidden: {}, push: false };
+  return { companyId: null, role: null, theme: dark ? 'dark' : 'light', user: null, hidden: {}, push: false, design: 'cabinet' };
 };
 
 interface AppState {
@@ -38,6 +41,7 @@ interface AppState {
   /** event_id скрытых карточек текущей компании */
   hidden: string[];
   push: boolean;
+  design: Design;
   demo: DemoSettings;
   /** увеличивается при загрузке новой новости — лента и виджет перезапрашиваются */
   feedVersion: number;
@@ -46,6 +50,7 @@ interface AppState {
   hide(eventId: string): void;
   unhide(eventId: string): void;
   setPush(on: boolean): void;
+  setDesign(design: Design): void;
   select(companyId: string, role: Role): void;
   setRole(role: Role): void;
   setCompany(companyId: string): void;
@@ -68,6 +73,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.dataset.theme = p.theme;
+    document.documentElement.dataset.design = p.design;
     try { localStorage.setItem(KEY, JSON.stringify(p)); } catch { /* ignore */ }
   }, [p]);
 
@@ -80,6 +86,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       user: p.user,
       hidden: (p.companyId && p.hidden[p.companyId]) || [],
       push: p.push,
+      design: p.design,
       demo,
       feedVersion,
       login: (login, password) => {
@@ -97,6 +104,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         ? { ...s, hidden: { ...s.hidden, [s.companyId]: (s.hidden[s.companyId] ?? []).filter((x) => x !== eventId) } }
         : s)),
       setPush: (on) => setP((s) => ({ ...s, push: on })),
+      setDesign: (design) => setP((s) => ({ ...s, design })),
       select: (companyId, role) => setP((s) => ({ ...s, companyId, role })),
       setRole: (role) => setP((s) => ({ ...s, role })),
       setCompany: (companyId) => setP((s) => ({ ...s, companyId })),

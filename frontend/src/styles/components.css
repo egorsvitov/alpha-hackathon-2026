@@ -86,7 +86,7 @@ a.btn:hover { color: inherit; }
 @media (hover: hover) { .topic-card:hover { transform: translateY(-3px); } }
 .topic-card--skeleton { background: var(--color-bg-surface); gap: 16px; }
 .topic-card--lead { grid-column: 1 / -1; min-height: 320px; padding: 28px 32px 32px; }
-.topic-card__top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding-right: 84px; }
+.topic-card__top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding-right: 124px; }
 .topic-card__title { font-size: 26px; line-height: 30px; font-weight: 700; letter-spacing: -0.025em; margin-top: 6px; position: relative; z-index: 1; }
 .topic-card--lead .topic-card__title { font-size: 42px; line-height: 46px; letter-spacing: -0.035em; max-width: 58%; }
 .topic-card__link { color: inherit; text-wrap: balance; }
