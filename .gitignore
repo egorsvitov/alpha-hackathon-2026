@@ -3,7 +3,11 @@ __pycache__/
 *.pyc
 .env
 .venv/
+.venv_news/
+.venv_events/
 .cache/
+.nessy/
+.DS_Store
 
 # Supplied materials remain local; publication terms pending.
 /data/companies/
@@ -11,6 +15,14 @@ __pycache__/
 /data/task/
 /data/context/
 *.pdf
+
+# News collector: sensitive supplied CSV and generated derivatives stay local.
+/news/*.csv
+/news/drive-download-*/
+/news/.env
+/data/processed/news/
+/data/processed/news_cache/
+/data/processed/news_bulk/
 
 # Full-text derivatives and generated images remain local.
 /data/processed/ocr/

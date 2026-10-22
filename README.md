@@ -19,6 +19,15 @@ llm/
     agent/                 # Извлечение фактов, интерпретация и самопроверка
         contracts/         # Проект формата ответа и ручной пример
         model_policy.json  # Проект выбора моделей и бюджетной политики
+news/                      # Сборщик внешних новостей и профилирование аудитории
+    collect.py             # Сбор источников из news/sources.json
+    dump_large.py          # Крупная выгрузка корпуса (~10k) для кластеризации
+    scheduler.py           # Периодическая проверка новых статей (расписание)
+    profile/               # Анализ аудитории → темы, поиск новых источников
+        source_discovery.py   # Выделение новых источников под темы аудитории
+        audience.py           # Профиль аудитории из CSV клиентов
+    sources.json           # Реестр источников новостей
+    Dockerfile             # Задача-расписание сбора в Docker (см. docker-compose)
 data/
     companies/             # Три исходных CSV
     analytics/             # Девять аналитических PDF
@@ -108,6 +117,7 @@ docker compose up --build
 
 - `backend`: FastAPI, база SQLite лежит в томе `backend-data` и переживает пересоздание контейнера.
 - `frontend`: nginx раздаёт собранный интерфейс и проксирует `/api/` на backend, поэтому фронт и API живут на одном адресе без CORS. Фронт стартует только после того, как backend стал healthy.
+- `news-collector`: регулярный сбор новостей по расписанию (см. `news/README.md`). Архив статей пишется в том `news-data` (на VPS монтируется в постоянное хранилище). Интервал — `NEWS_EVERY` (сек, по умолчанию 3600 = 1 час). Разовый проход: `docker compose run --rm news-collector python news/scheduler.py --once`.
 
 Откуда фронт берёт данные, задаёт `APP_API_MODE` в `.env`:
 

@@ -58,5 +58,24 @@ services:
     security_opt:
       - no-new-privileges:true
 
+  news-collector:
+    build:
+      context: .
+      dockerfile: news/Dockerfile
+    image: alfa-news-collector:local
+    restart: unless-stopped
+    environment:
+      # Интервал сбора (сек). Переопределяется через .env: NEWS_EVERY=3600.
+      NEWS_EVERY: ${NEWS_EVERY:-3600}
+    volumes:
+      - news-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+
 volumes:
   backend-data:
+  news-data:
