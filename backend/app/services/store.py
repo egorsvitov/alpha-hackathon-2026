@@ -1,4 +1,7 @@
 import json
+import logging
+import time
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +30,9 @@ from app.services.seed_data import (
 )
 from app.services.orchestrator import orchestrator
 
+logger = logging.getLogger(__name__)
+MSK = timezone(timedelta(hours=3))
+
 
 class DataStore:
     def __init__(self) -> None:
@@ -40,6 +46,28 @@ class DataStore:
         self._ask_template: dict[str, Any] = {}
 
         self._load_seed_data()
+        self._latencies_ms: list[int] = []
+
+    @property
+    def analyst(self) -> Any:
+        """Фасад LLM-аналитика (общий для store и orchestrator); создаётся при первом обращении."""
+        from app.analyst.service import get_analyst_service
+
+        return get_analyst_service()
+
+    @analyst.setter
+    def analyst(self, value: Any) -> None:
+        from app.analyst.service import set_analyst_service
+
+        set_analyst_service(value)
+
+    def _analyst_enabled(self) -> bool:
+        """``ANALYST_MODE=llm|cached`` включает аналитика; ``template`` — прежнее поведение."""
+        try:
+            return bool(self.analyst.enabled)
+        except Exception:  # noqa: BLE001 - аналитик не должен ронять шаблонный путь
+            logger.exception("Не удалось инициализировать LLM-аналитика, работаю в шаблонном режиме")
+            return False
 
     def _load_seed_data(self) -> None:
         ask_file = self.docs_examples_dir / "ask.json"
@@ -185,8 +213,14 @@ class DataStore:
             self._companies[0],
         )
 
-        feed_items: list[FeedItem] = []
         all_events = self.user_events + self._events
+        if self._analyst_enabled():
+            try:
+                return self.analyst.feed(company, role, all_events, self._score_event_for_company)
+            except Exception:  # noqa: BLE001
+                logger.exception("Лента через LLM-аналитика не построена, откат на шаблон")
+
+        feed_items: list[FeedItem] = []
 
         for ev in all_events:
             rel = self._score_event_for_company(ev, company, role)
@@ -217,12 +251,25 @@ class DataStore:
             self._events[0],
         )
 
-        return self.orchestrator.run_pipeline(
-            event=event,
-            company=company,
-            role=role,
-            score_fn=self._score_event_for_company,
-        )
+        started = time.perf_counter()
+        try:
+            if self._analyst_enabled():
+                try:
+                    return self.orchestrator.run_llm_pipeline(
+                        event=event, company=company, role=role, score_fn=self._score_event_for_company
+                    )
+                except Exception:  # noqa: BLE001
+                    logger.exception("Карточка через LLM-аналитика не построена, откат на шаблон")
+            return self.orchestrator.run_pipeline(
+                event=event,
+                company=company,
+                role=role,
+                score_fn=self._score_event_for_company,
+            )
+        finally:
+            self._latencies_ms.append(int((time.perf_counter() - started) * 1000))
+            del self._latencies_ms[:-200]
+
     def ask(
         self,
         company_id: str,
@@ -231,6 +278,27 @@ class DataStore:
         run_id: str,
         question: str,
     ) -> QaAnswer:
+        if self._analyst_enabled():
+            try:
+                company = next((c for c in self._companies if c["company_id"] == company_id), self._companies[0])
+                all_events = self.user_events + self._events
+                event = next((ev for ev in all_events if ev.get("event_id") == news_id), self._events[0])
+                return self.analyst.ask(
+                    company,
+                    role,
+                    event,
+                    question,
+                    self._score_event_for_company,
+                    template_insight_fn=lambda: self.orchestrator.run_pipeline(
+                        event=event, company=company, role=role, score_fn=self._score_event_for_company
+                    ),
+                    template_answer_fn=lambda: self._template_answer(company_id, news_id, role, question),
+                )
+            except Exception:  # noqa: BLE001
+                logger.exception("Ответ чата через LLM не получен, откат на шаблон")
+        return self._template_answer(company_id, news_id, role, question)
+
+    def _template_answer(self, company_id: str, news_id: str, role: Role, question: str) -> QaAnswer:
         resp_data = self._ask_template.get("response", {})
         answer_text = resp_data.get(
             "text",
@@ -259,27 +327,42 @@ class DataStore:
             "is_synthetic": True,
             "user_uploaded": True,
         }
+        if self._analyst_enabled():
+            # Тема — общая классификация (один вызов); значимость для компании и роли
+            # считает аналитик при показе ленты/карточки (кэшируется по компании и роли).
+            try:
+                cls = self.analyst.classify_upload(title, text)
+                event.update(
+                    {
+                        "topic": cls["topic"],
+                        "topic_label": cls["topic_label"],
+                        "date": datetime.now(MSK).isoformat(timespec="seconds"),
+                        "text": text,
+                    }
+                )
+            except Exception:  # noqa: BLE001
+                logger.exception("Классификация загруженной новости не выполнена")
         self.user_events.append(event)
         return NewsEvent.model_validate(event)
 
     def get_metrics(self) -> dict[str, Any]:
+        budget = self.orchestrator.budget.get_metrics()
+        analyst = budget.get("analyst", {})
+        llm = analyst.get("llm", {})
+        latencies = self._latencies_ms
         metrics = {
             "service_status": "healthy",
             "total_companies_loaded": len(self._companies),
             "total_events_indexed": len(self._events) + len(self.user_events),
-            "rag_coverage_ratio": 0.83,
-            "claim_source_attribution_ratio": 1.0,
-            "average_latency_ms": 145,
-            "estimated_cost_per_insight_rub": round(
-                self.orchestrator.budget.spent_today_rub
-                / max(1, self.orchestrator.budget.total_orchestrations),
-                4,
-            )
-            if self.orchestrator.budget.total_orchestrations
-            else 0.042,
+            # Реальные замеры; None — данных ещё не было (а не выдуманное значение).
+            "claim_source_attribution_ratio": analyst.get("claim_source_attribution_ratio"),
+            "average_latency_ms": round(sum(latencies) / len(latencies)) if latencies else None,
+            "estimated_cost_per_insight_rub": round(llm["cost_rub"] / llm["llm_calls"], 4)
+            if llm.get("llm_calls")
+            else None,
             "compliance_disclaimer": "Аналитика не является индивидуальной инвестиционной рекомендацией",
         }
-        metrics.update(self.orchestrator.budget.get_metrics())
+        metrics.update(budget)
         return metrics
 
 

@@ -1,0 +1,475 @@
+{
+ "key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|treasurer|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:12:45+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "cluster_id": "cluster:e6_food_inflation",
+   "event_refs": [
+    {
+     "event_id": "e6_food_inflation",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.35,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.03,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "costs",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Продуктовая инфляция ускоряется: казначейская повестка — закупочные цены, оборотный капитал и доходность депозитов",
+   "what_happened": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+   "facts": [
+    {
+     "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+     "kind": "fact",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — розничный продуктовый ритейлер, поэтому ускорение роста продовольственных цен напрямую затрагивает её закупочные издержки и потребительский спрос.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Инфляция закупочных цен может повышать себестоимость и потребность в оборотном капитале; одновременно она влияет на ставки денежного рынка и доходность размещения свободных средств.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Рост закупочных цен может увеличить потребность в оборотном капитале и нагрузку на ликвидность.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Инфляция может сжимать реальные доходы покупателей и маржу при ограниченной возможности повышать цены.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Ускорение инфляции может повышать доходность депозитов и коротких размещений свободных средств.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Динамика закупочных цен по ключевым категориям и условия договоров с поставщиками",
+    "Фактическая доходность и сроки действующих депозитов",
+    "Помесячная динамика выручки и товарных запасов"
+   ],
+   "next_steps": [
+    {
+     "text": "Пересмотреть прогноз денежных потоков с учётом роста закупочных цен и графика платежей ключевым контрагентам.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "counterparty.1",
+      "counterparty.2"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Оценить сроки и ставки действующих депозитов и возможность пере размещения на более выгодных условиях.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Проверить достаточность доступной ликвидности и лимитов на случай роста потребности в оборотном капитале.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.rko"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Неизвестны условия депозитов и структура оборотного капитала.",
+     "question": "Каковы сроки, ставки и суммы действующих депозитов и доступные кредитные лимиты?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Тип отношений с ООО «Агрохолдинг Север» и «ЛогистикПро» не подтверждён договорами.",
+     "question": "Являются ли эти контрагенты поставщиками, и какова доля закупок у них?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Продуктовая инфляция касается компании напрямую: казначей должен следить за оборотным капиталом и графиком платежей, а также проверить возможность улучшения доходности депозитов на фоне возможного роста ставок.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "product.deposits",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "product.deposits",
+     "counterparty.1",
+     "counterparty.2",
+     "product.rko"
+    ],
+    "event_claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e6_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:12:45+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2692,
+    "completion_tokens": 797,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.094048,
+    "cost_rub_tariff": 0.027278,
+    "latency_ms": 9599,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2692/797, 0.0940 ₽, 9.6 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "costs",
+     "demand_revenue"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Продуктовая инфляция ускоряется: казначейская повестка — закупочные цены, оборотный капитал и доходность депозитов",
+    "what_happened": [
+     {
+      "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+      "kind": "fact",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — розничный продуктовый ритейлер (F1, F2), поэтому ускорение роста продовольственных цен напрямую затрагивает её закупочные издержки и потребительский спрос.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Инфляция закупочных цен может повышать себестоимость и потребность в оборотном капитале; одновременно она влияет на ставки денежного рынка и доходность размещения свободных средств (F12).",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Рост закупочных цен может увеличить потребность в оборотном капитале и нагрузку на ликвидность.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Инфляция может сжимать реальные доходы покупателей и маржу при ограниченной возможности повышать цены.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.industry"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Ускорение инфляции может повышать доходность депозитов и коротких размещений свободных средств (F12).",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Пересмотреть прогноз денежных потоков с учётом роста закупочных цен и графика платежей ключевым контрагентам.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1",
+       "counterparty.2"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Оценить сроки и ставки действующих депозитов (F12) и возможность пере размещения на более выгодных условиях.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Проверить достаточность доступной ликвидности и лимитов на случай роста потребности в оборотном капитале.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.rko"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Динамика закупочных цен по ключевым категориям и условия договоров с поставщиками",
+     "Фактическая доходность и сроки действующих депозитов",
+     "Помесячная динамика выручки и товарных запасов"
+    ],
+    "unknowns": [
+     {
+      "text": "Неизвестны условия депозитов и структура оборотного капитала.",
+      "question": "Каковы сроки, ставки и суммы действующих депозитов и доступные кредитные лимиты?"
+     },
+     {
+      "text": "Тип отношений с ООО «Агрохолдинг Север» и «ЛогистикПро» не подтверждён договорами.",
+      "question": "Являются ли эти контрагенты поставщиками, и какова доля закупок у них?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Продуктовая инфляция касается компании напрямую: казначей должен следить за оборотным капиталом и графиком платежей, а также проверить возможность улучшения доходности депозитов на фоне возможного роста ставок.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "product.deposits",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2692/797, 0.0940 ₽, 9.6 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

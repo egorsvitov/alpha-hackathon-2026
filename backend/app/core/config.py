@@ -12,10 +12,14 @@ class Settings(BaseSettings):
     # Режим заглушек (удобно для фронтенда и демо)
     MOCK_MODE: bool = True
 
+    # extra="ignore": в .env лежат и чужие для этих настроек переменные (LLM_API_KEY,
+    # ANALYST_MODE и т. п.). С запретом лишних полей pydantic падал при старте и печатал
+    # их значения (в том числе ключ) в текст ошибки.
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=True,
+        extra="ignore",
     )
 
 

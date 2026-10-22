@@ -1,0 +1,147 @@
+{
+ "key": "SYNTHETIC_U_1042|e6_food_inflation@1#bdcde2a04ba5|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e6_food_inflation@1#bdcde2a04ba5|ceo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:08:46+03:00",
+ "record": {
+  "insight": null,
+  "excluded": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "cluster_id": "cluster:e6_food_inflation",
+   "event_refs": [
+    {
+     "event_id": "e6_food_inflation",
+     "event_version": 1
+    }
+   ],
+   "reason_code": "not_relevant",
+   "reason": "Событие касается роста цен на продукты питания; у металлургического производителя (F1, F2) нет признаков связи с продовольственным рынком — совпадение темы не образует механизма влияния.",
+   "headline": "Инфляция в продуктовом сегменте не затрагивает бизнес компании напрямую",
+   "facts": [
+    {
+     "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+     "kind": "fact",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ]
+  },
+  "run": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e6_food_inflation@1#bdcde2a04ba5|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:08:46+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3040,
+    "completion_tokens": 350,
+    "reasoning_tokens": 70,
+    "cost_rub": 0.073968,
+    "cost_rub_tariff": 0.021454,
+    "latency_ms": 5826,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 3040/350, 0.0740 ₽, 5.8 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "exclude",
+    "exclude_reason": "Событие касается роста цен на продукты питания; у металлургического производителя (F1, F2) нет признаков связи с продовольственным рынком — совпадение темы не образует механизма влияния.",
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Инфляция в продуктовом сегменте не затрагивает бизнес компании напрямую",
+    "what_happened": [
+     {
+      "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+      "kind": "fact",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "risks": [],
+    "opportunities": [],
+    "next_steps": [],
+    "recommended_checks": [],
+    "unknowns": [],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "inference_status": "insufficient_evidence"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 3040/350, 0.0740 ₽, 5.8 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

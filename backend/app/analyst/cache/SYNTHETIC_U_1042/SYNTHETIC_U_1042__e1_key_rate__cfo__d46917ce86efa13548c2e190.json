@@ -1,0 +1,473 @@
+{
+ "key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:08:58+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "cluster_id": "cluster:e1_key_rate",
+   "event_refs": [
+    {
+     "event_id": "e1_key_rate",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.33,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.06,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.05
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "credit_liquidity",
+    "costs"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ставка ЦБ сохранена на 14%: стоимость нового финансирования и лизинга для компании останется высокой",
+   "what_happened": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+   "facts": [
+    {
+     "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+     "kind": "fact",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания имеет кредитные продукты и лизинг в Альфа-Банке, поэтому уровень ключевой ставки напрямую влияет на стоимость нового заёмного финансирования.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ключевая ставка формирует базу для ставок нового кредитования и лизинга; сохранение 14% означает отсутствие удешевления новых заимствований, по действующим договорам влияние зависит от типа ставки.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Новые кредиты и лизинг останутся дорогими, что может сдерживать инвестиционные планы и давить на маржу.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Если действующие кредиты с плавающей ставкой, обслуживание долга остаётся на высоком уровне.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Пауза в цикле ставки даёт предсказуемость для бюджетирования стоимости финансирования до декабря.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [
+      "b_key"
+     ],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Тип ставок по действующим кредитам (фикс/плавающая)",
+    "График рефинансирования и потребность в новом финансировании",
+    "Условия действующих лизинговых договоров"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить тип ставок по действующим кредитным договорам и оценить чувствительность процентных расходов к ставке 14%.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Оценить целесообразность фиксации ставок по новым заимствованиям до возможного изменения политики ЦБ.",
+     "kind": "inference",
+     "claim_ids": [],
+     "evidence_ids": [],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [
+      "b_key"
+     ],
+     "conditional": false,
+     "roles": [
+      "treasurer",
+      "cfo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Неизвестны условия действующих кредитных договоров и объём долга.",
+     "question": "Какой объём долга и тип ставки по действующим кредитам?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Неизвестна привязка лизинговых платежей к ключевой ставке.",
+     "question": "Как пересматриваются ставки по действующему лизингу?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_key"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Сохранение ставки на 14% не меняет ситуацию резко, но фиксирует высокую стоимость нового кредитования и лизинга; для CFO важно проверить структуру долга и заложить текущие ставки в бюджет.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "product.loans",
+     "product.leasing"
+    ],
+    "event_claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e1_1"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "inference_status": "supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:08:58+03:00",
+   "qa_status": "passed_with_fixes",
+   "qa_issues": [
+    {
+     "code": "number_not_in_data",
+     "severity": "error",
+     "message": "Числа не из данных: 2027",
+     "path": "next_steps[1]"
+    }
+   ],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3191,
+    "completion_tokens": 780,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.058613,
+    "cost_rub_tariff": 0.029534,
+    "latency_ms": 9080,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3191/780, 0.0586 ₽, 9.1 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed_with_fixes; ошибок 1, замечаний 0 (number_not_in_data)",
+     "status": "warn"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "credit_liquidity",
+     "costs"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ставка ЦБ сохранена на 14%: стоимость нового финансирования и лизинга для компании останется высокой",
+    "what_happened": [
+     {
+      "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания имеет кредитные продукты и лизинг в Альфа-Банке (F11, F12), поэтому уровень ключевой ставки напрямую влияет на стоимость нового заёмного финансирования.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ключевая ставка формирует базу для ставок нового кредитования и лизинга; сохранение 14% означает отсутствие удешевления новых заимствований, по действующим договорам влияние зависит от типа ставки.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Новые кредиты и лизинг останутся дорогими, что может сдерживать инвестиционные планы и давить на маржу.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Если действующие кредиты с плавающей ставкой, обслуживание долга остаётся на высоком уровне.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Пауза в цикле ставки даёт предсказуемость для бюджетирования стоимости финансирования до декабря.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1",
+       "b_key"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить тип ставок по действующим кредитным договорам и оценить чувствительность процентных расходов к ставке 14%.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Пересмотреть бюджет на 2027 год с учётом сохранения высокой стоимости нового финансирования и лизинга.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Оценить целесообразность фиксации ставок по новым заимствованиям до возможного изменения политики ЦБ.",
+      "kind": "inference",
+      "claim_ids": [
+       "b_key"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "treasurer",
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Тип ставок по действующим кредитам (фикс/плавающая)",
+     "График рефинансирования и потребность в новом финансировании",
+     "Условия действующих лизинговых договоров"
+    ],
+    "unknowns": [
+     {
+      "text": "Неизвестны условия действующих кредитных договоров и объём долга.",
+      "question": "Какой объём долга и тип ставки по действующим кредитам?"
+     },
+     {
+      "text": "Неизвестна привязка лизинговых платежей к ключевой ставке.",
+      "question": "Как пересматриваются ставки по действующему лизингу?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_key"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Сохранение ставки на 14% не меняет ситуацию резко, но фиксирует высокую стоимость нового кредитования и лизинга; для CFO важно проверить структуру долга и заложить текущие ставки в бюджет.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1",
+      "b_key"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "roles": []
+    },
+    "inference_status": "supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3191/780, 0.0586 ₽, 9.1 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

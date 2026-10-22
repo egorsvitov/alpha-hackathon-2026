@@ -1,0 +1,423 @@
+{
+ "key": "SYNTHETIC_U_3305|e4_wheat_duty@1#c0801416248a|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e4_wheat_duty@1#c0801416248a|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:13:01+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "cluster_id": "cluster:e4_wheat_duty",
+   "event_refs": [
+    {
+     "event_id": "e4_wheat_duty",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.03,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.05
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "costs",
+    "taxes"
+   ],
+   "event_status": "occurred",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "Повышение экспортной пошлины на пшеницу: для розничного продуктового ритейлера связь возможна, но не подтверждена",
+   "what_happened": "Правительство повысило экспортную пошлину на пшеницу.",
+   "facts": [
+    {
+     "text": "Правительство повысило экспортную пошлину на пшеницу.",
+     "kind": "fact",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — розничный торговец продуктами; пошлина затрагивает экспортёров пшеницы напрямую, а ритейлер — лишь гипотетически через цены закупок у поставщиков.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Возможный канал: рост экспортной пошлины может повлиять на внутренние цены зерна и продукты переработки, что при условии пересмотра цен поставщиками отразится на себестоимости закупок.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.okved"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "При условии роста закупочных цен на муку и крупы может увеличиться себестоимость и потребоваться пересмотр резервов/оценок в учёте.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Если внутренние цены на зерно снизятся из-за ограничения экспорта, закупочные издержки могут уменьшиться.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Доля зернопродуктов (мука, крупы) в закупках",
+    "Условия договоров с поставщиками о пересмотре цен"
+   ],
+   "next_steps": [
+    {
+     "text": "Запросить у ключевых поставщиков (в т.ч. «Агрохолдинг Север», тип отношений не подтверждён) информацию о планах пересмотра цен.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Мониторить публикацию точного размера пошлины и даты вступления в силу для оценки налоговых и учётных последствий.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Новый размер пошлины и дата вступления в силу не указаны.",
+     "question": "Каков новый размер пошлины и когда она вступает в силу?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Не подтверждён тип отношений с ООО «Агрохолдинг Север» (16% исходящих платежей).",
+     "question": "Является ли «Агрохолдинг Север» поставщиком продуктов и есть ли в его ассортименте зерновая продукция?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Событие касается экспортёров пшеницы; для компании-ритейлера влияние возможно только опосредованно через закупочные цены — рекомендуется наблюдение без срочных действий.",
+    "kind": "inference",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "counterparty.1"
+    ],
+    "event_claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e4_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": [
+     "Тип отношений с контрагентом по платежам не подтверждён (это гипотеза)."
+    ]
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e4_wheat_duty@1#c0801416248a|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:13:01+03:00",
+   "qa_status": "passed_with_fixes",
+   "qa_issues": [
+    {
+     "code": "number_not_in_data",
+     "severity": "error",
+     "message": "Числа не из данных: 19.1",
+     "path": "facts[0]"
+    },
+    {
+     "code": "facts_restored",
+     "severity": "warn",
+     "message": "Факты взяты дословно из утверждений источника",
+     "path": "facts"
+    },
+    {
+     "code": "payment_as_supplier",
+     "severity": "warn",
+     "message": "Тип отношений с контрагентом выведен из платежей",
+     "path": "next_steps[0]"
+    }
+   ],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2650,
+    "completion_tokens": 754,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.090789,
+    "cost_rub_tariff": 0.026333,
+    "latency_ms": 8763,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2650/754, 0.0908 ₽, 8.8 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed_with_fixes; ошибок 1, замечаний 2 (facts_restored, number_not_in_data, payment_as_supplier)",
+     "status": "warn"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "costs",
+     "taxes"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Повышение экспортной пошлины на пшеницу: для розничного продуктового ритейлера связь возможна, но не подтверждена",
+    "what_happened": [
+     {
+      "text": "Правительство повысило экспортную пошлину на пшеницу (утверждено 19.10.2026); новый размер и дата вступления в силу не раскрыты.",
+      "kind": "fact",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — розничный торговец продуктами (F1, F2); пошлина затрагивает экспортёров пшеницы напрямую, а ритейлер — лишь гипотетически через цены закупок у поставщиков.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Возможный канал: рост экспортной пошлины может повлиять на внутренние цены зерна и продукты переработки, что при условии пересмотра цен поставщиками отразится на себестоимости закупок.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "При условии роста закупочных цен на муку и крупы может увеличиться себестоимость и потребоваться пересмотр резервов/оценок в учёте.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Если внутренние цены на зерно снизятся из-за ограничения экспорта, закупочные издержки могут уменьшиться.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Запросить у ключевых поставщиков (в т.ч. «Агрохолдинг Север», тип отношений не подтверждён) информацию о планах пересмотра цен.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Мониторить публикацию точного размера пошлины и даты вступления в силу для оценки налоговых и учётных последствий.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [],
+      "roles": [
+       "chief_accountant"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Доля зернопродуктов (мука, крупы) в закупках",
+     "Условия договоров с поставщиками о пересмотре цен"
+    ],
+    "unknowns": [
+     {
+      "text": "Новый размер пошлины и дата вступления в силу не указаны.",
+      "question": "Каков новый размер пошлины и когда она вступает в силу?"
+     },
+     {
+      "text": "Не подтверждён тип отношений с ООО «Агрохолдинг Север» (16% исходящих платежей).",
+      "question": "Является ли «Агрохолдинг Север» поставщиком продуктов и есть ли в его ассортименте зерновая продукция?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Событие касается экспортёров пшеницы; для компании-ритейлера влияние возможно только опосредованно через закупочные цены — рекомендуется наблюдение без срочных действий.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2650/754, 0.0908 ₽, 8.8 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

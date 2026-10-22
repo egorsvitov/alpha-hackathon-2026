@@ -1,0 +1,484 @@
+{
+ "key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|treasurer|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:11:02+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "cluster_id": "cluster:e1_key_rate",
+   "event_refs": [
+    {
+     "event_id": "e1_key_rate",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.35,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.03,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "credit_liquidity"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ставка ЦБ сохранена на 14%: условия размещения средств и нового кредитования для казначейства остаются дорогими",
+   "what_happened": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+   "facts": [
+    {
+     "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+     "kind": "fact",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания ведёт ВЭД и активно управляет оборотным капиталом через факторинг; ставка влияет на стоимость нового финансирования и доходность размещения свободных средств.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.factoring",
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Сохранение ставки 14% удерживает стоимость нового заёмного и факторингового финансирования на высоком уровне и одновременно делает депозиты/размещения доходными; действующие договоры затронуты только при плавающей ставке (данных нет).",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.deposits",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Продление паузы по ставке может удерживать высокую стоимость возобновления факторинговых лимитов и нового кредитования.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "При плавающих ставках в действующих договорах (не подтверждено) обслуживание долга могло бы оставаться дорогим.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Ставка 14% делает размещение свободных средств на депозитах привлекательным — компания пока без депозитов в банке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Наличие свободных остатков для размещения",
+    "Условия факторингового соглашения (ставка, лимит, срок)",
+    "Тип ставок по действующим обязательствам"
+   ],
+   "next_steps": [
+    {
+     "text": "Оценить доходность размещения свободного остатка на депозитах/овернайт при ставке 14%.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Проверить стоимость и сроки возобновления факторинговых лимитов в текущих условиях.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Уточнить, есть ли договоры с плавающей ставкой, чувствительные к ключевой ставке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer",
+      "cfo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Неизвестны объём свободных средств и потребность в новом финансировании.",
+     "question": "Каков текущий денежный поток и потребность в оборотном финансировании?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Неизвестна валюта и структура ВЭД-контрактов.",
+     "question": "В какой валюте расчёты с турецкими контрагентами?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_key"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Ставка сохранена на 14%: для казначея это удержание дорогого нового финансирования (факторинг ) при привлекательной доходности размещений (депозитов нет, ); действующие договоры затронуты лишь при плавающей ставке.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.deposits",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "product.factoring",
+     "fts.flag",
+     "fts.country",
+     "product.loans",
+     "product.deposits"
+    ],
+    "event_claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e1_1"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:11:02+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3086,
+    "completion_tokens": 816,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.102089,
+    "cost_rub_tariff": 0.029611,
+    "latency_ms": 10292,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3086/816, 0.1021 ₽, 10.3 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "credit_liquidity"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ставка ЦБ сохранена на 14%: условия размещения средств и нового кредитования для казначейства остаются дорогими",
+    "what_happened": [
+     {
+      "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания ведёт ВЭД (F14, F15) и активно управляет оборотным капиталом через факторинг (F13); ставка влияет на стоимость нового финансирования и доходность размещения свободных средств.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.factoring",
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Сохранение ставки 14% удерживает стоимость нового заёмного и факторингового финансирования на высоком уровне и одновременно делает депозиты/размещения доходными; действующие договоры затронуты только при плавающей ставке (данных нет).",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.deposits",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Продление паузы по ставке может удерживать высокую стоимость возобновления факторинговых лимитов и нового кредитования (F10, F13).",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.factoring"
+      ],
+      "roles": []
+     },
+     {
+      "text": "При плавающих ставках в действующих договорах (не подтверждено) обслуживание долга могло бы оставаться дорогим.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Ставка 14% делает размещение свободных средств на депозитах привлекательным — компания пока без депозитов в банке (F11).",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Оценить доходность размещения свободного остатка на депозитах/овернайт при ставке 14%.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Проверить стоимость и сроки возобновления факторинговых лимитов (F13) в текущих условиях.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.factoring"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Уточнить, есть ли договоры с плавающей ставкой, чувствительные к ключевой ставке.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "treasurer",
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Наличие свободных остатков для размещения",
+     "Условия факторингового соглашения (ставка, лимит, срок)",
+     "Тип ставок по действующим обязательствам"
+    ],
+    "unknowns": [
+     {
+      "text": "Неизвестны объём свободных средств и потребность в новом финансировании.",
+      "question": "Каков текущий денежный поток и потребность в оборотном финансировании?"
+     },
+     {
+      "text": "Неизвестна валюта и структура ВЭД-контрактов.",
+      "question": "В какой валюте расчёты с турецкими контрагентами?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_key"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Ставка сохранена на 14%: для казначея это удержание дорогого нового финансирования (факторинг F13) при привлекательной доходности размещений (депозитов нет, F11); действующие договоры затронуты лишь при плавающей ставке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.deposits",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3086/816, 0.1021 ₽, 10.3 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

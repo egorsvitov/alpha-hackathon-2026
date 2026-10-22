@@ -1,0 +1,576 @@
+{
+ "key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|cfo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:12:23+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "cluster_id": "cluster:e6_food_inflation",
+   "event_refs": [
+    {
+     "event_id": "e6_food_inflation",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.39,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.04,
+    "evidence": 0.03,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "costs",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "medium",
+   "headline": "Продуктовая инфляция выше общего ИПЦ: для CFO — давление на маржу и пересмотр бюджета закупок",
+   "what_happened": "В августе 2026 г. цены на продукты питания росли быстрее общего индекса потребительских цен.",
+   "facts": [
+    {
+     "text": "В августе 2026 г. цены на продукты питания росли быстрее общего индекса потребительских цен.",
+     "kind": "fact",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — продуктовый ритейлер, поэтому опережающий рост цен на продукты напрямую затрагивает её закупочные издержки и ценообразование.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Рост закупочных цен на продукты может сжимать маржу, если розничные цены индексируются с лагом; одновременно выручка в номинале может расти за счёт ценового фактора.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Сжатие валовой маржи при лаге переноса закупочных цен в розничные цены.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Снижение спроса/переключение покупателей при росте продовольственного чека.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Рост потребности в оборотном капитале для закупок по более высоким ценам.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Возможность роста номинальной выручки за счёт ценового фактора при сохранении трафика.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.industry",
+      "company.revenue"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Более высокая доходность размещения свободных средств на депозитах при сохранении жёсткой ДКП.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Динамика закупочных цен по ключевым категориям за август–сентябрь",
+    "Фактическая маржа и трафик за последний месяц",
+    "Условия депозитов и потребность в оборотном финансировании"
+   ],
+   "next_steps": [
+    {
+     "text": "Пересмотреть бюджет закупок и план маржи с учётом опережающей продуктовой инфляции.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    },
+    {
+     "text": "Оценить достаточность оборотного капитала и потребность в финансировании под рост закупочных цен.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Проанализировать ценовую политику и эластичность спроса по ключевым категориям.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    },
+    {
+     "text": "Проверить условия депозитов и доходность размещения свободных средств.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Значения индексов в новости не приведены.",
+     "question": "Насколько продуктовая инфляция опережала общий ИПЦ в августе?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Структура закупок и договоры с поставщиками неизвестны.",
+     "question": "Какая доля закупок подвержена опережающему росту цен?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Квартальные показатели выручки и маржи неизвестны.",
+     "question": "Как изменилась маржа компании в III квартале?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Опережающий рост цен на продукты для продуктового ритейлера — фактор давления на маржу и оборотный капитал; CFO стоит пересмотреть бюджет закупок и оценить потребность в финансировании.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry",
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "product.deposits",
+     "company.revenue",
+     "product.loans"
+    ],
+    "event_claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e6_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:12:23+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2687,
+    "completion_tokens": 1076,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.110312,
+    "cost_rub_tariff": 0.031996,
+    "latency_ms": 11246,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2687/1076, 0.1103 ₽, 11.2 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "costs",
+     "demand_revenue"
+    ],
+    "materiality": "medium",
+    "urgency": "medium",
+    "headline": "Продуктовая инфляция выше общего ИПЦ: для CFO — давление на маржу и пересмотр бюджета закупок",
+    "what_happened": [
+     {
+      "text": "В августе 2026 г. цены на продукты питания росли быстрее общего индекса потребительских цен.",
+      "kind": "fact",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — продуктовый ритейлер (F1, F2), поэтому опережающий рост цен на продукты напрямую затрагивает её закупочные издержки и ценообразование.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Рост закупочных цен на продукты может сжимать маржу, если розничные цены индексируются с лагом; одновременно выручка в номинале может расти за счёт ценового фактора.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Сжатие валовой маржи при лаге переноса закупочных цен в розничные цены.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "company.industry"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Снижение спроса/переключение покупателей при росте продовольственного чека.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.industry"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Рост потребности в оборотном капитале для закупок по более высоким ценам.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Возможность роста номинальной выручки за счёт ценового фактора при сохранении трафика.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.industry",
+       "company.revenue"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Более высокая доходность размещения свободных средств на депозитах при сохранении жёсткой ДКП.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Пересмотреть бюджет закупок и план маржи с учётом опережающей продуктовой инфляции.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "company.industry"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Оценить достаточность оборотного капитала и потребность в финансировании под рост закупочных цен.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.deposits"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Проверить условия депозитов и доходность размещения свободных средств.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Проанализировать ценовую политику и эластичность спроса по ключевым категориям.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.industry"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Динамика закупочных цен по ключевым категориям за август–сентябрь",
+     "Фактическая маржа и трафик за последний месяц",
+     "Условия депозитов и потребность в оборотном финансировании"
+    ],
+    "unknowns": [
+     {
+      "text": "Значения индексов в новости не приведены.",
+      "question": "Насколько продуктовая инфляция опережала общий ИПЦ в августе?"
+     },
+     {
+      "text": "Структура закупок и договоры с поставщиками неизвестны.",
+      "question": "Какая доля закупок подвержена опережающему росту цен?"
+     },
+     {
+      "text": "Квартальные показатели выручки и маржи неизвестны.",
+      "question": "Как изменилась маржа компании в III квартале?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Опережающий рост цен на продукты (C1) для продуктового ритейлера (F1, F2) — фактор давления на маржу и оборотный капитал; CFO стоит пересмотреть бюджет закупок и оценить потребность в финансировании.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry",
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2687/1076, 0.1103 ₽, 11.2 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

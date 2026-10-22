@@ -1,0 +1,530 @@
+{
+ "key": "SYNTHETIC_U_3305|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:11:47+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "cluster_id": "cluster:e3_rub_weak",
+   "event_refs": [
+    {
+     "event_id": "e3_rub_weak",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.08,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "costs",
+    "demand_revenue",
+    "credit_liquidity"
+   ],
+   "event_status": "mixed",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "Ослабление рубля на 4% — для продуктовой розницы риск вторичной инфляции издержек, прямого канала в профиле нет",
+   "what_happened": "За неделю рубль ослаб к юаню и доллару США на 4%. Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+   "facts": [
+    {
+     "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — розничная торговля продуктами без таможенных деклараций ВЭД, поэтому прямого импортного канала в данных нет; влияние возможно через поставщиков и потребительский спрос.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "fts.flag"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Гипотетически: ослабление рубля может удорожать закупки у поставщиков с валютной составляющей и логистику, а также давить на спрос через инфляцию; для депозитов возможен рост доходности размещения.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "counterparty.1",
+     "counterparty.2",
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Рост закупочных цен у поставщиков с импортной составляющей может сжать маржу при ограниченной возможности повышать розничные цены.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Инфляционное давление может снизить потребительский спрос на продукты в регионе присутствия.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "company.region"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При ужесточении ДКП доходность размещения свободных средств на депозитах может вырасти.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Доля импортных товаров и валютная составляющая в закупках",
+    "Динамика закупочных цен у «Агрохолдинг Север» и «ЛогистикПро»",
+    "Условия и сроки действующих депозитов"
+   ],
+   "next_steps": [
+    {
+     "text": "Запросить у ключевых поставщиков (в т.ч. «Агрохолдинг Север») условия пересмотра цен и валютную составляющую в закупках.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": [
+      "ceo"
+     ]
+    },
+    {
+     "text": "Оценить ценовую эластичность спроса и сценарий роста закупочных цен в планах на ближайший квартал.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.region"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo"
+     ]
+    },
+    {
+     "text": "Рассмотреть с банком условия пролонгации депозитов при возможном изменении ставок.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo",
+      "cfo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов.",
+     "question": "Есть ли у поставщиков валютная составляющая в ценообразовании?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Доля импортных товаров в ассортименте неизвестна.",
+     "question": "Какова доля импортных SKU в выручке и закупках?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Текущая динамика выручки и маржи за 2026 год неизвестна.",
+     "question": "Как изменились закупочные цены и маржа в последние месяцы?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Прямого канала влияния в профиле нет (нет ВЭД), но ослабление рубля может через поставщиков и спрос отразиться на издержках розницы; рекомендуется мониторинг цен поставщиков и спроса.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "fts.flag",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "fts.flag",
+     "counterparty.1",
+     "counterparty.2",
+     "product.deposits",
+     "company.region"
+    ],
+    "event_claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "event_evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": [
+     "Тип отношений с контрагентом по платежам не подтверждён (это гипотеза)."
+    ]
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:11:47+03:00",
+   "qa_status": "passed_with_fixes",
+   "qa_issues": [
+    {
+     "code": "payment_as_supplier",
+     "severity": "warn",
+     "message": "Тип отношений с контрагентом выведен из платежей",
+     "path": "next_steps[0]"
+    }
+   ],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2741,
+    "completion_tokens": 1110,
+    "reasoning_tokens": 39,
+    "cost_rub": 0.113255,
+    "cost_rub_tariff": 0.032849,
+    "latency_ms": 13776,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2741/1110, 0.1133 ₽, 13.8 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed_with_fixes; ошибок 0, замечаний 1 (payment_as_supplier)",
+     "status": "warn"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "mixed",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "costs",
+     "demand_revenue",
+     "credit_liquidity"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Ослабление рубля на 4% — для продуктовой розницы риск вторичной инфляции издержек, прямого канала в профиле нет",
+    "what_happened": [
+     {
+      "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     },
+     {
+      "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — розничная торговля продуктами (F1, F2) без таможенных деклараций ВЭД (F15), поэтому прямого импортного канала в данных нет; влияние возможно через поставщиков и потребительский спрос.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.flag"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Гипотетически: ослабление рубля может удорожать закупки у поставщиков с валютной составляющей (F16) и логистику (F17), а также давить на спрос через инфляцию; для депозитов (F12) возможен рост доходности размещения.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "counterparty.1",
+      "counterparty.2",
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Рост закупочных цен у поставщиков с импортной составляющей может сжать маржу при ограниченной возможности повышать розничные цены.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Инфляционное давление может снизить потребительский спрос на продукты в регионе присутствия (F4).",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "company.region"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При ужесточении ДКП доходность размещения свободных средств на депозитах (F12) может вырасти.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Запросить у ключевых поставщиков (в т.ч. «Агрохолдинг Север») условия пересмотра цен и валютную составляющую в закупках.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": [
+       "ceo"
+      ]
+     },
+     {
+      "text": "Оценить ценовую эластичность спроса и сценарий роста закупочных цен в планах на ближайший квартал.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "company.region"
+      ],
+      "roles": [
+       "ceo"
+      ]
+     },
+     {
+      "text": "Рассмотреть с банком условия пролонгации депозитов при возможном изменении ставок.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "ceo",
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Доля импортных товаров и валютная составляющая в закупках",
+     "Динамика закупочных цен у «Агрохолдинг Север» и «ЛогистикПро»",
+     "Условия и сроки действующих депозитов"
+    ],
+    "unknowns": [
+     {
+      "text": "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов.",
+      "question": "Есть ли у поставщиков валютная составляющая в ценообразовании?"
+     },
+     {
+      "text": "Доля импортных товаров в ассортименте неизвестна.",
+      "question": "Какова доля импортных SKU в выручке и закупках?"
+     },
+     {
+      "text": "Текущая динамика выручки и маржи за 2026 год неизвестна.",
+      "question": "Как изменились закупочные цены и маржа в последние месяцы?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Прямого канала влияния в профиле нет (нет ВЭД), но ослабление рубля может через поставщиков и спрос отразиться на издержках розницы; рекомендуется мониторинг цен поставщиков и спроса.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.flag",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2741/1110, 0.1133 ₽, 13.8 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

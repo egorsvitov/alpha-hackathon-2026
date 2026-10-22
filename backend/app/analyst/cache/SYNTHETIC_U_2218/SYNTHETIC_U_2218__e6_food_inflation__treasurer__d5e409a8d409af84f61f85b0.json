@@ -1,0 +1,417 @@
+{
+ "key": "SYNTHETIC_U_2218|e6_food_inflation@1#bdcde2a04ba5|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e6_food_inflation@1#bdcde2a04ba5|treasurer|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:11:13+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "cluster_id": "cluster:e6_food_inflation",
+   "event_refs": [
+    {
+     "event_id": "e6_food_inflation",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.08,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "costs",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "Продуктовая инфляция в августе: для зернового трейдера сигнал о динамике закупочных цен и оборотного капитала",
+   "what_happened": "В августе 2026 г. цены на продукты питания росли быстрее общего индекса потребительских цен.",
+   "facts": [
+    {
+     "text": "В августе 2026 г. цены на продукты питания росли быстрее общего индекса потребительских цен.",
+     "kind": "fact",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания торгует зерном и кормами; ускорение продовольственной инфляции может отражать рост цен на её продукцию, но связь с зерновыми ценами данными не подтверждена.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Если растут закупочные цены на зерно, потребность в оборотном капитале и объёмы факторинга могут увеличиться; для казначея это вопрос ликвидности и размещения свободных средств.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Рост закупочных цен может увеличить потребность в оборотном капитале и нагрузку на лимиты факторинга.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При росте цен на зерно выручка может увеличиваться; свободные средства можно размещать на депозитах (сейчас их нет — ).",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Динамика закупочных цен на зерно и корма",
+    "Оборачиваемость дебиторской задолженности и использование факторинга",
+    "Валютная позиция по контрактам с Турцией"
+   ],
+   "next_steps": [
+    {
+     "text": "Отслеживать динамику закупочных цен на зерно и их влияние на потребность в оборотном капитале.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Оценить достаточность текущих лимитов и при необходимости пересмотреть график платежей.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.factoring",
+      "counterparty.3",
+      "counterparty.4"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Значения индексов и связь продовольственной инфляции с ценами на зерно не раскрыты.",
+     "question": "Насколько выросли закупочные цены на зерно в августе?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Текущая потребность в оборотном капитале неизвестна.",
+     "question": "Как изменилась потребность в финансировании оборотного капитала за последние месяцы?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Событие косвенно затрагивает компанию через возможный рост цен на зерно; прямого влияния на ликвидность пока нет — рекомендуется мониторинг цен и оборотного капитала.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "product.factoring",
+     "product.deposits",
+     "counterparty.3",
+     "counterparty.4"
+    ],
+    "event_claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e6_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e6_food_inflation@1#bdcde2a04ba5|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:11:13+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3053,
+    "completion_tokens": 832,
+    "reasoning_tokens": 24,
+    "cost_rub": 0.102447,
+    "cost_rub_tariff": 0.029714,
+    "latency_ms": 9377,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3053/832, 0.1024 ₽, 9.4 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "costs",
+     "demand_revenue"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Продуктовая инфляция в августе: для зернового трейдера сигнал о динамике закупочных цен и оборотного капитала",
+    "what_happened": [
+     {
+      "text": "В августе 2026 г. цены на продукты питания росли быстрее общего индекса потребительских цен.",
+      "kind": "fact",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания торгует зерном и кормами (F1, F2); ускорение продовольственной инфляции может отражать рост цен на её продукцию, но связь с зерновыми ценами данными не подтверждена.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Если растут закупочные цены на зерно, потребность в оборотном капитале и объёмы факторинга (F13) могут увеличиться; для казначея это вопрос ликвидности и размещения свободных средств.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Рост закупочных цен может увеличить потребность в оборотном капитале и нагрузку на лимиты факторинга.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.factoring"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При росте цен на зерно выручка может увеличиваться; свободные средства можно размещать на депозитах (сейчас их нет — F11).",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Отслеживать динамику закупочных цен на зерно и их влияние на потребность в оборотном капитале.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "product.factoring"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Оценить достаточность текущих лимитов и при необходимости пересмотреть график платежей.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.factoring",
+       "counterparty.3",
+       "counterparty.4"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Динамика закупочных цен на зерно и корма",
+     "Оборачиваемость дебиторской задолженности и использование факторинга",
+     "Валютная позиция по контрактам с Турцией (F15)"
+    ],
+    "unknowns": [
+     {
+      "text": "Значения индексов и связь продовольственной инфляции с ценами на зерно не раскрыты.",
+      "question": "Насколько выросли закупочные цены на зерно в августе?"
+     },
+     {
+      "text": "Текущая потребность в оборотном капитале неизвестна.",
+      "question": "Как изменилась потребность в финансировании оборотного капитала за последние месяцы?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Событие косвенно затрагивает компанию через возможный рост цен на зерно; прямого влияния на ликвидность пока нет — рекомендуется мониторинг цен и оборотного капитала.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3053/832, 0.1024 ₽, 9.4 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

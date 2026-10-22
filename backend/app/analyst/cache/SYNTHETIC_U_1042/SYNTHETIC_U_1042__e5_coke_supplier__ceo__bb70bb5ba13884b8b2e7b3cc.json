@@ -1,0 +1,574 @@
+{
+ "key": "SYNTHETIC_U_1042|e5_coke_supplier@1#988ab5d48380|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e5_coke_supplier@1#988ab5d48380|ceo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:08:46+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e5_coke_supplier:v1",
+   "cluster_id": "cluster:e5_coke_supplier",
+   "event_refs": [
+    {
+     "event_id": "e5_coke_supplier",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.7,
+   "significance": "high",
+   "priority_breakdown": {
+    "materiality": 0.62,
+    "urgency": 0.1,
+    "evidence": 0.03,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.05
+   },
+   "impact_direction": "negative",
+   "impact_channels": [
+    "costs",
+    "operations",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "high",
+   "urgency": "high",
+   "headline": "Приостановка отгрузок «КоксРесурс» — риск для сырьевого обеспечения производства стали",
+   "what_happened": "«КоксРесурс» приостановил отгрузки коксующегося угля из-за аварии на шахте. Срок возобновления поставок не назван; потребителям рекомендуют уточнять графики.",
+   "facts": [
+    {
+     "text": "«КоксРесурс» приостановил отгрузки коксующегося угля из-за аварии на шахте.",
+     "kind": "fact",
+     "claim_ids": [
+      "e5_coke_supplier:c1"
+     ],
+     "evidence_ids": [
+      "n_e5_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Срок возобновления поставок не назван; потребителям рекомендуют уточнять графики.",
+     "kind": "fact",
+     "claim_ids": [
+      "e5_coke_supplier:c2"
+     ],
+     "evidence_ids": [
+      "n_e5_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — металлург, а «КоксРесурс» получает 21% исходящих платежей компании; вероятный поставщик критического сырья, но тип отношений договором не подтверждён.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e5_coke_supplier:c1"
+    ],
+    "evidence_ids": [
+     "n_e5_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Перебой поставок коксующегося угля может ограничить загрузку сталеплавильных мощностей и вынудить закупать сырьё дороже на споте, где цены локально поддерживаются.",
+    "kind": "inference",
+    "claim_ids": [
+     "e5_coke_supplier:c1",
+     "e5_coke_supplier:c2"
+    ],
+    "evidence_ids": [
+     "n_e5_1",
+     "n_e5_2"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Дефицит сырья может снизить объёмы производства и выручку, если запасов угля и кокса недостаточно.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e5_coke_supplier:c1"
+     ],
+     "evidence_ids": [
+      "n_e5_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Замещающие закупки на споте могут пройти по более высоким ценам и увеличить себестоимость.",
+     "kind": "inference",
+     "claim_ids": [
+      "e5_coke_supplier:c1"
+     ],
+     "evidence_ids": [
+      "n_e5_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Срыв графиков отгрузки может осложнить отношения с покупателями.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e5_coke_supplier:c2"
+     ],
+     "evidence_ids": [
+      "n_e5_2"
+     ],
+     "feature_ids": [
+      "counterparty.3",
+      "counterparty.4"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При наличии запасов сырья компания может нарастить выпуск и долю рынка, пока конкуренты испытывают дефицит.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e5_coke_supplier:c1"
+     ],
+     "evidence_ids": [
+      "n_e5_1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Договор поставки с «КоксРесурс» и его условия",
+    "Текущие запасы коксующегося угля и кокса",
+    "Альтернативные поставщики и спотовые цены"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить наличие действующего договора с «КоксРесурс» и текущие запасы угля/кокса в днях.",
+     "kind": "inference",
+     "claim_ids": [
+      "e5_coke_supplier:c1"
+     ],
+     "evidence_ids": [
+      "n_e5_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo"
+     ]
+    },
+    {
+     "text": "Запросить у «КоксРесурс» график возобновления поставок и рассмотреть альтернативных поставщиков.",
+     "kind": "inference",
+     "claim_ids": [
+      "e5_coke_supplier:c2"
+     ],
+     "evidence_ids": [
+      "n_e5_2"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo"
+     ]
+    },
+    {
+     "text": "Оценить влияние на производственный план и обязательства перед покупателями,.",
+     "kind": "inference",
+     "claim_ids": [
+      "e5_coke_supplier:c2"
+     ],
+     "evidence_ids": [
+      "n_e5_2"
+     ],
+     "feature_ids": [
+      "counterparty.3",
+      "counterparty.4"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Не подтверждено, что «КоксРесурс» — поставщик сырья компании; известны только платежи.",
+     "question": "Есть ли действующий договор поставки угля с «КоксРесурс»?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Неизвестны запасы сырья и возможность замещения.",
+     "question": "На сколько дней производства хватит текущих запасов угля и кокса?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_commodities"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Событие критично для операционной устойчивости: вероятный ключевой поставщик сырья остановил отгрузки без срока возобновления. Первоочередные шаги — проверка договора, запасов и плана замещения поставок.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e5_coke_supplier:c1",
+     "e5_coke_supplier:c2"
+    ],
+    "evidence_ids": [
+     "n_e5_1",
+     "n_e5_2"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "counterparty.1",
+     "counterparty.3",
+     "counterparty.4"
+    ],
+    "event_claim_ids": [
+     "e5_coke_supplier:c1",
+     "e5_coke_supplier:c2"
+    ],
+    "event_evidence_ids": [
+     "n_e5_1",
+     "n_e5_2"
+    ],
+    "bank_chunk_ids": [
+     "b_commodities"
+    ],
+    "inference_status": "partially_supported",
+    "limitations": [
+     "Тип отношений с контрагентом по платежам не подтверждён (это гипотеза)."
+    ]
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e5_coke_supplier:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e5_coke_supplier@1#988ab5d48380|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:08:46+03:00",
+   "qa_status": "passed_with_fixes",
+   "qa_issues": [
+    {
+     "code": "payment_as_supplier",
+     "severity": "warn",
+     "message": "Тип отношений с контрагентом выведен из платежей",
+     "path": "ai_conclusion"
+    },
+    {
+     "code": "estimate_number_not_in_data",
+     "severity": "error",
+     "message": "В оценке эффекта числа не из данных и не из допущений — снята",
+     "path": "impact_estimate"
+    }
+   ],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3330,
+    "completion_tokens": 1199,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.082014,
+    "cost_rub_tariff": 0.037366,
+    "latency_ms": 11890,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность high; токены 3330/1199, 0.0820 ₽, 11.9 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed_with_fixes; ошибок 1, замечаний 1 (estimate_number_not_in_data, payment_as_supplier)",
+     "status": "warn"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "negative",
+    "impact_channels": [
+     "costs",
+     "operations",
+     "demand_revenue"
+    ],
+    "materiality": "high",
+    "urgency": "high",
+    "headline": "Приостановка отгрузок «КоксРесурс» — риск для сырьевого обеспечения производства стали",
+    "what_happened": [
+     {
+      "text": "«КоксРесурс» приостановил отгрузки коксующегося угля из-за аварии на шахте.",
+      "kind": "fact",
+      "claim_ids": [
+       "e5_coke_supplier:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     },
+     {
+      "text": "Срок возобновления поставок не назван; потребителям рекомендуют уточнять графики.",
+      "kind": "fact",
+      "claim_ids": [
+       "e5_coke_supplier:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — металлург (F1, F2), а «КоксРесурс» получает 21% исходящих платежей компании (F18); вероятный поставщик критического сырья, но тип отношений договором не подтверждён.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e5_coke_supplier:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Перебой поставок коксующегося угля может ограничить загрузку сталеплавильных мощностей и вынудить закупать сырьё дороже на споте, где цены локально поддерживаются (B1).",
+     "kind": "inference",
+     "claim_ids": [
+      "e5_coke_supplier:c1",
+      "e5_coke_supplier:c2"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Дефицит сырья может снизить объёмы производства и выручку, если запасов угля и кокса недостаточно.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e5_coke_supplier:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Замещающие закупки на споте могут пройти по более высоким ценам и увеличить себестоимость.",
+      "kind": "inference",
+      "claim_ids": [
+       "e5_coke_supplier:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Срыв графиков отгрузки может осложнить отношения с покупателями (F20, F21).",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e5_coke_supplier:c2"
+      ],
+      "feature_ids": [
+       "counterparty.3",
+       "counterparty.4"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При наличии запасов сырья компания может нарастить выпуск и долю рынка, пока конкуренты испытывают дефицит.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e5_coke_supplier:c1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить наличие действующего договора с «КоксРесурс» и текущие запасы угля/кокса в днях.",
+      "kind": "inference",
+      "claim_ids": [
+       "e5_coke_supplier:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": [
+       "ceo"
+      ]
+     },
+     {
+      "text": "Запросить у «КоксРесурс» график возобновления поставок и рассмотреть альтернативных поставщиков.",
+      "kind": "inference",
+      "claim_ids": [
+       "e5_coke_supplier:c2"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": [
+       "ceo"
+      ]
+     },
+     {
+      "text": "Оценить влияние на производственный план и обязательства перед покупателями F20, F21.",
+      "kind": "inference",
+      "claim_ids": [
+       "e5_coke_supplier:c2"
+      ],
+      "feature_ids": [
+       "counterparty.3",
+       "counterparty.4"
+      ],
+      "roles": [
+       "ceo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Договор поставки с «КоксРесурс» и его условия",
+     "Текущие запасы коксующегося угля и кокса",
+     "Альтернативные поставщики и спотовые цены"
+    ],
+    "unknowns": [
+     {
+      "text": "Не подтверждено, что «КоксРесурс» — поставщик сырья компании; известны только платежи.",
+      "question": "Есть ли действующий договор поставки угля с «КоксРесурс»?"
+     },
+     {
+      "text": "Неизвестны запасы сырья и возможность замещения.",
+      "question": "На сколько дней производства хватит текущих запасов угля и кокса?"
+     }
+    ],
+    "impact_estimate": {
+     "metric": "Себестоимость и объём выпуска стали",
+     "scenario": "Если «КоксРесурс» — основной поставщик и запасы менее 2–3 недель, возможны сокращение выпуска и рост закупочных цен на споте; точная оценка требует данных о запасах и договорах.",
+     "assumptions": [
+      "«КоксРесурс» — действующий поставщик угля (не подтверждено)",
+      "Запасы сырья ограничены (не подтверждено)"
+     ],
+     "claim_ids": [
+      "e5_coke_supplier:c1",
+      "e5_coke_supplier:c2"
+     ],
+     "feature_ids": [
+      "counterparty.1",
+      "company.okved"
+     ]
+    },
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_commodities"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Событие критично для операционной устойчивости: вероятный ключевой поставщик сырья остановил отгрузки без срока возобновления. Первоочередные шаги — проверка договора, запасов и плана замещения поставок.",
+     "kind": "inference",
+     "claim_ids": [
+      "e5_coke_supplier:c1",
+      "e5_coke_supplier:c2"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность high; токены 3330/1199, 0.0820 ₽, 11.9 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}
