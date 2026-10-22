@@ -1,8 +1,8 @@
 import { useId, useState, type ReactNode } from 'react';
 import {
   ArrowDown, ArrowLeftRight, ArrowRight, ArrowUp, Check, ChevronDown, ChevronRight, CirclePlus, ClipboardList, Clock, CornerDownRight, CreditCard,
-  Ellipsis, Eye, EyeOff, FileCheck, FileDown, FileInput, FilePlus, FileText, House, Landmark, LayoutGrid, Mail, Moon, Newspaper, Plus,
-  ReceiptText, ScrollText, Settings, ShieldCheck, Sun, Users, Wallet, X,
+  Ellipsis, Eye, EyeOff, FileDown, FileInput, FilePlus, FileText, House, LayoutGrid, Mail, Moon, Newspaper, Plus,
+  Settings, ShieldCheck, Sun, Users, Wallet, X,
 } from 'lucide-react';
 import { ROLES, roleLabel } from '../data/companies';
 import { href, navigate, type Route } from '../router';
@@ -27,15 +27,10 @@ type Icon = typeof House;
 const MENU: { icon: Icon; label: string; tag?: string }[] = [
   { icon: ClipboardList, label: 'Заявки', tag: 'НОВОЕ' },
   { icon: Plus, label: 'Новый платёж' },
-  { icon: ScrollText, label: 'Лента операций' },
   { icon: Clock, label: 'Платежи в работе' },
-  { icon: FileInput, label: 'Импорт реестров' },
   { icon: FileText, label: 'Выписка' },
   { icon: Wallet, label: 'Счета' },
   { icon: Users, label: 'Контрагенты' },
-  { icon: FileCheck, label: 'Справки' },
-  { icon: ReceiptText, label: 'Счета на оплату' },
-  { icon: CreditCard, label: 'Карты' },
 ];
 
 function Dummy({ icon: I, label, tag }: { icon: Icon; label: string; tag?: string }) {
@@ -68,10 +63,8 @@ function CabSidebar({ route }: { route: Route }) {
           <Newspaper size={20} aria-hidden /><span className="cab-nav__label">Новости и аналитика</span>
           {high > 0 && <span className="count" aria-label={`${high} ${plural(high, 'важное событие', 'важных события', 'важных событий')}`}>{high}</span>}
         </a>
-        <Dummy icon={Landmark} label="Госзакупки" />
       </nav>
       <div className="cab-side__bottom">
-        <Dummy icon={Settings} label="Настроить меню" />
         <button type="button" className="cab-side__prev" onClick={() => setDesign('classic')}>Классическое оформление</button>
       </div>
     </aside>

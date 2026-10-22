@@ -1,10 +1,14 @@
 import type { CompanyProfile } from '../types';
 import { initialsOf } from '../data/companies';
 
-/* Фирменные элементы прототипа. Всё нарисовано командой: это упрощённая имитация в стиле скриншотов организаторов,
-   а не файлы банка. Логотип — красная скруглённая плитка с белой «А» и чертой под ней. */
+/* Фирменные элементы прототипа. Знак «А» Альфа-Банка взят из открытого пакета дизайн-системы банка
+   `@alfalab/icons-logotype` (лицензия MIT, иконка AlfaBankLIcon); красная плитка вокруг него и логотипы демо-компаний
+   нарисованы командой. */
 
-/** Знак Альфа-Бизнеса: красная плитка с белой стилизованной «А». */
+/** Оригинальный контур знака Альфа-Банка (viewBox 21×32) из `@alfalab/icons-logotype`. */
+const ALFA_GLYPH = "M10.471 4.886l-3.081 8.89h6.106l-2.91-8.89h-.115zM10.7 0c2.474 0 3.196 1.432 3.822 3.245L21 22h-4.794l-1.455-4.459H6.077L4.508 22H0L6.798 3.245C7.458 1.426 8.226 0 10.7 0zM0 27h21v5H0v-5z";
+
+/** Знак Альфа-Бизнеса: красная скруглённая плитка с оригинальной белой «А». */
 export function AlfaLogo({ size = 40, className = '', title }: { size?: number; className?: string; title?: string }) {
   return (
     <svg
@@ -18,12 +22,7 @@ export function AlfaLogo({ size = 40, className = '', title }: { size?: number; 
       focusable="false"
     >
       <rect width="40" height="40" rx="10" fill="#ef3124" />
-      <path
-        fill="#fff"
-        fillRule="evenodd"
-        d="M17.4 8.6h5.2l6.5 18h-4l-1.5-4.4h-7.2l-1.5 4.4h-4zM20 12.6l-2.5 7h5z"
-      />
-      <rect x="11" y="28.6" width="18" height="3" rx="0.8" fill="#fff" />
+      <path fill="#fff" fillRule="evenodd" clipRule="evenodd" transform="translate(12.4 8.4) scale(0.7)" d={ALFA_GLYPH} />
     </svg>
   );
 }
