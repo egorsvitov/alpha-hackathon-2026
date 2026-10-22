@@ -69,6 +69,12 @@ services:
       NEWS_EVERY: ${NEWS_EVERY:-3600}
     volumes:
       - news-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 5s
+      retries: 3
     read_only: true
     tmpfs:
       - /tmp
