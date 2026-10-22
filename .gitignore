@@ -22,6 +22,7 @@ __pycache__/
 
 # News pipeline derived data (full text, cache) remain local.
 /data/processed/news/
+/data/processed/news_bulk/
 /data/processed/news_cache/
 /data/processed/events_state/
 /data/processed/events_catalog.json
