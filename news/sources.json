@@ -6,16 +6,12 @@
     { "name": "minfin_ru", "kind": "html", "url": "https://minfin.gov.ru/ru/press-center/", "category": "official", "limit": 50, "language": "ru" },
     { "name": "nalog_ru", "kind": "rss", "url": "https://www.nalog.gov.ru/rn77/rss/", "category": "official", "limit": 100, "language": "ru" },
     { "name": "minpromtorg", "kind": "rss", "url": "https://minpromtorg.gov.ru/rss/", "category": "official", "limit": 100, "language": "ru" },
-    { "name": "minagro", "kind": "rss", "url": "https://mcx.gov.ru/rss/", "category": "official", "limit": 100, "language": "ru" },
     { "name": "minenergo", "kind": "rss", "url": "https://minenergo.gov.ru/rss", "category": "official", "limit": 100, "language": "ru" },
 
-    { "name": "moex_rss", "kind": "rss", "url": "https://moex.com/export/news.aspx?cat=100", "category": "macro", "limit": 200, "language": "ru" },
-    { "name": "moex_main", "kind": "rss", "url": "https://moex.com/export/news.aspx?cat=101", "category": "macro", "limit": 200, "language": "ru" },
+    { "name": "moex_rss", "kind": "rss", "url": "https://moex.com/export/news.aspx?cat=100", "category": "macro", "limit": 1500, "language": "ru" },
+    { "name": "moex_main", "kind": "rss", "url": "https://moex.com/export/news.aspx?cat=101", "category": "macro", "limit": 1500, "language": "ru" },
     { "name": "1prime", "kind": "rss", "url": "https://1prime.ru/export/rss2/index.xml", "category": "macro", "limit": 100, "language": "ru" },
-    { "name": "banki_ru", "kind": "rss", "url": "https://www.banki.ru/news/lenta/rss/", "category": "macro", "limit": 100, "language": "ru" },
     { "name": "gazprombank", "kind": "rss", "url": "https://www.gazprombank.ru/rss/", "category": "macro", "limit": 100, "language": "ru" },
-    { "name": "rosbank", "kind": "rss", "url": "https://www.rosbank.ru/rss/", "category": "macro", "limit": 100, "language": "ru" },
-    { "name": "bfm_ru", "kind": "rss", "url": "https://www.bfm.ru/rss.html", "category": "business", "limit": 100, "language": "ru" },
 
     { "name": "interfax_rss", "kind": "rss", "url": "https://www.interfax.ru/rss.asp", "category": "business", "limit": 100, "language": "ru" },
     { "name": "lenta_ru", "kind": "rss", "url": "https://lenta.ru/rss/news", "category": "business", "limit": 100, "language": "ru" },
@@ -27,21 +23,11 @@
     { "name": "m24_ru", "kind": "rss", "url": "https://www.m24.ru/rss.xml", "category": "business", "limit": 100, "language": "ru" },
     { "name": "tass_ru", "kind": "rss", "url": "https://tass.ru/rss/v2.xml", "category": "business", "limit": 100, "language": "ru" },
     { "name": "gazeta_ru", "kind": "rss", "url": "https://www.gazeta.ru/export/rss/first.xml", "category": "business", "limit": 100, "language": "ru" },
-    { "name": "msk_ru", "kind": "rss", "url": "https://www.msk.ru/rss", "category": "business", "limit": 100, "language": "ru" },
     { "name": "news_ru", "kind": "rss", "url": "https://news.ru/rss", "category": "business", "limit": 100, "language": "ru" },
-    { "name": "utro_ru", "kind": "rss", "url": "https://utro.ru/rss.xml", "category": "business", "limit": 100, "language": "ru" },
 
-    { "name": "oilcapital", "kind": "rss", "url": "https://oilcapital.ru/rss", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "agroinvestor", "kind": "rss", "url": "https://www.agroinvestor.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "retailer_ru", "kind": "rss", "url": "https://www.retail.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "it_news", "kind": "rss", "url": "https://www.cnews.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "realty_ria", "kind": "rss", "url": "https://realty.ria.ru/export/articles/rss/", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "investfunds", "kind": "rss", "url": "https://investfunds.ru/rss/", "category": "macro", "limit": 100, "language": "ru" },
-    { "name": "logirus", "kind": "rss", "url": "https://www.logirus.ru/rss", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "metaltorg", "kind": "rss", "url": "https://www.metaltorg.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "agroxxi", "kind": "rss", "url": "https://www.agroxxi.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
     { "name": "ural_region", "kind": "rss", "url": "https://www.urfo.org/rss", "category": "business", "limit": 100, "language": "ru" },
     { "name": "retail_news", "kind": "rss", "url": "https://www.retailer.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "it_industry", "kind": "rss", "url": "https://www.comnews.ru/rss/", "category": "industry", "limit": 100, "language": "ru" }
+    { "name": "it_industry", "kind": "rss", "url": "https://www.comnews.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
+    { "name": "it_news", "kind": "rss", "url": "https://www.cnews.ru/rss/", "category": "industry", "limit": 100, "language": "ru" }
   ]
 }

@@ -43,8 +43,8 @@ def main() -> int:
                         help="Куда писать JSONL-накопитель.")
     parser.add_argument("--cache-dir", default="data/processed/news_cache",
                         help="Кэш скачанного.")
-    parser.add_argument("--limit-per-source", type=int, default=100,
-                        help="Лимит записей с одного источника за проход.")
+    parser.add_argument("--limit-per-source", type=int, default=None,
+                        help="Лимит записей с одного источника. По умолчанию берётся из реестра.")
     args = parser.parse_args()
 
     from news.core.fetcher import Fetcher
@@ -57,9 +57,10 @@ def main() -> int:
         sources = registry.enabled(args.category)
     else:
         sources = registry.sources
-    # Учитываем per-source лимит из аргумента (переопределяем из реестра).
-    for s in sources:
-        object.__setattr__(s, "limit", args.limit_per_source)
+    # Per-source лимит: если передан явно — переопределяем реестр, иначе берём из реестра.
+    if args.limit_per_source is not None:
+        for s in sources:
+            object.__setattr__(s, "limit", args.limit_per_source)
 
     store = JsonlStore(args.out_dir)
     fetcher = Fetcher(cache_dir=args.cache_dir, delay=0.3)
