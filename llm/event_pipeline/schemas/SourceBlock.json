@@ -1,0 +1,43 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "block_id": {
+      "title": "Block Id",
+      "type": "string"
+    },
+    "document_id": {
+      "title": "Document Id",
+      "type": "string"
+    },
+    "field": {
+      "enum": [
+        "title",
+        "text"
+      ],
+      "title": "Field",
+      "type": "string"
+    },
+    "start": {
+      "title": "Start",
+      "type": "integer"
+    },
+    "end": {
+      "title": "End",
+      "type": "integer"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    }
+  },
+  "required": [
+    "block_id",
+    "document_id",
+    "field",
+    "start",
+    "end",
+    "text"
+  ],
+  "title": "SourceBlock",
+  "type": "object"
+}

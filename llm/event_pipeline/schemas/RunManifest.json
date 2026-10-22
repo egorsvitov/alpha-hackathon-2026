@@ -1,0 +1,46 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "event-pipeline.v1",
+      "default": "event-pipeline.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "corpus_id": {
+      "title": "Corpus Id",
+      "type": "string"
+    },
+    "document_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Document Ids",
+      "type": "array"
+    },
+    "configuration": {
+      "additionalProperties": true,
+      "title": "Configuration",
+      "type": "object"
+    },
+    "status": {
+      "default": "planned",
+      "enum": [
+        "planned",
+        "extracting",
+        "clustering",
+        "complete",
+        "partial"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "corpus_id",
+    "document_ids",
+    "configuration"
+  ],
+  "title": "RunManifest",
+  "type": "object"
+}

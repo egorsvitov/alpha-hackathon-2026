@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "cluster_id": {
+      "title": "Cluster Id",
+      "type": "string"
+    },
+    "identity": {
+      "enum": [
+        "same",
+        "different",
+        "uncertain"
+      ],
+      "title": "Identity",
+      "type": "string"
+    },
+    "claim_compatibility": {
+      "enum": [
+        "compatible",
+        "conflicting",
+        "unknown"
+      ],
+      "title": "Claim Compatibility",
+      "type": "string"
+    },
+    "mention_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Mention Ids",
+      "type": "array"
+    },
+    "block_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Block Ids",
+      "type": "array"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cluster_id",
+    "identity",
+    "claim_compatibility",
+    "mention_ids",
+    "block_ids",
+    "reason"
+  ],
+  "title": "MembershipDecision",
+  "type": "object"
+}

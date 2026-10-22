@@ -4,6 +4,7 @@ from importlib import import_module
 import sys
 
 COMMANDS = {
+    'corpus': ('corpus.cli', 'Ручные выгрузки, аудит и предварительные группы'),
     'storage': ('storage.cli', 'Батчи, версии статей, задания и миграции'),
     'extract': ('extraction.cli', 'Обнаружение → предметные пакеты → варианты A/B'),
     'llm': ('extraction.admin_cli', 'Простой B3, профили, usage и бюджет'),

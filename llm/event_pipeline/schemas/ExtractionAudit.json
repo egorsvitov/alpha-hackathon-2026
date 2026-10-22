@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "EventMention": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Block Ids",
+          "type": "array"
+        },
+        "gloss": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gloss"
+        },
+        "hints": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            ]
+          },
+          "title": "Hints",
+          "type": "object"
+        },
+        "diagnostics": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Diagnostics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "mention_id",
+        "document_id",
+        "block_ids"
+      ],
+      "title": "EventMention",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "mentions": {
+      "items": {
+        "$ref": "#/$defs/EventMention"
+      },
+      "title": "Mentions",
+      "type": "array"
+    },
+    "rejected": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Rejected",
+      "type": "array"
+    },
+    "coverage": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Coverage",
+      "type": "object"
+    }
+  },
+  "required": [
+    "mentions",
+    "rejected",
+    "coverage"
+  ],
+  "title": "ExtractionAudit",
+  "type": "object"
+}

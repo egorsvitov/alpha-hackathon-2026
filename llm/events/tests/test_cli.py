@@ -18,7 +18,7 @@ class PipelineCLITests(unittest.TestCase):
             with redirect_stdout(StringIO()) as text:
                 self.assertEqual(main(['--help']), 0)
             self.assertIn('extract', text.getvalue())
-            for command in ('storage', 'extract', 'llm', 'normalize', 'catalog', 'publish', 'import-news', 'demo'):
+            for command in ('corpus', 'storage', 'extract', 'llm', 'normalize', 'catalog', 'publish', 'import-news', 'demo'):
                 with self.subTest(command=command), redirect_stdout(StringIO()) as text:
                     with self.assertRaises(SystemExit) as result:
                         main([command, '--help'])

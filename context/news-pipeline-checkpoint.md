@@ -1,5 +1,7 @@
 # Состояние NLP перед уборкой — 22 октября 2026
 
+Текущее продолжение: [подготовка более широкого корпуса](cluster-first-progress.md).
+
 Ветка уборки: `news-pipeline-clean`, создана из `news-pipeline` с сохранением
 незакоммиченных изменений. Исходное рабочее дерево дополнительно сохранено локально:
 `data/processed/events/cleanup-checkpoint/working-tree.patch`, `untracked-files.tar.gz`

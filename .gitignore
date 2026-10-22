@@ -13,6 +13,7 @@ __pycache__/
 /data/analytics/
 /data/task/
 /data/context/
+/data/raw_news/
 *.pdf
 
 # Full-text derivatives and generated images remain local.
@@ -57,3 +58,5 @@ alfa_hack.db
 
 # Internal reports removed from public history.
 /reports/
+
+/data/processed/event_pipeline/

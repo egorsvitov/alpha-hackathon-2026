@@ -121,3 +121,10 @@ news/
 data/processed/news/news_corpus.jsonl --db data/processed/events/news.sqlite3`.
 Команда импортирует тексты в архив B2 без API-вызовов. Дальнейшая обработка
 запускается явно; [инструкция и схема](../llm/events/README.md).
+
+## Ручные выгрузки Telegram и общий корпус
+
+Автоматическая выгрузка через Telegram API удалена. Файлы Telegram Desktop
+`1.json`, `2.json`, `3.json` и `news_corpus.jsonl` кладутся в игнорируемый
+`data/raw_news/`. Подготовка: `python -m llm.events corpus prepare`.
+Авторизация и Telethon не нужны. [Формат, аудит и следующий pipeline](../llm/events/docs/cluster-first.md).

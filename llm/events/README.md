@@ -7,6 +7,9 @@
 Начать со [схемы пайплайна](docs/pipeline.md). Точка остановки экспериментов и
 нерешённые проблемы — [checkpoint](../../context/news-pipeline-checkpoint.md).
 
+Новые ручные выгрузки готовятся командой `corpus`: [переход к разбору групп](docs/cluster-first.md).
+Эта часть пока включает подготовку корпуса и поиск соседей; новая LLM-часть ещё не реализована.
+
 ## Быстрая проверка без API
 
 Из корня репозитория, Python 3.13+:
@@ -28,6 +31,7 @@ python3 -m venv .venv_events
 
 | Папка | Что делает | Основной API |
 |---|---|---|
+| `corpus/` | Ручные экспорты, аудит и группы для разметки | `prepare_corpus`, `candidate_neighborhoods` |
 | `contracts/` | B1: модели, цитаты, связи, разметка | `validate_bundle`, `validate_grounding` |
 | `storage/` | B2: батчи, неизменяемые редакции, задания | `EventStore` |
 | `extraction/` | B3: запросы, пакеты, проверка B, бюджет | `ExtractionService` |

@@ -14,7 +14,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from news.core.fetcher import Fetcher
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from news.core.fetcher import Fetcher
 from news.core.identity import normalize_time, stable_id
 from news.core.model import Article
 from news.core.registry import load_registry, SourceRegistry
@@ -108,6 +111,8 @@ def build_pipeline(
     cache_dir: str | Path = "data/processed/news_cache",
 ) -> NewsPipeline:
     """Собирает пайплайн со стандартными путями из корня проекта."""
+    from news.core.fetcher import Fetcher
+
     registry = load_registry(registry_path)
     fetcher = Fetcher(cache_dir=cache_dir)
     store = JsonlStore(out_dir)
