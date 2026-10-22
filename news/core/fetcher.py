@@ -158,20 +158,113 @@ class Fetcher:
     def _from_html(self, spec: SourceSpec) -> list[ArticleCandidate]:
         content = self._http_get(spec.url, spec.kind)
         import re
-        # Грубый разбор ссылок на странице-листинге: абсолютные и относительные.
+        # Ссылки со страницы-листинга: абсолютные и относительные.
         base = spec.url
         links = re.findall(r'href=["\']([^"\']+)["\']', content)
         out: list[ArticleCandidate] = []
         seen = set()
+
         for link in links:
             url = link if link.startswith("http") else requests.compat.urljoin(base, link)
+            # Отбрасываем мусор: статику, якоря, навигацию, дубли.
             if url in seen or url == base:
                 continue
+            if not self._is_news_link(url):
+                continue
             seen.add(url)
-            out.append(ArticleCandidate(url=url, title=url))
+            title = self._title_from_html_link(url)
+            out.append(ArticleCandidate(url=url, title=title))
             if len(out) >= spec.limit:
                 break
         return out
+
+    # Навигационные сегменты/подстроки пути, которые не являются статьями.
+    _NAV_SKIP = (
+        "ministry", "perfomance", "performance", "document", "appeal",
+        "judicial", "contacts", "about", "structure", "history", "press-release",
+        "career", "vacancy", "search", "login", "register", "feedback",
+    )
+
+    @staticmethod
+    def _is_news_link(url: str) -> bool:
+        """True, если ссылка похожа на статью, а не на статику/навигацию.
+
+        Отбрасывает:
+          - статические ресурсы: css, js, png, ico, svg, fonts, webmanifest, json, pdf;
+          - якоря и пустые/корневые ссылки (#, /, //, mailto, tel);
+          - служебные пути CMS (/common/, /fav/, /css/, /api/...);
+          - известные навигационные разделы (ministry, document, contacts и т.п.).
+
+        Новостная ссылка должна иметь признак контента: query-параметр id_*,
+        слово news/press/announce/event в пути, либо достаточно глубокий путь
+        со slug (2+ сегмента после хоста).
+        """
+        import re
+        # Якоря, пустые, корневые, не-http.
+        if url in ("#", "", "/", "//", "/ru/", "/en/"):
+            return False
+        if url.startswith(("#", "mailto:", "tel:", "javascript:")):
+            return False
+        # Статические расширения файлов.
+        if re.search(r'\.(css|js|png|jpe?g|gif|ico|svg|woff2?|ttf|eot|webmanifest|json|xml|pdf|zip)(\?|#|$)', url, re.I):
+            return False
+        # Служебные пути CMS.
+        low = url.lower()
+        for skip in ("/common/", "/fav/", "/css/", "/js/", "/images/", "/fonts/", "/img/", "/api/"):
+            if skip in low:
+                return False
+
+        # Отделяем путь от query и хоста.
+        path_query = url.split("//", 1)[1] if "//" in url else url
+        path_query = path_query.split("/", 1)[1] if "/" in path_query else ""
+        path = path_query.split("?", 1)[0].strip("/")
+        query = path_query.split("?", 1)[1] if "?" in path_query else ""
+        low_path = path.lower()
+
+        # Признак новости: query-параметр id вида «<имя>=<цифры>-<slug>»
+        # (например id_4=40706-gosduma_utverdila_...). Число-и-slug исключают
+        # UI-фильтры (mode_4=default, TYPE_ID_4=2) и дают настоящую статью.
+        if re.search(r'([?&](?:id(?:_\w+)?|nid|news_id|item_id)=\d+-[^&#]+)', query, re.I):
+            return True
+        # Если есть query-параметры, но нет id-признака — это фильтры/сортировка
+        # (mode_4=default, TYPE_ID_4=2), а не статья. Отбрасываем.
+        if query and not re.search(r'(?:id(?:_\w+)?|nid|news_id|item_id)=\d+-', query, re.I):
+            return False
+        # Признак новости: слова news/press/announce/event/actual в пути.
+        if re.search(r'(^|/)(news|press[-_]?(center|release)|announce|events?|actual)(/|$)', low_path):
+            # …но не навигационный раздел, а под-страница контента.
+            if not any(seg in low_path.split("/") for seg in Fetcher._NAV_SKIP):
+                return True
+        # Отбрасываем навигацию и служебные разделы сайта.
+        for seg in Fetcher._NAV_SKIP:
+            if seg in low_path.split("/"):
+                return False
+        # Остальное (разделы сайта без id-признака) — не считаем новостью.
+        return False
+
+    @staticmethod
+    def _title_from_html_link(url: str) -> str:
+        """Извлекает читаемый заголовок из URL новости.
+
+        Для Минфина (и подобных CMS) заголовок закодирован в slug:
+        /ru/press-center/?id_4=40706-gosduma_utverdila_kandidaturu_...
+        → «Госдума утвердила кандидатуру ...» (slug, нормализованный к пробелам).
+        Если выделить нечего — возвращаем сам URL (честно).
+        """
+        import re
+        # Разворачиваем HTML-escape &amp; -> &, чтобы query был корректным.
+        url = url.replace("&amp;", "&")
+        # Заголовок из slug query: ?id_4=40706-gosduma_utverdila_...
+        m = re.search(r'[?&](?:id(?:_\w+)?|nid|news_id|item_id)=\d+-([^&#]+)', url)
+        if m:
+            slug = m.group(1).split("&")[0]
+            title = slug.replace("_", " ").replace("-", " ")
+            return title.strip() or url
+        # Паттерн ЧПУ: /ru/press-center/40706-gosduma_utverdila_...
+        m = re.search(r'/(\d{4,})-([^/]+)', url)
+        if m:
+            return m.group(2).replace("_", " ").replace("-", " ").strip() or url
+        return url
 
     # ---------------------------------------------------------------- текст статьи
 

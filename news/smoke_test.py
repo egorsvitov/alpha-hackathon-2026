@@ -60,7 +60,22 @@ def main() -> int:
         assert art["text"].startswith("Текст"), "текст не извлечён"
         assert art["source"] == first.name
 
-    print("smoke test OK: реестр валиден, дедуп работает, формат статьи корректен")
+    # HTML-фильтр новостей: мусор (favicon, css, навигация, фильтры) отсекается,
+    # настоящие статьи Минфина (id_4=digits-slug) проходят.
+    news = "https://minfin.gov.ru/ru/press-center/?id_4=40706-gosduma_utverdila_kandidaturu"
+    assert Fetcher._is_news_link(news), "реальная новость Минфина должна проходить"
+    for junk in (
+        "https://minfin.gov.ru/common/core/fav/favicon.ico",
+        "https://minfin.gov.ru/common/core/css/text.css",
+        "https://minfin.gov.ru/ru/ministry/",
+        "https://minfin.gov.ru/ru/press-center/?mode_4=default&amp;TYPE_ID_4=2",
+        "https://example.com/img/logo.png",
+    ):
+        assert not Fetcher._is_news_link(junk), f"мусор не должен проходить: {junk}"
+    title = Fetcher._title_from_html_link(news)
+    assert "gosduma" in title, f"заголовок из slug не извлечён: {title!r}"
+
+    print("smoke test OK: реестр валиден, дедуп работает, формат статьи корректен, HTML-фильтр корректен")
     return 0
 
 
