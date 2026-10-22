@@ -1,0 +1,18 @@
+[project]
+name = "cpu-news-embeddings-experiment"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+  "httpx>=0.28,<0.29",
+  "feedparser>=6,<7",
+  "trafilatura>=2,<3",
+  "onnxruntime>=1.22,<2",
+  "tokenizers>=0.21,<1",
+  "numpy>=2,<3",
+  "jsonschema==4.25.1",
+  "rfc3339-validator==0.1.4",
+  "rfc3986-validator==0.1.1",
+]
+
+[tool.uv]
+package = false

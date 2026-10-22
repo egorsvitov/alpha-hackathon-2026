@@ -70,9 +70,15 @@ def load_bundles(path, *, max_bytes=DEFAULT_MAX_BYTES, max_line_bytes=DEFAULT_MA
     if path.suffix.lower() != ".json":
         raise InputError("Input must have .json or .jsonl extension")
     value = decode_json(text)
-    if not isinstance(value, dict):
-        raise InputError("JSON input must be an object")
-    return [value]
+    if isinstance(value, dict):
+        return [value]
+    if isinstance(value, list):
+        for index, bundle in enumerate(value):
+            if not isinstance(bundle, dict):
+                raise InputError("JSON batch items must be objects", issues=[
+                    ValidationIssue("invalid_bundle_item", f"/{index}", "Expected an EventBundle object")])
+        return value
+    raise InputError("JSON input must be an object or an array of objects")
 
 
 def validate_bundle(bundle) -> list[ValidationIssue]:
@@ -81,6 +87,9 @@ def validate_bundle(bundle) -> list[ValidationIssue]:
         return issues
     def add(code, path, message, severity="error"):
         issues.append(ValidationIssue(code, path, message, severity))
+    # v0.2's generated schema leaves these invariants to application checks.
+    if bundle["event"]["availability"] == "active" and bundle["event"]["quality"] != "insufficient" and not bundle["claims"]:
+        add("active_claims_required", "/claims", "An active non-insufficient event requires claims")
     indexes = {}
     for group, key in [("claims", "claim_id"), ("sources", "source_id"), ("evidence", "evidence_id"), ("conflicts", "conflict_id")]:
         indexes[group] = {}
@@ -172,6 +181,9 @@ def validate_bundle(bundle) -> list[ValidationIssue]:
                 add("conflict_reference_invalid", path, "Conflict claim/field does not exist")
     for i, relation in enumerate(bundle["relations"]):
         path = f"/relations/{i}"
+        expected_kind = "event" if relation["type"] == "related_stage" else "claim"
+        if relation["target_kind"] != expected_kind:
+            add("relation_kind_invalid", path + "/target_kind", "Relation type and target kind disagree")
         if relation["from_id"] == relation["to_id"]:
             add("relation_self_loop", path, "Self-loop is not allowed")
         if relation["target_kind"] == "claim":

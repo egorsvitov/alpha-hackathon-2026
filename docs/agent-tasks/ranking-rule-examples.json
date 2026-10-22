@@ -1,0 +1,350 @@
+{
+  "spec_version": "0.1",
+  "status": "planned_configuration_not_runtime",
+  "rules": [
+    {
+      "rule_id": "policy_rate_loan_v1",
+      "event_match": {
+        "event_types": [
+          "policy_rate"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "policy_rate",
+              "ключевая ставка"
+            ]
+          },
+          {
+            "path": "/measurements/*/metric",
+            "aliases": [
+              "policy_rate"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "path": "/products/loan",
+        "op": "equals",
+        "value": true
+      },
+      "geography_policy": "ru_or_unknown",
+      "awards": [
+        {
+          "group": "product",
+          "points": 28,
+          "mechanism": "financing_conditions"
+        },
+        {
+          "group": "macro",
+          "points": 4,
+          "mechanism": "monetary_context"
+        }
+      ]
+    },
+    {
+      "rule_id": "policy_rate_deposit_v1",
+      "event_match": {
+        "event_types": [
+          "policy_rate"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "policy_rate",
+              "ключевая ставка"
+            ]
+          },
+          {
+            "path": "/measurements/*/metric",
+            "aliases": [
+              "policy_rate"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "path": "/products/deposit",
+        "op": "equals",
+        "value": true
+      },
+      "geography_policy": "ru_or_unknown",
+      "awards": [
+        {
+          "group": "product",
+          "points": 20,
+          "mechanism": "liquidity_placement"
+        },
+        {
+          "group": "macro",
+          "points": 4,
+          "mechanism": "monetary_context"
+        }
+      ]
+    },
+    {
+      "rule_id": "policy_rate_leasing_v1",
+      "event_match": {
+        "event_types": [
+          "policy_rate"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "policy_rate",
+              "ключевая ставка"
+            ]
+          },
+          {
+            "path": "/measurements/*/metric",
+            "aliases": [
+              "policy_rate"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "path": "/products/leasing",
+        "op": "equals",
+        "value": true
+      },
+      "geography_policy": "ru_or_unknown",
+      "awards": [
+        {
+          "group": "product",
+          "points": 15,
+          "mechanism": "leasing_conditions"
+        },
+        {
+          "group": "macro",
+          "points": 4,
+          "mechanism": "monetary_context"
+        }
+      ]
+    },
+    {
+      "rule_id": "fuel_transport_v1",
+      "event_match": {
+        "event_types": [
+          "price_change"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "fuel",
+              "diesel",
+              "gasoline",
+              "топливо",
+              "дизель",
+              "бензин"
+            ]
+          },
+          {
+            "path": "/measurements/*/metric",
+            "aliases": [
+              "fuel_price",
+              "diesel_price",
+              "gasoline_price"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "any_of": [
+          {
+            "path": "/okved/code",
+            "op": "prefix",
+            "value": "49.41"
+          },
+          {
+            "path": "/industry",
+            "op": "equals",
+            "value": "transport"
+          }
+        ]
+      },
+      "geography_policy": "ru_or_unknown",
+      "awards": [
+        {
+          "group": "mechanism",
+          "points": 25,
+          "mechanism": "potential_fuel_costs"
+        }
+      ]
+    },
+    {
+      "rule_id": "wages_it_v1",
+      "event_match": {
+        "event_types": [
+          "market_indicator"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "wages",
+              "зарплаты"
+            ]
+          },
+          {
+            "path": "/measurements/*/metric",
+            "aliases": [
+              "wage",
+              "wages",
+              "average_wage"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "all_of": [
+          {
+            "path": "/industry",
+            "op": "equals",
+            "value": "it"
+          },
+          {
+            "path": "/employees_band",
+            "op": "known"
+          }
+        ]
+      },
+      "geography_policy": "ru_or_unknown",
+      "awards": [
+        {
+          "group": "mechanism",
+          "points": 10,
+          "mechanism": "potential_labor_costs"
+        }
+      ]
+    },
+    {
+      "rule_id": "steel_manufacturing_v1",
+      "event_match": {
+        "event_types": [
+          "price_change"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "steel",
+              "сталь"
+            ]
+          },
+          {
+            "path": "/measurements/*/metric",
+            "aliases": [
+              "steel_price"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "any_of": [
+          {
+            "path": "/okved/code",
+            "op": "prefix",
+            "value": "24"
+          },
+          {
+            "path": "/okved/code",
+            "op": "prefix",
+            "value": "25"
+          }
+        ]
+      },
+      "geography_policy": "ru_or_unknown",
+      "awards": [
+        {
+          "group": "industry",
+          "points": 42,
+          "mechanism": "steel_sector_exposure"
+        },
+        {
+          "group": "mechanism",
+          "points": 25,
+          "mechanism": "steel_market_context"
+        }
+      ]
+    },
+    {
+      "rule_id": "restriction_country_v1",
+      "event_match": {
+        "event_types": [
+          "sanction_or_trade_restriction"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "trade_restriction",
+              "sanctions",
+              "export_restriction",
+              "санкции",
+              "ограничение торговли"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "path": "/fts_present",
+        "op": "equals",
+        "value": true
+      },
+      "geography_policy": "country_overlap",
+      "awards": [
+        {
+          "group": "geography",
+          "points": 18,
+          "mechanism": "potential_trade_restriction"
+        }
+      ]
+    },
+    {
+      "rule_id": "fx_fts_v1",
+      "event_match": {
+        "event_types": [
+          "fx_rate"
+        ],
+        "claim_any_of": [
+          {
+            "path": "/object",
+            "aliases": [
+              "usd_rub",
+              "eur_rub",
+              "cny_rub",
+              "exchange_rate"
+            ]
+          },
+          {
+            "path": "/measurements/*/metric",
+            "aliases": [
+              "usd_rub",
+              "eur_rub",
+              "cny_rub",
+              "exchange_rate"
+            ]
+          }
+        ]
+      },
+      "company_match": {
+        "path": "/fts_present",
+        "op": "equals",
+        "value": true
+      },
+      "geography_policy": "currency_unconfirmed",
+      "awards": [
+        {
+          "group": "mechanism",
+          "points": 15,
+          "mechanism": "potential_fx_exposure"
+        }
+      ]
+    }
+  ]
+}

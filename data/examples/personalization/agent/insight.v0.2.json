@@ -1,0 +1,683 @@
+{
+  "schema_version": "0.2",
+  "run_id": "6ad9841e-e835-4d05-8881-33f8ae9e272a",
+  "company_id": "DEMO_TRADE",
+  "profile_version": "50b4cc533c31d6a4c7372496db52b1cb3e09ab30541cf2537a777e4d5a18babe",
+  "user_role": "cfo",
+  "as_of": "2026-10-20T15:00:00+00:00",
+  "event_id": "demo:rate-forecast",
+  "event_version": 1,
+  "generation_mode": "fixture",
+  "generated_at": "2026-10-20T15:00:00+00:00",
+  "status": "limited",
+  "relevance": {
+    "schema_version": "0.1",
+    "event_id": "demo:rate-forecast",
+    "event_version": 1,
+    "company_id": "DEMO_TRADE",
+    "profile_version": "50b4cc533c31d6a4c7372496db52b1cb3e09ab30541cf2537a777e4d5a18babe",
+    "user_role": "cfo",
+    "as_of": "2026-10-20T15:00:00+00:00",
+    "eligibility": "eligible",
+    "reason_codes": [],
+    "score": 0.36741214813127643,
+    "raw_total": 36.74121481312764,
+    "scoring_diagnostics": {
+      "groups": [
+        {
+          "group": "macro",
+          "raw_points": 4,
+          "role_multiplier": 1,
+          "age_weight": 0.9771599684342459,
+          "weighted_points": 3.9086398737369836
+        },
+        {
+          "group": "product",
+          "raw_points": 28,
+          "role_multiplier": 1.2,
+          "age_weight": 0.9771599684342459,
+          "weighted_points": 32.83257493939066
+        }
+      ],
+      "age_policy": "decay",
+      "score_saturated": false
+    },
+    "level": "medium",
+    "reasons": [
+      {
+        "reason_id": "policy_rate_deposit_v1:demo:rate-forecast:claim-1:macro",
+        "group": "macro",
+        "text": "monetary_context; modality=forecast; polarity=affirmed; action=hold; stage=None. Экспозиция и финансовый эффект не установлены.",
+        "raw_points": 4,
+        "contribution": 0.03908639873736984,
+        "feature_ids": [
+          "DEMO_TRADE:/products/deposit"
+        ],
+        "claim_ids": [
+          "demo:rate-forecast:claim-1"
+        ],
+        "event_paths": [
+          "/claims/0/measurements/0/metric",
+          "/claims/0/object",
+          "/claims/0/modality",
+          "/claims/0/polarity",
+          "/claims/0/stage",
+          "/claims/0/action"
+        ],
+        "basis": "metadata_match"
+      },
+      {
+        "reason_id": "policy_rate_loan_v1:demo:rate-forecast:claim-1:product",
+        "group": "product",
+        "text": "financing_conditions; modality=forecast; polarity=affirmed; action=hold; stage=None. Экспозиция и финансовый эффект не установлены.",
+        "raw_points": 28,
+        "contribution": 0.32832574939390663,
+        "feature_ids": [
+          "DEMO_TRADE:/products/loan"
+        ],
+        "claim_ids": [
+          "demo:rate-forecast:claim-1"
+        ],
+        "event_paths": [
+          "/claims/0/measurements/0/metric",
+          "/claims/0/object",
+          "/claims/0/modality",
+          "/claims/0/polarity",
+          "/claims/0/stage",
+          "/claims/0/action"
+        ],
+        "basis": "conditional_mechanism"
+      }
+    ],
+    "candidate_channels": [
+      "macro",
+      "product"
+    ],
+    "feature_ids": [
+      "DEMO_TRADE:/products/deposit",
+      "DEMO_TRADE:/products/loan"
+    ],
+    "claim_ids": [
+      "demo:rate-forecast:claim-1"
+    ],
+    "evidence_status": "usable",
+    "limitations": [
+      "heuristic_uncalibrated_priority",
+      "modality_forecast",
+      "operating_territory_unknown",
+      "profile_historical_applicability_unknown",
+      "Полностью синтетический пример; не является сообщением о реальном событии."
+    ],
+    "scoring_version": "baseline-0.1",
+    "rules_sha256": "41cc60f39f4f93be93442a44dab4a81149392e14f5aaba8f18addd74a64a4a8e"
+  },
+  "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+  },
+  "claims": [
+    {
+      "claim_id": "report:demo:rate-forecast:claim-1",
+      "section": "what_happened",
+      "kind": "source_fact",
+      "text": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [],
+      "assumptions": [],
+      "support_status": "supported",
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "modality": "forecast",
+      "polarity": "affirmed"
+    },
+    {
+      "kind": "ai_inference",
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [
+        "DEMO_TRADE:/products/deposit"
+      ],
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "assumptions": [
+        "Неизвестны тип ставки, объём и даты пересмотра договорных условий."
+      ],
+      "support_status": "conditional",
+      "modality": null,
+      "polarity": null,
+      "claim_id": "synthetic:deposit:why",
+      "section": "why_important",
+      "text": "Если договор депозита допускает пересмотр ставки, доходность зависит от договорных условий; сообщение источника является поводом для проверки."
+    },
+    {
+      "kind": "ai_inference",
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [
+        "DEMO_TRADE:/products/deposit"
+      ],
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "assumptions": [
+        "Неизвестны тип ставки, объём и даты пересмотра договорных условий."
+      ],
+      "support_status": "conditional",
+      "modality": null,
+      "polarity": null,
+      "claim_id": "synthetic:deposit:next",
+      "section": "next_step",
+      "text": "Проверьте договор депозита: тип ставки, объём и даты пересмотра условий пока неизвестны."
+    },
+    {
+      "kind": "ai_inference",
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [
+        "DEMO_TRADE:/products/loan"
+      ],
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "assumptions": [
+        "Неизвестны тип ставки, объём и даты пересмотра договорных условий."
+      ],
+      "support_status": "conditional",
+      "modality": null,
+      "polarity": null,
+      "claim_id": "synthetic:loan:why",
+      "section": "why_important",
+      "text": "Если договор кредита допускает пересмотр ставки, стоимость обслуживания зависит от договорных условий; сообщение источника является поводом для проверки."
+    },
+    {
+      "kind": "ai_inference",
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [
+        "DEMO_TRADE:/products/loan"
+      ],
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "assumptions": [
+        "Неизвестны тип ставки, объём и даты пересмотра договорных условий."
+      ],
+      "support_status": "conditional",
+      "modality": null,
+      "polarity": null,
+      "claim_id": "synthetic:loan:next",
+      "section": "next_step",
+      "text": "Проверьте договор кредита: тип ставки, объём и даты пересмотра условий пока неизвестны."
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2",
+      "type": "synthetic_news",
+      "locator": "demo:rate-forecast:article-1:v1",
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "quote": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+      "verification_status": "synthetic",
+      "publisher": "Учебное издание",
+      "url": null,
+      "content_kind": "synthetic",
+      "is_synthetic": true,
+      "evidence_id": "demo:rate-forecast:evidence-1",
+      "article_id": "demo:rate-forecast:article-1",
+      "article_version": 1,
+      "event_id": "demo:rate-forecast",
+      "event_version": 1,
+      "char_start": 0,
+      "char_end": 128,
+      "text_sha256": "2b0f095b6f52198dfedfb64a2b32f7658f4f9c4d61e0f4a0a720f1a5e17ffbbb"
+    }
+  ],
+  "features_used": [
+    {
+      "feature_id": "DEMO_TRADE:/products/deposit",
+      "path": "/products/deposit",
+      "value": true,
+      "quality": "observed",
+      "origin": {
+        "kind": "csv",
+        "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+        "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+        "data_record_numbers": [
+          3
+        ],
+        "columns": [
+          "CL_PRODUCT_DEP_MARK"
+        ]
+      }
+    },
+    {
+      "feature_id": "DEMO_TRADE:/products/loan",
+      "path": "/products/loan",
+      "value": true,
+      "quality": "observed",
+      "origin": {
+        "kind": "csv",
+        "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+        "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+        "data_record_numbers": [
+          3
+        ],
+        "columns": [
+          "CL_PRODUCT_LOA_MARK"
+        ]
+      }
+    }
+  ],
+  "section_states": {
+    "what_happened": {
+      "status": "available",
+      "reason": null
+    },
+    "why_important": {
+      "status": "available",
+      "reason": null
+    },
+    "risk": {
+      "status": "insufficient_evidence",
+      "reason": "Offline fixture does not establish this section."
+    },
+    "opportunity": {
+      "status": "insufficient_evidence",
+      "reason": "Offline fixture does not establish this section."
+    },
+    "next_step": {
+      "status": "available",
+      "reason": null
+    },
+    "bank_view": {
+      "status": "insufficient_evidence",
+      "reason": "Offline fixture does not establish this section."
+    }
+  },
+  "unknowns": [
+    {
+      "id": "contract:rate_type",
+      "text": "Contractual rate_type is unknown.",
+      "affected_paths": [
+        "/claims"
+      ],
+      "clarification_question": "Уточните договорное условие: rate_type?"
+    },
+    {
+      "id": "contract:debt_amount",
+      "text": "Contractual debt_amount is unknown.",
+      "affected_paths": [
+        "/claims"
+      ],
+      "clarification_question": "Уточните договорное условие: debt_amount?"
+    },
+    {
+      "id": "contract:repricing_date",
+      "text": "Contractual repricing_date is unknown.",
+      "affected_paths": [
+        "/claims"
+      ],
+      "clarification_question": "Уточните договорное условие: repricing_date?"
+    }
+  ],
+  "limitations": [
+    "revenue_unit_and_period_unconfirmed",
+    "products_describe_supplied_bank_record_only",
+    "registered_region_not_all_operations",
+    "okved_not_cost_structure",
+    "group_id_not_proof_of_ownership",
+    "source_business_date_unknown_historical_applicability_unproven",
+    "heuristic_uncalibrated_priority",
+    "modality_forecast",
+    "operating_territory_unknown",
+    "profile_historical_applicability_unknown",
+    "Полностью синтетический пример; не является сообщением о реальном событии.",
+    "retrieval_candidates_require_claim_level_review",
+    "Synthetic deterministic fixture; no financial reasoning or independent semantic review."
+  ],
+  "trace": {
+    "artifact_ids": [
+      "9f051e4840725c8ae0bbbaff55c902634541220722683e6b50a271c81a5015c4",
+      "9d78924833d304295c86801de0bfcbc5d7a591f0e8402095ab92544d1b75f0b0",
+      "91e064b62f1f09cfd7da2576fb01695653c7fc7071f073544b56e2a88172f965",
+      "ebdc71ea787baf5991089d700a128922e67a548a5f6745f4578025948ce2884e",
+      "f37f6a17edb46b641b5bf7d6addd7c8e93c1f26903fc48439d06fc08b81fc1e4",
+      "3fa1c6173d8a26d9c68ab0e3908b0717114c68092901e8282fcb8438f25f7648",
+      "4fc84f0ea95cc0fdc1d5bbe67d0149d961a6b29952af2a2481279c78a83b71f7",
+      "fec467977789b3f998bb5bb77afbc686d8b75c673b0830694dda85f7d937caaf",
+      "b25f046368279289d59e3cc0e4c2e0e074cb1915efbc769aeef080b60b0101c9"
+    ],
+    "qa_status": "limited",
+    "retry_count": 0,
+    "retrieval_count": 1,
+    "generation_count": 1,
+    "semantic_review_count": 0,
+    "steps": [
+      {
+        "state": "created",
+        "started_at": "2026-10-20T15:00:00+00:00",
+        "finished_at": "2026-10-20T15:00:00+00:00",
+        "tool_name": "create_run",
+        "tool_version": "0.1",
+        "input_artifact_ids": [],
+        "output_artifact_ids": [
+          "9f051e4840725c8ae0bbbaff55c902634541220722683e6b50a271c81a5015c4"
+        ],
+        "status": "finished",
+        "result": "created"
+      },
+      {
+        "state": "inputs_validated",
+        "started_at": "2026-10-20T15:00:00+00:00",
+        "finished_at": "2026-10-20T15:00:00+00:00",
+        "tool_name": "validate_identity",
+        "tool_version": "0.1",
+        "input_artifact_ids": [],
+        "output_artifact_ids": [
+          "9d78924833d304295c86801de0bfcbc5d7a591f0e8402095ab92544d1b75f0b0"
+        ],
+        "status": "finished",
+        "result": "inputs_validated"
+      },
+      {
+        "state": "context_built",
+        "started_at": "2026-10-20T15:00:00+00:00",
+        "finished_at": "2026-10-20T15:00:00+00:00",
+        "tool_name": "build_context",
+        "tool_version": "0.1",
+        "input_artifact_ids": [],
+        "output_artifact_ids": [
+          "91e064b62f1f09cfd7da2576fb01695653c7fc7071f073544b56e2a88172f965"
+        ],
+        "status": "finished",
+        "result": "context_built"
+      },
+      {
+        "state": "evidence_retrieved",
+        "started_at": "2026-10-20T15:00:00+00:00",
+        "finished_at": "2026-10-20T15:00:00+00:00",
+        "tool_name": "retrieve_evidence",
+        "tool_version": "0.1",
+        "input_artifact_ids": [],
+        "output_artifact_ids": [
+          "ebdc71ea787baf5991089d700a128922e67a548a5f6745f4578025948ce2884e"
+        ],
+        "status": "finished",
+        "result": "evidence_retrieved"
+      },
+      {
+        "state": "draft_generated",
+        "started_at": "2026-10-20T15:00:00+00:00",
+        "finished_at": "2026-10-20T15:00:00+00:00",
+        "tool_name": "fixture_generator",
+        "tool_version": "0.1",
+        "input_artifact_ids": [],
+        "output_artifact_ids": [
+          "4fc84f0ea95cc0fdc1d5bbe67d0149d961a6b29952af2a2481279c78a83b71f7"
+        ],
+        "status": "finished",
+        "result": "draft_generated"
+      },
+      {
+        "state": "qa_checked",
+        "started_at": "2026-10-20T15:00:00+00:00",
+        "finished_at": "2026-10-20T15:00:00+00:00",
+        "tool_name": "validate_draft",
+        "tool_version": "0.1",
+        "input_artifact_ids": [],
+        "output_artifact_ids": [
+          "fec467977789b3f998bb5bb77afbc686d8b75c673b0830694dda85f7d937caaf"
+        ],
+        "status": "finished",
+        "result": "qa_checked"
+      },
+      {
+        "state": "completed",
+        "started_at": "2026-10-20T15:00:00+00:00",
+        "finished_at": "2026-10-20T15:00:00+00:00",
+        "tool_name": "finalize",
+        "tool_version": "0.1",
+        "input_artifact_ids": [],
+        "output_artifact_ids": [
+          "b25f046368279289d59e3cc0e4c2e0e074cb1915efbc769aeef080b60b0101c9"
+        ],
+        "status": "finished",
+        "result": "completed"
+      }
+    ],
+    "corpus_version": "fc8eead86d4642e33e031d674d32207386fafab1e886b7f2f89eb5abd0673c7d",
+    "context_fingerprint": "5ca417f1e9722ac4231475947c1adc49e6dfdbbae79391a8a8ccd4109d7ba5d3",
+    "prompt_version": "agent-interpret-v1",
+    "model_id": "offline-fixture-v1",
+    "config": {
+      "mode": "fixture",
+      "rag": {
+        "version": "strict-replay-1",
+        "tokenizer_version": "nfkc-explicit-economic-forms-1",
+        "temporal_mode": "strict_replay",
+        "date_only_policy": "next_day_start_Europe_Moscow",
+        "top_k": 5,
+        "max_chunks_per_document": 2,
+        "max_context_chars": 10000,
+        "include_historical": false,
+        "overlap_threshold": 0.5,
+        "bm25_k1": 1.2,
+        "bm25_b": 0.75,
+        "mapping": {
+          "version": "economic-concepts-1",
+          "topics": {
+            "rates": [
+              "policy_rate"
+            ],
+            "policy_rate": [
+              "policy_rate"
+            ],
+            "interest_rates": [
+              "policy_rate"
+            ],
+            "inflation": [
+              "inflation"
+            ],
+            "fuel": [
+              "fuel",
+              "inflation"
+            ],
+            "labor": [
+              "labor"
+            ],
+            "wages": [
+              "labor"
+            ],
+            "gdp": [
+              "gdp"
+            ],
+            "consumption": [
+              "consumption"
+            ],
+            "demand": [
+              "consumption"
+            ],
+            "gold": [
+              "gold",
+              "commodities"
+            ],
+            "steel": [
+              "steel",
+              "commodities"
+            ],
+            "counterparty": [
+              "counterparties"
+            ]
+          },
+          "queries": {
+            "policy_rate": "ключевая ставка прогноз",
+            "inflation": "инфляция цены прогноз",
+            "fuel": "топливо бензин цены",
+            "labor": "рынок труда зарплата вакансии",
+            "gdp": "ВВП экономический рост прогноз",
+            "consumption": "потребление спрос",
+            "gold": "золото спрос",
+            "steel": "сталь производство цены",
+            "counterparties": "контрагент платежи"
+          },
+          "concepts": {
+            "policy_rate": [
+              "ставка",
+              "ставки",
+              "ставку",
+              "ставке",
+              "ставок",
+              "ставкой",
+              "ставкам",
+              "ставками"
+            ],
+            "credit": [
+              "кредит",
+              "кредиты",
+              "кредита",
+              "кредитов",
+              "кредитование",
+              "кредитования",
+              "кредитованию",
+              "кредитный",
+              "кредитные"
+            ],
+            "inflation": [
+              "инфляция",
+              "инфляции",
+              "инфляцию",
+              "инфляцией",
+              "цены",
+              "цен",
+              "ценам",
+              "ценами"
+            ],
+            "labor": [
+              "зарплата",
+              "зарплаты",
+              "зарплат",
+              "зарплату",
+              "вакансии",
+              "вакансий",
+              "труда",
+              "оплата"
+            ],
+            "gdp": [
+              "ввп",
+              "экономический рост",
+              "экономического роста"
+            ],
+            "consumption": [
+              "потребление",
+              "потребления",
+              "потреблению",
+              "спрос",
+              "спроса"
+            ],
+            "gold": [
+              "золото",
+              "золота",
+              "золоту",
+              "золотом"
+            ],
+            "steel": [
+              "сталь",
+              "стали",
+              "сталью"
+            ],
+            "fuel": [
+              "топливо",
+              "топлива",
+              "бензин",
+              "бензина",
+              "бензину"
+            ]
+          },
+          "stop_words": [
+            "и",
+            "в",
+            "во",
+            "на",
+            "по",
+            "за",
+            "к",
+            "с",
+            "со",
+            "из",
+            "для",
+            "от",
+            "до",
+            "о",
+            "об",
+            "а",
+            "но",
+            "не",
+            "это",
+            "что",
+            "как",
+            "мы",
+            "он",
+            "она",
+            "они",
+            "при",
+            "будет",
+            "были",
+            "был",
+            "г",
+            "года",
+            "год",
+            "году",
+            "россия",
+            "россии",
+            "российский",
+            "компания",
+            "компании",
+            "прогноз",
+            "прогноза",
+            "данные",
+            "данных"
+          ]
+        }
+      }
+    },
+    "qa": {
+      "status": "limited",
+      "next_action": "deliver",
+      "issues": [],
+      "checks_run": [
+        "draft_schema",
+        "identity_and_refs",
+        "source_exact_text",
+        "registry_integrity",
+        "linked_number_guard",
+        "unknown_exposure_guard",
+        "bank_view_guard"
+      ],
+      "checks_not_run": [
+        "independent_semantic_review",
+        "general_financial_reasoning",
+        "bank_opinion_semantics"
+      ],
+      "missing_evidence_queries": [],
+      "structural_status": "passed",
+      "semantic_status": "not_run",
+      "publication_status": "limited"
+    }
+  },
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_rub": 0,
+    "pricing_status": "no_llm_calls"
+  }
+}

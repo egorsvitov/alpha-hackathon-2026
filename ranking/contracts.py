@@ -105,6 +105,12 @@ def _validator(name):
 
 def validate_contract(value, schema_name: str) -> list[ValidationIssue]:
     name = schema_name if schema_name.endswith(".schema.json") else schema_name + ".schema.json"
+    if name == "event-bundle.schema.json" and isinstance(value, dict):
+        version = value.get("schema_version")
+        if version == "0.2":
+            name = "event-bundle.v0.2.schema.json"
+        elif version not in (None, "0.1"):
+            return [ValidationIssue("unsupported_contract_version", "/schema_version", "Supported EventBundle versions: 0.1, 0.2")]
     validator = _validator(name)
     issues = [ValidationIssue("schema_error", pointer_path(e.absolute_path), f"Schema constraint failed: {e.validator}") for e in validator.iter_errors(value)]
     try:

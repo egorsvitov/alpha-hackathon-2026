@@ -1,0 +1,177 @@
+{
+  "package_version": "0.3",
+  "status": "tasks_01_04_and_05_fixture_validated_live_and_06_07_pending",
+  "target_branch": "news-personalization",
+  "baseline_commit": "2453da0e72fe8e78a302391527edaf278d046cb2",
+  "common_documents": [
+    "COMMON.md",
+    "INTERFACES.md",
+    "ACCEPTANCE.md"
+  ],
+  "tasks": [
+    {
+      "id": "01",
+      "file": "01-contracts-and-ingestion.md",
+      "depends_on": [],
+      "acceptance_prefixes": [
+        "C"
+      ],
+      "subphases": [
+        {
+          "id": "01A",
+          "depends_on": []
+        },
+        {
+          "id": "01B",
+          "depends_on": [
+            "01A"
+          ]
+        }
+      ],
+      "status": "implemented_offline_validated",
+      "implementation_report": "../implementation/01-result.md"
+    },
+    {
+      "id": "02",
+      "file": "02-company-profiles.md",
+      "depends_on": [
+        "01"
+      ],
+      "acceptance_prefixes": [
+        "P"
+      ],
+      "subphases": [
+        {
+          "id": "02A",
+          "depends_on": [
+            "01A"
+          ]
+        },
+        {
+          "id": "02B",
+          "depends_on": [
+            "02A"
+          ]
+        }
+      ],
+      "status": "implemented_offline_validated",
+      "implementation_report": "../implementation/02-result.md"
+    },
+    {
+      "id": "03",
+      "file": "03-ranking.md",
+      "depends_on": [
+        "01",
+        "02"
+      ],
+      "acceptance_prefixes": [
+        "R"
+      ],
+      "subphases": [
+        {
+          "id": "03A",
+          "depends_on": [
+            "01A"
+          ],
+          "integration_requires": [
+            "01B"
+          ]
+        },
+        {
+          "id": "03B",
+          "depends_on": [
+            "01B",
+            "02A",
+            "03A"
+          ],
+          "graph_branch_requires": [
+            "02B"
+          ]
+        }
+      ],
+      "status": "implemented_offline_validated",
+      "implementation_report": "../implementation/03-result.md"
+    },
+    {
+      "id": "04",
+      "file": "04-bank-rag.md",
+      "depends_on": [
+        "01"
+      ],
+      "acceptance_prefixes": [
+        "G"
+      ],
+      "status": "implemented_offline_validated",
+      "subphases": [
+        "04A",
+        "04B"
+      ],
+      "implementation_report": "../implementation/04-result.md"
+    },
+    {
+      "id": "05",
+      "file": "05-analyst.md",
+      "depends_on": [
+        "01",
+        "02",
+        "03",
+        "04"
+      ],
+      "live_requires": "06A",
+      "acceptance_prefixes": [
+        "A"
+      ],
+      "status": "implemented_fixture_validated_live_semantic_review_not_run",
+      "subphases": [
+        "05A",
+        "05B",
+        "05C"
+      ],
+      "implementation_report": "../implementation/05-result.md"
+    },
+    {
+      "id": "06",
+      "file": "06-runtime-and-integration.md",
+      "depends_on": [
+        "05"
+      ],
+      "early_work_after": [
+        "01"
+      ],
+      "subphases": [
+        "06A",
+        "06B"
+      ],
+      "acceptance_prefixes": [
+        "B",
+        "Q",
+        "I"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "07",
+      "file": "07-evaluation-and-demo.md",
+      "depends_on": [
+        "06"
+      ],
+      "early_work_after": [
+        "01",
+        "02"
+      ],
+      "acceptance_prefixes": [
+        "E"
+      ],
+      "status": "planned"
+    }
+  ],
+  "previous_baseline_commit": "d0f7c8a06af609129702ce522469cdfe37ba1051",
+  "spec_documents": [
+    "RANKING-RULES.md",
+    "ranking-rule-examples.json",
+    "review-01-03.md",
+    "review-04-05.md"
+  ],
+  "implementation_report": "../implementation/00-orchestration.md",
+  "latest_implementation_report": "../implementation/04-05-orchestration.md"
+}

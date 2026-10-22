@@ -1,0 +1,6 @@
+{
+  "version": "strict-replay-1", "tokenizer_version": "nfkc-explicit-economic-forms-1",
+  "temporal_mode": "strict_replay", "date_only_policy": "next_day_start_Europe_Moscow",
+  "top_k": 5, "max_chunks_per_document": 2, "max_context_chars": 10000,
+  "include_historical": false, "overlap_threshold": 0.5, "bm25_k1": 1.2, "bm25_b": 0.75
+}

@@ -105,7 +105,7 @@ def attach_payment_graph(profiles, known_company_ids, payments_path, *, config=N
                 aggregations[direction] = {'retained_data_record_numbers':[edge[1] for edge in retained],'denominator_raw':decimal_string(retained_amount),'coverage':c}
                 for other,record,amount,count in retained:
                     neighbors.append({'company_id':other,'direction':direction,'observed_amount_raw':amount,'payment_count':int(count),'observed_share':round(float(Decimal(amount)/retained_amount),12),'profile_known':other in known_company_ids,'feature_id':''})
-            artifact = {'schema_version':'0.1','company_id':uid,'source_path':source_locator(path),'source_sha256':source_hash,'policy':policy,'known_company_ids_sha256':canonical_hash(sorted(known_company_ids)),'directions':aggregations,'scan_statistics':stats}
+            artifact = {'schema_version':'0.1','company_id':uid,'source_path':source_locator(path),'source_sha256':source_hash,'policy':policy,'known_company_ids_sha256':canonical_hash(sorted(known_company_ids)),'directions':aggregations}
             artifact_hash = canonical_hash(artifact)
             artifact_id = 'payment-aggregation:'+artifact_hash
             artifacts[artifact_id] = artifact

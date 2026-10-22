@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.1",
+  "status": "partial",
+  "event_id": "synthetic:event",
+  "event_version": 1,
+  "company_id": "SYNTHETIC",
+  "profile_version": "synthetic-v1",
+  "as_of": "2026-10-20T18:00:00+03:00",
+  "corpus_version": "fc8eead86d4642e33e031d674d32207386fafab1e886b7f2f89eb5abd0673c7d",
+  "query_plan": [
+    {
+      "attempt": 0,
+      "queries": [
+        "ключевая ставка прогноз"
+      ],
+      "topic_filters": [
+        "policy_rate"
+      ],
+      "temporal_mode": "strict_replay",
+      "retry_reason": null,
+      "config_version": "8d988c5a13950cedb7706a8a3713fde9a5b6383897d1b3978c9cb96d6e49e16e",
+      "corpus_version": "fc8eead86d4642e33e031d674d32207386fafab1e886b7f2f89eb5abd0673c7d",
+      "reasons": [
+        "event_object_topic_mapping"
+      ]
+    }
+  ],
+  "hits": [
+    {
+      "document_id": "synthetic-policy-rate",
+      "document_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "chunk_id": "synthetic-policy-rate-v1",
+      "page": 1,
+      "char_start": 0,
+      "char_end": 134,
+      "text_sha256": "2e67c9ff731ef6af10ed4bc3afc4af357f4509c59b0732857ba408451f7f18aa",
+      "source_path": "synthetic-policy-rate.pdf",
+      "title": "Вымышленный учебный обзор ставки",
+      "published_at": "2026-10-19",
+      "date_status": "synthetic",
+      "verification_status": "synthetic",
+      "quote": "Полностью вымышленный учебный обзор: ключевая ставка влияет на стоимость кредитования. Это синтетический материал, а не позиция банка.",
+      "retrieval_score": 0.57536414,
+      "matched_queries": [
+        "ключевая ставка прогноз"
+      ],
+      "limitations": [
+        "synthetic_material",
+        "provenance_incomplete",
+        "forecast_horizon_unverified"
+      ],
+      "is_synthetic": true,
+      "provenance_status": {
+        "document_hash": "unavailable",
+        "ocr_boundaries": "unavailable"
+      },
+      "evidence_id": "bank:381b5c9b10f41bd2f8380bf671f45ede2eae06a16f40266d9b45065e2783a6a3"
+    }
+  ],
+  "limitations": [
+    "retrieval_candidates_require_claim_level_review"
+  ],
+  "diagnostics": {
+    "rejected": [],
+    "admitted": [
+      {
+        "chunk_id": "synthetic-policy-rate-v1",
+        "reason": "subject_concept_match"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1068 @@
+{
+  "run_id": "synthetic-forecast-example",
+  "snapshot": {
+    "event_id": "demo:rate-forecast",
+    "event_version": 1,
+    "payload_sha256": "4d3db7f884050244be2ba5c34b0d086f767f4235fdf23cf38cf574633eea2a66",
+    "received_at": "2026-10-20T15:00:00+00:00",
+    "source_mode": "fixture",
+    "ingest_id": "synthetic-forecast",
+    "bundle": {
+      "schema_version": "0.1",
+      "event": {
+        "event_id": "demo:rate-forecast",
+        "event_version": 1,
+        "title": "Учебный пример: прогноз ставки",
+        "event_type": "policy_rate",
+        "first_published_at": "2026-10-20T10:00:00+03:00",
+        "updated_at": "2026-10-20T10:01:00+03:00",
+        "availability": "active",
+        "quality": "complete"
+      },
+      "ranking_features": {
+        "topics": [
+          "rates"
+        ],
+        "industries": [],
+        "geographies": [
+          "RU"
+        ],
+        "objects": [
+          "policy_rate"
+        ],
+        "metrics": [
+          "policy_rate"
+        ],
+        "factors": [
+          "interest_rates"
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "demo:rate-forecast:claim-1",
+          "text": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+          "modality": "forecast",
+          "polarity": "affirmed",
+          "stage": null,
+          "attribution": {
+            "entity_id": "demo:analyst",
+            "name": "Учебный аналитический центр"
+          },
+          "participants": [
+            {
+              "entity_id": "demo:regulator",
+              "name": "Учебный регулятор",
+              "role": "decision_maker"
+            }
+          ],
+          "action": "hold",
+          "object": "policy_rate",
+          "geographies": [
+            "RU"
+          ],
+          "time": {
+            "occurred_at": null,
+            "effective_at": null,
+            "observation_period": null,
+            "forecast_horizon": {
+              "start": "2026-10-23",
+              "end": "2026-10-23",
+              "text": "2026-10-23"
+            }
+          },
+          "measurements": [
+            {
+              "measurement_id": "demo:rate-forecast:measurement-1",
+              "metric": "policy_rate",
+              "kind": "level",
+              "value": "14",
+              "unit": "percent",
+              "qualifier": "exact",
+              "comparison_period": null
+            }
+          ],
+          "evidence_ids": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "field_evidence": {
+            "/text": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/modality": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/polarity": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/attribution": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/participants/0": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/action": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/object": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/geographies/0": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/measurements/0": [
+              "demo:rate-forecast:evidence-1"
+            ],
+            "/time/forecast_horizon": [
+              "demo:rate-forecast:evidence-1"
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "demo:rate-forecast:article-1:v1",
+          "article_id": "demo:rate-forecast:article-1",
+          "article_version": 1,
+          "title": "Синтетическая новость для проверки контракта",
+          "publisher": "Учебное издание",
+          "url": null,
+          "published_at": "2026-10-20T10:00:00+03:00",
+          "content_kind": "synthetic",
+          "is_full_original_text": false,
+          "is_synthetic": true
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "demo:rate-forecast:evidence-1",
+          "source_id": "demo:rate-forecast:article-1:v1",
+          "field": "text",
+          "start": 0,
+          "end": 128,
+          "quote": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%."
+        }
+      ],
+      "conflicts": [],
+      "relations": [],
+      "limitations": [
+        "Полностью синтетический пример; не является сообщением о реальном событии."
+      ]
+    },
+    "validation_issues": []
+  },
+  "profile": {
+    "schema_version": "0.1",
+    "company_id": "DEMO_TRADE",
+    "is_synthetic": true,
+    "display_name": "Компания DEMO_TRADE",
+    "features": {
+      "DEMO_TRADE:/company_id": {
+        "feature_id": "DEMO_TRADE:/company_id",
+        "path": "/company_id",
+        "value": "DEMO_TRADE",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "SYNTHETIC_U"
+          ]
+        }
+      },
+      "DEMO_TRADE:/okved/code": {
+        "feature_id": "DEMO_TRADE:/okved/code",
+        "path": "/okved/code",
+        "value": "46.49",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "MAINOKVED_CODE"
+          ]
+        }
+      },
+      "DEMO_TRADE:/okved/name": {
+        "feature_id": "DEMO_TRADE:/okved/name",
+        "path": "/okved/name",
+        "value": "Вымышленная торговля",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "MAINOKVED_NAME"
+          ]
+        }
+      },
+      "DEMO_TRADE:/industry": {
+        "feature_id": "DEMO_TRADE:/industry",
+        "path": "/industry",
+        "value": "trade",
+        "quality": "derived",
+        "origin": {
+          "kind": "derived",
+          "input_feature_ids": [
+            "DEMO_TRADE:/okved/code"
+          ],
+          "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+          "artifact_id": null,
+          "artifact_sha256": null
+        }
+      },
+      "DEMO_TRADE:/products/rko": {
+        "feature_id": "DEMO_TRADE:/products/rko",
+        "path": "/products/rko",
+        "value": true,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_RKO_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/products/guarantee": {
+        "feature_id": "DEMO_TRADE:/products/guarantee",
+        "path": "/products/guarantee",
+        "value": false,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_GAR_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/products/loan": {
+        "feature_id": "DEMO_TRADE:/products/loan",
+        "path": "/products/loan",
+        "value": true,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_LOA_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/products/leasing": {
+        "feature_id": "DEMO_TRADE:/products/leasing",
+        "path": "/products/leasing",
+        "value": false,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_LEA_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/products/deposit": {
+        "feature_id": "DEMO_TRADE:/products/deposit",
+        "path": "/products/deposit",
+        "value": true,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_DEP_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/products/payroll": {
+        "feature_id": "DEMO_TRADE:/products/payroll",
+        "path": "/products/payroll",
+        "value": false,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_ZPP_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/products/factoring": {
+        "feature_id": "DEMO_TRADE:/products/factoring",
+        "path": "/products/factoring",
+        "value": false,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "FACTORING_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/region": {
+        "feature_id": "DEMO_TRADE:/region",
+        "path": "/region",
+        "value": "Москва",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "REGION"
+          ]
+        }
+      },
+      "DEMO_TRADE:/city": {
+        "feature_id": "DEMO_TRADE:/city",
+        "path": "/city",
+        "value": "Вымышленный город",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CITY"
+          ]
+        }
+      },
+      "DEMO_TRADE:/age_band": {
+        "feature_id": "DEMO_TRADE:/age_band",
+        "path": "/age_band",
+        "value": "3–5",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "COMPANY_AGE_YEARS_GRADATION"
+          ]
+        }
+      },
+      "DEMO_TRADE:/employees_band": {
+        "feature_id": "DEMO_TRADE:/employees_band",
+        "path": "/employees_band",
+        "value": "16–100",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "AMOUNT_WORKERS_FNS_GRADATION"
+          ]
+        }
+      },
+      "DEMO_TRADE:/development_stage": {
+        "feature_id": "DEMO_TRADE:/development_stage",
+        "path": "/development_stage",
+        "value": null,
+        "quality": "unknown",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "ECO_MARK_LABEL"
+          ]
+        }
+      },
+      "DEMO_TRADE:/group_id": {
+        "feature_id": "DEMO_TRADE:/group_id",
+        "path": "/group_id",
+        "value": null,
+        "quality": "unknown",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "GROUP_ID"
+          ]
+        }
+      },
+      "DEMO_TRADE:/client_type": {
+        "feature_id": "DEMO_TRADE:/client_type",
+        "path": "/client_type",
+        "value": null,
+        "quality": "unknown",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_TYPE"
+          ]
+        }
+      },
+      "DEMO_TRADE:/fts_present": {
+        "feature_id": "DEMO_TRADE:/fts_present",
+        "path": "/fts_present",
+        "value": true,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "FTS_FLAG"
+          ]
+        }
+      },
+      "DEMO_TRADE:/countries": {
+        "feature_id": "DEMO_TRADE:/countries",
+        "path": "/countries",
+        "value": [
+          "CN",
+          "TR"
+        ],
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "FTS_COUNTRY_NAME"
+          ]
+        }
+      },
+      "DEMO_TRADE:/revenue/raw": {
+        "feature_id": "DEMO_TRADE:/revenue/raw",
+        "path": "/revenue/raw",
+        "value": "123456.78",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "REVENUE_COMPANY"
+          ]
+        }
+      },
+      "DEMO_TRADE:/revenue/unit": {
+        "feature_id": "DEMO_TRADE:/revenue/unit",
+        "path": "/revenue/unit",
+        "value": null,
+        "quality": "unknown",
+        "origin": {
+          "kind": "derived",
+          "input_feature_ids": [
+            "DEMO_TRADE:/revenue/raw"
+          ],
+          "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+          "artifact_id": null,
+          "artifact_sha256": null
+        }
+      },
+      "DEMO_TRADE:/revenue/unit_status": {
+        "feature_id": "DEMO_TRADE:/revenue/unit_status",
+        "path": "/revenue/unit_status",
+        "value": "unconfirmed",
+        "quality": "derived",
+        "origin": {
+          "kind": "derived",
+          "input_feature_ids": [
+            "DEMO_TRADE:/revenue/raw"
+          ],
+          "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+          "artifact_id": null,
+          "artifact_sha256": null
+        }
+      },
+      "DEMO_TRADE:/revenue/period": {
+        "feature_id": "DEMO_TRADE:/revenue/period",
+        "path": "/revenue/period",
+        "value": null,
+        "quality": "unknown",
+        "origin": {
+          "kind": "derived",
+          "input_feature_ids": [
+            "DEMO_TRADE:/revenue/raw"
+          ],
+          "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+          "artifact_id": null,
+          "artifact_sha256": null
+        }
+      },
+      "DEMO_TRADE:/source_snapshot/data_as_of": {
+        "feature_id": "DEMO_TRADE:/source_snapshot/data_as_of",
+        "path": "/source_snapshot/data_as_of",
+        "value": null,
+        "quality": "unknown",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "SYNTHETIC_U"
+          ]
+        }
+      },
+      "DEMO_TRADE:/source_snapshot/exported_at": {
+        "feature_id": "DEMO_TRADE:/source_snapshot/exported_at",
+        "path": "/source_snapshot/exported_at",
+        "value": null,
+        "quality": "unknown",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "SYNTHETIC_U"
+          ]
+        }
+      },
+      "DEMO_TRADE:/source_snapshot/source_sha256": {
+        "feature_id": "DEMO_TRADE:/source_snapshot/source_sha256",
+        "path": "/source_snapshot/source_sha256",
+        "value": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "SYNTHETIC_U"
+          ]
+        }
+      },
+      "DEMO_TRADE:/source_snapshot/historical_applicability": {
+        "feature_id": "DEMO_TRADE:/source_snapshot/historical_applicability",
+        "path": "/source_snapshot/historical_applicability",
+        "value": "unknown",
+        "quality": "derived",
+        "origin": {
+          "kind": "derived",
+          "input_feature_ids": [
+            "DEMO_TRADE:/source_snapshot/data_as_of"
+          ],
+          "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+          "artifact_id": null,
+          "artifact_sha256": null
+        }
+      },
+      "DEMO_TRADE:/display_name": {
+        "feature_id": "DEMO_TRADE:/display_name",
+        "path": "/display_name",
+        "value": "Компания DEMO_TRADE",
+        "quality": "derived",
+        "origin": {
+          "kind": "derived",
+          "input_feature_ids": [
+            "DEMO_TRADE:/company_id"
+          ],
+          "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+          "artifact_id": null,
+          "artifact_sha256": null
+        }
+      },
+      "DEMO_TRADE:/is_synthetic": {
+        "feature_id": "DEMO_TRADE:/is_synthetic",
+        "path": "/is_synthetic",
+        "value": true,
+        "quality": "derived",
+        "origin": {
+          "kind": "derived",
+          "input_feature_ids": [
+            "DEMO_TRADE:/company_id"
+          ],
+          "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+          "artifact_id": null,
+          "artifact_sha256": null
+        }
+      }
+    },
+    "missing_fields": [
+      "/client_type",
+      "/development_stage",
+      "/group_id",
+      "/revenue/period",
+      "/revenue/unit",
+      "/source_snapshot/data_as_of",
+      "/source_snapshot/exported_at"
+    ],
+    "limitations": [
+      "revenue_unit_and_period_unconfirmed",
+      "products_describe_supplied_bank_record_only",
+      "registered_region_not_all_operations",
+      "okved_not_cost_structure",
+      "group_id_not_proof_of_ownership",
+      "source_business_date_unknown_historical_applicability_unproven"
+    ],
+    "normalization_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+    "okved": {
+      "code": "46.49",
+      "name": "Вымышленная торговля"
+    },
+    "industry": "trade",
+    "products": {
+      "rko": true,
+      "guarantee": false,
+      "loan": true,
+      "leasing": false,
+      "deposit": true,
+      "payroll": false,
+      "factoring": false
+    },
+    "region": "Москва",
+    "city": "Вымышленный город",
+    "age_band": "3–5",
+    "employees_band": "16–100",
+    "development_stage": null,
+    "group_id": null,
+    "client_type": null,
+    "fts_present": true,
+    "countries": [
+      "CN",
+      "TR"
+    ],
+    "revenue": {
+      "raw": "123456.78",
+      "unit": null,
+      "unit_status": "unconfirmed",
+      "period": null
+    },
+    "source_snapshot": {
+      "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+      "imported_at": "2026-10-21T00:00:00Z",
+      "data_as_of": null,
+      "exported_at": null,
+      "historical_applicability": "unknown"
+    },
+    "graph": {
+      "status": "not_loaded",
+      "graph_version": null,
+      "period": null,
+      "currency": null,
+      "neighbors": [],
+      "profile_coverage_by_nodes": null,
+      "graph_coverage": null,
+      "limitations": []
+    },
+    "profile_version": "50b4cc533c31d6a4c7372496db52b1cb3e09ab30541cf2537a777e4d5a18babe"
+  },
+  "relevance": {
+    "schema_version": "0.1",
+    "event_id": "demo:rate-forecast",
+    "event_version": 1,
+    "company_id": "DEMO_TRADE",
+    "profile_version": "50b4cc533c31d6a4c7372496db52b1cb3e09ab30541cf2537a777e4d5a18babe",
+    "user_role": "cfo",
+    "as_of": "2026-10-20T15:00:00+00:00",
+    "eligibility": "eligible",
+    "reason_codes": [],
+    "score": 0.36741214813127643,
+    "raw_total": 36.74121481312764,
+    "scoring_diagnostics": {
+      "groups": [
+        {
+          "group": "macro",
+          "raw_points": 4,
+          "role_multiplier": 1,
+          "age_weight": 0.9771599684342459,
+          "weighted_points": 3.9086398737369836
+        },
+        {
+          "group": "product",
+          "raw_points": 28,
+          "role_multiplier": 1.2,
+          "age_weight": 0.9771599684342459,
+          "weighted_points": 32.83257493939066
+        }
+      ],
+      "age_policy": "decay",
+      "score_saturated": false
+    },
+    "level": "medium",
+    "reasons": [
+      {
+        "reason_id": "policy_rate_deposit_v1:demo:rate-forecast:claim-1:macro",
+        "group": "macro",
+        "text": "monetary_context; modality=forecast; polarity=affirmed; action=hold; stage=None. Экспозиция и финансовый эффект не установлены.",
+        "raw_points": 4,
+        "contribution": 0.03908639873736984,
+        "feature_ids": [
+          "DEMO_TRADE:/products/deposit"
+        ],
+        "claim_ids": [
+          "demo:rate-forecast:claim-1"
+        ],
+        "event_paths": [
+          "/claims/0/measurements/0/metric",
+          "/claims/0/object",
+          "/claims/0/modality",
+          "/claims/0/polarity",
+          "/claims/0/stage",
+          "/claims/0/action"
+        ],
+        "basis": "metadata_match"
+      },
+      {
+        "reason_id": "policy_rate_loan_v1:demo:rate-forecast:claim-1:product",
+        "group": "product",
+        "text": "financing_conditions; modality=forecast; polarity=affirmed; action=hold; stage=None. Экспозиция и финансовый эффект не установлены.",
+        "raw_points": 28,
+        "contribution": 0.32832574939390663,
+        "feature_ids": [
+          "DEMO_TRADE:/products/loan"
+        ],
+        "claim_ids": [
+          "demo:rate-forecast:claim-1"
+        ],
+        "event_paths": [
+          "/claims/0/measurements/0/metric",
+          "/claims/0/object",
+          "/claims/0/modality",
+          "/claims/0/polarity",
+          "/claims/0/stage",
+          "/claims/0/action"
+        ],
+        "basis": "conditional_mechanism"
+      }
+    ],
+    "candidate_channels": [
+      "macro",
+      "product"
+    ],
+    "feature_ids": [
+      "DEMO_TRADE:/products/deposit",
+      "DEMO_TRADE:/products/loan"
+    ],
+    "claim_ids": [
+      "demo:rate-forecast:claim-1"
+    ],
+    "evidence_status": "usable",
+    "limitations": [
+      "heuristic_uncalibrated_priority",
+      "modality_forecast",
+      "operating_territory_unknown",
+      "profile_historical_applicability_unknown",
+      "Полностью синтетический пример; не является сообщением о реальном событии."
+    ],
+    "scoring_version": "baseline-0.1",
+    "rules_sha256": "41cc60f39f4f93be93442a44dab4a81149392e14f5aaba8f18addd74a64a4a8e"
+  },
+  "role": "cfo",
+  "as_of": "2026-10-20T15:00:00+00:00",
+  "config": {},
+  "payload": {
+    "identity": {
+      "event_id": "demo:rate-forecast",
+      "event_version": 1,
+      "company_id": "DEMO_TRADE",
+      "profile_version": "50b4cc533c31d6a4c7372496db52b1cb3e09ab30541cf2537a777e4d5a18babe",
+      "user_role": "cfo"
+    },
+    "as_of": "2026-10-20T15:00:00+00:00",
+    "claims": [
+      {
+        "claim_id": "demo:rate-forecast:claim-1",
+        "text": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+        "modality": "forecast",
+        "polarity": "affirmed",
+        "stage": null,
+        "attribution": {
+          "entity_id": "demo:analyst",
+          "name": "Учебный аналитический центр"
+        },
+        "participants": [
+          {
+            "entity_id": "demo:regulator",
+            "name": "Учебный регулятор",
+            "role": "decision_maker"
+          }
+        ],
+        "action": "hold",
+        "object": "policy_rate",
+        "geographies": [
+          "RU"
+        ],
+        "time": {
+          "occurred_at": null,
+          "effective_at": null,
+          "observation_period": null,
+          "forecast_horizon": {
+            "start": "2026-10-23",
+            "end": "2026-10-23",
+            "text": "2026-10-23"
+          }
+        },
+        "measurements": [
+          {
+            "measurement_id": "demo:rate-forecast:measurement-1",
+            "metric": "policy_rate",
+            "kind": "level",
+            "value": "14",
+            "unit": "percent",
+            "qualifier": "exact",
+            "comparison_period": null
+          }
+        ],
+        "evidence_ids": [
+          "demo:rate-forecast:evidence-1"
+        ],
+        "field_evidence": {
+          "/text": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/modality": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/polarity": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/attribution": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/participants/0": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/action": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/object": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/geographies/0": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/measurements/0": [
+            "demo:rate-forecast:evidence-1"
+          ],
+          "/time/forecast_horizon": [
+            "demo:rate-forecast:evidence-1"
+          ]
+        }
+      }
+    ],
+    "conflicts": [],
+    "features": {
+      "DEMO_TRADE:/products/deposit": {
+        "feature_id": "DEMO_TRADE:/products/deposit",
+        "path": "/products/deposit",
+        "value": true,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_DEP_MARK"
+          ]
+        }
+      },
+      "DEMO_TRADE:/products/loan": {
+        "feature_id": "DEMO_TRADE:/products/loan",
+        "path": "/products/loan",
+        "value": true,
+        "quality": "observed",
+        "origin": {
+          "kind": "csv",
+          "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+          "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "data_record_numbers": [
+            3
+          ],
+          "columns": [
+            "CL_PRODUCT_LOA_MARK"
+          ]
+        }
+      }
+    },
+    "profile_limitations": [
+      "revenue_unit_and_period_unconfirmed",
+      "products_describe_supplied_bank_record_only",
+      "registered_region_not_all_operations",
+      "okved_not_cost_structure",
+      "group_id_not_proof_of_ownership",
+      "source_business_date_unknown_historical_applicability_unproven"
+    ],
+    "reasons": [
+      {
+        "reason_id": "policy_rate_deposit_v1:demo:rate-forecast:claim-1:macro",
+        "group": "macro",
+        "text": "monetary_context; modality=forecast; polarity=affirmed; action=hold; stage=None. Экспозиция и финансовый эффект не установлены.",
+        "raw_points": 4,
+        "contribution": 0.03908639873736984,
+        "feature_ids": [
+          "DEMO_TRADE:/products/deposit"
+        ],
+        "claim_ids": [
+          "demo:rate-forecast:claim-1"
+        ],
+        "event_paths": [
+          "/claims/0/measurements/0/metric",
+          "/claims/0/object",
+          "/claims/0/modality",
+          "/claims/0/polarity",
+          "/claims/0/stage",
+          "/claims/0/action"
+        ],
+        "basis": "metadata_match"
+      },
+      {
+        "reason_id": "policy_rate_loan_v1:demo:rate-forecast:claim-1:product",
+        "group": "product",
+        "text": "financing_conditions; modality=forecast; polarity=affirmed; action=hold; stage=None. Экспозиция и финансовый эффект не установлены.",
+        "raw_points": 28,
+        "contribution": 0.32832574939390663,
+        "feature_ids": [
+          "DEMO_TRADE:/products/loan"
+        ],
+        "claim_ids": [
+          "demo:rate-forecast:claim-1"
+        ],
+        "event_paths": [
+          "/claims/0/measurements/0/metric",
+          "/claims/0/object",
+          "/claims/0/modality",
+          "/claims/0/polarity",
+          "/claims/0/stage",
+          "/claims/0/action"
+        ],
+        "basis": "conditional_mechanism"
+      }
+    ],
+    "limitations": [
+      "heuristic_uncalibrated_priority",
+      "modality_forecast",
+      "operating_territory_unknown",
+      "profile_historical_applicability_unknown",
+      "Полностью синтетический пример; не является сообщением о реальном событии."
+    ],
+    "bank_sources": [],
+    "news_sources": [
+      {
+        "source_id": "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2",
+        "type": "synthetic_news",
+        "locator": "demo:rate-forecast:article-1:v1",
+        "published_at": "2026-10-20T10:00:00+03:00",
+        "quote": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+        "verification_status": "synthetic",
+        "publisher": "Учебное издание",
+        "url": null,
+        "content_kind": "synthetic",
+        "is_synthetic": true,
+        "evidence_id": "demo:rate-forecast:evidence-1",
+        "article_id": "demo:rate-forecast:article-1",
+        "article_version": 1,
+        "event_id": "demo:rate-forecast",
+        "event_version": 1,
+        "char_start": 0,
+        "char_end": 128,
+        "text_sha256": "2b0f095b6f52198dfedfb64a2b32f7658f4f9c4d61e0f4a0a720f1a5e17ffbbb"
+      }
+    ]
+  },
+  "excluded_artifacts": [],
+  "fingerprint": "2ac1aaee952c951570225a24ccb4f9de61879884e3361d35ab7330747af6affd",
+  "registry": {
+    "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2": {
+      "source_id": "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2",
+      "type": "synthetic_news",
+      "locator": "demo:rate-forecast:article-1:v1",
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "quote": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+      "verification_status": "synthetic",
+      "publisher": "Учебное издание",
+      "url": null,
+      "content_kind": "synthetic",
+      "is_synthetic": true,
+      "evidence_id": "demo:rate-forecast:evidence-1",
+      "article_id": "demo:rate-forecast:article-1",
+      "article_version": 1,
+      "event_id": "demo:rate-forecast",
+      "event_version": 1,
+      "char_start": 0,
+      "char_end": 128,
+      "text_sha256": "2b0f095b6f52198dfedfb64a2b32f7658f4f9c4d61e0f4a0a720f1a5e17ffbbb"
+    }
+  }
+}

@@ -4,6 +4,17 @@ Scope: components actually used for the local audit/OCR/search preparation, supp
 materials, and a clearly separate register of proposed LLM integrations.
 This is not a complete dependency/license inventory of a future deployed service.
 
+Update for the implemented offline RAG/agent route (2026-10-21): llm/rag and
+llm/agent now have local retrieval, QA, persistence and fixture orchestration.
+These use the existing locked JSON Schema packages and Python standard library;
+no additional third-party package, embedding model or runtime LLM was added.
+llm/rag/tests/fixtures/, llm/agent/tests/fixtures/ and
+data/examples/personalization/agent/ contain authored, wholly fictional examples.
+Supplied analytics/OCR were searched locally under the dataset terms below.
+The fixture generator is project code, not an LLM or an independent quality benchmark.
+Earlier architecture-only descriptions below remain historical preparation notes;
+current implementation scope is recorded in docs/implementation/04-05-orchestration.md.
+
 ## Software actually used
 
 1. CPython 3.13.5 and standard library
@@ -206,12 +217,9 @@ It is not wired into the resulting scripts or proposed application.
 ## Development-only tools
 
 The shell, Debian package download/extraction utilities and the environment's
-web search were used during preparation. One public search attempted to
-identify the initially unspecified SIGMA reference; no matching reference was
-established from that search. The user subsequently supplied a SIGMA description,
-which informed the architecture plan. No SIGMA
-source code or LangChain runtime was imported. No external news dataset was
-downloaded by that search.
+web search were used during preparation. User-supplied architectural descriptions
+informed the plan. No external agent platform source code or LangChain runtime
+was imported. No external news dataset was downloaded by that preliminary search.
 
 License texts for Apache-2.0 and GPL-2 are retained under licenses.
 Before release, append every newly added library, image/container, model,
@@ -228,6 +236,26 @@ its code, weights, trained classifiers and thresholds are not reproduced.
 The B5 regression corpus is independently authored fictional data. Supplied
 news texts, B1 development annotations and B5 development reports remain local
 under ignored data/context/events/.
+
+## Development-only B6 contract review (2026-10-21)
+
+scripts/review_event_bundle.py uses jsonschema for JSON Schema Draft 2020-12
+and format validation. Installed in an isolated uv environment; these packages
+are not added to the backend runtime. Versions observed during this review:
+
+- jsonschema 4.25.1 — MIT; https://github.com/python-jsonschema/jsonschema
+- attrs 26.1.0 — MIT; https://github.com/python-attrs/attrs
+- jsonschema-specifications 2025.9.1 — MIT;
+  https://github.com/python-jsonschema/jsonschema-specifications
+- referencing 0.37.0 — MIT; https://github.com/python-jsonschema/referencing
+- rpds-py 2026.9.1 — MIT; https://github.com/crate-py/rpds
+- typing-extensions 4.16.0 — PSF-2.0;
+  https://github.com/python/typing_extensions
+
+License expressions above were read from installed distribution metadata.
+Only jsonschema is pinned by the documented review command; transitive versions
+are recorded here as observations, not as a runtime dependency lock.
+
 ## Personalization Python runtime (2026-10-21)
 
 Root pyproject.toml and uv.lock now pin the isolated personalization runtime;
@@ -250,3 +278,24 @@ is a build dependency (MIT); its exact isolated build resolution is controlled
 by the build frontend, not a backend runtime dependency. Contract fixtures in
 data/examples/personalization/contracts/ are handcrafted, entirely fictional,
 and contain no supplied company/payment/bank-document derivatives.
+
+## Isolated CPU news embedding experiment
+
+The optional experiment in `ranking/experiments/cpu_news_embeddings/` uses
+intfloat/multilingual-e5-small (384), multilingual-e5-base (768), and
+multilingual-e5-large (1024), official INT8 ONNX exports (MIT). These are not
+integrated into the baseline ranking runtime. Exact pinned revisions, model
+sources, dependency versions/licenses and news-data provenance are listed in
+`ranking/experiments/cpu_news_embeddings/THIRD_PARTY_NOTICES.md` and its uv.lock.
+Downloaded weights and local news/company artifacts are excluded from Git.
+
+Company representation runtime (optional embeddings extra):
+- NumPy 2.5.4 — BSD-3-Clause; https://github.com/numpy/numpy
+- ONNX Runtime 1.31.0 — MIT; https://github.com/microsoft/onnxruntime
+- Hugging Face tokenizers 0.23.3 — Apache-2.0; https://github.com/huggingface/tokenizers
+- intfloat/multilingual-e5-small — MIT, revision 614241f622f53c4eeff9890bdc4f31cfecc418b3; https://huggingface.co/intfloat/multilingual-e5-small
+  Model files reused from the pinned local CPU experiment; embeddings are derived local artifacts.
+
+The complete installed company-embedding runtime dependency inventory (including
+transitive distributions), model revision and dataset provenance are recorded in
+`retriever/THIRD_PARTY_NOTICES.md`; exact versions remain locked in root uv.lock.

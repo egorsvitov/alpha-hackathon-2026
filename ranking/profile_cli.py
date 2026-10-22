@@ -27,7 +27,7 @@ def run(args):
         if args.with_payments:
             if args.payments_csv is None:
                 raise ProfileError('payments_csv_required','--with-payments requires --payments-csv')
-            profile = attach_payment_graph([profile],repo.company_ids,args.payments_csv,config={'state_dir':args.state_dir})[0][0]
+            profile = attach_payment_graph([profile],repo.company_ids - repo.conflicts,args.payments_csv,config={'state_dir':args.state_dir})[0][0]
         require_valid_contract(profile,'company-profile')
         encoded = json.dumps(profile,ensure_ascii=False,indent=2,allow_nan=False)+'\n'
         if args.output:

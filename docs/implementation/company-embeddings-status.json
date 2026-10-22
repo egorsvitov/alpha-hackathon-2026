@@ -1,0 +1,46 @@
+{
+  "company_embeddings_ready": true,
+  "payment_context_ready": true,
+  "dense_ready": true,
+  "hybrid_ready": true,
+  "quality_evaluated": false,
+  "quality_status": "not_evaluated",
+  "analyst_integrated": false,
+  "gpu_verified": false,
+  "graph_default_enabled": false,
+  "tests": {
+    "retriever_including_real_cpu": 41,
+    "existing_ranking_data_contracts": 36,
+    "legacy_analyst_regression_only": 44
+  },
+  "company_count": 85513,
+  "base_view_count": 218332,
+  "unique_base_vectors": 903,
+  "snapshot_id": "8ee9f89b9a760ad9d80456878101ffdf16b88daf8092beabe717883b1cd790db",
+  "encoder_fingerprint": "959b8d695ee2637aa7b494198686977810a8b1e5d1830b50630ac2ef58ca5607",
+  "source_sha256": "cb48983806ce7ca0ae045a40c9627ccbe47cc72bfb54058db04df2386da4a983",
+  "payment_sha256": "30095f75bead1a1dac0d7232b0da09a326b7ef643ee3b77b36ad3b4458a1cab3",
+  "gates": {
+    "E0": "passed",
+    "I1": "agents_started_then_quota_error_orchestrator_completed",
+    "I2": "passed",
+    "I3": "passed",
+    "I4": "passed",
+    "I5": "runtime_matrix_passed_quality_not_evaluated_R7_pending"
+  },
+  "measurements": {
+    "full_build_seconds": 144.3192387989984,
+    "full_repeat_seconds": 37.72352843900444,
+    "full_repeat_encoded_texts": 0,
+    "full_process_peak_rss_mib": 1821.8359375,
+    "event_count": 100,
+    "event_chunks": 200,
+    "event_index_seconds": 2.4126816619973397
+  },
+  "dependencies": [
+    "human judgments and reviewed story splits",
+    "R7 batch -> analyst -> backend integration",
+    "configured paid LLM provider/prices/budget for live analytics"
+  ],
+  "paid_llm_calls": 0
+}

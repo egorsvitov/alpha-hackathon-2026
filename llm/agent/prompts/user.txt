@@ -1,0 +1,3 @@
+The structured payload contains pinned identity, role, claims with modality/polarity,
+conflicts, selected profile features, ranking reasons and permitted source excerpts.
+Explain only supported content; mark missing sections and unknown contractual inputs.

@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claims",
+    "section_states",
+    "unknowns",
+    "limitations",
+    "requested_evidence"
+  ],
+  "properties": {
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "section_states": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "what_happened",
+        "why_important",
+        "risk",
+        "opportunity",
+        "next_step",
+        "bank_view"
+      ],
+      "properties": {
+        "what_happened": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "available",
+                "not_identified",
+                "insufficient_evidence",
+                "not_applicable"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "why_important": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "available",
+                "not_identified",
+                "insufficient_evidence",
+                "not_applicable"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "risk": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "available",
+                "not_identified",
+                "insufficient_evidence",
+                "not_applicable"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "opportunity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "available",
+                "not_identified",
+                "insufficient_evidence",
+                "not_applicable"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "next_step": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "available",
+                "not_identified",
+                "insufficient_evidence",
+                "not_applicable"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "bank_view": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "available",
+                "not_identified",
+                "insufficient_evidence",
+                "not_applicable"
+              ]
+            },
+            "reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "text",
+          "affected_paths",
+          "clarification_question"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "affected_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clarification_question": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requested_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "section",
+        "kind",
+        "text",
+        "source_ids",
+        "feature_ids",
+        "assumptions",
+        "support_status",
+        "input_claim_ids",
+        "modality",
+        "polarity"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "what_happened",
+            "why_important",
+            "risk",
+            "opportunity",
+            "next_step",
+            "bank_view"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "source_fact",
+            "bank_view",
+            "ai_inference"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "source_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "feature_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "support_status": {
+          "enum": [
+            "supported",
+            "conditional",
+            "pending_review"
+          ]
+        },
+        "input_claim_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "modality": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "polarity": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ai_inference"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "feature_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "section": {
+                "const": "bank_view"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "bank_view"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "source_fact"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "input_claim_ids": {
+                "minItems": 1
+              },
+              "modality": {
+                "type": "string"
+              },
+              "polarity": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "ai_inference"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "modality": {
+                "type": "null"
+              },
+              "polarity": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

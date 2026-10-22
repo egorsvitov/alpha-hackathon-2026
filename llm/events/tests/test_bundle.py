@@ -301,12 +301,12 @@ class BundleTests(unittest.TestCase):
     def test_ranking_version_boundary(self):
         eid = self.ready()
         self.service.publish()
-        # The consumer's existing validator still accepts only v0.1.
+        # The migrated consumer accepts both schemas without downgrading v0.2.
         from ranking.b6 import validate_bundle as ranking_validate
         v01 = json.loads((ROOT / 'docs/b6-examples/normal.json').read_text())
         v02 = self.service.get_event(eid)
         self.assertFalse([i for i in ranking_validate(v01) if i.severity == 'error'])
-        self.assertTrue([i for i in ranking_validate(v02) if i.severity == 'error'])
+        self.assertFalse([i for i in ranking_validate(v02) if i.severity == 'error'])
 
     def test_quality_uses_structured_metadata(self):
         self.ready()

@@ -1,0 +1,13 @@
+{
+  "source_kind": "synthetic",
+  "independent_benchmark": false,
+  "queries": [
+    {"topic": "rates", "intent": "Найти обсуждение ключевой ставки и стоимости кредитования; не подтверждать число из новости"},
+    {"topic": "inflation", "object": "fuel", "intent": "Найти инфляционные механизмы и цены топлива"},
+    {"topic": "market_indicator", "object": "wages", "intent": "Найти обсуждение зарплаты и рынка труда"},
+    {"topic": "gdp", "intent": "Найти экономический рост с сохранением горизонта прогноза"},
+    {"topic": "gold", "intent": "Недатированные обзоры только в diagnostics строгого replay"},
+    {"topic": "steel", "intent": "Исторический обзор не становится текущим мнением"},
+    {"topic": "unknown_factor", "intent": "Общий lexical fallback требует два содержательных совпадения"}
+  ]
+}

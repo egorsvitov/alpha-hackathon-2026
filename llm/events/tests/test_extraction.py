@@ -231,7 +231,9 @@ class ExtractionTests(unittest.TestCase):
 
     def test_missing_usage_holds_reservation_after_restart(self):
         self.queue();runner,_=self.runner([self.response(usage=False)]);result=runner.run_next(self.spec,self.limits)
-        reopened=CallLedger(EventStore(self.db),offline=True)
+        # Restart must preserve the test clock; wall time may be another
+        # Moscow budget day and move this amount into carried_reserved_rub.
+        reopened=CallLedger(EventStore(self.db,clock=self.clock),offline=True)
         call=reopened.get(result.call_id)
         self.assertEqual(call['state'],'unknown')
         self.assertEqual(Decimal(reopened.budget()['accounted_rub']),maximum_cost(self.profile,self.limits))

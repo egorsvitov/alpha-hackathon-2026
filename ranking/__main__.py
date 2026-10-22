@@ -40,7 +40,7 @@ def main(argv=None):
     ingest.add_argument("--mode",choices=["live","fixture"],default="live")
     ingest.add_argument("--fixture-clock")
     ingest.set_defaults(func=_ingest)
-    for name in ("profile_cli","rank_cli"):
+    for name in ("profile_cli",):
         try:
             module = importlib.import_module("ranking."+name)
         except ModuleNotFoundError as exc:

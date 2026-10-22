@@ -53,6 +53,10 @@ alfa_hack.db
 /data/processed/personalization/
 /data/processed/ranking/
 /data/processed/events/
+
+# Local personalization derivatives and state
+/data/processed/ranking/
+/data/processed/personalization/
 *.db-wal
 *.db-shm
 *.sqlite3-wal
@@ -60,3 +64,8 @@ alfa_hack.db
 *.egg-info/
 build/
 dist/
+
+# Retriever generated indexes, vectors, evaluation artifacts
+/data/processed/retriever/
+*.sqlite-wal
+*.sqlite-shm

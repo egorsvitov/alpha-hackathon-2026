@@ -1,0 +1,119 @@
+{
+  "claims": [
+    {
+      "claim_id": "report:demo:rate-forecast:claim-1",
+      "section": "what_happened",
+      "kind": "source_fact",
+      "text": "Учебный аналитический центр ожидает, что 23 октября 2026 года Учебный регулятор сохранит ключевую ставку в России на уровне 14%.",
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [],
+      "assumptions": [],
+      "support_status": "supported",
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "modality": "forecast",
+      "polarity": "affirmed"
+    },
+    {
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [
+        "DEMO_TRADE:/products/loan"
+      ],
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "kind": "ai_inference",
+      "modality": null,
+      "polarity": null,
+      "support_status": "conditional",
+      "assumptions": [
+        "Неизвестны тип ставки, объём кредита и даты пересмотра условий."
+      ],
+      "claim_id": "synthetic:conditional-credit",
+      "section": "why_important",
+      "text": "Если договор предусматривает пересмотр ставки, прогноз источника может быть поводом проверить будущие условия кредита."
+    },
+    {
+      "source_ids": [
+        "news:8da8ab544a8e150ffd2f4a12f424b6f4a50dca038cfb6d196f198775a8e99cb2"
+      ],
+      "feature_ids": [
+        "DEMO_TRADE:/products/loan"
+      ],
+      "input_claim_ids": [
+        "demo:rate-forecast:claim-1"
+      ],
+      "kind": "ai_inference",
+      "modality": null,
+      "polarity": null,
+      "support_status": "conditional",
+      "assumptions": [
+        "Неизвестны тип ставки, объём кредита и даты пересмотра условий."
+      ],
+      "claim_id": "synthetic:check-contract",
+      "section": "next_step",
+      "text": "Проверьте договор кредита: тип ставки, объём и даты пересмотра условий пока неизвестны."
+    }
+  ],
+  "section_states": {
+    "what_happened": {
+      "status": "available",
+      "reason": null
+    },
+    "why_important": {
+      "status": "available",
+      "reason": null
+    },
+    "risk": {
+      "status": "insufficient_evidence",
+      "reason": "Offline fixture does not establish this section."
+    },
+    "opportunity": {
+      "status": "insufficient_evidence",
+      "reason": "Offline fixture does not establish this section."
+    },
+    "next_step": {
+      "status": "available",
+      "reason": null
+    },
+    "bank_view": {
+      "status": "insufficient_evidence",
+      "reason": "Offline fixture does not establish this section."
+    }
+  },
+  "unknowns": [
+    {
+      "id": "contract:rate_type",
+      "text": "Contractual rate_type is unknown.",
+      "affected_paths": [
+        "/claims"
+      ],
+      "clarification_question": "Уточните договорное условие: rate_type?"
+    },
+    {
+      "id": "contract:debt_amount",
+      "text": "Contractual debt_amount is unknown.",
+      "affected_paths": [
+        "/claims"
+      ],
+      "clarification_question": "Уточните договорное условие: debt_amount?"
+    },
+    {
+      "id": "contract:repricing_date",
+      "text": "Contractual repricing_date is unknown.",
+      "affected_paths": [
+        "/claims"
+      ],
+      "clarification_question": "Уточните договорное условие: repricing_date?"
+    }
+  ],
+  "limitations": [
+    "Synthetic deterministic fixture; no financial reasoning or independent semantic review."
+  ],
+  "requested_evidence": []
+}
