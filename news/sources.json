@@ -28,6 +28,12 @@
     { "name": "ural_region", "kind": "rss", "url": "https://www.urfo.org/rss", "category": "business", "limit": 100, "language": "ru" },
     { "name": "retail_news", "kind": "rss", "url": "https://www.retailer.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
     { "name": "it_industry", "kind": "rss", "url": "https://www.comnews.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
-    { "name": "it_news", "kind": "rss", "url": "https://www.cnews.ru/rss/", "category": "industry", "limit": 100, "language": "ru" }
+    { "name": "it_news", "kind": "rss", "url": "https://www.cnews.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
+    { "name": "cnews_it", "kind": "rss", "url": "https://www.cnews.ru/inc/rss/news.xml", "category": "industry", "limit": 100, "language": "ru" },
+    { "name": "3dnews", "kind": "rss", "url": "https://3dnews.ru/news/rss/", "category": "industry", "limit": 100, "language": "ru" },
+    { "name": "rbc_realty", "kind": "rss", "url": "https://realty.rbc.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
+    { "name": "tourdom", "kind": "rss", "url": "https://www.tourdom.ru/rss/", "category": "industry", "limit": 100, "language": "ru" },
+    { "name": "metaltorg", "kind": "rss", "url": "https://www.metaltorg.ru/news/rss/", "category": "industry", "limit": 100, "language": "ru" },
+    { "name": "sostav", "kind": "rss", "url": "https://www.sostav.ru/rss/", "category": "industry", "limit": 100, "language": "ru" }
   ]
 }

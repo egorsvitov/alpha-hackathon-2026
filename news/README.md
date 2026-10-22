@@ -102,6 +102,52 @@ news/
     batch_plan.py      # профиль → план батча (темы/регионы/страны/источники)
     topic_filter.py    # фильтр кандидатов по плану (без LLM, на этапе сбора)
     plan_cli.py        # CLI: показать профиль и план батча
+    source_discovery.py    # поиск новых источников под темы аудитории
+    source_discovery_cli.py # CLI: показать/проверить/добавить рекомендованные источники
+  scheduler.py         # периодическая проверка новых статей (расписание)
+```
+
+## Поиск новых источников под целевую аудиторию
+
+`news/profile/source_discovery.py` анализирует профиль аудитории (отрасли,
+страны ВЭД) и определяет, каких тематических источников не хватает. Каталог
+`POTENTIAL_SOURCES` связывает тему аудитории с кандидатами источников.
+
+```bash
+# показать темы аудитории и рекомендованные источники
+.venv_news/bin/python news/profile/source_discovery_cli.py
+
+# проверить доступность рекомендованных источников и добавить рабочие в sources.json
+.venv_news/bin/python news/profile/source_discovery_cli.py --add
+
+# без записи в реестр
+.venv_news/bin/python news/profile/source_discovery_cli.py --add --dry-run
+```
+
+`--add` проверяет каждый рекомендованный источник (HTTP-статус + число записей
+через feedparser) и добавляет в `sources.json` только те, что реально отдают
+статьи. Так пул источников растёт под конкретную аудиторию, а не вручную.
+
+## Расписание проверки новых статей
+
+`news/scheduler.py` периодически запускает сбор новостей и ведёт журнал
+запусков (`schedule_state.json`). Подходит для демо и Docker — не зависит от
+внешнего cron ОС.
+
+```bash
+# каждый час, бесконечно
+.venv_news/bin/python news/scheduler.py --every 3600
+
+# один проход и выход
+.venv_news/bin/python news/scheduler.py --once
+
+# CRON-выражение (минуты часы): каждые 6 часов
+.venv_news/bin/python news/scheduler.py --cron "0 */6 * * *"
+```
+
+Параметры сбора (`--target`, `--category`, `--out-dir`, `--cache-dir`)
+пробрасываются в `dump_large.py`. Журнал запусков виден в
+`data/processed/news_bulk/schedule_state.json`.
 ```
 
 ## Профилирование целевой аудитории (тематика батчей)
