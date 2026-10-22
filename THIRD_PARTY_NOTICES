@@ -146,6 +146,10 @@ No embedding model, neural reranker or multi-agent framework was used.
   key-rate example taken from the case brief.
 - frontend/src/components/Illustrations.tsx: original SVG illustrations drawn by the team;
   no bank artwork is copied.
+- frontend/src/components/Brand.tsx, frontend/public/favicon.svg and the "Cabinet" home screen art:
+  the Alfa-Business logo, the demo company logos and the promo card are the team's own simplified
+  imitations drawn in the style of the organisers' screenshots, for demonstration only; no
+  official bank logo files, brand assets or brand book were used.
 - frontend/src/api/mock/: in-browser mock of the backend used when VITE_API_MODE=mock.
 - The demo login, the manager message / request / callback buttons and the browser
   notifications in the frontend simulate bank integrations (authorisation, CRM,
