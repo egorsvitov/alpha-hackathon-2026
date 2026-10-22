@@ -285,11 +285,16 @@ class Fetcher:
         if not extracted:
             return FetchResult(error="extract: пустой текст")
 
-        # Дата/заголовок из метаданных, если лента их не дала.
+        # Дата/заголовок из метаданных страницы статьи.
         meta = trafilatura.metadata.extract_metadata(content)
         title = candidate.title
-        if meta and meta.title and len(meta.title) > len(title):
-            title = meta.title
+        if meta and meta.title:
+            # Настоящий заголовок статьи предпочтительнее: он читаемый (кириллица)
+            # и обычно длиннее, чем транслитерированный slug из URL. Берём его,
+            # если он кириллический ИЛИ длиннее текущего fallback.
+            has_cyrillic = any("\u0400" <= ch <= "\u04FF" for ch in meta.title)
+            if has_cyrillic or len(meta.title) > len(title):
+                title = meta.title.strip()
         published_at = candidate.published_at
         if meta and meta.date and not published_at:
             published_at = meta.date
