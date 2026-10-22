@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "Coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "processed",
+            "excluded",
+            "unresolved",
+            "rejected",
+            "deferred",
+            "missing"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "candidate_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/Issue"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "mention_id",
+        "status"
+      ],
+      "title": "Coverage",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "path",
+        "message"
+      ],
+      "title": "Issue",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "extraction-audit.v2",
+      "default": "extraction-audit.v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "minLength": 1,
+      "title": "Source Id",
+      "type": "string"
+    },
+    "article_sha256": {
+      "minLength": 1,
+      "title": "Article Sha256",
+      "type": "string"
+    },
+    "variant": {
+      "enum": [
+        "A",
+        "B"
+      ],
+      "title": "Variant",
+      "type": "string"
+    },
+    "coverage": {
+      "items": {
+        "$ref": "#/$defs/Coverage"
+      },
+      "title": "Coverage",
+      "type": "array"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "excluded_candidate_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Excluded Candidate Ids",
+      "type": "array"
+    },
+    "input_artifact_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Input Artifact Ids",
+      "type": "array"
+    },
+    "incomplete": {
+      "title": "Incomplete",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "article_sha256",
+    "variant",
+    "coverage",
+    "issues",
+    "input_artifact_ids",
+    "incomplete"
+  ],
+  "title": "ExtractionAudit",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -12,12 +12,12 @@ from threading import Barrier
 import unittest
 from unittest.mock import patch
 
-from llm.events.models import Issue
-from llm.events.schemas import ROOT
-from llm.events.storage import EventStore, StorageError, processing_hash, source_id_for
-from llm.events.storage_models import ProcessingSpec
-from llm.events.storage_schema import APPLICATION_ID, SCHEMA_VERSION
-from llm.events.validation import validate_grounding
+from llm.events.contracts.models import Issue
+from llm.events.contracts.schemas import ROOT
+from llm.events.storage.store import EventStore, StorageError, processing_hash, source_id_for
+from llm.events.storage.models import ProcessingSpec
+from llm.events.storage.schema import APPLICATION_ID, SCHEMA_VERSION
+from llm.events.contracts.validation import validate_grounding
 
 
 class Clock:
@@ -440,7 +440,7 @@ class StorageTests(unittest.TestCase):
         raw=Path(self.temp.name)/"input.json"; raw.write_text(json.dumps([self.article]))
         spec=Path(self.temp.name)/"spec.json"; spec.write_text(self.spec.model_dump_json())
         def cli(*args):
-            result=subprocess.run([sys.executable,"-m","llm.events.storage_cli","--db",str(self.path),*map(str,args)],cwd=ROOT,capture_output=True,text=True)
+            result=subprocess.run([sys.executable,"-m","llm.events.storage.cli","--db",str(self.path),*map(str,args)],cwd=ROOT,capture_output=True,text=True)
             return result,json.loads(result.stdout)
         result,receipt=cli("import-batch",raw)
         self.assertEqual(result.returncode,0,result.stderr)

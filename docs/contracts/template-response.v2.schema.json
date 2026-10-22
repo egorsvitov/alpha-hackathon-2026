@@ -1,0 +1,64 @@
+{
+  "$defs": {
+    "Exclusion": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "unresolved_type": {
+          "default": false,
+          "title": "Unresolved Type",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "mention_id",
+        "reason"
+      ],
+      "title": "Exclusion",
+      "type": "object"
+    },
+    "JsonValue": {}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "records": {
+      "items": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Records",
+      "type": "array"
+    },
+    "excluded_mentions": {
+      "items": {
+        "$ref": "#/$defs/Exclusion"
+      },
+      "title": "Excluded Mentions",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "records",
+    "excluded_mentions",
+    "limitations"
+  ],
+  "title": "TemplateResponse",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

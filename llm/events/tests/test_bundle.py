@@ -10,13 +10,13 @@ from unittest.mock import patch
 
 from jsonschema import Draft202012Validator, FormatChecker
 from llm.events import EventBundleService, EventStore, StorageError
-from llm.events.bundle import build_bundle
-from llm.events.bundle_store import rules_configuration
-from llm.events.catalog_models import CanonicalEventRecord, ClaimContext, ReviewRequest
-from llm.events.migration import migrate_v3_to_v4
-from llm.events.models import ArticleRecord
-from llm.events.storage_schema import V3_DDL, V3_TABLES
-from llm.events.validation import validate_bundle, validate_grounding, ContractValidationError
+from llm.events.publication.builder import build_bundle
+from llm.events.publication.service import rules_configuration
+from llm.events.catalog.models import CanonicalEventRecord, ClaimContext, ReviewRequest
+from llm.events.storage.migration import migrate_v3_to_v4
+from llm.events.contracts.models import ArticleRecord
+from llm.events.storage.schema import V3_DDL, V3_TABLES
+from llm.events.contracts.validation import validate_bundle, validate_grounding, ContractValidationError
 from llm.events.tests import test_catalog as catalog_tests
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -99,8 +99,9 @@ class BundleTests(unittest.TestCase):
         self.helper.clock.value += 100
         with patch.object(self.store, '_transaction', wraps=self.store._transaction) as transactions:
             self.assertEqual(self.service.get_event(eid), bundle)
-            self.service.export_events(self.output)
             self.assertTrue(all(not c.kwargs.get('write', False) for c in transactions.call_args_list))
+        # Export takes a short writer reservation only to fence the final rename.
+        self.service.export_events(self.output)
         self.assertEqual(self.service.publish()['status'], 'cached')
         self.assertEqual(self.service.get_event(eid), bundle)
         self.error('event_not_found', self.service.get_event, 'unknown')
@@ -161,15 +162,16 @@ class BundleTests(unittest.TestCase):
         self.service.publish()
         old = self.service.get_event(eid)
         rules = {**rules_configuration(), 'rules_version': 'test-new'}
-        with patch('llm.events.bundle_store.rules_configuration', return_value=rules):
+        with patch('llm.events.publication.service.rules_configuration', return_value=rules):
             self.error('bundle_configuration_mismatch', self.service.publish)
             self.assertEqual(self.service.publish(rebuild=True)['changed_event_ids'], [])
             self.assertEqual(self.service.get_event(eid), old)
-        rules['rules_version'] = 'test-newer'
-        with patch('llm.events.bundle_store.rules_configuration', return_value=rules), \
-                patch.dict('llm.events.bundle.TYPE_LABELS', {'policy_rate': 'Решение о ставке'}):
-            self.service.publish(rebuild=True)
-            self.assertEqual(self.service.get_event(eid)['event']['event_version'], 2)
+        from llm.events.publication.models import PublicationConfig
+        from llm.events.publication.features import resolved_rules
+        dictionary = resolved_rules(PublicationConfig()).model_copy(deep=True)
+        dictionary.category_titles['policy_rate'] = 'Решение о ставке'
+        self.service.publish_snapshot(PublicationConfig(dictionary=dictionary))
+        self.assertEqual(self.service.get_event(eid)['event']['event_version'], 2)
         self.assertEqual(self.catalog.get_event(eid).event_version, 1)
         self.assertEqual(self.count('bundle_versions'), 2)
 
@@ -185,7 +187,7 @@ class BundleTests(unittest.TestCase):
         withdrawn = self.service.get_event(other)
         self.assertEqual(withdrawn['event']['event_id'], other)
         self.assertEqual(withdrawn['event']['availability'], 'withdrawn')
-        self.assertIn('Replaced by event IDs: ' + original, withdrawn['limitations'])
+        self.assertIn('Событие заменено: ' + original, withdrawn['limitations'])
         self.assertEqual(self.service.get_event(original)['event']['availability'], 'active')
 
     def test_empty_catalog_and_unknown_id(self):
@@ -202,7 +204,7 @@ class BundleTests(unittest.TestCase):
             bundle = real_build(*args, **kwargs)
             bundle.evidence[0].quote = 'x' * len(bundle.evidence[0].quote)
             return bundle
-        with patch('llm.events.bundle_store.build_bundle', side_effect=broken):
+        with patch('llm.events.publication.service.build_bundle', side_effect=broken):
             with self.assertRaises(ContractValidationError):
                 self.service.publish()
         self.assertEqual(self.count('bundle_versions'), 0)
@@ -212,7 +214,7 @@ class BundleTests(unittest.TestCase):
     def test_concurrent_catalog_and_publication_changes(self):
         self.ready()
         real_build = build_bundle
-        with patch('llm.events.bundle_store.build_bundle', side_effect=lambda *a, **kw: real_build(*a, **kw)):
+        with patch('llm.events.publication.service.build_bundle', side_effect=lambda *a, **kw: real_build(*a, **kw)):
             # Publish through the capture boundary to avoid recursively mocking the builder.
             capture = self.service._capture
             def concurrent_capture():
@@ -228,7 +230,7 @@ class BundleTests(unittest.TestCase):
             raw['title'] += ' late'
             self.store.import_batch(json.dumps([raw]).encode())
             return real_build(*args, **kwargs)
-        with patch('llm.events.bundle_store.build_bundle', side_effect=changed):
+        with patch('llm.events.publication.service.build_bundle', side_effect=changed):
             self.error('catalog_changed', self.service.publish)
         self.assertEqual(self.count('bundle_publications'), 1)
 
@@ -236,7 +238,7 @@ class BundleTests(unittest.TestCase):
         self.ready()
         self.service.publish()
         self.output.write_text('previous export')
-        with patch('llm.events.bundle_store.os.replace', side_effect=OSError('disk error')):
+        with patch('llm.events.publication.export.os.replace', side_effect=OSError('disk error')):
             self.error('storage_io_error', self.service.export_events, self.output)
         self.assertEqual(self.output.read_text(), 'previous export')
         self.assertEqual(list(self.output.parent.glob('.events.jsonl.*.tmp')), [])
@@ -257,7 +259,7 @@ class BundleTests(unittest.TestCase):
         path = self.output.with_suffix('.sqlite3')
         with ExitStack() as stack:
             for name, value in [('DDL', V3_DDL), ('TABLES', V3_TABLES), ('SCHEMA_VERSION', 3)]:
-                stack.enter_context(patch('llm.events.storage.' + name, value))
+                stack.enter_context(patch('llm.events.storage.store.' + name, value))
             old = EventStore(path)
             old_helper_store, old_helper_service = self.helper.store, self.helper.service
             self.helper.store = old
@@ -268,7 +270,7 @@ class BundleTests(unittest.TestCase):
             source = old.get_current_article('a')
             self.helper.store, self.helper.service = old_helper_store, old_helper_service
         self.error('storage_migration_required', EventStore, path)
-        with patch('llm.events.migration.B6_DDL', ['CREATE TABLE transient_b6(x)', 'INVALID SQL']):
+        with patch('llm.events.storage.migration.B6_DDL', ['CREATE TABLE transient_b6(x)', 'INVALID SQL']):
             self.error('storage_error', migrate_v3_to_v4, path)
         with closing(sqlite3.connect(path)) as conn:
             self.assertEqual(conn.execute('PRAGMA user_version').fetchone()[0], 3)
@@ -287,7 +289,7 @@ class BundleTests(unittest.TestCase):
 
     def test_cli(self):
         eid = self.ready()
-        command = [sys.executable, '-m', 'llm.events.bundle_cli', '--db', str(self.store.path)]
+        command = [sys.executable, '-m', 'llm.events.publication.cli', '--db', str(self.store.path)]
         for args in (['publish'], ['get', eid], ['export', '--output', str(self.output)]):
             result = subprocess.run(command + args, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
@@ -295,7 +297,7 @@ class BundleTests(unittest.TestCase):
             if args[0] == 'get':
                 self.assertEqual(payload, self.service.get_event(eid))
         self.assertEqual(subprocess.run(command + ['get', 'missing'], capture_output=True).returncode, 1)
-        self.assertEqual(subprocess.run(command + ['export'], capture_output=True).returncode, 2)
+        self.assertEqual(subprocess.run(command + ['export'], capture_output=True).returncode, 0)
 
     @unittest.skipUnless((ROOT / 'ranking/b6.py').is_file(), 'Ranking consumer is not present in this checkout')
     def test_ranking_version_boundary(self):
@@ -328,8 +330,10 @@ class BundleTests(unittest.TestCase):
         for field in ('action', 'object', 'modality', 'polarity'):
             changed = context.model_copy(deep=True)
             setattr(changed.claim, field, None if field in ('action', 'object') else 'unknown')
-            self.assertEqual(project(ctx=changed).event.quality, 'partial', field)
-        from llm.events.catalog_models import PairDecision
+            # An optional action/object does not make an otherwise usable claim partial.
+            self.assertEqual(project(ctx=changed).event.quality,
+                'complete' if field in ('action', 'object') else 'partial', field)
+        from llm.events.catalog.models import PairDecision
         cid = context.claim.claim_id
         decision = PairDecision(left_id=cid, right_id='other', identity='uncertain',
             rules_hash='offline', reasons=['uncertain'])

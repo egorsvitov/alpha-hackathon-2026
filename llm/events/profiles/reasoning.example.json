@@ -1,0 +1,19 @@
+{
+  "candidate_format": "b3.1",
+  "execution_mode": "live",
+  "base_url": "https://changellenge.up.railway.app/v1",
+  "model": "deepseek/deepseek-v4.1-flash",
+  "max_tokens": 4096,
+  "max_request_bytes": 100000,
+  "response_format": "json_schema",
+  "format_verified": false,
+  "thinking": "enabled",
+  "thinking_verified": false,
+  "reasoning_effort": "low",
+  "connect_timeout": 5.0,
+  "read_timeout": 60.0,
+  "limits_confirmed": false,
+  "max_input_tokens": null,
+  "max_output_tokens": null,
+  "context_window_tokens": null
+}

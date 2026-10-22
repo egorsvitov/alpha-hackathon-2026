@@ -1,0 +1,654 @@
+{
+  "version": "b6.1",
+  "category_titles": {
+    "policy_rate": "Ключевая ставка",
+    "fx_rate": "Валютные курсы",
+    "price_change": "Изменение цен",
+    "regulation": "Регулирование",
+    "sanction_or_trade_restriction": "Санкции и торговые ограничения",
+    "market_indicator": "Показатели экономики и рынка",
+    "company_results": "Результаты компании",
+    "investment": "Инвестиции",
+    "corporate_action": "Корпоративное действие",
+    "operational_incident": "Операционный инцидент",
+    "other": "Экономическое событие"
+  },
+  "subject_titles": {
+    "steel_consumption": "Потребление стали",
+    "policy_rate": "Ключевая ставка",
+    "official_exchange_rate": "Официальный валютный курс",
+    "inflation": "Инфляция",
+    "inflation_forecast": "Прогноз инфляции",
+    "oil_flow": "Поставки нефти",
+    "net_profit_ras": "Чистая прибыль по РСБУ",
+    "net_profit_ifrs": "Чистая прибыль по МСФО",
+    "operating_income": "Операционный доход",
+    "revenue": "Выручка",
+    "m2": "Денежная масса М2",
+    "money_supply_m2": "Денежная масса М2",
+    "broad_money_ex_fx_revaluation": "Широкая денежная масса",
+    "investment_amount": "Объём инвестиций",
+    "ddos_peak_power": "Мощность DDoS-атак"
+  },
+  "rules": [
+    {
+      "rule_id": "type.rate",
+      "when": {
+        "event_types": [
+          "policy_rate"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "rates"
+        ],
+        "industries": [],
+        "factors": [
+          "interest_rates"
+        ]
+      }
+    },
+    {
+      "rule_id": "type.fx",
+      "when": {
+        "event_types": [
+          "fx_rate"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "fx"
+        ],
+        "industries": [],
+        "factors": [
+          "fx"
+        ]
+      }
+    },
+    {
+      "rule_id": "type.investment",
+      "when": {
+        "event_types": [
+          "investment"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [],
+        "factors": [
+          "investments"
+        ]
+      }
+    },
+    {
+      "rule_id": "type.price",
+      "when": {
+        "event_types": [
+          "price_change"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "type.regulation",
+      "when": {
+        "event_types": [
+          "regulation",
+          "sanction_or_trade_restriction"
+        ]
+      },
+      "labels": {
+        "topics": [],
+        "industries": [],
+        "factors": [
+          "regulation"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.tariff",
+      "when": {
+        "objects": [
+          "import_tariff",
+          "export_tariff",
+          "customs_duty",
+          "пошлина",
+          "таможенная пошлина"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "trade"
+        ],
+        "industries": [],
+        "factors": [
+          "tariffs",
+          "trade"
+        ]
+      }
+    },
+    {
+      "rule_id": "action.sanctions",
+      "when": {
+        "actions": [
+          "impose_sanctions",
+          "ввести санкции"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "sanctions"
+        ],
+        "industries": [],
+        "factors": [
+          "sanctions"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.sanctions",
+      "when": {
+        "objects": [
+          "sanctions",
+          "financial_sanctions",
+          "санкции"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "sanctions"
+        ],
+        "industries": [],
+        "factors": [
+          "sanctions"
+        ]
+      }
+    },
+    {
+      "rule_id": "metric.steel",
+      "when": {
+        "metrics": [
+          "steel_consumption"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "steel"
+        ],
+        "factors": [
+          "demand"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.steel",
+      "when": {
+        "objects": [
+          "steel_consumption",
+          "steel_forecast_revision",
+          "steel_market_recovery"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "steel"
+        ],
+        "factors": [
+          "demand"
+        ]
+      }
+    },
+    {
+      "rule_id": "metric.money",
+      "when": {
+        "metrics": [
+          "m2",
+          "money_supply_m2",
+          "m2_monthly_growth",
+          "m2_yoy_growth",
+          "broad_money_ex_fx_revaluation",
+          "broad_money_yoy_growth"
+        ]
+      },
+      "labels": {
+        "topics": [],
+        "industries": [],
+        "factors": [
+          "liquidity"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.money",
+      "when": {
+        "objects": [
+          "money_supply_m2",
+          "money_supply_m2_yoy_growth",
+          "broad_money_ex_fx_revaluation",
+          "broad_money_yoy_growth"
+        ]
+      },
+      "labels": {
+        "topics": [],
+        "industries": [],
+        "factors": [
+          "liquidity"
+        ]
+      }
+    },
+    {
+      "rule_id": "metric.inflation",
+      "when": {
+        "metrics": [
+          "inflation",
+          "inflation_rate",
+          "cpi"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "inflation"
+        ],
+        "industries": [],
+        "factors": [
+          "inflation"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.inflation",
+      "when": {
+        "objects": [
+          "inflation",
+          "inflation_forecast",
+          "cpi"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "inflation"
+        ],
+        "industries": [],
+        "factors": [
+          "inflation"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.oil_flow",
+      "when": {
+        "objects": [
+          "oil_flow_ru_cn",
+          "oil_flow_br_cn",
+          "oil_supply_redistribution",
+          "oil_export_rank_to_china",
+          "combined_ru_br_oil_share"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "trade"
+        ],
+        "industries": [
+          "oil_gas_chemicals"
+        ],
+        "factors": [
+          "trade",
+          "logistics"
+        ]
+      }
+    },
+    {
+      "rule_id": "metric.oil_flow",
+      "when": {
+        "metrics": [
+          "oil_flow"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "trade"
+        ],
+        "industries": [
+          "oil_gas_chemicals"
+        ],
+        "factors": [
+          "trade",
+          "logistics"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.commodity_price",
+      "when": {
+        "event_types": [
+          "price_change"
+        ],
+        "objects": [
+          "oil",
+          "oil_brent",
+          "steel",
+          "coal",
+          "gold"
+        ]
+      },
+      "labels": {
+        "topics": [],
+        "industries": [],
+        "factors": [
+          "commodity_prices"
+        ]
+      }
+    },
+    {
+      "rule_id": "metric.commodity_price",
+      "when": {
+        "metrics": [
+          "oil_price",
+          "brent_price",
+          "steel_price",
+          "coal_price",
+          "gold_price"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [],
+        "factors": [
+          "commodity_prices"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.investment.construction",
+      "when": {
+        "event_types": [
+          "investment"
+        ],
+        "objects": [
+          "investment_dfo_construction"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "construction"
+        ],
+        "factors": [
+          "investments"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.investment.energy",
+      "when": {
+        "event_types": [
+          "investment"
+        ],
+        "objects": [
+          "investment_dfo_energy"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "energy"
+        ],
+        "factors": [
+          "investments"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.investment.logistics",
+      "when": {
+        "event_types": [
+          "investment"
+        ],
+        "objects": [
+          "investment_dfo_logistics"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "logistics"
+        ],
+        "factors": [
+          "investments"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.investment.mining_metallurgy",
+      "when": {
+        "event_types": [
+          "investment"
+        ],
+        "objects": [
+          "investment_dfo_mining_metallurgy"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "mining_metallurgy"
+        ],
+        "factors": [
+          "investments"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.investment.oil_gas_chemicals",
+      "when": {
+        "event_types": [
+          "investment"
+        ],
+        "objects": [
+          "investment_dfo_oil_gas_chemicals"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "oil_gas_chemicals"
+        ],
+        "factors": [
+          "investments"
+        ]
+      }
+    },
+    {
+      "rule_id": "object.utilities",
+      "when": {
+        "objects": [
+          "heating",
+          "utilities",
+          "wastewater",
+          "water_supply",
+          "resource_supply_organizations",
+          "utilities_revenue"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "utilities"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "object.retail",
+      "when": {
+        "objects": [
+          "retailers_revising_network",
+          "survey_group_full_closure_share"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "retail"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "object.apparel",
+      "when": {
+        "objects": [
+          "fashion_brands_revising_network"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "retail",
+          "apparel"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "object.ddos",
+      "when": {
+        "objects": [
+          "ddos_attack_causes",
+          "ddos_attacks_ru_platforms",
+          "ddos_incidents_lasting_1_to_6_hours",
+          "ddos_peak_power",
+          "largest_application_botnet"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "online_services"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "metric.ddos",
+      "when": {
+        "metrics": [
+          "ddos_peak_power",
+          "largest_application_botnet"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "online_services"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "object.industry.steel",
+      "when": {
+        "objects": [
+          "steel"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "steel"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "object.industry.oil",
+      "when": {
+        "objects": [
+          "oil"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "oil_gas_chemicals"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "object.industry.natural_gas",
+      "when": {
+        "objects": [
+          "natural_gas"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "oil_gas_chemicals"
+        ],
+        "factors": []
+      }
+    },
+    {
+      "rule_id": "object.industry.electricity",
+      "when": {
+        "objects": [
+          "electricity"
+        ]
+      },
+      "labels": {
+        "topics": [
+          "industry"
+        ],
+        "industries": [
+          "energy"
+        ],
+        "factors": []
+      }
+    }
+  ]
+}

@@ -4,9 +4,9 @@ from copy import deepcopy
 import json
 from pathlib import Path
 
-from llm.events.compatibility import ROOT, upgrade_v01
+from llm.events.contracts.compatibility import ROOT, upgrade_v01
 from llm.events.fixtures.make_synthetic import build
-from llm.events.validation import validate_grounding
+from llm.events.contracts.validation import validate_grounding
 
 
 def main():

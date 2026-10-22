@@ -114,3 +114,10 @@ news/
 - NLP, классификации и извлечения фактов — это пункт 1 (агент), выход `EventBundle`.
 - Ранжирования под компанию — модуль `ranking/`.
 - Позиции банка / аналитики — RAG в `llm/rag/`.
+
+## Передача в NLP
+
+Из корня проекта в окружении NLP: `python -m llm.events import-news
+data/processed/news/news_corpus.jsonl --db data/processed/events/news.sqlite3`.
+Команда импортирует тексты в архив B2 без API-вызовов. Дальнейшая обработка
+запускается явно; [инструкция и схема](../llm/events/README.md).

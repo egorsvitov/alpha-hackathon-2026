@@ -1,0 +1,211 @@
+{
+  "$defs": {
+    "FeatureCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "event_types": {
+          "items": {
+            "enum": [
+              "policy_rate",
+              "fx_rate",
+              "price_change",
+              "regulation",
+              "sanction_or_trade_restriction",
+              "market_indicator",
+              "company_results",
+              "investment",
+              "corporate_action",
+              "operational_incident",
+              "other"
+            ],
+            "type": "string"
+          },
+          "title": "Event Types",
+          "type": "array"
+        },
+        "objects": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Objects",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "metrics": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Metrics",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "actions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Actions",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "title": "FeatureCondition",
+      "type": "object"
+    },
+    "FeatureDictionary": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "category_titles": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "policy_rate",
+              "fx_rate",
+              "price_change",
+              "regulation",
+              "sanction_or_trade_restriction",
+              "market_indicator",
+              "company_results",
+              "investment",
+              "corporate_action",
+              "operational_incident",
+              "other"
+            ]
+          },
+          "title": "Category Titles",
+          "type": "object"
+        },
+        "subject_titles": {
+          "additionalProperties": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Subject Titles",
+          "type": "object"
+        },
+        "rules": {
+          "items": {
+            "$ref": "#/$defs/FeatureRule"
+          },
+          "title": "Rules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "version",
+        "category_titles",
+        "subject_titles",
+        "rules"
+      ],
+      "title": "FeatureDictionary",
+      "type": "object"
+    },
+    "FeatureLabels": {
+      "additionalProperties": false,
+      "properties": {
+        "topics": {
+          "items": {
+            "enum": [
+              "rates",
+              "sanctions",
+              "fx",
+              "trade",
+              "inflation",
+              "counterparty",
+              "industry",
+              "other"
+            ],
+            "type": "string"
+          },
+          "title": "Topics",
+          "type": "array"
+        },
+        "industries": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Industries",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "factors": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Factors",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "title": "FeatureLabels",
+      "type": "object"
+    },
+    "FeatureRule": {
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": {
+          "minLength": 1,
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "when": {
+          "$ref": "#/$defs/FeatureCondition"
+        },
+        "labels": {
+          "$ref": "#/$defs/FeatureLabels"
+        }
+      },
+      "required": [
+        "rule_id",
+        "when",
+        "labels"
+      ],
+      "title": "FeatureRule",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "rules_version": {
+      "const": "b6.1",
+      "default": "b6.1",
+      "title": "Rules Version",
+      "type": "string"
+    },
+    "max_events": {
+      "default": 10000,
+      "minimum": 1,
+      "title": "Max Events",
+      "type": "integer"
+    },
+    "dictionary": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FeatureDictionary"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "title": "PublicationConfig",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

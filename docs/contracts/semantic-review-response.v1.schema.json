@@ -1,0 +1,132 @@
+{
+  "$defs": {
+    "ClaimVerdict": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "$ref": "#/$defs/FieldVerdict"
+          },
+          "title": "Fields",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "fields"
+      ],
+      "title": "ClaimVerdict",
+      "type": "object"
+    },
+    "FieldVerdict": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "supported",
+            "contradicted",
+            "not_found",
+            "ambiguous"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/QuoteRef"
+              },
+              {
+                "$ref": "#/$defs/SpanRef"
+              }
+            ]
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "status",
+        "evidence"
+      ],
+      "title": "FieldVerdict",
+      "type": "object"
+    },
+    "QuoteRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "quote"
+      ],
+      "title": "QuoteRef",
+      "type": "object"
+    },
+    "SpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "start_id": {
+          "minLength": 1,
+          "title": "Start Id",
+          "type": "string"
+        },
+        "end_id": {
+          "minLength": 1,
+          "title": "End Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "start_id",
+        "end_id"
+      ],
+      "title": "SpanRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "verdicts": {
+      "items": {
+        "$ref": "#/$defs/ClaimVerdict"
+      },
+      "title": "Verdicts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "verdicts"
+  ],
+  "title": "VerificationResponse",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

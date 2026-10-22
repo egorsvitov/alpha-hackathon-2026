@@ -4,6 +4,8 @@ __pycache__/
 .env
 .venv/
 .venv_news/
+.venv_events/
+.venv_telegram/
 .cache/
 
 # Supplied materials remain local; publication terms pending.
@@ -46,6 +48,12 @@ news/.DS_Store
 *.sqlite3
 alfa_hack.db
 *.log
+
+# Telegram account sessions (including sidecars) must never enter Git.
+*.session
+*.session-journal
+*.session-wal
+*.session-shm
 
 # Internal reports removed from public history.
 /reports/

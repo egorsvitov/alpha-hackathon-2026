@@ -10,24 +10,23 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from jsonschema import Draft202012Validator
-from llm.events.budget import CallLedger
-from llm.events.extraction import build_processing_spec,digest
-from llm.events.extraction_models import ExtractionResult,ProviderProfile,ExecutionLimits
+from llm.events.extraction.budget import CallLedger
+from llm.events.extraction.protocol import build_processing_spec, digest
+from llm.events.extraction.models import ExtractionResult, ProviderProfile, ExecutionLimits
 from llm.events.fixtures.make_normalization import case,claim,measurement
-from llm.events.models import ArticleRecord,Issue
-from llm.events.normalization import (normalize_extraction,validate_normalized_result,
-    normalization_schema,configuration_hash,resolved_dictionary,exact_span,alias)
-from llm.events.normalization_dates import normalize_period
-from llm.events.normalization_models import NormalizationConfig
-from llm.events.normalization_numbers import normalize_measurement
-from llm.events.extraction_models import CandidateMeasurement
-from llm.events.normalization_store import NormalizationService
-from llm.events.provider import OfflineProvider,ProviderResponse,ProviderFailure
-from llm.events.runner import ExtractionRunner
-from llm.events.schemas import ROOT
-from llm.events.storage import EventStore,StorageError,processing_hash
-from llm.events.storage_schema import SCHEMA_VERSION
-from llm.events.validation import (validate_claim_collection,validate_grounding,ContractValidationError,article_sha256)
+from llm.events.contracts.models import ArticleRecord, Issue
+from llm.events.normalization.core import normalize_extraction, validate_normalized_result, normalization_schema, configuration_hash, resolved_dictionary, exact_span, alias
+from llm.events.normalization.dates import normalize_period
+from llm.events.normalization.models import NormalizationConfig
+from llm.events.normalization.numbers import normalize_measurement
+from llm.events.extraction.models import CandidateMeasurement
+from llm.events.normalization.service import NormalizationService
+from llm.events.extraction.provider import OfflineProvider, ProviderResponse, ProviderFailure
+from llm.events.extraction.runner import ExtractionRunner
+from llm.events.contracts.schemas import ROOT
+from llm.events.storage.store import EventStore, StorageError, processing_hash
+from llm.events.storage.schema import SCHEMA_VERSION
+from llm.events.contracts.validation import validate_claim_collection, validate_grounding, ContractValidationError, article_sha256
 
 
 class NoHeartbeat:
@@ -52,7 +51,7 @@ class NormalizationTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.clock=Clock();self.store=EventStore(Path(self.temp.name)/'state.sqlite3',clock=self.clock)
         self.service=NormalizationService(self.store)
-        self.profile=ProviderProfile(execution_mode='offline',model='offline:scripted',limits_confirmed=True,
+        self.profile=ProviderProfile(candidate_format='b3.1',execution_mode='offline',model='offline:scripted',limits_confirmed=True,
             max_input_tokens=30000,max_output_tokens=4096,context_window_tokens=34096)
         self.limits=ExecutionLimits(tariffs_confirmed=True,input_rub_per_million='0',output_rub_per_million='0',daily_quota_rub='1')
 
@@ -105,7 +104,7 @@ class NormalizationTests(unittest.TestCase):
         e=r.evidence[0];text=c['article']['article']['text']
         self.assertEqual(text[e.start:e.end],e.quote);self.assertIn('😀',e.quote);self.assertIn('\u00a0',e.quote)
         c['article']['article']['title']=text;c['input']['extraction']['evidence'][0]['field']='title'
-        c['input']['article_sha256']=article_sha256(__import__('llm.events.models',fromlist=['ArticleInput']).ArticleInput.model_validate(c['article']['article']))
+        c['input']['article_sha256']=article_sha256(__import__('llm.events.contracts.models',fromlist=['ArticleInput']).ArticleInput.model_validate(c['article']['article']))
         self.assertEqual(normalize_extraction(c['input'],c['article']).evidence[0].field,'title')
         self.error('quote_not_found',exact_span,ArticleRecord.model_validate(c['article']),'text',text.replace('\u00a0',' '))
 
@@ -267,7 +266,7 @@ class NormalizationTests(unittest.TestCase):
         # Reject a length response regardless of any valid JSON prefix.
         aid,outcome,owner,c=self.publish(self.by_name['growth'],content='{}')
         call=CallLedger(self.store).get(outcome.call_id);call['response']['body']['choices'][0]['finish_reason']='length'
-        with patch('llm.events.budget.CallLedger.get',return_value=call):
+        with patch('llm.events.extraction.budget.CallLedger.get',return_value=call):
             self.error('invalid_repair_input',self.service.repair_input,{'call_id':outcome.call_id},self.profile,self.limits,provider=provider)
 
     def test_repair_timeout_manual_retry_does_not_issue_second_call(self):
@@ -304,7 +303,7 @@ class NormalizationTests(unittest.TestCase):
 
     def test_cli_normalization_schema_and_diagnostic_show(self):
         aid,_,_,_=self.publish()
-        command=[sys.executable,'-m','llm.events.normalization_cli','--db',str(self.store.path)]
+        command=[sys.executable,'-m','llm.events.normalization.cli','--db',str(self.store.path)]
         result=subprocess.run(command+['normalize','--artifact-id',aid],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         artifact=json.loads(result.stdout)['artifact_id']
@@ -339,7 +338,7 @@ class NormalizationTests(unittest.TestCase):
     def test_multiple_sentence_support_and_orphan_evidence(self):
         c=deepcopy(self.by_name['percent']);text=c['article']['article']['text']
         c['article']['article']['text']='Контекст. '+text
-        from llm.events.models import ArticleInput
+        from llm.events.contracts.models import ArticleInput
         c['input']['article_sha256']=article_sha256(ArticleInput.model_validate(c['article']['article']))
         ext=c['input']['extraction'];ext['evidence'].append({'evidence_id':'e2','field':'text','quote':'Контекст.'})
         ext['claims'][0]['evidence_ids'].append('e2');ext['claims'][0]['field_evidence']['/text'].append('e2')
@@ -388,7 +387,7 @@ class NormalizationTests(unittest.TestCase):
         self.assertEqual(len(provider.requests),1)
 
     def test_check_fixture_cli_and_current_database_version(self):
-        result=subprocess.run([sys.executable,'-m','llm.events.normalization_cli','check'],capture_output=True,text=True)
+        result=subprocess.run([sys.executable,'-m','llm.events.normalization.cli','check'],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         self.assertEqual(json.loads(result.stdout)['cases'],22)
         conn=sqlite3.connect(self.store.path)

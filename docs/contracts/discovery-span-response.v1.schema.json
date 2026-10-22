@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "Mention": {
+      "additionalProperties": false,
+      "properties": {
+        "primary_fragment_id": {
+          "minLength": 1,
+          "title": "Primary Fragment Id",
+          "type": "string"
+        },
+        "context_fragment_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Context Fragment Ids",
+          "type": "array"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "trigger": {
+          "$ref": "#/$defs/SpanRef"
+        },
+        "event_type": {
+          "enum": [
+            "policy_rate",
+            "fx_rate",
+            "price_change",
+            "regulation",
+            "sanction_or_trade_restriction",
+            "market_indicator",
+            "company_results",
+            "investment",
+            "corporate_action",
+            "operational_incident",
+            "other"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "possible_templates": {
+          "items": {
+            "enum": [
+              "observation",
+              "indicator_forecast",
+              "forecast_revision",
+              "decision_forecast",
+              "scenario_forecast",
+              "decision",
+              "action"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Possible Templates",
+          "type": "array"
+        }
+      },
+      "required": [
+        "primary_fragment_id",
+        "label",
+        "trigger",
+        "event_type",
+        "possible_templates"
+      ],
+      "title": "Mention",
+      "type": "object"
+    },
+    "SpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "start_id": {
+          "minLength": 1,
+          "title": "Start Id",
+          "type": "string"
+        },
+        "end_id": {
+          "minLength": 1,
+          "title": "End Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "start_id",
+        "end_id"
+      ],
+      "title": "SpanRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "mentions": {
+      "items": {
+        "$ref": "#/$defs/Mention"
+      },
+      "title": "Mentions",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "mentions",
+    "limitations"
+  ],
+  "title": "DiscoveryResponse",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

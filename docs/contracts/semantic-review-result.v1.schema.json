@@ -1,0 +1,238 @@
+{
+  "$defs": {
+    "ClaimSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "accepted": {
+          "title": "Accepted",
+          "type": "boolean"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/Issue"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "accepted",
+        "issues"
+      ],
+      "title": "ClaimSelection",
+      "type": "object"
+    },
+    "ClaimVerdict": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "$ref": "#/$defs/FieldVerdict"
+          },
+          "title": "Fields",
+          "type": "array"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "fields"
+      ],
+      "title": "ClaimVerdict",
+      "type": "object"
+    },
+    "FieldVerdict": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "supported",
+            "contradicted",
+            "not_found",
+            "ambiguous"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/QuoteRef"
+              },
+              {
+                "$ref": "#/$defs/SpanRef"
+              }
+            ]
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "status",
+        "evidence"
+      ],
+      "title": "FieldVerdict",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "path",
+        "message"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "QuoteRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "quote"
+      ],
+      "title": "QuoteRef",
+      "type": "object"
+    },
+    "SpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "start_id": {
+          "minLength": 1,
+          "title": "Start Id",
+          "type": "string"
+        },
+        "end_id": {
+          "minLength": 1,
+          "title": "End Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "start_id",
+        "end_id"
+      ],
+      "title": "SpanRef",
+      "type": "object"
+    },
+    "VerificationResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "verdicts": {
+          "items": {
+            "$ref": "#/$defs/ClaimVerdict"
+          },
+          "title": "Verdicts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "verdicts"
+      ],
+      "title": "VerificationResponse",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "semantic-review.v1",
+      "default": "semantic-review.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "minLength": 1,
+      "title": "Source Id",
+      "type": "string"
+    },
+    "article_sha256": {
+      "minLength": 1,
+      "title": "Article Sha256",
+      "type": "string"
+    },
+    "normalized_artifact_id": {
+      "minLength": 1,
+      "title": "Normalized Artifact Id",
+      "type": "string"
+    },
+    "selections": {
+      "items": {
+        "$ref": "#/$defs/ClaimSelection"
+      },
+      "title": "Selections",
+      "type": "array"
+    },
+    "response": {
+      "$ref": "#/$defs/VerificationResponse"
+    },
+    "transport_envelope": {
+      "enum": [
+        "json",
+        "markdown_json"
+      ],
+      "title": "Transport Envelope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "article_sha256",
+    "normalized_artifact_id",
+    "selections",
+    "response",
+    "transport_envelope"
+  ],
+  "title": "VerificationResult",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

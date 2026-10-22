@@ -1,0 +1,1075 @@
+{
+  "$defs": {
+    "ClaimTime": {
+      "additionalProperties": false,
+      "properties": {
+        "occurred_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Period"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "effective_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Period"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observation_period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Period"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "forecast_horizon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Period"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "occurred_at",
+        "effective_at",
+        "observation_period",
+        "forecast_horizon"
+      ],
+      "title": "ClaimTime",
+      "type": "object"
+    },
+    "Conflict": {
+      "additionalProperties": false,
+      "properties": {
+        "conflict_id": {
+          "minLength": 1,
+          "title": "Conflict Id",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "variants": {
+          "items": {
+            "$ref": "#/$defs/ConflictVariant"
+          },
+          "minItems": 2,
+          "title": "Variants",
+          "type": "array"
+        }
+      },
+      "required": [
+        "conflict_id",
+        "description",
+        "variants"
+      ],
+      "title": "Conflict",
+      "type": "object"
+    },
+    "ConflictVariant": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "field_path": {
+          "pattern": "^/",
+          "title": "Field Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "field_path"
+      ],
+      "title": "ConflictVariant",
+      "type": "object"
+    },
+    "Entity": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Entity Id"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "name"
+      ],
+      "title": "Entity",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "minLength": 1,
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_version": {
+          "minimum": 1,
+          "title": "Event Version",
+          "type": "integer"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "event_type": {
+          "enum": [
+            "policy_rate",
+            "fx_rate",
+            "price_change",
+            "regulation",
+            "sanction_or_trade_restriction",
+            "market_indicator",
+            "company_results",
+            "investment",
+            "corporate_action",
+            "operational_incident",
+            "other"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "first_published_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "First Published At"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "minLength": 1,
+          "title": "Updated At",
+          "type": "string"
+        },
+        "availability": {
+          "enum": [
+            "active",
+            "withdrawn"
+          ],
+          "title": "Availability",
+          "type": "string"
+        },
+        "quality": {
+          "enum": [
+            "complete",
+            "partial",
+            "insufficient"
+          ],
+          "title": "Quality",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "event_version",
+        "title",
+        "event_type",
+        "first_published_at",
+        "updated_at",
+        "availability",
+        "quality"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "EventBundle": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "0.2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "event": {
+          "$ref": "#/$defs/Event"
+        },
+        "ranking_features": {
+          "$ref": "#/$defs/RankingFeatures"
+        },
+        "claims": {
+          "items": {
+            "$ref": "#/$defs/SourceClaim"
+          },
+          "title": "Claims",
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/Source"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "conflicts": {
+          "items": {
+            "$ref": "#/$defs/Conflict"
+          },
+          "title": "Conflicts",
+          "type": "array"
+        },
+        "relations": {
+          "items": {
+            "$ref": "#/$defs/Relation"
+          },
+          "title": "Relations",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema_version",
+        "event",
+        "ranking_features",
+        "claims",
+        "sources",
+        "evidence",
+        "conflicts",
+        "relations",
+        "limitations"
+      ],
+      "title": "EventBundle",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "minLength": 1,
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "title",
+            "text"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "source_id",
+        "field",
+        "start",
+        "end",
+        "quote"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "FeatureBasis": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Claim Id"
+        },
+        "path": {
+          "pattern": "^/",
+          "title": "Path",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "classification": {
+          "default": false,
+          "title": "Classification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "claim_id",
+        "path",
+        "evidence_ids"
+      ],
+      "title": "FeatureBasis",
+      "type": "object"
+    },
+    "FeatureTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "pattern": "^/",
+          "title": "Path",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "rule_id": {
+          "minLength": 1,
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "bases": {
+          "items": {
+            "$ref": "#/$defs/FeatureBasis"
+          },
+          "title": "Bases",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "label",
+        "rule_id",
+        "bases"
+      ],
+      "title": "FeatureTrace",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "path",
+        "message"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "Measurement": {
+      "additionalProperties": false,
+      "properties": {
+        "measurement_id": {
+          "minLength": 1,
+          "title": "Measurement Id",
+          "type": "string"
+        },
+        "metric": {
+          "minLength": 1,
+          "title": "Metric",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "level",
+            "absolute_change",
+            "relative_change"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/ValueRange"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "qualifier": {
+          "enum": [
+            "exact",
+            "approximate",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ],
+          "title": "Qualifier",
+          "type": "string"
+        },
+        "comparison_period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Period"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "value_role": {
+          "enum": [
+            "reported",
+            "before",
+            "after",
+            "comparison"
+          ],
+          "title": "Value Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "measurement_id",
+        "metric",
+        "kind",
+        "value",
+        "unit",
+        "qualifier",
+        "comparison_period",
+        "value_role"
+      ],
+      "title": "Measurement",
+      "type": "object"
+    },
+    "Participant": {
+      "additionalProperties": false,
+      "properties": {
+        "entity_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Entity Id"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entity_id",
+        "name",
+        "role"
+      ],
+      "title": "Participant",
+      "type": "object"
+    },
+    "Period": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "anyOf": [
+            {
+              "format": "date",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Start"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "End"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "Period",
+      "type": "object"
+    },
+    "RankingFeatures": {
+      "additionalProperties": false,
+      "properties": {
+        "topics": {
+          "items": {
+            "enum": [
+              "rates",
+              "sanctions",
+              "fx",
+              "trade",
+              "inflation",
+              "counterparty",
+              "industry",
+              "other"
+            ],
+            "type": "string"
+          },
+          "title": "Topics",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "industries": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Industries",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "geographies": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Geographies",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "objects": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Objects",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "metrics": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Metrics",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "factors": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Factors",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "topics",
+        "industries",
+        "geographies",
+        "objects",
+        "metrics",
+        "factors"
+      ],
+      "title": "RankingFeatures",
+      "type": "object"
+    },
+    "Relation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "duplicate_claim",
+            "updates",
+            "related_stage"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "from_id": {
+          "minLength": 1,
+          "title": "From Id",
+          "type": "string"
+        },
+        "to_id": {
+          "minLength": 1,
+          "title": "To Id",
+          "type": "string"
+        },
+        "target_kind": {
+          "enum": [
+            "claim",
+            "event"
+          ],
+          "title": "Target Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "from_id",
+        "to_id",
+        "target_kind"
+      ],
+      "title": "Relation",
+      "type": "object"
+    },
+    "Scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "baseline",
+            "alternative",
+            "unspecified"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "text"
+      ],
+      "title": "Scenario",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "article_id": {
+          "minLength": 1,
+          "title": "Article Id",
+          "type": "string"
+        },
+        "article_version": {
+          "minimum": 1,
+          "title": "Article Version",
+          "type": "integer"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "publisher": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Publisher"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Url"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Published At"
+        },
+        "content_kind": {
+          "enum": [
+            "original",
+            "source_based_paraphrase",
+            "synthetic",
+            "user_provided",
+            "unknown"
+          ],
+          "title": "Content Kind",
+          "type": "string"
+        },
+        "is_full_original_text": {
+          "title": "Is Full Original Text",
+          "type": "boolean"
+        },
+        "is_synthetic": {
+          "title": "Is Synthetic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_id",
+        "article_id",
+        "article_version",
+        "title",
+        "publisher",
+        "url",
+        "published_at",
+        "content_kind",
+        "is_full_original_text",
+        "is_synthetic"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "SourceClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "modality": {
+          "enum": [
+            "asserted",
+            "forecast",
+            "plan",
+            "proposal",
+            "opinion",
+            "unknown"
+          ],
+          "title": "Modality",
+          "type": "string"
+        },
+        "polarity": {
+          "enum": [
+            "affirmed",
+            "negated",
+            "unknown"
+          ],
+          "title": "Polarity",
+          "type": "string"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "announced",
+                "proposed",
+                "approved",
+                "effective",
+                "repealed",
+                "observed"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Stage"
+        },
+        "attribution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Entity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "participants": {
+          "items": {
+            "$ref": "#/$defs/Participant"
+          },
+          "title": "Participants",
+          "type": "array"
+        },
+        "action": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Action"
+        },
+        "object": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Object"
+        },
+        "geographies": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Geographies",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "time": {
+          "$ref": "#/$defs/ClaimTime"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "field_evidence": {
+          "minProperties": 1,
+          "patternProperties": {
+            "^/": {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "title": "Field Evidence",
+          "type": "object"
+        },
+        "scenario": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Scenario"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "modality",
+        "polarity",
+        "stage",
+        "attribution",
+        "participants",
+        "action",
+        "object",
+        "geographies",
+        "time",
+        "measurements",
+        "evidence_ids",
+        "field_evidence",
+        "scenario"
+      ],
+      "title": "SourceClaim",
+      "type": "object"
+    },
+    "ValueRange": {
+      "additionalProperties": false,
+      "properties": {
+        "min": {
+          "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+          "title": "Min",
+          "type": "string"
+        },
+        "max": {
+          "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?$",
+          "title": "Max",
+          "type": "string"
+        }
+      },
+      "required": [
+        "min",
+        "max"
+      ],
+      "title": "ValueRange",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "b6.1",
+      "default": "b6.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "bundle": {
+      "$ref": "#/$defs/EventBundle"
+    },
+    "feature_trace": {
+      "items": {
+        "$ref": "#/$defs/FeatureTrace"
+      },
+      "title": "Feature Trace",
+      "type": "array"
+    },
+    "quality_reasons": {
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "title": "Quality Reasons",
+      "type": "array"
+    },
+    "semantic_support": {
+      "const": "not_assessed",
+      "default": "not_assessed",
+      "title": "Semantic Support",
+      "type": "string"
+    }
+  },
+  "required": [
+    "bundle",
+    "feature_trace",
+    "quality_reasons"
+  ],
+  "title": "BundleProjection",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

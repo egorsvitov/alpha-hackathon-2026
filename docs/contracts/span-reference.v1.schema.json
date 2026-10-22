@@ -1,0 +1,28 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "fragment_id": {
+      "minLength": 1,
+      "title": "Fragment Id",
+      "type": "string"
+    },
+    "start_id": {
+      "minLength": 1,
+      "title": "Start Id",
+      "type": "string"
+    },
+    "end_id": {
+      "minLength": 1,
+      "title": "End Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "fragment_id",
+    "start_id",
+    "end_id"
+  ],
+  "title": "SpanRef",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

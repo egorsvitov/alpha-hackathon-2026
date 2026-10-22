@@ -15,18 +15,17 @@ from unittest.mock import patch
 
 import httpx
 from jsonschema import Draft202012Validator
-from llm.events.budget import CallLedger, validate_limits, maximum_cost
-from llm.events.extraction import (parse_extraction, extraction_schema, build_processing_spec,
-    build_request, profile_from_spec)
-from llm.events.extraction_models import ProviderProfile, ExecutionLimits
-from llm.events.extraction_cli import load_cli_env
-from llm.events.migration import migrate_v1_to_v2, migrate_v2_to_v3, migrate_v3_to_v4
-from llm.events.provider import OpenAIProvider, OfflineProvider, ProviderResponse, ProviderFailure
-from llm.events.runner import ExtractionRunner, LeaseHeartbeat
-from llm.events.storage import EventStore, StorageError, processing_hash
-from llm.events.storage_schema import B2_DDL, B2_TABLES
-from llm.events.schemas import ROOT
-from llm.events.validation import article_sha256
+from llm.events.extraction.budget import CallLedger, validate_limits, maximum_cost
+from llm.events.extraction.protocol import parse_extraction, extraction_schema, build_processing_spec, build_request, profile_from_spec
+from llm.events.extraction.models import ProviderProfile, ExecutionLimits
+from llm.events.extraction.admin_cli import load_cli_env
+from llm.events.storage.migration import migrate_v1_to_v2, migrate_v2_to_v3, migrate_v3_to_v4
+from llm.events.extraction.provider import OpenAIProvider, OfflineProvider, ProviderResponse, ProviderFailure
+from llm.events.extraction.runner import ExtractionRunner, LeaseHeartbeat
+from llm.events.storage.store import EventStore, StorageError, processing_hash
+from llm.events.storage.schema import B2_DDL, B2_TABLES
+from llm.events.contracts.schemas import ROOT
+from llm.events.contracts.validation import article_sha256
 
 
 class Clock:
@@ -55,7 +54,7 @@ class ExtractionTests(unittest.TestCase):
         self.article=deepcopy(self.source)
         self.article['text']=self.fixture['evidence'][0]['quote']
         self.sid=self.store.import_batch(json.dumps([self.article],ensure_ascii=False).encode()).items[0].source_id
-        self.profile=ProviderProfile(execution_mode='offline',model='offline:scripted',max_tokens=1024,
+        self.profile=ProviderProfile(candidate_format='b3.1',execution_mode='offline',model='offline:scripted',max_tokens=1024,
             limits_confirmed=True,max_input_tokens=20000,max_output_tokens=4096,context_window_tokens=24096)
         self.spec=build_processing_spec(self.profile)
         self.limits=ExecutionLimits(tariffs_confirmed=True,input_rub_per_million='1',
@@ -137,10 +136,10 @@ class ExtractionTests(unittest.TestCase):
         self.assertEqual(build_processing_spec(self.profile),self.spec)
         for changes in [{'model':'offline:other'},{'thinking':'disabled'}, {'response_format':'json_object'}, {'max_tokens':1025}, {'execution_mode':'live'}]:
             self.assertNotEqual(processing_hash(build_processing_spec(self.profile.model_copy(update=changes))),processing_hash(self.spec))
-        with patch('llm.events.extraction.SYSTEM_PROMPT','updated'):
+        with patch('llm.events.extraction.protocol.SYSTEM_PROMPT','updated'):
             self.assertNotEqual(build_processing_spec(self.profile),self.spec)
             self.error('processing_spec_mismatch',profile_from_spec,self.spec)
-        with patch('llm.events.extraction.extraction_schema',return_value={'type':'object'}):
+        with patch('llm.events.extraction.protocol.extraction_schema',return_value={'type':'object'}):
             self.assertNotEqual(build_processing_spec(self.profile),self.spec)
 
     def test_success_artifacts_and_cache_reuse(self):
@@ -231,7 +230,7 @@ class ExtractionTests(unittest.TestCase):
 
     def test_missing_usage_holds_reservation_after_restart(self):
         self.queue();runner,_=self.runner([self.response(usage=False)]);result=runner.run_next(self.spec,self.limits)
-        reopened=CallLedger(EventStore(self.db),offline=True)
+        reopened=CallLedger(EventStore(self.db,clock=self.clock),offline=True)
         call=reopened.get(result.call_id)
         self.assertEqual(call['state'],'unknown')
         self.assertEqual(Decimal(reopened.budget()['accounted_rub']),maximum_cost(self.profile,self.limits))
@@ -342,7 +341,7 @@ class ExtractionTests(unittest.TestCase):
         path=Path(self.temp.name)/'legacy.sqlite3'
         with ExitStack() as stack:
             for name,value in [('DDL',B2_DDL),('TABLES',B2_TABLES),('SCHEMA_VERSION',1)]:
-                stack.enter_context(patch('llm.events.storage.'+name,value))
+                stack.enter_context(patch('llm.events.storage.store.'+name,value))
             store=EventStore(path,clock=self.clock)
             receipt=store.import_batch(json.dumps([self.article]).encode())
             record=store.get_article(receipt.items[0].source_id)
@@ -368,7 +367,7 @@ class ExtractionTests(unittest.TestCase):
 
     def test_migration_failure_rolls_back_and_existing_backup_not_overwritten(self):
         path,_=self.legacy_database();backup=Path(self.temp.name)/'v1.backup'
-        with patch('llm.events.migration.B3_DDL',['CREATE TABLE temp_new(x)','BROKEN SQL']):
+        with patch('llm.events.storage.migration.B3_DDL',['CREATE TABLE temp_new(x)','BROKEN SQL']):
             self.error('storage_error',migrate_v1_to_v2,path,backup)
         with closing(sqlite3.connect(path)) as conn:
             self.assertEqual(conn.execute('PRAGMA user_version').fetchone()[0],1)
@@ -423,12 +422,12 @@ class ExtractionTests(unittest.TestCase):
         with patch.dict(os.environ,{},clear=True):
             load_cli_env(env);self.assertEqual(os.environ['LLM_API_KEY'],'file-secret')
         path=Path(self.temp.name)/'bad-profile.json';path.write_text('{"api_key":"never-print-me"}')
-        command=[sys.executable,'-m','llm.events.extraction_cli','validate-profile','--profile',str(path),'--limits',str(ROOT/'llm/events/profiles/limits.example.json')]
+        command=[sys.executable,'-m','llm.events.extraction.admin_cli','validate-profile','--profile',str(path),'--limits',str(ROOT/'llm/events/profiles/limits.example.json')]
         result=subprocess.run(command,capture_output=True,text=True)
         self.assertEqual(result.returncode,1);self.assertNotIn('never-print-me',result.stdout+result.stderr)
 
     def test_cli_offline_end_to_end_and_live_gate(self):
-        command=[sys.executable,'-m','llm.events.extraction_cli']
+        command=[sys.executable,'-m','llm.events.extraction.admin_cli']
         profile=ROOT/'llm/events/profiles/offline.json'
         args=['--db',str(self.db),'--profile',str(profile)]
         queued=subprocess.run(command+['enqueue',*args,'--source-id',self.sid],capture_output=True,text=True)

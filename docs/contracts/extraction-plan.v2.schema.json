@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "Batch": {
+      "additionalProperties": false,
+      "properties": {
+        "batch_id": {
+          "minLength": 1,
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "template": {
+          "enum": [
+            "observation",
+            "indicator_forecast",
+            "forecast_revision",
+            "decision_forecast",
+            "scenario_forecast",
+            "decision",
+            "action"
+          ],
+          "title": "Template",
+          "type": "string"
+        },
+        "allowed_templates": {
+          "items": {
+            "enum": [
+              "observation",
+              "indicator_forecast",
+              "forecast_revision",
+              "decision_forecast",
+              "scenario_forecast",
+              "decision",
+              "action"
+            ],
+            "type": "string"
+          },
+          "title": "Allowed Templates",
+          "type": "array"
+        },
+        "mention_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Mention Ids",
+          "type": "array"
+        },
+        "fragment_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Fragment Ids",
+          "type": "array"
+        },
+        "request_sha256": {
+          "minLength": 1,
+          "title": "Request Sha256",
+          "type": "string"
+        },
+        "request_bytes": {
+          "title": "Request Bytes",
+          "type": "integer"
+        },
+        "deferred_reason": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deferred Reason"
+        }
+      },
+      "required": [
+        "batch_id",
+        "template",
+        "allowed_templates",
+        "mention_ids",
+        "fragment_ids",
+        "request_sha256",
+        "request_bytes"
+      ],
+      "title": "Batch",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "extraction-plan.v2",
+      "default": "extraction-plan.v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "minLength": 1,
+      "title": "Source Id",
+      "type": "string"
+    },
+    "article_sha256": {
+      "minLength": 1,
+      "title": "Article Sha256",
+      "type": "string"
+    },
+    "discovery_artifact_id": {
+      "minLength": 1,
+      "title": "Discovery Artifact Id",
+      "type": "string"
+    },
+    "discovery_sha256": {
+      "minLength": 1,
+      "title": "Discovery Sha256",
+      "type": "string"
+    },
+    "configuration_sha256": {
+      "minLength": 1,
+      "title": "Configuration Sha256",
+      "type": "string"
+    },
+    "batches": {
+      "items": {
+        "$ref": "#/$defs/Batch"
+      },
+      "title": "Batches",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "article_sha256",
+    "discovery_artifact_id",
+    "discovery_sha256",
+    "configuration_sha256",
+    "batches"
+  ],
+  "title": "ExtractionPlan",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

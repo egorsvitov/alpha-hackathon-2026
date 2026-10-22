@@ -1,0 +1,704 @@
+{
+  "$defs": {
+    "CandidateClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "minLength": 1,
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "event_type": {
+          "enum": [
+            "policy_rate",
+            "fx_rate",
+            "price_change",
+            "regulation",
+            "sanction_or_trade_restriction",
+            "market_indicator",
+            "company_results",
+            "investment",
+            "corporate_action",
+            "operational_incident",
+            "other"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "modality": {
+          "enum": [
+            "asserted",
+            "forecast",
+            "plan",
+            "proposal",
+            "opinion",
+            "unknown"
+          ],
+          "title": "Modality",
+          "type": "string"
+        },
+        "polarity": {
+          "enum": [
+            "affirmed",
+            "negated",
+            "unknown"
+          ],
+          "title": "Polarity",
+          "type": "string"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "enum": [
+                "announced",
+                "proposed",
+                "approved",
+                "effective",
+                "repealed",
+                "observed"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Stage"
+        },
+        "attribution": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CandidateEntity"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "participants": {
+          "items": {
+            "$ref": "#/$defs/CandidateParticipant"
+          },
+          "title": "Participants",
+          "type": "array"
+        },
+        "action": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Action"
+        },
+        "object": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Object"
+        },
+        "geographies": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Geographies",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "scenario": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Scenario"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "time": {
+          "$ref": "#/$defs/CandidateTime"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/CandidateMeasurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "field_evidence": {
+          "minProperties": 1,
+          "patternProperties": {
+            "^/": {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "title": "Field Evidence",
+          "type": "object"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "stage",
+        "attribution",
+        "participants",
+        "action",
+        "object",
+        "geographies",
+        "scenario",
+        "time",
+        "measurements",
+        "evidence_ids",
+        "field_evidence"
+      ],
+      "title": "CandidateClaim",
+      "type": "object"
+    },
+    "CandidateEntity": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "CandidateEntity",
+      "type": "object"
+    },
+    "CandidateEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "minLength": 1,
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "title",
+            "text"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "field",
+        "quote"
+      ],
+      "title": "CandidateEvidence",
+      "type": "object"
+    },
+    "CandidateExcluded": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "enum": [
+            "title",
+            "text"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        },
+        "reason": {
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "quote",
+        "reason"
+      ],
+      "title": "CandidateExcluded",
+      "type": "object"
+    },
+    "CandidateMeasurement": {
+      "additionalProperties": false,
+      "properties": {
+        "measurement_id": {
+          "minLength": 1,
+          "title": "Measurement Id",
+          "type": "string"
+        },
+        "metric": {
+          "minLength": 1,
+          "title": "Metric",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "level",
+            "absolute_change",
+            "relative_change"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "value_text": {
+          "minLength": 1,
+          "title": "Value Text",
+          "type": "string"
+        },
+        "unit_text": {
+          "minLength": 1,
+          "title": "Unit Text",
+          "type": "string"
+        },
+        "qualifier": {
+          "enum": [
+            "exact",
+            "approximate",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ],
+          "title": "Qualifier",
+          "type": "string"
+        },
+        "value_role": {
+          "enum": [
+            "reported",
+            "before",
+            "after",
+            "comparison"
+          ],
+          "title": "Value Role",
+          "type": "string"
+        },
+        "comparison_period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CandidatePeriod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "measurement_id",
+        "metric",
+        "kind",
+        "value_text",
+        "unit_text",
+        "qualifier",
+        "value_role",
+        "comparison_period"
+      ],
+      "title": "CandidateMeasurement",
+      "type": "object"
+    },
+    "CandidateParticipant": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "role"
+      ],
+      "title": "CandidateParticipant",
+      "type": "object"
+    },
+    "CandidatePeriod": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "CandidatePeriod",
+      "type": "object"
+    },
+    "CandidateTime": {
+      "additionalProperties": false,
+      "properties": {
+        "occurred_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CandidatePeriod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "effective_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CandidatePeriod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "observation_period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CandidatePeriod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "forecast_horizon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CandidatePeriod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "occurred_at",
+        "effective_at",
+        "observation_period",
+        "forecast_horizon"
+      ],
+      "title": "CandidateTime",
+      "type": "object"
+    },
+    "Coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "processed",
+            "excluded",
+            "unresolved",
+            "rejected",
+            "deferred",
+            "missing"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "candidate_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/Issue"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "mention_id",
+        "status"
+      ],
+      "title": "Coverage",
+      "type": "object"
+    },
+    "ExtractionResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "items": {
+            "$ref": "#/$defs/CandidateClaim"
+          },
+          "title": "Claims",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/CandidateEvidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "excluded": {
+          "items": {
+            "$ref": "#/$defs/CandidateExcluded"
+          },
+          "title": "Excluded",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "claims",
+        "evidence",
+        "excluded",
+        "limitations"
+      ],
+      "title": "ExtractionResponse",
+      "type": "object"
+    },
+    "FieldBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": {
+          "minLength": 1,
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "title",
+            "text"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        },
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "path",
+        "field",
+        "start",
+        "end",
+        "quote",
+        "fragment_id"
+      ],
+      "title": "FieldBinding",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "path",
+        "message"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "Scenario": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "baseline",
+            "alternative",
+            "unspecified"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "text"
+      ],
+      "title": "Scenario",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "template-batch.v2",
+      "default": "template-batch.v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "minLength": 1,
+      "title": "Source Id",
+      "type": "string"
+    },
+    "article_sha256": {
+      "minLength": 1,
+      "title": "Article Sha256",
+      "type": "string"
+    },
+    "processing_spec_hash": {
+      "minLength": 1,
+      "title": "Processing Spec Hash",
+      "type": "string"
+    },
+    "plan_artifact_id": {
+      "minLength": 1,
+      "title": "Plan Artifact Id",
+      "type": "string"
+    },
+    "batch_id": {
+      "minLength": 1,
+      "title": "Batch Id",
+      "type": "string"
+    },
+    "extraction": {
+      "$ref": "#/$defs/ExtractionResponse"
+    },
+    "coverage": {
+      "items": {
+        "$ref": "#/$defs/Coverage"
+      },
+      "title": "Coverage",
+      "type": "array"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/FieldBinding"
+      },
+      "title": "Bindings",
+      "type": "array"
+    },
+    "transport_envelope": {
+      "enum": [
+        "json",
+        "markdown_json"
+      ],
+      "title": "Transport Envelope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "article_sha256",
+    "processing_spec_hash",
+    "plan_artifact_id",
+    "batch_id",
+    "extraction",
+    "coverage",
+    "issues",
+    "bindings",
+    "transport_envelope"
+  ],
+  "title": "TemplateBatchResult",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

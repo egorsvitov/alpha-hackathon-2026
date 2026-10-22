@@ -11,25 +11,25 @@ import unittest
 from unittest.mock import patch
 from jsonschema import Draft202012Validator
 from pydantic import ValidationError
-from llm.events.catalog_models import CatalogConfig, ClaimContext, PairDecision, CanonicalEventRecord, CatalogSnapshot, ReviewRequest
-from llm.events.catalog_store import CatalogService, implementation_hash
-from llm.events.catalog_checks import check_fixtures,evaluate_gold
-from llm.events.candidate_search import BM25CandidateSearch,pair_key
-from llm.events.grouping import cluster_claims
-from llm.events.matching import describe_identity,compare_claims,semantic_claim,related_stages
+from llm.events.catalog.models import CatalogConfig, ClaimContext, PairDecision, CanonicalEventRecord, CatalogSnapshot, ReviewRequest
+from llm.events.catalog.service import CatalogService, implementation_hash
+from llm.events.catalog.checks import check_fixtures, evaluate_gold
+from llm.events.catalog.search import BM25CandidateSearch, pair_key
+from llm.events.catalog.grouping import cluster_claims
+from llm.events.catalog.matching import describe_identity, compare_claims, semantic_claim, related_stages
 from llm.events.fixtures.make_catalog import context,TYPES
 from llm.events.fixtures.make_normalization import case,measurement
-from llm.events.extraction import build_processing_spec
-from llm.events.extraction_models import ProviderProfile, ExecutionLimits
-from llm.events.runner import ExtractionRunner
-from llm.events.provider import OfflineProvider,ProviderResponse,ProviderFailure
-from llm.events.normalization_store import NormalizationService
-from llm.events.normalization_models import NormalizationConfig, Transformation
-from llm.events.pair_check import parse_recommendation
-from llm.events.storage import EventStore,StorageError
-from llm.events.storage_schema import V2_DDL,V2_TABLES,SCHEMA_VERSION
-from llm.events.migration import migrate_v2_to_v3, migrate_v3_to_v4
-from llm.events.validation import ContractValidationError,validate_claim_collection
+from llm.events.extraction.protocol import build_processing_spec
+from llm.events.extraction.models import ProviderProfile, ExecutionLimits
+from llm.events.extraction.runner import ExtractionRunner
+from llm.events.extraction.provider import OfflineProvider, ProviderResponse, ProviderFailure
+from llm.events.normalization.service import NormalizationService
+from llm.events.normalization.models import NormalizationConfig, Transformation
+from llm.events.catalog.pair_check import parse_recommendation
+from llm.events.storage.store import EventStore, StorageError
+from llm.events.storage.schema import V2_DDL, V2_TABLES, SCHEMA_VERSION
+from llm.events.storage.migration import migrate_v2_to_v3, migrate_v3_to_v4
+from llm.events.contracts.validation import ContractValidationError, validate_claim_collection
 
 ROOT=Path(__file__).resolve().parents[3]
 
@@ -52,7 +52,7 @@ class CatalogTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.clock=Clock();self.db=Path(self.temp.name)/'state.sqlite3'
         self.store=EventStore(self.db,clock=self.clock);self.service=CatalogService(self.store)
-        self.profile=ProviderProfile(execution_mode='offline',model='offline:scripted',limits_confirmed=True,
+        self.profile=ProviderProfile(candidate_format='b3.1',execution_mode='offline',model='offline:scripted',limits_confirmed=True,
             max_input_tokens=30000,max_output_tokens=4096,context_window_tokens=34096)
         self.limits=ExecutionLimits(tariffs_confirmed=True,input_rub_per_million='1',output_rub_per_million='2',daily_quota_rub='1')
 
@@ -92,8 +92,8 @@ class CatalogTests(unittest.TestCase):
 
     def test_fixtures_and_contracts(self):
         report=check_fixtures(ROOT/'llm/events/fixtures/catalog.b5.1.json');self.assertEqual(report['cases'],33)
-        for model,name in [(CatalogSnapshot,'event-catalog'),(__import__('llm.events.catalog_models',fromlist=['IdentityDescriptor']).IdentityDescriptor,'event-identity'),
-                           (__import__('llm.events.catalog_models',fromlist=['PairCheckResult']).PairCheckResult,'pair-check')]:
+        for model,name in [(CatalogSnapshot,'event-catalog'),(__import__('llm.events.catalog.models',fromlist=['IdentityDescriptor']).IdentityDescriptor,'event-identity'),
+                           (__import__('llm.events.catalog.models',fromlist=['PairCheckResult']).PairCheckResult,'pair-check')]:
             schema=json.loads((ROOT/f'docs/contracts/{name}.b5.1.schema.json').read_text());schema.pop('$schema')
             self.assertEqual(schema,model.model_json_schema())
         with self.assertRaises(ValidationError):CatalogConfig(max_claims='10')
@@ -127,7 +127,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_ranges_and_unknown_conditions(self):
         a,b=ctx('a'),ctx('b')
-        from llm.events.models import ValueRange
+        from llm.events.contracts.models import ValueRange
         a.claim.measurements[0].value=ValueRange(min='10',max='12')
         b.claim.measurements[0].value=ValueRange(min='13',max='15')
         self.assertEqual(compare_claims(a,b).content,'conflicts_with')
@@ -212,7 +212,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_same_revision_replace_is_explicit(self):
         a=self.publish('a');self.initialize(a)
-        new=self.publish('a',config=NormalizationConfig(dictionary=__import__('llm.events.normalization',fromlist=['resolved_dictionary']).resolved_dictionary(NormalizationConfig())|{'version':'test-b5'}))
+        new=self.publish('a',config=NormalizationConfig(dictionary=__import__('llm.events.normalization.core',fromlist=['resolved_dictionary']).resolved_dictionary(NormalizationConfig())|{'version':'test-b5'}))
         self.assertNotEqual(a,new)
         self.error('catalog_replace_required',self.service.apply_artifacts,[new])
         self.service.apply_artifacts([new],replace=True)
@@ -243,7 +243,7 @@ class CatalogTests(unittest.TestCase):
         self.service.rebuild_catalog(CatalogConfig(max_claims=1))
         self.error('catalog_size_limit',self.service.apply_artifacts,[b])
         self.assertEqual(len(self.service.list_events()[0].claims),1)
-        with patch('llm.events.catalog_store.implementation_hash',return_value='new-rules'):
+        with patch('llm.events.catalog.service.implementation_hash',return_value='new-rules'):
             self.error('catalog_configuration_mismatch',self.service.apply_artifacts,[a])
             self.service.rebuild_catalog()
 
@@ -324,20 +324,20 @@ class CatalogTests(unittest.TestCase):
         provider=ChangingProvider([self.response(data)])
         result=service.check_pair(*ids,self.profile,self.limits,provider=provider,heartbeat=NoHeartbeat)
         self.assertEqual(result['status'],'succeeded');self.assertFalse(result['applicable'])
-        from llm.events.budget import CallLedger
+        from llm.events.extraction.budget import CallLedger
         self.assertEqual(CallLedger(store,offline=True).get(result['call_id'])['state'],'settled')
         self.error('catalog_stale',service.list_events)
 
     def test_migration_v2_backup_retains_artifacts(self):
         legacy=Path(self.temp.name)/'legacy.sqlite3'
         with ExitStack() as stack:
-            for name,value in [('DDL',V2_DDL),('TABLES',V2_TABLES),('SCHEMA_VERSION',2)]:stack.enter_context(patch('llm.events.storage.'+name,value))
+            for name,value in [('DDL',V2_DDL),('TABLES',V2_TABLES),('SCHEMA_VERSION',2)]:stack.enter_context(patch('llm.events.storage.store.'+name,value))
             old=EventStore(legacy);raw=context('a')
             article={'article_id':'legacy','source':'Synthetic','url':None,'title':'Legacy','published_at':None,'language':'ru',
                      'text':'Legacy text','content_kind':'synthetic','is_full_original_text':False}
             sid=old.import_batch(json.dumps([article]).encode()).items[0].source_id
             job=old.enqueue(sid,build_processing_spec(self.profile));running=old.claim_next(job.spec,'test')
-            from llm.events.budget import CallLedger
+            from llm.events.extraction.budget import CallLedger
             ledger=CallLedger(old,offline=True)
             call_id=ledger.reserve(running.active_attempt.token,{'legacy':'request'},self.profile,self.limits)
             ledger.finish(call_id,response=self.response({}).payload())
@@ -353,7 +353,7 @@ class CatalogTests(unittest.TestCase):
         self.error('unsupported_storage_schema',migrate_v2_to_v3,legacy)
 
     def test_cli_offline_and_gold_evaluation(self):
-        command=[sys.executable,'-m','llm.events.catalog_cli','--db',str(Path(self.temp.name)/'no-db.sqlite3')]
+        command=[sys.executable,'-m','llm.events.catalog.cli','--db',str(Path(self.temp.name)/'no-db.sqlite3')]
         for sub in ('schema','check'):
             result=subprocess.run(command+[sub]+(['--check'] if sub=='schema' else []),capture_output=True,text=True)
             self.assertEqual(result.returncode,0,result.stdout+result.stderr)
@@ -403,7 +403,7 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(compare_claims(a,b).content,'complements')
         # Oil: one current indicator, different comparison bases.
         a,b=ctx('a','market_indicator',value='20'),ctx('b','market_indicator',value='-8.5')
-        from llm.events.models import Period
+        from llm.events.contracts.models import Period
         for x,start,end in ((a,'2025-09-01','2025-09-30'),(b,'2026-08-01','2026-08-31')):
             x.claim.measurements[0].kind='relative_change'
             x.claim.measurements[0].comparison_period=Period(start=start,end=end,text=start)
@@ -429,7 +429,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_unknown_periods_and_exchange_rate_kind(self):
         a,b=ctx('a'),ctx('b')
-        from llm.events.models import Period
+        from llm.events.contracts.models import Period
         for c in (a,b):c.claim.measurements[0].comparison_period=Period(start=None,end=None,text='к прежнему периоду')
         self.assertEqual(compare_claims(a,b).content,'complements')
         a,b=ctx('a','fx_rate'),ctx('b','fx_rate')
@@ -462,16 +462,16 @@ class CatalogTests(unittest.TestCase):
         result=self.service.check_pair(*ids,self.profile,self.limits,
             provider=ExpiringProvider([self.response({})]),heartbeat=NoHeartbeat)
         self.assertEqual(result['status'],'superseded')
-        from llm.events.budget import CallLedger
+        from llm.events.extraction.budget import CallLedger
         self.assertEqual(CallLedger(store,offline=True).get(result['call_id'])['state'],'settled')
         self.assertNotIn('artifact_id',result)
 
     def test_migration_failure_rolls_back_v2(self):
         legacy=Path(self.temp.name)/'broken.sqlite3'
         with ExitStack() as stack:
-            for name,value in [('DDL',V2_DDL),('TABLES',V2_TABLES),('SCHEMA_VERSION',2)]:stack.enter_context(patch('llm.events.storage.'+name,value))
+            for name,value in [('DDL',V2_DDL),('TABLES',V2_TABLES),('SCHEMA_VERSION',2)]:stack.enter_context(patch('llm.events.storage.store.'+name,value))
             EventStore(legacy)
-        with patch('llm.events.migration.B5_DDL',['CREATE TABLE temp_b5(x)','INVALID SQL']):
+        with patch('llm.events.storage.migration.B5_DDL',['CREATE TABLE temp_b5(x)','INVALID SQL']):
             self.error('storage_error',migrate_v2_to_v3,legacy)
         with closing(sqlite3.connect(legacy)) as conn:
             self.assertEqual(conn.execute('PRAGMA user_version').fetchone()[0],2)
@@ -494,7 +494,7 @@ class CatalogTests(unittest.TestCase):
         a,b=self.publish('a'),self.publish('b');self.initialize(a,b)
         pairs=sorted([ClaimContext.model_validate(v) for v in self.service._prepare()['manifest']['contexts']],key=lambda c:c.claim.claim_id)
         ids=[c.claim.claim_id for c in pairs]
-        from llm.events.budget import CallLedger
+        from llm.events.extraction.budget import CallLedger
         original=CallLedger.reserve
         store=self.store
         def reserve(ledger,*args,**kwargs):
@@ -512,7 +512,7 @@ class CatalogTests(unittest.TestCase):
         a,b=self.publish('a'),self.publish('b');self.initialize(a,b)
         pairs=sorted([ClaimContext.model_validate(v) for v in self.service._prepare()['manifest']['contexts']],key=lambda c:c.claim.claim_id)
         ids=[c.claim.claim_id for c in pairs]
-        from llm.events.runner import LeaseHeartbeat
+        from llm.events.extraction.runner import LeaseHeartbeat
         active=[];clock=self.clock;store=self.store
         class ControlledHeartbeat(LeaseHeartbeat):
             def __enter__(self):active.append(self);return self

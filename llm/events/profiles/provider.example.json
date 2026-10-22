@@ -14,5 +14,6 @@
   "limits_confirmed": false,
   "max_input_tokens": null,
   "max_output_tokens": null,
-  "context_window_tokens": null
+  "context_window_tokens": null,
+  "candidate_format": "b3.1"
 }

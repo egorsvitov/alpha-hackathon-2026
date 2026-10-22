@@ -6,14 +6,11 @@ import unittest
 
 from jsonschema import Draft202012Validator, FormatChecker
 
-from llm.events.compatibility import upgrade_v01
-from llm.events.models import ArticleInput, EventType
+from llm.events.contracts.compatibility import upgrade_v01
+from llm.events.contracts.models import ArticleInput, EventType
 from typing import get_args
-from llm.events.schemas import ROOT, generated_schemas
-from llm.events.validation import (
-    ContractValidationError, article_sha256, pointer, validate_bundle,
-    validate_gold, validate_grounding,
-)
+from llm.events.contracts.schemas import ROOT, generated_schemas
+from llm.events.contracts.validation import ContractValidationError, article_sha256, pointer, validate_bundle, validate_gold, validate_grounding
 
 
 def load(relative):
@@ -258,7 +255,7 @@ class ContractTests(unittest.TestCase):
         self.assertEqual(expected["s04:c1","s05:c1"],"different_event")
 
     def test_offline_cli(self):
-        result=subprocess.run([sys.executable,"-m","llm.events.check_contracts"],cwd=ROOT,capture_output=True,text=True)
+        result=subprocess.run([sys.executable,"-m","llm.events.contracts.check"],cwd=ROOT,capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
         self.assertIn("20 articles",result.stdout)
 

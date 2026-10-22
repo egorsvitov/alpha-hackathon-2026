@@ -2,8 +2,8 @@
 import json
 from copy import deepcopy
 from pathlib import Path
-from llm.events.models import ArticleInput
-from llm.events.validation import article_sha256
+from llm.events.contracts.models import ArticleInput
+from llm.events.contracts.validation import article_sha256
 
 
 def measurement(value,unit,*,kind='level',role='reported',metric='ключевая ставка',qualifier='exact',comparison=None):

@@ -1,0 +1,21 @@
+{
+  "schema_version": "b6.1",
+  "cases": [
+    {"event_type":"policy_rate","object":"policy_rate","metric":"policy_rate","topics":["rates"],"factors":["interest_rates"],"industries":[]},
+    {"event_type":"fx_rate","object":"official_exchange_rate","metric":"official_exchange_rate","topics":["fx"],"factors":["fx"],"industries":[]},
+    {"event_type":"price_change","object":"oil","metric":"oil_price","topics":["industry"],"factors":["commodity_prices"],"industries":["oil_gas_chemicals"]},
+    {"event_type":"regulation","object":"unknown_measure","metric":"unknown","topics":["other"],"factors":["regulation"],"industries":[]},
+    {"event_type":"sanction_or_trade_restriction","object":"import_tariff","metric":"unknown","topics":["trade"],"factors":["regulation","tariffs","trade"],"industries":[]},
+    {"event_type":"sanction_or_trade_restriction","object":"sanctions","metric":"unknown","topics":["sanctions"],"factors":["regulation","sanctions"],"industries":[]},
+    {"event_type":"market_indicator","object":"money_supply_m2","metric":"m2","topics":["other"],"factors":["liquidity"],"industries":[]},
+    {"event_type":"market_indicator","object":"inflation","metric":"inflation","topics":["inflation"],"factors":["inflation"],"industries":[]},
+    {"event_type":"company_results","object":"revenue","metric":"revenue","topics":["other"],"factors":[],"industries":[]},
+    {"event_type":"investment","object":"investment_dfo_energy","metric":"investment_amount","topics":["industry"],"factors":["investments"],"industries":["energy"]},
+    {"event_type":"corporate_action","object":"unknown_asset","metric":"unknown","topics":["other"],"factors":[],"industries":[]},
+    {"event_type":"operational_incident","object":"ddos_attacks_ru_platforms","metric":"ddos_peak_power","topics":["industry"],"factors":[],"industries":["online_services"]},
+    {"event_type":"other","object":"unknown_subject","metric":"unknown","topics":["other"],"factors":[],"industries":[]},
+    {"event_type":"market_indicator","object":"steel_consumption","metric":"steel_consumption","topics":["industry"],"factors":["demand"],"industries":["steel"]},
+    {"event_type":"market_indicator","object":"oil_flow_ru_cn","metric":"oil_flow","topics":["trade"],"factors":["logistics","trade"],"industries":["oil_gas_chemicals"]},
+    {"event_type":"corporate_action","object":"retailers_revising_network","metric":"unknown","topics":["industry"],"factors":[],"industries":["retail"]}
+  ]
+}

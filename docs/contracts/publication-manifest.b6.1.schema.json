@@ -1,0 +1,76 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "b6.1",
+      "default": "b6.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "catalog_id": {
+      "minLength": 1,
+      "title": "Catalog Id",
+      "type": "string"
+    },
+    "publication_revision": {
+      "minimum": 1,
+      "title": "Publication Revision",
+      "type": "integer"
+    },
+    "catalog_revision": {
+      "minimum": 0,
+      "title": "Catalog Revision",
+      "type": "integer"
+    },
+    "catalog_run_id": {
+      "minLength": 1,
+      "title": "Catalog Run Id",
+      "type": "string"
+    },
+    "published_at": {
+      "format": "date-time",
+      "minLength": 1,
+      "title": "Published At",
+      "type": "string"
+    },
+    "configuration_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Configuration Sha256",
+      "type": "string"
+    },
+    "bundle_schema_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Bundle Schema Sha256",
+      "type": "string"
+    },
+    "count": {
+      "minimum": 0,
+      "title": "Count",
+      "type": "integer"
+    },
+    "complete_snapshot": {
+      "title": "Complete Snapshot",
+      "type": "boolean"
+    },
+    "events_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Events Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "catalog_id",
+    "publication_revision",
+    "catalog_revision",
+    "catalog_run_id",
+    "published_at",
+    "configuration_sha256",
+    "bundle_schema_sha256",
+    "count",
+    "complete_snapshot",
+    "events_sha256"
+  ],
+  "title": "PublicationManifest",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

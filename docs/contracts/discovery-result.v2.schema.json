@@ -1,0 +1,268 @@
+{
+  "$defs": {
+    "Coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "processed",
+            "excluded",
+            "unresolved",
+            "rejected",
+            "deferred",
+            "missing"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "candidate_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/Issue"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "mention_id",
+        "status"
+      ],
+      "title": "Coverage",
+      "type": "object"
+    },
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "path",
+        "message"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "MentionRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "primary_fragment_id": {
+          "minLength": 1,
+          "title": "Primary Fragment Id",
+          "type": "string"
+        },
+        "context_fragment_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Context Fragment Ids",
+          "type": "array"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "trigger": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QuoteRef"
+            },
+            {
+              "$ref": "#/$defs/SpanRef"
+            }
+          ],
+          "title": "Trigger"
+        },
+        "event_type": {
+          "enum": [
+            "policy_rate",
+            "fx_rate",
+            "price_change",
+            "regulation",
+            "sanction_or_trade_restriction",
+            "market_indicator",
+            "company_results",
+            "investment",
+            "corporate_action",
+            "operational_incident",
+            "other"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "possible_templates": {
+          "items": {
+            "enum": [
+              "observation",
+              "indicator_forecast",
+              "forecast_revision",
+              "decision_forecast",
+              "scenario_forecast",
+              "decision",
+              "action"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Possible Templates",
+          "type": "array"
+        },
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "primary_fragment_id",
+        "label",
+        "trigger",
+        "event_type",
+        "possible_templates",
+        "mention_id"
+      ],
+      "title": "MentionRecord",
+      "type": "object"
+    },
+    "QuoteRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "quote": {
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "quote"
+      ],
+      "title": "QuoteRef",
+      "type": "object"
+    },
+    "SpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "start_id": {
+          "minLength": 1,
+          "title": "Start Id",
+          "type": "string"
+        },
+        "end_id": {
+          "minLength": 1,
+          "title": "End Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "start_id",
+        "end_id"
+      ],
+      "title": "SpanRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "discovery.v2",
+      "default": "discovery.v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "minLength": 1,
+      "title": "Source Id",
+      "type": "string"
+    },
+    "article_sha256": {
+      "minLength": 1,
+      "title": "Article Sha256",
+      "type": "string"
+    },
+    "processing_spec_hash": {
+      "minLength": 1,
+      "title": "Processing Spec Hash",
+      "type": "string"
+    },
+    "mentions": {
+      "items": {
+        "$ref": "#/$defs/MentionRecord"
+      },
+      "title": "Mentions",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "transport_envelope": {
+      "enum": [
+        "json",
+        "markdown_json"
+      ],
+      "title": "Transport Envelope",
+      "type": "string"
+    },
+    "rejected_mentions": {
+      "items": {
+        "$ref": "#/$defs/Coverage"
+      },
+      "title": "Rejected Mentions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "article_sha256",
+    "processing_spec_hash",
+    "mentions",
+    "limitations",
+    "transport_envelope"
+  ],
+  "title": "DiscoveryResult",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

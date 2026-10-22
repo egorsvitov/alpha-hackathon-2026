@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from llm.events.annotation_tools import AnnotationBuilder, measurement as m, period as p
+from llm.events.contracts.annotations import AnnotationBuilder, measurement as m, period as p
 
 
 TEXTS = [

@@ -14,5 +14,6 @@
   "limits_confirmed": true,
   "max_input_tokens": 20000,
   "max_output_tokens": 4096,
-  "context_window_tokens": 24096
+  "context_window_tokens": 24096,
+  "candidate_format": "b3.1"
 }

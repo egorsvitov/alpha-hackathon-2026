@@ -1,0 +1,193 @@
+{
+  "article": {
+    "article_id": "synthetic:grounded-v2",
+    "source": "synthetic",
+    "url": null,
+    "title": "Результаты компании",
+    "published_at": "2026-10-20T12:00:00+03:00",
+    "language": "ru",
+    "text": "АО Север сообщило: выручка за 2026 год составила 10 млн рублей.\n\nЭксперт ожидает ставку 13,5% в 2027 году.",
+    "content_kind": "original",
+    "is_full_original_text": true,
+    "is_synthetic": true
+  },
+  "discovery": {
+    "mentions": [
+      {
+        "primary_fragment_id": "P1",
+        "context_fragment_ids": [],
+        "label": "выручка",
+        "trigger": {
+          "fragment_id": "P1",
+          "start_id": "P1.S1",
+          "end_id": "P1.S1"
+        },
+        "event_type": "company_results",
+        "possible_templates": [
+          "observation"
+        ]
+      }
+    ],
+    "limitations": []
+  },
+  "templates": {
+    "records": [
+      {
+        "mention_id": "d1",
+        "template": "observation",
+        "text": {
+          "value": "Выручка АО Север за 2026 год составила 10 млн рублей.",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "event_type": {
+          "value": "company_results",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "modality": {
+          "value": "asserted",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "polarity": {
+          "value": "affirmed",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "subject": {
+          "value": "АО Север",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "author": {
+          "value": "АО Север",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "object": {
+          "value": "выручка",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "period": {
+          "value": "2026 год",
+          "evidence": [
+            {
+              "fragment_id": "P1",
+              "start_id": "P1.S1",
+              "end_id": "P1.S1"
+            }
+          ]
+        },
+        "measurements": [
+          {
+            "metric": {
+              "value": "выручка",
+              "evidence": [
+                {
+                  "fragment_id": "P1",
+                  "start_id": "P1.S1",
+                  "end_id": "P1.S1"
+                }
+              ]
+            },
+            "value_text": {
+              "value": "10",
+              "evidence": [
+                {
+                  "fragment_id": "P1",
+                  "start_id": "P1.S1",
+                  "end_id": "P1.S1"
+                }
+              ]
+            },
+            "unit_text": {
+              "value": "млн рублей",
+              "evidence": [
+                {
+                  "fragment_id": "P1",
+                  "start_id": "P1.S1",
+                  "end_id": "P1.S1"
+                }
+              ]
+            },
+            "kind": {
+              "value": "level",
+              "evidence": [
+                {
+                  "fragment_id": "P1",
+                  "start_id": "P1.S1",
+                  "end_id": "P1.S1"
+                }
+              ]
+            },
+            "qualifier": {
+              "value": "exact",
+              "evidence": [
+                {
+                  "fragment_id": "P1",
+                  "start_id": "P1.S1",
+                  "end_id": "P1.S1"
+                }
+              ]
+            },
+            "value_role": {
+              "value": "reported",
+              "evidence": [
+                {
+                  "fragment_id": "P1",
+                  "start_id": "P1.S1",
+                  "end_id": "P1.S1"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "excluded_mentions": [],
+    "limitations": []
+  },
+  "expected": {
+    "candidate_id": "d1r1",
+    "normalized_value": "10000000",
+    "unit": "RUB",
+    "time_slot": "observation_period"
+  }
+}

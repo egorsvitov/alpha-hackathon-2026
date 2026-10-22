@@ -1,0 +1,1194 @@
+{
+  "$defs": {
+    "Action": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "event_type": {
+          "$ref": "#/$defs/Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___"
+        },
+        "modality": {
+          "$ref": "#/$defs/Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Bound_Literal__affirmed____negated____unknown___"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "author": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geographies": {
+          "items": {
+            "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+          },
+          "title": "Geographies",
+          "type": "array"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "template": {
+          "const": "action",
+          "title": "Template",
+          "type": "string"
+        },
+        "occurred_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "effective_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "program_period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "plan_horizon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "mention_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "template"
+      ],
+      "title": "Action",
+      "type": "object"
+    },
+    "Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Annotated[str, FieldInfo(annotation=NoneType, required=True, metadata=[MinLen(min_length=1)])]]",
+      "type": "object"
+    },
+    "Bound_Literal__affirmed____negated____unknown___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "affirmed",
+            "negated",
+            "unknown"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['affirmed', 'negated', 'unknown']]",
+      "type": "object"
+    },
+    "Bound_Literal__announced____proposed____approved____effective____repealed___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "announced",
+            "proposed",
+            "approved",
+            "effective",
+            "repealed"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['announced', 'proposed', 'approved', 'effective', 'repealed']]",
+      "type": "object"
+    },
+    "Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "asserted",
+            "forecast",
+            "plan",
+            "proposal",
+            "opinion",
+            "unknown"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['asserted', 'forecast', 'plan', 'proposal', 'opinion', 'unknown']]",
+      "type": "object"
+    },
+    "Bound_Literal__baseline____alternative____unspecified___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "baseline",
+            "alternative",
+            "unspecified"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['baseline', 'alternative', 'unspecified']]",
+      "type": "object"
+    },
+    "Bound_Literal__exact____approximate____gt____gte____lt____lte___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "exact",
+            "approximate",
+            "gt",
+            "gte",
+            "lt",
+            "lte"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['exact', 'approximate', 'gt', 'gte', 'lt', 'lte']]",
+      "type": "object"
+    },
+    "Bound_Literal__level____absolute_change____relative_change___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "level",
+            "absolute_change",
+            "relative_change"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['level', 'absolute_change', 'relative_change']]",
+      "type": "object"
+    },
+    "Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "policy_rate",
+            "fx_rate",
+            "price_change",
+            "regulation",
+            "sanction_or_trade_restriction",
+            "market_indicator",
+            "company_results",
+            "investment",
+            "corporate_action",
+            "operational_incident",
+            "other"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['policy_rate', 'fx_rate', 'price_change', 'regulation', 'sanction_or_trade_restriction', 'market_indicator', 'company_results', 'investment', 'corporate_action', 'operational_incident', 'other']]",
+      "type": "object"
+    },
+    "Bound_Literal__reported____before____after____comparison___": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "enum": [
+            "reported",
+            "before",
+            "after",
+            "comparison"
+          ],
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/SpanRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "value",
+        "evidence"
+      ],
+      "title": "Bound[Literal['reported', 'before', 'after', 'comparison']]",
+      "type": "object"
+    },
+    "Decision": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "event_type": {
+          "$ref": "#/$defs/Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___"
+        },
+        "modality": {
+          "$ref": "#/$defs/Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Bound_Literal__affirmed____negated____unknown___"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "author": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geographies": {
+          "items": {
+            "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+          },
+          "title": "Geographies",
+          "type": "array"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "template": {
+          "const": "decision",
+          "title": "Template",
+          "type": "string"
+        },
+        "stage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Literal__announced____proposed____approved____effective____repealed___"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "decision_time": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "effective_time": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "mention_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "template",
+        "stage"
+      ],
+      "title": "Decision",
+      "type": "object"
+    },
+    "DecisionForecast": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "event_type": {
+          "$ref": "#/$defs/Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___"
+        },
+        "modality": {
+          "$ref": "#/$defs/Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Bound_Literal__affirmed____negated____unknown___"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "author": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geographies": {
+          "items": {
+            "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+          },
+          "title": "Geographies",
+          "type": "array"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "template": {
+          "const": "decision_forecast",
+          "title": "Template",
+          "type": "string"
+        },
+        "horizon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mention_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "template",
+        "horizon"
+      ],
+      "title": "DecisionForecast",
+      "type": "object"
+    },
+    "ForecastRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "event_type": {
+          "$ref": "#/$defs/Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___"
+        },
+        "modality": {
+          "$ref": "#/$defs/Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Bound_Literal__affirmed____negated____unknown___"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "author": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geographies": {
+          "items": {
+            "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+          },
+          "title": "Geographies",
+          "type": "array"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "template": {
+          "const": "forecast_revision",
+          "title": "Template",
+          "type": "string"
+        },
+        "horizon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mention_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "template",
+        "horizon"
+      ],
+      "title": "ForecastRevision",
+      "type": "object"
+    },
+    "GroundedScenario": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/Bound_Literal__baseline____alternative____unspecified___"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        }
+      },
+      "required": [
+        "kind",
+        "text"
+      ],
+      "title": "GroundedScenario",
+      "type": "object"
+    },
+    "IndicatorForecast": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "event_type": {
+          "$ref": "#/$defs/Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___"
+        },
+        "modality": {
+          "$ref": "#/$defs/Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Bound_Literal__affirmed____negated____unknown___"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "author": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geographies": {
+          "items": {
+            "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+          },
+          "title": "Geographies",
+          "type": "array"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "template": {
+          "const": "indicator_forecast",
+          "title": "Template",
+          "type": "string"
+        },
+        "horizon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mention_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "template",
+        "horizon"
+      ],
+      "title": "IndicatorForecast",
+      "type": "object"
+    },
+    "Measurement": {
+      "additionalProperties": false,
+      "properties": {
+        "metric": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "value_text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "unit_text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "kind": {
+          "$ref": "#/$defs/Bound_Literal__level____absolute_change____relative_change___"
+        },
+        "qualifier": {
+          "$ref": "#/$defs/Bound_Literal__exact____approximate____gt____gte____lt____lte___"
+        },
+        "value_role": {
+          "$ref": "#/$defs/Bound_Literal__reported____before____after____comparison___"
+        },
+        "comparison_period_text": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "metric",
+        "value_text",
+        "unit_text",
+        "kind",
+        "qualifier",
+        "value_role"
+      ],
+      "title": "Measurement",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "event_type": {
+          "$ref": "#/$defs/Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___"
+        },
+        "modality": {
+          "$ref": "#/$defs/Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Bound_Literal__affirmed____negated____unknown___"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "author": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geographies": {
+          "items": {
+            "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+          },
+          "title": "Geographies",
+          "type": "array"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "template": {
+          "const": "observation",
+          "title": "Template",
+          "type": "string"
+        },
+        "period": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mention_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "template",
+        "period"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "ScenarioForecast": {
+      "additionalProperties": false,
+      "properties": {
+        "mention_id": {
+          "minLength": 1,
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "text": {
+          "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+        },
+        "event_type": {
+          "$ref": "#/$defs/Bound_Literal__policy_rate____fx_rate____price_change____regulation____sanction_or_trade_restriction____market_indicator____company_results____investment____corporate_action____operational_incident____other___"
+        },
+        "modality": {
+          "$ref": "#/$defs/Bound_Literal__asserted____forecast____plan____proposal____opinion____unknown___"
+        },
+        "polarity": {
+          "$ref": "#/$defs/Bound_Literal__affirmed____negated____unknown___"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "author": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "action": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "object": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "geographies": {
+          "items": {
+            "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+          },
+          "title": "Geographies",
+          "type": "array"
+        },
+        "measurements": {
+          "items": {
+            "$ref": "#/$defs/Measurement"
+          },
+          "title": "Measurements",
+          "type": "array"
+        },
+        "template": {
+          "const": "scenario_forecast",
+          "title": "Template",
+          "type": "string"
+        },
+        "horizon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Bound_Annotated_str__FieldInfo_annotation_NoneType__required_True__metadata__MinLen_min_length_1_____"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "scenario": {
+          "$ref": "#/$defs/GroundedScenario"
+        }
+      },
+      "required": [
+        "mention_id",
+        "text",
+        "event_type",
+        "modality",
+        "polarity",
+        "template",
+        "horizon",
+        "scenario"
+      ],
+      "title": "ScenarioForecast",
+      "type": "object"
+    },
+    "SpanRef": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "minLength": 1,
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "start_id": {
+          "minLength": 1,
+          "title": "Start Id",
+          "type": "string"
+        },
+        "end_id": {
+          "minLength": 1,
+          "title": "End Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "start_id",
+        "end_id"
+      ],
+      "title": "SpanRef",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "action": "#/$defs/Action",
+      "decision": "#/$defs/Decision",
+      "decision_forecast": "#/$defs/DecisionForecast",
+      "forecast_revision": "#/$defs/ForecastRevision",
+      "indicator_forecast": "#/$defs/IndicatorForecast",
+      "observation": "#/$defs/Observation",
+      "scenario_forecast": "#/$defs/ScenarioForecast"
+    },
+    "propertyName": "template"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Observation"
+    },
+    {
+      "$ref": "#/$defs/IndicatorForecast"
+    },
+    {
+      "$ref": "#/$defs/ForecastRevision"
+    },
+    {
+      "$ref": "#/$defs/DecisionForecast"
+    },
+    {
+      "$ref": "#/$defs/ScenarioForecast"
+    },
+    {
+      "$ref": "#/$defs/Decision"
+    },
+    {
+      "$ref": "#/$defs/Action"
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
