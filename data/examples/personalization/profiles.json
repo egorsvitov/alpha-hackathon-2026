@@ -1,0 +1,1721 @@
+{
+  "schema_version": "0.1",
+  "profiles": [
+    {
+      "schema_version": "0.1",
+      "company_id": "DEMO_LOGISTICS",
+      "is_synthetic": true,
+      "display_name": "Компания DEMO_LOGISTICS",
+      "features": {
+        "DEMO_LOGISTICS:/company_id": {
+          "feature_id": "DEMO_LOGISTICS:/company_id",
+          "path": "/company_id",
+          "value": "DEMO_LOGISTICS",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/okved/code": {
+          "feature_id": "DEMO_LOGISTICS:/okved/code",
+          "path": "/okved/code",
+          "value": "49.41",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "MAINOKVED_CODE"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/okved/name": {
+          "feature_id": "DEMO_LOGISTICS:/okved/name",
+          "path": "/okved/name",
+          "value": "Вымышленные перевозки",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "MAINOKVED_NAME"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/industry": {
+          "feature_id": "DEMO_LOGISTICS:/industry",
+          "path": "/industry",
+          "value": "transport",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_LOGISTICS:/okved/code"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_LOGISTICS:/products/rko": {
+          "feature_id": "DEMO_LOGISTICS:/products/rko",
+          "path": "/products/rko",
+          "value": true,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CL_PRODUCT_RKO_MARK"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/products/guarantee": {
+          "feature_id": "DEMO_LOGISTICS:/products/guarantee",
+          "path": "/products/guarantee",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CL_PRODUCT_GAR_MARK"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/products/loan": {
+          "feature_id": "DEMO_LOGISTICS:/products/loan",
+          "path": "/products/loan",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CL_PRODUCT_LOA_MARK"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/products/leasing": {
+          "feature_id": "DEMO_LOGISTICS:/products/leasing",
+          "path": "/products/leasing",
+          "value": true,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CL_PRODUCT_LEA_MARK"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/products/deposit": {
+          "feature_id": "DEMO_LOGISTICS:/products/deposit",
+          "path": "/products/deposit",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CL_PRODUCT_DEP_MARK"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/products/payroll": {
+          "feature_id": "DEMO_LOGISTICS:/products/payroll",
+          "path": "/products/payroll",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CL_PRODUCT_ZPP_MARK"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/products/factoring": {
+          "feature_id": "DEMO_LOGISTICS:/products/factoring",
+          "path": "/products/factoring",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "FACTORING_MARK"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/region": {
+          "feature_id": "DEMO_LOGISTICS:/region",
+          "path": "/region",
+          "value": "Москва",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "REGION"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/city": {
+          "feature_id": "DEMO_LOGISTICS:/city",
+          "path": "/city",
+          "value": "Вымышленный город",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CITY"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/age_band": {
+          "feature_id": "DEMO_LOGISTICS:/age_band",
+          "path": "/age_band",
+          "value": "3–5",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "COMPANY_AGE_YEARS_GRADATION"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/employees_band": {
+          "feature_id": "DEMO_LOGISTICS:/employees_band",
+          "path": "/employees_band",
+          "value": "16–100",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "AMOUNT_WORKERS_FNS_GRADATION"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/development_stage": {
+          "feature_id": "DEMO_LOGISTICS:/development_stage",
+          "path": "/development_stage",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "ECO_MARK_LABEL"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/group_id": {
+          "feature_id": "DEMO_LOGISTICS:/group_id",
+          "path": "/group_id",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "GROUP_ID"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/client_type": {
+          "feature_id": "DEMO_LOGISTICS:/client_type",
+          "path": "/client_type",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "CL_TYPE"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/fts_present": {
+          "feature_id": "DEMO_LOGISTICS:/fts_present",
+          "path": "/fts_present",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "FTS_FLAG"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/countries": {
+          "feature_id": "DEMO_LOGISTICS:/countries",
+          "path": "/countries",
+          "value": [],
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "FTS_COUNTRY_NAME"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/revenue/raw": {
+          "feature_id": "DEMO_LOGISTICS:/revenue/raw",
+          "path": "/revenue/raw",
+          "value": "123456.78",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "REVENUE_COMPANY"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/revenue/unit": {
+          "feature_id": "DEMO_LOGISTICS:/revenue/unit",
+          "path": "/revenue/unit",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_LOGISTICS:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_LOGISTICS:/revenue/unit_status": {
+          "feature_id": "DEMO_LOGISTICS:/revenue/unit_status",
+          "path": "/revenue/unit_status",
+          "value": "unconfirmed",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_LOGISTICS:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_LOGISTICS:/revenue/period": {
+          "feature_id": "DEMO_LOGISTICS:/revenue/period",
+          "path": "/revenue/period",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_LOGISTICS:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_LOGISTICS:/source_snapshot/data_as_of": {
+          "feature_id": "DEMO_LOGISTICS:/source_snapshot/data_as_of",
+          "path": "/source_snapshot/data_as_of",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/source_snapshot/exported_at": {
+          "feature_id": "DEMO_LOGISTICS:/source_snapshot/exported_at",
+          "path": "/source_snapshot/exported_at",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/source_snapshot/source_sha256": {
+          "feature_id": "DEMO_LOGISTICS:/source_snapshot/source_sha256",
+          "path": "/source_snapshot/source_sha256",
+          "value": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              1
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_LOGISTICS:/source_snapshot/historical_applicability": {
+          "feature_id": "DEMO_LOGISTICS:/source_snapshot/historical_applicability",
+          "path": "/source_snapshot/historical_applicability",
+          "value": "unknown",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_LOGISTICS:/source_snapshot/data_as_of"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_LOGISTICS:/display_name": {
+          "feature_id": "DEMO_LOGISTICS:/display_name",
+          "path": "/display_name",
+          "value": "Компания DEMO_LOGISTICS",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_LOGISTICS:/company_id"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_LOGISTICS:/is_synthetic": {
+          "feature_id": "DEMO_LOGISTICS:/is_synthetic",
+          "path": "/is_synthetic",
+          "value": true,
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_LOGISTICS:/company_id"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        }
+      },
+      "missing_fields": [
+        "/client_type",
+        "/countries",
+        "/development_stage",
+        "/group_id",
+        "/revenue/period",
+        "/revenue/unit",
+        "/source_snapshot/data_as_of",
+        "/source_snapshot/exported_at"
+      ],
+      "limitations": [
+        "revenue_unit_and_period_unconfirmed",
+        "products_describe_supplied_bank_record_only",
+        "registered_region_not_all_operations",
+        "okved_not_cost_structure",
+        "group_id_not_proof_of_ownership",
+        "source_business_date_unknown_historical_applicability_unproven"
+      ],
+      "normalization_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+      "okved": {
+        "code": "49.41",
+        "name": "Вымышленные перевозки"
+      },
+      "industry": "transport",
+      "products": {
+        "rko": true,
+        "guarantee": false,
+        "loan": false,
+        "leasing": true,
+        "deposit": false,
+        "payroll": false,
+        "factoring": false
+      },
+      "region": "Москва",
+      "city": "Вымышленный город",
+      "age_band": "3–5",
+      "employees_band": "16–100",
+      "development_stage": null,
+      "group_id": null,
+      "client_type": null,
+      "fts_present": false,
+      "countries": [],
+      "revenue": {
+        "raw": "123456.78",
+        "unit": null,
+        "unit_status": "unconfirmed",
+        "period": null
+      },
+      "source_snapshot": {
+        "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+        "imported_at": "2026-10-21T00:00:00Z",
+        "data_as_of": null,
+        "exported_at": null,
+        "historical_applicability": "unknown"
+      },
+      "graph": {
+        "status": "not_loaded",
+        "graph_version": null,
+        "period": null,
+        "currency": null,
+        "neighbors": [],
+        "profile_coverage_by_nodes": null,
+        "graph_coverage": null,
+        "limitations": []
+      },
+      "profile_version": "82f05fac8e727e0007acf108cde860df38f14e53e0091e5bb90f0fec35f29987"
+    },
+    {
+      "schema_version": "0.1",
+      "company_id": "DEMO_IT",
+      "is_synthetic": true,
+      "display_name": "Компания DEMO_IT",
+      "features": {
+        "DEMO_IT:/company_id": {
+          "feature_id": "DEMO_IT:/company_id",
+          "path": "/company_id",
+          "value": "DEMO_IT",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_IT:/okved/code": {
+          "feature_id": "DEMO_IT:/okved/code",
+          "path": "/okved/code",
+          "value": "62.01",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "MAINOKVED_CODE"
+            ]
+          }
+        },
+        "DEMO_IT:/okved/name": {
+          "feature_id": "DEMO_IT:/okved/name",
+          "path": "/okved/name",
+          "value": "Вымышленная разработка",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "MAINOKVED_NAME"
+            ]
+          }
+        },
+        "DEMO_IT:/industry": {
+          "feature_id": "DEMO_IT:/industry",
+          "path": "/industry",
+          "value": "it",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_IT:/okved/code"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_IT:/products/rko": {
+          "feature_id": "DEMO_IT:/products/rko",
+          "path": "/products/rko",
+          "value": true,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CL_PRODUCT_RKO_MARK"
+            ]
+          }
+        },
+        "DEMO_IT:/products/guarantee": {
+          "feature_id": "DEMO_IT:/products/guarantee",
+          "path": "/products/guarantee",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CL_PRODUCT_GAR_MARK"
+            ]
+          }
+        },
+        "DEMO_IT:/products/loan": {
+          "feature_id": "DEMO_IT:/products/loan",
+          "path": "/products/loan",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CL_PRODUCT_LOA_MARK"
+            ]
+          }
+        },
+        "DEMO_IT:/products/leasing": {
+          "feature_id": "DEMO_IT:/products/leasing",
+          "path": "/products/leasing",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CL_PRODUCT_LEA_MARK"
+            ]
+          }
+        },
+        "DEMO_IT:/products/deposit": {
+          "feature_id": "DEMO_IT:/products/deposit",
+          "path": "/products/deposit",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CL_PRODUCT_DEP_MARK"
+            ]
+          }
+        },
+        "DEMO_IT:/products/payroll": {
+          "feature_id": "DEMO_IT:/products/payroll",
+          "path": "/products/payroll",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CL_PRODUCT_ZPP_MARK"
+            ]
+          }
+        },
+        "DEMO_IT:/products/factoring": {
+          "feature_id": "DEMO_IT:/products/factoring",
+          "path": "/products/factoring",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "FACTORING_MARK"
+            ]
+          }
+        },
+        "DEMO_IT:/region": {
+          "feature_id": "DEMO_IT:/region",
+          "path": "/region",
+          "value": "Москва",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "REGION"
+            ]
+          }
+        },
+        "DEMO_IT:/city": {
+          "feature_id": "DEMO_IT:/city",
+          "path": "/city",
+          "value": "Вымышленный город",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CITY"
+            ]
+          }
+        },
+        "DEMO_IT:/age_band": {
+          "feature_id": "DEMO_IT:/age_band",
+          "path": "/age_band",
+          "value": "3–5",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "COMPANY_AGE_YEARS_GRADATION"
+            ]
+          }
+        },
+        "DEMO_IT:/employees_band": {
+          "feature_id": "DEMO_IT:/employees_band",
+          "path": "/employees_band",
+          "value": "16–100",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "AMOUNT_WORKERS_FNS_GRADATION"
+            ]
+          }
+        },
+        "DEMO_IT:/development_stage": {
+          "feature_id": "DEMO_IT:/development_stage",
+          "path": "/development_stage",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "ECO_MARK_LABEL"
+            ]
+          }
+        },
+        "DEMO_IT:/group_id": {
+          "feature_id": "DEMO_IT:/group_id",
+          "path": "/group_id",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "GROUP_ID"
+            ]
+          }
+        },
+        "DEMO_IT:/client_type": {
+          "feature_id": "DEMO_IT:/client_type",
+          "path": "/client_type",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "CL_TYPE"
+            ]
+          }
+        },
+        "DEMO_IT:/fts_present": {
+          "feature_id": "DEMO_IT:/fts_present",
+          "path": "/fts_present",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "FTS_FLAG"
+            ]
+          }
+        },
+        "DEMO_IT:/countries": {
+          "feature_id": "DEMO_IT:/countries",
+          "path": "/countries",
+          "value": [],
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "FTS_COUNTRY_NAME"
+            ]
+          }
+        },
+        "DEMO_IT:/revenue/raw": {
+          "feature_id": "DEMO_IT:/revenue/raw",
+          "path": "/revenue/raw",
+          "value": "123456.78",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "REVENUE_COMPANY"
+            ]
+          }
+        },
+        "DEMO_IT:/revenue/unit": {
+          "feature_id": "DEMO_IT:/revenue/unit",
+          "path": "/revenue/unit",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_IT:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_IT:/revenue/unit_status": {
+          "feature_id": "DEMO_IT:/revenue/unit_status",
+          "path": "/revenue/unit_status",
+          "value": "unconfirmed",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_IT:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_IT:/revenue/period": {
+          "feature_id": "DEMO_IT:/revenue/period",
+          "path": "/revenue/period",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_IT:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_IT:/source_snapshot/data_as_of": {
+          "feature_id": "DEMO_IT:/source_snapshot/data_as_of",
+          "path": "/source_snapshot/data_as_of",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_IT:/source_snapshot/exported_at": {
+          "feature_id": "DEMO_IT:/source_snapshot/exported_at",
+          "path": "/source_snapshot/exported_at",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_IT:/source_snapshot/source_sha256": {
+          "feature_id": "DEMO_IT:/source_snapshot/source_sha256",
+          "path": "/source_snapshot/source_sha256",
+          "value": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              2
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_IT:/source_snapshot/historical_applicability": {
+          "feature_id": "DEMO_IT:/source_snapshot/historical_applicability",
+          "path": "/source_snapshot/historical_applicability",
+          "value": "unknown",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_IT:/source_snapshot/data_as_of"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_IT:/display_name": {
+          "feature_id": "DEMO_IT:/display_name",
+          "path": "/display_name",
+          "value": "Компания DEMO_IT",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_IT:/company_id"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_IT:/is_synthetic": {
+          "feature_id": "DEMO_IT:/is_synthetic",
+          "path": "/is_synthetic",
+          "value": true,
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_IT:/company_id"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        }
+      },
+      "missing_fields": [
+        "/client_type",
+        "/countries",
+        "/development_stage",
+        "/group_id",
+        "/products/payroll",
+        "/revenue/period",
+        "/revenue/unit",
+        "/source_snapshot/data_as_of",
+        "/source_snapshot/exported_at"
+      ],
+      "limitations": [
+        "revenue_unit_and_period_unconfirmed",
+        "products_describe_supplied_bank_record_only",
+        "registered_region_not_all_operations",
+        "okved_not_cost_structure",
+        "group_id_not_proof_of_ownership",
+        "source_business_date_unknown_historical_applicability_unproven"
+      ],
+      "normalization_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+      "okved": {
+        "code": "62.01",
+        "name": "Вымышленная разработка"
+      },
+      "industry": "it",
+      "products": {
+        "rko": true,
+        "guarantee": false,
+        "loan": false,
+        "leasing": false,
+        "deposit": false,
+        "payroll": null,
+        "factoring": false
+      },
+      "region": "Москва",
+      "city": "Вымышленный город",
+      "age_band": "3–5",
+      "employees_band": "16–100",
+      "development_stage": null,
+      "group_id": null,
+      "client_type": null,
+      "fts_present": false,
+      "countries": [],
+      "revenue": {
+        "raw": "123456.78",
+        "unit": null,
+        "unit_status": "unconfirmed",
+        "period": null
+      },
+      "source_snapshot": {
+        "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+        "imported_at": "2026-10-21T00:00:00Z",
+        "data_as_of": null,
+        "exported_at": null,
+        "historical_applicability": "unknown"
+      },
+      "graph": {
+        "status": "not_loaded",
+        "graph_version": null,
+        "period": null,
+        "currency": null,
+        "neighbors": [],
+        "profile_coverage_by_nodes": null,
+        "graph_coverage": null,
+        "limitations": []
+      },
+      "profile_version": "5abe2627b59c482cd0d7378b6da1b54842486dc4981c1b93b427a93dcb3937b8"
+    },
+    {
+      "schema_version": "0.1",
+      "company_id": "DEMO_TRADE",
+      "is_synthetic": true,
+      "display_name": "Компания DEMO_TRADE",
+      "features": {
+        "DEMO_TRADE:/company_id": {
+          "feature_id": "DEMO_TRADE:/company_id",
+          "path": "/company_id",
+          "value": "DEMO_TRADE",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_TRADE:/okved/code": {
+          "feature_id": "DEMO_TRADE:/okved/code",
+          "path": "/okved/code",
+          "value": "46.49",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "MAINOKVED_CODE"
+            ]
+          }
+        },
+        "DEMO_TRADE:/okved/name": {
+          "feature_id": "DEMO_TRADE:/okved/name",
+          "path": "/okved/name",
+          "value": "Вымышленная торговля",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "MAINOKVED_NAME"
+            ]
+          }
+        },
+        "DEMO_TRADE:/industry": {
+          "feature_id": "DEMO_TRADE:/industry",
+          "path": "/industry",
+          "value": "trade",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_TRADE:/okved/code"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_TRADE:/products/rko": {
+          "feature_id": "DEMO_TRADE:/products/rko",
+          "path": "/products/rko",
+          "value": true,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CL_PRODUCT_RKO_MARK"
+            ]
+          }
+        },
+        "DEMO_TRADE:/products/guarantee": {
+          "feature_id": "DEMO_TRADE:/products/guarantee",
+          "path": "/products/guarantee",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CL_PRODUCT_GAR_MARK"
+            ]
+          }
+        },
+        "DEMO_TRADE:/products/loan": {
+          "feature_id": "DEMO_TRADE:/products/loan",
+          "path": "/products/loan",
+          "value": true,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CL_PRODUCT_LOA_MARK"
+            ]
+          }
+        },
+        "DEMO_TRADE:/products/leasing": {
+          "feature_id": "DEMO_TRADE:/products/leasing",
+          "path": "/products/leasing",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CL_PRODUCT_LEA_MARK"
+            ]
+          }
+        },
+        "DEMO_TRADE:/products/deposit": {
+          "feature_id": "DEMO_TRADE:/products/deposit",
+          "path": "/products/deposit",
+          "value": true,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CL_PRODUCT_DEP_MARK"
+            ]
+          }
+        },
+        "DEMO_TRADE:/products/payroll": {
+          "feature_id": "DEMO_TRADE:/products/payroll",
+          "path": "/products/payroll",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CL_PRODUCT_ZPP_MARK"
+            ]
+          }
+        },
+        "DEMO_TRADE:/products/factoring": {
+          "feature_id": "DEMO_TRADE:/products/factoring",
+          "path": "/products/factoring",
+          "value": false,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "FACTORING_MARK"
+            ]
+          }
+        },
+        "DEMO_TRADE:/region": {
+          "feature_id": "DEMO_TRADE:/region",
+          "path": "/region",
+          "value": "Москва",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "REGION"
+            ]
+          }
+        },
+        "DEMO_TRADE:/city": {
+          "feature_id": "DEMO_TRADE:/city",
+          "path": "/city",
+          "value": "Вымышленный город",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CITY"
+            ]
+          }
+        },
+        "DEMO_TRADE:/age_band": {
+          "feature_id": "DEMO_TRADE:/age_band",
+          "path": "/age_band",
+          "value": "3–5",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "COMPANY_AGE_YEARS_GRADATION"
+            ]
+          }
+        },
+        "DEMO_TRADE:/employees_band": {
+          "feature_id": "DEMO_TRADE:/employees_band",
+          "path": "/employees_band",
+          "value": "16–100",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "AMOUNT_WORKERS_FNS_GRADATION"
+            ]
+          }
+        },
+        "DEMO_TRADE:/development_stage": {
+          "feature_id": "DEMO_TRADE:/development_stage",
+          "path": "/development_stage",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "ECO_MARK_LABEL"
+            ]
+          }
+        },
+        "DEMO_TRADE:/group_id": {
+          "feature_id": "DEMO_TRADE:/group_id",
+          "path": "/group_id",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "GROUP_ID"
+            ]
+          }
+        },
+        "DEMO_TRADE:/client_type": {
+          "feature_id": "DEMO_TRADE:/client_type",
+          "path": "/client_type",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "CL_TYPE"
+            ]
+          }
+        },
+        "DEMO_TRADE:/fts_present": {
+          "feature_id": "DEMO_TRADE:/fts_present",
+          "path": "/fts_present",
+          "value": true,
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "FTS_FLAG"
+            ]
+          }
+        },
+        "DEMO_TRADE:/countries": {
+          "feature_id": "DEMO_TRADE:/countries",
+          "path": "/countries",
+          "value": [
+            "CN",
+            "TR"
+          ],
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "FTS_COUNTRY_NAME"
+            ]
+          }
+        },
+        "DEMO_TRADE:/revenue/raw": {
+          "feature_id": "DEMO_TRADE:/revenue/raw",
+          "path": "/revenue/raw",
+          "value": "123456.78",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "REVENUE_COMPANY"
+            ]
+          }
+        },
+        "DEMO_TRADE:/revenue/unit": {
+          "feature_id": "DEMO_TRADE:/revenue/unit",
+          "path": "/revenue/unit",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_TRADE:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_TRADE:/revenue/unit_status": {
+          "feature_id": "DEMO_TRADE:/revenue/unit_status",
+          "path": "/revenue/unit_status",
+          "value": "unconfirmed",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_TRADE:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_TRADE:/revenue/period": {
+          "feature_id": "DEMO_TRADE:/revenue/period",
+          "path": "/revenue/period",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_TRADE:/revenue/raw"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_TRADE:/source_snapshot/data_as_of": {
+          "feature_id": "DEMO_TRADE:/source_snapshot/data_as_of",
+          "path": "/source_snapshot/data_as_of",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_TRADE:/source_snapshot/exported_at": {
+          "feature_id": "DEMO_TRADE:/source_snapshot/exported_at",
+          "path": "/source_snapshot/exported_at",
+          "value": null,
+          "quality": "unknown",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_TRADE:/source_snapshot/source_sha256": {
+          "feature_id": "DEMO_TRADE:/source_snapshot/source_sha256",
+          "path": "/source_snapshot/source_sha256",
+          "value": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+          "quality": "observed",
+          "origin": {
+            "kind": "csv",
+            "source_path": "ranking/tests/fixtures/profiles/companies.csv",
+            "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+            "data_record_numbers": [
+              3
+            ],
+            "columns": [
+              "SYNTHETIC_U"
+            ]
+          }
+        },
+        "DEMO_TRADE:/source_snapshot/historical_applicability": {
+          "feature_id": "DEMO_TRADE:/source_snapshot/historical_applicability",
+          "path": "/source_snapshot/historical_applicability",
+          "value": "unknown",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_TRADE:/source_snapshot/data_as_of"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_TRADE:/display_name": {
+          "feature_id": "DEMO_TRADE:/display_name",
+          "path": "/display_name",
+          "value": "Компания DEMO_TRADE",
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_TRADE:/company_id"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        },
+        "DEMO_TRADE:/is_synthetic": {
+          "feature_id": "DEMO_TRADE:/is_synthetic",
+          "path": "/is_synthetic",
+          "value": true,
+          "quality": "derived",
+          "origin": {
+            "kind": "derived",
+            "input_feature_ids": [
+              "DEMO_TRADE:/company_id"
+            ],
+            "rule_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+            "artifact_id": null,
+            "artifact_sha256": null
+          }
+        }
+      },
+      "missing_fields": [
+        "/client_type",
+        "/development_stage",
+        "/group_id",
+        "/revenue/period",
+        "/revenue/unit",
+        "/source_snapshot/data_as_of",
+        "/source_snapshot/exported_at"
+      ],
+      "limitations": [
+        "revenue_unit_and_period_unconfirmed",
+        "products_describe_supplied_bank_record_only",
+        "registered_region_not_all_operations",
+        "okved_not_cost_structure",
+        "group_id_not_proof_of_ownership",
+        "source_business_date_unknown_historical_applicability_unproven"
+      ],
+      "normalization_version": "company-normalization-0.1:992cf17c6f8a95a2ad47a794d9bc07fd611a46e9f7ca0926da40a1ac783e2002",
+      "okved": {
+        "code": "46.49",
+        "name": "Вымышленная торговля"
+      },
+      "industry": "trade",
+      "products": {
+        "rko": true,
+        "guarantee": false,
+        "loan": true,
+        "leasing": false,
+        "deposit": true,
+        "payroll": false,
+        "factoring": false
+      },
+      "region": "Москва",
+      "city": "Вымышленный город",
+      "age_band": "3–5",
+      "employees_band": "16–100",
+      "development_stage": null,
+      "group_id": null,
+      "client_type": null,
+      "fts_present": true,
+      "countries": [
+        "CN",
+        "TR"
+      ],
+      "revenue": {
+        "raw": "123456.78",
+        "unit": null,
+        "unit_status": "unconfirmed",
+        "period": null
+      },
+      "source_snapshot": {
+        "source_sha256": "b23fc2252a95397dec78e6086d3744017c1a41b2113a770cad70027701ed269d",
+        "imported_at": "2026-10-21T00:00:00Z",
+        "data_as_of": null,
+        "exported_at": null,
+        "historical_applicability": "unknown"
+      },
+      "graph": {
+        "status": "not_loaded",
+        "graph_version": null,
+        "period": null,
+        "currency": null,
+        "neighbors": [],
+        "profile_coverage_by_nodes": null,
+        "graph_coverage": null,
+        "limitations": []
+      },
+      "profile_version": "50b4cc533c31d6a4c7372496db52b1cb3e09ab30541cf2537a777e4d5a18babe"
+    }
+  ]
+}

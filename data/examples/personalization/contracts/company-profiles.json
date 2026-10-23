@@ -1,0 +1,68 @@
+{
+  "schema_version": "0.1",
+  "profiles": [
+    {
+      "schema_version": "0.1",
+      "company_id": "DEMO_CONTRACT",
+      "profile_version": "synthetic-v1",
+      "is_synthetic": true,
+      "display_name": "Вымышленная компания",
+      "okved": {
+        "code": null,
+        "name": null
+      },
+      "industry": null,
+      "products": {
+        "rko": null,
+        "guarantee": null,
+        "loan": null,
+        "leasing": null,
+        "deposit": null,
+        "payroll": null,
+        "factoring": null
+      },
+      "region": null,
+      "city": null,
+      "age_band": null,
+      "employees_band": null,
+      "development_stage": null,
+      "group_id": null,
+      "client_type": null,
+      "countries": [],
+      "fts_present": null,
+      "revenue": {
+        "raw": null,
+        "unit": null,
+        "unit_status": "unconfirmed",
+        "period": null
+      },
+      "graph": {
+        "status": "not_loaded",
+        "graph_version": null,
+        "period": null,
+        "currency": null,
+        "neighbors": [],
+        "profile_coverage_by_nodes": null,
+        "graph_coverage": null,
+        "limitations": [
+          "Synthetic fixture; graph absent"
+        ]
+      },
+      "features": {},
+      "missing_fields": [
+        "/industry"
+      ],
+      "limitations": [
+        "Entirely fictional contract fixture"
+      ],
+      "normalization_version": "fixture-v1",
+      "source_snapshot": {
+        "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "imported_at": "2026-10-20T08:00:00Z",
+        "exported_at": null,
+        "data_as_of": null,
+        "historical_applicability": "unknown"
+      }
+    }
+  ]
+}
