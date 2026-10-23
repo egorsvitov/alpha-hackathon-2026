@@ -160,16 +160,15 @@ def group_vectors(
         matrix = np.asarray(vectors, dtype=np.float64)
         scores = np.clip(matrix @ matrix.T, 0, 1) if n else np.zeros((0, 0))
         if alpha:
+            # Parse each publication once. Row-wise broadcasting bounds temporary
+            # memory to O(N), while preserving interval/unknown-date semantics.
+            intervals = [interval(d) for d in dates]
+            starts = np.asarray([v[0] if v else np.nan for v in intervals])
+            ends = np.asarray([v[1] if v else np.nan for v in intervals])
             for i in range(n):
-                for j in range(i + 1, n):
-                    gap = time_gap(dates[i], dates[j])
-                    factor = (
-                        1
-                        if gap is None
-                        else (1 - alpha) + alpha * 2 ** (-gap / half_life_days)
-                    )
-                    scores[i, j] *= factor
-                    scores[j, i] = scores[i, j]
+                gaps = np.maximum(0, np.maximum(starts[i] - ends, starts - ends[i])) / 86400
+                factors = np.where(np.isnan(gaps), 1, (1 - alpha) + alpha * np.exp2(-gaps / half_life_days))
+                scores[i] *= factors
         if n > 1:
             distance = 1 - scores
             np.fill_diagonal(distance, 0)

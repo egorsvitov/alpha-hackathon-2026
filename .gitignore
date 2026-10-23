@@ -60,3 +60,7 @@ alfa_hack.db
 /reports/
 
 /data/processed/event_pipeline/
+
+# Download archives, local runtime locks, and source-bearing GPU artifacts.
+/tmp_file/
+*.egg-info/

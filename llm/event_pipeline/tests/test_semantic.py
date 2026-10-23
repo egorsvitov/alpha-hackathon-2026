@@ -188,3 +188,23 @@ class SemanticTests(unittest.TestCase):
             vectors, [UNKNOWN] * 4, threshold=0.8, backend="scipy"
         )
         self.assertEqual(reference["groups"], accelerated["groups"])
+
+    def test_vectorized_time_matches_reference_for_intervals_and_unknown(self):
+        import importlib.util
+        if importlib.util.find_spec('scipy') is None:
+            self.skipTest('optional scipy environment')
+        vectors = [[math.cos(t), math.sin(t)] for t in (0, 0.13, 0.4, 0.9, 1.8)]
+        dates = [UNKNOWN,
+                 {'precision':'day','value':'2026-01-01'},
+                 {'precision':'timestamp','value':'2025-12-31T21:00:00+00:00'},
+                 {'precision':'timestamp','value':'2026-01-08T15:00:00+03:00'},
+                 {'precision':'day','value':'2026-02-01'}]
+        for alpha in (0.2, 0.4, 0.6):
+            for half_life in (1, 7, 30):
+                kwargs=dict(threshold=0.65,alpha=alpha,half_life_days=half_life,neighbors=4)
+                expected=group_vectors(vectors,dates,backend='reference',**kwargs)
+                actual=group_vectors(vectors,dates,backend='scipy',**kwargs)
+                self.assertEqual(expected['groups'],actual['groups'])
+                for left,right in zip(expected['minimum_scores'],actual['minimum_scores']):
+                    if left is not None: self.assertAlmostEqual(left,right)
+                self.assertEqual(expected['neighbors'],actual['neighbors'])
