@@ -4,7 +4,8 @@ import {
 } from 'lucide-react';
 import { api, resetDemoNews, simulateIncoming } from '../api';
 import type { FeedItem } from '../types';
-import { ROLES, initialsOf, roleLabel } from '../data/companies';
+import { ROLES, roleLabel } from '../data/companies';
+import { BrandLockup, CompanyLogo } from './Brand';
 import { href, navigate, type Route } from '../router';
 import { useApp, useAsync } from '../store';
 import { readEvents } from '../pages/readState';
@@ -117,14 +118,23 @@ export function NotificationsBell() {
 
 /* ---------------- Меню пользователя ---------------- */
 
-export function UserMenu() {
+/** Меню профиля. variant="pill" — тёмная «пилюля» с именем, как в шапке Альфа-Бизнеса (оформление «Кабинет»). */
+export function UserMenu({ variant = 'avatar' }: { variant?: 'avatar' | 'pill' }) {
   const { user, logout, design, setDesign } = useApp();
   const { open, setOpen, ref } = usePopover();
   if (!user) return null;
   const initials = user.name.split(' ').map((w) => w[0]).slice(0, 2).join('');
+  const [first, , last] = user.name.split(' ');
   return (
     <div className="switcher" ref={ref}>
-      <button type="button" className="avatar avatar--btn" aria-haspopup="dialog" aria-expanded={open} aria-label={`Профиль: ${user.name}`} onClick={() => setOpen(!open)}>{initials}</button>
+      {variant === 'pill' ? (
+        <button type="button" className="avatar--btn user-pill" aria-haspopup="dialog" aria-expanded={open} aria-label={`Профиль: ${user.name}`} onClick={() => setOpen(!open)}>
+          <span className="user-pill__ava" aria-hidden>{initials}</span>
+          <span className="user-pill__name">{first} {last ?? ''}</span>
+        </button>
+      ) : (
+        <button type="button" className="avatar avatar--btn" aria-haspopup="dialog" aria-expanded={open} aria-label={`Профиль: ${user.name}`} onClick={() => setOpen(!open)}>{initials}</button>
+      )}
       {open && (
         <div className="popover popover--right" role="dialog" aria-label="Профиль">
           <p className="popover__title">Вы вошли как</p>
@@ -154,7 +164,7 @@ function CompanySwitcher() {
   return (
     <div className="switcher" ref={ref}>
       <button type="button" className="switcher__btn" aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen(!open)}>
-        <span className="tile tile--dark" aria-hidden>{initialsOf(company)}</span>
+        <CompanyLogo company={company} size={32} />
         <span className="switcher__text">
           <span className="switcher__name">{company.name}</span>
           <span className="switcher__sub">{company.industry}{role ? ` · ${roleLabel(role)}` : ''}</span>
@@ -173,7 +183,7 @@ function CompanySwitcher() {
               className="option"
               onClick={() => { setCompany(c.company_id); setOpen(false); }}
             >
-              <span className="tile tile--dark" aria-hidden>{initialsOf(c)}</span>
+              <CompanyLogo company={c} size={32} />
               <span className="option__text">
                 <span className="option__name">{c.name}</span>
                 <span className="option__sub">{c.industry} · {c.revenue_bn_rub.toLocaleString('ru-RU')} млрд ₽</span>
@@ -266,8 +276,7 @@ export function Header() {
   return (
     <header className="app-header">
       <a className="brand" href={href.home} aria-label="Альфа-Бизнес, главная">
-        <span className="brand__mark" aria-hidden />
-        <span className="brand__name">Альфа-Бизнес</span>
+        <BrandLockup size={32} />
         <Badge tone="warning">Демо</Badge>
       </a>
       <div className="app-header__switchers">

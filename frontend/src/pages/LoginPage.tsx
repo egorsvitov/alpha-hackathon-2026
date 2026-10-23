@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { href, navigate } from '../router';
 import { DEMO_LOGIN, useApp } from '../store';
 import { ArtLogin } from '../components/Illustrations';
+import { BrandLockup } from '../components/Brand';
 
 /** Вход в демо. Компоновка повторяет страницу входа в интернет-банк: белая страница, одна колонка, крупный заголовок,
     серые поля, тёмная кнопка, серая карточка с картинкой. В банке логин и пароль принадлежат физлицу, а доступ к компаниям
@@ -23,8 +24,7 @@ export function LoginPage() {
     <div className="login">
       <header className="login__top">
         <span className="brand">
-          <span className="brand__mark" aria-hidden />
-          <span className="brand__name">Альфа-Бизнес</span>
+          <BrandLockup size={40} />
         </span>
         <span className="login__demo">Демо-режим</span>
       </header>
