@@ -1,0 +1,50 @@
+{
+  "$id": "urn:retriever:ApplyResult:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "already_applied": {
+      "default": false,
+      "title": "Already Applied",
+      "type": "boolean"
+    },
+    "applied": {
+      "default": false,
+      "title": "Applied",
+      "type": "boolean"
+    },
+    "generation": {
+      "title": "Generation",
+      "type": "integer"
+    },
+    "item_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Item Ids",
+      "type": "array"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    },
+    "stale": {
+      "default": false,
+      "title": "Stale",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "generation"
+  ],
+  "title": "ApplyResult",
+  "type": "object"
+}

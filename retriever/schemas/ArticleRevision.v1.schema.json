@@ -1,0 +1,113 @@
+{
+  "$id": "urn:retriever:ArticleRevision:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "article_id": {
+      "minLength": 1,
+      "title": "Article Id",
+      "type": "string"
+    },
+    "language": {
+      "default": "und",
+      "title": "Language",
+      "type": "string"
+    },
+    "observed_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed At"
+    },
+    "provenance": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Provenance",
+      "type": "array"
+    },
+    "publication_precision": {
+      "default": "unknown",
+      "enum": [
+        "timestamp",
+        "day",
+        "unknown"
+      ],
+      "title": "Publication Precision",
+      "type": "string"
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Published At"
+    },
+    "revision_id": {
+      "minLength": 1,
+      "title": "Revision Id",
+      "type": "string"
+    },
+    "source": {
+      "default": "",
+      "title": "Source",
+      "type": "string"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "text_sha256": {
+      "default": "",
+      "title": "Text Sha256",
+      "type": "string"
+    },
+    "title": {
+      "default": "",
+      "title": "Title",
+      "type": "string"
+    },
+    "title_origin": {
+      "default": "source",
+      "enum": [
+        "source",
+        "generated_identifier",
+        "unknown"
+      ],
+      "title": "Title Origin",
+      "type": "string"
+    },
+    "url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Url"
+    }
+  },
+  "required": [
+    "revision_id",
+    "article_id",
+    "text"
+  ],
+  "title": "ArticleRevision",
+  "type": "object"
+}

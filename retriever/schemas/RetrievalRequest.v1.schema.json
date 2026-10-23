@@ -1,0 +1,120 @@
+{
+  "$id": "urn:retriever:RetrievalRequest:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "title": "As Of",
+      "type": "string"
+    },
+    "company_id": {
+      "minLength": 1,
+      "title": "Company Id",
+      "type": "string"
+    },
+    "corpus_id": {
+      "minLength": 1,
+      "title": "Corpus Id",
+      "type": "string"
+    },
+    "deadline_seconds": {
+      "default": 60.0,
+      "exclusiveMinimum": 0,
+      "title": "Deadline Seconds",
+      "type": "number"
+    },
+    "include_graph": {
+      "default": false,
+      "title": "Include Graph",
+      "type": "boolean"
+    },
+    "k": {
+      "default": 50,
+      "maximum": 10000,
+      "minimum": 1,
+      "title": "K",
+      "type": "integer"
+    },
+    "max_context_bytes": {
+      "default": 200000,
+      "exclusiveMinimum": 0,
+      "title": "Max Context Bytes",
+      "type": "integer"
+    },
+    "max_merge_operations": {
+      "default": 20,
+      "minimum": 0,
+      "title": "Max Merge Operations",
+      "type": "integer"
+    },
+    "max_new_llm_calls": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Max New Llm Calls",
+      "type": "integer"
+    },
+    "max_rebuilds": {
+      "default": 30,
+      "minimum": 0,
+      "title": "Max Rebuilds",
+      "type": "integer"
+    },
+    "profile_version": {
+      "minLength": 1,
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "raw_fallback": {
+      "default": false,
+      "title": "Raw Fallback",
+      "type": "boolean"
+    },
+    "request_id": {
+      "minLength": 1,
+      "title": "Request Id",
+      "type": "string"
+    },
+    "unknown_date_policy": {
+      "default": "include",
+      "enum": [
+        "include",
+        "exclude"
+      ],
+      "title": "Unknown Date Policy",
+      "type": "string"
+    },
+    "window_end": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window End"
+    },
+    "window_start": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window Start"
+    }
+  },
+  "required": [
+    "request_id",
+    "company_id",
+    "profile_version",
+    "corpus_id",
+    "as_of"
+  ],
+  "title": "RetrievalRequest",
+  "type": "object"
+}

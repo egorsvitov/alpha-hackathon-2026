@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "SearchItem": {
+      "additionalProperties": false,
+      "properties": {
+        "derived_from": {
+          "additionalProperties": true,
+          "title": "Derived From",
+          "type": "object"
+        },
+        "embedding_text": {
+          "minLength": 1,
+          "title": "Embedding Text",
+          "type": "string"
+        },
+        "item_id": {
+          "minLength": 1,
+          "title": "Item Id",
+          "type": "string"
+        },
+        "item_version": {
+          "default": "1",
+          "title": "Item Version",
+          "type": "string"
+        },
+        "kind": {
+          "default": "article",
+          "enum": [
+            "article",
+            "event"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "publication_count": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Publication Count",
+          "type": "integer"
+        },
+        "source_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Source Count",
+          "type": "integer"
+        },
+        "source_revision_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Revision Ids",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "was_merged": {
+          "default": false,
+          "title": "Was Merged",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "item_id",
+        "text",
+        "embedding_text",
+        "source_revision_ids"
+      ],
+      "title": "SearchItem",
+      "type": "object"
+    }
+  },
+  "$id": "urn:retriever:Candidate:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "best_interest_id": {
+      "title": "Best Interest Id",
+      "type": "string"
+    },
+    "embedding_score": {
+      "title": "Embedding Score",
+      "type": "number"
+    },
+    "group_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Group Ids",
+      "type": "array"
+    },
+    "interest_scores": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Interest Scores",
+      "type": "object"
+    },
+    "item": {
+      "$ref": "#/$defs/SearchItem"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "score_origin": {
+      "default": "cosine",
+      "enum": [
+        "cosine",
+        "inherited_trigger"
+      ],
+      "title": "Score Origin",
+      "type": "string"
+    },
+    "selection_score": {
+      "title": "Selection Score",
+      "type": "number"
+    }
+  },
+  "required": [
+    "item",
+    "selection_score",
+    "embedding_score",
+    "best_interest_id",
+    "interest_scores"
+  ],
+  "title": "Candidate",
+  "type": "object"
+}

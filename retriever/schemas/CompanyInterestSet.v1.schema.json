@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "Interest": {
+      "additionalProperties": false,
+      "properties": {
+        "active": {
+          "default": true,
+          "title": "Active",
+          "type": "boolean"
+        },
+        "applicability_basis": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Applicability Basis"
+        },
+        "applicable_when": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Applicable When"
+        },
+        "family": {
+          "default": "activity",
+          "enum": [
+            "activity",
+            "graph",
+            "other"
+          ],
+          "title": "Family",
+          "type": "string"
+        },
+        "interest_id": {
+          "minLength": 1,
+          "title": "Interest Id",
+          "type": "string"
+        },
+        "provenance": {
+          "additionalProperties": true,
+          "title": "Provenance",
+          "type": "object"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "vector": {
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1,
+          "title": "Vector",
+          "type": "array"
+        }
+      },
+      "required": [
+        "interest_id",
+        "text",
+        "vector"
+      ],
+      "title": "Interest",
+      "type": "object"
+    }
+  },
+  "$id": "urn:retriever:CompanyInterestSet:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "company_id": {
+      "minLength": 1,
+      "title": "Company Id",
+      "type": "string"
+    },
+    "dimension": {
+      "exclusiveMinimum": 0,
+      "title": "Dimension",
+      "type": "integer"
+    },
+    "encoder_fingerprint": {
+      "minLength": 1,
+      "title": "Encoder Fingerprint",
+      "type": "string"
+    },
+    "interest_set_version": {
+      "minLength": 1,
+      "title": "Interest Set Version",
+      "type": "string"
+    },
+    "interests": {
+      "items": {
+        "$ref": "#/$defs/Interest"
+      },
+      "title": "Interests",
+      "type": "array"
+    },
+    "profile_version": {
+      "minLength": 1,
+      "title": "Profile Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "company_id",
+    "profile_version",
+    "interest_set_version",
+    "encoder_fingerprint",
+    "dimension",
+    "interests"
+  ],
+  "title": "CompanyInterestSet",
+  "type": "object"
+}

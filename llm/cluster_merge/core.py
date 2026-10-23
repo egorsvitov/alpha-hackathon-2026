@@ -224,4 +224,37 @@ def validate_merge_result(result, request):
         coverage != set(expected) or result.unresolved
     ):
         errors.append("incomplete_result")
-    return ValidationReport(valid=not errors, errors=errors)
+    if result.configuration != configuration(request):
+        errors.append('configuration_mismatch')
+    if result.id != digest(result.model_dump(exclude={'id', 'cache_hit'})):
+        errors.append('result_id_mismatch')
+    if result.calls < 0 or len(result.usage) != result.calls:
+        errors.append('call_accounting_mismatch')
+    if len({event.id for event in result.events}) != len(result.events):
+        errors.append('duplicate_event_id')
+    coverage_ids = [c.fragment_id for c in result.coverage]
+    if len(set(coverage_ids)) != len(coverage_ids) or not set(coverage_ids) <= set(expected):
+        errors.append('invalid_coverage_membership')
+    drafts = [
+        {'title': e.title, 'paragraphs': [p.model_dump() for p in e.paragraphs],
+         'disagreements': [p.model_dump() for p in e.disagreements]}
+        for e in result.events
+    ]
+    try:
+        answer = parse_answer(canonical({
+            'events': drafts, 'coverage': [c.model_dump() for c in result.coverage],
+        }), [expected[fid] for fid in coverage_ids if fid in expected])
+        for event, draft in zip(result.events, answer.events):
+            rebuilt = event_from(draft, answer, plan.fragments, request, plan.operation_id)
+            if event != rebuilt:
+                errors.append('event_reconstruction_mismatch')
+    except (ValueError, KeyError, TypeError):
+        errors.append('invalid_result_dispositions')
+    if result.status == 'completed':
+        mode = ('merged' if len(result.events) == 1 and len(request.articles) > 1
+                else 'unchanged' if len(result.events) <= 1 else 'split')
+        if result.mode != mode or any(c.kind == 'unresolved' for c in result.coverage):
+            errors.append('invalid_completed_result')
+    elif result.mode is not None:
+        errors.append('incomplete_result_has_mode')
+    return ValidationReport(valid=not errors, errors=sorted(set(errors)))

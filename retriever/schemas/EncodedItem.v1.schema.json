@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "SearchItem": {
+      "additionalProperties": false,
+      "properties": {
+        "derived_from": {
+          "additionalProperties": true,
+          "title": "Derived From",
+          "type": "object"
+        },
+        "embedding_text": {
+          "minLength": 1,
+          "title": "Embedding Text",
+          "type": "string"
+        },
+        "item_id": {
+          "minLength": 1,
+          "title": "Item Id",
+          "type": "string"
+        },
+        "item_version": {
+          "default": "1",
+          "title": "Item Version",
+          "type": "string"
+        },
+        "kind": {
+          "default": "article",
+          "enum": [
+            "article",
+            "event"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "publication_count": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Publication Count",
+          "type": "integer"
+        },
+        "source_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Source Count",
+          "type": "integer"
+        },
+        "source_revision_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Revision Ids",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "was_merged": {
+          "default": false,
+          "title": "Was Merged",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "item_id",
+        "text",
+        "embedding_text",
+        "source_revision_ids"
+      ],
+      "title": "SearchItem",
+      "type": "object"
+    },
+    "VectorRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "embedding_text_sha256": {
+          "minLength": 1,
+          "title": "Embedding Text Sha256",
+          "type": "string"
+        },
+        "item_id": {
+          "minLength": 1,
+          "title": "Item Id",
+          "type": "string"
+        },
+        "item_version": {
+          "default": "1",
+          "title": "Item Version",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1,
+          "title": "Values",
+          "type": "array"
+        },
+        "vector_id": {
+          "minLength": 1,
+          "title": "Vector Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "vector_id",
+        "item_id",
+        "embedding_text_sha256",
+        "values"
+      ],
+      "title": "VectorRecord",
+      "type": "object"
+    }
+  },
+  "$id": "urn:retriever:EncodedItem:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "item": {
+      "$ref": "#/$defs/SearchItem"
+    },
+    "vectors": {
+      "items": {
+        "$ref": "#/$defs/VectorRecord"
+      },
+      "minItems": 1,
+      "title": "Vectors",
+      "type": "array"
+    }
+  },
+  "required": [
+    "item",
+    "vectors"
+  ],
+  "title": "EncodedItem",
+  "type": "object"
+}

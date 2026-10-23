@@ -1,0 +1,64 @@
+{
+  "$id": "urn:retriever:ClusterSnapshot:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cluster_id": {
+      "minLength": 1,
+      "title": "Cluster Id",
+      "type": "string"
+    },
+    "member_revision_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Member Revision Ids",
+      "type": "array"
+    },
+    "membership_hash": {
+      "default": "",
+      "title": "Membership Hash",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": true,
+      "title": "Provenance",
+      "type": "object"
+    },
+    "result_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Result Id"
+    },
+    "revision": {
+      "minLength": 1,
+      "title": "Revision",
+      "type": "string"
+    },
+    "status": {
+      "default": "pending",
+      "enum": [
+        "pending",
+        "resolved",
+        "ambiguous"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cluster_id",
+    "revision",
+    "member_revision_ids"
+  ],
+  "title": "ClusterSnapshot",
+  "type": "object"
+}

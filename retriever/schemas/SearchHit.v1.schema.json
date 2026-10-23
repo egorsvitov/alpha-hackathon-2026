@@ -1,0 +1,39 @@
+{
+  "$id": "urn:retriever:SearchHit:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "best_interest_id": {
+      "title": "Best Interest Id",
+      "type": "string"
+    },
+    "interest_scores": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Interest Scores",
+      "type": "object"
+    },
+    "item_id": {
+      "title": "Item Id",
+      "type": "string"
+    },
+    "item_version": {
+      "title": "Item Version",
+      "type": "string"
+    },
+    "score": {
+      "title": "Score",
+      "type": "number"
+    }
+  },
+  "required": [
+    "item_id",
+    "item_version",
+    "score",
+    "best_interest_id",
+    "interest_scores"
+  ],
+  "title": "SearchHit",
+  "type": "object"
+}

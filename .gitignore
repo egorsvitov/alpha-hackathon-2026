@@ -49,3 +49,9 @@ dist/
 
 # Local cluster merge state
 /data/processed/cluster_merge/
+
+# Standalone retriever private inputs, vectors, traces and runtime state
+/data/processed/retriever/
+/data/raw_news/
+*.sqlite-wal
+*.sqlite-shm
