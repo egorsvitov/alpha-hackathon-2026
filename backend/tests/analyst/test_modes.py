@@ -45,15 +45,37 @@ def template_insight_fn(event_id="e1_key_rate", company_id=CO, role="cfo"):
 
 
 def forbid_network():
-    """Любая попытка сетевого обращения (httpx или сокет) — ошибка теста."""
+    """Любая попытка внешнего сетевого обращения (httpx или сокет) — ошибка теста.
 
-    def boom(*args, **kwargs):
+    Локальные обращения разрешены: ``TestClient`` ходит на ``testserver``, а цикл событий
+    asyncio на Windows соединяет сокеты через 127.0.0.1.
+    """
+    real_send, real_async_send, real_connect = httpx.Client.send, httpx.AsyncClient.send, socket.socket.connect
+    local_hosts = {"testserver", "127.0.0.1", "localhost", "::1"}
+
+    def boom():
         raise AssertionError("сетевой вызов запрещён в этом режиме")
 
+    def guarded_send(self, request, *args, **kwargs):
+        if request.url.host not in local_hosts:
+            boom()
+        return real_send(self, request, *args, **kwargs)
+
+    async def guarded_async_send(self, request, *args, **kwargs):
+        if request.url.host not in local_hosts:
+            boom()
+        return await real_async_send(self, request, *args, **kwargs)
+
+    def guarded_connect(self, address):
+        host = address[0] if isinstance(address, tuple) else address
+        if host not in local_hosts:
+            boom()
+        return real_connect(self, address)
+
     return [
-        mock.patch.object(httpx.Client, "send", boom),
-        mock.patch.object(httpx.AsyncClient, "send", boom),
-        mock.patch.object(socket.socket, "connect", boom),
+        mock.patch.object(httpx.Client, "send", guarded_send),
+        mock.patch.object(httpx.AsyncClient, "send", guarded_async_send),
+        mock.patch.object(socket.socket, "connect", guarded_connect),
     ]
 
 
@@ -67,6 +89,19 @@ class NetworkForbidden:
     def __exit__(self, *exc):
         for p in self.patches:
             p.stop()
+
+
+class TestNetworkGuard(unittest.TestCase):
+    def test_guard_blocks_external_hosts_but_not_local(self):
+        with NetworkForbidden():
+            with self.assertRaises(AssertionError):
+                httpx.Client().get("https://example.com/")
+            s = socket.socket()
+            try:
+                with self.assertRaises(AssertionError):
+                    s.connect(("93.184.216.34", 80))
+            finally:
+                s.close()
 
 
 class UseService(unittest.TestCase):
