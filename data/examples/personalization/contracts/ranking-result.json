@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1",
+  "company_id": "DEMO_CONTRACT",
+  "profile_version": "synthetic-v1",
+  "user_role": "ceo",
+  "as_of": "2026-10-20T08:00:00Z",
+  "scoring_version": "fixture-v1",
+  "rules_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "input_snapshot_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "ranked": [],
+  "feed": [],
+  "deferred": [],
+  "excluded": [],
+  "limitations": [
+    "Synthetic fixture"
+  ]
+}

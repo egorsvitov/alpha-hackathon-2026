@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://alpha.local/contracts/relevance.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "company_id",
+    "profile_version",
+    "user_role",
+    "as_of",
+    "scoring_version",
+    "rules_sha256",
+    "event_id",
+    "event_version",
+    "eligibility",
+    "reason_codes",
+    "score",
+    "raw_total",
+    "scoring_diagnostics",
+    "level",
+    "reasons",
+    "candidate_channels",
+    "feature_ids",
+    "claim_ids",
+    "evidence_status",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "company_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_role": {
+      "enum": [
+        "ceo",
+        "cfo",
+        "treasurer",
+        "chief_accountant"
+      ]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "scoring_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rules_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "eligibility": {
+      "enum": [
+        "eligible",
+        "deferred",
+        "excluded"
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "score": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "raw_total": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "scoring_diagnostics": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "groups",
+            "age_policy",
+            "score_saturated"
+          ],
+          "properties": {
+            "groups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "group",
+                  "raw_points",
+                  "role_multiplier",
+                  "age_weight",
+                  "weighted_points"
+                ],
+                "properties": {
+                  "group": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "raw_points": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "role_multiplier": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "age_weight": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "weighted_points": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            },
+            "age_policy": {
+              "enum": [
+                "decay",
+                "upcoming_floor",
+                "durable_recheck_floor"
+              ]
+            },
+            "score_saturated": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "level": {
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "unknown"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reason_id",
+          "group",
+          "text",
+          "raw_points",
+          "contribution",
+          "feature_ids",
+          "claim_ids",
+          "event_paths",
+          "basis"
+        ],
+        "properties": {
+          "reason_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "group": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "raw_points": {
+            "type": "number",
+            "minimum": 0
+          },
+          "contribution": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "feature_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "event_paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^/"
+            }
+          },
+          "basis": {
+            "enum": [
+              "observed_match",
+              "conditional_mechanism",
+              "metadata_match",
+              "lexical_match"
+            ]
+          }
+        }
+      }
+    },
+    "candidate_channels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "feature_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_status": {
+      "enum": [
+        "usable",
+        "limited",
+        "insufficient"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

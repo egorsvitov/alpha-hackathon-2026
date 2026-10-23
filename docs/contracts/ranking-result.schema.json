@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://alpha.local/contracts/ranking-result.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "company_id",
+    "profile_version",
+    "user_role",
+    "as_of",
+    "scoring_version",
+    "rules_sha256",
+    "input_snapshot_hash",
+    "ranked",
+    "feed",
+    "deferred",
+    "excluded",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "company_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "user_role": {
+      "enum": [
+        "ceo",
+        "cfo",
+        "treasurer",
+        "chief_accountant"
+      ]
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "scoring_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rules_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "input_snapshot_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "ranked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "snapshot",
+          "relevance"
+        ],
+        "properties": {
+          "snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event_id",
+              "event_version",
+              "payload_sha256",
+              "received_at",
+              "source_mode",
+              "ingest_id"
+            ],
+            "properties": {
+              "event_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "event_version": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "payload_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "received_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "source_mode": {
+                "enum": [
+                  "live",
+                  "fixture"
+                ]
+              },
+              "ingest_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "relevance": {
+            "$ref": "relevance.schema.json"
+          }
+        }
+      }
+    },
+    "feed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "snapshot",
+          "relevance"
+        ],
+        "properties": {
+          "snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event_id",
+              "event_version",
+              "payload_sha256",
+              "received_at",
+              "source_mode",
+              "ingest_id"
+            ],
+            "properties": {
+              "event_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "event_version": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "payload_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "received_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "source_mode": {
+                "enum": [
+                  "live",
+                  "fixture"
+                ]
+              },
+              "ingest_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "relevance": {
+            "$ref": "relevance.schema.json"
+          }
+        }
+      }
+    },
+    "deferred": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "snapshot",
+          "reason_codes",
+          "limitations"
+        ],
+        "properties": {
+          "snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event_id",
+              "event_version",
+              "payload_sha256",
+              "received_at",
+              "source_mode",
+              "ingest_id"
+            ],
+            "properties": {
+              "event_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "event_version": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "payload_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "received_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "source_mode": {
+                "enum": [
+                  "live",
+                  "fixture"
+                ]
+              },
+              "ingest_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "reason_codes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "snapshot",
+          "reason_codes",
+          "limitations"
+        ],
+        "properties": {
+          "snapshot": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "event_id",
+              "event_version",
+              "payload_sha256",
+              "received_at",
+              "source_mode",
+              "ingest_id"
+            ],
+            "properties": {
+              "event_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "event_version": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "payload_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "received_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "source_mode": {
+                "enum": [
+                  "live",
+                  "fixture"
+                ]
+              },
+              "ingest_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "reason_codes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}
