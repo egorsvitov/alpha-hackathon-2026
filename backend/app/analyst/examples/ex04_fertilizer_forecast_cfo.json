@@ -1,0 +1,684 @@
+{
+ "example_id": "EX04",
+ "slug": "fertilizer_forecast_cfo",
+ "title": "Прогноз цен на удобрения: издержки через допущение, а не факт о закупках",
+ "kind": "reference",
+ "topics": [
+  "commodities",
+  "inflation",
+  "industry"
+ ],
+ "role": "cfo",
+ "decision": "include",
+ "teaches": [
+  "Прогноз остаётся прогнозом (event_status=forecast, пометка в фактах)",
+  "Цепочка «мировые цены → затраты компании» — допущение (hypothesis)",
+  "Без выдуманных процентов маржи"
+ ],
+ "defect": null,
+ "source_ids": [
+  "wb-2026-04-30-cmo"
+ ],
+ "disclaimer": "Учебный пример: компания синтетическая (не из данных кейса), событие — по открытому источнику на дату примера и может быть устаревшим. Не факты о текущей компании и не текущие новости.",
+ "input": {
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+   "request_id": "EX04-request",
+   "company_id": "EXAMPLE_CO_04",
+   "role": "cfo",
+   "as_of": "2026-05-04T10:00:00+03:00",
+   "news_window_hours": 1440,
+   "max_insights": 10
+  },
+  "company_context": {
+   "profile_version": "example-v1",
+   "profile_snapshot_ref": "seed:EXAMPLE_CO_04@example-v1",
+   "verified_facts": [
+    {
+     "feature_id": "company.okved",
+     "field": "MAINOKVED_CODE/MAINOKVED_NAME",
+     "value": "01.11 Выращивание зерновых (кроме риса), зернобобовых культур и семян масличных культур",
+     "description": "Основной ОКВЭД",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.industry",
+     "field": "industry",
+     "value": "Сельское хозяйство",
+     "description": "Отрасль (по ОКВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "derived"
+    },
+    {
+     "feature_id": "company.revenue",
+     "field": "REVENUE_COMPANY",
+     "value": "19 млрд ₽",
+     "description": "Выручка за прошлый отчётный год (2025), не за текущий период",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.region",
+     "field": "RC_NAME/CITY_NAME",
+     "value": "Юг, Краснодар",
+     "description": "Регион и город обслуживания",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.rko",
+     "field": "CL_PRODUCT_RKO_MARK",
+     "value": "есть",
+     "description": "Расчётно-кассовое обслуживание в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.loans",
+     "field": "CL_PRODUCT_LOA_MARK",
+     "value": "есть",
+     "description": "Кредитные продукты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.leasing",
+     "field": "CL_PRODUCT_LEA_MARK",
+     "value": "есть",
+     "description": "Лизинг в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.flag",
+     "field": "FTS_FLAG",
+     "value": "есть",
+     "description": "Есть таможенные декларации (ВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.country",
+     "field": "FTS_COUNTRY_NAME",
+     "value": "Турция",
+     "description": "Страна ВЭД по декларациям (направление экспорт/импорт неизвестно)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    }
+   ],
+   "economic_exposures": [
+    {
+     "exposure_id": "exp.loans",
+     "factor": "Стоимость и доступность заёмного финансирования",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.loans"
+     ],
+     "description": "Выведено из наличия продукта «Кредитные продукты»; условия договоров неизвестны."
+    },
+    {
+     "exposure_id": "exp.leasing",
+     "factor": "Стоимость лизинга и обновления основных средств",
+     "status": "inferred",
+     "confidence": "low",
+     "basis_feature_ids": [
+      "product.leasing"
+     ],
+     "description": "Выведено из наличия продукта «Лизинг»; условия договоров неизвестны."
+    },
+    {
+     "exposure_id": "exp.fx_trade",
+     "factor": "Валютный курс и условия внешней торговли",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "description": "Выведено из наличия таможенных деклараций; направление и валюта контрактов неизвестны."
+    }
+   ],
+   "related_entities": [],
+   "graph_context": {
+    "included": false,
+    "reason": "Платёжный контекст не передан"
+   },
+   "unknowns": [
+    "Условия действующих кредитных договоров (тип ставки, сроки, объём долга) в профиле неизвестны.",
+    "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов, не тип отношений.",
+    "Выручка известна только за прошлый отчётный год; квартальные и месячные показатели неизвестны.",
+    "Наличие продукта «Банковские гарантии» в профиле неизвестно.",
+    "Наличие продукта «Депозиты» в профиле неизвестно.",
+    "Наличие продукта «Зарплатный проект» в профиле неизвестно.",
+    "Наличие продукта «Факторинг» в профиле неизвестно.",
+    "Направление ВЭД (экспорт или импорт), валюта контрактов и товарная структура неизвестны."
+   ],
+   "synthetic_demo_profile": true
+  },
+  "candidates": [
+   {
+    "candidate_id": "EX04-cand",
+    "cluster_id": "EX04-cluster",
+    "event_bundle_refs": [
+     {
+      "event_id": "ex04:wb-fert",
+      "event_version": 1,
+      "snapshot_sha256": "ef4d5ae038951713da94d33b8efb4865e608a12743c929a5e799279eb3e81577"
+     }
+    ],
+    "analysis_projection": {
+     "event_bundles": [
+      {
+       "bundle_schema_version": "example-0.1",
+       "event": {
+        "event_id": "ex04:wb-fert",
+        "event_version": 1,
+        "event_type": "price_change",
+        "title": "Всемирный банк прогнозирует рост цен на удобрения в 2026 году",
+        "first_published_at": "2026-04-30T18:00:00+03:00",
+        "quality": "complete"
+       },
+       "claims": [
+        {
+         "claim_id": "ex04:wb-fert:c1",
+         "text": "Всемирный банк прогнозирует рост индекса цен на удобрения более чем на 30% в 2026 году.",
+         "modality": "forecast",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Всемирный банк"
+         },
+         "measurements": [
+          {
+           "metric": "fertilizer_price_index",
+           "kind": "change",
+           "value": "30",
+           "unit": "percent",
+           "qualifier": "more_than"
+          }
+         ],
+         "evidence_ids": [
+          "ex04:wb-fert:ev1"
+         ]
+        },
+        {
+         "claim_id": "ex04:wb-fert:c2",
+         "text": "Всемирный банк ожидает, что средняя цена нефти Brent составит 86 долларов за баррель в 2026 году и 70 долларов в 2027 году.",
+         "modality": "forecast",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Всемирный банк"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex04:wb-fert:ev2"
+         ]
+        }
+       ],
+       "conflicts": [],
+       "relations": [],
+       "sources": [
+        {
+         "source_id": "wb-2026-04-30-cmo",
+         "title": "The Commodity Markets Outlook in eight charts",
+         "publisher": "World Bank Blogs (Let's Talk Development)",
+         "published_at": "2026-04-30",
+         "url": "https://blogs.worldbank.org/en/developmenttalk/the-commodity-markets-outlook-in-eight-charts3",
+         "is_synthetic": false
+        }
+       ],
+       "evidence": [
+        {
+         "evidence_id": "ex04:wb-fert:ev1",
+         "source_id": "wb-2026-04-30-cmo",
+         "quote": "The index is projected to increase by more than 30 percent in 2026.",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex04:wb-fert:ev2",
+         "source_id": "wb-2026-04-30-cmo",
+         "quote": "Brent is expected to average $86 a barrel in 2026 and $70 a barrel in 2027.",
+         "field": "text"
+        }
+       ],
+       "limitations": [
+        "Источник на английском; утверждения — перевод команды. Прогноз мировых цен не равен изменению цен на внутреннем рынке."
+       ]
+      }
+     ]
+    },
+    "match_context": {
+     "signals": [
+      {
+       "channel": "dense",
+       "profile_facet": "okved",
+       "reason": "Растениеводство; тема цен на удобрения и топливо"
+      }
+     ],
+     "matched_company_feature_ids": [
+      "company.okved"
+     ],
+     "matched_event_claim_ids": [
+      "ex04:wb-fert:c1"
+     ],
+     "confirmed_entity_match": null,
+     "assumptions_not_verified": [
+      "Объём и источники закупок удобрений компанией неизвестны"
+     ],
+     "prior_score": 0.52
+    },
+    "bank_fragments": []
+   }
+  ],
+  "analysis_policy": {}
+ },
+ "draft": {
+  "decision": "include",
+  "event_status": "forecast",
+  "impact_direction": "negative",
+  "impact_channels": [
+   "costs"
+  ],
+  "materiality": "medium",
+  "urgency": "low",
+  "headline": "Прогноз Всемирного банка: удобрения могут подорожать более чем на 30% — проверьте бюджет затрат",
+  "what_happened": [
+   {
+    "text": "По прогнозу Всемирного банка, индекс цен на удобрения в 2026 году может вырасти более чем на 30%.",
+    "kind": "fact",
+    "claim_ids": [
+     "C1"
+    ]
+   },
+   {
+    "text": "Всемирный банк ожидает среднюю цену Brent 86 долларов за баррель в 2026 году.",
+    "kind": "fact",
+    "claim_ids": [
+     "C2"
+    ]
+   }
+  ],
+  "company_relevance": {
+   "text": "Компания выращивает зерновые и масличные культуры, где удобрения и топливо — обычные статьи затрат; объём закупок по данным неизвестен.",
+   "kind": "inference",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F1"
+   ]
+  },
+  "impact_mechanism": {
+   "text": "Если прогноз сбудется и цены дойдут до внутреннего рынка, затраты на удобрения и топливо могут вырасти; это допущение, а не факт о закупках компании.",
+   "kind": "hypothesis",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "feature_ids": [
+    "F1"
+   ]
+  },
+  "risks": [
+   {
+    "text": "Рост затрат на удобрения может сжать маржу, если цены на зерно не вырастут вслед.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F1"
+    ]
+   }
+  ],
+  "opportunities": [
+   {
+    "text": "Заблаговременная закупка или фиксация цен может снизить риск, если для этого доступна кредитная линия.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F6"
+    ]
+   }
+  ],
+  "next_steps": [
+   {
+    "text": "Пересчитать бюджет затрат на удобрения и топливо в сценарии роста цен.",
+    "kind": "inference",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F1"
+    ],
+    "roles": [
+     "cfo"
+    ]
+   },
+   {
+    "text": "Сверить сроки закупок с графиком финансирования.",
+    "kind": "inference",
+    "feature_ids": [
+     "F6"
+    ],
+    "roles": [
+     "treasurer",
+     "cfo"
+    ]
+   }
+  ],
+  "recommended_checks": [
+   "Какова доля удобрений в себестоимости и закуплены ли они на сезон?"
+  ],
+  "unknowns": [
+   {
+    "text": "Объём и источники закупок удобрений неизвестны; прогноз мировых цен не равен изменению внутренних цен."
+   }
+  ],
+  "impact_estimate": null,
+  "bank_assessment": {
+   "status": "not_found",
+   "bank_chunk_ids": []
+  },
+  "ai_conclusion": {
+   "text": "Это прогноз, а не свершившийся рост: финансовому директору стоит проверить чувствительность бюджета к ценам на удобрения.",
+   "kind": "inference",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F1"
+   ]
+  },
+  "inference_status": "hypothesis"
+ },
+ "expected_output": {
+  "schema_version": "AnalystOutput.v1-draft",
+  "request_id": "EX04-request",
+  "company_id": "EXAMPLE_CO_04",
+  "role": "cfo",
+  "as_of": "2026-05-04T10:00:00+03:00",
+  "ranked_insights": [
+   {
+    "candidate_id": "EX04-cand",
+    "cluster_id": "EX04-cluster",
+    "event_refs": [
+     {
+      "event_id": "ex04:wb-fert",
+      "event_version": 1
+     }
+    ],
+    "decision": "include",
+    "priority_score": 0.32,
+    "significance": "medium",
+    "priority_breakdown": {
+     "materiality": 0.32,
+     "urgency": 0.0,
+     "evidence": 0.0,
+     "cap": 0.45,
+     "cap_reason": "вывод — гипотеза",
+     "penalty": 0.0
+    },
+    "impact_direction": "negative",
+    "impact_channels": [
+     "costs"
+    ],
+    "event_status": "forecast",
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Прогноз Всемирного банка: удобрения могут подорожать более чем на 30% — проверьте бюджет затрат",
+    "what_happened": "По прогнозу Всемирного банка, индекс цен на удобрения в 2026 году может вырасти более чем на 30%. Всемирный банк ожидает среднюю цену Brent 86 долларов за баррель в 2026 году.",
+    "facts": [
+     {
+      "text": "По прогнозу Всемирного банка, индекс цен на удобрения в 2026 году может вырасти более чем на 30%.",
+      "kind": "fact",
+      "claim_ids": [
+       "ex04:wb-fert:c1"
+      ],
+      "evidence_ids": [
+       "ex04:wb-fert:ev1"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     },
+     {
+      "text": "Всемирный банк ожидает среднюю цену Brent 86 долларов за баррель в 2026 году.",
+      "kind": "fact",
+      "claim_ids": [
+       "ex04:wb-fert:c2"
+      ],
+      "evidence_ids": [
+       "ex04:wb-fert:ev2"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания выращивает зерновые и масличные культуры, где удобрения и топливо — обычные статьи затрат; объём закупок по данным неизвестен.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex04:wb-fert:c1"
+     ],
+     "evidence_ids": [
+      "ex04:wb-fert:ev1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Если прогноз сбудется и цены дойдут до внутреннего рынка, затраты на удобрения и топливо могут вырасти; это допущение, а не факт о закупках компании.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "ex04:wb-fert:c1",
+      "ex04:wb-fert:c2"
+     ],
+     "evidence_ids": [
+      "ex04:wb-fert:ev1",
+      "ex04:wb-fert:ev2"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Рост затрат на удобрения может сжать маржу, если цены на зерно не вырастут вслед.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "ex04:wb-fert:c1"
+      ],
+      "evidence_ids": [
+       "ex04:wb-fert:ev1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": true,
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Заблаговременная закупка или фиксация цен может снизить риск, если для этого доступна кредитная линия.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "ex04:wb-fert:c1"
+      ],
+      "evidence_ids": [
+       "ex04:wb-fert:ev1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": true,
+      "roles": []
+     }
+    ],
+    "recommended_checks": [
+     "Какова доля удобрений в себестоимости и закуплены ли они на сезон?"
+    ],
+    "next_steps": [
+     {
+      "text": "Пересчитать бюджет затрат на удобрения и топливо в сценарии роста цен.",
+      "kind": "inference",
+      "claim_ids": [
+       "ex04:wb-fert:c1"
+      ],
+      "evidence_ids": [
+       "ex04:wb-fert:ev1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Сверить сроки закупок с графиком финансирования.",
+      "kind": "inference",
+      "claim_ids": [],
+      "evidence_ids": [],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "treasurer",
+       "cfo"
+      ]
+     }
+    ],
+    "unknowns": [
+     {
+      "text": "Объём и источники закупок удобрений неизвестны; прогноз мировых цен не равен изменению внутренних цен.",
+      "question": null,
+      "how_to_clarify": null
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Это прогноз, а не свершившийся рост: финансовому директору стоит проверить чувствительность бюджета к ценам на удобрения.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex04:wb-fert:c1"
+     ],
+     "evidence_ids": [
+      "ex04:wb-fert:ev1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "support": {
+     "company_feature_ids": [
+      "company.okved",
+      "product.loans"
+     ],
+     "event_claim_ids": [
+      "ex04:wb-fert:c1",
+      "ex04:wb-fert:c2"
+     ],
+     "event_evidence_ids": [
+      "ex04:wb-fert:ev1",
+      "ex04:wb-fert:ev2"
+     ],
+     "bank_chunk_ids": [],
+     "inference_status": "hypothesis",
+     "limitations": []
+    },
+    "changes_since_previous": null
+   }
+  ],
+  "excluded_candidates": [],
+  "run_metadata": {
+   "model": "few-shot-reference",
+   "prompt_version": "analyst-v1.0",
+   "qa_status": "passed",
+   "bank_rag_used": false,
+   "generated_by": "cached",
+   "profile_version": "example-v1",
+   "cache_hits": 0,
+   "llm_calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_rub": 0.0,
+   "latency_ms": 0,
+   "json_repairs": 0,
+   "candidates": [
+    {
+     "candidate_id": "EX04-cand",
+     "model": null,
+     "prompt_version": "analyst-v1.0",
+     "generated_by": "cached",
+     "cache_key": null,
+     "created_at": null,
+     "qa_status": "passed",
+     "qa_issues": [],
+     "usage": {},
+     "trace": [],
+     "draft": null,
+     "llm_trace": [],
+     "memory_ref": null
+    }
+   ]
+  }
+ }
+}

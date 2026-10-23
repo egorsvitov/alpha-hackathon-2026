@@ -1,0 +1,716 @@
+{
+ "example_id": "EX01",
+ "slug": "rate_credit_cfo",
+ "title": "Ставка ЦБ и кредитный профиль: новое финансирование, а не автоматическая смена платежа",
+ "kind": "reference",
+ "topics": [
+  "rates",
+  "inflation"
+ ],
+ "role": "cfo",
+ "decision": "include",
+ "teaches": [
+  "Решение по ставке меняет условия НОВОГО кредитования; про действующие договоры — только условно",
+  "Позиция банка (B1) отделена от вывода модели",
+  "Шаги — по роли читателя"
+ ],
+ "defect": null,
+ "source_ids": [
+  "cbr-2026-09-11-key-rate"
+ ],
+ "disclaimer": "Учебный пример: компания синтетическая (не из данных кейса), событие — по открытому источнику на дату примера и может быть устаревшим. Не факты о текущей компании и не текущие новости.",
+ "input": {
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+   "request_id": "EX01-request",
+   "company_id": "EXAMPLE_CO_01",
+   "role": "cfo",
+   "as_of": "2026-09-12T10:00:00+03:00",
+   "news_window_hours": 1440,
+   "max_insights": 10
+  },
+  "company_context": {
+   "profile_version": "example-v1",
+   "profile_snapshot_ref": "seed:EXAMPLE_CO_01@example-v1",
+   "verified_facts": [
+    {
+     "feature_id": "company.okved",
+     "field": "MAINOKVED_CODE/MAINOKVED_NAME",
+     "value": "41.20 Строительство жилых и нежилых зданий",
+     "description": "Основной ОКВЭД",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.industry",
+     "field": "industry",
+     "value": "Строительство",
+     "description": "Отрасль (по ОКВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "derived"
+    },
+    {
+     "feature_id": "company.revenue",
+     "field": "REVENUE_COMPANY",
+     "value": "48 млрд ₽",
+     "description": "Выручка за прошлый отчётный год (2025), не за текущий период",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.region",
+     "field": "RC_NAME/CITY_NAME",
+     "value": "Поволжье, Казань",
+     "description": "Регион и город обслуживания",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.rko",
+     "field": "CL_PRODUCT_RKO_MARK",
+     "value": "есть",
+     "description": "Расчётно-кассовое обслуживание в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.loans",
+     "field": "CL_PRODUCT_LOA_MARK",
+     "value": "есть",
+     "description": "Кредитные продукты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.deposits",
+     "field": "CL_PRODUCT_DEP_MARK",
+     "value": "есть",
+     "description": "Депозиты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.flag",
+     "field": "FTS_FLAG",
+     "value": "нет",
+     "description": "Есть таможенные декларации (ВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    }
+   ],
+   "economic_exposures": [
+    {
+     "exposure_id": "exp.loans",
+     "factor": "Стоимость и доступность заёмного финансирования",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.loans"
+     ],
+     "description": "Выведено из наличия продукта «Кредитные продукты»; условия договоров неизвестны."
+    },
+    {
+     "exposure_id": "exp.deposits",
+     "factor": "Доходность размещения свободных средств",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.deposits"
+     ],
+     "description": "Выведено из наличия продукта «Депозиты»; условия договоров неизвестны."
+    }
+   ],
+   "related_entities": [],
+   "graph_context": {
+    "included": false,
+    "reason": "Платёжный контекст не передан"
+   },
+   "unknowns": [
+    "Условия действующих кредитных договоров (тип ставки, сроки, объём долга) в профиле неизвестны.",
+    "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов, не тип отношений.",
+    "Выручка известна только за прошлый отчётный год; квартальные и месячные показатели неизвестны.",
+    "Наличие продукта «Банковские гарантии» в профиле неизвестно.",
+    "Наличие продукта «Лизинг» в профиле неизвестно.",
+    "Наличие продукта «Зарплатный проект» в профиле неизвестно.",
+    "Наличие продукта «Факторинг» в профиле неизвестно."
+   ],
+   "synthetic_demo_profile": true
+  },
+  "candidates": [
+   {
+    "candidate_id": "EX01-cand",
+    "cluster_id": "EX01-cluster",
+    "event_bundle_refs": [
+     {
+      "event_id": "ex01:cbr-rate",
+      "event_version": 1,
+      "snapshot_sha256": "5dd46c902641caadd2e99a502c51099caa0387800fab49f847e464354fa415e2"
+     }
+    ],
+    "analysis_projection": {
+     "event_bundles": [
+      {
+       "bundle_schema_version": "example-0.1",
+       "event": {
+        "event_id": "ex01:cbr-rate",
+        "event_version": 1,
+        "event_type": "policy_rate",
+        "title": "Банк России сохранил ключевую ставку на уровне 14,00% годовых",
+        "first_published_at": "2026-09-11T13:30:00+03:00",
+        "quality": "complete"
+       },
+       "claims": [
+        {
+         "claim_id": "ex01:cbr-rate:c1",
+         "text": "Совет директоров Банка России 11 сентября 2026 года принял решение сохранить ключевую ставку на уровне 14,00% годовых.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [
+          {
+           "metric": "policy_rate",
+           "kind": "level",
+           "value": "14.00",
+           "unit": "percent"
+          }
+         ],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev1"
+         ]
+        },
+        {
+         "claim_id": "ex01:cbr-rate:c2",
+         "text": "Неценовые условия банковского кредитования по-прежнему жесткие.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev2"
+         ]
+        },
+        {
+         "claim_id": "ex01:cbr-rate:c3",
+         "text": "Кредитная активность в последние месяцы была повышенной, прежде всего за счет корпоративного сегмента.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev3"
+         ]
+        },
+        {
+         "claim_id": "ex01:cbr-rate:c4",
+         "text": "По базовому прогнозу Банка России годовая инфляция составит 6,0–7,0% в 2026 году.",
+         "modality": "forecast",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev4"
+         ]
+        }
+       ],
+       "conflicts": [],
+       "relations": [],
+       "sources": [
+        {
+         "source_id": "cbr-2026-09-11-key-rate",
+         "title": "Банк России принял решение сохранить ключевую ставку на уровне 14,00% годовых",
+         "publisher": "Банк России",
+         "published_at": "2026-09-11T13:30:00+03:00",
+         "url": "https://www.cbr.ru/press/pr/?file=11092026_133000Key.htm",
+         "is_synthetic": false
+        }
+       ],
+       "evidence": [
+        {
+         "evidence_id": "ex01:cbr-rate:ev1",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "Совет директоров Банка России 11 сентября 2026 года принял решение сохранить ключевую ставку на уровне 14,00% годовых.",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex01:cbr-rate:ev2",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "Неценовые условия банковского кредитования по-прежнему жесткие.",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex01:cbr-rate:ev3",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "Кредитная активность в последние месяцы была повышенной, прежде всего за счет корпоративного сегмента.",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex01:cbr-rate:ev4",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "годовая инфляция составит 6,0–7,0% в 2026 году",
+         "field": "text"
+        }
+       ],
+       "limitations": []
+      }
+     ]
+    },
+    "match_context": {
+     "signals": [
+      {
+       "channel": "rules",
+       "profile_facet": "products",
+       "reason": "У компании есть кредитные продукты; событие — решение по ключевой ставке"
+      }
+     ],
+     "matched_company_feature_ids": [
+      "product.loans"
+     ],
+     "matched_event_claim_ids": [
+      "ex01:cbr-rate:c1"
+     ],
+     "confirmed_entity_match": null,
+     "assumptions_not_verified": [],
+     "prior_score": 0.71
+    },
+    "bank_fragments": [
+     {
+      "bank_chunk_id": "ex01:bank-1",
+      "document_id": "synthetic-training-note-rate",
+      "title": "Учебный фрагмент (синтетический): комментарий к решению по ставке",
+      "publisher": "Синтетический учебный фрагмент — не позиция Альфа-Банка",
+      "published_at": "2026-09-11",
+      "quote": "Пауза в снижении ставки означает, что новое заёмное финансирование для компаний в ближайшие месяцы, вероятно, останется дорогим.",
+      "applicability": "current",
+      "is_synthetic": true
+     }
+    ]
+   }
+  ],
+  "analysis_policy": {}
+ },
+ "draft": {
+  "decision": "include",
+  "event_status": "occurred",
+  "impact_direction": "negative",
+  "impact_channels": [
+   "credit_liquidity"
+  ],
+  "materiality": "medium",
+  "urgency": "medium",
+  "headline": "Ставка сохранена на 14%: новое заёмное финансирование остаётся дорогим",
+  "what_happened": [
+   {
+    "text": "Банк России 11 сентября 2026 года сохранил ключевую ставку на уровне 14,00% годовых.",
+    "kind": "fact",
+    "claim_ids": [
+     "C1"
+    ]
+   },
+   {
+    "text": "Неценовые условия кредитования, по оценке регулятора, остаются жёсткими.",
+    "kind": "fact",
+    "claim_ids": [
+     "C2"
+    ]
+   }
+  ],
+  "company_relevance": {
+   "text": "У компании есть кредитные продукты, а строительные проекты часто финансируются заёмными средствами, поэтому для неё важна стоимость новых кредитов.",
+   "kind": "inference",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F6",
+    "F1"
+   ]
+  },
+  "impact_mechanism": {
+   "text": "Пауза в снижении ставки сохраняет высокую стоимость нового кредитования и рефинансирования; по действующим кредитам эффект зависит от типа ставки, который неизвестен.",
+   "kind": "inference",
+   "claim_ids": [
+    "C1",
+    "C2"
+   ],
+   "feature_ids": [
+    "F6"
+   ]
+  },
+  "risks": [
+   {
+    "text": "Если компания планирует новые заимствования под проекты, их стоимость может оказаться выше заложенной в бюджет.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F6"
+    ]
+   }
+  ],
+  "opportunities": [
+   {
+    "text": "При наличии свободных средств доходность депозитов может оставаться привлекательной для размещения.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F7"
+    ]
+   }
+  ],
+  "next_steps": [
+   {
+    "text": "Сверить график новых заимствований и долю кредитов с плавающей ставкой.",
+    "kind": "inference",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F6"
+    ],
+    "roles": [
+     "cfo",
+     "treasurer"
+    ]
+   },
+   {
+    "text": "Обсудить с банком сроки и условия нового финансирования до запуска проектов.",
+    "kind": "inference",
+    "feature_ids": [
+     "F6"
+    ],
+    "roles": [
+     "cfo"
+    ]
+   }
+  ],
+  "recommended_checks": [
+   "Есть ли кредиты с плавающей ставкой и когда планируются новые заимствования?"
+  ],
+  "unknowns": [
+   {
+    "text": "Тип ставки и сроки действующих кредитов неизвестны.",
+    "question": "Какая доля долга по плавающей ставке?"
+   }
+  ],
+  "impact_estimate": null,
+  "bank_assessment": {
+   "status": "found",
+   "bank_chunk_ids": [
+    "B1"
+   ]
+  },
+  "ai_conclusion": {
+   "text": "Финансовому директору стоит заложить в бюджет проектов дорогое новое финансирование; платежи по действующим договорам меняются только при плавающей ставке.",
+   "kind": "inference",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F6"
+   ]
+  },
+  "inference_status": "supported"
+ },
+ "expected_output": {
+  "schema_version": "AnalystOutput.v1-draft",
+  "request_id": "EX01-request",
+  "company_id": "EXAMPLE_CO_01",
+  "role": "cfo",
+  "as_of": "2026-09-12T10:00:00+03:00",
+  "ranked_insights": [
+   {
+    "candidate_id": "EX01-cand",
+    "cluster_id": "EX01-cluster",
+    "event_refs": [
+     {
+      "event_id": "ex01:cbr-rate",
+      "event_version": 1
+     }
+    ],
+    "decision": "include",
+    "priority_score": 0.42,
+    "significance": "medium",
+    "priority_breakdown": {
+     "materiality": 0.32,
+     "urgency": 0.04,
+     "evidence": 0.06,
+     "cap": null,
+     "cap_reason": null,
+     "penalty": 0.0
+    },
+    "impact_direction": "negative",
+    "impact_channels": [
+     "credit_liquidity"
+    ],
+    "event_status": "occurred",
+    "materiality": "medium",
+    "urgency": "medium",
+    "headline": "Ставка сохранена на 14%: новое заёмное финансирование остаётся дорогим",
+    "what_happened": "Банк России 11 сентября 2026 года сохранил ключевую ставку на уровне 14,00% годовых. Неценовые условия кредитования, по оценке регулятора, остаются жёсткими.",
+    "facts": [
+     {
+      "text": "Банк России 11 сентября 2026 года сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "ex01:cbr-rate:c1"
+      ],
+      "evidence_ids": [
+       "ex01:cbr-rate:ev1"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     },
+     {
+      "text": "Неценовые условия кредитования, по оценке регулятора, остаются жёсткими.",
+      "kind": "fact",
+      "claim_ids": [
+       "ex01:cbr-rate:c2"
+      ],
+      "evidence_ids": [
+       "ex01:cbr-rate:ev2"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "У компании есть кредитные продукты, а строительные проекты часто финансируются заёмными средствами, поэтому для неё важна стоимость новых кредитов.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex01:cbr-rate:c1"
+     ],
+     "evidence_ids": [
+      "ex01:cbr-rate:ev1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Пауза в снижении ставки сохраняет высокую стоимость нового кредитования и рефинансирования; по действующим кредитам эффект зависит от типа ставки, который неизвестен.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex01:cbr-rate:c1",
+      "ex01:cbr-rate:c2"
+     ],
+     "evidence_ids": [
+      "ex01:cbr-rate:ev1",
+      "ex01:cbr-rate:ev2"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Если компания планирует новые заимствования под проекты, их стоимость может оказаться выше заложенной в бюджет.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "ex01:cbr-rate:c1"
+      ],
+      "evidence_ids": [
+       "ex01:cbr-rate:ev1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": true,
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При наличии свободных средств доходность депозитов может оставаться привлекательной для размещения.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "ex01:cbr-rate:c1"
+      ],
+      "evidence_ids": [
+       "ex01:cbr-rate:ev1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": true,
+      "roles": []
+     }
+    ],
+    "recommended_checks": [
+     "Есть ли кредиты с плавающей ставкой и когда планируются новые заимствования?"
+    ],
+    "next_steps": [
+     {
+      "text": "Сверить график новых заимствований и долю кредитов с плавающей ставкой.",
+      "kind": "inference",
+      "claim_ids": [
+       "ex01:cbr-rate:c1"
+      ],
+      "evidence_ids": [
+       "ex01:cbr-rate:ev1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Обсудить с банком сроки и условия нового финансирования до запуска проектов.",
+      "kind": "inference",
+      "claim_ids": [],
+      "evidence_ids": [],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "cfo"
+      ]
+     }
+    ],
+    "unknowns": [
+     {
+      "text": "Тип ставки и сроки действующих кредитов неизвестны.",
+      "question": "Какая доля долга по плавающей ставке?",
+      "how_to_clarify": null
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "ex01:bank-1"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Финансовому директору стоит заложить в бюджет проектов дорогое новое финансирование; платежи по действующим договорам меняются только при плавающей ставке.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex01:cbr-rate:c1"
+     ],
+     "evidence_ids": [
+      "ex01:cbr-rate:ev1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "support": {
+     "company_feature_ids": [
+      "product.loans",
+      "company.okved",
+      "product.deposits"
+     ],
+     "event_claim_ids": [
+      "ex01:cbr-rate:c1",
+      "ex01:cbr-rate:c2"
+     ],
+     "event_evidence_ids": [
+      "ex01:cbr-rate:ev1",
+      "ex01:cbr-rate:ev2"
+     ],
+     "bank_chunk_ids": [
+      "ex01:bank-1"
+     ],
+     "inference_status": "supported",
+     "limitations": []
+    },
+    "changes_since_previous": null
+   }
+  ],
+  "excluded_candidates": [],
+  "run_metadata": {
+   "model": "few-shot-reference",
+   "prompt_version": "analyst-v1.0",
+   "qa_status": "passed",
+   "bank_rag_used": true,
+   "generated_by": "cached",
+   "profile_version": "example-v1",
+   "cache_hits": 0,
+   "llm_calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_rub": 0.0,
+   "latency_ms": 0,
+   "json_repairs": 0,
+   "candidates": [
+    {
+     "candidate_id": "EX01-cand",
+     "model": null,
+     "prompt_version": "analyst-v1.0",
+     "generated_by": "cached",
+     "cache_key": null,
+     "created_at": null,
+     "qa_status": "passed",
+     "qa_issues": [],
+     "usage": {},
+     "trace": [],
+     "draft": null,
+     "llm_trace": [],
+     "memory_ref": null
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,92 @@
+{
+  "note": "Структурные фрагменты (по образцу EventBundle v0.1) для семи демо-событий backend/app/services/seed_data.py. Кроме e1_key_rate, все тексты СИНТЕТИЧЕСКИЕ (демо), не сообщения о реальных событиях. Цитаты e1/e5 совпадают с SHARED_EVIDENCE. Новых фактов сверх заголовков и цитат seed не добавлено, кроме явно помеченного прогноза в e3 (проверка различения факта и прогноза).",
+  "bundles": [
+    {
+      "schema_version": "0.1",
+      "event": {"event_id": "e1_key_rate", "event_version": 1, "event_type": "policy_rate", "title": "Банк России сохранил ключевую ставку на уровне 14%", "first_published_at": "2026-09-11T15:00:00+03:00", "quality": "complete"},
+      "claims": [
+        {"claim_id": "e1_key_rate:c1", "text": "11 сентября 2026 года совет директоров Банка России принял решение сохранить ключевую ставку на уровне 14,00% годовых.", "action": "hold", "object": "policy_rate", "attribution": {"name": "Банк России"}, "participants": [{"name": "Банк России", "role": "decision_maker"}], "geographies": ["RU"], "measurements": [{"metric": "policy_rate", "kind": "level", "value": "14", "unit": "percent"}], "modality": "asserted", "polarity": "affirmed", "stage": "approved", "scenario": null, "time": {"occurred_at": {"start": "2026-09-11", "end": "2026-09-11"}}, "evidence_ids": ["n_e1_1"]}
+      ],
+      "sources": [{"source_id": "s_e1_cbr", "title": "Пресс-релиз Банка России по ключевой ставке", "publisher": "Банк России", "published_at": "2026-09-11", "is_synthetic": false}],
+      "evidence": [{"evidence_id": "n_e1_1", "source_id": "s_e1_cbr", "field": "text", "quote": "11 сентября 2026 года совет директоров Банка России принял решение сохранить ключевую ставку на уровне 14,00% годовых."}],
+      "conflicts": [], "relations": [], "limitations": []
+    },
+    {
+      "schema_version": "0.1",
+      "event": {"event_id": "e2_eu_steel_quota", "event_version": 1, "event_type": "restriction", "title": "ЕС вводит квоты на импорт стального проката из России", "first_published_at": "2026-10-15T10:00:00+03:00", "quality": "partial"},
+      "claims": [
+        {"claim_id": "e2_eu_steel_quota:c1", "text": "Европейский союз вводит квоты на импорт стального проката из России.", "action": "introduce_quota", "object": "steel_imports", "attribution": {"name": "Отраслевой вестник (демо)"}, "participants": [{"name": "Европейский союз", "role": "regulator"}], "geographies": ["EU", "RU"], "measurements": [], "modality": "asserted", "polarity": "affirmed", "stage": "announced", "scenario": null, "time": {"occurred_at": {"start": "2026-10-15", "end": "2026-10-15"}, "effective_at": null}, "evidence_ids": ["n_e2_1"]}
+      ],
+      "sources": [{"source_id": "s_e2_demo", "title": "ЕС вводит квоты на стальной прокат (демо)", "publisher": "Отраслевой вестник (демо)", "published_at": "2026-10-15", "is_synthetic": true}],
+      "evidence": [{"evidence_id": "n_e2_1", "source_id": "s_e2_demo", "field": "text", "quote": "Европейский союз вводит квоты на импорт стального проката из России."}],
+      "conflicts": [], "relations": [],
+      "limitations": ["Синтетическая новость (демо).", "Размер квот и дата начала действия в сообщении не указаны."]
+    },
+    {
+      "schema_version": "0.1",
+      "event": {"event_id": "e3_rub_weak", "event_version": 1, "event_type": "fx", "title": "Рубль ослаб к юаню и доллару на 4% за неделю", "first_published_at": "2026-10-18T10:00:00+03:00", "quality": "complete"},
+      "claims": [
+        {"claim_id": "e3_rub_weak:c1", "text": "За неделю рубль ослаб к юаню и доллару США на 4%.", "action": "weaken", "object": "rub_exchange_rate", "attribution": {"name": "Деловая лента (демо)"}, "participants": [], "geographies": ["RU"], "measurements": [{"metric": "rub_change", "kind": "change", "value": "-4", "unit": "percent", "comparison_period": "week"}], "modality": "asserted", "polarity": "affirmed", "stage": null, "scenario": null, "time": {"observation_period": {"start": "2026-10-11", "end": "2026-10-18"}}, "evidence_ids": ["n_e3_1"]},
+        {"claim_id": "e3_rub_weak:c2", "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели.", "action": "weaken", "object": "rub_exchange_rate", "attribution": {"name": "Участники рынка (по данным Деловой ленты, демо)"}, "participants": [], "geographies": ["RU"], "measurements": [], "modality": "forecast", "polarity": "affirmed", "stage": null, "scenario": null, "time": {"forecast_horizon": {"text": "ближайшие недели"}}, "evidence_ids": ["n_e3_2"]}
+      ],
+      "sources": [{"source_id": "s_e3_demo", "title": "Рубль за неделю (демо)", "publisher": "Деловая лента (демо)", "published_at": "2026-10-18", "is_synthetic": true}],
+      "evidence": [
+        {"evidence_id": "n_e3_1", "source_id": "s_e3_demo", "field": "text", "quote": "За неделю рубль ослаб к юаню и доллару США на 4%."},
+        {"evidence_id": "n_e3_2", "source_id": "s_e3_demo", "field": "text", "quote": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели."}
+      ],
+      "conflicts": [], "relations": [],
+      "limitations": ["Синтетическая новость (демо).", "Второе утверждение — прогноз участников рынка, не факт."]
+    },
+    {
+      "schema_version": "0.1",
+      "event": {"event_id": "e4_wheat_duty", "event_version": 1, "event_type": "trade", "title": "Правительство повысило экспортную пошлину на пшеницу", "first_published_at": "2026-10-19T10:00:00+03:00", "quality": "partial"},
+      "claims": [
+        {"claim_id": "e4_wheat_duty:c1", "text": "Правительство повысило экспортную пошлину на пшеницу.", "action": "raise", "object": "wheat_export_duty", "attribution": {"name": "Аграрный вестник (демо)"}, "participants": [{"name": "Правительство РФ", "role": "decision_maker"}], "geographies": ["RU"], "measurements": [], "modality": "asserted", "polarity": "affirmed", "stage": "approved", "scenario": null, "time": {"occurred_at": {"start": "2026-10-19", "end": "2026-10-19"}, "effective_at": null}, "evidence_ids": ["n_e4_1"]}
+      ],
+      "sources": [{"source_id": "s_e4_demo", "title": "Экспортная пошлина на пшеницу (демо)", "publisher": "Аграрный вестник (демо)", "published_at": "2026-10-19", "is_synthetic": true}],
+      "evidence": [{"evidence_id": "n_e4_1", "source_id": "s_e4_demo", "field": "text", "quote": "Правительство повысило экспортную пошлину на пшеницу."}],
+      "conflicts": [], "relations": [],
+      "limitations": ["Синтетическая новость (демо).", "Новый размер пошлины и дата вступления в силу не указаны."]
+    },
+    {
+      "schema_version": "0.1",
+      "event": {"event_id": "e5_coke_supplier", "event_version": 1, "event_type": "counterparty", "title": "Поставщик коксующегося угля «КоксРесурс» приостановил отгрузки", "first_published_at": "2026-10-17T10:00:00+03:00", "quality": "complete"},
+      "claims": [
+        {"claim_id": "e5_coke_supplier:c1", "text": "Компания «КоксРесурс» сообщила о приостановке отгрузок коксующегося угля из-за аварии на шахте.", "action": "suspend_shipments", "object": "coking_coal", "attribution": {"name": "ООО «КоксРесурс»"}, "participants": [{"name": "ООО «КоксРесурс»", "role": "subject"}], "geographies": ["RU"], "measurements": [], "modality": "asserted", "polarity": "affirmed", "stage": "in_effect", "scenario": null, "time": {"occurred_at": {"start": "2026-10-17", "end": "2026-10-17"}}, "evidence_ids": ["n_e5_1"]},
+        {"claim_id": "e5_coke_supplier:c2", "text": "Срок возобновления отгрузок не назван; потребителям рекомендуют уточнять графики поставок.", "action": "no_resume_date", "object": "coking_coal", "attribution": {"name": "Деловая лента (демо)"}, "participants": [{"name": "ООО «КоксРесурс»", "role": "subject"}], "geographies": ["RU"], "measurements": [], "modality": "asserted", "polarity": "affirmed", "stage": null, "scenario": null, "time": {"occurred_at": {"start": "2026-10-17", "end": "2026-10-17"}}, "evidence_ids": ["n_e5_2"]}
+      ],
+      "sources": [
+        {"source_id": "s_e5_a", "title": "«КоксРесурс» приостановил отгрузки угля", "publisher": "Отраслевой вестник (демо)", "published_at": "2026-10-17", "is_synthetic": true},
+        {"source_id": "s_e5_b", "title": "Авария на шахте: когда возобновят добычу", "publisher": "Деловая лента (демо)", "published_at": "2026-10-17", "is_synthetic": true}
+      ],
+      "evidence": [
+        {"evidence_id": "n_e5_1", "source_id": "s_e5_a", "field": "text", "quote": "Компания «КоксРесурс» сообщила о приостановке отгрузок коксующегося угля из-за аварии на шахте."},
+        {"evidence_id": "n_e5_2", "source_id": "s_e5_b", "field": "text", "quote": "Срок возобновления отгрузок не назван; потребителям рекомендуют уточнять графики поставок."}
+      ],
+      "conflicts": [], "relations": [],
+      "limitations": ["Синтетическая новость о вымышленной компании (демо); сопоставлена с профилем по названию контрагента в платёжных данных."]
+    },
+    {
+      "schema_version": "0.1",
+      "event": {"event_id": "e6_food_inflation", "event_version": 1, "event_type": "inflation", "title": "Инфляция в августе: продукты дорожают быстрее общего индекса", "first_published_at": "2026-09-02T10:00:00+03:00", "quality": "partial"},
+      "claims": [
+        {"claim_id": "e6_food_inflation:c1", "text": "В августе цены на продукты питания росли быстрее общего индекса потребительских цен.", "action": "rise", "object": "food_prices", "attribution": {"name": "Экономическая лента (демо)"}, "participants": [], "geographies": ["RU"], "measurements": [], "modality": "asserted", "polarity": "affirmed", "stage": null, "scenario": null, "time": {"observation_period": {"start": "2026-08-01", "end": "2026-08-31"}}, "evidence_ids": ["n_e6_1"]}
+      ],
+      "sources": [{"source_id": "s_e6_demo", "title": "Инфляция в августе (демо)", "publisher": "Экономическая лента (демо)", "published_at": "2026-09-02", "is_synthetic": true}],
+      "evidence": [{"evidence_id": "n_e6_1", "source_id": "s_e6_demo", "field": "text", "quote": "В августе цены на продукты питания росли быстрее общего индекса потребительских цен."}],
+      "conflicts": [], "relations": [],
+      "limitations": ["Синтетическая новость (демо).", "Значения индексов в сообщении не приведены."]
+    },
+    {
+      "schema_version": "0.1",
+      "event": {"event_id": "e7_noise_sports", "event_version": 1, "event_type": "other", "title": "Финальный этап городского турнира по шахматам пройдет в следующие выходные", "first_published_at": "2026-10-20T10:00:00+03:00", "quality": "complete"},
+      "claims": [
+        {"claim_id": "e7_noise_sports:c1", "text": "Финальный этап городского турнира по шахматам пройдёт в следующие выходные.", "action": "schedule", "object": "chess_tournament", "attribution": {"name": "Городская лента (демо)"}, "participants": [], "geographies": [], "measurements": [], "modality": "asserted", "polarity": "affirmed", "stage": "planned", "scenario": null, "time": {"effective_at": {"text": "следующие выходные"}}, "evidence_ids": ["n_e7_1"]}
+      ],
+      "sources": [{"source_id": "s_e7_demo", "title": "Шахматный турнир (демо)", "publisher": "Городская лента (демо)", "published_at": "2026-10-20", "is_synthetic": true}],
+      "evidence": [{"evidence_id": "n_e7_1", "source_id": "s_e7_demo", "field": "text", "quote": "Финальный этап городского турнира по шахматам пройдёт в следующие выходные."}],
+      "conflicts": [], "relations": [],
+      "limitations": ["Синтетическая новость (демо)."]
+    }
+  ]
+}

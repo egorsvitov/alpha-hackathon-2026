@@ -1,0 +1,473 @@
+{
+ "key": "SYNTHETIC_U_3305|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:12:11+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "cluster_id": "cluster:e1_key_rate",
+   "event_refs": [
+    {
+     "event_id": "e1_key_rate",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.38,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.06,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "credit_liquidity"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ставка ЦБ сохранена на 14%: доходность депозитов компании остаётся на высоком уровне, стоимость нового финансирования не снижается",
+   "what_happened": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+   "facts": [
+    {
+     "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+     "kind": "fact",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания размещает свободные средства на депозитах, поэтому уровень ключевой ставки напрямую влияет на доходность размещения ликвидности.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Сохранение ставки 14% поддерживает высокую доходность депозитов, но удерживает стоимость нового кредитования высокой; действующие договоры затронуты только при плавающей ставке (данных нет).",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Если компании потребуется новое финансирование, его стоимость останется высокой при ставке 14%.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "При снижении ставки позже в году доходность депозитов может снизиться, уменьшая процентный доход.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Пауза по ставке позволяет зафиксировать высокую доходность по новым депозитам на горизонте до декабря.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [
+      "b_key"
+     ],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Структура и сроки депозитного портфеля",
+    "Планы привлечения финансирования в бюджете",
+    "Наличие обязательств с плавающей ставкой"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить сроки и ставки действующих депозитов и при необходимости пролонгировать на выгодных условиях до возможного снижения ставки.",
+     "kind": "inference",
+     "claim_ids": [],
+     "evidence_ids": [],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [
+      "b_key"
+     ],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Оценить потребность в кредитном финансировании на бюджетный период и стоимость заимствований при ставке 14%.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    },
+    {
+     "text": "Уточнить, есть ли договоры с плавающей ставкой, чувствительные к ключевой ставке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "chief_accountant"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Неизвестны условия действующих кредитных договоров и объём долга компании.",
+     "question": "Есть ли у компании кредиты и какой у них тип ставки?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Неизвестен объём и сроки депозитов.",
+     "question": "Какова сумма и срочность размещённых депозитов?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_key"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Для CFO событие умеренно значимо: сохранение ставки 14% поддерживает доходность депозитов, но удорожает потенциальное новое кредитование; стоит зафиксировать ставки по депозитам до декабря.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.deposits",
+     "product.loans"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "product.deposits",
+     "product.loans"
+    ],
+    "event_claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e1_1"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "inference_status": "supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:12:11+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2769,
+    "completion_tokens": 881,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.100325,
+    "cost_rub_tariff": 0.029099,
+    "latency_ms": 10049,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2769/881, 0.1003 ₽, 10.0 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "credit_liquidity"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ставка ЦБ сохранена на 14%: доходность депозитов компании остаётся на высоком уровне, стоимость нового финансирования не снижается",
+    "what_happened": [
+     {
+      "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания размещает свободные средства на депозитах (F12), поэтому уровень ключевой ставки напрямую влияет на доходность размещения ликвидности.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Сохранение ставки 14% поддерживает высокую доходность депозитов (F12), но удерживает стоимость нового кредитования высокой; действующие договоры затронуты только при плавающей ставке (данных нет).",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Если компании потребуется новое финансирование, его стоимость останется высокой при ставке 14%.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.deposits"
+      ],
+      "roles": []
+     },
+     {
+      "text": "При снижении ставки позже в году доходность депозитов может снизиться, уменьшая процентный доход.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Пауза по ставке позволяет зафиксировать высокую доходность по новым депозитам на горизонте до декабря.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1",
+       "b_key"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить сроки и ставки действующих депозитов и при необходимости пролонгировать на выгодных условиях до возможного снижения ставки.",
+      "kind": "inference",
+      "claim_ids": [
+       "b_key"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Оценить потребность в кредитном финансировании на бюджетный период и стоимость заимствований при ставке 14%.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Уточнить, есть ли договоры с плавающей ставкой, чувствительные к ключевой ставке.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": [
+       "cfo",
+       "chief_accountant"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Структура и сроки депозитного портфеля",
+     "Планы привлечения финансирования в бюджете",
+     "Наличие обязательств с плавающей ставкой"
+    ],
+    "unknowns": [
+     {
+      "text": "Неизвестны условия действующих кредитных договоров и объём долга компании.",
+      "question": "Есть ли у компании кредиты и какой у них тип ставки?"
+     },
+     {
+      "text": "Неизвестен объём и сроки депозитов.",
+      "question": "Какова сумма и срочность размещённых депозитов?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_key"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Для CFO событие умеренно значимо: сохранение ставки 14% поддерживает доходность депозитов (F12), но удорожает потенциальное новое кредитование; стоит зафиксировать ставки по депозитам до декабря.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1",
+      "b_key"
+     ],
+     "feature_ids": [
+      "product.deposits",
+      "product.loans"
+     ],
+     "roles": []
+    },
+    "inference_status": "supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2769/881, 0.1003 ₽, 10.0 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

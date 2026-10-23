@@ -1,0 +1,433 @@
+{
+ "key": "SYNTHETIC_U_3305|e4_wheat_duty@1#c0801416248a|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e4_wheat_duty@1#c0801416248a|treasurer|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:12:39+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "cluster_id": "cluster:e4_wheat_duty",
+   "event_refs": [
+    {
+     "event_id": "e4_wheat_duty",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.08,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "costs",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "Повышение экспортной пошлины на пшеницу: для казначея — возможное давление на закупочные цены и денежный поток",
+   "what_happened": "Правительство повысило экспортную пошлину на пшеницу; новый размер и дата вступления в силу не указаны.",
+   "facts": [
+    {
+     "text": "Правительство повысило экспортную пошлину на пшеницу; новый размер и дата вступления в силу не указаны.",
+     "kind": "fact",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — продуктовый ритейлер; если «Агрохолдинг Север» (16% исходящих платежей) является поставщиком, пошлина может отразиться на закупочных ценах зерновой группы.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Пошлина может снизить экспортную доходность и повлиять на внутренние цены зерна; через закупки это может увеличить себестоимость и отток денежных средств по оплате поставщикам.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Рост закупочных цен на продукты зерновой группы может увеличить отток средств и потребовать пересмотра платёжного календаря.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Свободные средства на депозитах можно при изменении ставок размещать на более выгодных условиях.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Доля зерновой продукции в закупках",
+    "Условия цен в договорах с поставщиками",
+    "Текущая структура депозитов и ставок размещения"
+   ],
+   "next_steps": [
+    {
+     "text": "Уточнить у закупок долю зерновой группы и условия контрактов с «Агрохолдинг Север» (фиксация цен).",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Смоделировать сценарий роста закупочных цен в платёжном календаре и лимитах.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Отслеживать размер пошлины и дату вступления в силу.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Новый размер пошлины и дата вступления в силу не раскрыты.",
+     "question": "Каков новый размер пошлины и когда она вступает в силу?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Тип отношений с «Агрохолдинг Север» не подтверждён договором.",
+     "question": "Является ли «Агрохолдинг Север» поставщиком компании и по каким ценам?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Событие косвенное: связь с компанией возможна только через гипотетического поставщика; для казначея достаточно мониторинга цен закупок и платёжного календаря, срочных действий не требуется.",
+    "kind": "inference",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "counterparty.1",
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "counterparty.1",
+     "product.deposits"
+    ],
+    "event_claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e4_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e4_wheat_duty@1#c0801416248a|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:12:39+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2647,
+    "completion_tokens": 881,
+    "reasoning_tokens": 39,
+    "cost_rub": 0.09818,
+    "cost_rub_tariff": 0.028477,
+    "latency_ms": 11611,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2647/881, 0.0982 ₽, 11.6 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "costs",
+     "demand_revenue"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Повышение экспортной пошлины на пшеницу: для казначея — возможное давление на закупочные цены и денежный поток",
+    "what_happened": [
+     {
+      "text": "Правительство повысило экспортную пошлину на пшеницу; новый размер и дата вступления в силу не указаны.",
+      "kind": "fact",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — продуктовый ритейлер; если «Агрохолдинг Север» (16% исходящих платежей) является поставщиком, пошлина может отразиться на закупочных ценах зерновой группы.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Пошлина может снизить экспортную доходность и повлиять на внутренние цены зерна; через закупки это может увеличить себестоимость и отток денежных средств по оплате поставщикам.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Рост закупочных цен на продукты зерновой группы может увеличить отток средств и потребовать пересмотра платёжного календаря.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Свободные средства на депозитах (F12) можно при изменении ставок размещать на более выгодных условиях.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Уточнить у закупок долю зерновой группы и условия контрактов с «Агрохолдинг Север» (фиксация цен).",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Смоделировать сценарий роста закупочных цен в платёжном календаре и лимитах.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Отслеживать размер пошлины и дату вступления в силу.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [],
+      "roles": [
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Доля зерновой продукции в закупках",
+     "Условия цен в договорах с поставщиками",
+     "Текущая структура депозитов и ставок размещения"
+    ],
+    "unknowns": [
+     {
+      "text": "Новый размер пошлины и дата вступления в силу не раскрыты.",
+      "question": "Каков новый размер пошлины и когда она вступает в силу?"
+     },
+     {
+      "text": "Тип отношений с «Агрохолдинг Север» не подтверждён договором.",
+      "question": "Является ли «Агрохолдинг Север» поставщиком компании и по каким ценам?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Событие косвенное: связь с компанией возможна только через гипотетического поставщика; для казначея достаточно мониторинга цен закупок и платёжного календаря, срочных действий не требуется.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "counterparty.1",
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2647/881, 0.0982 ₽, 11.6 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

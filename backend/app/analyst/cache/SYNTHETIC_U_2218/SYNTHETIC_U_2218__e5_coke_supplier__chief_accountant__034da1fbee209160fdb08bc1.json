@@ -1,0 +1,132 @@
+{
+ "key": "SYNTHETIC_U_2218|e5_coke_supplier@1#988ab5d48380|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e5_coke_supplier@1#988ab5d48380|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:11:34+03:00",
+ "record": {
+  "insight": null,
+  "excluded": {
+   "candidate_id": "cand:e5_coke_supplier:v1",
+   "cluster_id": "cluster:e5_coke_supplier",
+   "event_refs": [
+    {
+     "event_id": "e5_coke_supplier",
+     "event_version": 1
+    }
+   ],
+   "reason_code": "not_relevant",
+   "reason": "Событие касается поставщика коксующегося угля; в профиле компании нет связей с угольной отраслью или контрагентом «КоксРесурс», совпадение темы сырья не образует связи с бизнесом.",
+   "headline": "Приостановка отгрузок угля «КоксРесурс» не затрагивает бизнес компании",
+   "facts": [
+    {
+     "text": "«КоксРесурс» приостановил отгрузки коксующегося угля из-за аварии на шахте; срок возобновления не назван.",
+     "kind": "fact",
+     "claim_ids": [
+      "e5_coke_supplier:c1",
+      "e5_coke_supplier:c2"
+     ],
+     "evidence_ids": [
+      "n_e5_1",
+      "n_e5_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ]
+  },
+  "run": {
+   "candidate_id": "cand:e5_coke_supplier:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e5_coke_supplier@1#988ab5d48380|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:11:34+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3210,
+    "completion_tokens": 265,
+    "reasoning_tokens": 15,
+    "cost_rub": 0.071975,
+    "cost_rub_tariff": 0.020876,
+    "latency_ms": 5539,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 3210/265, 0.0720 ₽, 5.5 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "exclude",
+    "exclude_reason": "Событие касается поставщика коксующегося угля; в профиле компании нет связей с угольной отраслью или контрагентом «КоксРесурс», совпадение темы сырья не образует связи с бизнесом.",
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Приостановка отгрузок угля «КоксРесурс» не затрагивает бизнес компании",
+    "what_happened": [
+     {
+      "text": "«КоксРесурс» приостановил отгрузки коксующегося угля из-за аварии на шахте; срок возобновления не назван.",
+      "kind": "fact",
+      "claim_ids": [
+       "e5_coke_supplier:c1",
+       "e5_coke_supplier:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": null,
+    "impact_mechanism": null,
+    "risks": [],
+    "opportunities": [],
+    "next_steps": [],
+    "recommended_checks": [],
+    "unknowns": [],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": null,
+    "inference_status": "insufficient_evidence"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 3210/265, 0.0720 ₽, 5.5 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,415 @@
+{
+ "example_id": "EX10",
+ "slug": "anti_rate_contract_terms",
+ "title": "Антипример: «ставка → платёж по действующим кредитам вырастет», позиция банка выдумана",
+ "kind": "anti",
+ "topics": [
+  "rates"
+ ],
+ "role": "cfo",
+ "decision": "include",
+ "teaches": [
+  "Не приписывать условия действующих договоров",
+  "Не выдумывать позицию банка",
+  "Не подменять анализ общими словами"
+ ],
+ "defect": {
+  "summary": "Формально про ставку и с ссылками, но вводит в заблуждение: выдуманы условия договоров, ущерб подан как факт, позиция банка придумана, связь с компанией — общие слова.",
+  "what_is_wrong": [
+   "«Платежи по действующим кредитам вырастут» — тип ставки и условия договоров неизвестны; решение ЦБ меняет условия нового финансирования",
+   "«Компания понесёт расходы» — возможное влияние подано как свершившийся ущерб",
+   "bank_assessment=found без фрагментов банка и «банк рекомендует» в выводе — выдуманная позиция банка",
+   "«Ставка важна для всех компаний» — пересказ без персонализации; materiality/urgency=high не обоснованы"
+  ],
+  "bad_fields": [
+   "headline",
+   "company_relevance",
+   "impact_mechanism",
+   "risks",
+   "bank_assessment",
+   "ai_conclusion"
+  ],
+  "expected_qa_codes": [
+   "contract_terms",
+   "damage_as_fact",
+   "bank_invented",
+   "unknown_bank_ref"
+  ],
+  "fix": "См. EX01: новое финансирование, условная формулировка про действующие кредиты, позиция банка только по фрагменту B."
+ },
+ "source_ids": [
+  "cbr-2026-09-11-key-rate"
+ ],
+ "disclaimer": "Учебный пример: компания синтетическая (не из данных кейса), событие — по открытому источнику на дату примера и может быть устаревшим. Не факты о текущей компании и не текущие новости.",
+ "input": {
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+   "request_id": "EX10-request",
+   "company_id": "EXAMPLE_CO_01",
+   "role": "cfo",
+   "as_of": "2026-09-12T10:00:00+03:00",
+   "news_window_hours": 1440,
+   "max_insights": 10
+  },
+  "company_context": {
+   "profile_version": "example-v1",
+   "profile_snapshot_ref": "seed:EXAMPLE_CO_01@example-v1",
+   "verified_facts": [
+    {
+     "feature_id": "company.okved",
+     "field": "MAINOKVED_CODE/MAINOKVED_NAME",
+     "value": "41.20 Строительство жилых и нежилых зданий",
+     "description": "Основной ОКВЭД",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.industry",
+     "field": "industry",
+     "value": "Строительство",
+     "description": "Отрасль (по ОКВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "derived"
+    },
+    {
+     "feature_id": "company.revenue",
+     "field": "REVENUE_COMPANY",
+     "value": "48 млрд ₽",
+     "description": "Выручка за прошлый отчётный год (2025), не за текущий период",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.region",
+     "field": "RC_NAME/CITY_NAME",
+     "value": "Поволжье, Казань",
+     "description": "Регион и город обслуживания",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.rko",
+     "field": "CL_PRODUCT_RKO_MARK",
+     "value": "есть",
+     "description": "Расчётно-кассовое обслуживание в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.loans",
+     "field": "CL_PRODUCT_LOA_MARK",
+     "value": "есть",
+     "description": "Кредитные продукты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.deposits",
+     "field": "CL_PRODUCT_DEP_MARK",
+     "value": "есть",
+     "description": "Депозиты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.flag",
+     "field": "FTS_FLAG",
+     "value": "нет",
+     "description": "Есть таможенные декларации (ВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    }
+   ],
+   "economic_exposures": [
+    {
+     "exposure_id": "exp.loans",
+     "factor": "Стоимость и доступность заёмного финансирования",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.loans"
+     ],
+     "description": "Выведено из наличия продукта «Кредитные продукты»; условия договоров неизвестны."
+    },
+    {
+     "exposure_id": "exp.deposits",
+     "factor": "Доходность размещения свободных средств",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.deposits"
+     ],
+     "description": "Выведено из наличия продукта «Депозиты»; условия договоров неизвестны."
+    }
+   ],
+   "related_entities": [],
+   "graph_context": {
+    "included": false,
+    "reason": "Платёжный контекст не передан"
+   },
+   "unknowns": [
+    "Условия действующих кредитных договоров (тип ставки, сроки, объём долга) в профиле неизвестны.",
+    "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов, не тип отношений.",
+    "Выручка известна только за прошлый отчётный год; квартальные и месячные показатели неизвестны.",
+    "Наличие продукта «Банковские гарантии» в профиле неизвестно.",
+    "Наличие продукта «Лизинг» в профиле неизвестно.",
+    "Наличие продукта «Зарплатный проект» в профиле неизвестно.",
+    "Наличие продукта «Факторинг» в профиле неизвестно."
+   ],
+   "synthetic_demo_profile": true
+  },
+  "candidates": [
+   {
+    "candidate_id": "EX10-cand",
+    "cluster_id": "EX10-cluster",
+    "event_bundle_refs": [
+     {
+      "event_id": "ex01:cbr-rate",
+      "event_version": 1,
+      "snapshot_sha256": "5dd46c902641caadd2e99a502c51099caa0387800fab49f847e464354fa415e2"
+     }
+    ],
+    "analysis_projection": {
+     "event_bundles": [
+      {
+       "bundle_schema_version": "example-0.1",
+       "event": {
+        "event_id": "ex01:cbr-rate",
+        "event_version": 1,
+        "event_type": "policy_rate",
+        "title": "Банк России сохранил ключевую ставку на уровне 14,00% годовых",
+        "first_published_at": "2026-09-11T13:30:00+03:00",
+        "quality": "complete"
+       },
+       "claims": [
+        {
+         "claim_id": "ex01:cbr-rate:c1",
+         "text": "Совет директоров Банка России 11 сентября 2026 года принял решение сохранить ключевую ставку на уровне 14,00% годовых.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [
+          {
+           "metric": "policy_rate",
+           "kind": "level",
+           "value": "14.00",
+           "unit": "percent"
+          }
+         ],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev1"
+         ]
+        },
+        {
+         "claim_id": "ex01:cbr-rate:c2",
+         "text": "Неценовые условия банковского кредитования по-прежнему жесткие.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev2"
+         ]
+        },
+        {
+         "claim_id": "ex01:cbr-rate:c3",
+         "text": "Кредитная активность в последние месяцы была повышенной, прежде всего за счет корпоративного сегмента.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev3"
+         ]
+        },
+        {
+         "claim_id": "ex01:cbr-rate:c4",
+         "text": "По базовому прогнозу Банка России годовая инфляция составит 6,0–7,0% в 2026 году.",
+         "modality": "forecast",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex01:cbr-rate:ev4"
+         ]
+        }
+       ],
+       "conflicts": [],
+       "relations": [],
+       "sources": [
+        {
+         "source_id": "cbr-2026-09-11-key-rate",
+         "title": "Банк России принял решение сохранить ключевую ставку на уровне 14,00% годовых",
+         "publisher": "Банк России",
+         "published_at": "2026-09-11T13:30:00+03:00",
+         "url": "https://www.cbr.ru/press/pr/?file=11092026_133000Key.htm",
+         "is_synthetic": false
+        }
+       ],
+       "evidence": [
+        {
+         "evidence_id": "ex01:cbr-rate:ev1",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "Совет директоров Банка России 11 сентября 2026 года принял решение сохранить ключевую ставку на уровне 14,00% годовых.",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex01:cbr-rate:ev2",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "Неценовые условия банковского кредитования по-прежнему жесткие.",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex01:cbr-rate:ev3",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "Кредитная активность в последние месяцы была повышенной, прежде всего за счет корпоративного сегмента.",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex01:cbr-rate:ev4",
+         "source_id": "cbr-2026-09-11-key-rate",
+         "quote": "годовая инфляция составит 6,0–7,0% в 2026 году",
+         "field": "text"
+        }
+       ],
+       "limitations": []
+      }
+     ]
+    },
+    "match_context": {
+     "signals": [
+      {
+       "channel": "rules",
+       "profile_facet": "products",
+       "reason": "У компании есть кредитные продукты; событие — решение по ключевой ставке"
+      }
+     ],
+     "matched_company_feature_ids": [
+      "product.loans"
+     ],
+     "matched_event_claim_ids": [
+      "ex01:cbr-rate:c1"
+     ],
+     "confirmed_entity_match": null,
+     "assumptions_not_verified": [],
+     "prior_score": 0.71
+    },
+    "bank_fragments": []
+   }
+  ],
+  "analysis_policy": {}
+ },
+ "draft": {
+  "decision": "include",
+  "event_status": "occurred",
+  "impact_direction": "negative",
+  "impact_channels": [
+   "credit_liquidity"
+  ],
+  "materiality": "high",
+  "urgency": "high",
+  "headline": "Ставка 14%: расходы компании на кредиты вырастут",
+  "what_happened": [
+   {
+    "text": "Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+    "kind": "fact",
+    "claim_ids": [
+     "C1"
+    ]
+   }
+  ],
+  "company_relevance": {
+   "text": "Ключевая ставка важна для всех компаний, использующих кредиты.",
+   "kind": "inference",
+   "feature_ids": [
+    "F6"
+   ]
+  },
+  "impact_mechanism": {
+   "text": "Платежи по действующим кредитам компании вырастут уже в следующем месяце.",
+   "kind": "fact",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F6"
+   ]
+  },
+  "risks": [
+   {
+    "text": "Компания понесёт дополнительные процентные расходы.",
+    "kind": "fact",
+    "feature_ids": [
+     "F6"
+    ]
+   }
+  ],
+  "opportunities": [],
+  "next_steps": [
+   {
+    "text": "Срочно рефинансировать все кредиты.",
+    "kind": "inference",
+    "feature_ids": [
+     "F6"
+    ],
+    "roles": [
+     "cfo"
+    ]
+   }
+  ],
+  "recommended_checks": [],
+  "unknowns": [],
+  "impact_estimate": null,
+  "bank_assessment": {
+   "status": "found",
+   "bank_chunk_ids": [
+    "B1"
+   ]
+  },
+  "ai_conclusion": {
+   "text": "Банк рекомендует срочно рефинансировать кредиты.",
+   "kind": "fact",
+   "feature_ids": [
+    "F6"
+   ]
+  },
+  "inference_status": "supported"
+ },
+ "expected_output": null
+}

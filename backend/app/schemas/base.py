@@ -1,5 +1,5 @@
 from typing import Any, Literal
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, SerializationInfo, SerializerFunctionWrapHandler, model_serializer
 
 Role = Literal["ceo", "cfo", "treasurer", "chief_accountant"]
 SignificanceLevel = Literal["high", "medium", "low"]
@@ -89,6 +89,10 @@ class RelevanceFactor(BaseModel):
     label: str
     contribution: float
     detail: str
+    feature_ids: list[str] = Field(default_factory=list)
+    event_fields: list[str] = Field(default_factory=list)
+    basis: str | None = None
+    provenance: dict[str, Any] | None = None
 
 
 class Relevance(BaseModel):
@@ -97,6 +101,9 @@ class Relevance(BaseModel):
     factors: list[RelevanceFactor] = Field(default_factory=list)
     explanation: str
     reasons: list[str] | None = None
+    candidate_channels: list[str] = Field(default_factory=list)
+    missing_context: list[str] = Field(default_factory=list)
+    evidence_status: str | None = None
 
 
 class FeedItem(BaseModel):
@@ -166,6 +173,19 @@ class AiConclusion(BaseModel):
     features: list[str] = Field(default_factory=list)
 
 
+class ChangesSincePrevious(BaseModel):
+    """Что изменилось по сравнению с ранее сохранёнными выводами (память аналитика).
+
+    Опциональное поле карточки: фронт может его игнорировать. Формат — как
+    ``changes_since_previous`` в ``llm/agent/contracts/insight.schema.json``.
+    """
+
+    status: Literal["new", "continuation", "escalation", "deescalation", "unknown"]
+    previous_insight_id: str | None = None
+    summary: str | None = None
+    claim_ids: list[str] = Field(default_factory=list)
+
+
 class Insight(BaseModel):
     run_id: str
     company_id: str
@@ -186,6 +206,15 @@ class Insight(BaseModel):
     unknowns: list[UnknownItem] = Field(default_factory=list)
     evidence: list[Evidence] = Field(default_factory=list)
     trace: list[TraceStep] = Field(default_factory=list)
+    changes_since_previous: ChangesSincePrevious | None = None
+
+    @model_serializer(mode="wrap")
+    def _omit_empty_changes(self, handler: SerializerFunctionWrapHandler, info: SerializationInfo):  # без аннотации: схема OpenAPI не меняется
+        """Пустое ``changes_since_previous`` не попадает в JSON-ответ API: прежние ответы не меняются."""
+        data = handler(self)
+        if info.mode_is_json() and isinstance(data, dict) and data.get("changes_since_previous") is None:
+            data.pop("changes_since_previous", None)
+        return data
 
 
 class QaRequest(BaseModel):

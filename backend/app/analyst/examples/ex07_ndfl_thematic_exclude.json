@@ -1,0 +1,353 @@
+{
+ "example_id": "EX07",
+ "slug": "ndfl_thematic_exclude",
+ "title": "НДФЛ с пассивных доходов граждан: тема «налоги» совпала, механизма нет",
+ "kind": "reference",
+ "topics": [
+  "taxes",
+  "other"
+ ],
+ "role": "cfo",
+ "decision": "exclude",
+ "teaches": [
+  "Тематическое совпадение (налоги, зарплатный проект) — не механизм влияния",
+  "Для exclude заполняются только факты и причина"
+ ],
+ "defect": null,
+ "source_ids": [
+  "minfin-2026-09-24-budget"
+ ],
+ "disclaimer": "Учебный пример: компания синтетическая (не из данных кейса), событие — по открытому источнику на дату примера и может быть устаревшим. Не факты о текущей компании и не текущие новости.",
+ "input": {
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+   "request_id": "EX07-request",
+   "company_id": "EXAMPLE_CO_07",
+   "role": "cfo",
+   "as_of": "2026-09-25T10:00:00+03:00",
+   "news_window_hours": 1440,
+   "max_insights": 10
+  },
+  "company_context": {
+   "profile_version": "example-v1",
+   "profile_snapshot_ref": "seed:EXAMPLE_CO_07@example-v1",
+   "verified_facts": [
+    {
+     "feature_id": "company.okved",
+     "field": "MAINOKVED_CODE/MAINOKVED_NAME",
+     "value": "25.11 Производство строительных металлических конструкций",
+     "description": "Основной ОКВЭД",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.industry",
+     "field": "industry",
+     "value": "Металлообработка",
+     "description": "Отрасль (по ОКВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "derived"
+    },
+    {
+     "feature_id": "company.revenue",
+     "field": "REVENUE_COMPANY",
+     "value": "21 млрд ₽",
+     "description": "Выручка за прошлый отчётный год (2025), не за текущий период",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.region",
+     "field": "RC_NAME/CITY_NAME",
+     "value": "Урал, Екатеринбург",
+     "description": "Регион и город обслуживания",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.rko",
+     "field": "CL_PRODUCT_RKO_MARK",
+     "value": "есть",
+     "description": "Расчётно-кассовое обслуживание в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.loans",
+     "field": "CL_PRODUCT_LOA_MARK",
+     "value": "есть",
+     "description": "Кредитные продукты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.payroll",
+     "field": "CL_PRODUCT_ZPP_MARK",
+     "value": "есть",
+     "description": "Зарплатный проект в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.flag",
+     "field": "FTS_FLAG",
+     "value": "нет",
+     "description": "Есть таможенные декларации (ВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    }
+   ],
+   "economic_exposures": [
+    {
+     "exposure_id": "exp.loans",
+     "factor": "Стоимость и доступность заёмного финансирования",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.loans"
+     ],
+     "description": "Выведено из наличия продукта «Кредитные продукты»; условия договоров неизвестны."
+    }
+   ],
+   "related_entities": [],
+   "graph_context": {
+    "included": false,
+    "reason": "Платёжный контекст не передан"
+   },
+   "unknowns": [
+    "Условия действующих кредитных договоров (тип ставки, сроки, объём долга) в профиле неизвестны.",
+    "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов, не тип отношений.",
+    "Выручка известна только за прошлый отчётный год; квартальные и месячные показатели неизвестны.",
+    "Наличие продукта «Банковские гарантии» в профиле неизвестно.",
+    "Наличие продукта «Лизинг» в профиле неизвестно.",
+    "Наличие продукта «Депозиты» в профиле неизвестно.",
+    "Наличие продукта «Факторинг» в профиле неизвестно."
+   ],
+   "synthetic_demo_profile": true
+  },
+  "candidates": [
+   {
+    "candidate_id": "EX07-cand",
+    "cluster_id": "EX07-cluster",
+    "event_bundle_refs": [
+     {
+      "event_id": "ex07:ndfl",
+      "event_version": 1,
+      "snapshot_sha256": "bc3cc334975c2a33bb9cb981d37d46bd59e2d9f3ec96d79d1d97f05903c264a6"
+     }
+    ],
+    "analysis_projection": {
+     "event_bundles": [
+      {
+       "bundle_schema_version": "example-0.1",
+       "event": {
+        "event_id": "ex07:ndfl",
+        "event_version": 1,
+        "event_type": "tax_change",
+        "title": "Минфин предлагает включить пассивные доходы граждан в основную базу НДФЛ",
+        "first_published_at": "2026-09-24T11:00:00+03:00",
+        "quality": "complete"
+       },
+       "claims": [
+        {
+         "claim_id": "ex07:ndfl:c1",
+         "text": "Минфин предлагает включить в основную налоговую базу по НДФЛ «пассивные» доходы граждан, в том числе от продажи имущества и реализации долей участия.",
+         "modality": "scenario",
+         "polarity": "affirmed",
+         "stage": "proposed",
+         "attribution": {
+          "name": "Минфин России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex07:ndfl:ev1.1",
+          "ex07:ndfl:ev1.2"
+         ]
+        },
+        {
+         "claim_id": "ex07:ndfl:c2",
+         "text": "По оценке Минфина, унификация коснётся не более 6% населения.",
+         "modality": "forecast",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Минфин России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex07:ndfl:ev2"
+         ]
+        }
+       ],
+       "conflicts": [],
+       "relations": [],
+       "sources": [
+        {
+         "source_id": "minfin-2026-09-24-budget",
+         "title": "Минфин России внес в Правительство РФ бюджетный пакет",
+         "publisher": "Минфин России",
+         "published_at": "2026-09-24T11:00:00+03:00",
+         "url": "https://minfin.gov.ru/ru/press-center/?id_4=40635-minfin_rossii_vnes_v_pravitelstvo_rf_byudzhetnyi_paket",
+         "is_synthetic": false
+        }
+       ],
+       "evidence": [
+        {
+         "evidence_id": "ex07:ndfl:ev1.1",
+         "source_id": "minfin-2026-09-24-budget",
+         "quote": "В основную налоговую базу по НДФЛ предлагается включить «пассивные» доходы",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex07:ndfl:ev1.2",
+         "source_id": "minfin-2026-09-24-budget",
+         "quote": "от продажи имущества и реализации долей участия",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex07:ndfl:ev2",
+         "source_id": "minfin-2026-09-24-budget",
+         "quote": "Предлагаемая унификация коснется не более 6% населения",
+         "field": "text"
+        }
+       ],
+       "limitations": []
+      }
+     ]
+    },
+    "match_context": {
+     "signals": [
+      {
+       "channel": "bm25",
+       "profile_facet": "products",
+       "reason": "Тема «налоги»; у компании зарплатный проект"
+      }
+     ],
+     "matched_company_feature_ids": [
+      "product.payroll"
+     ],
+     "matched_event_claim_ids": [
+      "ex07:ndfl:c1"
+     ],
+     "confirmed_entity_match": null,
+     "assumptions_not_verified": [],
+     "prior_score": 0.33
+    },
+    "bank_fragments": []
+   }
+  ],
+  "analysis_policy": {}
+ },
+ "draft": {
+  "decision": "exclude",
+  "exclude_reason": "Изменение касается НДФЛ граждан с пассивных доходов; налоги и издержки компании оно не меняет — совпала только тема «налоги».",
+  "event_status": "scenario",
+  "headline": "Предложение по НДФЛ с пассивных доходов граждан не касается налогов компании",
+  "what_happened": [
+   {
+    "text": "Сценарий: Минфин предлагает включить пассивные доходы граждан в основную базу НДФЛ.",
+    "kind": "fact",
+    "claim_ids": [
+     "C1"
+    ]
+   }
+  ]
+ },
+ "expected_output": {
+  "schema_version": "AnalystOutput.v1-draft",
+  "request_id": "EX07-request",
+  "company_id": "EXAMPLE_CO_07",
+  "role": "cfo",
+  "as_of": "2026-09-25T10:00:00+03:00",
+  "ranked_insights": [],
+  "excluded_candidates": [
+   {
+    "candidate_id": "EX07-cand",
+    "cluster_id": "EX07-cluster",
+    "event_refs": [
+     {
+      "event_id": "ex07:ndfl",
+      "event_version": 1
+     }
+    ],
+    "reason_code": "not_relevant",
+    "reason": "Изменение касается НДФЛ граждан с пассивных доходов; налоги и издержки компании оно не меняет — совпала только тема «налоги».",
+    "headline": "Предложение по НДФЛ с пассивных доходов граждан не касается налогов компании",
+    "facts": [
+     {
+      "text": "Сценарий: Минфин предлагает включить пассивные доходы граждан в основную базу НДФЛ.",
+      "kind": "fact",
+      "claim_ids": [
+       "ex07:ndfl:c1"
+      ],
+      "evidence_ids": [
+       "ex07:ndfl:ev1.1",
+       "ex07:ndfl:ev1.2"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     }
+    ]
+   }
+  ],
+  "run_metadata": {
+   "model": "few-shot-reference",
+   "prompt_version": "analyst-v1.0",
+   "qa_status": "passed",
+   "bank_rag_used": false,
+   "generated_by": "cached",
+   "profile_version": "example-v1",
+   "cache_hits": 0,
+   "llm_calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_rub": 0.0,
+   "latency_ms": 0,
+   "json_repairs": 0,
+   "candidates": [
+    {
+     "candidate_id": "EX07-cand",
+     "model": null,
+     "prompt_version": "analyst-v1.0",
+     "generated_by": "cached",
+     "cache_key": null,
+     "created_at": null,
+     "qa_status": "passed",
+     "qa_issues": [],
+     "usage": {},
+     "trace": [],
+     "draft": null,
+     "llm_trace": [],
+     "memory_ref": null
+    }
+   ]
+  }
+ }
+}

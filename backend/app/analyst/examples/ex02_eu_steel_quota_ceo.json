@@ -1,0 +1,709 @@
+{
+ "example_id": "EX02",
+ "slug": "eu_steel_quota_ceo",
+ "title": "Квоты ЕС на импорт стали: ВЭД известна по стране, направление — нет",
+ "kind": "reference",
+ "topics": [
+  "sanctions",
+  "trade",
+  "industry"
+ ],
+ "role": "ceo",
+ "decision": "include",
+ "teaches": [
+  "Связь через ОКВЭД и страну ВЭД; экспорт в ЕС — гипотеза, т. к. направление ВЭД неизвестно",
+  "Возможности не выдумываются ради заполнения поля",
+  "Нет материала банка — not_found"
+ ],
+ "defect": null,
+ "source_ids": [
+  "ec-2026-06-30-steel"
+ ],
+ "disclaimer": "Учебный пример: компания синтетическая (не из данных кейса), событие — по открытому источнику на дату примера и может быть устаревшим. Не факты о текущей компании и не текущие новости.",
+ "input": {
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+   "request_id": "EX02-request",
+   "company_id": "EXAMPLE_CO_02",
+   "role": "ceo",
+   "as_of": "2026-07-01T10:00:00+03:00",
+   "news_window_hours": 1440,
+   "max_insights": 10
+  },
+  "company_context": {
+   "profile_version": "example-v1",
+   "profile_snapshot_ref": "seed:EXAMPLE_CO_02@example-v1",
+   "verified_facts": [
+    {
+     "feature_id": "company.okved",
+     "field": "MAINOKVED_CODE/MAINOKVED_NAME",
+     "value": "24.10 Производство чугуна, стали и ферросплавов",
+     "description": "Основной ОКВЭД",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.industry",
+     "field": "industry",
+     "value": "Металлургия",
+     "description": "Отрасль (по ОКВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "derived"
+    },
+    {
+     "feature_id": "company.revenue",
+     "field": "REVENUE_COMPANY",
+     "value": "210 млрд ₽",
+     "description": "Выручка за прошлый отчётный год (2025), не за текущий период",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.region",
+     "field": "RC_NAME/CITY_NAME",
+     "value": "Урал, Челябинск",
+     "description": "Регион и город обслуживания",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.rko",
+     "field": "CL_PRODUCT_RKO_MARK",
+     "value": "есть",
+     "description": "Расчётно-кассовое обслуживание в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.loans",
+     "field": "CL_PRODUCT_LOA_MARK",
+     "value": "есть",
+     "description": "Кредитные продукты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.flag",
+     "field": "FTS_FLAG",
+     "value": "есть",
+     "description": "Есть таможенные декларации (ВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.country",
+     "field": "FTS_COUNTRY_NAME",
+     "value": "Италия",
+     "description": "Страна ВЭД по декларациям (направление экспорт/импорт неизвестно)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    }
+   ],
+   "economic_exposures": [
+    {
+     "exposure_id": "exp.loans",
+     "factor": "Стоимость и доступность заёмного финансирования",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.loans"
+     ],
+     "description": "Выведено из наличия продукта «Кредитные продукты»; условия договоров неизвестны."
+    },
+    {
+     "exposure_id": "exp.fx_trade",
+     "factor": "Валютный курс и условия внешней торговли",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "description": "Выведено из наличия таможенных деклараций; направление и валюта контрактов неизвестны."
+    }
+   ],
+   "related_entities": [],
+   "graph_context": {
+    "included": false,
+    "reason": "Платёжный контекст не передан"
+   },
+   "unknowns": [
+    "Условия действующих кредитных договоров (тип ставки, сроки, объём долга) в профиле неизвестны.",
+    "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов, не тип отношений.",
+    "Выручка известна только за прошлый отчётный год; квартальные и месячные показатели неизвестны.",
+    "Наличие продукта «Банковские гарантии» в профиле неизвестно.",
+    "Наличие продукта «Лизинг» в профиле неизвестно.",
+    "Наличие продукта «Депозиты» в профиле неизвестно.",
+    "Наличие продукта «Зарплатный проект» в профиле неизвестно.",
+    "Наличие продукта «Факторинг» в профиле неизвестно.",
+    "Направление ВЭД (экспорт или импорт), валюта контрактов и товарная структура неизвестны."
+   ],
+   "synthetic_demo_profile": true
+  },
+  "candidates": [
+   {
+    "candidate_id": "EX02-cand",
+    "cluster_id": "EX02-cluster",
+    "event_bundle_refs": [
+     {
+      "event_id": "ex02:eu-steel",
+      "event_version": 1,
+      "snapshot_sha256": "719484e4482f36dd53c2fa51c29a6011f29f77218d9c7f25e9f4919a096fb798"
+     }
+    ],
+    "analysis_projection": {
+     "event_bundles": [
+      {
+       "bundle_schema_version": "example-0.1",
+       "event": {
+        "event_id": "ex02:eu-steel",
+        "event_version": 1,
+        "event_type": "sanction_or_trade_restriction",
+        "title": "ЕС ввёл новый режим импорта стали: квоты меньше, пошлина сверх квоты 50%",
+        "first_published_at": "2026-06-30T13:00:00+03:00",
+        "quality": "complete"
+       },
+       "claims": [
+        {
+         "claim_id": "ex02:eu-steel:c1",
+         "text": "С 1 июля 2026 года Регламент (ЕС) 2026/1384 вводит в ЕС новый режим импорта стали вместо прежней защитной меры.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Европейская комиссия"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex02:eu-steel:ev1"
+         ]
+        },
+        {
+         "claim_id": "ex02:eu-steel:c2",
+         "text": "Общий объём беспошлинных импортных квот сокращается примерно на 47% по сравнению с базой 2024 года.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Европейская комиссия"
+         },
+         "measurements": [
+          {
+           "metric": "duty_free_quota",
+           "kind": "change",
+           "value": "-47",
+           "unit": "percent",
+           "qualifier": "approximately"
+          }
+         ],
+         "evidence_ids": [
+          "ex02:eu-steel:ev2"
+         ]
+        },
+        {
+         "claim_id": "ex02:eu-steel:c3",
+         "text": "Пошлина на импорт стали сверх квоты повышается до 50%.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Европейская комиссия"
+         },
+         "measurements": [
+          {
+           "metric": "out_of_quota_duty",
+           "kind": "level",
+           "value": "50",
+           "unit": "percent"
+          }
+         ],
+         "evidence_ids": [
+          "ex02:eu-steel:ev3"
+         ]
+        },
+        {
+         "claim_id": "ex02:eu-steel:c4",
+         "text": "Импортёры продукции под квотами должны предоставлять проверяемые доказательства места выплавки стали.",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Европейская комиссия"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex02:eu-steel:ev4"
+         ]
+        }
+       ],
+       "conflicts": [],
+       "relations": [],
+       "sources": [
+        {
+         "source_id": "ec-2026-06-30-steel",
+         "title": "New EU safeguards on steel imports from third countries",
+         "publisher": "European Commission, Access2Markets",
+         "published_at": "2026-06-30",
+         "url": "https://trade.ec.europa.eu/access-to-markets/en/news/new-eu-safeguards-steel-imports-third-countries",
+         "is_synthetic": false
+        }
+       ],
+       "evidence": [
+        {
+         "evidence_id": "ex02:eu-steel:ev1",
+         "source_id": "ec-2026-06-30-steel",
+         "quote": "From 1 July, Regulation (EU) 2026/1384 of the European Parliament and of the Council establishes a new regulatory framework",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex02:eu-steel:ev2",
+         "source_id": "ec-2026-06-30-steel",
+         "quote": "reduces the total volume of duty-free import quotas by approximately 47% compared to the 2024 reference system,",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex02:eu-steel:ev3",
+         "source_id": "ec-2026-06-30-steel",
+         "quote": "increases the out-of-quota duty to 50%, as set out in Annex II,",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex02:eu-steel:ev4",
+         "source_id": "ec-2026-06-30-steel",
+         "quote": "importers of products subject to the quotas must submit adequate and verifiable evidence",
+         "field": "text"
+        }
+       ],
+       "limitations": [
+        "Текст источника на английском; утверждения — перевод команды, цитаты в evidence дословные."
+       ]
+      }
+     ]
+    },
+    "match_context": {
+     "signals": [
+      {
+       "channel": "rules",
+       "profile_facet": "okved+fts",
+       "reason": "ОКВЭД 24.10 (сталь) и таможенные декларации по стране ЕС (Италия)"
+      }
+     ],
+     "matched_company_feature_ids": [
+      "company.okved",
+      "fts.country"
+     ],
+     "matched_event_claim_ids": [
+      "ex02:eu-steel:c1"
+     ],
+     "confirmed_entity_match": null,
+     "assumptions_not_verified": [],
+     "prior_score": 0.66
+    },
+    "bank_fragments": []
+   }
+  ],
+  "analysis_policy": {}
+ },
+ "draft": {
+  "decision": "include",
+  "event_status": "occurred",
+  "impact_direction": "negative",
+  "impact_channels": [
+   "fx_trade",
+   "demand_revenue",
+   "regulation"
+  ],
+  "materiality": "medium",
+  "urgency": "medium",
+  "headline": "Новый режим импорта стали в ЕС: квоты меньше примерно на 47%, сверх квоты — пошлина 50%",
+  "what_happened": [
+   {
+    "text": "С 1 июля 2026 года в ЕС действует новый режим импорта стали (Регламент 2026/1384).",
+    "kind": "fact",
+    "claim_ids": [
+     "C1"
+    ]
+   },
+   {
+    "text": "Беспошлинные квоты сокращены примерно на 47% к базе 2024 года, пошлина сверх квоты — 50%.",
+    "kind": "fact",
+    "claim_ids": [
+     "C2",
+     "C3"
+    ]
+   }
+  ],
+  "company_relevance": {
+   "text": "Компания производит сталь и имеет таможенные декларации по Италии (страна ЕС); экспортирует ли она прокат в ЕС, по данным неизвестно.",
+   "kind": "inference",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F1",
+    "F7",
+    "F8"
+   ]
+  },
+  "impact_mechanism": {
+   "text": "Если часть проката идёт в ЕС, меньшие квоты и пошлина сверх них могут снизить спрос и цену реализации на этом направлении.",
+   "kind": "hypothesis",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "feature_ids": [
+    "F1",
+    "F8"
+   ]
+  },
+  "risks": [
+   {
+    "text": "Требование подтверждать место выплавки может удлинить оформление поставок в ЕС.",
+    "kind": "inference",
+    "claim_ids": [
+     "C4"
+    ],
+    "feature_ids": [
+     "F7"
+    ]
+   }
+  ],
+  "opportunities": [],
+  "next_steps": [
+   {
+    "text": "Проверить долю поставок в ЕС и товарные категории под квотами.",
+    "kind": "inference",
+    "claim_ids": [
+     "C2"
+    ],
+    "feature_ids": [
+     "F8"
+    ],
+    "roles": [
+     "ceo"
+    ]
+   },
+   {
+    "text": "Подготовить документы о месте выплавки для поставок под квоты.",
+    "kind": "inference",
+    "claim_ids": [
+     "C4"
+    ],
+    "feature_ids": [
+     "F7"
+    ],
+    "roles": [
+     "chief_accountant"
+    ]
+   }
+  ],
+  "recommended_checks": [
+   "ВЭД с Италией — экспорт или импорт и какие товарные позиции?"
+  ],
+  "unknowns": [
+   {
+    "text": "Направление ВЭД и товарная структура поставок неизвестны.",
+    "question": "Поставляет ли компания прокат в ЕС?"
+   }
+  ],
+  "impact_estimate": null,
+  "bank_assessment": {
+   "status": "not_found",
+   "bank_chunk_ids": []
+  },
+  "ai_conclusion": {
+   "text": "Генеральному директору стоит проверить зависимость от рынка ЕС: при экспорте проката условия там заметно ужесточились.",
+   "kind": "inference",
+   "claim_ids": [
+    "C2",
+    "C3"
+   ],
+   "feature_ids": [
+    "F8"
+   ]
+  },
+  "inference_status": "partially_supported"
+ },
+ "expected_output": {
+  "schema_version": "AnalystOutput.v1-draft",
+  "request_id": "EX02-request",
+  "company_id": "EXAMPLE_CO_02",
+  "role": "ceo",
+  "as_of": "2026-07-01T10:00:00+03:00",
+  "ranked_insights": [
+   {
+    "candidate_id": "EX02-cand",
+    "cluster_id": "EX02-cluster",
+    "event_refs": [
+     {
+      "event_id": "ex02:eu-steel",
+      "event_version": 1
+     }
+    ],
+    "decision": "include",
+    "priority_score": 0.39,
+    "significance": "medium",
+    "priority_breakdown": {
+     "materiality": 0.32,
+     "urgency": 0.04,
+     "evidence": 0.03,
+     "cap": null,
+     "cap_reason": null,
+     "penalty": 0.0
+    },
+    "impact_direction": "negative",
+    "impact_channels": [
+     "fx_trade",
+     "demand_revenue",
+     "regulation"
+    ],
+    "event_status": "occurred",
+    "materiality": "medium",
+    "urgency": "medium",
+    "headline": "Новый режим импорта стали в ЕС: квоты меньше примерно на 47%, сверх квоты — пошлина 50%",
+    "what_happened": "С 1 июля 2026 года в ЕС действует новый режим импорта стали (Регламент 2026/1384). Беспошлинные квоты сокращены примерно на 47% к базе 2024 года, пошлина сверх квоты — 50%.",
+    "facts": [
+     {
+      "text": "С 1 июля 2026 года в ЕС действует новый режим импорта стали (Регламент 2026/1384).",
+      "kind": "fact",
+      "claim_ids": [
+       "ex02:eu-steel:c1"
+      ],
+      "evidence_ids": [
+       "ex02:eu-steel:ev1"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     },
+     {
+      "text": "Беспошлинные квоты сокращены примерно на 47% к базе 2024 года, пошлина сверх квоты — 50%.",
+      "kind": "fact",
+      "claim_ids": [
+       "ex02:eu-steel:c2",
+       "ex02:eu-steel:c3"
+      ],
+      "evidence_ids": [
+       "ex02:eu-steel:ev2",
+       "ex02:eu-steel:ev3"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания производит сталь и имеет таможенные декларации по Италии (страна ЕС); экспортирует ли она прокат в ЕС, по данным неизвестно.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex02:eu-steel:c1"
+     ],
+     "evidence_ids": [
+      "ex02:eu-steel:ev1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Если часть проката идёт в ЕС, меньшие квоты и пошлина сверх них могут снизить спрос и цену реализации на этом направлении.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "ex02:eu-steel:c2",
+      "ex02:eu-steel:c3"
+     ],
+     "evidence_ids": [
+      "ex02:eu-steel:ev2",
+      "ex02:eu-steel:ev3"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Требование подтверждать место выплавки может удлинить оформление поставок в ЕС.",
+      "kind": "inference",
+      "claim_ids": [
+       "ex02:eu-steel:c4"
+      ],
+      "evidence_ids": [
+       "ex02:eu-steel:ev4"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     }
+    ],
+    "opportunities": [],
+    "recommended_checks": [
+     "ВЭД с Италией — экспорт или импорт и какие товарные позиции?"
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить долю поставок в ЕС и товарные категории под квотами.",
+      "kind": "inference",
+      "claim_ids": [
+       "ex02:eu-steel:c2"
+      ],
+      "evidence_ids": [
+       "ex02:eu-steel:ev2"
+      ],
+      "feature_ids": [
+       "fts.country"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "ceo"
+      ]
+     },
+     {
+      "text": "Подготовить документы о месте выплавки для поставок под квоты.",
+      "kind": "inference",
+      "claim_ids": [
+       "ex02:eu-steel:c4"
+      ],
+      "evidence_ids": [
+       "ex02:eu-steel:ev4"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "chief_accountant"
+      ]
+     }
+    ],
+    "unknowns": [
+     {
+      "text": "Направление ВЭД и товарная структура поставок неизвестны.",
+      "question": "Поставляет ли компания прокат в ЕС?",
+      "how_to_clarify": null
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Генеральному директору стоит проверить зависимость от рынка ЕС: при экспорте проката условия там заметно ужесточились.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex02:eu-steel:c2",
+      "ex02:eu-steel:c3"
+     ],
+     "evidence_ids": [
+      "ex02:eu-steel:ev2",
+      "ex02:eu-steel:ev3"
+     ],
+     "feature_ids": [
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "support": {
+     "company_feature_ids": [
+      "company.okved",
+      "fts.flag",
+      "fts.country"
+     ],
+     "event_claim_ids": [
+      "ex02:eu-steel:c1",
+      "ex02:eu-steel:c2",
+      "ex02:eu-steel:c3",
+      "ex02:eu-steel:c4"
+     ],
+     "event_evidence_ids": [
+      "ex02:eu-steel:ev1",
+      "ex02:eu-steel:ev2",
+      "ex02:eu-steel:ev3",
+      "ex02:eu-steel:ev4"
+     ],
+     "bank_chunk_ids": [],
+     "inference_status": "partially_supported",
+     "limitations": []
+    },
+    "changes_since_previous": null
+   }
+  ],
+  "excluded_candidates": [],
+  "run_metadata": {
+   "model": "few-shot-reference",
+   "prompt_version": "analyst-v1.0",
+   "qa_status": "passed",
+   "bank_rag_used": false,
+   "generated_by": "cached",
+   "profile_version": "example-v1",
+   "cache_hits": 0,
+   "llm_calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_rub": 0.0,
+   "latency_ms": 0,
+   "json_repairs": 0,
+   "candidates": [
+    {
+     "candidate_id": "EX02-cand",
+     "model": null,
+     "prompt_version": "analyst-v1.0",
+     "generated_by": "cached",
+     "cache_key": null,
+     "created_at": null,
+     "qa_status": "passed",
+     "qa_issues": [],
+     "usage": {},
+     "trace": [],
+     "draft": null,
+     "llm_trace": [],
+     "memory_ref": null
+    }
+   ]
+  }
+ }
+}

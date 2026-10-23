@@ -1,0 +1,608 @@
+{
+ "key": "SYNTHETIC_U_2218|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:10:12+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "cluster_id": "cluster:e3_rub_weak",
+   "event_refs": [
+    {
+     "event_id": "e3_rub_weak",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.36,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.04,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "вывод — гипотеза",
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "fx_trade",
+    "demand_revenue",
+    "credit_liquidity"
+   ],
+   "event_status": "mixed",
+   "materiality": "medium",
+   "urgency": "medium",
+   "headline": "Ослабление рубля на 4% за неделю: для экспортно-ориентированной зерновой торговли это может поддержать выручку, но усилит ценовую неопределённость по контрактам",
+   "what_happened": "За неделю рубль ослаб к юаню и доллару США на 4%. Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+   "facts": [
+    {
+     "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания ведёт ВЭД с Турцией в зерновой торговле; курсовая динамика напрямую влияет на рублёвую выручку от экспортных операций, если направление — экспорт.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry",
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ослабление рубля может повысить рублёвый эквивалент экспортной выручки, но также увеличить стоимость импортных издержек и создать неопределённость при ценообразовании по новым контрактам.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "При импортных или валютных расходных контрактах ослабление рубля может увеличить затраты.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Дальнейшее ослабление рубля (прогноз ) может осложнить ценообразование и переговоры с контрагентами по новым сделкам.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Волатильность курса может повлиять на оборотный капитал и дебиторскую задолженность, покрываемую факторингом.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При экспортной модели ослабление рубля может повысить рублёвую выручку от продаж в Турцию.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Возможность зафиксировать выгодные условия по новым экспортным контрактам на фоне курсовых ожиданий.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Направление ВЭД (экспорт/импорт) и валюта контрактов с Турцией",
+    "Доля валютной выручки в общей выручке",
+    "Условия факторинга и покрытие валютной дебиторки"
+   ],
+   "next_steps": [
+    {
+     "text": "Оценить валютную структуру контрактов с турецкими контрагентами (экспорт/импорт, валюта расчётов).",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Проверить долю валютной выручки и чувствительность маржи к курсу.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "company.revenue"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    },
+    {
+     "text": "Рассмотреть инструменты хеджирования курсового риска при значительной валютной позиции.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Уточнить условия факторингового покрытия дебиторки по экспортным покупателям.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "product.factoring",
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Направление ВЭД (экспорт или импорт) и валюта контрактов неизвестны.",
+     "question": "Какова доля экспорта в Турцию и в какой валюте номинированы контракты?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Текущая выручка за 2026 год неизвестна (есть только 2025).",
+     "question": "Какова динамика выручки и маржи в текущем году при новой курсовой динамике?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Ослабление рубля на 4% за неделю для компании с ВЭД в Турцию — смешанный сигнал: возможный рост рублёвой выручки от экспорта при риске удорожания валютных издержек; ключевое действие — уточнить валютную структуру контрактов.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country",
+     "company.okved"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "fts.flag",
+     "fts.country",
+     "counterparty.1",
+     "product.factoring",
+     "company.revenue"
+    ],
+    "event_claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "event_evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:10:12+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3162,
+    "completion_tokens": 1260,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.129449,
+    "cost_rub_tariff": 0.037546,
+    "latency_ms": 15575,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3162/1260, 0.1294 ₽, 15.6 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "mixed",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "fx_trade",
+     "demand_revenue",
+     "credit_liquidity"
+    ],
+    "materiality": "medium",
+    "urgency": "medium",
+    "headline": "Ослабление рубля на 4% за неделю: для экспортно-ориентированной зерновой торговли это может поддержать выручку, но усилит ценовую неопределённость по контрактам",
+    "what_happened": [
+     {
+      "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     },
+     {
+      "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания ведёт ВЭД с Турцией (F14, F15) в зерновой торговле (F1, F2); курсовая динамика напрямую влияет на рублёвую выручку от экспортных операций, если направление — экспорт.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry",
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ослабление рубля может повысить рублёвый эквивалент экспортной выручки, но также увеличить стоимость импортных издержек и создать неопределённость при ценообразовании по новым контрактам.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "При импортных или валютных расходных контрактах ослабление рубля может увеличить затраты.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Дальнейшее ослабление рубля (прогноз C2) может осложнить ценообразование и переговоры с контрагентами по новым сделкам.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Волатильность курса может повлиять на оборотный капитал и дебиторскую задолженность, покрываемую факторингом.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "product.factoring"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При экспортной модели ослабление рубля может повысить рублёвую выручку от продаж в Турцию.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Возможность зафиксировать выгодные условия по новым экспортным контрактам на фоне курсовых ожиданий.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Оценить валютную структуру контрактов с турецкими контрагентами (экспорт/импорт, валюта расчётов).",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": [
+       "ceo",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Проверить долю валютной выручки и чувствительность маржи к курсу.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "company.revenue"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Рассмотреть инструменты хеджирования курсового риска при значительной валютной позиции.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Уточнить условия факторингового покрытия дебиторки по экспортным покупателям.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "product.factoring",
+       "counterparty.1"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Направление ВЭД (экспорт/импорт) и валюта контрактов с Турцией",
+     "Доля валютной выручки в общей выручке",
+     "Условия факторинга и покрытие валютной дебиторки"
+    ],
+    "unknowns": [
+     {
+      "text": "Направление ВЭД (экспорт или импорт) и валюта контрактов неизвестны.",
+      "question": "Какова доля экспорта в Турцию и в какой валюте номинированы контракты?"
+     },
+     {
+      "text": "Текущая выручка за 2026 год неизвестна (есть только 2025).",
+      "question": "Какова динамика выручки и маржи в текущем году при новой курсовой динамике?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Ослабление рубля на 4% за неделю для компании с ВЭД в Турцию — смешанный сигнал: возможный рост рублёвой выручки от экспорта при риске удорожания валютных издержек; ключевое действие — уточнить валютную структуру контрактов.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country",
+      "company.okved"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3162/1260, 0.1294 ₽, 15.6 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}
