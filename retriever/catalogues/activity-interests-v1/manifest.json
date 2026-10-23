@@ -1,0 +1,3559 @@
+{
+  "schema_version": "activity-interests.v1",
+  "created_on": "2026-10-23",
+  "status": "agent_reviewed_hypotheses",
+  "human_approved": false,
+  "generator_model": "gpt-6-luna",
+  "generator_reasoning_effort": "medium",
+  "reviewer_model": "gpt-6.1-sol",
+  "reviewer_reasoning_effort": "medium",
+  "review_status_counts": {
+    "revised": 427,
+    "approved": 105,
+    "needs_human_review": 14
+  },
+  "structural_validation": {
+    "activity_count": 546,
+    "interest_count": 2730,
+    "conditional_interest_count": 242,
+    "description_word_count_min": 11,
+    "description_word_count_max": 21,
+    "outside_target_word_count": [
+      {
+        "interest_id": "01.1/field_machinery",
+        "words": 13
+      },
+      {
+        "interest_id": "01.11/oilseed_protection",
+        "words": 14
+      },
+      {
+        "interest_id": "01.11.1/grain_disease",
+        "words": 14
+      },
+      {
+        "interest_id": "01.25.1/berry_disease",
+        "words": 14
+      },
+      {
+        "interest_id": "01.41/feed_cost",
+        "words": 14
+      },
+      {
+        "interest_id": "01.41/dairy_equipment",
+        "words": 14
+      },
+      {
+        "interest_id": "02.20/harvesting_equipment",
+        "words": 14
+      },
+      {
+        "interest_id": "06.10.1/oil_transport",
+        "words": 13
+      },
+      {
+        "interest_id": "06.10.1/well_integrity",
+        "words": 14
+      },
+      {
+        "interest_id": "09.10/service_safety",
+        "words": 14
+      },
+      {
+        "interest_id": "09.10.9/remote_fields",
+        "words": 14
+      },
+      {
+        "interest_id": "10.51/dairy_market",
+        "words": 14
+      },
+      {
+        "interest_id": "10.51.3/cheese_cultures",
+        "words": 14
+      },
+      {
+        "interest_id": "10.71.1/retail_bread",
+        "words": 14
+      },
+      {
+        "interest_id": "10.72/moisture_control",
+        "words": 14
+      },
+      {
+        "interest_id": "10.82/confectionery_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "10.82.2/chocolate_cocoa",
+        "words": 13
+      },
+      {
+        "interest_id": "10.82.2/chocolate_filling",
+        "words": 14
+      },
+      {
+        "interest_id": "10.83/roasting_profiles",
+        "words": 14
+      },
+      {
+        "interest_id": "10.85/cold_chain_meals",
+        "words": 13
+      },
+      {
+        "interest_id": "10.91/feed_protein",
+        "words": 14
+      },
+      {
+        "interest_id": "11.05/beer_distribution",
+        "words": 14
+      },
+      {
+        "interest_id": "11.07/beverage_formulation",
+        "words": 13
+      },
+      {
+        "interest_id": "13.92/home_textiles",
+        "words": 14
+      },
+      {
+        "interest_id": "14.13/garment_fit",
+        "words": 14
+      },
+      {
+        "interest_id": "15.20/footwear_materials",
+        "words": 14
+      },
+      {
+        "interest_id": "15.20/shoe_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "16.10/lumber_grade",
+        "words": 14
+      },
+      {
+        "interest_id": "16.10.1/lumber_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "16.10.1/railway_sleepers",
+        "words": 14
+      },
+      {
+        "interest_id": "16.23/construction_lumber",
+        "words": 13
+      },
+      {
+        "interest_id": "16.23.1/joinery_finish",
+        "words": 14
+      },
+      {
+        "interest_id": "16.24/wood_packaging_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "16.24/packaging_lumber",
+        "words": 12
+      },
+      {
+        "interest_id": "16.24/pallet_specs",
+        "words": 14
+      },
+      {
+        "interest_id": "16.24/wood_packaging_lines",
+        "words": 14
+      },
+      {
+        "interest_id": "17.29/paper_products_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "20.11/gas_cylinder_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "20.11/gas_transport_safety",
+        "words": 14
+      },
+      {
+        "interest_id": "20.13/chemical_reactor_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "20.13/industrial_chemical_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "20.16/polymer_resins",
+        "words": 12
+      },
+      {
+        "interest_id": "20.16/polymer_pelletizing",
+        "words": 14
+      },
+      {
+        "interest_id": "20.30/paint_performance",
+        "words": 13
+      },
+      {
+        "interest_id": "20.41/detergent_surfactants",
+        "words": 13
+      },
+      {
+        "interest_id": "20.42/cosmetic_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "20.42/cosmetic_packaging",
+        "words": 14
+      },
+      {
+        "interest_id": "20.59/specialty_chemistry_inputs",
+        "words": 14
+      },
+      {
+        "interest_id": "20.59/specialty_chemistry_markets",
+        "words": 14
+      },
+      {
+        "interest_id": "21.20/pharma_active_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "21.20/pharma_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "21.20/pharma_packaging",
+        "words": 14
+      },
+      {
+        "interest_id": "21.20.2/medical_packaging",
+        "words": 13
+      },
+      {
+        "interest_id": "22.21/polymer_recycling",
+        "words": 14
+      },
+      {
+        "interest_id": "22.21.9/profile_applications",
+        "words": 14
+      },
+      {
+        "interest_id": "22.22/packaging_polymer",
+        "words": 12
+      },
+      {
+        "interest_id": "22.23/construction_plastic_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "22.29/recycled_plastic_use",
+        "words": 14
+      },
+      {
+        "interest_id": "22.29.2/custom_tooling",
+        "words": 13
+      },
+      {
+        "interest_id": "23.61/concrete_inputs",
+        "words": 14
+      },
+      {
+        "interest_id": "23.61/concrete_testing",
+        "words": 14
+      },
+      {
+        "interest_id": "23.61.1/precast_reinforcement",
+        "words": 14
+      },
+      {
+        "interest_id": "23.61.1/precast_delivery",
+        "words": 13
+      },
+      {
+        "interest_id": "23.63/concrete_batching",
+        "words": 14
+      },
+      {
+        "interest_id": "23.63/aggregate_cement_supply",
+        "words": 12
+      },
+      {
+        "interest_id": "23.64/dry_mix_inputs",
+        "words": 13
+      },
+      {
+        "interest_id": "23.64/dry_mortar_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "23.70/stone_surface_finish",
+        "words": 14
+      },
+      {
+        "interest_id": "23.99/mineral_feedstock",
+        "words": 14
+      },
+      {
+        "interest_id": "23.99.3/bitumen_feedstock",
+        "words": 13
+      },
+      {
+        "interest_id": "23.99.3/road_repair_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "23.99.3/mixing_heating",
+        "words": 13
+      },
+      {
+        "interest_id": "23.99.3/asphalt_performance",
+        "words": 14
+      },
+      {
+        "interest_id": "23.99.6/fiber_forming",
+        "words": 14
+      },
+      {
+        "interest_id": "23.99.6/insulation_testing",
+        "words": 14
+      },
+      {
+        "interest_id": "25.1/structural_steel",
+        "words": 14
+      },
+      {
+        "interest_id": "25.1/welding_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "25.1/structure_transport",
+        "words": 14
+      },
+      {
+        "interest_id": "25.12/sheet_hardware",
+        "words": 14
+      },
+      {
+        "interest_id": "25.29/tank_welding",
+        "words": 13
+      },
+      {
+        "interest_id": "25.61/plating_chemicals",
+        "words": 14
+      },
+      {
+        "interest_id": "25.62/cnc_machining",
+        "words": 12
+      },
+      {
+        "interest_id": "25.73/tooling_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "25.73/tool_heat_treatment",
+        "words": 14
+      },
+      {
+        "interest_id": "25.73/tool_grinding",
+        "words": 14
+      },
+      {
+        "interest_id": "25.73/tool_quality",
+        "words": 14
+      },
+      {
+        "interest_id": "26.11/semiconductor_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "26.11/component_packaging",
+        "words": 14
+      },
+      {
+        "interest_id": "26.11/component_testing",
+        "words": 14
+      },
+      {
+        "interest_id": "26.20/computer_market",
+        "words": 14
+      },
+      {
+        "interest_id": "26.51/measurement_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "26.51/instrument_calibration",
+        "words": 14
+      },
+      {
+        "interest_id": "27.11/electrical_steel",
+        "words": 14
+      },
+      {
+        "interest_id": "27.11/power_equipment_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "27.11/motor_efficiency",
+        "words": 13
+      },
+      {
+        "interest_id": "27.12/switchgear_components",
+        "words": 13
+      },
+      {
+        "interest_id": "27.32/fire_safe_cables",
+        "words": 13
+      },
+      {
+        "interest_id": "27.40/lighting_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "27.40/luminaire_design",
+        "words": 13
+      },
+      {
+        "interest_id": "27.90/electrical_components",
+        "words": 14
+      },
+      {
+        "interest_id": "28.13/pump_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "28.13/pump_components",
+        "words": 14
+      },
+      {
+        "interest_id": "28.13/compressor_efficiency",
+        "words": 14
+      },
+      {
+        "interest_id": "28.14/valve_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "28.14/valve_castings",
+        "words": 14
+      },
+      {
+        "interest_id": "28.14/pressure_testing",
+        "words": 14
+      },
+      {
+        "interest_id": "28.22/lifting_equipment_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "28.22/lifting_mechanisms",
+        "words": 14
+      },
+      {
+        "interest_id": "28.22/conveyor_systems",
+        "words": 14
+      },
+      {
+        "interest_id": "28.25/refrigeration_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "28.25/refrigerant_supply",
+        "words": 12
+      },
+      {
+        "interest_id": "28.25/ventilation_systems",
+        "words": 14
+      },
+      {
+        "interest_id": "28.29/machinery_components",
+        "words": 12
+      },
+      {
+        "interest_id": "28.29/machinery_compliance",
+        "words": 14
+      },
+      {
+        "interest_id": "28.92/mine_machine_automation",
+        "words": 14
+      },
+      {
+        "interest_id": "28.99/machine_control_systems",
+        "words": 14
+      },
+      {
+        "interest_id": "28.99/machine_acceptance",
+        "words": 12
+      },
+      {
+        "interest_id": "28.99.9/custom_component_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "29.10/automotive_components",
+        "words": 14
+      },
+      {
+        "interest_id": "29.10.5/special_chassis",
+        "words": 12
+      },
+      {
+        "interest_id": "29.10.5/special_vehicle_testing",
+        "words": 14
+      },
+      {
+        "interest_id": "29.10.5/special_vehicle_certification",
+        "words": 13
+      },
+      {
+        "interest_id": "29.20/trailer_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "29.20/trailer_customization",
+        "words": 14
+      },
+      {
+        "interest_id": "29.32/automotive_materials",
+        "words": 13
+      },
+      {
+        "interest_id": "29.32/vehicle_design_changes",
+        "words": 12
+      },
+      {
+        "interest_id": "29.32/auto_part_testing",
+        "words": 13
+      },
+      {
+        "interest_id": "29.32.3/automotive_tooling",
+        "words": 14
+      },
+      {
+        "interest_id": "29.32.3/part_traceability",
+        "words": 14
+      },
+      {
+        "interest_id": "30.11/shipbuilding_orders",
+        "words": 12
+      },
+      {
+        "interest_id": "30.11/ship_systems",
+        "words": 12
+      },
+      {
+        "interest_id": "30.11/ship_classification",
+        "words": 14
+      },
+      {
+        "interest_id": "31.01/office_furniture_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "31.02/kitchen_hardware",
+        "words": 13
+      },
+      {
+        "interest_id": "31.09/furniture_categories",
+        "words": 14
+      },
+      {
+        "interest_id": "31.09/upholstery_materials",
+        "words": 12
+      },
+      {
+        "interest_id": "32.50/medical_device_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "32.50/medical_device_sterilization",
+        "words": 13
+      },
+      {
+        "interest_id": "32.99/misc_product_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "33.12/industrial_repair_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "33.12/spare_parts_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "33.13/optics_alignment",
+        "words": 13
+      },
+      {
+        "interest_id": "33.14/electrical_repair_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "33.14/power_component_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "33.14/electrical_safety_work",
+        "words": 14
+      },
+      {
+        "interest_id": "33.15/ship_repair_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "33.15/marine_engine_parts",
+        "words": 14
+      },
+      {
+        "interest_id": "33.15/hull_repair",
+        "words": 11
+      },
+      {
+        "interest_id": "33.20/industrial_installation_orders",
+        "words": 14
+      },
+      {
+        "interest_id": "33.20/installation_shutdowns",
+        "words": 13
+      },
+      {
+        "interest_id": "35.11/generation_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "35.11/renewable_generation",
+        "words": 14
+      },
+      {
+        "interest_id": "35.11/power_plant_maintenance",
+        "words": 12
+      },
+      {
+        "interest_id": "35.11.1/thermal_fuel_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "35.11.1/emissions_control",
+        "words": 12
+      },
+      {
+        "interest_id": "35.11.1/thermal_dispatch",
+        "words": 12
+      },
+      {
+        "interest_id": "35.12/grid_connection",
+        "words": 14
+      },
+      {
+        "interest_id": "35.12/network_assets",
+        "words": 12
+      },
+      {
+        "interest_id": "35.12/grid_maintenance",
+        "words": 14
+      },
+      {
+        "interest_id": "35.12/transmission_tariffs",
+        "words": 13
+      },
+      {
+        "interest_id": "35.14/electricity_market_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "35.14/generation_mix_prices",
+        "words": 14
+      },
+      {
+        "interest_id": "35.14/retail_electricity_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "35.30.14/boiler_load",
+        "words": 14
+      },
+      {
+        "interest_id": "35.30.4/boiler_maintenance",
+        "words": 13
+      },
+      {
+        "interest_id": "35.30.4/boiler_automation",
+        "words": 12
+      },
+      {
+        "interest_id": "35.30.4/maintenance_staff",
+        "words": 13
+      },
+      {
+        "interest_id": "36.00/water_source_availability",
+        "words": 14
+      },
+      {
+        "interest_id": "36.00/water_treatment_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "36.00/distribution_network_losses",
+        "words": 14
+      },
+      {
+        "interest_id": "36.00/water_quality_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "36.00.1/water_treatment_chemicals",
+        "words": 12
+      },
+      {
+        "interest_id": "36.00.1/water_filtration",
+        "words": 14
+      },
+      {
+        "interest_id": "36.00.1/water_disinfection",
+        "words": 14
+      },
+      {
+        "interest_id": "36.00.2/water_pipes",
+        "words": 14
+      },
+      {
+        "interest_id": "36.00.2/metering_and_pressure",
+        "words": 14
+      },
+      {
+        "interest_id": "37.00/sewer_network_condition",
+        "words": 13
+      },
+      {
+        "interest_id": "38.1/collection_vehicles",
+        "words": 13
+      },
+      {
+        "interest_id": "38.1/waste_collection_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "38.11/municipal_waste_volume",
+        "words": 14
+      },
+      {
+        "interest_id": "38.11/municipal_fleet",
+        "words": 12
+      },
+      {
+        "interest_id": "38.11/recycling_separation",
+        "words": 14
+      },
+      {
+        "interest_id": "38.11/collection_service_levels",
+        "words": 14
+      },
+      {
+        "interest_id": "38.21/nonhazardous_processing",
+        "words": 13
+      },
+      {
+        "interest_id": "38.21/landfill_reduction",
+        "words": 14
+      },
+      {
+        "interest_id": "38.22/hazardous_treatment_capacity",
+        "words": 13
+      },
+      {
+        "interest_id": "38.22/hazardous_emissions",
+        "words": 14
+      },
+      {
+        "interest_id": "38.32/secondary_material_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "38.32/recyclate_quality",
+        "words": 14
+      },
+      {
+        "interest_id": "38.32.3/ferrous_scrap_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "38.32.3/scrap_transport",
+        "words": 14
+      },
+      {
+        "interest_id": "38.32.4/scrap_origin_records",
+        "words": 14
+      },
+      {
+        "interest_id": "38.32.5/nonmetal_recyclables",
+        "words": 12
+      },
+      {
+        "interest_id": "38.32.5/recycling_infrastructure",
+        "words": 13
+      },
+      {
+        "interest_id": "41.10/land_and_zoning",
+        "words": 13
+      },
+      {
+        "interest_id": "41.10/design_permits",
+        "words": 13
+      },
+      {
+        "interest_id": "41.2/construction_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "41.2/construction_labor",
+        "words": 14
+      },
+      {
+        "interest_id": "41.20/construction_workforce",
+        "words": 13
+      },
+      {
+        "interest_id": "41.20.1/residential_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "41.20.1/housing_materials_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "41.20.1/housing_labor",
+        "words": 12
+      },
+      {
+        "interest_id": "41.20.1/housing_commissioning",
+        "words": 14
+      },
+      {
+        "interest_id": "41.20.9/building_envelope",
+        "words": 12
+      },
+      {
+        "interest_id": "42.11/road_materials",
+        "words": 13
+      },
+      {
+        "interest_id": "42.11/road_equipment",
+        "words": 11
+      },
+      {
+        "interest_id": "42.11/traffic_management",
+        "words": 14
+      },
+      {
+        "interest_id": "42.12/rail_infrastructure_orders",
+        "words": 13
+      },
+      {
+        "interest_id": "42.12/railway_materials",
+        "words": 14
+      },
+      {
+        "interest_id": "42.12/rail_construction_machinery",
+        "words": 14
+      },
+      {
+        "interest_id": "42.12/rail_safety_coordination",
+        "words": 14
+      },
+      {
+        "interest_id": "42.13/bridge_tunnel_projects",
+        "words": 13
+      },
+      {
+        "interest_id": "42.21/utility_network_demand",
+        "words": 11
+      },
+      {
+        "interest_id": "42.21/utility_connection",
+        "words": 14
+      },
+      {
+        "interest_id": "42.22/power_grid_projects",
+        "words": 14
+      },
+      {
+        "interest_id": "42.22/cables_and_substations",
+        "words": 14
+      },
+      {
+        "interest_id": "42.22/grid_connection_work",
+        "words": 13
+      },
+      {
+        "interest_id": "42.99/heavy_construction_equipment",
+        "words": 14
+      },
+      {
+        "interest_id": "43.11/demolition_orders",
+        "words": 14
+      },
+      {
+        "interest_id": "43.11/demolition_equipment",
+        "words": 11
+      },
+      {
+        "interest_id": "43.11/hazardous_material_survey",
+        "words": 13
+      },
+      {
+        "interest_id": "43.11/site_safety_demolition",
+        "words": 14
+      },
+      {
+        "interest_id": "43.12/site_preparation_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "43.12/site_machinery",
+        "words": 12
+      },
+      {
+        "interest_id": "43.12.3/earthwork_volume",
+        "words": 14
+      },
+      {
+        "interest_id": "43.12.3/earthmoving_fleet",
+        "words": 11
+      },
+      {
+        "interest_id": "43.13/drilling_site_access",
+        "words": 14
+      },
+      {
+        "interest_id": "43.2/building_installation_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "43.2/installation_materials",
+        "words": 13
+      },
+      {
+        "interest_id": "43.2/installation_quality",
+        "words": 14
+      },
+      {
+        "interest_id": "43.21/cable_and_switchgear",
+        "words": 13
+      },
+      {
+        "interest_id": "43.22/hvac_installation_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "43.22/refrigerant_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "43.29/special_installation_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "43.3/interior_renovation_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "43.3/finishers_workforce",
+        "words": 13
+      },
+      {
+        "interest_id": "43.31/plastering_equipment",
+        "words": 14
+      },
+      {
+        "interest_id": "43.32/carpentry_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "43.32/finish_carpentry",
+        "words": 14
+      },
+      {
+        "interest_id": "43.32.3/partition_systems",
+        "words": 13
+      },
+      {
+        "interest_id": "43.33/flooring_materials",
+        "words": 14
+      },
+      {
+        "interest_id": "46.34.1/bottling_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "46.34.2/alcohol_retail_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.34.2/glass_and_closure_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "46.34.23/beer_demand_mix",
+        "words": 13
+      },
+      {
+        "interest_id": "46.35/tobacco_packaging",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38/specialty_food_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38/seafood_cold_chain",
+        "words": 12
+      },
+      {
+        "interest_id": "46.38/food_traceability",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38/special_diet_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38.1/seafood_processing",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38.1/fish_origin_docs",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38.2/food_processing_inputs",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38.2/prepared_food_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38.22/pet_food_packaging",
+        "words": 14
+      },
+      {
+        "interest_id": "46.38.22/pet_food_brand_mix",
+        "words": 12
+      },
+      {
+        "interest_id": "46.38.29/retail_assortment_shifts",
+        "words": 14
+      },
+      {
+        "interest_id": "46.41/sustainable_fibres",
+        "words": 13
+      },
+      {
+        "interest_id": "46.42/sustainable_apparel",
+        "words": 14
+      },
+      {
+        "interest_id": "46.43/electronics_component_shortage",
+        "words": 14
+      },
+      {
+        "interest_id": "46.43/appliance_logistics",
+        "words": 13
+      },
+      {
+        "interest_id": "46.43.1/major_appliance_models",
+        "words": 14
+      },
+      {
+        "interest_id": "46.43.1/small_appliance_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.43.1/energy_use",
+        "words": 13
+      },
+      {
+        "interest_id": "46.44/product_safety_labels",
+        "words": 14
+      },
+      {
+        "interest_id": "46.45/cosmetic_ingredient_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "46.45/sustainable_beauty",
+        "words": 14
+      },
+      {
+        "interest_id": "46.45.1/beauty_packaging",
+        "words": 14
+      },
+      {
+        "interest_id": "46.46.1/pharma_regulatory_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "46.46.1/pharmacy_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.47/furniture_project_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "46.47/lighting_efficiency",
+        "words": 13
+      },
+      {
+        "interest_id": "46.47/furniture_logistics",
+        "words": 14
+      },
+      {
+        "interest_id": "46.49/ecommerce_assortment",
+        "words": 13
+      },
+      {
+        "interest_id": "46.49.43/bicycle_components",
+        "words": 14
+      },
+      {
+        "interest_id": "46.49.49/warehouse_assortment_risk",
+        "words": 14
+      },
+      {
+        "interest_id": "46.51/computer_hardware_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "46.51/software_licensing",
+        "words": 14
+      },
+      {
+        "interest_id": "46.51.2/cloud_software_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.52/electronics_component_leadtime",
+        "words": 14
+      },
+      {
+        "interest_id": "46.52/cybersecurity_networks",
+        "words": 14
+      },
+      {
+        "interest_id": "46.52/telecom_spare_parts",
+        "words": 14
+      },
+      {
+        "interest_id": "46.6/industrial_capex",
+        "words": 14
+      },
+      {
+        "interest_id": "46.61/farm_mechanization",
+        "words": 14
+      },
+      {
+        "interest_id": "46.61/precision_agriculture",
+        "words": 13
+      },
+      {
+        "interest_id": "46.61/farm_capex",
+        "words": 13
+      },
+      {
+        "interest_id": "46.62/machine_tool_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "46.63/equipment_rental_substitution",
+        "words": 13
+      },
+      {
+        "interest_id": "46.65/furniture_material_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "46.65/recycled_office_furniture",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69/equipment_safety_standards",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.2/cutting_tool_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "46.69.2/supply_disruptions",
+        "words": 13
+      },
+      {
+        "interest_id": "46.69.2/industrial_consumable_specs",
+        "words": 13
+      },
+      {
+        "interest_id": "46.69.3/warehouse_automation",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.3/lifting_equipment_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.3/warehouse_safety",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.4/hygienic_design",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.4/packaging_automation",
+        "words": 12
+      },
+      {
+        "interest_id": "46.69.5/industrial_electrical_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.5/power_component_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.5/energy_efficiency_upgrade",
+        "words": 13
+      },
+      {
+        "interest_id": "46.69.8/medical_equipment_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.69.8/device_registration_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "46.69.8/hospital_service_centers",
+        "words": 13
+      },
+      {
+        "interest_id": "46.69.9/component_lead_times",
+        "words": 12
+      },
+      {
+        "interest_id": "46.69.9/industrial_service_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "46.7/supply_route_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "46.7/buyer_inventory_cycles",
+        "words": 13
+      },
+      {
+        "interest_id": "46.71/refinery_output",
+        "words": 14
+      },
+      {
+        "interest_id": "46.71/fuel_storage_capacity",
+        "words": 13
+      },
+      {
+        "interest_id": "46.71/fuel_transport_routes",
+        "words": 14
+      },
+      {
+        "interest_id": "46.71.1/solid_fuel_logistics",
+        "words": 14
+      },
+      {
+        "interest_id": "46.71.2/fuel_tax_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "46.71.2/fuel_terminal_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "46.72/metal_demand_cycles",
+        "words": 13
+      },
+      {
+        "interest_id": "46.72/ore_transport",
+        "words": 14
+      },
+      {
+        "interest_id": "46.72/metal_price_volatility",
+        "words": 14
+      },
+      {
+        "interest_id": "46.72.2/smelting_energy_cost",
+        "words": 14
+      },
+      {
+        "interest_id": "46.72.2/recycled_metal_substitution",
+        "words": 13
+      },
+      {
+        "interest_id": "46.73/construction_material_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73/building_material_inputs",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73/construction_supply_routes",
+        "words": 13
+      },
+      {
+        "interest_id": "46.73/material_compliance",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73.1/timber_harvest",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73.3/water_system_materials",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73.3/building_code_changes",
+        "words": 13
+      },
+      {
+        "interest_id": "46.73.3/bathroom_market_shifts",
+        "words": 13
+      },
+      {
+        "interest_id": "46.73.3/plumbing_supply_delays",
+        "words": 13
+      },
+      {
+        "interest_id": "46.73.4/paint_resin_prices",
+        "words": 13
+      },
+      {
+        "interest_id": "46.73.4/low_voc_coatings",
+        "words": 13
+      },
+      {
+        "interest_id": "46.73.4/paint_safety_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73.6/cement_and_aggregate_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73.6/construction_material_logistics",
+        "words": 14
+      },
+      {
+        "interest_id": "46.73.6/recycled_building_inputs",
+        "words": 12
+      },
+      {
+        "interest_id": "46.74/hardware_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.74/heating_equipment_transition",
+        "words": 13
+      },
+      {
+        "interest_id": "46.74.2/heating_system_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.74.2/sanitary_ware_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "46.74.2/plumbing_spare_parts",
+        "words": 14
+      },
+      {
+        "interest_id": "46.74.3/tool_safety_standards",
+        "words": 14
+      },
+      {
+        "interest_id": "46.75/chemical_feedstock_prices",
+        "words": 13
+      },
+      {
+        "interest_id": "46.75/chemical_supply_disruptions",
+        "words": 12
+      },
+      {
+        "interest_id": "46.75/industrial_demand_chemicals",
+        "words": 14
+      },
+      {
+        "interest_id": "46.75.1/fertilizer_gas_cost",
+        "words": 13
+      },
+      {
+        "interest_id": "46.75.1/fertilizer_logistics",
+        "words": 14
+      },
+      {
+        "interest_id": "46.75.2/chemical_feedstocks",
+        "words": 11
+      },
+      {
+        "interest_id": "46.75.2/chemical_tank_logistics",
+        "words": 13
+      },
+      {
+        "interest_id": "46.76/raw_material_price_shifts",
+        "words": 13
+      },
+      {
+        "interest_id": "46.76/recycled_materials",
+        "words": 14
+      },
+      {
+        "interest_id": "46.76/industrial_inventory_cycles",
+        "words": 13
+      },
+      {
+        "interest_id": "46.76.1/paper_pulp_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "46.76.1/packaging_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "46.76.1/paper_price_energy",
+        "words": 14
+      },
+      {
+        "interest_id": "46.76.1/print_media_decline",
+        "words": 14
+      },
+      {
+        "interest_id": "46.76.3/polymer_resin_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "46.76.3/synthetic_rubber_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "46.76.3/recycled_polymer_substitution",
+        "words": 14
+      },
+      {
+        "interest_id": "46.77/scrap_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "46.77/waste_transport_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "46.9/supply_chain_disruptions",
+        "words": 14
+      },
+      {
+        "interest_id": "46.9/digital_wholesale_channels",
+        "words": 13
+      },
+      {
+        "interest_id": "46.90/wholesale_inventory",
+        "words": 14
+      },
+      {
+        "interest_id": "46.90/supplier_concentration",
+        "words": 12
+      },
+      {
+        "interest_id": "46.90/delivery_networks",
+        "words": 13
+      },
+      {
+        "interest_id": "46.90/product_traceability",
+        "words": 12
+      },
+      {
+        "interest_id": "47.1/retail_spending",
+        "words": 13
+      },
+      {
+        "interest_id": "47.1/store_format_shift",
+        "words": 14
+      },
+      {
+        "interest_id": "47.1/retail_supply_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "47.1/retail_private_labels",
+        "words": 14
+      },
+      {
+        "interest_id": "47.11/food_retail_basket",
+        "words": 14
+      },
+      {
+        "interest_id": "47.11/food_marking_controls",
+        "words": 14
+      },
+      {
+        "interest_id": "47.11/discount_and_promo_mix",
+        "words": 13
+      },
+      {
+        "interest_id": "47.11.3/store_delivery_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "47.19/store_format_competition",
+        "words": 12
+      },
+      {
+        "interest_id": "47.19/retail_inventory_age",
+        "words": 13
+      },
+      {
+        "interest_id": "47.19.1/import_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "47.19.1/consumer_durables_cycle",
+        "words": 14
+      },
+      {
+        "interest_id": "47.2/specialty_store_competition",
+        "words": 13
+      },
+      {
+        "interest_id": "47.21/local_produce_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "47.21/produce_packaging_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "47.21/produce_delivery_disruptions",
+        "words": 13
+      },
+      {
+        "interest_id": "47.22/meat_cut_preferences",
+        "words": 14
+      },
+      {
+        "interest_id": "47.22/local_meat_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "47.24/flour_and_sugar_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "47.24/craft_bakery_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.25/beverage_excise_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "47.25/low_sugar_drinks",
+        "words": 13
+      },
+      {
+        "interest_id": "47.25.1/alcohol_marking_systems",
+        "words": 14
+      },
+      {
+        "interest_id": "47.25.1/alcohol_consumer_mix",
+        "words": 14
+      },
+      {
+        "interest_id": "47.25.1/alcohol_supplier_access",
+        "words": 13
+      },
+      {
+        "interest_id": "47.25.1/age_verification",
+        "words": 13
+      },
+      {
+        "interest_id": "47.25.12/beer_retail_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "47.25.12/beer_supply_seasonality",
+        "words": 14
+      },
+      {
+        "interest_id": "47.25.12/beer_brand_turnover",
+        "words": 13
+      },
+      {
+        "interest_id": "47.26/tobacco_retail_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "47.26/tobacco_excise_prices",
+        "words": 12
+      },
+      {
+        "interest_id": "47.26/tobacco_marking",
+        "words": 14
+      },
+      {
+        "interest_id": "47.26/retail_age_checks",
+        "words": 13
+      },
+      {
+        "interest_id": "47.29/specialty_food_demand",
+        "words": 13
+      },
+      {
+        "interest_id": "47.29/health_food_trends",
+        "words": 13
+      },
+      {
+        "interest_id": "47.29/food_label_compliance",
+        "words": 14
+      },
+      {
+        "interest_id": "47.29/specialty_retail_competition",
+        "words": 12
+      },
+      {
+        "interest_id": "47.30/fuel_station_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "47.41/component_price_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "47.41/device_lifecycle",
+        "words": 14
+      },
+      {
+        "interest_id": "47.41/software_license_changes",
+        "words": 13
+      },
+      {
+        "interest_id": "47.42/mobile_network_upgrades",
+        "words": 14
+      },
+      {
+        "interest_id": "47.42/phone_component_shortage",
+        "words": 13
+      },
+      {
+        "interest_id": "47.42/device_warranty_service",
+        "words": 12
+      },
+      {
+        "interest_id": "47.42/used_phone_tradein",
+        "words": 14
+      },
+      {
+        "interest_id": "47.43/display_technology_shift",
+        "words": 13
+      },
+      {
+        "interest_id": "47.43/electronics_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "47.43/repair_and_recycling_av",
+        "words": 14
+      },
+      {
+        "interest_id": "47.5/specialty_retail_online",
+        "words": 12
+      },
+      {
+        "interest_id": "47.5/household_import_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "47.5/product_safety_updates",
+        "words": 12
+      },
+      {
+        "interest_id": "47.51/home_textile_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.51/textile_sustainability",
+        "words": 14
+      },
+      {
+        "interest_id": "47.51/home_textile_online",
+        "words": 14
+      },
+      {
+        "interest_id": "47.51/textile_care_labels",
+        "words": 14
+      },
+      {
+        "interest_id": "47.52/paint_price_changes",
+        "words": 13
+      },
+      {
+        "interest_id": "47.52/glass_and_glazing",
+        "words": 13
+      },
+      {
+        "interest_id": "47.52/diy_market_growth",
+        "words": 12
+      },
+      {
+        "interest_id": "47.52.5/water_saving_products",
+        "words": 12
+      },
+      {
+        "interest_id": "47.52.5/plumbing_product_shortage",
+        "words": 14
+      },
+      {
+        "interest_id": "47.52.5/bathroom_design_trends",
+        "words": 13
+      },
+      {
+        "interest_id": "47.52.5/sanitary_product_standards",
+        "words": 13
+      },
+      {
+        "interest_id": "47.52.7/construction_material_prices",
+        "words": 13
+      },
+      {
+        "interest_id": "47.52.7/diy_building_products",
+        "words": 14
+      },
+      {
+        "interest_id": "47.52.7/construction_retail_competition",
+        "words": 13
+      },
+      {
+        "interest_id": "47.54/energy_efficient_appliances",
+        "words": 11
+      },
+      {
+        "interest_id": "47.54/smart_appliances",
+        "words": 12
+      },
+      {
+        "interest_id": "47.59/furniture_retail_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.59/furniture_material_prices",
+        "words": 13
+      },
+      {
+        "interest_id": "47.59/led_lighting_transition",
+        "words": 11
+      },
+      {
+        "interest_id": "47.59/compact_furniture",
+        "words": 14
+      },
+      {
+        "interest_id": "47.59.1/furniture_home_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.59.1/modular_furniture",
+        "words": 13
+      },
+      {
+        "interest_id": "47.59.1/furniture_input_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "47.59.1/flat_pack_logistics",
+        "words": 14
+      },
+      {
+        "interest_id": "47.61/paper_and_print_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "47.61/book_returns",
+        "words": 12
+      },
+      {
+        "interest_id": "47.64/sports_retail_seasonality",
+        "words": 13
+      },
+      {
+        "interest_id": "47.64/fitness_trends",
+        "words": 13
+      },
+      {
+        "interest_id": "47.64/sports_safety_standards",
+        "words": 13
+      },
+      {
+        "interest_id": "47.7/specialty_goods_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "47.7/marketplace_competition_specialty",
+        "words": 13
+      },
+      {
+        "interest_id": "47.7/import_channel_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "47.7/product_safety_standards",
+        "words": 13
+      },
+      {
+        "interest_id": "47.7/niche_inventory_obsolescence",
+        "words": 11
+      },
+      {
+        "interest_id": "47.71/apparel_import_delays",
+        "words": 14
+      },
+      {
+        "interest_id": "47.71/clothing_material_trends",
+        "words": 12
+      },
+      {
+        "interest_id": "47.71/apparel_returns",
+        "words": 14
+      },
+      {
+        "interest_id": "47.71.1/clothing_consumer_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.71.1/fashion_inventory_risk",
+        "words": 13
+      },
+      {
+        "interest_id": "47.71.1/textile_costs_retail",
+        "words": 12
+      },
+      {
+        "interest_id": "47.71.1/inclusive_sizing",
+        "words": 14
+      },
+      {
+        "interest_id": "47.72/footwear_retail_seasons",
+        "words": 13
+      },
+      {
+        "interest_id": "47.72/shoe_size_returns",
+        "words": 13
+      },
+      {
+        "interest_id": "47.72/footwear_import_routes",
+        "words": 14
+      },
+      {
+        "interest_id": "47.73/medicine_retail_availability",
+        "words": 13
+      },
+      {
+        "interest_id": "47.73/pharmacy_marking",
+        "words": 14
+      },
+      {
+        "interest_id": "47.73/generic_medicine_choice",
+        "words": 12
+      },
+      {
+        "interest_id": "47.73/pharmacy_service_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "47.74/assistive_device_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.74/medical_device_marking",
+        "words": 12
+      },
+      {
+        "interest_id": "47.74/medical_device_shortages",
+        "words": 12
+      },
+      {
+        "interest_id": "47.74/assistive_product_selection",
+        "words": 14
+      },
+      {
+        "interest_id": "47.75/beauty_brand_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "47.75/cosmetic_ingredient_safety",
+        "words": 13
+      },
+      {
+        "interest_id": "47.76/seed_and_fertilizer_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.76/pet_supply_retail",
+        "words": 13
+      },
+      {
+        "interest_id": "47.76/plant_care_and_pests",
+        "words": 13
+      },
+      {
+        "interest_id": "47.76/live_animal_welfare",
+        "words": 14
+      },
+      {
+        "interest_id": "47.76.1/cut_flower_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "47.76.1/nursery_and_pot_plants",
+        "words": 11
+      },
+      {
+        "interest_id": "47.76.1/seed_and_fertilizer_season",
+        "words": 14
+      },
+      {
+        "interest_id": "47.76.2/pet_food_formulations",
+        "words": 13
+      },
+      {
+        "interest_id": "47.76.2/pet_product_ecommerce",
+        "words": 13
+      },
+      {
+        "interest_id": "47.77.2/precious_metal_prices",
+        "words": 13
+      },
+      {
+        "interest_id": "47.77.2/jewellery_marking",
+        "words": 13
+      },
+      {
+        "interest_id": "47.77.2/lab_grown_gems",
+        "words": 13
+      },
+      {
+        "interest_id": "47.77.2/jewellery_security",
+        "words": 14
+      },
+      {
+        "interest_id": "47.78/specialty_store_online",
+        "words": 13
+      },
+      {
+        "interest_id": "47.78/brand_supply_changes",
+        "words": 11
+      },
+      {
+        "interest_id": "47.78/niche_inventory_turnover",
+        "words": 13
+      },
+      {
+        "interest_id": "47.78.9/misc_goods_retail",
+        "words": 13
+      },
+      {
+        "interest_id": "47.78.9/online_marketplace_competition",
+        "words": 11
+      },
+      {
+        "interest_id": "47.78.9/product_import_changes",
+        "words": 11
+      },
+      {
+        "interest_id": "47.78.9/consumer_safety_compliance",
+        "words": 12
+      },
+      {
+        "interest_id": "47.78.9/slow_moving_stock",
+        "words": 14
+      },
+      {
+        "interest_id": "47.81/weather_and_market_sales",
+        "words": 13
+      },
+      {
+        "interest_id": "47.81/market_logistics",
+        "words": 14
+      },
+      {
+        "interest_id": "47.9/last_mile_costs",
+        "words": 12
+      },
+      {
+        "interest_id": "47.9/cashless_sales",
+        "words": 14
+      },
+      {
+        "interest_id": "47.9/consumer_protection_remote",
+        "words": 14
+      },
+      {
+        "interest_id": "47.91/online_retail_demand",
+        "words": 11
+      },
+      {
+        "interest_id": "47.91/marketplace_fee_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "47.91/digital_ad_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "47.91/delivery_service_levels",
+        "words": 14
+      },
+      {
+        "interest_id": "47.91.2/ecommerce_platform_dependence",
+        "words": 13
+      },
+      {
+        "interest_id": "47.91.2/online_catalogue_quality",
+        "words": 14
+      },
+      {
+        "interest_id": "47.99/delivery_cost_pressure",
+        "words": 13
+      },
+      {
+        "interest_id": "47.99.2/vending_location_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "47.99.2/vending_cashless_payments",
+        "words": 13
+      },
+      {
+        "interest_id": "49.20/railcar_shortages",
+        "words": 14
+      },
+      {
+        "interest_id": "49.20/rail_infrastructure_congestion",
+        "words": 13
+      },
+      {
+        "interest_id": "49.20/rail_fuel_and_tariffs",
+        "words": 14
+      },
+      {
+        "interest_id": "49.20/rail_safety_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "49.31/public_transport_fares",
+        "words": 12
+      },
+      {
+        "interest_id": "49.31/urban_bus_emissions",
+        "words": 13
+      },
+      {
+        "interest_id": "49.31.2/bus_fleet_electrification",
+        "words": 13
+      },
+      {
+        "interest_id": "49.31.2/passenger_information",
+        "words": 11
+      },
+      {
+        "interest_id": "49.31.21/city_bus_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "49.31.21/bus_depot_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "49.31.21/fare_collection_technology",
+        "words": 13
+      },
+      {
+        "interest_id": "49.31.21/bus_route_delay",
+        "words": 14
+      },
+      {
+        "interest_id": "49.32/aggregator_commissions",
+        "words": 13
+      },
+      {
+        "interest_id": "49.32/taxi_fleet_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "49.32/driver_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "49.32/taxi_regulation",
+        "words": 13
+      },
+      {
+        "interest_id": "49.39/charter_vehicle_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "49.39/passenger_safety_compliance",
+        "words": 14
+      },
+      {
+        "interest_id": "49.39/tour_bus_driver_shortages",
+        "words": 13
+      },
+      {
+        "interest_id": "49.4/road_freight_demand",
+        "words": 11
+      },
+      {
+        "interest_id": "49.4/truck_capacity_shortage",
+        "words": 12
+      },
+      {
+        "interest_id": "49.4/freight_fuel_costs",
+        "words": 12
+      },
+      {
+        "interest_id": "49.4/freight_digital_platforms",
+        "words": 13
+      },
+      {
+        "interest_id": "49.41/freight_market_activity",
+        "words": 11
+      },
+      {
+        "interest_id": "49.41/driver_shortage_freight",
+        "words": 12
+      },
+      {
+        "interest_id": "49.41.1/temperature_controlled_freight",
+        "words": 14
+      },
+      {
+        "interest_id": "49.41.1/dangerous_goods_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "49.41.1/special_vehicle_upkeep",
+        "words": 12
+      },
+      {
+        "interest_id": "49.41.2/general_freight_loads",
+        "words": 13
+      },
+      {
+        "interest_id": "49.41.2/freight_document_digitalization",
+        "words": 13
+      },
+      {
+        "interest_id": "49.41.3/truck_driver_wages",
+        "words": 13
+      },
+      {
+        "interest_id": "49.41.3/fleet_availability",
+        "words": 12
+      },
+      {
+        "interest_id": "49.41.3/vehicle_operating_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "50.20/maritime_freight_flows",
+        "words": 12
+      },
+      {
+        "interest_id": "50.20/port_congestion",
+        "words": 12
+      },
+      {
+        "interest_id": "50.20/shipping_fuel_costs",
+        "words": 12
+      },
+      {
+        "interest_id": "50.20/maritime_emission_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "50.30/navigation_season",
+        "words": 14
+      },
+      {
+        "interest_id": "50.40/river_draft_limits",
+        "words": 14
+      },
+      {
+        "interest_id": "50.40/barge_fleet_condition",
+        "words": 12
+      },
+      {
+        "interest_id": "52.10/warehouse_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "52.10/warehouse_vacancy",
+        "words": 14
+      },
+      {
+        "interest_id": "52.10/warehouse_energy_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "52.10.21/environmental_leak_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "52.10.21/pipeline_terminal_flows",
+        "words": 14
+      },
+      {
+        "interest_id": "52.21.22/road_repair_materials",
+        "words": 14
+      },
+      {
+        "interest_id": "56.30/bar_equipment_updates",
+        "words": 14
+      },
+      {
+        "interest_id": "58.13/newsroom_staffing",
+        "words": 14
+      },
+      {
+        "interest_id": "59.11/production_crew_availability",
+        "words": 14
+      },
+      {
+        "interest_id": "59.14/cinema_attendance",
+        "words": 13
+      },
+      {
+        "interest_id": "60.10/radio_advertising_market",
+        "words": 13
+      },
+      {
+        "interest_id": "60.10/broadcast_transmission_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "60.20/tv_distribution_platforms",
+        "words": 13
+      },
+      {
+        "interest_id": "61.10/broadband_competition",
+        "words": 14
+      },
+      {
+        "interest_id": "61.10/telecom_network_reliability",
+        "words": 14
+      },
+      {
+        "interest_id": "61.10/telecom_data_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "62.0/software_cloud_migration",
+        "words": 14
+      },
+      {
+        "interest_id": "62.02/it_compliance_advisory",
+        "words": 14
+      },
+      {
+        "interest_id": "62.02.9/it_audit_projects",
+        "words": 14
+      },
+      {
+        "interest_id": "62.02.9/it_asset_licensing",
+        "words": 14
+      },
+      {
+        "interest_id": "62.02.9/it_service_processes",
+        "words": 14
+      },
+      {
+        "interest_id": "63.91/regional_correspondent_network",
+        "words": 14
+      },
+      {
+        "interest_id": "64.9/financial_technology_adoption",
+        "words": 13
+      },
+      {
+        "interest_id": "64.92.7/microloan_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "66.22/insurance_broker_sales",
+        "words": 14
+      },
+      {
+        "interest_id": "68.10/property_acquisition_finance",
+        "words": 14
+      },
+      {
+        "interest_id": "68.10.1/property_document_readiness",
+        "words": 13
+      },
+      {
+        "interest_id": "68.10.2/property_closing_process",
+        "words": 14
+      },
+      {
+        "interest_id": "68.10.21/housing_transaction_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "68.10.22/commercial_property_use_compliance",
+        "words": 13
+      },
+      {
+        "interest_id": "68.10.22/commercial_property_valuation",
+        "words": 14
+      },
+      {
+        "interest_id": "68.20/building_maintenance_contracts",
+        "words": 13
+      },
+      {
+        "interest_id": "68.20/property_tax_and_charges",
+        "words": 14
+      },
+      {
+        "interest_id": "68.20.2/nonresidential_lease_vacancy",
+        "words": 14
+      },
+      {
+        "interest_id": "68.20.2/commercial_tenant_fitout",
+        "words": 13
+      },
+      {
+        "interest_id": "68.20.29/industrial_lease_compliance",
+        "words": 14
+      },
+      {
+        "interest_id": "68.31/agency_client_verification",
+        "words": 14
+      },
+      {
+        "interest_id": "68.31.1/buyer_financing_access",
+        "words": 14
+      },
+      {
+        "interest_id": "68.31.1/property_sale_due_diligence",
+        "words": 12
+      },
+      {
+        "interest_id": "68.31.12/commercial_property_income_review",
+        "words": 13
+      },
+      {
+        "interest_id": "68.31.12/commercial_transaction_zoning",
+        "words": 14
+      },
+      {
+        "interest_id": "68.32/property_management_contracts",
+        "words": 14
+      },
+      {
+        "interest_id": "68.32/property_management_software",
+        "words": 13
+      },
+      {
+        "interest_id": "68.32/property_operations_compliance",
+        "words": 13
+      },
+      {
+        "interest_id": "69.10/corporate_legal_compliance",
+        "words": 13
+      },
+      {
+        "interest_id": "69.10/cross_border_legal_work",
+        "words": 14
+      },
+      {
+        "interest_id": "69.20/audit_evidence_access",
+        "words": 14
+      },
+      {
+        "interest_id": "69.20.1/audit_standard_updates",
+        "words": 14
+      },
+      {
+        "interest_id": "69.20.1/audit_staff_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "70.10/group_management_reporting",
+        "words": 14
+      },
+      {
+        "interest_id": "70.10/head_office_talent",
+        "words": 14
+      },
+      {
+        "interest_id": "70.10.1/industrial_group_coordination",
+        "words": 14
+      },
+      {
+        "interest_id": "70.10.1/group_supply_chain_risk",
+        "words": 14
+      },
+      {
+        "interest_id": "70.10.1/group_company_performance",
+        "words": 14
+      },
+      {
+        "interest_id": "70.10.2/holding_strategy_changes",
+        "words": 12
+      },
+      {
+        "interest_id": "70.22/business_transformation_advisory",
+        "words": 13
+      },
+      {
+        "interest_id": "71.1/design_project_pipeline",
+        "words": 14
+      },
+      {
+        "interest_id": "71.1/design_staff_availability",
+        "words": 13
+      },
+      {
+        "interest_id": "71.1/design_document_standards",
+        "words": 13
+      },
+      {
+        "interest_id": "71.11/architectural_design_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "71.11/architectural_approval_process",
+        "words": 14
+      },
+      {
+        "interest_id": "71.11.1/architectural_review_requirements",
+        "words": 14
+      },
+      {
+        "interest_id": "71.11.1/building_user_accessibility",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12/engineering_project_pipeline",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12/engineering_survey_technology",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12/construction_cost_design_changes",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12/construction_control_quality",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12/engineering_approval_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "71.12.1/project_information_models",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12.12/industrial_energy_efficiency_design",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12.2/construction_subcontractor_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "71.12.3/exploration_programs",
+        "words": 12
+      },
+      {
+        "interest_id": "71.12.3/geophysical_survey_technology",
+        "words": 13
+      },
+      {
+        "interest_id": "71.20/testing_equipment_calibration",
+        "words": 14
+      },
+      {
+        "interest_id": "71.20/testing_method_updates",
+        "words": 13
+      },
+      {
+        "interest_id": "71.20.5/vehicle_inspection_volume",
+        "words": 14
+      },
+      {
+        "interest_id": "71.20.5/inspection_line_equipment",
+        "words": 13
+      },
+      {
+        "interest_id": "71.20.8/certification_scheme_updates",
+        "words": 13
+      },
+      {
+        "interest_id": "71.20.8/certification_body_accreditation",
+        "words": 14
+      },
+      {
+        "interest_id": "71.20.8/product_certification_testing",
+        "words": 14
+      },
+      {
+        "interest_id": "71.20.9/inspection_staff_qualification",
+        "words": 12
+      },
+      {
+        "interest_id": "72.1/research_staff_competition",
+        "words": 14
+      },
+      {
+        "interest_id": "72.1/laboratory_equipment_access",
+        "words": 14
+      },
+      {
+        "interest_id": "72.11/biotech_research_funding",
+        "words": 14
+      },
+      {
+        "interest_id": "72.11/biotech_preclinical_testing",
+        "words": 13
+      },
+      {
+        "interest_id": "72.11/biotech_staff_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "72.19/research_publication_and_ip",
+        "words": 13
+      },
+      {
+        "interest_id": "72.19/research_compute_resources",
+        "words": 13
+      },
+      {
+        "interest_id": "72.19/research_project_continuity",
+        "words": 14
+      },
+      {
+        "interest_id": "72.19.9/research_data_management",
+        "words": 14
+      },
+      {
+        "interest_id": "73.1/advertising_creative_production",
+        "words": 14
+      },
+      {
+        "interest_id": "73.20/survey_participant_access",
+        "words": 14
+      },
+      {
+        "interest_id": "73.20/research_methodology_updates",
+        "words": 14
+      },
+      {
+        "interest_id": "73.20.1/market_forecasting_models",
+        "words": 13
+      },
+      {
+        "interest_id": "74.10/design_software_tools",
+        "words": 14
+      },
+      {
+        "interest_id": "74.20/photography_equipment_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "74.20/photo_postproduction_tools",
+        "words": 13
+      },
+      {
+        "interest_id": "74.90/professional_service_standards",
+        "words": 14
+      },
+      {
+        "interest_id": "75.00/veterinary_medicines_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "75.00/veterinary_diagnostics_equipment",
+        "words": 14
+      },
+      {
+        "interest_id": "77.11/car_rental_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "77.12/truck_fleet_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "77.21/recreation_equipment_maintenance",
+        "words": 14
+      },
+      {
+        "interest_id": "77.21/rental_booking_channels",
+        "words": 13
+      },
+      {
+        "interest_id": "77.32/construction_machinery_availability",
+        "words": 13
+      },
+      {
+        "interest_id": "77.32/rental_equipment_breakdowns",
+        "words": 14
+      },
+      {
+        "interest_id": "77.32/construction_rental_rates",
+        "words": 14
+      },
+      {
+        "interest_id": "77.34/marine_rental_insurance",
+        "words": 13
+      },
+      {
+        "interest_id": "77.39/rental_asset_utilization",
+        "words": 14
+      },
+      {
+        "interest_id": "77.39.1/land_vehicle_maintenance",
+        "words": 14
+      },
+      {
+        "interest_id": "77.39.1/transport_rental_compliance",
+        "words": 14
+      },
+      {
+        "interest_id": "77.39.2/industrial_equipment_utilization",
+        "words": 12
+      },
+      {
+        "interest_id": "77.39.26/medical_device_service",
+        "words": 13
+      },
+      {
+        "interest_id": "77.39.26/medical_equipment_rental_risk",
+        "words": 14
+      },
+      {
+        "interest_id": "77.39.29/scientific_industrial_rental_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "77.39.29/specialized_equipment_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "77.40/trademark_licensing",
+        "words": 12
+      },
+      {
+        "interest_id": "78.10/recruitment_client_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "79.11/travel_agency_booking_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "79.11/travel_supplier_commissions",
+        "words": 12
+      },
+      {
+        "interest_id": "79.11/travel_route_access",
+        "words": 13
+      },
+      {
+        "interest_id": "79.11/travel_booking_platforms",
+        "words": 14
+      },
+      {
+        "interest_id": "79.12/tour_component_costs",
+        "words": 14
+      },
+      {
+        "interest_id": "79.12/destination_supplier_capacity",
+        "words": 14
+      },
+      {
+        "interest_id": "79.90/booking_service_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "79.90/booking_platform_competition",
+        "words": 12
+      },
+      {
+        "interest_id": "80.10/security_training_and_licensing",
+        "words": 14
+      },
+      {
+        "interest_id": "80.10.2/guard_qualification_requirements",
+        "words": 14
+      },
+      {
+        "interest_id": "81.10/facility_service_labor",
+        "words": 14
+      },
+      {
+        "interest_id": "81.21/cleaning_staff_availability",
+        "words": 13
+      },
+      {
+        "interest_id": "81.21/cleaning_chemical_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "81.21/cleaning_equipment_upgrades",
+        "words": 13
+      },
+      {
+        "interest_id": "81.22/cleaning_chemical_safety",
+        "words": 14
+      },
+      {
+        "interest_id": "81.29/cleaning_waste_disposal",
+        "words": 14
+      },
+      {
+        "interest_id": "81.29/seasonal_cleaning_orders",
+        "words": 14
+      },
+      {
+        "interest_id": "81.29.9/cleaning_equipment_reliability",
+        "words": 14
+      },
+      {
+        "interest_id": "82.11/office_support_outsourcing",
+        "words": 14
+      },
+      {
+        "interest_id": "82.11/administrative_document_flow",
+        "words": 13
+      },
+      {
+        "interest_id": "82.11/office_vendor_contracts",
+        "words": 14
+      },
+      {
+        "interest_id": "82.30/event_venue_costs",
+        "words": 13
+      },
+      {
+        "interest_id": "82.30/event_hybrid_technology",
+        "words": 14
+      },
+      {
+        "interest_id": "82.91/debt_collection_rules",
+        "words": 13
+      },
+      {
+        "interest_id": "82.92/packaging_material_prices",
+        "words": 14
+      },
+      {
+        "interest_id": "82.92/packaging_line_automation",
+        "words": 13
+      },
+      {
+        "interest_id": "82.92/packaging_label_requirements",
+        "words": 14
+      },
+      {
+        "interest_id": "85.11/preschool_staff_shortage",
+        "words": 14
+      },
+      {
+        "interest_id": "85.11/preschool_facility_safety",
+        "words": 14
+      },
+      {
+        "interest_id": "85.11/preschool_childcare_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "85.41/online_learning_formats",
+        "words": 14
+      },
+      {
+        "interest_id": "85.41.1/sports_coach_availability",
+        "words": 14
+      },
+      {
+        "interest_id": "85.41.1/sports_training_equipment",
+        "words": 12
+      },
+      {
+        "interest_id": "85.41.1/sports_facility_scheduling",
+        "words": 14
+      },
+      {
+        "interest_id": "85.41.1/sports_class_safety",
+        "words": 14
+      },
+      {
+        "interest_id": "85.41.9/course_content_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "85.41.9/independent_educator_competition",
+        "words": 13
+      },
+      {
+        "interest_id": "85.41.9/course_platform_tools",
+        "words": 14
+      },
+      {
+        "interest_id": "85.41.9/adult_learning_schedule",
+        "words": 13
+      },
+      {
+        "interest_id": "85.42/professional_course_accreditation",
+        "words": 14
+      },
+      {
+        "interest_id": "85.42/instructor_practitioner_supply",
+        "words": 12
+      },
+      {
+        "interest_id": "85.42/professional_training_delivery",
+        "words": 14
+      },
+      {
+        "interest_id": "85.42.9/professional_course_materials",
+        "words": 14
+      },
+      {
+        "interest_id": "85.42.9/niche_trainer_market",
+        "words": 14
+      },
+      {
+        "interest_id": "85.42.9/course_outcomes_assessment",
+        "words": 14
+      },
+      {
+        "interest_id": "86/medical_equipment_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "86/healthcare_licensing_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "86/patient_data_protection",
+        "words": 14
+      },
+      {
+        "interest_id": "86.10/hospital_medicine_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "86.10/hospital_equipment_renewal",
+        "words": 14
+      },
+      {
+        "interest_id": "86.21/primary_care_patient_flow",
+        "words": 14
+      },
+      {
+        "interest_id": "86.21/telemedicine_primary_care",
+        "words": 14
+      },
+      {
+        "interest_id": "86.21/primary_care_clinic_compliance",
+        "words": 13
+      },
+      {
+        "interest_id": "86.22/specialist_patient_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "86.22/specialist_physician_availability",
+        "words": 13
+      },
+      {
+        "interest_id": "86.22/specialty_diagnostic_equipment",
+        "words": 13
+      },
+      {
+        "interest_id": "86.22/specialist_treatment_guidelines",
+        "words": 14
+      },
+      {
+        "interest_id": "86.23/dental_patient_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "86.23/dental_material_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "86.23/dental_equipment_service",
+        "words": 14
+      },
+      {
+        "interest_id": "86.23/dental_staff_competition",
+        "words": 13
+      },
+      {
+        "interest_id": "86.90/medical_test_reagent_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "86.90/medical_service_quality_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "86.90.4/resort_health_demand",
+        "words": 12
+      },
+      {
+        "interest_id": "86.90.4/resort_treatment_equipment",
+        "words": 12
+      },
+      {
+        "interest_id": "86.90.4/resort_food_and_accommodation",
+        "words": 14
+      },
+      {
+        "interest_id": "86.90.9/medical_service_license_scope",
+        "words": 14
+      },
+      {
+        "interest_id": "86.90.9/medical_device_supply_service",
+        "words": 14
+      },
+      {
+        "interest_id": "86.90.9/medical_specialist_training",
+        "words": 12
+      },
+      {
+        "interest_id": "87.30/care_worker_shortage",
+        "words": 14
+      },
+      {
+        "interest_id": "87.30/residential_care_quality_rules",
+        "words": 14
+      },
+      {
+        "interest_id": "90.01/performing_artist_availability",
+        "words": 14
+      },
+      {
+        "interest_id": "90.01/performing_arts_venue_costs",
+        "words": 12
+      },
+      {
+        "interest_id": "90.02/stage_equipment_rental",
+        "words": 13
+      },
+      {
+        "interest_id": "90.03/creative_grant_programs",
+        "words": 13
+      },
+      {
+        "interest_id": "93.11/sports_event_safety",
+        "words": 13
+      },
+      {
+        "interest_id": "93.12/sports_team_facility_access",
+        "words": 14
+      },
+      {
+        "interest_id": "93.12/sports_coach_recruitment",
+        "words": 13
+      },
+      {
+        "interest_id": "93.12/sports_competition_calendar",
+        "words": 14
+      },
+      {
+        "interest_id": "93.13/fitness_membership_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "93.13/fitness_trainer_retention",
+        "words": 14
+      },
+      {
+        "interest_id": "93.13/fitness_equipment_renewal",
+        "words": 14
+      },
+      {
+        "interest_id": "93.13/fitness_club_energy",
+        "words": 14
+      },
+      {
+        "interest_id": "93.19/sports_event_sponsorship",
+        "words": 13
+      },
+      {
+        "interest_id": "93.19/sports_officials_availability",
+        "words": 13
+      },
+      {
+        "interest_id": "93.21/park_safety_requirements",
+        "words": 13
+      },
+      {
+        "interest_id": "93.29/leisure_service_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "93.29/leisure_equipment_safety",
+        "words": 12
+      },
+      {
+        "interest_id": "93.29/leisure_booking_channels",
+        "words": 14
+      },
+      {
+        "interest_id": "94.11/business_association_advocacy",
+        "words": 14
+      },
+      {
+        "interest_id": "94.11/membership_fee_collection",
+        "words": 14
+      },
+      {
+        "interest_id": "94.12/professional_association_membership",
+        "words": 13
+      },
+      {
+        "interest_id": "94.12/professional_association_funding",
+        "words": 14
+      },
+      {
+        "interest_id": "95.11/computer_repair_parts_supply",
+        "words": 13
+      },
+      {
+        "interest_id": "95.12/communications_spare_parts",
+        "words": 12
+      },
+      {
+        "interest_id": "96.01/textile_cleaning_safety",
+        "words": 14
+      },
+      {
+        "interest_id": "96.02/beauty_service_demand",
+        "words": 14
+      },
+      {
+        "interest_id": "96.02/beauty_product_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "96.02/beauty_booking_platforms",
+        "words": 13
+      },
+      {
+        "interest_id": "96.03/funeral_goods_supply",
+        "words": 14
+      },
+      {
+        "interest_id": "96.03/funeral_transport_fleet",
+        "words": 13
+      },
+      {
+        "interest_id": "96.03/funeral_service_rules",
+        "words": 14
+      }
+    ],
+    "exact_cross_activity_duplicates": []
+  },
+  "source_catalogue": {
+    "source_sha256": "386b64547e9e32ac09b71439e5b6713c96a81de8caf0a4da7b5a2e8696f93075",
+    "source_path": "data/processed/retriever/activity-hypotheses-v1/catalogue/catalogue.json",
+    "activity_count": 546
+  },
+  "reviewed_batch_hashes": [
+    {
+      "file": "generator-1/batch-01.json",
+      "sha256": "5e526b6312bd262844f8e114b158cbebc9b998e2b475ca9b6ad1cedd3db615be"
+    },
+    {
+      "file": "generator-1/batch-02.json",
+      "sha256": "57c8cee1481b1f994575d52e1cb4a21b990500741212f7b6675c750a668a0c49"
+    },
+    {
+      "file": "generator-1/batch-03.json",
+      "sha256": "c7e708f259c62ec5ea6c3fa65150d28e7a866559721be5c1e9b5e97add70be84"
+    },
+    {
+      "file": "generator-1/batch-04.json",
+      "sha256": "90ef4cec327cfd1ff624d0964c001ab09cb6da142d01e557bce4683490d62ec7"
+    },
+    {
+      "file": "generator-1/batch-05.json",
+      "sha256": "36079a3c898aa4092e4767d8262acecef7f5a1b0eb590a874248ebfc9adcd4b4"
+    },
+    {
+      "file": "generator-1/batch-06.json",
+      "sha256": "98f210fa61eb6a9bc06f1a0ca50a15d65ea43de2d58d326b39be470764469cf5"
+    },
+    {
+      "file": "generator-1/batch-07.json",
+      "sha256": "a4cc4ff6555c6869fa926d2da8847538761fb2e943a6804d2a70a59fbe66f85e"
+    },
+    {
+      "file": "generator-1/batch-08.json",
+      "sha256": "716d75aa687ba84e26a765fd82df1950c0efce86b1bd2d6aedff8478b3f7497e"
+    },
+    {
+      "file": "generator-1/batch-09.json",
+      "sha256": "09495c3e128bb15909df80b2633412fab19179a8e84f29620341137ea6e580fc"
+    },
+    {
+      "file": "generator-1/batch-10.json",
+      "sha256": "78d2b46a7027fc4359c004edf04799498d829d3754c7c397ed4570cb39f9a80d"
+    },
+    {
+      "file": "generator-1/batch-11.json",
+      "sha256": "5c4f8e176b9b2c655bcffa51cbbbf23ac0d7ab8cf61be8c9dd1c51baf60bccc8"
+    },
+    {
+      "file": "generator-1/batch-12.json",
+      "sha256": "e4cb51dae10583a98b7a2ed3e930d63403fdf86a2357fc9e5b6b1fdc745763f4"
+    },
+    {
+      "file": "generator-1/batch-13.json",
+      "sha256": "e72a00e08311e77e0ce988af855cf55365142c8fd74e50d47165f2779acb6def"
+    },
+    {
+      "file": "generator-1/batch-14.json",
+      "sha256": "6aad11fb16bb75b5ca88d4c16585d1682f88d15f69d09bb969d40eba1b9462a1"
+    },
+    {
+      "file": "generator-1/batch-15.json",
+      "sha256": "75aa030aadc278acee10d7e8883bfbb6e8488b4825b05c2950c40bb3e9ad2fb9"
+    },
+    {
+      "file": "generator-1/batch-16.json",
+      "sha256": "621fda842fa19df0cdec6b3655407676552a617675e723e4574acea74737366c"
+    },
+    {
+      "file": "generator-1/batch-17.json",
+      "sha256": "062d1f45189c03a261d80c63fed35f264c3980ba4a4a4659d697418bff1c3148"
+    },
+    {
+      "file": "generator-1/batch-18.json",
+      "sha256": "5d3d651f923decd62becdb7c53f4d64c2015724bd4e987adbe8ce2587b9602ad"
+    },
+    {
+      "file": "reviewer-1/batch-01.json",
+      "sha256": "aa5b6c6e3166d422943af3951df157e6fed4da36ffa1cf1dc8a6b98683db712b"
+    },
+    {
+      "file": "reviewer-1/batch-02.json",
+      "sha256": "371f946dcbee10cbd911b35a985d812b1a414f99bfd01fbb9ef91aef09a96b3b"
+    },
+    {
+      "file": "reviewer-1/batch-03.json",
+      "sha256": "6fe6ecbbf4dd9a4f2b9f38f736f732fac39199c6e04f4f965a63d6aa7c4b6ebb"
+    },
+    {
+      "file": "reviewer-1/batch-04.json",
+      "sha256": "2689ffe915a22e7bd7ddfe7801024e699d28b4bec102472de29c9ebeae1cc705"
+    },
+    {
+      "file": "reviewer-1/batch-05.json",
+      "sha256": "e8f5a435bef7d627fce315fc545c7198b2abf068e7b0beb725dfeab98d7da178"
+    },
+    {
+      "file": "reviewer-1/batch-06.json",
+      "sha256": "33a61c67223537c3361b276c8a19908c822f27abc2989ba2702d55b2ba41f7e5"
+    },
+    {
+      "file": "reviewer-1/batch-07.json",
+      "sha256": "1e2a344cae280673b348295e961803c7bd68f24da45c6cb8039fbea9817a1cbb"
+    },
+    {
+      "file": "reviewer-1/batch-08.json",
+      "sha256": "a657790186a25f69343c6f4c882148e5d48362ad5be7b323c365cad11c4fc798"
+    },
+    {
+      "file": "reviewer-1/batch-09.json",
+      "sha256": "ed84de22ac0892c50813813722938b4b9e4903846f00581cca68e539962ee603"
+    },
+    {
+      "file": "reviewer-1/batch-10.json",
+      "sha256": "62f3726ef8de0b4a35881a350a680c223e344312dfe1777e2b570643f0d1992b"
+    },
+    {
+      "file": "reviewer-1/batch-11.json",
+      "sha256": "011d973d3128c244df7afdef47e4e3174a3b6204f509c84420bfb91cb0a80623"
+    },
+    {
+      "file": "reviewer-1/batch-12.json",
+      "sha256": "cd84619bf505ad0acceefbbbabf96d74087bad0e416ad127999f4966d1ca732a"
+    },
+    {
+      "file": "reviewer-1/batch-13.json",
+      "sha256": "ac774d18970dffd481f005415c9d034c787b36cacb2a7e9ddbb892d883a3839d"
+    },
+    {
+      "file": "reviewer-1/batch-14.json",
+      "sha256": "7f92e2c592b2e6807f4001f9d0aaabd47df3f0ed060aee571b6162074cab330c"
+    },
+    {
+      "file": "reviewer-1/batch-15.json",
+      "sha256": "7fd094ce62a9b74099c31aee959debe9dcb77332e87f465026c6a58b9b9c88b5"
+    },
+    {
+      "file": "reviewer-1/batch-16.json",
+      "sha256": "494a739a2dda589540f5d433d147c4e1ea3baefd9dfe85d93badc19531dc2cfa"
+    },
+    {
+      "file": "reviewer-1/batch-17.json",
+      "sha256": "3bcc393935694f2218f2b365e281cb5004a08ca383a72a4ae4d44e7376d03e65"
+    },
+    {
+      "file": "reviewer-1/batch-18.json",
+      "sha256": "e53f59f400ec889b0e3849051bce7ff3a76391532b86da56fc37380e275ac4ac"
+    },
+    {
+      "file": "reviewer-1/review.json",
+      "sha256": "61d72a5c3aea732af4259a9d77d476e612b6c45826c34e7b87aaae04872c5ed9"
+    },
+    {
+      "file": "generator-2/batch-01.json",
+      "sha256": "ddb6c75399a778b00be4e87e4f2d2a646c526516db9e1d307ad1ee23b71032db"
+    },
+    {
+      "file": "generator-2/batch-02.json",
+      "sha256": "20213eb59f5bfe4617ee4354c94772dbd21dc2466fcbb0a6ceb0347877ea4232"
+    },
+    {
+      "file": "generator-2/batch-03.json",
+      "sha256": "fb4772b0bccb3b5bae0c1f2734b82697e553f0ecf8aa969edd30b725d8ce6845"
+    },
+    {
+      "file": "generator-2/batch-04.json",
+      "sha256": "a08a8cbff4d2d6d52512dfbee893545cadcc3f3bd0b62acccf1194bb4cec4fd6"
+    },
+    {
+      "file": "generator-2/batch-05.json",
+      "sha256": "7e7f89a6eaa8548186ac4b7aaf6d700f517dd3f7cda1bb464787d48d33a1cba1"
+    },
+    {
+      "file": "generator-2/batch-06.json",
+      "sha256": "d2f09e2c1b8e605d41fd8658d1f5813b40728fa0fff3fd027904ae96d70d0387"
+    },
+    {
+      "file": "generator-2/batch-07.json",
+      "sha256": "efc46d5410c44bb4fc9a0fb6003dfd7d8482e62b5fbb59ffcf2a641857fff4f4"
+    },
+    {
+      "file": "generator-2/batch-08.json",
+      "sha256": "0f168a893fd1e3a81cc3b0b9fc21c35e647bb5aa1ad4d8b59b8d11bbd9487aa9"
+    },
+    {
+      "file": "generator-2/batch-09.json",
+      "sha256": "dab7357340fa01e688903915af193005b9dfd91b1c40f8ebdcb24601b72a430e"
+    },
+    {
+      "file": "generator-2/batch-10.json",
+      "sha256": "abd170083e681483090396571668b3e88b97ed1d81c314fd57a44d92ab981562"
+    },
+    {
+      "file": "generator-2/batch-11.json",
+      "sha256": "0bf532507d5afb7d7c6ba2cfcf921be3c24b7caf37a4b447f479cd3c5ac28f20"
+    },
+    {
+      "file": "generator-2/batch-12.json",
+      "sha256": "e4a5420846a1c5e3fcf339248f10bad4cb79633945ec9284ef25e376032a1d72"
+    },
+    {
+      "file": "generator-2/batch-13.json",
+      "sha256": "a115ddf8e907b2831ba274f668fcd4fff484b2d5a4aaceb768445a6c6dcf140f"
+    },
+    {
+      "file": "generator-2/batch-14.json",
+      "sha256": "290953ab6d27f7f687288ecdaeee63ac9c419b974a55913fdb2342cd6affd2dd"
+    },
+    {
+      "file": "generator-2/batch-15.json",
+      "sha256": "4ae126cf5b682807be3fe7243e247e3a0f20054bb65c7a97b0d147db0e12caa3"
+    },
+    {
+      "file": "generator-2/batch-16.json",
+      "sha256": "03b02a41d8c5a2e695ed2cd1667c014b3750f63f7dd53fdbf50a26da8abf91c1"
+    },
+    {
+      "file": "generator-2/batch-17.json",
+      "sha256": "7bcaa917d891090d96defc0642470a3da552f6477d40c312fd1ae1bf7b255848"
+    },
+    {
+      "file": "generator-2/batch-18.json",
+      "sha256": "d6efcca73e5905cda826ed6f41e074718ede88c7f34ffca51c1f66df11d713cd"
+    },
+    {
+      "file": "reviewer-2/batch-01.json",
+      "sha256": "4a40b3ed98cad1eab643c218e339460e0b7a2bed436654b7038ebae75989a013"
+    },
+    {
+      "file": "reviewer-2/batch-02.json",
+      "sha256": "bfc0cce49163908a7a194f7aa6a908a32cf1e9bd8f52f05779d4f43a7c7289dd"
+    },
+    {
+      "file": "reviewer-2/batch-03.json",
+      "sha256": "131b8d99dd6600e7017bc9257532dc8ed41145bbf31cb8a5d77d6f714065e15b"
+    },
+    {
+      "file": "reviewer-2/batch-04.json",
+      "sha256": "ac0385158711f3a3a844e2091252b6c9c4d51d50392b7c255390c245aded5370"
+    },
+    {
+      "file": "reviewer-2/batch-05.json",
+      "sha256": "965e75d9c6d7591fe92c7aa50a474999f49de23e5577a1e16cf1c5b62b1098a3"
+    },
+    {
+      "file": "reviewer-2/batch-06.json",
+      "sha256": "2d3d86fd1159ab5c72dac3ad8fc7b2cb8fb5133ad8f73fef17403e65e75d1ed1"
+    },
+    {
+      "file": "reviewer-2/batch-07.json",
+      "sha256": "fc946b1d6b0ea3300e8163523d4ef9717c31cc7df15ba9ef955bbdfe56414d74"
+    },
+    {
+      "file": "reviewer-2/batch-08.json",
+      "sha256": "a8e751ce7afafd3bea8da04b0aabceb5bd42a400796715ffbe9698899706c2cc"
+    },
+    {
+      "file": "reviewer-2/batch-09.json",
+      "sha256": "5b2676489f5e90696eabb3669678d132ac61bc5ebde6574091909ca63780a5a9"
+    },
+    {
+      "file": "reviewer-2/batch-10.json",
+      "sha256": "94927f7471b67020f18d375311edfc2a008e9f613485725a163521a03fdbdfb1"
+    },
+    {
+      "file": "reviewer-2/batch-11.json",
+      "sha256": "d992535a74eb438a116bbc0d00e4efca82d65eb30d4d2e17ad3a3e824062ad26"
+    },
+    {
+      "file": "reviewer-2/batch-12.json",
+      "sha256": "37db0a6563ce514ee95ee001d4c199b32bb0b402bb65642f8d42abd984a11203"
+    },
+    {
+      "file": "reviewer-2/batch-13.json",
+      "sha256": "9883efc00efa64eb2da580044a7163105328d7a554c40bbc25058bd59e2b5d10"
+    },
+    {
+      "file": "reviewer-2/batch-14.json",
+      "sha256": "b639d9e3c4325dcc8a455399ebc937acc86cb7ae41dc76f04a98d3ff9e148133"
+    },
+    {
+      "file": "reviewer-2/batch-15.json",
+      "sha256": "55bf99379a350c53cb8e4b71062a746da480fe5ef1dbb72934c9730382013581"
+    },
+    {
+      "file": "reviewer-2/batch-16.json",
+      "sha256": "9567fe7a62d579534ab7bc1f31bab698d0d361cd83a5056cbbde57ffc07dd938"
+    },
+    {
+      "file": "reviewer-2/batch-17.json",
+      "sha256": "ccd65c28755167a994c497c360a8b10a3457918825a14ebfcd5e8cbb63c179cc"
+    },
+    {
+      "file": "reviewer-2/batch-18.json",
+      "sha256": "8708b352e5e9e4cf606ab70a6b6817c4571d894054faa1028abc4598d0fb0067"
+    },
+    {
+      "file": "reviewer-2/review.json",
+      "sha256": "cb58fd697788efdf9cbe4336f36064fdfa3db8d8ab31b4d705b27d567ee697d8"
+    },
+    {
+      "file": "generator-3/batch-01.json",
+      "sha256": "072b4558a763eff3899ced361f87f8c75e2fc1cae426ce5ec9278e70d06b7c06"
+    },
+    {
+      "file": "generator-3/batch-02.json",
+      "sha256": "ac2294adc2be3f8f3c7cd374f590836d3cd0462450a3c92f2a1965e5ee4bb030"
+    },
+    {
+      "file": "generator-3/batch-03.json",
+      "sha256": "c745dbd169b36effd32ef71f1522034fbf7837bcc235a8565f894df35deb10cf"
+    },
+    {
+      "file": "generator-3/batch-04.json",
+      "sha256": "44d84c74dd4916b3bd9cc90f1199c3f4b2c2cf4337a742dfd1f4e493daf1aa93"
+    },
+    {
+      "file": "generator-3/batch-05.json",
+      "sha256": "77b110472e5226d1be89339fb50a637bdd35e51878227283258293a3f996de53"
+    },
+    {
+      "file": "generator-3/batch-06.json",
+      "sha256": "84657d2c23449aaaf073ad9de27d51c0274f677fe9e15f3eb37adcd5679ef54a"
+    },
+    {
+      "file": "generator-3/batch-07.json",
+      "sha256": "f6f72da023265d531ca85c31dd23678d33aca6f7f32525c093ba1b9bcf2ca2d1"
+    },
+    {
+      "file": "generator-3/batch-08.json",
+      "sha256": "0c77ea1518a1bb5d4c1cdbe9be77d48b1dad15e11a06c37ae1fce77abc5d2ab2"
+    },
+    {
+      "file": "generator-3/batch-09.json",
+      "sha256": "85e220d12147803d96e259dd6771721d835961e321532e0fc6cb0a08676b34fe"
+    },
+    {
+      "file": "generator-3/batch-10.json",
+      "sha256": "5a64d908f6f669e8909f070a318295c37b594114a6259b680b17b28e96263322"
+    },
+    {
+      "file": "generator-3/batch-11.json",
+      "sha256": "c1bc216e88d89f773e3b20bd811cec9c317e082a268637916c170086e4154cbf"
+    },
+    {
+      "file": "generator-3/batch-12.json",
+      "sha256": "9d66339bc9673754ab3ce0c6ea281755539f3028a87f6440cf69e1c1216ad2e2"
+    },
+    {
+      "file": "generator-3/batch-13.json",
+      "sha256": "dd43cf4f9132aaf45814dff93db04d04eeb076ddf77fb7da30c1baee8a1b901e"
+    },
+    {
+      "file": "generator-3/batch-14.json",
+      "sha256": "17a4843275d80a36cab0d8efe970fbd361c56b85fd797d321c2b704f465a8ba5"
+    },
+    {
+      "file": "generator-3/batch-15.json",
+      "sha256": "1f6b06c3cf571c4b95e410032de1f32c4f84dd14d1603652ad9ddb364b0b650f"
+    },
+    {
+      "file": "generator-3/batch-16.json",
+      "sha256": "1d4e71f7ee3250976e41454e96f5bdb70e1db895666be9d6686b0c1d05afc212"
+    },
+    {
+      "file": "generator-3/batch-17.json",
+      "sha256": "94d56b5ce99fa9f255b78a40813a37bed7518d00b6c65c18d5f349e7fd47f1cb"
+    },
+    {
+      "file": "generator-3/batch-18.json",
+      "sha256": "6a9b387587839d2d04d92f855afafaaa6d48282c56b0de73902edac5857382f0"
+    },
+    {
+      "file": "reviewer-3/batch-01.json",
+      "sha256": "dea8b0305bd33b1524316e421a112e515f13ab903c62aac6fd9609db86c193d2"
+    },
+    {
+      "file": "reviewer-3/batch-02.json",
+      "sha256": "c133cfbe18a3a9a96b4d4bcebf1146a13613e513d2286617e190758ce520a1c0"
+    },
+    {
+      "file": "reviewer-3/batch-03.json",
+      "sha256": "0b1b27a3bdce31fb7e78076f7f43fcbf247ed32523f04a80a64090f0a9b9d9e9"
+    },
+    {
+      "file": "reviewer-3/batch-04.json",
+      "sha256": "89cf50f6fade2cbc30e72eebc7f9db0bb43b2de5ed4d519bd018d1b38633335b"
+    },
+    {
+      "file": "reviewer-3/batch-05.json",
+      "sha256": "4c0a3b8c3a4369b0072d147597538f42dadcbc519fde48c46d8802d7951a8b4f"
+    },
+    {
+      "file": "reviewer-3/batch-06.json",
+      "sha256": "0dfa96f0b60725cd1a9cd266e9af8a046e6fd927945454559cc85c03e309410c"
+    },
+    {
+      "file": "reviewer-3/batch-07.json",
+      "sha256": "4c9dfc12bef29fc5c52c869ae75468d6bc62272a7739170e1fcc644ecaf88be3"
+    },
+    {
+      "file": "reviewer-3/batch-08.json",
+      "sha256": "e5a2f2be6cddf4dd3a116ee2a2ec2512e11310c94f0e2c84674316045290babb"
+    },
+    {
+      "file": "reviewer-3/batch-09.json",
+      "sha256": "b1e3d6852392e197ae38ede11d9120dc85974b912ec11fc636842297d17110f2"
+    },
+    {
+      "file": "reviewer-3/batch-10.json",
+      "sha256": "a25ee5ecc96045d8ce2942455d7fc3a32afa691b2af2690e344a0b473d5dde50"
+    },
+    {
+      "file": "reviewer-3/batch-11.json",
+      "sha256": "2806b5bc549c2d51ea0f7fe46fb0aa4ddf7bc3b18d54072645214df4a2aeff1b"
+    },
+    {
+      "file": "reviewer-3/batch-12.json",
+      "sha256": "8c04bb3dd353ef5cc57259599c4f281ec6300733886bd7bae82f3aa76d523536"
+    },
+    {
+      "file": "reviewer-3/batch-13.json",
+      "sha256": "27799880e003ab8e9731e43f7b5ca793e43e9c5ef8aa701ec3d78a51b0365db2"
+    },
+    {
+      "file": "reviewer-3/batch-14.json",
+      "sha256": "e309f1a7bcb6d732aae72d4c6dd6965a977a0ab5fefd409c803c7c392ef94006"
+    },
+    {
+      "file": "reviewer-3/batch-15.json",
+      "sha256": "967d167bbfdde4d6240259b7da3f5153afe1edc55e31265300e6bc7d045bd124"
+    },
+    {
+      "file": "reviewer-3/batch-16.json",
+      "sha256": "0de6080ce860f1c2237486597f2a0bdc8dc3ea1388d660236b0e874581c4de71"
+    },
+    {
+      "file": "reviewer-3/batch-17.json",
+      "sha256": "44a6786d750e47243a36236d4a8812477f5012cf8b48182c12cc429b926060b9"
+    },
+    {
+      "file": "reviewer-3/batch-18.json",
+      "sha256": "1d33e6a6b6e9d7662148fa2db905237a4134e656a44cdeba632c6c02ad91a213"
+    },
+    {
+      "file": "reviewer-3/review.json",
+      "sha256": "6e35a0d3797c33adf949184d4862dee85ee916ad1da700225c19a846e7fc763d"
+    }
+  ],
+  "assembly_tool": {
+    "path": "retriever/experiments/activity_interest_catalogue.py",
+    "sha256": "03970d5eccd9e7c96896d2ccf2f71f03d2068d7b56c7d324c3fc7fce8a1a4330"
+  },
+  "files": {
+    "activities.json": "cdae368855972afedab0859dabf7167f3ed759ade66b0cb38f5741a6a3edb033",
+    "catalogue.json": "c0dec0d28cde3a6d4936722e25747eec2c12fa90ac0508cf6fa4e183040f75b2",
+    "catalogue.csv": "d388b4555a1825baf69fe6498120994b5ab9201af9ecdb91b8a0412f80051e3b",
+    "reviews.json": "51918e0e3372ccaad6ed216cb985d9427ffe762a14731e99a04bfe6973f1a9b6",
+    "EDITORIAL_GUIDE.md": "92ba592cb935a36f83e7ef178a27fee930f9745f84d0b6721e444bf99d63ce6b",
+    "README.md": "155f51421e001d0ddf71fe85e5cba492c6dcb0f197c4b57cb91d254dda79e53b",
+    "REPORT.md": "0c0ebd97e61a332b58f5d6d4c6741be71c5aba70c2a16cc0d0f3f11e1feddfdc"
+  },
+  "limitations": [
+    "Not verified company facts",
+    "No independent human approval",
+    "Search interests are hypotheses; conditional topics need applicability checks",
+    "No embeddings or graph interests computed; retrieval runtime unchanged"
+  ]
+}
