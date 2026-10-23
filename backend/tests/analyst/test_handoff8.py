@@ -227,6 +227,45 @@ class TestBudgetTruncation(unittest.TestCase):
         self.assertIn("unknown_ref", codes)
 
 
+class TestFixesFromLiveRun(unittest.TestCase):
+    """Проблемы, найденные живым прогоном на 8 компаниях (analyst-v1.1 → v1.2)."""
+
+    def test_null_statements_from_exclude_do_not_break_schema(self):
+        from app.analyst.schemas import LLMDraft
+
+        d = LLMDraft.model_validate(dict(exclude_draft(), company_relevance={"text": None, "feature_ids": []},
+                                         risks=[{"text": None}], ai_conclusion={"text": ""}))
+        self.assertIsNone(d.company_relevance)
+        self.assertEqual(d.risks, [])
+
+    def test_exclude_reason_without_aliases(self):
+        from app.analyst.qa import clean_reason
+
+        self.assertEqual(clean_reason("Нет механизма: не связано с ИТ (F8, F9); продукты (F10–F15) не используются, регион F17."),
+                         "Нет механизма: не связано с ИТ; продукты не используются, регион.")
+
+    def test_numbers_from_event_title_are_allowed(self):
+        cand = make_candidate("ev:msp", "Индекс деловой активности МСП составил 50,8 пункта", ["Доля оптимистов выросла до 30%."])
+        res = ImpactBatchAdapter(prompt_version=V11).to_analyst_input(make_batch([cand]))
+        d = draft(what_happened=[{"text": "Индекс составил 50,8 пункта.", "kind": "fact", "claim_ids": ["C1"]}])
+        fake = FakeLLM(lambda req: json.dumps(d, ensure_ascii=False))
+        out, _ = BusinessAnalyst(fake, model="z-ai/glm-5.3-flash", prompt_version=prompts.PROMPT_VERSION_V12).analyze(res.analyst_input)
+        self.assertEqual(out.ranked_insights[0].facts[0].text, "Индекс составил 50,8 пункта.")
+
+    def test_fewshot_flag_changes_prompt_and_cache_key_only_when_on(self):
+        res = ImpactBatchAdapter(prompt_version=V11).to_analyst_input(make_batch())
+        seen = []
+        fake = FakeLLM(lambda req: (seen.append(req.messages[0]["content"]), json.dumps(draft(), ensure_ascii=False))[1])
+        off = BusinessAnalyst(fake, model="z-ai/glm-5.3-flash", prompt_version=V11)
+        on = BusinessAnalyst(fake, model="z-ai/glm-5.3-flash", prompt_version=V11, fewshot=True)
+        self.assertEqual(off.prompt_version, V11)
+        self.assertEqual(on.prompt_version, V11 + prompts.FEWSHOT_SUFFIX)
+        off.analyze(res.analyst_input)
+        on.analyze(res.analyst_input)
+        self.assertNotIn("ПРИМЕРЫ РАЗБОРА", seen[0])
+        self.assertIn("ПРИМЕРЫ РАЗБОРА", seen[1])
+
+
 class TestJsonSchemaLite(unittest.TestCase):
     def test_subset_keywords(self):
         schema = {"$defs": {"P": {"type": "string", "pattern": "^/"}},

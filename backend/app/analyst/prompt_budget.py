@@ -26,6 +26,7 @@ def estimate_prompt_tokens(
     cand: Candidate,
     prompt_version: str | None = None,
     previous: "PreviousContext | None" = None,
+    fewshot: bool = False,
 ) -> int:
     version = prompt_version or prompts.PROMPT_VERSION
     if previous is None and prompts.supports_memory(version):
@@ -33,4 +34,4 @@ def estimate_prompt_tokens(
 
         previous = PreviousContext(items=[], checked=True)
     view = build_prompt_view(inp, cand, previous=previous)
-    return messages_tokens(prompts.build_analyst_messages(view.data, version=version))
+    return messages_tokens(prompts.build_analyst_messages(view.data, version=version, fewshot=fewshot))

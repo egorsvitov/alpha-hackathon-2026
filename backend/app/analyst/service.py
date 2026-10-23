@@ -99,7 +99,7 @@ class AnalystService:
                 logger.warning("Память фактов недоступна: %s", type(exc).__name__)
         self.analyst = BusinessAnalyst(
             llm, model=s.model, cache=self.cache, max_tokens=s.max_tokens, max_parallel=s.max_parallel, fallback_models=fallbacks,
-            prompt_version=s.prompt_version, memory=self.memory,
+            prompt_version=s.prompt_version, memory=self.memory, fewshot=s.fewshot,
         )
         if bank_evidence is None:
             from app.services.seed_data import SHARED_EVIDENCE
@@ -186,7 +186,7 @@ class AnalystService:
 
     # ------------------------------------------------------------------ карточка
     def run_id(self, company_id: str, role: str, cand_ref: str) -> str:
-        return "an_" + key_hash(f"{company_id}|{role}|{cand_ref}|{self.settings.prompt_version}")[:16]
+        return "an_" + key_hash(f"{company_id}|{role}|{cand_ref}|{self.analyst.prompt_version}")[:16]
 
     # ------------------------------------------------------------------ пакет ретривера
     def analyze_batch(self, raw_batch: dict[str, Any], role: str | None = None) -> tuple[AnalystOutput, Any]:
@@ -353,7 +353,7 @@ class AnalystService:
             "analyst_mode": self.mode,
             "analyst_model": self.settings.model if self.mode != "template" else None,
             "analyst_fallback_model": self.settings.fallback_model if self.mode != "template" else None,
-            "prompt_version": self.settings.prompt_version,
+            "prompt_version": self.analyst.prompt_version,
             "memory_enabled": self.memory is not None,
             "live_llm_available": live,
             "live_llm_status": why,

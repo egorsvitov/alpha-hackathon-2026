@@ -387,13 +387,17 @@ class LLMDraft(BaseModel):
     @field_validator("what_happened", "risks", "opportunities", "next_steps", mode="before")
     @classmethod
     def _stmts(cls, v: Any) -> list[Any]:
-        return [{"text": x} if isinstance(x, str) else x for x in _as_list(v)]
+        out = [{"text": x} if isinstance(x, str) else x for x in _as_list(v)]
+        # Пустые заготовки ({"text": null}) — не ошибка схемы, а отсутствие пункта.
+        return [x for x in out if not (isinstance(x, dict) and not str(x.get("text") or "").strip())]
 
     @field_validator("company_relevance", "impact_mechanism", "ai_conclusion", mode="before")
     @classmethod
     def _stmt(cls, v: Any) -> Any:
         if isinstance(v, str):
             return {"text": v} if v.strip() else None
+        if isinstance(v, dict) and not str(v.get("text") or "").strip():
+            return None  # при exclude модель часто присылает объект с text=null
         return v
 
     @field_validator("unknowns", mode="before")

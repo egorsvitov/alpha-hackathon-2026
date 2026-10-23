@@ -135,22 +135,66 @@ ANALYST_SYSTEM_PROMPT_V11 = """Ты — бизнес-аналитик банка
 }
 Формат impact_estimate (только при materiality="high"): {"metric": "какой показатель", "scenario": "условная оценка: если …, то …", "assumptions": ["допущение 1"], "claim_ids": [], "feature_ids": []}."""
 
+# analyst-v1.2: по итогам живого прогона на 8 компаниях (eval/handoff8_results.json):
+# пустые поля при exclude — null (было 15% ремонтов JSON из-за {"text": null}), причина без ID,
+# запрет выдавать общие знания об отрасли и додуманные черты компании за выводы.
+PROMPT_VERSION_V12 = "analyst-v1.2"
+_V12_RULES = """25. Не выдавай общие знания об отрасли, налоговой практике или рынке за свойства компании («отрасль под особым вниманием ФНС», «компания использует наёмных водителей / зависит от топлива»): если такое соображение нужно, это kind "hypothesis" с «возможно/если» и вопрос в unknowns; признаков F, которых нет, не додумывай.
+26. exclude_reason — одно предложение словами, без ID (не пиши F1, C1).
+
+СХЕМА ОТВЕТА"""
+ANALYST_SYSTEM_PROMPT_V12 = (
+    ANALYST_SYSTEM_PROMPT_V11
+    .replace(
+        "Для exclude заполни только decision, exclude_reason, event_status, headline, what_happened, остальное оставь пустым.",
+        "Для exclude заполни только decision, exclude_reason, event_status, headline, what_happened; company_relevance, "
+        "impact_mechanism, ai_conclusion, impact_estimate — null (не объект с пустым text), списки — [].",
+    )
+    .replace("\n\nСХЕМА ОТВЕТА", "\n" + _V12_RULES, 1)
+)
+
 SYSTEM_PROMPTS: dict[str, str] = {
     PROMPT_VERSION: ANALYST_SYSTEM_PROMPT,
     PROMPT_VERSION_V11: ANALYST_SYSTEM_PROMPT_V11,
+    PROMPT_VERSION_V12: ANALYST_SYSTEM_PROMPT_V12,
 }
 # Версии, которые умеют работать с блоком previous_context (память фактов).
-MEMORY_AWARE_VERSIONS = frozenset({PROMPT_VERSION_V11})
+MEMORY_AWARE_VERSIONS = frozenset({PROMPT_VERSION_V11, PROMPT_VERSION_V12})
 
 
 def supports_memory(version: str) -> bool:
     return version in MEMORY_AWARE_VERSIONS
 
 
-def build_analyst_messages(view: dict[str, Any], version: str = PROMPT_VERSION) -> list[dict[str, str]]:
-    """Сообщения для анализа одного кандидата. ``view`` — представление для модели."""
+FEWSHOT_SUFFIX = "+fewshot"
+
+
+def fewshot_block(view: dict[str, Any]) -> str:
+    """Учебные примеры (``examples.py``) под тему события и роль; пусто, если подходящих нет."""
+    from app.analyst.examples import examples_block
+    from app.analyst.memory import detect_topic
+
+    event = view.get("event") or {}
+    topic = event.get("type")
+    if not topic or topic in ("other", "unknown"):
+        text = " ".join(c.get("text", "") for c in event.get("claims") or [] if isinstance(c, dict))
+        topic = detect_topic(event.get("title") or "", text)
+    return examples_block(topic, role=view.get("role"))
+
+
+def build_analyst_messages(view: dict[str, Any], version: str = PROMPT_VERSION, *, fewshot: bool = False) -> list[dict[str, str]]:
+    """Сообщения для анализа одного кандидата. ``view`` — представление для модели.
+
+    ``fewshot`` — дописать к системному промпту учебные примеры (флаг ``ANALYST_FEWSHOT``,
+    по умолчанию выключен; в ключе кэша версия получает суффикс ``+fewshot``).
+    """
     if version not in SYSTEM_PROMPTS:
         raise ValueError(f"Неизвестная версия промпта: {version}")
+    system = SYSTEM_PROMPTS[version]
+    if fewshot:
+        block = fewshot_block(view)
+        if block:
+            system = system + "\n\n" + block
     role = view.get("role", "cfo")
     header = (
         f"Роль читателя: {ROLE_NAMES.get(role, role)} ({role}). Фокус роли: {ROLE_FOCUS.get(role, '')}.\n"
@@ -159,7 +203,7 @@ def build_analyst_messages(view: dict[str, Any], version: str = PROMPT_VERSION) 
     )
     body = json.dumps({k: v for k, v in view.items() if k not in ("role", "as_of")}, ensure_ascii=False, separators=(",", ":"))
     return [
-        {"role": "system", "content": SYSTEM_PROMPTS[version]},
+        {"role": "system", "content": system},
         {"role": "user", "content": header + body + "\n\nВерни только JSON по схеме."},
     ]
 

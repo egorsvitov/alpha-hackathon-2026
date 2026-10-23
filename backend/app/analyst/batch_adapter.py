@@ -263,12 +263,14 @@ class ImpactBatchAdapter:
         schema_dir: str | Path | None = None,
         estimator: TokenEstimator | None = None,
         prompt_version: str | None = None,
+        fewshot: bool = False,
     ) -> None:
         self.token_budget = token_budget
         self.reserve_tokens = reserve_tokens
         self.schema_dir = Path(schema_dir) if schema_dir else default_schema_dir()
         self._estimator = estimator
         self.prompt_version = prompt_version
+        self.fewshot = fewshot
         self._batch_validator: SchemaValidator | None = None
         self._bundle_validator: SchemaValidator | None = None
         if self.schema_dir is not None:
@@ -528,7 +530,7 @@ class ImpactBatchAdapter:
             return self._estimator(inp, cand)
         from app.analyst.prompt_budget import estimate_prompt_tokens
 
-        return estimate_prompt_tokens(inp, cand, self.prompt_version)
+        return estimate_prompt_tokens(inp, cand, self.prompt_version, fewshot=self.fewshot)
 
     def fit_to_budget(self, inp: AnalystInput, budget: int) -> tuple[AnalystInput, dict[str, dict[str, Any]], dict[str, int]]:
         """Отбрасывает целиком менее значимые утверждения, пока оценка промпта не уложится в бюджет."""

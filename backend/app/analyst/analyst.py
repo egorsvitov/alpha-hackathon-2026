@@ -31,7 +31,7 @@ from app.analyst.cache import AnalysisCache
 from app.analyst.input_adapter import parse_dt
 from app.analyst.llm_gateway import BaseLLM, ChatRequest, LLMError, get_logger
 from app.analyst.memory import MemoryStore, PreviousContext, schedule_levels
-from app.analyst.qa import QAResult, validate_draft
+from app.analyst.qa import QAResult, clean_reason, validate_draft
 from app.analyst.schemas import (
     AnalystInput,
     AnalystOutput,
@@ -123,6 +123,7 @@ class BusinessAnalyst:
         fallback_models: list[str] | None = None,
         prompt_version: str = prompts.PROMPT_VERSION,
         memory: MemoryStore | None = None,
+        fewshot: bool = False,
     ) -> None:
         if prompt_version not in prompts.SYSTEM_PROMPTS:
             raise ValueError(f"Неизвестная версия промпта: {prompt_version}")
@@ -132,14 +133,17 @@ class BusinessAnalyst:
         self.max_tokens = max_tokens
         self.max_parallel = max(1, max_parallel)
         self.fallback_models = fallback_models or []
-        self.prompt_version = prompt_version
+        self.fewshot = fewshot
+        # Версия для ключа кэша и метаданных: с примерами — отдельные записи кэша.
+        self.prompt_version = prompt_version + (prompts.FEWSHOT_SUFFIX if fewshot else "")
+        self.base_prompt_version = prompt_version
         self.memory = memory
         self.qa_totals = {"statements": 0, "with_refs": 0, "candidates": 0, "qa_failed": 0, "bank_found": 0}
 
     # ------------------------------------------------------------------ память фактов
     def previous_context(self, inp: AnalystInput, cand: Candidate) -> PreviousContext | None:
         """Блок памяти для кандидата. ``None`` — версия промпта не работает с памятью."""
-        if not prompts.supports_memory(self.prompt_version):
+        if not prompts.supports_memory(self.base_prompt_version):
             return None
         if self.memory is None:
             return PreviousContext(items=[], checked=False)
@@ -397,7 +401,7 @@ class BusinessAnalyst:
     ) -> CandidateOutcome:
         assert self.llm is not None
         view = build_prompt_view(inp, cand, previous=previous)
-        messages = prompts.build_analyst_messages(view.data, version=self.prompt_version)
+        messages = prompts.build_analyst_messages(view.data, version=self.base_prompt_version, fewshot=self.fewshot)
         request = ChatRequest(messages=messages, model=model, max_tokens=self.max_tokens, temperature=0.1, purpose="analysis")
         try:
             draft, usage = self.llm.chat_json(request, LLMDraft.model_validate)
@@ -458,7 +462,7 @@ class BusinessAnalyst:
                 excluded=ExcludedCandidate(
                     candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
                     reason_code="not_relevant",
-                    reason=(draft.exclude_reason or "Аналитик не нашёл механизма влияния на компанию").strip()[:400],
+                    reason=(clean_reason(draft.exclude_reason or "") or "Аналитик не нашёл механизма влияния на компанию")[:400],
                     headline=qa.headline, facts=qa.facts,
                 ),
                 run=run,

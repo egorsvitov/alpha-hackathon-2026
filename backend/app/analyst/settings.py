@@ -24,10 +24,12 @@
 * ``ANALYST_FEED_HIDE_EXCLUDED`` — скрывать из ленты события с ``decision=exclude``.
 * ``ANALYST_MAX_PARALLEL`` — сколько кандидатов ленты анализировать параллельно.
 * ``ANALYST_PROMPT_VERSION`` — версия промпта: ``analyst-v1.0`` (по умолчанию, под неё
-  сохранены ответы в ``app/analyst/cache``) или ``analyst-v1.1`` (вход ретривера, память фактов).
+  сохранены ответы в ``app/analyst/cache``) или ``analyst-v1.1``/``analyst-v1.2`` (вход ретривера, память фактов; v1.2 — после живой оценки).
 * ``ANALYST_MEMORY`` — память фактов и «что изменилось с прошлого» (по умолчанию выключена;
   работает с промптом ``analyst-v1.1``). ``ANALYST_MEMORY_PATH`` — файл SQLite
   (по умолчанию ``/data/analyst_memory.sqlite3`` или временная папка ОС).
+* ``ANALYST_FEWSHOT`` — дописывать к системному промпту учебные примеры (``examples.py``);
+  по умолчанию выключено, при включении ключ кэша получает суффикс ``+fewshot``.
 """
 
 from __future__ import annotations
@@ -47,7 +49,7 @@ DEFAULT_MODEL = "z-ai/glm-5.3-flash"
 DEFAULT_FALLBACK_MODEL = "deepseek/deepseek-v4.1-flash"
 VALID_MODES = ("template", "llm", "cached")
 DEFAULT_PROMPT_VERSION = "analyst-v1.0"
-VALID_PROMPT_VERSIONS = ("analyst-v1.0", "analyst-v1.1")
+VALID_PROMPT_VERSIONS = ("analyst-v1.0", "analyst-v1.1", "analyst-v1.2")
 
 _dotenv_loaded = False
 
@@ -122,6 +124,7 @@ class AnalystSettings:
     prompt_version: str = DEFAULT_PROMPT_VERSION
     memory_enabled: bool = False
     memory_path: Path | None = None
+    fewshot: bool = False
 
     @property
     def has_key(self) -> bool:
@@ -172,4 +175,5 @@ class AnalystSettings:
             prompt_version=prompt_version,
             memory_enabled=_bool(env.get("ANALYST_MEMORY"), False),
             memory_path=Path(memory_path) if memory_path else None,
+            fewshot=_bool(env.get("ANALYST_FEWSHOT"), False),
         )

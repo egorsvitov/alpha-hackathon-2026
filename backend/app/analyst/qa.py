@@ -152,6 +152,19 @@ def clean_text(text: str) -> str:
     return t
 
 
+_ALIAS_RANGE_RE = re.compile(r"\s*\(?\b[CFBP]\d+(?:\.\d+)?\s*[–—-]\s*[CFBP]\d+(?:\.\d+)?\)?")
+_EMPTY_PARENS_RE = re.compile(r"\(\s*[,;]?\s*\)")
+
+
+def clean_reason(text: str) -> str:
+    """Причина исключения для человека: без псевдонимов ID (F8, C1, F10–F15) и пустых скобок."""
+    t = _ALIAS_RANGE_RE.sub("", text or "")
+    t = re.sub(r"\(\s*(?:[CFBP]\d+(?:\.\d+)?\s*[,;]?\s*)+\)", "", t)
+    t = clean_text(t)
+    t = _EMPTY_PARENS_RE.sub("", t)
+    return re.sub(r"\s{2,}", " ", t).strip()
+
+
 def _norm_text(text: str) -> str:
     return re.sub(r"[^\wа-яё]+", " ", (text or "").lower()).strip()
 
@@ -179,7 +192,10 @@ class Validator:
         for b in view.bank.values():
             allowed |= numbers_in(f"{b.title} {b.quote} {b.published_at or ''}")
         for s in view.sources.values():
-            allowed |= numbers_in(s.published_at or "")
+            allowed |= numbers_in(f"{s.published_at or ''} {s.title or ''}")
+        event = view.data.get("event", {}) if isinstance(view.data.get("event"), dict) else {}
+        for title in [event.get("title") or ""] + list(event.get("other_titles") or []):
+            allowed |= numbers_in(title)  # заголовок события — тоже текст источника
         allowed |= numbers_in(str(view.data.get("event", {}).get("published_at", "")))
         allowed |= numbers_in(as_of or "")
         self.allowed_numbers = allowed
