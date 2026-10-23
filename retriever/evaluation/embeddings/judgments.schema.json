@@ -1,0 +1,6 @@
+{
+ "$schema":"https://json-schema.org/draft/2020-12/schema","type":"array","items":{
+  "type":"object","required":["company_id","company_context_hash","role","event_id","event_version","payload_hash","story_group_id","label","status","label_source","annotator","annotation_version","basis_feature_refs","basis_claim_refs","assumptions","synthetic"],
+  "properties":{"company_id":{"type":"string"},"company_context_hash":{"type":"string"},"role":{"enum":["ceo","cfo","treasurer","chief_accountant"]},"event_id":{"type":"string"},"event_version":{"type":"integer","minimum":1},"payload_hash":{"type":"string"},"story_group_id":{"type":"string"},"label":{"enum":[0,1,2,3,null]},"status":{"enum":["judged","unknown","not_judged"]},"label_source":{"enum":["human","weak","synthetic_test"]},"annotator":{"type":["string","null"]},"annotation_version":{"type":"string"},"basis_feature_refs":{"type":"array"},"basis_claim_refs":{"type":"array"},"assumptions":{"type":"array"},"synthetic":{"type":"boolean"}}
+ }
+}

@@ -1,0 +1,142 @@
+{
+  "schema_version": "0.1",
+  "event": {
+    "event_id": "synthetic:fuel",
+    "event_version": 1,
+    "title": "Синтетический пример: fuel",
+    "event_type": "price_change",
+    "first_published_at": "2026-10-20T10:00:00+03:00",
+    "updated_at": "2026-10-20T10:01:00+03:00",
+    "availability": "active",
+    "quality": "complete"
+  },
+  "ranking_features": {
+    "topics": [],
+    "industries": [],
+    "geographies": [
+      "RU"
+    ],
+    "objects": [
+      "diesel"
+    ],
+    "metrics": [
+      "diesel_price"
+    ],
+    "factors": [
+      "interest_rates"
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "synthetic:fuel:claim-1",
+      "text": "Синтетический пример: diesel; increase; территория RU. Все сведения вымышлены.",
+      "modality": "asserted",
+      "polarity": "affirmed",
+      "stage": "approved",
+      "attribution": {
+        "entity_id": "demo:regulator",
+        "name": "Учебный регулятор"
+      },
+      "participants": [
+        {
+          "entity_id": "demo:regulator",
+          "name": "Учебный регулятор",
+          "role": "decision_maker"
+        }
+      ],
+      "action": "increase",
+      "object": "diesel",
+      "geographies": [
+        "RU"
+      ],
+      "time": {
+        "occurred_at": {
+          "start": "2026-10-20",
+          "end": "2026-10-20",
+          "text": "2026-10-20"
+        },
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": null
+      },
+      "measurements": [
+        {
+          "measurement_id": "synthetic:fuel:measurement-1",
+          "metric": "diesel_price",
+          "kind": "level",
+          "value": "14",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null
+        }
+      ],
+      "evidence_ids": [
+        "synthetic:fuel:evidence-1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/modality": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/polarity": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/attribution": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/participants/0": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/action": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/object": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/geographies/0": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/measurements/0": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/time/occurred_at": [
+          "synthetic:fuel:evidence-1"
+        ],
+        "/stage": [
+          "synthetic:fuel:evidence-1"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "synthetic:fuel:article-1:v1",
+      "article_id": "synthetic:fuel:article-1",
+      "article_version": 1,
+      "title": "Синтетическая новость для проверки контракта",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "synthetic:fuel:evidence-1",
+      "source_id": "synthetic:fuel:article-1:v1",
+      "field": "text",
+      "start": 0,
+      "end": 78,
+      "quote": "Синтетический пример: diesel; increase; территория RU. Все сведения вымышлены."
+    }
+  ],
+  "conflicts": [],
+  "relations": [],
+  "limitations": [
+    "Полностью синтетический пример; не является сообщением о реальном событии."
+  ]
+}

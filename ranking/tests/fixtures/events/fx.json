@@ -1,0 +1,142 @@
+{
+  "schema_version": "0.1",
+  "event": {
+    "event_id": "synthetic:fx",
+    "event_version": 1,
+    "title": "Синтетический пример: fx",
+    "event_type": "fx_rate",
+    "first_published_at": "2026-10-20T10:00:00+03:00",
+    "updated_at": "2026-10-20T10:01:00+03:00",
+    "availability": "active",
+    "quality": "complete"
+  },
+  "ranking_features": {
+    "topics": [],
+    "industries": [],
+    "geographies": [
+      "RU"
+    ],
+    "objects": [
+      "usd_rub"
+    ],
+    "metrics": [
+      "usd_rub"
+    ],
+    "factors": [
+      "interest_rates"
+    ]
+  },
+  "claims": [
+    {
+      "claim_id": "synthetic:fx:claim-1",
+      "text": "Синтетический пример: usd_rub; increase; территория RU. Все сведения вымышлены.",
+      "modality": "asserted",
+      "polarity": "affirmed",
+      "stage": "approved",
+      "attribution": {
+        "entity_id": "demo:regulator",
+        "name": "Учебный регулятор"
+      },
+      "participants": [
+        {
+          "entity_id": "demo:regulator",
+          "name": "Учебный регулятор",
+          "role": "decision_maker"
+        }
+      ],
+      "action": "increase",
+      "object": "usd_rub",
+      "geographies": [
+        "RU"
+      ],
+      "time": {
+        "occurred_at": {
+          "start": "2026-10-20",
+          "end": "2026-10-20",
+          "text": "2026-10-20"
+        },
+        "effective_at": null,
+        "observation_period": null,
+        "forecast_horizon": null
+      },
+      "measurements": [
+        {
+          "measurement_id": "synthetic:fx:measurement-1",
+          "metric": "usd_rub",
+          "kind": "level",
+          "value": "14",
+          "unit": "percent",
+          "qualifier": "exact",
+          "comparison_period": null
+        }
+      ],
+      "evidence_ids": [
+        "synthetic:fx:evidence-1"
+      ],
+      "field_evidence": {
+        "/text": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/modality": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/polarity": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/attribution": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/participants/0": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/action": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/object": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/geographies/0": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/measurements/0": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/time/occurred_at": [
+          "synthetic:fx:evidence-1"
+        ],
+        "/stage": [
+          "synthetic:fx:evidence-1"
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "synthetic:fx:article-1:v1",
+      "article_id": "synthetic:fx:article-1",
+      "article_version": 1,
+      "title": "Синтетическая новость для проверки контракта",
+      "publisher": "Учебное издание",
+      "url": null,
+      "published_at": "2026-10-20T10:00:00+03:00",
+      "content_kind": "synthetic",
+      "is_full_original_text": false,
+      "is_synthetic": true
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "synthetic:fx:evidence-1",
+      "source_id": "synthetic:fx:article-1:v1",
+      "field": "text",
+      "start": 0,
+      "end": 79,
+      "quote": "Синтетический пример: usd_rub; increase; территория RU. Все сведения вымышлены."
+    }
+  ],
+  "conflicts": [],
+  "relations": [],
+  "limitations": [
+    "Полностью синтетический пример; не является сообщением о реальном событии."
+  ]
+}

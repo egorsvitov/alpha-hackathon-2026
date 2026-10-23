@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request", "status", "empty_reason", "company_context", "candidates", "retrieval_context", "limitations"],
+  "properties": {
+    "schema_version": {"const": "impact_candidate_batch.v1"},
+    "request": {"type":"object","additionalProperties":false,"required":["request_id","company_id","role","as_of","window_start","window_end","requested_limit","max_input_tokens"],"properties":{
+      "request_id":{"type":"string","minLength":1},"company_id":{"type":"string","minLength":1},"role":{"enum":["ceo","cfo","treasurer","chief_accountant"]},
+      "as_of":{"type":"string","format":"date-time"},"window_start":{"type":"string","format":"date-time"},"window_end":{"type":"string","format":"date-time"},
+      "requested_limit":{"type":"integer","minimum":1,"maximum":20},"max_input_tokens":{"type":"integer","minimum":1}
+    }},
+    "status":{"enum":["ready","empty","degraded"]},
+    "empty_reason":{"enum":[null,"no_events","no_matches","budget_exhausted"]},
+    "company_context":{"type":"object","required":["profile_version","profile_hash","snapshot","verified_facts","derived_exposures","group_context","payment_context","unknowns"],"properties":{
+      "profile_version":{"type":"string"},"profile_hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"snapshot":{"type":"object"},"verified_facts":{"type":"array","items":{"type":"object"}},"derived_exposures":{"type":"array"},"group_context":{"type":"object"},"payment_context":{"type":"object"},"unknowns":{"type":"array","items":{"type":"string"}}
+    }},
+    "candidates":{"type":"array","maxItems":20,"items":{"type":"object","additionalProperties":false,"required":["candidate_id","event_cluster_id","cluster_version","members","match_context","limitations"],"properties":{
+      "candidate_id":{"type":"string","pattern":"^[a-f0-9]{64}$"},"event_cluster_id":{"type":"null"},"cluster_version":{"type":"null"},
+      "members":{"type":"array","minItems":1,"maxItems":1,"items":{"type":"object","additionalProperties":false,"required":["snapshot","bundle"],"properties":{"snapshot":{"type":"object","required":["event_id","event_version","payload_sha256","received_at","source_mode"],"properties":{"event_version":{"type":"integer","minimum":1}}},"bundle":{"type":"object","properties":{"schema_version":{"const":"0.2"}}}}}},
+      "match_context":{"type":"object","additionalProperties":false,"required":["channels","matched_views","feature_ids","neighbor_feature_refs","claim_refs","event_paths","hypotheses","unknowns"],"properties":{
+        "channels":{"type":"array","items":{"enum":["dense","lexical","structured"]}},"matched_views":{"type":"array","items":{"type":"string"}},"feature_ids":{"type":"array","items":{"type":"string"}},"neighbor_feature_refs":{"type":"array","items":{"type":"object"}},"claim_refs":{"type":"array","items":{"type":"object"}},"event_paths":{"type":"array","items":{"type":"string"}},"hypotheses":{"type":"array","maxItems":0},"unknowns":{"type":"array"}
+      }},"limitations":{"type":"array","items":{"type":"string"}}
+    }}},
+    "retrieval_context":{"type":"object","required":["trace_id","index_snapshot_id","encoder_fingerprint","representation_version","policy_version","data_watermark","failed_channels"]},
+    "limitations":{"type":"array","items":{"type":"string"}}
+  }
+}
