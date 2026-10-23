@@ -34,7 +34,10 @@ async def get_news_feed(
     company_id: str,
     role: Role = Query(default="cfo"),
 ) -> list[FeedItem]:
-    return await run_in_threadpool(store.get_feed, company_id=company_id, role=role)
+    try:
+        return await run_in_threadpool(store.get_feed, company_id=company_id, role=role)
+    except KeyError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Company not found") from exc
 
 
 @api_router.get(

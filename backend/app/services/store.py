@@ -208,10 +208,10 @@ class DataStore:
         )
 
     def get_feed(self, company_id: str, role: Role) -> list[FeedItem]:
-        company = next(
-            (c for c in self._companies if c["company_id"] == company_id),
-            self._companies[0],
-        )
+        company = next((c for c in self._companies if c["company_id"] == company_id), None)
+        if company is None:
+            # Контракт API: неизвестная компания — 404, а не подстановка первой компании.
+            raise KeyError(f"unknown company_id: {company_id}")
 
         all_events = self.user_events + self._events
         if self._analyst_enabled():
@@ -241,15 +241,12 @@ class DataStore:
     def get_insight(
         self, event_id: str, company_id: str, role: Role
     ) -> Insight:
-        company = next(
-            (c for c in self._companies if c["company_id"] == company_id),
-            self._companies[0],
-        )
+        company = next((c for c in self._companies if c["company_id"] == company_id), None)
         all_events = self.user_events + self._events
-        event = next(
-            (ev for ev in all_events if ev.get("event_id") == event_id),
-            self._events[0],
-        )
+        event = next((ev for ev in all_events if ev.get("event_id") == event_id), None)
+        if company is None or event is None:
+            # Контракт API: неизвестные company_id/news_id — 404 (эндпоинт ловит исключение).
+            raise KeyError(f"unknown company_id/news_id: {company_id}/{event_id}")
 
         started = time.perf_counter()
         try:

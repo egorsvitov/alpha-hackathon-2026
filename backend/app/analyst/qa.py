@@ -308,7 +308,8 @@ class Validator:
             if not claim_ids:
                 self.issue("fact_without_source", "Факт без утверждения-источника удалён", "error", path)
                 return None
-        elif kind == "fact" and not (claim_ids or feature_ids):
+        elif kind == "fact" and not evidence_ids:
+            # Контракт фронта: «факт» — только с цитатой источника (evidence_ids).
             kind = "inference"
         if section != "facts" and not (claim_ids or feature_ids or bank_ids):
             self.issue("unsupported_statement", "Вывод без ссылок на данные", "error", path)

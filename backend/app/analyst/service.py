@@ -326,7 +326,7 @@ class AnalystService:
             )
             try:
                 draft, _usage = self.llm.chat_json(request, ClassifyDraft.model_validate)
-                topic = draft.topic if draft.business_relevant or draft.topic != "other" else "other"
+                topic = draft.topic if draft.business_relevant else "other"
                 return {"topic": topic, "topic_label": TOPIC_LABELS[topic], "summary": draft.summary, "classified_by": "llm"}
             except LLMError as exc:
                 logger.warning("Классификация новости через LLM не выполнена: %s", exc)

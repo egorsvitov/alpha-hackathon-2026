@@ -271,7 +271,8 @@ class BusinessAnalyst:
                 for m in [self.model, *self.fallback_models]:
                     record, source = self.cache.get(cache_key(company_id, cand, role, pv, pver, m, mem_ref))
                     if record is not None and (prefer_cache or source in ("memory", "runtime") or not allow_live):
-                        return self._from_cache(record, source or "memory", inp, cand, base_trace, previous)
+                        return self._from_cache(record, source or "memory", inp, cand, base_trace, previous,
+                                                allow_live=allow_live and self.llm is not None)
             if not allow_live or self.llm is None:
                 return self._offline(lkey, inp, cand, base_trace, previous, reason="живой вызов LLM недоступен в этом режиме")
             outcome, used_model, last_exc = None, self.model, None
@@ -342,9 +343,12 @@ class BusinessAnalyst:
         cand: Candidate,
         base_trace: list[TraceEntry],
         previous: PreviousContext | None = None,
+        allow_live: bool = True,
     ) -> CandidateOutcome:
         outcome = self._restore(record, inp, cand, base_trace, previous)
-        if source == "bundled":
+        # Сохранённый ответ репозитория или режим без живых вызовов (cached) — «cached»;
+        # в режиме llm ответ, только что посчитанный живым вызовом и взятый из памяти, остаётся «live».
+        if source == "bundled" or not allow_live:
             outcome.run.generated_by = "cached"
         outcome.run.trace = list(outcome.run.trace) + [
             TraceEntry(
@@ -449,6 +453,7 @@ class BusinessAnalyst:
             ))
         if qa.decision == "exclude":
             trace.append(TraceEntry(step="priority_rule", summary="Решение аналитика", result="exclude: событие не показывается в ленте этой роли"))
+            run.trace = list(trace)  # Pydantic копирует список при создании run — переносим шаги, добавленные позже
             return CandidateOutcome(
                 excluded=ExcludedCandidate(
                     candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
@@ -502,6 +507,7 @@ class BusinessAnalyst:
                 limitations=qa.limitations,
             ),
         )
+        run.trace = list(trace)
         return CandidateOutcome(insight=insight, run=run)
 
     # ------------------------------------------------------------------ пакет
