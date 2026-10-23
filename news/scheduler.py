@@ -119,7 +119,7 @@ def main() -> int:
     # Параметры сбора, пробрасываются в dump_large.
     parser.add_argument("--target", type=int, default=0)
     parser.add_argument("--category", action="append",
-                        choices=["macro", "industry", "business", "official"])
+                        choices=["macro", "industry", "business", "official", "regional"])
     parser.add_argument("--out-dir", default=os.environ.get("NEWS_OUT_DIR", "data/processed/news_bulk"))
     parser.add_argument("--cache-dir", default=os.environ.get("NEWS_CACHE_DIR", "data/processed/news_cache"))
     parser.add_argument("--collect-timeout", type=int, default=3600,

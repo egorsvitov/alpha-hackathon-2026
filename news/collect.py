@@ -17,6 +17,7 @@
 Примеры:
     python3 news/collect.py                       # все источники
     python3 news/collect.py --category macro      # только макро
+    python3 news/collect.py --category regional   # только региональные СМИ
     python3 news/collect.py --headlines-only      # без полного текста
     python3 news/collect.py --dry-run             # только кандидаты, без сети к статьям
 
@@ -35,7 +36,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--category", action="append", choices=["macro", "industry", "business", "official"],
+        "--category", action="append",
+        choices=["macro", "industry", "business", "official", "regional"],
         help="Ограничить категорией источников (можно несколько раз).",
     )
     parser.add_argument("--headlines-only", action="store_true",
@@ -68,6 +70,7 @@ def main() -> int:
             plan = build_batch_plan(profile, pipeline.registry.sources)
             topic_filter = TopicFilter(plan)
             print(f"[audience] темы: {', '.join(plan.top_topics)}")
+            print(f"[audience] регионы: {', '.join(plan.top_regions)}")
             print(f"[audience] страны ВЭД: {', '.join(plan.priority_countries[:6])}")
         except Exception as e:  # noqa: BLE001
             print(f"Предупреждение: не удалось построить фильтр аудитории: {e}", file=sys.stderr)

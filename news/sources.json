@@ -61,15 +61,7 @@
       "kind": "rss",
       "url": "https://moex.com/export/news.aspx?cat=100",
       "category": "macro",
-      "limit": 1500,
-      "language": "ru"
-    },
-    {
-      "name": "moex_main",
-      "kind": "rss",
-      "url": "https://moex.com/export/news.aspx?cat=101",
-      "category": "macro",
-      "limit": 1500,
+      "limit": 100,
       "language": "ru"
     },
     {
@@ -145,14 +137,6 @@
       "language": "ru"
     },
     {
-      "name": "m24_ru",
-      "kind": "rss",
-      "url": "https://www.m24.ru/rss.xml",
-      "category": "business",
-      "limit": 100,
-      "language": "ru"
-    },
-    {
       "name": "tass_ru",
       "kind": "rss",
       "url": "https://tass.ru/rss/v2.xml",
@@ -177,14 +161,6 @@
       "language": "ru"
     },
     {
-      "name": "ural_region",
-      "kind": "rss",
-      "url": "https://www.urfo.org/rss",
-      "category": "business",
-      "limit": 100,
-      "language": "ru"
-    },
-    {
       "name": "retail_news",
       "kind": "rss",
       "url": "https://www.retailer.ru/rss/",
@@ -201,15 +177,7 @@
       "language": "ru"
     },
     {
-      "name": "it_news",
-      "kind": "rss",
-      "url": "https://www.cnews.ru/rss/",
-      "category": "industry",
-      "limit": 100,
-      "language": "ru"
-    },
-    {
-      "name": "cnews_it",
+      "name": "cnews",
       "kind": "rss",
       "url": "https://www.cnews.ru/inc/rss/news.xml",
       "category": "industry",
@@ -225,9 +193,9 @@
       "language": "ru"
     },
     {
-      "name": "rbc_realty",
+      "name": "spb_nsp",
       "kind": "rss",
-      "url": "https://realty.rbc.ru/rss/",
+      "url": "https://nsp.ru/rss",
       "category": "industry",
       "limit": 100,
       "language": "ru"
@@ -257,10 +225,170 @@
       "language": "ru"
     },
     {
-      "name": "cnews",
+      "name": "m24_ru",
       "kind": "rss",
-      "url": "https://www.cnews.ru/inc/rss/news.xml",
-      "category": "industry",
+      "url": "https://www.m24.ru/rss.xml",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "spb_peterburg2",
+      "kind": "rss",
+      "url": "https://peterburg2.ru/rss/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "spb_online47",
+      "kind": "rss",
+      "url": "https://online47.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "sib_infopro54",
+      "kind": "rss",
+      "url": "https://infopro54.ru/feed/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "sib_krsk",
+      "kind": "rss",
+      "url": "https://krsk.sibnovosti.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "ural_region",
+      "kind": "rss",
+      "url": "https://www.urfo.org/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "ural_ean",
+      "kind": "rss",
+      "url": "https://eanews.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "ural_perm_bc",
+      "kind": "rss",
+      "url": "https://www.business-class.su/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "ural_tyumen_vsluh",
+      "kind": "rss",
+      "url": "https://vsluh.ru/rss/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "ural_chel_dostup",
+      "kind": "rss",
+      "url": "https://dostup1.ru/rss/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "pfo_tatar_inform",
+      "kind": "rss",
+      "url": "https://www.tatar-inform.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "pfo_nn_nta",
+      "kind": "rss",
+      "url": "https://nta-pfo.ru/rss/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "pfo_nn_vremya",
+      "kind": "rss",
+      "url": "https://www.vremyan.ru/rss/news.rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "pfo_samara_63",
+      "kind": "rss",
+      "url": "https://63.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "pfo_ufa1",
+      "kind": "rss",
+      "url": "https://ufa1.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "south_kubnews",
+      "kind": "rss",
+      "url": "https://kubnews.ru/rss/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "south_krd_93",
+      "kind": "rss",
+      "url": "https://93.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "south_rnd_161",
+      "kind": "rss",
+      "url": "https://161.ru/rss",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "south_abireg",
+      "kind": "rss",
+      "url": "https://abireg.ru/rss/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "dv_eastrussia",
+      "kind": "rss",
+      "url": "https://www.eastrussia.ru/rss/",
+      "category": "regional",
+      "limit": 100,
+      "language": "ru"
+    },
+    {
+      "name": "dv_newsvl",
+      "kind": "rss",
+      "url": "https://www.newsvl.ru/rss/",
+      "category": "regional",
       "limit": 100,
       "language": "ru"
     }

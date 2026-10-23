@@ -7,6 +7,7 @@
   - устойчива к сбоям сети: заблокированный источник пропускается и
     логируется, но не останавливает весь проход;
   - использует дисковый кэш и продолжает с места остановки (дедуп по URL);
+  - очищает накопленный корпус от технического и нецелевого шума;
   - позволяет ограничить цель по числу статей и по времени.
 
 ВАЖНО: полную выгрузку нужно запускать вне корпоративной сети (дома /
@@ -16,7 +17,7 @@
 Запуск из корня:
     .venv_news/bin/python news/dump_large.py
     .venv_news/bin/python news/dump_large.py --target 10000
-    .venv_news/bin/python news/dump_large.py --categories business macro
+    .venv_news/bin/python news/dump_large.py --category business --category regional
 """
 from __future__ import annotations
 
@@ -35,7 +36,7 @@ def main() -> int:
     parser.add_argument("--max-seconds", type=float, default=0,
                         help="Ограничить время прохода (сек). 0 = без ограничения.")
     parser.add_argument("--category", action="append",
-                        choices=["macro", "industry", "business", "official"],
+                        choices=["macro", "industry", "business", "official", "regional"],
                         help="Ограничить категорией (можно несколько раз).")
     parser.add_argument("--registry", default="news/sources.json",
                         help="Путь к реестру источников.")
@@ -48,8 +49,9 @@ def main() -> int:
     args = parser.parse_args()
 
     from news.core.fetcher import Fetcher
-    from news.core.registry import load_registry
     from news.core.pipeline import NewsPipeline
+    from news.core.quality import clean_article_text, is_noise_article
+    from news.core.registry import load_registry
     from news.core.store import JsonlStore
 
     registry = load_registry(args.registry)
@@ -70,8 +72,22 @@ def main() -> int:
     fetched_total = 0
     ok_names: list[str] = []
     fail_list: list[tuple[str, str]] = []
-    # Текущее состояние корпуса (URL -> Article), дедуп накапливается в памяти.
-    merged = store.read_existing()
+
+    # Читаем и сразу очищаем существующий корпус от ранее накопленного шума.
+    raw_existing = store.read_existing()
+    merged = {}
+    sanitized_changed = False
+    for url_key, art in raw_existing.items():
+        cleaned_txt = clean_article_text(art.text, title=art.title, url=art.url)
+        if is_noise_article(url=art.url, title=art.title, text=cleaned_txt, source=art.source):
+            sanitized_changed = True
+            continue
+        if cleaned_txt != art.text:
+            art = art.model_copy(update={"text": cleaned_txt})
+            sanitized_changed = True
+        merged[url_key] = art
+    if sanitized_changed:
+        store.write(list(merged.values()))
 
     for spec in sources:
         if args.target and len(merged) >= args.target:
@@ -87,13 +103,15 @@ def main() -> int:
             fail_list.append((spec.name, str(e)[:60]))
             continue
         if not candidates:
+            ok_names.append(f"{spec.name}(0)")
+            print(f"  [{spec.name}] +0 (всего в корпусе: {len(merged)})", flush=True)
             continue
         new_count = 0
         for c in candidates:
             existing_art = merged.get(c.url)
             if existing_art is not None and existing_art.text:
                 continue
-            res = fetcher.fetch_article(c)
+            res = fetcher.fetch_article(c, source=spec.name)
             if res.error:
                 continue
             art = pipe._candidate_to_article(
@@ -110,7 +128,7 @@ def main() -> int:
         print(f"  [{spec.name}] +{new_count} (всего в корпусе: {len(merged)})", flush=True)
 
     # Итоговое сохранение.
-    if fetched_total > 0 or not store.corpus_path.exists():
+    if fetched_total > 0 or sanitized_changed or not store.corpus_path.exists():
         store.write(list(merged.values()))
     fetcher.close()
 

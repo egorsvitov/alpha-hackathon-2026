@@ -10,20 +10,31 @@
   - сетевой доступ есть ТОЛЬКО в этом модуле, остальной код работает с файлами;
   - скачанные страницы кэшируются на диск, чтобы не дёргать источники повторно
     (важно и для скорости, и для вежливости к источнику);
+  - технический биржевой/табличный и бытовой шум отсекается до и после скачивания;
   - текст, который не удалось извлечь, честно остаётся пустым — не выдумываем.
 """
 from __future__ import annotations
 
 import hashlib
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-import feedparser
 import requests
-import trafilatura
+
+try:
+    import feedparser
+except ImportError:  # pragma: no cover
+    feedparser = None  # type: ignore[assignment]
+
+try:
+    import trafilatura
+except ImportError:  # pragma: no cover
+    trafilatura = None  # type: ignore[assignment]
 
 from news.core.model import ArticleCandidate
+from news.core.quality import clean_article_text, is_noise_article, is_noise_candidate
 from news.core.registry import SourceSpec
 
 # Будем представляться браузером, чтобы некоторые издания не блокировали.
@@ -46,7 +57,7 @@ class FetchResult:
 
 
 class Fetcher:
-    """Загрузчик лент и статей с дисковым кэшем."""
+    """Загрузчик лент и статей с дисковым кэшем и фильтрацией шума."""
 
     def __init__(
         self,
@@ -78,6 +89,26 @@ class Fetcher:
     def _save_to_cache(self, kind: str, url: str, content: str) -> None:
         self._cache_path(kind, url).write_text(content, encoding="utf-8")
 
+    @staticmethod
+    def _decode_response(resp) -> str:
+        """Декодирует HTTP-ответ с учётом UTF-8 и Windows-1251 для российских СМИ."""
+        raw = getattr(resp, "content", None)
+        if isinstance(raw, (bytes, bytearray)):
+            try:
+                return raw.decode("utf-8")
+            except UnicodeDecodeError:
+                text = raw.decode("cp1251", errors="replace")
+                # Чтобы XML/HTML-парсеры (feedparser, trafilatura) не пытались повторно
+                # декодировать уже преобразованную Unicode-строку как windows-1251.
+                return re.sub(
+                    r'(encoding|charset)\s*=\s*["\']?windows-1251["\']?',
+                    r'\1="utf-8"',
+                    text,
+                    count=2,
+                    flags=re.IGNORECASE,
+                )
+        return resp.text
+
     def _http_get(self, url: str, kind: str) -> str:
         """GET с вежливой паузой. Возвращает HTML/XML строку.
 
@@ -93,7 +124,7 @@ class Fetcher:
         try:
             resp = self.session.get(url, timeout=self.timeout)
             resp.raise_for_status()
-            content = resp.text
+            content = self._decode_response(resp)
         except Exception:
             if kind != "article":
                 cached = self._load_from_cache(kind, url)
@@ -110,6 +141,7 @@ class Fetcher:
         """Собирает кандидатов из источника (RSS/JSON/HTML) согласно spec.kind.
 
         Отвечает только за список ссылок; текст берётся позже из URL.
+        Технический и нецелевой шум отсекается сразу на уровне кандидатов.
         """
         try:
             if spec.kind == "rss":
@@ -127,18 +159,24 @@ class Fetcher:
         content = self._http_get(spec.url, spec.kind)
         parsed = feedparser.parse(content)
         out: list[ArticleCandidate] = []
-        for entry in parsed.entries[: spec.limit]:
-            link = entry.get("link")
+        for entry in parsed.entries:
+            link = (entry.get("link") or "").strip()
             if not link:
+                continue
+            title = (entry.get("title") or "").strip() or link
+            summary = (entry.get("summary") or entry.get("description") or "").strip() or None
+            if is_noise_candidate(url=link, title=title, summary=summary, source=spec.name):
                 continue
             out.append(
                 ArticleCandidate(
                     url=link,
-                    title=(entry.get("title") or "").strip() or link,
+                    title=title,
                     published_at=self._rss_time(entry),
-                    summary=(entry.get("summary") or entry.get("description") or "").strip() or None,
+                    summary=summary,
                 )
             )
+            if len(out) >= spec.limit:
+                break
         return out
 
     @staticmethod
@@ -156,22 +194,28 @@ class Fetcher:
         data = json.loads(content)
         items = data if isinstance(data, list) else data.get("items", [])
         out: list[ArticleCandidate] = []
-        for item in items[: spec.limit]:
-            url = item.get("url") or item.get("link")
+        for item in items:
+            url = (item.get("url") or item.get("link") or "").strip()
             if not url:
+                continue
+            title = str(item.get("title") or url).strip()
+            summary = str(item.get("summary") or item.get("description") or "").strip() or None
+            if is_noise_candidate(url=url, title=title, summary=summary, source=spec.name):
                 continue
             out.append(
                 ArticleCandidate(
                     url=url,
-                    title=str(item.get("title") or url),
+                    title=title,
                     published_at=item.get("published_at") or item.get("date"),
+                    summary=summary,
                 )
             )
+            if len(out) >= spec.limit:
+                break
         return out
 
     def _from_html(self, spec: SourceSpec) -> list[ArticleCandidate]:
         content = self._http_get(spec.url, spec.kind)
-        import re
         # Ссылки со страницы-листинга: абсолютные и относительные.
         base = spec.url
         links = re.findall(r'href=["\']([^"\']+)["\']', content)
@@ -185,8 +229,10 @@ class Fetcher:
                 continue
             if not self._is_news_link(url):
                 continue
-            seen.add(url)
             title = self._title_from_html_link(url)
+            if is_noise_candidate(url=url, title=title, summary=None, source=spec.name):
+                continue
+            seen.add(url)
             out.append(ArticleCandidate(url=url, title=title))
             if len(out) >= spec.limit:
                 break
@@ -213,7 +259,6 @@ class Fetcher:
         слово news/press/announce/event в пути, либо достаточно глубокий путь
         со slug (2+ сегмента после хоста).
         """
-        import re
         # Якоря, пустые, корневые, не-http.
         if url in ("#", "", "/", "//", "/ru/", "/en/"):
             return False
@@ -265,7 +310,6 @@ class Fetcher:
         → «Госдума утвердила кандидатуру ...» (slug, нормализованный к пробелам).
         Если выделить нечего — возвращаем сам URL (честно).
         """
-        import re
         # Разворачиваем HTML-escape &amp; -> &, чтобы query был корректным.
         url = url.replace("&amp;", "&")
         # Заголовок из slug query: ?id_4=40706-gosduma_utverdila_...
@@ -282,8 +326,8 @@ class Fetcher:
 
     # ---------------------------------------------------------------- текст статьи
 
-    def fetch_article(self, candidate: ArticleCandidate) -> FetchResult:
-        """Выкачивает и извлекает текст статьи по URL."""
+    def fetch_article(self, candidate: ArticleCandidate, source: str = "") -> FetchResult:
+        """Выкачивает, извлекает и очищает текст статьи по URL."""
         try:
             content = self._http_get(candidate.url, "article")
         except Exception as e:  # noqa: BLE001
@@ -313,7 +357,11 @@ class Fetcher:
         if meta and meta.date and not published_at:
             published_at = meta.date
 
-        return FetchResult(text=extracted.strip(), title=title, published_at=published_at)
+        cleaned_text = clean_article_text(extracted, title=title, url=candidate.url)
+        if is_noise_article(url=candidate.url, title=title, text=cleaned_text, source=source):
+            return FetchResult(error="filtered: технический или нецелевой шум")
+
+        return FetchResult(text=cleaned_text, title=title, published_at=published_at)
 
     def close(self) -> None:
         self.session.close()

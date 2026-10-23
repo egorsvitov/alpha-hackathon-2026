@@ -17,6 +17,7 @@ SourceCategory = Literal[
     "industry",     # отраслевые издания и ассоциации
     "business",     # деловые и общеэкономические СМИ
     "official",     # госорганы, регуляторы, статистика
+    "regional",     # региональные деловые и экономические СМИ (по географии ЦА)
 ]
 SourceKind = Literal["rss", "json", "html"]
 

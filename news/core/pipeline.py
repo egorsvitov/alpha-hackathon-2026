@@ -48,8 +48,8 @@ class NewsPipeline:
         """Собирает статьи.
 
         topic_filter — опциональный TopicFilter (из плана батча по аудитории).
-        Если задан, кандидаты, не релевантные темам/странам плана, отбрасываются
-        на этапе сбора (без LLM, дёшево).
+        Если задан, кандидаты, не релевантные темам/странам/регионам плана,
+        отбрасываются на этапе сбора (без LLM, дёшево).
         """
         report = PipelineReport()
         sources = self.registry.enabled(categories)
@@ -77,7 +77,11 @@ class NewsPipeline:
                 res = self.fetcher.fetch_article(c)
                 if res.error:
                     report.failed_articles += 1
-                    # Всё равно сохраняем заголовок/ссылку без текста, чтобы
+                    # Если статья отфильтрована как технический или нецелевой шум,
+                    # не записываем пустую заглушку в корпус.
+                    if str(res.error).startswith("filtered:"):
+                        continue
+                    # При сетевой ошибке сохраняем заголовок/ссылку без текста, чтобы
                     # не терять факт существования статьи.
                     new_articles.append(self._candidate_to_article(spec, c, text=""))
                     continue

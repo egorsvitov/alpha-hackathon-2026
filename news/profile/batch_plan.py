@@ -15,27 +15,42 @@ from dataclasses import dataclass, field
 from news.profile.audience import AudienceProfile
 
 # Приоритетные категории источников для разных профилей (макрос для всех).
-BASE_CATEGORIES = ["macro", "business"]
+BASE_CATEGORIES = ["macro", "business", "official"]
 
 # Маппинг отрасли (по ключевым словам MAINOKVED_NAME) → тема/категория.
 # Служит для понимания, какие отраслевые источники/темы важны.
 INDUSTRY_TO_TOPIC = {
     "недвижим": "realestate",
     "строител": "construction",
+    "архитектур": "construction",
+    "инженерно-технич": "construction",
+    "электромонтаж": "construction",
+    "штукатурн": "construction",
+    "снос зданий": "construction",
     "торговл": "trade",
     "ресторан": "hospitality",
     "гостиниц": "hospitality",
     "программн": "it",
     "компьютерн": "it",
+    "информационн": "it",
     "перевоз": "logistics",
     "грузов": "logistics",
+    "транспорт": "logistics",
+    "склад": "logistics",
     "научн": "rnd",
     "рекламн": "marketing",
     "фармацевт": "pharma",
+    "больничн": "pharma",
+    "медицин": "pharma",
+    "стоматолог": "pharma",
     "финанс": "finance",
+    "бухгалтер": "finance",
+    "консультирован": "finance",
     "нефтегаз": "oil_gas",
     "металлург": "metallurgy",
     "сельск": "agro",
+    "выращиван": "agro",
+    "зернов": "agro",
 }
 
 # Приоритетные страны ВЭД для новостей о внешней торговле и логистике.
@@ -76,7 +91,8 @@ def _topic_of_industry(name: str) -> str | None:
 
 
 def build_batch_plan(profile: AudienceProfile, sources=None, *,
-                     top_n_industries: int = 8) -> BatchPlan:
+                     top_n_industries: int = 12,
+                     top_n_regions: int = 12) -> BatchPlan:
     """Строит план батча из профиля аудитории и списка источников.
 
     sources — список SourceSpec из реестра; если передан, дополнительно
@@ -85,7 +101,7 @@ def build_batch_plan(profile: AudienceProfile, sources=None, *,
     plan = BatchPlan()
     plan.categories = list(BASE_CATEGORIES)
     plan.reasoning.append(
-        f"Базовая категория: {', '.join(BASE_CATEGORIES)} (макро + деловые) — значимы для всех компаний."
+        f"Базовая категория: {', '.join(BASE_CATEGORIES)} (макро + деловые + регуляторы) — значимы для всех компаний."
     )
 
     # Темы из преобладающих отраслей.
@@ -96,6 +112,8 @@ def build_batch_plan(profile: AudienceProfile, sources=None, *,
             topic_counts[t] = topic_counts.get(t, 0) + cnt
     plan.top_topics = [t for t, _ in sorted(topic_counts.items(), key=lambda x: -x[1])]
     if plan.top_topics:
+        if "industry" not in plan.categories:
+            plan.categories.append("industry")
         plan.reasoning.append(
             f"Темы из отраслей аудитории: {', '.join(plan.top_topics)}."
         )
@@ -118,10 +136,14 @@ def build_batch_plan(profile: AudienceProfile, sources=None, *,
             f"{', '.join(plan.priority_countries[:6])}."
         )
 
-    # Регионы.
-    plan.top_regions = [n for n, _ in profile.top_regions[:5]]
+    # Регионы концентрации ЦА (топ кластеров РФ).
+    plan.top_regions = [n for n, _ in profile.top_regions[:top_n_regions]]
     if plan.top_regions:
-        plan.reasoning.append(f"Регионы концентрации: {', '.join(plan.top_regions)}.")
+        if "regional" not in plan.categories:
+            plan.categories.append("regional")
+        plan.reasoning.append(
+            f"Регионы концентрации ЦА ({len(plan.top_regions)}): {', '.join(plan.top_regions[:8])}."
+        )
 
     # Отбор источников из реестра по категориям.
     if sources:
@@ -129,7 +151,7 @@ def build_batch_plan(profile: AudienceProfile, sources=None, *,
             if s.category in plan.categories:
                 plan.source_names.append(s.name)
         plan.reasoning.append(
-            f"Источники по категориям: {', '.join(plan.source_names)}."
+            f"Источники по категориям ({len(plan.source_names)}): {', '.join(plan.source_names[:15])}."
         )
 
     return plan
