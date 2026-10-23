@@ -23,6 +23,11 @@
 * ``ANALYST_AS_OF`` — фиксированный момент анализа (ISO), по умолчанию текущее время.
 * ``ANALYST_FEED_HIDE_EXCLUDED`` — скрывать из ленты события с ``decision=exclude``.
 * ``ANALYST_MAX_PARALLEL`` — сколько кандидатов ленты анализировать параллельно.
+* ``ANALYST_PROMPT_VERSION`` — версия промпта: ``analyst-v1.0`` (по умолчанию, под неё
+  сохранены ответы в ``app/analyst/cache``) или ``analyst-v1.1`` (вход ретривера, память фактов).
+* ``ANALYST_MEMORY`` — память фактов и «что изменилось с прошлого» (по умолчанию выключена;
+  работает с промптом ``analyst-v1.1``). ``ANALYST_MEMORY_PATH`` — файл SQLite
+  (по умолчанию ``/data/analyst_memory.sqlite3`` или временная папка ОС).
 """
 
 from __future__ import annotations
@@ -41,6 +46,8 @@ DEFAULT_FALLBACK_BASE_URL = "https://changellenge.up.railway.app/v1"
 DEFAULT_MODEL = "z-ai/glm-5.3-flash"
 DEFAULT_FALLBACK_MODEL = "deepseek/deepseek-v4.1-flash"
 VALID_MODES = ("template", "llm", "cached")
+DEFAULT_PROMPT_VERSION = "analyst-v1.0"
+VALID_PROMPT_VERSIONS = ("analyst-v1.0", "analyst-v1.1")
 
 _dotenv_loaded = False
 
@@ -112,6 +119,9 @@ class AnalystSettings:
     feed_hide_excluded: bool = True
     max_parallel: int = 4
     news_window_hours: int = 24 * 60
+    prompt_version: str = DEFAULT_PROMPT_VERSION
+    memory_enabled: bool = False
+    memory_path: Path | None = None
 
     @property
     def has_key(self) -> bool:
@@ -131,6 +141,10 @@ class AnalystSettings:
             mode = "template"
         runtime_dir = env.get("ANALYST_CACHE_DIR")
         bundled_dir = env.get("ANALYST_BUNDLED_CACHE_DIR")
+        prompt_version = (env.get("ANALYST_PROMPT_VERSION") or DEFAULT_PROMPT_VERSION).strip()
+        if prompt_version not in VALID_PROMPT_VERSIONS:
+            prompt_version = DEFAULT_PROMPT_VERSION
+        memory_path = env.get("ANALYST_MEMORY_PATH")
         return cls(
             mode=mode,
             api_key=(env.get("LLM_API_KEY") or "").strip(),
@@ -155,4 +169,7 @@ class AnalystSettings:
             feed_hide_excluded=_bool(env.get("ANALYST_FEED_HIDE_EXCLUDED"), True),
             max_parallel=max(1, _int(env.get("ANALYST_MAX_PARALLEL"), 4)),
             news_window_hours=_int(env.get("ANALYST_NEWS_WINDOW_HOURS"), 24 * 60),
+            prompt_version=prompt_version,
+            memory_enabled=_bool(env.get("ANALYST_MEMORY"), False),
+            memory_path=Path(memory_path) if memory_path else None,
         )

@@ -26,6 +26,7 @@ from app.analyst.schemas import CandidateOutcome, Candidate, CompanyContext, Imp
 from app.schemas.base import (
     AiConclusion,
     BankPosition,
+    ChangesSincePrevious,
     Claim,
     Evidence,
     FeedItem,
@@ -306,4 +307,7 @@ def to_insight(
         why_it_matters=why, risks=risks, opportunities=opps, next_actions=steps,
         impact_estimate=estimate, bank_position=bank_position, ai_conclusion=ai,
         unknowns=unknowns[:8], evidence=col.items, trace=trace,
+        changes_since_previous=(
+            ChangesSincePrevious.model_validate(ins.changes_since_previous.model_dump()) if ins.changes_since_previous else None
+        ),
     )

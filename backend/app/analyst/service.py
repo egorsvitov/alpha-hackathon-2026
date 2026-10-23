@@ -33,8 +33,9 @@ from app.analyst.llm_gateway import (
     LLMGateway,
     get_logger,
 )
+from app.analyst.memory import MemoryStore
 from app.analyst.qa import numbers_in
-from app.analyst.schemas import CandidateOutcome, ChatDraft, ClassifyDraft
+from app.analyst.schemas import AnalystOutput, CandidateOutcome, ChatDraft, ClassifyDraft
 from app.analyst.settings import AnalystSettings
 from app.schemas.base import Evidence, FeedItem, Insight, QaAnswer, TraceStep
 
@@ -71,6 +72,7 @@ class AnalystService:
         cache: AnalysisCache | None = None,
         ledger: BudgetLedger | None = None,
         bank_evidence: list[Any] | None = None,
+        memory: MemoryStore | None = None,
     ) -> None:
         self.settings = settings or AnalystSettings.from_env()
         s = self.settings
@@ -89,8 +91,15 @@ class AnalystService:
         self.llm = llm
         self.cache = cache or AnalysisCache(s.runtime_cache_dir, s.bundled_cache_dir)
         fallbacks = [m for m in [s.fallback_model] if m and m != s.model]
+        self.memory = memory
+        if self.memory is None and s.memory_enabled and s.mode != "template":
+            try:
+                self.memory = MemoryStore(s.memory_path)
+            except Exception as exc:  # noqa: BLE001 - без памяти сервис работает как раньше
+                logger.warning("Память фактов недоступна: %s", type(exc).__name__)
         self.analyst = BusinessAnalyst(
-            llm, model=s.model, cache=self.cache, max_tokens=s.max_tokens, max_parallel=s.max_parallel, fallback_models=fallbacks
+            llm, model=s.model, cache=self.cache, max_tokens=s.max_tokens, max_parallel=s.max_parallel, fallback_models=fallbacks,
+            prompt_version=s.prompt_version, memory=self.memory,
         )
         if bank_evidence is None:
             from app.services.seed_data import SHARED_EVIDENCE
@@ -177,7 +186,22 @@ class AnalystService:
 
     # ------------------------------------------------------------------ карточка
     def run_id(self, company_id: str, role: str, cand_ref: str) -> str:
-        return "an_" + key_hash(f"{company_id}|{role}|{cand_ref}|{prompts.PROMPT_VERSION}")[:16]
+        return "an_" + key_hash(f"{company_id}|{role}|{cand_ref}|{self.settings.prompt_version}")[:16]
+
+    # ------------------------------------------------------------------ пакет ретривера
+    def analyze_batch(self, raw_batch: dict[str, Any], role: str | None = None) -> tuple[AnalystOutput, Any]:
+        """``ImpactCandidateBatch v1`` → ``AnalystOutput`` (и результат адаптера для трассы).
+
+        Пустой пакет (``status=empty`` или без кандидатов) даёт пустой ответ без вызова LLM.
+        """
+        from app.analyst.batch_adapter import ImpactBatchAdapter
+
+        adapter = ImpactBatchAdapter(prompt_version=self.settings.prompt_version,
+                                     reserve_tokens=600 if self.memory is not None else 0)
+        adapted = adapter.to_analyst_input(raw_batch, role=role)
+        live, _ = self.live_status()
+        output, _results = self.analyst.analyze(adapted.analyst_input, allow_live=live, prefer_cache=self.settings.prefer_cache)
+        return output, adapted
 
     def insight(
         self,
@@ -329,7 +353,8 @@ class AnalystService:
             "analyst_mode": self.mode,
             "analyst_model": self.settings.model if self.mode != "template" else None,
             "analyst_fallback_model": self.settings.fallback_model if self.mode != "template" else None,
-            "prompt_version": prompts.PROMPT_VERSION,
+            "prompt_version": self.settings.prompt_version,
+            "memory_enabled": self.memory is not None,
             "live_llm_available": live,
             "live_llm_status": why,
             "budget": self.ledger.snapshot(),

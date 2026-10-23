@@ -32,6 +32,9 @@ EventStatus = Literal["occurred", "forecast", "scenario", "refuted", "mixed", "u
 Level = Literal["high", "medium", "low"]
 StatementKind = Literal["fact", "inference", "hypothesis"]
 BankStatus = Literal["found", "not_found", "outdated"]
+# Совпадает с llm/agent/contracts/insight.schema.json → changes_since_previous.status.
+ChangeStatus = Literal["new", "continuation", "escalation", "deescalation", "unknown"]
+CHANGE_STATUSES: tuple[str, ...] = ("new", "continuation", "escalation", "deescalation", "unknown")
 ImpactChannel = Literal[
     "demand_revenue",
     "costs",
@@ -204,6 +207,9 @@ class Candidate(BaseModel):
     analysis_projection: AnalysisProjection
     match_context: MatchContext = Field(default_factory=MatchContext)
     bank_fragments: list[BankFragment] = Field(default_factory=list)
+    # Флаги качества данных, выставленные адаптером (например, ``unreadable_claims`` —
+    # текст утверждений повреждён ошибкой кодировки). Учитываются в ``precheck``.
+    quality_flags: list[str] = Field(default_factory=list)
 
 
 class AnalystRequest(BaseModel):
@@ -302,6 +308,38 @@ class DraftBank(BaseModel):
         return [str(x).strip() for x in _as_list(v) if str(x).strip()]
 
 
+class DraftChanges(BaseModel):
+    """«Что изменилось по сравнению с прошлым» в ответе модели (псевдонимы ``P1``, ``P1.1``, ``C1``)."""
+
+    model_config = ConfigDict(extra="ignore")
+    status: ChangeStatus = "unknown"
+    previous_insight_id: str | None = None
+    summary: str | None = None
+    claim_ids: list[str] = Field(default_factory=list)
+
+    @field_validator("status", mode="before")
+    @classmethod
+    def _status(cls, v: Any) -> Any:
+        if not isinstance(v, str):
+            return "unknown"
+        v = v.strip().lower()
+        v = {"новое": "new", "продолжение": "continuation", "эскалация": "escalation", "усиление": "escalation",
+             "ослабление": "deescalation", "de-escalation": "deescalation", "неизвестно": "unknown"}.get(v, v)
+        return v if v in CHANGE_STATUSES else "unknown"
+
+    @field_validator("previous_insight_id", "summary", mode="before")
+    @classmethod
+    def _opt_str(cls, v: Any) -> Any:
+        if v is None or (isinstance(v, str) and v.strip().lower() in ("", "null", "none")):
+            return None
+        return str(v).strip()
+
+    @field_validator("claim_ids", mode="before")
+    @classmethod
+    def _listify(cls, v: Any) -> list[Any]:
+        return [str(x).strip() for x in _as_list(v) if str(x).strip()]
+
+
 class LLMDraft(BaseModel):
     """Что возвращает модель на одного кандидата (до проверки QA)."""
 
@@ -326,6 +364,14 @@ class LLMDraft(BaseModel):
     bank_assessment: DraftBank = Field(default_factory=DraftBank)
     ai_conclusion: DraftStatement | None = None
     inference_status: InferenceStatus = "hypothesis"
+    changes_since_previous: DraftChanges | None = None
+
+    @field_validator("changes_since_previous", mode="before")
+    @classmethod
+    def _changes(cls, v: Any) -> Any:
+        if isinstance(v, str):
+            return {"status": v}
+        return v if isinstance(v, dict) else None
 
     @field_validator("decision", "event_status", "impact_direction", "materiality", "urgency", "inference_status", mode="before")
     @classmethod
@@ -442,6 +488,20 @@ class BankAssessment(BaseModel):
     bank_chunk_ids: list[str] = Field(default_factory=list)
 
 
+class ChangesSincePrevious(BaseModel):
+    """Сравнение с ранее сохранёнными выводами (память фактов, ``memory.py``).
+
+    ``previous_insight_id`` и ``claim_ids`` ссылаются только на реально сохранённые
+    записи памяти и утверждения текущего события — это проверяет QA. Без предыдущих
+    данных статус ``new`` (память проверена) или ``unknown`` (память не подключена).
+    """
+
+    status: ChangeStatus = "unknown"
+    previous_insight_id: str | None = None
+    summary: str | None = None
+    claim_ids: list[str] = Field(default_factory=list)
+
+
 class Support(BaseModel):
     company_feature_ids: list[str] = Field(default_factory=list)
     event_claim_ids: list[str] = Field(default_factory=list)
@@ -496,6 +556,7 @@ class RankedInsight(BaseModel):
     bank_assessment: BankAssessment = Field(default_factory=BankAssessment)
     ai_conclusion: Statement | None = None
     support: Support = Field(default_factory=Support)
+    changes_since_previous: ChangesSincePrevious | None = None
 
 
 class ExcludedCandidate(BaseModel):
@@ -508,6 +569,7 @@ class ExcludedCandidate(BaseModel):
         "after_as_of",
         "outside_window",
         "no_claims",
+        "unreadable_source",
         "insufficient_evidence",
         "analysis_failed",
     ]
@@ -540,6 +602,8 @@ class CandidateRun(BaseModel):
     # QA и приоритет пересчитываются при чтении из кэша текущей версией кода.
     draft: dict[str, Any] | None = None
     llm_trace: list[TraceEntry] = Field(default_factory=list)
+    # Отпечаток блока «предыдущий контекст» из памяти фактов (None — блока не было).
+    memory_ref: str | None = None
 
 
 class CandidateOutcome(BaseModel):

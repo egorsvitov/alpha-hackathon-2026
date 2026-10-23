@@ -30,6 +30,7 @@ from typing import Iterable
 
 from app.analyst.schemas import (
     BankAssessment,
+    ChangesSincePrevious,
     DraftStatement,
     ImpactEstimateOut,
     LLMDraft,
@@ -88,6 +89,7 @@ class QAResult:
     recommended_checks: list[str] = field(default_factory=list)
     impact_estimate: ImpactEstimateOut | None = None
     bank_assessment: BankAssessment = field(default_factory=BankAssessment)
+    changes: ChangesSincePrevious | None = None
     limitations: list[str] = field(default_factory=list)
     issues: list[QAIssue] = field(default_factory=list)
     status: str = "passed"
@@ -357,6 +359,85 @@ class Validator:
         return out[:limit]
 
 
+RELATION_STATUSES = ("continuation", "escalation", "deescalation")
+
+
+def validate_changes(draft: LLMDraft, view: PromptView, v: Validator) -> ChangesSincePrevious | None:
+    """Проверка «что изменилось по сравнению с прошлым».
+
+    * блока памяти в промпте не было (``view.previous is None``) — поле не формируем;
+    * истории нет — ``new`` (память проверена) или ``unknown`` (не подключена), без ссылок;
+    * ссылки — только на переданные записи памяти (``P*``) и утверждения (текущие ``C*``
+      и сохранённые ``P*.*``); иначе ссылка отбрасывается, а связь без записи → ``unknown``;
+    * числа в ``summary`` — только из текущих данных и сохранённых фактов.
+    """
+    prev = view.previous
+    if prev is None:
+        return None
+    ch = draft.changes_since_previous
+    path = "changes_since_previous"
+    if not prev.items:
+        if ch is not None and (ch.status in RELATION_STATUSES or ch.previous_insight_id):
+            v.issue("changes_without_history", "Ссылка на историю, которой нет в памяти, — статус исправлен", "warn", path)
+        return ChangesSincePrevious(status="new" if prev.checked else "unknown")
+    if ch is None:
+        v.issue("changes_missing", "Модель не сравнила событие с сохранённой историей", "info", path)
+        return ChangesSincePrevious(status="unknown")
+
+    status = ch.status
+    item = None
+    if ch.previous_insight_id:
+        item = view.resolve_previous_item(ch.previous_insight_id)
+        if item is None:
+            v.issue("unknown_previous_ref", f"Запись памяти {ch.previous_insight_id} не передавалась в запрос", "error", path)
+    claim_ids: list[str] = []
+    prev_items_cited = []
+    for ref in ch.claim_ids:
+        c = view.resolve_claim(ref)
+        if c is not None:
+            claim_ids.append(c.claim_id)
+            continue
+        p = view.resolve_previous_claim(ref)
+        if p is not None:
+            claim_ids.append(p.claim_id)
+            owner = next((it for it in prev.items if any(f.claim_id == p.claim_id for f in it.facts)), None)
+            if owner is not None:
+                prev_items_cited.append(owner)
+            continue
+        v.issue("unknown_ref", f"Ссылка {ref} в сравнении с прошлым не существует и отброшена", "warn", path)
+    if status in RELATION_STATUSES and item is None:
+        owners = {it.insight_id: it for it in prev_items_cited}
+        if len(owners) == 1:
+            item = next(iter(owners.values()))
+        else:
+            v.issue("changes_invalid_previous", "Связь с прошлым без существующей записи памяти — статус «unknown»", "error", path)
+            status = "unknown"
+    if status not in RELATION_STATUSES:
+        item = None
+        if status == "new":
+            claim_ids = [x for x in claim_ids if view.resolve_claim(x) is not None]
+
+    summary = clean_text(ch.summary) if ch.summary else None
+    if summary:
+        prev_text = " ".join(f.text for f in prev.all_facts())
+        allowed = set(numbers_in(prev_text))
+        bad = v._unsupported_numbers(summary, allowed)
+        low = summary.lower()
+        strong = [s for s in STRONG_EVENT_STEMS if s in low and s not in v.claim_text and s not in prev_text.lower()]
+        if bad or strong:
+            what = f"числа не из данных: {', '.join(str(n) for n in sorted(bad))}" if bad else f"«{strong[0]}…» нет в источниках"
+            v.issue("changes_unsupported", f"Сравнение с прошлым снято: {what}", "error", path)
+            summary = None
+            if status in RELATION_STATUSES:
+                status, item = "unknown", None
+    return ChangesSincePrevious(
+        status=status,  # type: ignore[arg-type]
+        previous_insight_id=item.insight_id if item is not None else None,
+        summary=summary,
+        claim_ids=_uniq(claim_ids),
+    )
+
+
 def validate_draft(draft: LLMDraft, view: PromptView, role: str, *, as_of: str | None = None) -> QAResult:
     v = Validator(view, role, as_of=as_of)
     event_title = (view.data.get("event") or {}).get("title") or draft.headline
@@ -405,6 +486,7 @@ def validate_draft(draft: LLMDraft, view: PromptView, role: str, *, as_of: str |
         event_status = "mixed"
 
     result = QAResult(decision=decision, inference_status=inference_status, event_status=event_status, headline=headline, facts=facts)
+    result.changes = validate_changes(draft, view, v)
 
     if decision == "exclude":
         result.issues, result.limitations = v.issues, _uniq(v.limitations)

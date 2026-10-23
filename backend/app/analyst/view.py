@@ -8,7 +8,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:  # pragma: no cover
+    from app.analyst.memory import MemoryFact, MemoryItem, PreviousContext
 
 from app.analyst.schemas import (
     AnalystInput,
@@ -21,6 +24,15 @@ from app.analyst.schemas import (
 )
 
 RELATION_RU = {"payment_out": "исходящие платежи компании", "payment_in": "входящие платежи компании"}
+# Служебные ограничения бандлов ретривера (англ.) → кратко по-русски для модели.
+LIMITATION_RU = {
+    "Embedding benchmark: quote-only deterministic packaging, NOT LLM fact extraction.":
+        "Утверждение — дословная цитата источника (часто анонс); структурные поля не размечены.",
+    "Article identity is used as event identity; cross-article event clustering not performed.":
+        "Одна статья = одно событие; статьи о том же событии не объединялись.",
+    "Semantic fields unknown; extracted HTML is not certified complete original.":
+        "Модальность и полярность не размечены; текст может быть неполным.",
+}
 
 
 def compact(value: Any) -> Any:
@@ -43,6 +55,8 @@ class PromptView:
     evidence: dict[str, ProjectionEvidence] = field(default_factory=dict)
     sources: dict[str, ProjectionSource] = field(default_factory=dict)
     conflicts: list[dict[str, Any]] = field(default_factory=list)
+    # Блок «предыдущий контекст» из памяти фактов (None — блок в промпт не передавался).
+    previous: "PreviousContext | None" = None
     _claim_by_real: dict[str, str] = field(default_factory=dict)
     _feature_by_real: dict[str, str] = field(default_factory=dict)
     _bank_by_real: dict[str, str] = field(default_factory=dict)
@@ -75,6 +89,18 @@ class PromptView:
     def alias_of_feature(self, feature_id: str) -> str | None:
         return self._feature_by_real.get(feature_id)
 
+    def resolve_previous_item(self, ref: str) -> "MemoryItem | None":
+        """``P1`` или исходный ID записи памяти → запись (только из переданного блока)."""
+        if self.previous is None or not ref:
+            return None
+        return self.previous.item_by_alias(ref) or self.previous.item_by_id(ref)
+
+    def resolve_previous_claim(self, ref: str) -> "MemoryFact | None":
+        """``P1.1`` или исходный ``claim_id`` сохранённого факта → факт (только из блока)."""
+        if self.previous is None or not ref:
+            return None
+        return self.previous.fact_by_alias(ref) or self.previous.fact_by_id(ref)
+
     def to_real(self, ref: str) -> str:
         """Псевдоним → исходный ID (неизвестная ссылка возвращается как есть и отбросится в QA)."""
         c = self.resolve_claim(ref)
@@ -86,6 +112,9 @@ class PromptView:
         b = self.resolve_bank(ref)
         if b is not None:
             return b.bank_chunk_id
+        p = self.resolve_previous_claim(ref)
+        if p is not None:
+            return p.claim_id
         return ref
 
     def realias_draft(self, draft: dict[str, Any]) -> dict[str, Any]:
@@ -101,6 +130,9 @@ class PromptView:
                 for k, v in obj.items():
                     if k in ("claim_ids", "feature_ids", "bank_chunk_ids") and isinstance(v, list):
                         out[k] = [self.to_real(str(x)) for x in v]
+                    elif k == "previous_insight_id" and isinstance(v, str):
+                        item = self.resolve_previous_item(v)
+                        out[k] = item.insight_id if item is not None else v
                     else:
                         out[k] = fix(v)
                 return out
@@ -136,8 +168,9 @@ def _claim_view(alias: str, c: ProjectionClaim) -> dict[str, Any]:
     )
 
 
-def build_prompt_view(inp: AnalystInput, cand: Candidate) -> PromptView:
-    view = PromptView(data={})
+def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousContext | None" = None) -> PromptView:
+    """``previous`` — блок памяти фактов; ``None`` — промпт без блока (как в analyst-v1.0)."""
+    view = PromptView(data={}, previous=previous)
     ctx = inp.company_context
 
     facts = []
@@ -194,7 +227,7 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate) -> PromptView:
         for s in bundle.sources:
             view.sources[s.source_id] = s
             sources_view.append(compact({"publisher": s.publisher, "date": (s.published_at or "")[:10], "synthetic": s.is_synthetic}))
-        limitations.extend(bundle.limitations)
+        limitations.extend(LIMITATION_RU.get(x, x) for x in bundle.limitations if LIMITATION_RU.get(x, x) not in limitations)
         for conflict in bundle.conflicts:
             view.conflicts.append(conflict)
             variant_aliases = [
@@ -246,4 +279,15 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate) -> PromptView:
         }
     )
     view.data["role"] = inp.request.role
+    if previous is not None:
+        if previous.items:
+            view.data["previous_context"] = {
+                "note": "Ранее сохранённые выводы аналитика по этой компании и роли о связанных событиях, "
+                        "опубликованных до текущего. Это история, а не факты текущего события.",
+                "items": previous.block(),
+            }
+        elif previous.checked:
+            view.data["previous_context"] = "Связанных ранее сохранённых выводов нет."
+        else:
+            view.data["previous_context"] = "Память выводов не подключена: история неизвестна."
     return view

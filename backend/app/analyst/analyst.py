@@ -30,6 +30,7 @@ from app.analyst import prompts
 from app.analyst.cache import AnalysisCache
 from app.analyst.input_adapter import parse_dt
 from app.analyst.llm_gateway import BaseLLM, ChatRequest, LLMError, get_logger
+from app.analyst.memory import MemoryStore, PreviousContext, schedule_levels
 from app.analyst.qa import QAResult, validate_draft
 from app.analyst.schemas import (
     AnalystInput,
@@ -89,11 +90,16 @@ def priority_from(qa: QAResult, materiality: str, urgency: str) -> tuple[float, 
     )
 
 
-def cache_key(company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str, model: str) -> str:
+def cache_key(
+    company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str, model: str, memory_ref: str | None = None
+) -> str:
+    """Ключ кэша. ``memory_ref`` — отпечаток блока памяти (версия схемы памяти + содержимое
+    записей, отобранных по дате); без блока ключ совпадает с прежним, сохранённые ответы валидны."""
     ref = cand.event_bundle_refs[0]
-    return "|".join(
-        [company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version, model]
-    )
+    parts = [company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version, model]
+    if memory_ref:
+        parts.append(memory_ref)
+    return "|".join(parts)
 
 
 def loose_key(company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str) -> str:
@@ -115,14 +121,37 @@ class BusinessAnalyst:
         max_tokens: int = 1600,
         max_parallel: int = 4,
         fallback_models: list[str] | None = None,
+        prompt_version: str = prompts.PROMPT_VERSION,
+        memory: MemoryStore | None = None,
     ) -> None:
+        if prompt_version not in prompts.SYSTEM_PROMPTS:
+            raise ValueError(f"Неизвестная версия промпта: {prompt_version}")
         self.llm = llm
         self.model = model
         self.cache = cache
         self.max_tokens = max_tokens
         self.max_parallel = max(1, max_parallel)
         self.fallback_models = fallback_models or []
+        self.prompt_version = prompt_version
+        self.memory = memory
         self.qa_totals = {"statements": 0, "with_refs": 0, "candidates": 0, "qa_failed": 0, "bank_found": 0}
+
+    # ------------------------------------------------------------------ память фактов
+    def previous_context(self, inp: AnalystInput, cand: Candidate) -> PreviousContext | None:
+        """Блок памяти для кандидата. ``None`` — версия промпта не работает с памятью."""
+        if not prompts.supports_memory(self.prompt_version):
+            return None
+        if self.memory is None:
+            return PreviousContext(items=[], checked=False)
+        return self.memory.context_for(inp.request.company_id, inp.request.role, cand, parse_dt(inp.request.as_of))
+
+    def _remember(self, inp: AnalystInput, cand: Candidate, outcome: CandidateOutcome) -> None:
+        if self.memory is None:
+            return
+        try:
+            self.memory.record_outcome(inp.request.company_id, inp.request.role, cand, outcome)
+        except Exception as exc:  # noqa: BLE001 - память не должна ронять анализ
+            logger.warning("Не удалось сохранить вывод в память: %s", type(exc).__name__)
 
     # ------------------------------------------------------------------ один кандидат
     def precheck(self, inp: AnalystInput, cand: Candidate) -> ExcludedCandidate | None:
@@ -133,6 +162,13 @@ class BusinessAnalyst:
                 candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
                 reason_code="no_claims", reason="В событии нет утверждений источников — анализ невозможен",
                 headline=bundle.event.title if bundle else None,
+            )
+        if "unreadable_claims" in cand.quality_flags:
+            return ExcludedCandidate(
+                candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
+                reason_code="unreadable_source",
+                reason="Текст источника повреждён (ошибка кодировки): утверждения нечитаемы, по одному заголовку выводы не делаем",
+                headline=bundle.event.title,
             )
         published = parse_dt(bundle.event.first_published_at)
         if as_of and published and published > as_of:
@@ -157,10 +193,29 @@ class BusinessAnalyst:
         *,
         allow_live: bool = True,
         prefer_cache: bool = True,
+        previous: PreviousContext | None = None,
+    ) -> CandidateOutcome:
+        if previous is None:
+            previous = self.previous_context(inp, cand)
+        outcome = self._analyze_candidate(inp, cand, allow_live=allow_live, prefer_cache=prefer_cache, previous=previous)
+        if outcome.run.generated_by != "rules":
+            self._remember(inp, cand, outcome)
+        return outcome
+
+    def _analyze_candidate(
+        self,
+        inp: AnalystInput,
+        cand: Candidate,
+        *,
+        allow_live: bool,
+        prefer_cache: bool,
+        previous: PreviousContext | None,
     ) -> CandidateOutcome:
         company_id = inp.request.company_id
         role = inp.request.role
         pv = inp.company_context.profile_version
+        pver = self.prompt_version
+        mem_ref = previous.ref() if previous is not None else None
         now = datetime.now(MSK).isoformat(timespec="seconds")
         base_trace = [
             TraceEntry(
@@ -182,18 +237,30 @@ class BusinessAnalyst:
                 ),
             ),
         ]
+        if previous is not None:
+            base_trace.append(
+                TraceEntry(
+                    step="memory_lookup",
+                    summary="Поиск ранее сохранённых выводов по компании и роли (только события до текущего и до as_of)",
+                    result=(
+                        f"Найдено связанных записей: {len(previous.items)} ({', '.join(it.insight_id for it in previous.items)})"
+                        if previous.items
+                        else ("Связанных записей нет" if previous.checked else "Память выводов не подключена")
+                    ),
+                )
+            )
 
         excluded = self.precheck(inp, cand)
         if excluded is not None:
             run = CandidateRun(
-                candidate_id=cand.candidate_id, model=None, prompt_version=prompts.PROMPT_VERSION, generated_by="rules",
+                candidate_id=cand.candidate_id, model=None, prompt_version=pver, generated_by="rules",
                 created_at=now, qa_status="skipped",
                 trace=base_trace + [TraceEntry(step="precheck", summary="Проверка времени и полноты события", result=excluded.reason, status="warn")],
             )
             return CandidateOutcome(excluded=excluded, run=run)
 
-        key = cache_key(company_id, cand, role, pv, prompts.PROMPT_VERSION, self.model)
-        lkey = loose_key(company_id, cand, role, pv, prompts.PROMPT_VERSION)
+        key = cache_key(company_id, cand, role, pv, pver, self.model, mem_ref)
+        lkey = loose_key(company_id, cand, role, pv, pver)
         label = f"{company_id}/{cand.event_bundle_refs[0].event_id}__{role}"
 
         lock = self.cache.key_lock(key) if self.cache else None
@@ -202,15 +269,15 @@ class BusinessAnalyst:
         try:
             if self.cache:
                 for m in [self.model, *self.fallback_models]:
-                    record, source = self.cache.get(cache_key(company_id, cand, role, pv, prompts.PROMPT_VERSION, m))
+                    record, source = self.cache.get(cache_key(company_id, cand, role, pv, pver, m, mem_ref))
                     if record is not None and (prefer_cache or source in ("memory", "runtime") or not allow_live):
-                        return self._from_cache(record, source or "memory", inp, cand, base_trace)
+                        return self._from_cache(record, source or "memory", inp, cand, base_trace, previous)
             if not allow_live or self.llm is None:
-                return self._offline(lkey, inp, cand, base_trace, reason="живой вызов LLM недоступен в этом режиме")
+                return self._offline(lkey, inp, cand, base_trace, previous, reason="живой вызов LLM недоступен в этом режиме")
             outcome, used_model, last_exc = None, self.model, None
             for model in [self.model, *self.fallback_models]:
                 try:
-                    outcome = self._live(inp, cand, base_trace, now, model)
+                    outcome = self._live(inp, cand, base_trace, now, model, previous)
                     used_model = model
                     break
                 except AnalysisUnavailable as exc:
@@ -220,9 +287,10 @@ class BusinessAnalyst:
                     logger.warning("Модель %s не справилась (%s), пробую запасную", model, exc.code)
             if outcome is None:
                 assert last_exc is not None
-                return self._offline(lkey, inp, cand, base_trace, reason=str(last_exc), code=last_exc.code)
-            used_key = cache_key(company_id, cand, role, pv, prompts.PROMPT_VERSION, used_model)
+                return self._offline(lkey, inp, cand, base_trace, previous, reason=str(last_exc), code=last_exc.code)
+            used_key = cache_key(company_id, cand, role, pv, pver, used_model, mem_ref)
             outcome.run.cache_key = used_key
+            outcome.run.memory_ref = mem_ref
             if self.cache:
                 self.cache.put(
                     used_key, outcome.model_dump(mode="json"), loose_key=lkey, label=label, model=used_model, created_at=now
@@ -232,8 +300,19 @@ class BusinessAnalyst:
             if lock:
                 lock.release()
 
-    def _restore(self, record: dict[str, Any], inp: AnalystInput, cand: Candidate, base_trace: list[TraceEntry]) -> CandidateOutcome:
-        """Восстановление из кэша: QA и приоритет пересчитываются по сохранённому ответу модели."""
+    def _restore(
+        self,
+        record: dict[str, Any],
+        inp: AnalystInput,
+        cand: Candidate,
+        base_trace: list[TraceEntry],
+        previous: PreviousContext | None = None,
+    ) -> CandidateOutcome:
+        """Восстановление из кэша: QA и приоритет пересчитываются по сохранённому ответу модели.
+
+        Сравнение с прошлым проверяется по ТЕКУЩЕМУ блоку памяти: при офлайн-откате на
+        ответ с другим контекстом ссылки на отсутствующие записи снимаются (``unknown``).
+        """
         stored = CandidateOutcome.model_validate(record)
         if stored.run.draft is None:
             return stored
@@ -241,22 +320,30 @@ class BusinessAnalyst:
             draft = LLMDraft.model_validate(stored.run.draft)
         except Exception:  # noqa: BLE001 - старая схема черновика: отдаём как сохранено
             return stored
-        view = build_prompt_view(inp, cand)
+        view = build_prompt_view(inp, cand, previous=previous)
         qa = validate_draft(draft, view, inp.request.role, as_of=inp.request.as_of)
         outcome = self._build(inp, cand, draft, qa, list(base_trace) + list(stored.run.llm_trace))
         outcome.run.model = stored.run.model
+        outcome.run.prompt_version = stored.run.prompt_version
         outcome.run.created_at = stored.run.created_at
         outcome.run.usage = stored.run.usage
         outcome.run.cache_key = stored.run.cache_key
         outcome.run.generated_by = stored.run.generated_by
         outcome.run.draft = stored.run.draft
         outcome.run.llm_trace = stored.run.llm_trace
+        outcome.run.memory_ref = stored.run.memory_ref
         return outcome
 
     def _from_cache(
-        self, record: dict[str, Any], source: str, inp: AnalystInput, cand: Candidate, base_trace: list[TraceEntry]
+        self,
+        record: dict[str, Any],
+        source: str,
+        inp: AnalystInput,
+        cand: Candidate,
+        base_trace: list[TraceEntry],
+        previous: PreviousContext | None = None,
     ) -> CandidateOutcome:
-        outcome = self._restore(record, inp, cand, base_trace)
+        outcome = self._restore(record, inp, cand, base_trace, previous)
         if source == "bundled":
             outcome.run.generated_by = "cached"
         outcome.run.trace = list(outcome.run.trace) + [
@@ -274,6 +361,7 @@ class BusinessAnalyst:
         inp: AnalystInput,
         cand: Candidate,
         base_trace: list[TraceEntry],
+        previous: PreviousContext | None = None,
         *,
         reason: str,
         code: str = "unavailable",
@@ -281,7 +369,7 @@ class BusinessAnalyst:
         if self.cache:
             record, source = self.cache.get_loose(lkey, prefer_models=[self.model, *self.fallback_models])
             if record is not None:
-                outcome = self._restore(record, inp, cand, base_trace)
+                outcome = self._restore(record, inp, cand, base_trace, previous)
                 outcome.run.generated_by = "cached"
                 outcome.run.trace = list(outcome.run.trace) + [
                     TraceEntry(
@@ -294,10 +382,18 @@ class BusinessAnalyst:
                 return outcome
         raise AnalysisUnavailable(reason, code)
 
-    def _live(self, inp: AnalystInput, cand: Candidate, base_trace: list[TraceEntry], now: str, model: str) -> CandidateOutcome:
+    def _live(
+        self,
+        inp: AnalystInput,
+        cand: Candidate,
+        base_trace: list[TraceEntry],
+        now: str,
+        model: str,
+        previous: PreviousContext | None = None,
+    ) -> CandidateOutcome:
         assert self.llm is not None
-        view = build_prompt_view(inp, cand)
-        messages = prompts.build_analyst_messages(view.data)
+        view = build_prompt_view(inp, cand, previous=previous)
+        messages = prompts.build_analyst_messages(view.data, version=self.prompt_version)
         request = ChatRequest(messages=messages, model=model, max_tokens=self.max_tokens, temperature=0.1, purpose="analysis")
         try:
             draft, usage = self.llm.chat_json(request, LLMDraft.model_validate)
@@ -311,7 +407,7 @@ class BusinessAnalyst:
         llm_trace.append(
             TraceEntry(
                 step="llm_analyst",
-                summary=f"Анализ кандидата моделью {model} (промпт {prompts.PROMPT_VERSION})",
+                summary=f"Анализ кандидата моделью {model} (промпт {self.prompt_version})",
                 result=(
                     f"Решение модели: {draft.decision}, существенность {draft.materiality}; токены {usage.prompt_tokens}/"
                     f"{usage.completion_tokens}, {usage.cost_rub:.4f} ₽, {usage.latency_ms / 1000:.1f} с"
@@ -342,9 +438,15 @@ class BusinessAnalyst:
             )
         )
         run = CandidateRun(
-            candidate_id=cand.candidate_id, prompt_version=prompts.PROMPT_VERSION, generated_by="live",
+            candidate_id=cand.candidate_id, prompt_version=self.prompt_version, generated_by="live",
             qa_status=qa.status, qa_issues=qa.issues, trace=trace,  # type: ignore[arg-type]
         )
+        if qa.changes is not None:
+            ch = qa.changes
+            trace.append(TraceEntry(
+                step="memory_compare", summary="Сравнение с ранее сохранёнными выводами (проверено QA)",
+                result=f"{ch.status}" + (f" → {ch.previous_insight_id}" if ch.previous_insight_id else ""),
+            ))
         if qa.decision == "exclude":
             trace.append(TraceEntry(step="priority_rule", summary="Решение аналитика", result="exclude: событие не показывается в ленте этой роли"))
             return CandidateOutcome(
@@ -393,6 +495,7 @@ class BusinessAnalyst:
             impact_estimate=qa.impact_estimate,
             bank_assessment=qa.bank_assessment,
             ai_conclusion=qa.ai_conclusion,
+            changes_since_previous=qa.changes,
             support=Support(
                 company_feature_ids=feats, event_claim_ids=claims, event_evidence_ids=evs, bank_chunk_ids=banks,
                 inference_status=qa.inference_status,  # type: ignore[arg-type]
@@ -416,12 +519,16 @@ class BusinessAnalyst:
             except AnalysisUnavailable as exc:
                 return c.candidate_id, exc
 
-        if len(inp.candidates) <= 1 or self.max_parallel == 1:
-            pairs = [work(c) for c in inp.candidates]
-        else:
-            with ThreadPoolExecutor(max_workers=min(self.max_parallel, len(inp.candidates))) as pool:
-                pairs = list(pool.map(work, inp.candidates))
-        results.update(pairs)
+        # С памятью фактов: связанные кандидаты — по возрастанию даты (уровни), несвязанные —
+        # параллельно. Тогда результат не зависит от порядка кандидатов во входе.
+        levels = schedule_levels(list(inp.candidates)) if self.memory is not None else [list(inp.candidates)]
+        for level in levels:
+            if len(level) <= 1 or self.max_parallel == 1:
+                pairs = [work(c) for c in level]
+            else:
+                with ThreadPoolExecutor(max_workers=min(self.max_parallel, len(level))) as pool:
+                    pairs = list(pool.map(work, level))
+            results.update(pairs)
         return self.assemble(inp, results), results
 
     def assemble(self, inp: AnalystInput, results: dict[str, CandidateOutcome | AnalysisUnavailable]) -> AnalystOutput:
@@ -477,7 +584,7 @@ class BusinessAnalyst:
         generated = gens.pop() if len(gens) == 1 else ("mixed" if gens else "rules")
         usage = [r.usage for r in runs if r.usage]
         meta = RunMetadata(
-            model=self.model, prompt_version=prompts.PROMPT_VERSION, qa_status=qa_status,  # type: ignore[arg-type]
+            model=self.model, prompt_version=self.prompt_version, qa_status=qa_status,  # type: ignore[arg-type]
             bank_rag_used=any(c.bank_fragments for c in inp.candidates),
             generated_by=generated,  # type: ignore[arg-type]
             profile_version=inp.company_context.profile_version,
