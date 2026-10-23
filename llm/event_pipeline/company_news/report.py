@@ -39,16 +39,22 @@ def report(root):
     index=read(root/'index.stage.json');retr=read(root/'retrieve.stage.json');rer=read(root/'rerank.stage.json')
     rankings=rows(root/'retrieval.jsonl')+rows(root/'reranking.jsonl');batches=rows(root/'selected.jsonl')
     rtimes=[r['seconds'] for r in rows(root/'reranking.jsonl')]
+    if not (root/'reranker-download.json').exists():
+        save(root/'reranker-download.json',read('.cache/company-news-models/BAAI--bge-reranker-v2-m3/verified.json'))
+    try:
+        gpu_info=subprocess.check_output(['nvidia-smi','--query-gpu=name,memory.total,driver_version','--format=csv,noheader'],stderr=subprocess.DEVNULL).decode().strip()
+    except (OSError,subprocess.SubprocessError):
+        gpu_info='unavailable on report host; see measured model/stage profiles'
     files={p.name:p.stat().st_size for p in root.iterdir() if p.is_file()}
     summary=dict(experiment_id=m['experiment_id'],inventory=read(root/'inventory.json'),models=m['models'],fusion=m['fusion'],budget=m['budget'],
         index=index['metrics'],performance=retr['metrics'],reranker=dict(rer['metrics'],per_company_p50_seconds=float(np.median(rtimes)),per_company_p95_seconds=float(np.percentile(rtimes,95)),profile=read(root/'reranker-profile.json')),
-        download=read('.cache/company-news-models/BAAI--bge-reranker-v2-m3/verified.json'),
+        download=read(root/'reranker-download.json'),
         peak_ram_bytes=dict(index=index['peak_process_ram_bytes'],retrieval=retr['peak_process_ram_bytes'],rerank=rer['peak_process_ram_bytes']),
         artifacts_bytes=sum(files.values()),cache_bytes={k:v for k,v in files.items() if k.endswith('.sqlite3')},
         evaluations={s:{k:v for k,v in value.items() if k not in ('per_company','misses')} for s,value in [('dev',dev),('test',test)]},
         lazy=accounting,limitations=test['limitations']+['control344_missing','no_new_live_calls','graph_not_run','static_not_historical'],
         validation=read(root/'verification.json') if (root/'verification.json').exists() else {'state':'see setup logs'},
-        hardware=dict(platform=platform.platform(),python=platform.python_version(),gpu=subprocess.check_output(['nvidia-smi','--query-gpu=name,memory.total,driver_version','--format=csv,noheader']).decode().strip()),
+        hardware=dict(platform=platform.platform(),python=platform.python_version(),gpu=gpu_info),
         bug_register=ISSUES)
     # Source-free export: strip source names (inventory) and all private profile/doc IDs.
     public=dict(summary);public['inventory']={k:v for k,v in summary['inventory'].items() if k!='sources'}
