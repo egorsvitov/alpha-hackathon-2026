@@ -31,6 +31,10 @@ jobs:
         run: |
           python -m compileall backend/ ranking/
 
+      - name: Run backend unit tests (analyst)
+        working-directory: backend
+        run: python -m unittest discover -s tests -t .
+
       - name: Run E2E Backend Tests
         run: |
           python backend/test_e2e.py
