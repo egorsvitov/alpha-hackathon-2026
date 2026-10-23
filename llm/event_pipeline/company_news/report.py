@@ -36,6 +36,22 @@ def report(root):
     for stage in ('index','retrieve','rerank','select','analyze'):require(root,stage)
     docs=rows(root/'documents.jsonl');profiles=rows(root/'profiles.jsonl');queries=rows(root/'queries.jsonl')
     dev=read(root/'evaluation-dev.json');test=read(root/'evaluation-test.json');accounting=read(root/'analysis-accounting.json')
+    calls=read(root/'live-calls.json') if (root/'live-calls.json').exists() else []
+    calls=[c for c in calls if c.get('request',{}).get('metadata',{}).get('company_news_experiment')==m['experiment_id']]
+    live_results=read(root/'live-results.json') if (root/'live-results.json').exists() else []
+    live_usage=Counter()
+    for call in calls:
+        for k,v in (call.get('response') or {}).get('body',{}).get('usage',{}).items():
+            if isinstance(v,(float,int)):live_usage[k]+=v
+    actual_live=dict(calls=len(calls),usage=dict(live_usage),states=dict(Counter(c['state'] for c in calls)),
+        cost_rub=sum(float(c['accounted_rub']) for c in calls) if calls else None,
+        cost_kind='ledger_accounted_including_unknown_reservations',results=live_results)
+    analysis_outputs={}
+    for path in (root/'analyst-cache').glob('*.json'):
+        cached=read(path)
+        from .contracts import fingerprint
+        if fingerprint(cached['output'])!=cached['sha256'] or path.stem!=cached['cache_key']:raise ValueError('analyst_cache_corrupt')
+        analysis_outputs[cached['cache_key']]=cached['output']
     index=read(root/'index.stage.json');retr=read(root/'retrieve.stage.json');rer=read(root/'rerank.stage.json')
     rankings=rows(root/'retrieval.jsonl')+rows(root/'reranking.jsonl');batches=rows(root/'selected.jsonl')
     rtimes=[r['seconds'] for r in rows(root/'reranking.jsonl')]
@@ -46,18 +62,24 @@ def report(root):
     except (OSError,subprocess.SubprocessError):
         gpu_info='unavailable on report host; see measured model/stage profiles'
     files={p.name:p.stat().st_size for p in root.iterdir() if p.is_file()}
+    disk={}
+    for path in ('.cache/semantic-bge-m3','.cache/semantic-http-parts','.cache/company-news-models/BAAI--bge-reranker-v2-m3',
+                 'ranking/experiments/cpu_news_embeddings/artifacts/model','data/processed/event_pipeline/gpu-experiment/full-run/vectors.sqlite3'):
+        if Path(path).exists():
+            disk[path]=int(subprocess.check_output(['du','-s','-B1',path]).split()[0])
     summary=dict(experiment_id=m['experiment_id'],inventory=read(root/'inventory.json'),models=m['models'],fusion=m['fusion'],budget=m['budget'],
-        index=index['metrics'],performance=retr['metrics'],reranker=dict(rer['metrics'],per_company_p50_seconds=float(np.median(rtimes)),per_company_p95_seconds=float(np.percentile(rtimes,95)),profile=read(root/'reranker-profile.json')),
+        index=index['metrics'],performance=retr['metrics'],request_benchmark=read(root/'retrieval-throughput.json') if (root/'retrieval-throughput.json').exists() else None,reranker=dict(rer['metrics'],per_company_p50_seconds=float(np.median(rtimes)),per_company_p95_seconds=float(np.percentile(rtimes,95)),profile=read(root/'reranker-profile.json')),
         download=read(root/'reranker-download.json'),
         peak_ram_bytes=dict(index=index['peak_process_ram_bytes'],retrieval=retr['peak_process_ram_bytes'],rerank=rer['peak_process_ram_bytes']),
-        artifacts_bytes=sum(files.values()),cache_bytes={k:v for k,v in files.items() if k.endswith('.sqlite3')},
+        artifacts_bytes=sum(files.values()),cache_bytes={k:v for k,v in files.items() if k.endswith('.sqlite3')},model_and_transport_cache_disk_bytes=disk,
         evaluations={s:{k:v for k,v in value.items() if k not in ('per_company','misses')} for s,value in [('dev',dev),('test',test)]},
-        lazy=accounting,limitations=test['limitations']+['control344_missing','no_new_live_calls','graph_not_run','static_not_historical'],
+        lazy=accounting,live=actual_live,limitations=test['limitations']+['control344_missing','graph_not_run','static_not_historical']+(['no_new_live_calls'] if not calls else ['live_semantic_support_unreviewed']),
         validation=read(root/'verification.json') if (root/'verification.json').exists() else {'state':'see setup logs'},
         hardware=dict(platform=platform.platform(),python=platform.python_version(),gpu=gpu_info),
         bug_register=ISSUES)
     # Source-free export: strip source names (inventory) and all private profile/doc IDs.
     public=dict(summary);public['inventory']={k:v for k,v in summary['inventory'].items() if k!='sources'}
+    public['live']={k:v for k,v in actual_live.items() if k!='results'}
     save(root/'aggregate-metrics.json',public);save(root/'issues.json',ISSUES)
     matrix=np.load(root/'bge-documents.npy');projection=PCA(n_components=2,svd_solver='randomized',random_state=20261023).fit_transform(matrix)
     center=projection.mean(0);scale=np.max(np.abs(projection-center),axis=0);points=((projection-center)/np.maximum(scale,1e-8)).round(6).tolist()
@@ -71,7 +93,7 @@ def report(root):
         plans.append(dict(company_id=row['company_id'],variant=row['variant'],common=[dict(key=c['key'],document_ids=[s['reference']['document_id'] for s in c['data']['sources']]) for c in row['prepared']['common']],personal_key=row['prepared']['personal']['key']))
     data=dict(summary=summary,documents=docs,profiles=profiles,queries=queries,rankings=rankings,selections=selected,plans=plans,points=points,
         judgments=rows(root/'judgments-dev.jsonl')+rows(root/'judgments-test.jsonl'),groups=rows(root/'groups.jsonl'),
-        exclusions=rows(root/'excluded.jsonl')+read(root/'e5-index.json')['exclusions'])
+        exclusions=rows(root/'excluded.jsonl')+read(root/'e5-index.json')['exclusions'],analysis_outputs=analysis_outputs)
     template=Path(__file__).with_name('report.html').read_text()
     payload=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
     html=template.replace('__REPORT_DATA__',payload);(root/'index.html').write_text(html)
@@ -88,6 +110,10 @@ def report(root):
         '', 'G4 не доказал экономию: 133 уникальные общие карточки против 122 у G3 на тех же 20 компаниях. Это подготовленные точные cache keys/запросы, а не оплаченные LLM-результаты. Новых live вызовов: 0. Для запуска требуются существующие общие журналы, max-calls, подтвержденный профиль и бюджет. Карточки и персональная интерпретация имеют разные ключи; ошибки не скрывают оригиналы.',
         '', 'Главные проблемы: пустые страницы и навигация ЦБ, географические совпадения без деловой связи, смешение банка и клиента, недостаток разметки. Сначала проверить версионированный content-kind фильтр и role-aware query/fusion, затем углубить общий размеченный пул. Reranker не исправляет пропуски retrieval. Историческая доступность профилей неизвестна; graph challenger не запускался. Общий контроль 344 не найден (локальный старый контроль — 100).',
         '', 'Полные оригиналы, исключения, все ранги, query paths, группы, выбранный контекст, ручные решения и 2D PCA доступны только локально: `data/processed/company_news/run-20261023/index.html`. PCA не является основанием релевантности. Офлайн-проверки и точные команды: `llm/event_pipeline/company_news/README.md`. Машиночитаемые агрегаты: `metrics.json`.']
+    if summary['request_benchmark']:
+        paragraphs+=['','Замер запроса на 128 компаниях с готовыми query vectors: BM25 + exact cosine + RRF. Загрузка/кодирование/reranking/LLM исключены. Это отдельный замер от dense-only цифр выше.','','| Вариант | p50, мс | p95, мс | компаний/с |','|---|---:|---:|---:|']
+        for variant,r in summary['request_benchmark']['variants'].items():
+            paragraphs.append(f"| {variant} | {r['p50_seconds']*1000:.2f} | {r['p95_seconds']*1000:.2f} | {r['companies_per_second']:.2f} |")
     (publicdir/'report.md').write_text('\n'.join(paragraphs)+'\n')
     complete(root,'report',[root/'index.html',root/'aggregate-metrics.json',root/'projection.jsonl',root/'issues.json'],dict(source_bearing=True,html_bytes=len(html.encode()),public_export=str(publicdir)))
     return dict(local_html=str(root/'index.html'),public_report=str(publicdir/'report.md'))

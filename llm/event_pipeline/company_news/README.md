@@ -116,6 +116,14 @@ A_freshness changes only publication-age weighting after eligibility. No graph
 challenger was run because historical graph availability is unproven.
 Search is exact CPU cosine in batches16×512 over GPU-produced BGE vectors;
 128-company timings measure this search alone, not end-to-end retrieval.
+The additional request benchmark includes BM25, cosine and fusion per company
+with frozen query vectors, separately from model loading/inference/reranking:
+
+```bash
+OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 \
+  $PY -m llm.event_pipeline.company_news.benchmark --root "$RUN"
+```
+
 R@20/50/100 in G3/G4/R* refer to the raw reranker ordering before the reserve;
 final metrics evaluate the actual reserved byte-budget selection. Macro recall
 averages only companies with at least one known positive. Test has just one.
@@ -170,3 +178,11 @@ PCA, stage exclusions, query paths, groups, card plans, manual judgments and an
 issue register. Public export `docs/reports/company-news-gpu-20261023/` contains
 only aggregates and the source-free report. Archive private JSONL/NPY/HTML and
 checksums, not keys, `.env`, model weights, vector caches or working databases.
+
+```bash
+$PY -m llm.event_pipeline.company_news.package --root "$RUN" \
+  --output data/processed/company_news/handoff/company-news-gpu-20261023.tar.gz
+```
+
+The private archive has `ARTIFACTS.sha256` for every payload file and an external
+SHA-256 for the archive itself. Source-bearing HTML should never be staged.
