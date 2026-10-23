@@ -15,19 +15,30 @@ def vector_key(fingerprint, text, *, input_kind='query'):
     return content_hash(dict(encoder_fingerprint=fingerprint, input_kind=input_kind, normalized_text_hash=text_hash(text)))
 
 
-def vector_bytes(vector):
+def exact_vector_key(fingerprint, text, *, input_kind='query'):
+    """Raw-news policy: exact UTF-8 text, independently of the B6 NFC policy."""
+    if input_kind not in {'query', 'document'}:
+        raise ValueError('unsupported input kind')
+    return content_hash(dict(encoder_fingerprint=fingerprint, input_kind=input_kind,
+                            exact_utf8_sha256=hashlib.sha256(text.encode()).hexdigest()))
+
+
+def vector_bytes(vector, dimension=384):
     arr = np.asarray(vector)
-    if arr.dtype != np.float32 or arr.shape != (384,) or not np.isfinite(arr).all() or abs(float(np.linalg.norm(arr)) - 1) > 1e-5:
-        raise CorruptVector('expected finite normalized float32[384]')
+    if arr.dtype != np.float32 or arr.shape != (dimension,) or not np.isfinite(arr).all() or abs(float(np.linalg.norm(arr)) - 1) > 1e-5:
+        raise CorruptVector(f'expected finite normalized float32[{dimension}]')
     return arr.astype('<f4', copy=False).tobytes()
 
 
-def vector_sha256(vector):
-    return hashlib.sha256(vector_bytes(vector)).hexdigest()
+def vector_sha256(vector, dimension=384):
+    return hashlib.sha256(vector_bytes(vector, dimension)).hexdigest()
 
 
 class VectorCache:
-    def __init__(self, path):
+    def __init__(self, path, *, dimension=384):
+        if type(dimension) is not int or dimension < 1:
+            raise ValueError('positive dimension required')
+        self.dimension = dimension
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.connection = sqlite3.connect(self.path, timeout=0)
@@ -55,7 +66,7 @@ class VectorCache:
         if hashlib.sha256(row[0]).hexdigest() != row[1]:
             raise CorruptVector('object checksum mismatch', context={'key': vector_key})
         vector = np.frombuffer(row[0], dtype='<f4').copy()
-        vector_bytes(vector)
+        vector_bytes(vector, self.dimension)
         return vector
 
     def metadata(self, key):
@@ -66,10 +77,10 @@ class VectorCache:
         # Cache records must never contain source/company provenance.
         if any(k in metadata for k in ('company_id', 'profile_version', 'feature_refs', 'source_provenance')):
             raise ValueError('company provenance belongs in mapping')
-        data = vector_bytes(vector)
+        data = vector_bytes(vector, self.dimension)
         old = self.get(vector_key)
         if old is not None:
-            if vector_bytes(old) != data or self.metadata(vector_key) != metadata:
+            if vector_bytes(old, self.dimension) != data or self.metadata(vector_key) != metadata:
                 raise VectorCollision('immutable vector object collision')
             return
         try:
