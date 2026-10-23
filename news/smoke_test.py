@@ -75,6 +75,32 @@ def main() -> int:
     title = Fetcher._title_from_html_link(news)
     assert "gosduma" in title, f"заголовок из slug не извлечён: {title!r}"
 
+    # Проверка кэша Fetcher: ленты (rss) всегда запрашиваются заново по сети,
+    # а статьи (article) берутся из кэша без повторного сетевого вызова.
+    with tempfile.TemporaryDirectory() as tmp_cache:
+        calls: list[str] = []
+
+        class DummyResp:
+            def __init__(self, text: str):
+                self.text = text
+
+            def raise_for_status(self) -> None:
+                pass
+
+        class DummySession:
+            headers: dict[str, str] = {}
+
+            def get(self, url: str, timeout: float = 20.0) -> DummyResp:
+                calls.append(url)
+                return DummyResp(f"attempt-{len(calls)}")
+
+        f = Fetcher(cache_dir=tmp_cache, delay=0.0, session=DummySession())  # type: ignore[arg-type]
+        assert f._http_get("https://example.com/rss", "rss") == "attempt-1"
+        assert f._http_get("https://example.com/rss", "rss") == "attempt-2", "RSS не должен залипать в кэше"
+        assert f._http_get("https://example.com/art1", "article") == "attempt-3"
+        assert f._http_get("https://example.com/art1", "article") == "attempt-3", "Статья должна браться из кэша"
+        assert len(calls) == 3
+
     print("smoke test OK: реестр валиден, дедуп работает, формат статьи корректен, HTML-фильтр корректен")
     return 0
 

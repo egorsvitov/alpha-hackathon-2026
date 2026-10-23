@@ -55,7 +55,7 @@ def _append_run(state: dict, run: dict) -> None:
 def _run_collect(args) -> dict:
     """Вызывает dump_large.py и возвращает сводку."""
     cmd = [sys.executable, "news/dump_large.py"]
-    if args.target:
+    if args.target is not None:
         cmd += ["--target", str(args.target)]
     if args.category:
         for c in args.category:

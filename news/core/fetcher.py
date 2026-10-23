@@ -79,13 +79,27 @@ class Fetcher:
         self._cache_path(kind, url).write_text(content, encoding="utf-8")
 
     def _http_get(self, url: str, kind: str) -> str:
-        """GET с вежливой паузой. Возвращает HTML/XML строку."""
-        cached = self._load_from_cache(kind, url)
-        if cached is not None:
-            return cached
-        resp = self.session.get(url, timeout=self.timeout)
-        resp.raise_for_status()
-        content = resp.text
+        """GET с вежливой паузой. Возвращает HTML/XML строку.
+
+        Из дискового кэша сразу отдаются только статьи (kind == 'article'):
+        ленты источников (rss/json/html) при каждом проходе запрашиваются заново
+        по сети, чтобы видеть новые публикации, а кэш ленты используется только
+        как резерв при сетевой ошибке.
+        """
+        if kind == "article":
+            cached = self._load_from_cache(kind, url)
+            if cached is not None:
+                return cached
+        try:
+            resp = self.session.get(url, timeout=self.timeout)
+            resp.raise_for_status()
+            content = resp.text
+        except Exception:
+            if kind != "article":
+                cached = self._load_from_cache(kind, url)
+                if cached is not None:
+                    return cached
+            raise
         self._save_to_cache(kind, url, content)
         time.sleep(self.delay)
         return content

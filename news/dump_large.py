@@ -90,23 +90,28 @@ def main() -> int:
             continue
         new_count = 0
         for c in candidates:
+            existing_art = merged.get(c.url)
+            if existing_art is not None and existing_art.text:
+                continue
             res = fetcher.fetch_article(c)
             if res.error:
                 continue
             art = pipe._candidate_to_article(
                 spec, c, text=res.text, title=res.title, published_at=res.published_at)
             key = art.url or art.article_id
-            was = key in merged
+            was = key in merged and bool(merged[key].text)
             merged[key] = art
             new_count += 0 if was else 1
         fetched_total += new_count
         ok_names.append(f"{spec.name}({new_count})")
-        # Пишем после каждого источника, чтобы не терять при сбое.
-        store.write(list(merged.values()))
+        # Пишем после каждого источника, если появились новые статьи.
+        if new_count > 0:
+            store.write(list(merged.values()))
         print(f"  [{spec.name}] +{new_count} (всего в корпусе: {len(merged)})", flush=True)
 
     # Итоговое сохранение.
-    store.write(list(merged.values()))
+    if fetched_total > 0 or not store.corpus_path.exists():
+        store.write(list(merged.values()))
     fetcher.close()
 
     print("\n=== ИТОГ ===")
