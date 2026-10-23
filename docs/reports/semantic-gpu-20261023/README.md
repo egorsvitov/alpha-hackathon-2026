@@ -1,7 +1,8 @@
 # GPU-эксперимент и интерактивный атлас
 
 [Отчёт](REPORT.md) · [Интерактивная визуализация](index.html) ·
-[Сравнение с news-pipeline-clean](../../implementation/news-pipeline-clean-overlap-review.md)
+[Сравнение с news-pipeline-clean](../../implementation/news-pipeline-clean-overlap-review.md) ·
+[Повторный полный аудит и 8 новых разборов](RECHECK.md)
 
 Скачайте ветку или клонируйте репозиторий и откройте `index.html` в Chrome.
 GitHub показывает HTML как исходный код; сервер и сеть самому атласу не нужны.

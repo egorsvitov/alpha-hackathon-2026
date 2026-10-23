@@ -200,3 +200,46 @@ neighbor edges, then poisons source fields to ensure their contents cannot reach
 the public export. It records `privacy-check.json`. Browser checks work for both
 editions and use only saved data. Commit only the Git edition; the full local
 HTML and source-bearing ZIP archives remain excluded.
+
+## Full-corpus recheck and additional source reading
+
+The corpus did not grow: all 3621 documents were already embedded. A fresh
+cache replay and comparison were saved separately in
+`data/processed/event_pipeline/full-corpus-audit-20261023/`. The prior archive,
+comparison and interactive report remain unchanged. For another recheck use a
+fresh experiment root because comparisons are immutable.
+
+```bash
+AUDIT=data/processed/event_pipeline/full-corpus-audit-20261023
+export HF_HOME="$PWD/.cache/semantic-bge-m3"
+SEMANTIC_EXPERIMENT_ROOT="$AUDIT" PYTHONPATH=. .venv_events/bin/python \
+  scripts/semantic_gpu/experiment.py embed \
+  --run data/processed/event_pipeline/gpu-experiment/full-run \
+  --label all-news-cache-recheck --batch-size 32
+SEMANTIC_EXPERIMENT_ROOT="$AUDIT" OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 \
+  PYTHONPATH=. .venv_events/bin/python scripts/semantic_gpu/experiment.py compare \
+  --run data/processed/event_pipeline/gpu-experiment/full-run \
+  --label full-recheck --threshold 0.65 --alpha 0.4 --half-life 7 \
+  --max-units 6000 --max-matrix-mb 1200
+OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 PYTHONPATH=. .venv_events/bin/python \
+  scripts/semantic_gpu/audit_corpus.py \
+  --comparison "$AUDIT/comparisons/full-recheck" --output "$AUDIT" \
+  --selection "$AUDIT/selection-request.json"
+# Read selected source texts and store explicit, scoped assessments first.
+.venv_events/bin/python scripts/semantic_gpu/render_audit_review.py --root "$AUDIT"
+```
+
+The optional local selection file contains cases with `case_id`, `group_prefix`,
+`category` and `inspect_neighbor`. The supplied diagnostic selection includes
+eight new groups, one singleton with its closest other-document neighbor and
+the member blocking complete-link attachment. It is not a representative or
+held-out quality sample. `audit_corpus.py` verifies every offset, cache/profile key,
+1024D vector, membership, within-group threshold and neighbor score, plus byte
+equality to the prior export. It prepares packets but never generates quality
+labels. The separately source-read `review/annotations.json` records what was
+read and what remained unreviewed. `render_audit_review.py` renders these labels
+and sources into local HTML/Markdown, with links to the original atlas.
+
+Raw packets and detailed reviews remain ignored. `RECHECK.md` in the published
+report directory is a source-free summary. New API calls and threshold retuning
+are not part of this recheck.
