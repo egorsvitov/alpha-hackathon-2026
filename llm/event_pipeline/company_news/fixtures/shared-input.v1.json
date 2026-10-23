@@ -83,9 +83,9 @@
       }
     ],
     "budget": {
-      "max_documents": 20,
-      "counter": "utf8_bytes_div4_estimate.v1",
-      "limit": 8192
+      "final_documents": 20,
+      "context_utf8_bytes": 24000,
+      "counter": "utf8_bytes_div4_estimate.v1"
     },
     "limitations": []
   },

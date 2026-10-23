@@ -21,7 +21,7 @@ def fixture():
         candidates=[c.CandidateTrace(document_id=doc.reference.document_id, hits=[hit], fusion_score=1/61,
             fusion_rank=1, selected=True)], selected_context=[c.ContextSelection(document_id=doc.reference.document_id,
             role="retrieved", spans=[c.SourceSpan(document_id=doc.reference.document_id, content_hash=doc.reference.content_hash, start=0, end=len(text))])],
-        budget={"max_documents": 20, "counter": "utf8_bytes_div4_estimate.v1", "limit": 8192})
+        budget={"final_documents": 20, "context_utf8_bytes": 24000, "counter": "utf8_bytes_div4_estimate.v1"})
     return c.NewsAnalysisInput(batch=batch, company_facts=[c.CompanyFact(feature_id=query.anchor_feature_ids[0], value=True, status="observed")], analytical_profile="synthetic-offline.v1")
 
 

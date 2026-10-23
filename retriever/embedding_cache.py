@@ -91,3 +91,35 @@ class VectorCache:
 
     def close(self):
         self.connection.close()
+
+
+class CachedEncoder:
+    """Restartable exact-input wrapper; shared engine, no company-specific vectors."""
+    def __init__(self, encoder, path, *, dimension, batch_size=8):
+        self.encoder=encoder
+        self.cache=VectorCache(path,dimension=dimension)
+        self.fingerprint=encoder.fingerprint
+        self.fingerprint_metadata=encoder.fingerprint_metadata
+        self.batch_size=batch_size
+        self.metrics=dict(hits=0,inferred=0)
+
+    def token_lengths(self,texts,*,input_kind):
+        return self.encoder.token_lengths(texts,input_kind=input_kind)
+
+    def _encode(self,texts,kind):
+        values={};pending=[]
+        for text in dict.fromkeys(texts):
+            v=self.cache.get(exact_vector_key(self.fingerprint,text,input_kind=kind))
+            if v is None:pending.append(text)
+            else:values[text]=v;self.metrics['hits']+=1
+        method=self.encoder.encode_documents if kind=='document' else self.encoder.encode_queries
+        for off in range(0,len(pending),self.batch_size):
+            batch=pending[off:off+self.batch_size];vectors=method(batch)
+            for text,v in zip(batch,vectors):
+                self.cache.put(exact_vector_key(self.fingerprint,text,input_kind=kind),v,
+                    metadata=dict(encoder_fingerprint=self.fingerprint,input_kind=kind,exact_text_sha256=hashlib.sha256(text.encode()).hexdigest()))
+                values[text]=v;self.metrics['inferred']+=1
+        return np.stack([values[t] for t in texts]) if texts else np.empty((0,self.cache.dimension),np.float32)
+
+    def encode_queries(self,texts):return self._encode(texts,'query')
+    def encode_documents(self,texts):return self._encode(texts,'document')
