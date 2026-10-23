@@ -127,3 +127,53 @@ under ignored `data/processed/event_pipeline/`. The archive includes all
 future interactive visualization. Future 2D distances must not be interpreted as
 original cosine distances. Use `environment.freeze.txt` and the exact model
 revision when reproducing; the recorded vectors are the exact audit artifact.
+
+## Offline interactive report
+
+The frozen 2026-10-23 experiment can be explored without a GPU, model download or
+API access. `build_report.py` reads only JSON/JSONL artifacts. Its curated issue
+catalog and conclusions describe this specific snapshot; they are not an
+automatic quality assessment of arbitrary future corpora. The source-bearing
+`issues.json` is delivered in the local report bundle, outside Git. Retain it
+before rebuilding, or pass `--issues PATH/TO/issues.json` for a fresh output.
+
+```bash
+# Reuse .venv_events, or create a clean Python 3.13 environment for the report.
+uv pip install --python .venv_events/bin/python -r scripts/semantic_gpu/report-requirements.txt
+OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 .venv_events/bin/python \
+  scripts/semantic_gpu/build_report.py \
+  --experiment data/processed/event_pipeline/gpu-experiment \
+  --output data/processed/event_pipeline/interactive-report-20261023
+```
+
+Open the resulting `index.html` directly in Chrome. It embeds the data, CSS and
+JavaScript and needs neither a server nor a network connection. Its CSP disables
+network requests. News, summaries and API request bodies are intentionally local;
+do not put generated HTML in Git or on hosting. No credentials, response headers,
+working databases or hidden reasoning are exported. The original experiment
+archive is not modified. Optional original-artifact links require the sibling
+`gpu-experiment` directory, but the interactive UI is self-contained.
+
+`projection.json` caches coordinates by vector SHA-256, seed, parameters and
+scikit-learn version. Delete this derived file to recompute; do not modify the
+original vectors. PCA50 randomized → Barnes-Hut t-SNE uses perplexity=40,
+max_iter=1200, learning_rate=auto, init=pca, seed=20261023 and four CPU threads.
+The PCA view uses the first two components of the same PCA fit. Full-corpus k=10
+trustworthiness and neighbor recall are measured against original 1024D cosine;
+exact duplicate vectors remain and tied ranks use a stable ID order. Hardware/BLAS
+differences may alter floating-point coordinates. `manifest.json` records input,
+code and output hashes. The semantic/time groupings never depend on projection.
+
+Optional browser integration verification (uses an existing Chrome, no download):
+
+```bash
+uv pip install --python .venv_events/bin/python playwright==1.64.1
+.venv_events/bin/python scripts/semantic_gpu/check_report.py \
+  --chrome /usr/bin/google-chrome
+```
+
+Checks include source/date/text filters, empty states, actual canvas selection,
+projection and grouping switches, case drilldowns, summary→citation navigation,
+all transport/output-limit failures, resource charts, data export, mobile layout,
+untrusted-title escaping, zero HTTP requests and zero browser errors. The local
+output includes screenshots and `browser-check.json`. No tests send live API calls.

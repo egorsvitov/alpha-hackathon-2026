@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Смысловые группы · интерактивный GPU-отчёт</title>
+  <style>/*__STYLE__*/</style>
+</head>
+<body>
+<header class="masthead"><a class="brand" href="#"><span class="brand-symbol">∴</span> СМЫСЛОВОЙ АТЛАС <span class="edition">/ LAB 01</span></a><div class="stamp"><span class="live-dot"></span> Локальный снимок <span>23.10.2026</span></div></header>
+<main>
+  <div class="intro"><div><div class="eyebrow">НОВОСТНАЯ АНАЛИТИКА / GPU-ЭКСПЕРИМЕНТ</div><h1>Где встречаются смыслы</h1><p>Пространство новостей, границы группировки и цена ошибок.</p></div><div class="run-label">BAAI / bge-m3<br><strong>1024D → 2D</strong><br><span>01 июля — 22 октября 2026</span></div></div>
+  <section id="kpis" class="kpis" aria-label="Результаты эксперимента"></section>
+  <nav class="tabs" aria-label="Разделы отчёта">
+    <button data-tab="space" class="active">01 <span>Пространство</span></button>
+    <button data-tab="quality">02 <span>Ошибки и гипотезы</span><b>21</b></button>
+    <button data-tab="api">03 <span>Обобщения и API</span></button>
+    <button data-tab="resources">04 <span>Скорость и ресурсы</span></button>
+    <button data-tab="method">05 <span>Методика и протокол</span></button>
+  </nav>
+
+  <section id="space" class="page active">
+    <div class="section-heading"><div><h2>Карта фрагментов</h2><p>Одна точка — один фрагмент. Цвет объединяет выбранные группы, а положение всегда вычислено из одних эмбеддингов.</p></div><button id="reset" class="secondary">Сбросить фильтры</button></div>
+    <div class="filters">
+      <label>Группировка<select id="variant"><option value="semantic">По смыслу · τ 0.65</option><option value="semantic_time">Смысл + время · α 0.4 / 7 дней</option></select></label>
+      <label>Проекция<select id="projection"><option value="tsne">t-SNE · локальные соседства</option><option value="pca">PCA · линейная проекция</option></select></label>
+      <label>Цвет<select id="color"><option value="group">Группа</option><option value="source">Источник</option><option value="date">Дата публикации</option><option value="summary">Статус обобщения</option></select></label>
+      <label>Источник<select id="source"><option value="">Все 26 источников</option></select></label>
+      <label class="search-label">Поиск по тексту<input id="search" type="search" placeholder="Ипотека, Brent, тикер…" autocomplete="off"></label>
+    </div>
+    <div class="subfilters"><label>С <input type="date" id="dateFrom" min="2026-07-01" max="2026-10-22"></label><label>По <input type="date" id="dateTo" min="2026-07-01" max="2026-10-22"></label><label>Размер группы <select id="minSize"><option value="1">Любой</option><option value="2">От 2 фрагментов</option><option value="5">От 5</option><option value="20">От 20</option></select></label><label><input type="checkbox" id="groupOnly"> Только выбранная группа</label><label><input type="checkbox" id="edges" checked> Соседи выбранной точки</label></div>
+    <div id="caseNote" class="case-note" hidden></div>
+    <div class="atlas-layout">
+      <div class="plot-column"><div class="plot-shell" id="plotShell"><div class="plot-top"><span id="visibleCount"></span><span class="plot-mode" id="plotMode"></span></div><canvas id="plot" tabindex="0" aria-label="Интерактивная карта фрагментов: колесо для масштаба, перетаскивание для перемещения, клик для выбора. Те же точки доступны в списке под картой."></canvas><div id="tooltip" class="tooltip" hidden></div><div class="plot-controls"><button id="zoomIn" aria-label="Приблизить">+</button><button id="zoomOut" aria-label="Отдалить">−</button><button id="fit" title="Вписать видимые точки">Вписать</button><button id="fitGroup">К группе</button></div><div class="plot-bottom"><span>Колесо: масштаб · drag: сдвиг · клик: текст</span><span id="axisLabel"></span></div></div>
+      <div class="map-caption"><span id="projectionMetrics"></span><button id="projectionHelp" class="text-button">Как читать карту ↗</button></div>
+      <div id="legend" class="legend"></div>
+      <div class="below-map"><div class="section-heading"><h3>Найденные группы <span id="groupCount"></span></h3><button id="export" class="text-button">Скачать видимые ID / JSON ↓</button></div><div id="groupList" class="group-list"></div><button id="moreGroups" class="secondary">Ещё группы</button></div></div>
+      <aside class="inspector"><div class="inspector-heading"><span>ИНСПЕКТОР</span><span id="selectionIndex"></span></div><div id="inspector"></div></aside>
+    </div>
+    <div class="comparison-callout"><div><span class="eyebrow">ВЛИЯНИЕ ВРЕМЕНИ</span><h3>Другой порядок объединений</h3><p>Время меняет complete-link слияния. Временная группировка может и разъединить, и добавить пары.</p></div><div><strong>−80 849</strong><span>пар перестали быть в одной группе</span></div><div><strong>+1 647</strong><span>пар оказались вместе впервые</span></div><button class="secondary" data-issue="G02">Разобрать причину →</button></div>
+  </section>
+
+  <section id="quality" class="page">
+    <div class="section-heading"><div><h2>Что сломалось — и что проверять дальше</h2><p>Наблюдения основаны на сохранённых артефактах. Причины и способы исправления — гипотезы, если не указано иное.</p></div></div>
+    <div class="recommendation"><span class="eyebrow">РЕКОМЕНДАЦИЯ ПО ИТОГАМ ЭКСПЕРИМЕНТА</span><h3>Смысловая группировка — отправная точка. Время — отдельный инструмент чтения.</h3><p>Сначала исправить доказательность цитат и сравнимость показателей. Затем проверять время и очистку текста на независимой разметке. Малый test не подтверждает общего улучшения от временного штрафа.</p></div>
+    <div class="filters issue-filters"><label>Приоритет<select id="issuePriority"><option value="">Все</option><option>P0</option><option>P1</option><option>P2</option></select></label><label>Область<select id="issueCategory"><option value="">Все области</option></select></label><label class="search-label">Поиск<input id="issueSearch" type="search" placeholder="Цитаты, время, таймаут…"></label><span id="issueCount"></span></div>
+    <div id="issueList" class="issue-list"></div>
+    <div class="section-heading audit-heading"><div><h2>24 диагностических случая</h2><p>18 полезных для совместного чтения, 2 пропущенные связи, 4 неопределённых. Это черновая оценка Codex по исходным текстам; независимой человеческой проверки нет.</p></div><label>Оценка<select id="reviewFilter"><option value="">Все случаи</option><option value="useful_together">Полезно читать вместе</option><option value="missing_link">Пропущенная связь</option><option value="uncertain">Неопределённо</option></select></label></div>
+    <div id="reviewList" class="review-list"></div>
+  </section>
+
+  <section id="api" class="page">
+    <div class="section-heading"><div><h2>От фрагмента к утверждению</h2><p>Все запросы уже выполнены. Здесь можно изучить сохранённые результаты, расход и ошибки; новых вызовов нет.</p></div></div>
+    <div id="apiStats" class="stats-grid"></div>
+    <div class="notice"><strong>59 валидных форматов ≠ 59 доказанных обзоров.</strong> Проверка IDs подтверждает существование ссылок, но не поддержку утверждения. Отдельно прочитаны шесть завершённых обобщений: одно поддержано, одно с оговорками, три частично, одно с неподтверждёнными цитатами. Отбор диагностический, доли на весь корпус не переносятся.</div>
+    <h3>Примеры с проверкой по исходникам</h3><div id="summaryExamples" class="examples-grid"></div>
+    <h3>Группы, которые не отправлялись</h3><div id="skippedGroups" class="badge-row"></div><p class="footnote">Полный контекст превысил 100 000 bytes. Ни один фрагмент не отброшен для обхода лимита; готового обзора для этих групп нет.</p>
+    <div class="section-heading audit-heading"><h3>Журнал 69 попыток</h3><label>Статус<select id="callFilter"><option value="">Все</option><option value="ok">Завершённый формат</option><option value="length">Лимит вывода</option><option value="error">Ошибка транспорта / ключа</option></select></label></div>
+    <div class="table-wrap"><table><thead><tr><th>Попытка / группа</th><th>Профиль</th><th>Результат</th><th>Время, с</th><th>Токены in / out</th><th>usage.cost *</th><th></th></tr></thead><tbody id="callTable"></tbody></table></div>
+    <p class="footnote">* Валюта usage.cost не подтверждена. Сумма 12.873778452030210067 не обозначает рубли. Две транспортные ошибки имеют неопределённый расход. Пять крупных групп не были отправлены. Ключи и заголовки авторизации в интерфейс не включены.</p>
+  </section>
+
+  <section id="resources" class="page">
+    <div class="section-heading"><div><h2>Что стоил эксперимент</h2><p>GPU кодирует тексты. Сравнение и complete-link выполняются на CPU. Фазы измерены раздельно.</p></div><span class="hardware">RTX 5070 Ti Laptop · 12 GB / Ryzen 9 8945HX</span></div>
+    <div id="speedStats" class="stats-grid"></div>
+    <div class="charts-grid"><article class="card"><h3>Скорость и кэш</h3><div id="cacheChart"></div><p class="footnote">Уникальные embedding_text/с, включая нормализацию и запись кэша, без загрузки модели. Full переиспользует sample-кэш; суммы батчей включают ранние пробы.</p></article><article class="card"><h3>Группы и синглтоны</h3><div id="groupsChart"></div><p class="footnote">Количество групп характеризует структуру, а не качество. В обоих вариантах распределены все 5128 фрагментов.</p></article></div>
+    <article class="card"><div class="section-heading"><h3>Память во времени</h3><label>Фаза<select id="resourcePhase"><option value="sample-complete">GPU · завершение 1000 статей</option><option value="full-complete">GPU · расширение до корпуса</option><option value="full-chosen">CPU · две группировки</option><option value="api-compact-parallel">API · три параллельных процесса</option></select></label></div><div id="resourceChart"></div><p id="resourceCaption" class="footnote"></p></article>
+    <div class="charts-grid"><article class="card"><h3>Пороги на 1000 статьях</h3><div id="thresholdChart"></div><p class="footnote">Dev: 16 полезных, 4 отрицательных, 2 неопределённых пары. Знаменатель — только явно размеченные полезные пары. Не означает precision всего корпуса.</p></article><article class="card"><h3>Временной sweep на dev</h3><div id="temporalChart"></div><p class="footnote">Девять конфигураций, один порог 0.65. Пять ничьих по 7/16; выбран α 0.4 / 7 дней по заранее заданному правилу. Test при выборе не использован.</p></article></div>
+    <div id="phaseTable"></div>
+  </section>
+
+  <section id="method" class="page">
+    <div class="section-heading"><div><h2>Воспроизводимость и границы выводов</h2><p>Все координаты, оценки и обзоры привязаны к одному сохранённому снимку.</p></div><a class="button secondary" href="manifest.json" download>Манифест ↓</a></div>
+    <div id="methodCards" class="charts-grid"></div>
+    <article class="card"><h3>Исторический протокол GPU-эксперимента</h3><p>Исходный REPORT.md сохранён без изменений. Формулировки о будущей визуализации описывают состояние до сборки этого интерфейса. Для поиска по протоколу используйте поиск браузера.</p><pre id="fullReport" class="full-report"></pre></article>
+  </section>
+  <footer><span>Смысловой атлас · локальный исследовательский отчёт</span><span>Исходные новости и запросы остаются вне Git · доступен без сети</span></footer>
+</main>
+<dialog id="modal"><div class="modal-head"><h2 id="modalTitle"></h2><button id="closeModal" aria-label="Закрыть">✕</button></div><div id="modalBody"></div></dialog>
+<script id="reportData" type="application/json">/*__DATA__*/</script>
+<script>/*__APP__*/</script>
+</body>
+</html>
