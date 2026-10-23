@@ -1,0 +1,100 @@
+{
+ "source": "app/analyst/cache",
+ "as_of": "2026-10-22T12:00:00+03:00",
+ "candidates": 84,
+ "models": {
+  "z-ai/glm-5.3-flash": 84
+ },
+ "prompt_versions": {
+  "analyst-v1.0": 84
+ },
+ "json": {
+  "valid_pct": 100.0,
+  "first_try_pct": 98.8,
+  "invalid": 0,
+  "repairs_total": 1
+ },
+ "reference_coverage": {
+  "statements": 503,
+  "with_refs": 503,
+  "pct": 100.0,
+  "model_statements": 624,
+  "model_with_refs": 543,
+  "model_pct": 87.0,
+  "unknown_refs_removed": 0
+ },
+ "decisions": {
+  "model": {
+   "include": 22,
+   "watch": 27,
+   "exclude": 35
+  },
+  "final": {
+   "include": 22,
+   "watch": 27,
+   "exclude": 35
+  },
+  "model_share_pct": {
+   "include": 26.2,
+   "watch": 32.1,
+   "exclude": 41.7
+  }
+ },
+ "significance": {
+  "high": 6,
+  "medium": 25,
+  "low": 18,
+  "excluded": 35
+ },
+ "tokens": {
+  "prompt": 253787,
+  "completion": 58006,
+  "reasoning": 1403,
+  "total": 311793,
+  "per_candidate": 3712
+ },
+ "latency_ms": {
+  "avg": 8888,
+  "median": 9537,
+  "p95": 13391,
+  "max": 16180
+ },
+ "cost_rub": {
+  "total": 7.6498,
+  "per_candidate": 0.0911,
+  "tariff_total": 2.2804,
+  "tariff_per_candidate": 0.0271
+ },
+ "qa": {
+  "source": "recomputed",
+  "stale": 0,
+  "passed": 71,
+  "passed_with_fixes": 12,
+  "failed": 1,
+  "candidates_with_issues": 13,
+  "issues_total": 24,
+  "triggered_pct": 15.5,
+  "by_severity": {
+   "error": 11,
+   "warn": 13
+  },
+  "by_code": {
+   "number_not_in_data": 10,
+   "facts_restored": 7,
+   "payment_as_supplier": 6,
+   "estimate_number_not_in_data": 1
+  }
+ },
+ "bank_position_found": 16,
+ "per_model": {
+  "z-ai/glm-5.3-flash": {
+   "candidates": 84,
+   "json_valid_pct": 100.0,
+   "json_first_try_pct": 98.8,
+   "reference_coverage_pct": 100.0,
+   "cost_rub_per_candidate": 0.0911,
+   "tokens_per_candidate": 3712,
+   "latency_ms_avg": 8888
+  }
+ }
+}
