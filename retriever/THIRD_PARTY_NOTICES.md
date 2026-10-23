@@ -40,3 +40,23 @@ Generated from installed distribution metadata after `uv sync --extra embeddings
 - News: existing local corpus from Interfax, Kommersant and Lenta. Collection URLs/timestamps and HTML/RSS provenance remain in the original experiment artifacts; no new crawling was performed. News content is not covered by the model or library licenses. See the experiment THIRD_PARTY_NOTICES.md.
 - Synthetic unit fixtures: repository-authored company and B6 fixtures, explicitly separated from unlabelled real evaluation data.
 - Standard-library SQLite, decimal, hashlib and related Python modules: Python/runtime licensing. No external agent framework, paid LLM, GNN library, vector DB or ANN dependency added.
+
+## Optional activity-hypothesis GPU experiment (2026-10-23)
+
+Separate from the production CPU runtime; observed dependency closure is in
+`experiments/requirements-gpu.lock`. The existing Jupyter Study GPU environment
+supplies PyTorch; it was not modified. An isolated overlay supplies Transformers.
+
+- PyTorch 2.14.0+cu130: BSD-3-Clause; CUDA libraries retain their NVIDIA licenses.
+  Upstream: https://pytorch.org/. The exact installed dependency/license inventory
+  is saved locally as `data/processed/retriever/activity-hypotheses-v1/runtime-dependencies.json`.
+- Transformers 4.57.6: Apache-2.0; Safetensors 0.8.0: Apache-2.0;
+  Hugging Face Hub 0.36.2: Apache-2.0; Tokenizers 0.22.2: Apache-2.0.
+  Upstream: https://github.com/huggingface/transformers and corresponding Hugging Face repositories.
+- The same MIT-licensed E5 model/revision above is used in safetensors FP32 form.
+  GPU fingerprints include artifact hashes and are distinct from CPU/INT8 hashes.
+- GPT-6 Luna: OpenAI-hosted Codex subagents authored and peer-reviewed activity
+  hypotheses. No model weights redistributed, no paid LLM API called by these scripts.
+  These descriptions are model-generated hypotheses, not validated company facts.
+- Existing supplied company CSV and existing news corpus only; no new news collected.
+  Generated catalogue, company mappings, vectors and full news outputs remain local.
