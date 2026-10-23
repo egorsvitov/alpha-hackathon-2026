@@ -1,0 +1,5 @@
+# Optional local inference environment, separate from the B1–B6 lock.
+# Exact installed versions and immutable model revision are recorded in artifacts.
+numpy>=2.2,<3
+scipy>=1.15,<2
+sentence-transformers>=5.1,<6

@@ -1,6 +1,7 @@
 """Explicit snapshot commands; no network during plan, inspect or export."""
 
 import argparse
+import sqlite3
 import json
 from pathlib import Path
 from .pipeline import (
@@ -51,6 +52,9 @@ def main(argv=None):
     p = sub.add_parser("evaluate")
     p.add_argument("--run", required=True)
     p.add_argument("--gold", required=True)
+    p = sub.add_parser("evaluate-retrieval")
+    p.add_argument("--documents", required=True)
+    p.add_argument("--gold", required=True)
     sub.add_parser("check")
     p = sub.add_parser("demo")
     p.add_argument("--output", required=True)
@@ -67,6 +71,10 @@ def main(argv=None):
                 load(args.document_ids) if args.document_ids else None,
                 load(args.configuration) if args.configuration else None,
             )
+            result = {
+                k: result[k]
+                for k in ("schema_version", "corpus_id", "run_id", "configuration")
+            }
         elif args.command == "status":
             result = status(args.run)
         elif args.command == "retrieve":
@@ -75,6 +83,17 @@ def main(argv=None):
             result = export_run(args.run, args.output)
         elif args.command == "evaluate":
             result = evaluate_run(args.run, args.gold)
+        elif args.command == "evaluate-retrieval":
+            from .evaluation import evaluate_gold_retrieval
+
+            result = evaluate_gold_retrieval(
+                [
+                    json.loads(line)
+                    for line in Path(args.documents).read_text().splitlines()
+                    if line.strip()
+                ],
+                load(args.gold),
+            )
         elif args.command == "check":
             from .checks import check
 
@@ -124,7 +143,7 @@ def main(argv=None):
             }[args.command](args.run, provider, args.max_calls, **kw)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
-    except (ValueError, OSError) as exc:
+    except (ValueError, OSError, sqlite3.Error) as exc:
         print(
             json.dumps(
                 {

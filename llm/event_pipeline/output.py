@@ -81,7 +81,7 @@ def export_run(root, output):
         for c in calls:
             for key in ("response_json", "error_json"):
                 c[key.removesuffix("_json")] = (
-                    json.loads(c.pop(key)) if c[key] else None
+                    json.loads(value) if (value := c.pop(key)) else None
                 )
         reservations = [a for a in artifacts if a["kind"] == "shared_quota_reservation"]
         if reservations:

@@ -127,7 +127,7 @@ def plan_run(corpus, output, document_ids=None, configuration=None):
             raise ValueError("snapshot_import_invalid")
         with closing(sqlite3.connect(root / "catalog.sqlite3")) as db, db:
             db.executescript(
-                "PRAGMA user_version=1; CREATE TABLE state(key TEXT PRIMARY KEY,value TEXT NOT NULL); CREATE TABLE extraction(document_id TEXT PRIMARY KEY,payload TEXT NOT NULL); CREATE TABLE steps(position INTEGER PRIMARY KEY,payload TEXT NOT NULL); CREATE TRIGGER step_immutable BEFORE UPDATE ON steps BEGIN SELECT RAISE(ABORT,'immutable step'); END; CREATE TRIGGER step_no_delete BEFORE DELETE ON steps BEGIN SELECT RAISE(ABORT,'immutable step'); END;"
+                "PRAGMA application_id=1162889552; PRAGMA user_version=1; CREATE TABLE state(key TEXT PRIMARY KEY,value TEXT NOT NULL); CREATE TABLE extraction(document_id TEXT PRIMARY KEY,payload TEXT NOT NULL); CREATE TABLE steps(position INTEGER PRIMARY KEY,payload TEXT NOT NULL); CREATE TRIGGER step_immutable BEFORE UPDATE ON steps BEGIN SELECT RAISE(ABORT,'immutable step'); END; CREATE TRIGGER step_no_delete BEFORE DELETE ON steps BEGIN SELECT RAISE(ABORT,'immutable step'); END;"
             )
             db.execute("INSERT INTO state VALUES (?,?)", ("phase", "extracting"))
         os.rename(root, destination)
@@ -154,7 +154,10 @@ def locked(root):
 @contextmanager
 def connect(root):
     db = sqlite3.connect(Path(root) / "catalog.sqlite3", timeout=5)
-    if db.execute("PRAGMA user_version").fetchone()[0] != 1:
+    if (
+        db.execute("PRAGMA application_id").fetchone()[0],
+        db.execute("PRAGMA user_version").fetchone()[0],
+    ) != (1162889552, 1):
         db.close()
         raise ValueError("unsupported_catalog_schema")
     try:
@@ -164,6 +167,15 @@ def connect(root):
             yield db
     finally:
         db.close()
+
+
+def snapshot_article(store, document):
+    from llm.events.contracts.validation import article_sha256
+
+    record = store.get_current_article(document["article"]["article_id"])
+    if article_sha256(record.article) != document["article_sha256"]:
+        raise ValueError("snapshot_article_changed")
+    return record
 
 
 def assert_implementation(plan):
@@ -227,7 +239,7 @@ def extract_mentions(root, provider, max_calls, limits=None, journal=None):
                         **packet,
                     },
                 )
-                record = store.get_current_article(doc["article"]["article_id"])
+                record = snapshot_article(store, doc)
                 result = execute(
                     store,
                     record.source_id,
@@ -403,9 +415,7 @@ def cluster_mentions(
                 if len(canonical_json(req).encode()) > profile.max_request_bytes:
                     reason = "context_too_large"
                 else:
-                    rec = store.get_current_article(
-                        docs[m.document_id]["article"]["article_id"]
-                    )
+                    rec = snapshot_article(store, docs[m.document_id])
                     call = execute(
                         store,
                         rec.source_id,
@@ -460,6 +470,7 @@ def cluster_mentions(
                                     raise ValueError("missing_pair_blocks")
                             reason = "assessed"
                         except ValueError:
+                            decisions = []
                             reason = "invalid_verification"
                     else:
                         reason = call.get("reason") or call["status"]

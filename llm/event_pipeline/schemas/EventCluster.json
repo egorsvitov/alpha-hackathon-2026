@@ -92,6 +92,17 @@
       "default": "navigation",
       "title": "Label Kind",
       "type": "string"
+    },
+    "verification_status": {
+      "default": "unassessed",
+      "enum": [
+        "assessed",
+        "unassessed",
+        "uncertain",
+        "not_required"
+      ],
+      "title": "Verification Status",
+      "type": "string"
     }
   },
   "required": [

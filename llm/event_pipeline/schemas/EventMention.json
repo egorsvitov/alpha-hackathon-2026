@@ -17,6 +17,13 @@
       "title": "Block Ids",
       "type": "array"
     },
+    "context_block_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Context Block Ids",
+      "type": "array"
+    },
     "gloss": {
       "anyOf": [
         {

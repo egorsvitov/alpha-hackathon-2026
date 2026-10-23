@@ -253,3 +253,40 @@ class SafetyTests(unittest.TestCase):
         with self.assertRaises(StorageError):
             counter.reserve({})
         self.assertEqual(counter.summary()[0]["error"]["code"], "provider_timeout")
+
+    def test_failed_pair_grounding_cannot_apply_same(self):
+        class BadReferences(DemoProvider):
+            def complete(self, req):
+                data = json.loads(req["messages"][1]["content"])
+                if "clusters" not in data:
+                    return super().complete(req)
+                # IDs exist globally, but omit new mention: pair grounding must fail.
+                old = data["clusters"][0]["mention_ids"][0]
+                return response(
+                    {
+                        "decisions": [
+                            {
+                                "cluster_id": c["cluster_id"],
+                                "identity": "same",
+                                "claim_compatibility": "compatible",
+                                "mention_ids": [old],
+                                "block_ids": data["new_mention"]["block_ids"],
+                                "reason": "bad pair support",
+                            }
+                            for c in data["clusters"]
+                        ]
+                    }
+                )
+
+        provider = BadReferences()
+        extract_mentions(self.run, provider, 10)
+        cluster_mentions(self.run, provider, 10)
+        with connect(self.run) as db:
+            steps = [
+                json.loads(r[0])
+                for r in db.execute("SELECT payload FROM steps ORDER BY position")
+            ]
+        self.assertNotEqual(
+            steps[0]["cluster"]["cluster_id"], steps[1]["cluster"]["cluster_id"]
+        )
+        self.assertEqual(steps[1]["reason"], "invalid_verification")

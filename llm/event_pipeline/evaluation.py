@@ -8,6 +8,26 @@ from .retrieval import BM25Retriever
 def evaluate_gold_retrieval(documents, gold, top_k=20, max_clusters=8):
     blocks = {b.block_id: b for d in documents for b in source_blocks(d)}
     order = {d["document_id"]: i for i, d in enumerate(documents)}
+    events = {}
+    docs = {d["document_id"]: d for d in documents}
+    for item in gold["mentions"]:
+        if item["document_id"] not in docs or not item["block_ids"]:
+            raise ValueError("invalid_gold_source")
+        if any(
+            b not in blocks or blocks[b].document_id != item["document_id"]
+            for b in item["block_ids"]
+        ):
+            raise ValueError("invalid_gold_blocks")
+        anchor = item.get("anchor")
+        if anchor:
+            text = docs[item["document_id"]]["article"][anchor["field"]]
+            if text[anchor["start"] : anchor["end"]] != anchor["text"]:
+                raise ValueError("invalid_gold_anchor")
+        if item.get("event_id") and item.get("split"):
+            splits = events.setdefault(item["event_id"], set())
+            splits.add(item["split"])
+            if len(splits) > 1:
+                raise ValueError("event_split_leakage")
     items = sorted(
         gold["mentions"],
         key=lambda g: (
