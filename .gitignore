@@ -60,6 +60,7 @@ alfa_hack.db
 /reports/
 
 /data/processed/event_pipeline/
+/data/processed/company_news/
 
 # Download archives, local runtime locks, and source-bearing GPU artifacts.
 /tmp_file/

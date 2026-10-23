@@ -1,0 +1,101 @@
+{
+  "schema_version": "raw-news-analysis.v1",
+  "batch": {
+    "schema_version": "raw-news-candidate-batch.v1",
+    "company_id": "synthetic-company-1",
+    "profile_version": "synthetic-profile-v1",
+    "as_of": "2026-10-22T23:59:59+03:00",
+    "snapshot_id": "synthetic-snapshot-v1",
+    "queries": [
+      {
+        "query_id": "a6a6e8a81c7e466037d763f989847fa231821ee042420dba762fcbbebf8efb65",
+        "company_id": "synthetic-company-1",
+        "profile_version": "synthetic-profile-v1",
+        "text": "Финансирование покупки оборудования",
+        "family": "mechanisms",
+        "view": "finance",
+        "anchor_feature_ids": [
+          "synthetic-company-1:/products/loan"
+        ],
+        "template_version": "synthetic-mechanisms.v1",
+        "status": "conditional"
+      }
+    ],
+    "documents": [
+      {
+        "reference": {
+          "document_id": "synthetic-news-1",
+          "article_id": "synthetic:1",
+          "article_version": null,
+          "content_hash": "50d69c821e5c0f6e2bcb4d718f419b0b9b6bda53482c26bfaca7615aeca33d63",
+          "snapshot_id": "synthetic-snapshot-v1",
+          "source": "synthetic-fixture",
+          "published_at": "2026-10-20T12:00:00+03:00",
+          "publication_precision": "timestamp",
+          "observed_at": null
+        },
+        "title": "Учебный пример",
+        "title_origin": "source",
+        "text": "Синтетический пример: опубликованы новые условия финансирования оборудования.",
+        "provenance": []
+      }
+    ],
+    "candidates": [
+      {
+        "document_id": "synthetic-news-1",
+        "hits": [
+          {
+            "document_id": "synthetic-news-1",
+            "query_id": "a6a6e8a81c7e466037d763f989847fa231821ee042420dba762fcbbebf8efb65",
+            "family": "mechanisms",
+            "channel": "lexical",
+            "rank": 1,
+            "raw_score": 1.25,
+            "encoder_fingerprint": null
+          }
+        ],
+        "fusion_score": 0.01639344262295082,
+        "fusion_rank": 1,
+        "rerank_score": null,
+        "rerank_rank": null,
+        "best_query_id": null,
+        "reranker_status": "not_requested",
+        "selected": true,
+        "exclusion_stage": null,
+        "exclusion_reason": null
+      }
+    ],
+    "selected_context": [
+      {
+        "document_id": "synthetic-news-1",
+        "role": "retrieved",
+        "parent_document_id": null,
+        "group_ids": [],
+        "spans": [
+          {
+            "document_id": "synthetic-news-1",
+            "content_hash": "50d69c821e5c0f6e2bcb4d718f419b0b9b6bda53482c26bfaca7615aeca33d63",
+            "field": "text",
+            "start": 0,
+            "end": 77
+          }
+        ]
+      }
+    ],
+    "budget": {
+      "max_documents": 20,
+      "counter": "utf8_bytes_div4_estimate.v1",
+      "limit": 8192
+    },
+    "limitations": []
+  },
+  "company_facts": [
+    {
+      "feature_id": "synthetic-company-1:/products/loan",
+      "value": true,
+      "status": "observed"
+    }
+  ],
+  "hypothesis_query_ids": [],
+  "analytical_profile": "synthetic-offline.v1"
+}

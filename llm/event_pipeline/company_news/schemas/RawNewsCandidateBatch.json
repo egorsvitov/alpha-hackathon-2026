@@ -1,0 +1,545 @@
+{
+  "$defs": {
+    "CandidateTrace": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "hits": {
+          "items": {
+            "$ref": "#/$defs/QueryHit"
+          },
+          "title": "Hits",
+          "type": "array"
+        },
+        "fusion_score": {
+          "title": "Fusion Score",
+          "type": "number"
+        },
+        "fusion_rank": {
+          "exclusiveMinimum": 0,
+          "title": "Fusion Rank",
+          "type": "integer"
+        },
+        "rerank_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rerank Score"
+        },
+        "rerank_rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rerank Rank"
+        },
+        "best_query_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Best Query Id"
+        },
+        "reranker_status": {
+          "default": "not_requested",
+          "enum": [
+            "not_requested",
+            "scored",
+            "unscored",
+            "failed"
+          ],
+          "title": "Reranker Status",
+          "type": "string"
+        },
+        "selected": {
+          "default": false,
+          "title": "Selected",
+          "type": "boolean"
+        },
+        "exclusion_stage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Exclusion Stage"
+        },
+        "exclusion_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Exclusion Reason"
+        }
+      },
+      "required": [
+        "document_id",
+        "hits",
+        "fusion_score",
+        "fusion_rank"
+      ],
+      "title": "CandidateTrace",
+      "type": "object"
+    },
+    "CompanyQuery": {
+      "additionalProperties": false,
+      "properties": {
+        "query_id": {
+          "minLength": 1,
+          "title": "Query Id",
+          "type": "string"
+        },
+        "company_id": {
+          "title": "Company Id",
+          "type": "string"
+        },
+        "profile_version": {
+          "title": "Profile Version",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "family": {
+          "enum": [
+            "facts",
+            "mechanisms",
+            "hypotheses",
+            "graph"
+          ],
+          "title": "Family",
+          "type": "string"
+        },
+        "view": {
+          "title": "View",
+          "type": "string"
+        },
+        "anchor_feature_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Anchor Feature Ids",
+          "type": "array"
+        },
+        "template_version": {
+          "title": "Template Version",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "observed",
+            "conditional",
+            "hypothesis"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query_id",
+        "company_id",
+        "profile_version",
+        "text",
+        "family",
+        "view",
+        "anchor_feature_ids",
+        "template_version",
+        "status"
+      ],
+      "title": "CompanyQuery",
+      "type": "object"
+    },
+    "ContextSelection": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "retrieved",
+            "context_expansion"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "parent_document_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Document Id"
+        },
+        "group_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Group Ids",
+          "type": "array"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/SourceSpan"
+          },
+          "minItems": 1,
+          "title": "Spans",
+          "type": "array"
+        }
+      },
+      "required": [
+        "document_id",
+        "role",
+        "spans"
+      ],
+      "title": "ContextSelection",
+      "type": "object"
+    },
+    "NewsDocumentRef": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "minLength": 1,
+          "title": "Document Id",
+          "type": "string"
+        },
+        "article_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Article Id"
+        },
+        "article_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Article Version"
+        },
+        "content_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Hash",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "minLength": 1,
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Published At"
+        },
+        "publication_precision": {
+          "enum": [
+            "timestamp",
+            "day",
+            "unknown"
+          ],
+          "title": "Publication Precision",
+          "type": "string"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        }
+      },
+      "required": [
+        "document_id",
+        "content_hash",
+        "snapshot_id",
+        "source",
+        "published_at",
+        "publication_precision"
+      ],
+      "title": "NewsDocumentRef",
+      "type": "object"
+    },
+    "QueryHit": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "query_id": {
+          "title": "Query Id",
+          "type": "string"
+        },
+        "family": {
+          "enum": [
+            "facts",
+            "mechanisms",
+            "hypotheses",
+            "graph"
+          ],
+          "title": "Family",
+          "type": "string"
+        },
+        "channel": {
+          "enum": [
+            "dense",
+            "lexical"
+          ],
+          "title": "Channel",
+          "type": "string"
+        },
+        "rank": {
+          "exclusiveMinimum": 0,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "raw_score": {
+          "title": "Raw Score",
+          "type": "number"
+        },
+        "encoder_fingerprint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Encoder Fingerprint"
+        }
+      },
+      "required": [
+        "document_id",
+        "query_id",
+        "family",
+        "channel",
+        "rank",
+        "raw_score"
+      ],
+      "title": "QueryHit",
+      "type": "object"
+    },
+    "RawNewsDocument": {
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "$ref": "#/$defs/NewsDocumentRef"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "title_origin": {
+          "enum": [
+            "source",
+            "generated_identifier",
+            "unknown"
+          ],
+          "title": "Title Origin",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "provenance": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Provenance",
+          "type": "array"
+        }
+      },
+      "required": [
+        "reference",
+        "title",
+        "title_origin",
+        "text"
+      ],
+      "title": "RawNewsDocument",
+      "type": "object"
+    },
+    "SourceSpan": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "title": "Document Id",
+          "type": "string"
+        },
+        "content_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Content Hash",
+          "type": "string"
+        },
+        "field": {
+          "const": "text",
+          "default": "text",
+          "title": "Field",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "document_id",
+        "content_hash",
+        "start",
+        "end"
+      ],
+      "title": "SourceSpan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "raw-news-candidate-batch.v1",
+      "default": "raw-news-candidate-batch.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "company_id": {
+      "title": "Company Id",
+      "type": "string"
+    },
+    "profile_version": {
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "as_of": {
+      "title": "As Of",
+      "type": "string"
+    },
+    "snapshot_id": {
+      "title": "Snapshot Id",
+      "type": "string"
+    },
+    "queries": {
+      "items": {
+        "$ref": "#/$defs/CompanyQuery"
+      },
+      "title": "Queries",
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/RawNewsDocument"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/CandidateTrace"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "selected_context": {
+      "items": {
+        "$ref": "#/$defs/ContextSelection"
+      },
+      "title": "Selected Context",
+      "type": "array"
+    },
+    "budget": {
+      "additionalProperties": true,
+      "title": "Budget",
+      "type": "object"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "company_id",
+    "profile_version",
+    "as_of",
+    "snapshot_id",
+    "queries",
+    "documents",
+    "candidates",
+    "budget"
+  ],
+  "title": "RawNewsCandidateBatch",
+  "type": "object"
+}

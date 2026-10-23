@@ -1,0 +1,71 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "query_id": {
+      "minLength": 1,
+      "title": "Query Id",
+      "type": "string"
+    },
+    "company_id": {
+      "title": "Company Id",
+      "type": "string"
+    },
+    "profile_version": {
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "family": {
+      "enum": [
+        "facts",
+        "mechanisms",
+        "hypotheses",
+        "graph"
+      ],
+      "title": "Family",
+      "type": "string"
+    },
+    "view": {
+      "title": "View",
+      "type": "string"
+    },
+    "anchor_feature_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Anchor Feature Ids",
+      "type": "array"
+    },
+    "template_version": {
+      "title": "Template Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "observed",
+        "conditional",
+        "hypothesis"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "query_id",
+    "company_id",
+    "profile_version",
+    "text",
+    "family",
+    "view",
+    "anchor_feature_ids",
+    "template_version",
+    "status"
+  ],
+  "title": "CompanyQuery",
+  "type": "object"
+}
