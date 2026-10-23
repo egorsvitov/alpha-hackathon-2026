@@ -1,0 +1,23 @@
+{
+  "schema": "semantic-interactive-report.public.v1",
+  "units": 5128,
+  "documents": 3621,
+  "private_report_sha256": "94736b537e61457d8c48bc136592e42ee459425844b207f67e873f0494cbc148",
+  "builder_sha256": "daff5f374cf0bdcf4bcd078e218f9a469c056cb03a86e45b00c6c68bb2ce1090",
+  "files": {
+    "index.html": "d0179c4ec756fb0b9af0e56f478c6cefcf9d8faf57408f091a06a30d44e691bb",
+    "REPORT.md": "9abb4659669ddda13546014ef82729a734772dd28dcbe5f73f3d2a0110f96e0a",
+    "projection.json": "d8f5799759e8fc0f9eb5a58c063b0e6e380f472c23322731f73b3970515258be",
+    "issues.json": "1465e45520e965c66b474a99a68d64675ffdf70e8c1e632ba2fa0bf487999dda"
+  },
+  "excluded": [
+    "article text/title/URL",
+    "unit text/embedding_text",
+    "API messages and content",
+    "raw responses/headers/reasoning",
+    "private protocol",
+    "keys",
+    "databases"
+  ],
+  "neighbor_scores_decimal_places": 6
+}

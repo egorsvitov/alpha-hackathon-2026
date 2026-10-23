@@ -177,3 +177,26 @@ projection and grouping switches, case drilldowns, summary→citation navigation
 all transport/output-limit failures, resource charts, data export, mobile layout,
 untrusted-title escaping, zero HTTP requests and zero browser errors. The local
 output includes screenshots and `browser-check.json`. No tests send live API calls.
+
+## Git edition without news contents
+
+`docs/reports/semantic-gpu-20261023/` contains the published Markdown report and
+standalone interactive HTML, with all coordinates, group memberships, rounded
+neighbor scores and measurements. It excludes article titles/text/URLs, unit
+text, API prompts/content, response headers, keys and databases. Curated generic
+diagnostic notes live in `report/public_notes.json`. It does not replace the
+full source-reading report in ignored `data/`.
+
+```bash
+.venv_events/bin/python scripts/semantic_gpu/publish_report.py
+.venv_events/bin/python scripts/semantic_gpu/verify_public_report.py
+.venv_events/bin/python scripts/semantic_gpu/check_report.py \
+  --report docs/reports/semantic-gpu-20261023/index.html
+```
+
+The publisher builds a fresh payload from allowlists; it never copies the private
+Markdown protocol. The verifier checks every point/membership and all 102560
+neighbor edges, then poisons source fields to ensure their contents cannot reach
+the public export. It records `privacy-check.json`. Browser checks work for both
+editions and use only saved data. Commit only the Git edition; the full local
+HTML and source-bearing ZIP archives remain excluded.

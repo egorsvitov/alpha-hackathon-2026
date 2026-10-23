@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "units": 5128,
+  "edges_checked": 102560,
+  "coordinates_and_membership_unchanged": true,
+  "scores_within_rounding_tolerance": true,
+  "source_text_title_url_absent": true,
+  "api_prompts_content_absent": true,
+  "poisoned_source_regression": "passed",
+  "manifest_hashes_verified": true,
+  "tested_html_sha256": "d0179c4ec756fb0b9af0e56f478c6cefcf9d8faf57408f091a06a30d44e691bb"
+}

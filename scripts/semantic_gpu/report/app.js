@@ -1,5 +1,6 @@
 'use strict';
 const D = JSON.parse(document.getElementById('reportData').textContent);
+if(D.neighbor_encoding==='compact.v1')for(const v of Object.keys(D.neighbors))D.neighbors[v]=D.neighbors[v].map(edges=>edges.map(([i,cosine,gap_days,time_multiplier,score])=>({i,cosine,gap_days,time_multiplier,score})));
 const $ = id => document.getElementById(id);
 const E = (tag, cls, value) => {const el=document.createElement(tag);if(cls)el.className=cls;if(value!==undefined)el.textContent=value;return el;};
 const n = (value, digits=0) => Number(value).toLocaleString('ru-RU',{maximumFractionDigits:digits});
@@ -116,11 +117,13 @@ function sourceLine(i){const wrap=E('div','source-line');wrap.append(pill(doc(i)
 function renderInspector(){const panel=$('inspector');panel.replaceChildren();const i=S.selected,u=units[i],d=doc(i),g=groupOf(i);$('selectionIndex').textContent=`${i+1} / ${n(units.length)}`;
   const top=E('section','inspect-block');add(top,sourceLine(i),E('h3','',title(i)));
   if(!S.visibleSet.has(i))add(top,E('p','error-line','Выбранный фрагмент скрыт фильтрами.'),button('Показать на карте',()=>{clearFilters();fit();}));
+  if(D.public){top.append(E('p','muted','Текст и заголовок новости доступны только в полной локальной версии. Здесь сохранены ID, источник, дата, группы и scores.'),E('div','unit-id',`unit ${u.unit_id} · ${u.field}[${u.start}:${u.end}]`));}else{
   if(u.text.length>800)top.append(E('p','muted','Фрагмент целиком; длинный текст можно прокручивать.'));
   add(top,E('div','unit-text',u.text));
   const details=E('details');details.append(E('summary','',`Извлечённый текст статьи · ${n(d.text.length)} символов`),E('p','muted',`is_full_original_text=${d.is_full_original_text}. Полнота оригинальной веб-статьи не гарантирована. Медиа не просматривались.`),E('div','original',d.text));
   add(top,details,E('div','unit-id',`unit ${u.unit_id} · ${u.field}[${u.start}:${u.end}]`));
   if(d.url){try{const url=new URL(d.url);if(['http:','https:'].includes(url.protocol)){const a=E('a','source-link','Открыть публикацию ↗');a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';top.append(a);}}catch{}}
+  }
   const meta=E('details');add(meta,E('summary','','Метаданные публикации'),E('pre','original',JSON.stringify({...d,text:undefined},null,2)));top.append(meta);panel.append(top);
   const block=E('section','inspect-block');add(block,E('h3','',`${S.variant==='semantic'?'Смысловая':'Смысл + время'} группа · ${g.members.length} фрагм.`),E('p','muted',`#${short(g.group_id)} · ${new Set(g.members.map(j=>units[j].document_id)).size} статей · minimum pair score ${n(g.minimum_pair_score,4)}`),E('p','muted','Группа для совместного чтения, не подтверждение одного события. Score не является вероятностью.'));
   const counterpart=S.variant==='semantic'?'semantic_time':'semantic';const parts=new Map();for(const j of g.members){const gid=units[j].groups[counterpart];parts.set(gid,(parts.get(gid)||0)+1);}const trans=E('details');trans.append(E('summary','',`В другом режиме → ${parts.size} групп`));for(const [gid,count]of [...parts].sort((a,b)=>b[1]-a[1])){const target=groupMaps[counterpart].get(gid);trans.append(button(`${short(gid)} · ${count} из ${target.members.length} фрагм.`,()=>{S.variant=counterpart;$('variant').value=counterpart;select(target.members.find(j=>g.members.includes(j)));},'member'));}block.append(trans);
@@ -152,7 +155,7 @@ function renderReviews(){const list=$('reviewList');list.replaceChildren();for(c
 
 function showCall(call){if(!call)return;const box=E('div');const result=Object.values(D.summaries).find(s=>s.call_id===call.call_id);const stats=E('div','badge-row');add(stats,pill(`HTTP ${call.status_code||'не получен'}`),pill(call.finish_reason||call.error?.code||'—',call.error||call.finish_reason==='length'?'bad':''),pill(n(call.elapsed_seconds,2)+' c','neutral'));box.append(stats);paragraph(box,`Попытка ${call.call_id} · ${new Date(call.created_at*1000).toISOString()} · группа ${call.group_id}`);if(call.error)paragraph(box,JSON.stringify(call.error),'error-line');if(result?.reason)paragraph(box,result.reason,'error-line');
   const usage=E('pre','',JSON.stringify(call.usage,null,2));add(box,E('h3','','Расход из ответа провайдера'),usage);paragraph(box,'usage.cost: валюта не установлена. Ключи, response headers и скрытое reasoning не экспортированы. Исходный аудит сохранён отдельно.');
-  const cols=E('div','dialog-cols'),left=E('div'),right=E('div');add(left,E('h3','','Сохранённый запрос'),E('pre','',JSON.stringify(call.request,null,2)));add(right,E('h3','','Финальное содержимое ответа'),E('pre','',call.content||'Финального content нет.'));add(cols,left,right);box.append(cols);if(call.group_id)box.append(button('Группа и исходники ↗',()=>{$('modal').close();focusGroup(call.group_id);}));modal('Аудит вызова · '+short(call.call_id),box);
+  const cols=E('div','dialog-cols'),left=E('div'),right=E('div');add(left,E('h3','',D.public?'Параметры запроса без prompts':'Сохранённый запрос'),E('pre','',JSON.stringify(call.request,null,2)));add(right,E('h3','',D.public?'Содержимое не опубликовано':'Финальное содержимое ответа'),E('pre','',D.public?'Тексты запроса и ответа остаются в локальном аудите. Здесь доступны статус, расход и параметры.':(call.content||'Финального content нет.')));add(cols,left,right);box.append(cols);if(call.group_id)box.append(button(D.public?'Группа и ссылки ↗':'Группа и исходники ↗',()=>{$('modal').close();focusGroup(call.group_id);}));modal('Аудит вызова · '+short(call.call_id),box);
 }
 const callStatus=c=>c.error?'error':c.finish_reason==='length'?'length':'ok';
 function initApi(){const api=D.aggregate.api;for(const [value,label,detail]of [[api.calls,'попыток из лимита 200','67 HTTP 200 · 2 ошибки транспорта'],[59,'формат + IDs валидны','8 ответов достигли лимита вывода'],[n(api.usage.total_tokens),'токенов всего',`${n(api.usage.prompt_tokens)} in / ${n(api.usage.completion_tokens)} out`],['5','групп не отправлены','Полный контекст > 100 000 bytes']])add($('apiStats'),add(E('div','stat'),E('strong','',value),E('span','',label),E('small','',detail)));
@@ -188,7 +191,18 @@ function initMethod(){const p=D.provenance;const cards=$('methodCards');const on
   for(const name of ['projection.json','manifest.json']){const a=E('a','source-link',name+' ↓');a.href=name;a.download=name;artifacts.append(a,E('br'));}cards.append(artifacts);$('fullReport').textContent=D.report_text;
 }
 $('export').onclick=()=>{const payload={variant:S.variant,projection:S.projection,filters:{query:S.query,source:S.source,from:S.from,to:S.to,minSize:S.minSize,onlyGroup:S.onlyGroup},units:S.visible.map(i=>({unit_id:units[i].unit_id,document_id:units[i].document_id,group_id:units[i].groups[S.variant],x:xy()[i][0],y:xy()[i][1]})),warning:'2D distances are not original cosine distances; group IDs are scoped to the frozen configuration.'};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=E('a');a.href=url;a.download='semantic-atlas-selection.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-initOverview();initIssues();initApi();initResources();initMethod();
+function applyPublicEdition(){
+  $('space').querySelector('.section-heading p').textContent='Одна точка — один фрагмент. Сохранены все координаты и группы; тексты и заголовки заменены IDs.';
+  $('search').placeholder='ID документа, фрагмента или группы…';$('search').parentElement.firstChild.textContent='Поиск по ID';
+  $('api').querySelector('.section-heading p').textContent='Сохранены статусы, параметры, usage и диагностика. Содержимое запросов и ответов доступно только локально. Новых вызовов нет.';
+  $('summaryExamples').previousElementSibling.textContent='Шесть проверенных обобщений: диагностика без текстов';
+  $('summaryExamples').querySelectorAll('button').forEach(b=>b.textContent='Группа и ссылки ↗');
+  const card=$('methodCards').children[3];card.replaceChildren(E('h3','','Версия для Git'),E('p','','Полный локальный отчёт сохраняется отдельно. В этой версии отсутствуют тексты и заголовки статей, URL, prompts и финальные API-ответы. Все 5128 точек, оба варианта группировки, метрики и диагностические связи сохранены.'),E('p','','Scores соседей округлены до 6 знаков; членство и порядок соседей не изменены. По ссылкам утверждений можно перейти к ID, источнику и дате, но проверка поддержки по тексту требует локальной версии.'),button('Качество проекции',()=>modal('Качество проекции',projectionExplanation())),E('p','','Сборщик: scripts/semantic_gpu/publish_report.py. Протокол и статические артефакты находятся рядом с index.html и опубликованы в той же ветке.'));
+  const artifacts=$('methodCards').children[4];artifacts.querySelector('h3').textContent='Опубликованные артефакты';artifacts.querySelector('p').textContent='Отчёт, проекции и диагностика без новостных текстов. Отдельный сервер не требуется.';
+  const protocol=$('fullReport').parentElement;protocol.querySelector('h3').textContent='Отчёт для Git';protocol.querySelector('p').textContent='Результаты и обобщённая диагностика без исходных новостей. Предложения исправлений не означают, что они уже реализованы.';
+  document.querySelector('footer span:last-child').textContent='Версия для Git · исходные тексты остаются локальными';
+}
+initOverview();initIssues();initApi();initResources();initMethod();if(D.public)applyPublicEdition();
 const initial=location.hash.match(/^#unit=([a-f0-9]+)$/);if(initial&&index.has(initial[1]))S.selected=index.get(initial[1]);else S.selected=allGroups.get(D.reviews.cases.find(c=>c.case_id==='group-17').group_id).members[0];
 refresh();requestAnimationFrame(resize);
 // Expose counts, not source contents, for reproducible browser smoke checks.

@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "browser": "153.0.8010.52",
+  "seconds": 6.8693110440071905,
+  "tested_html_sha256": "d0179c4ec756fb0b9af0e56f478c6cefcf9d8faf57408f091a06a30d44e691bb",
+  "check_script_sha256": "7217b67f5e564b42c81cf2b76d186f3e6ff1397833e65012be5abe9cea3c2cac",
+  "checks": [
+    "full corpus, 5128 aligned units, 3621 documents, 69 calls, 21 issues",
+    "source/text/date filters, no-results state, reset",
+    "semantic/time variants change memberships, not embedding coordinates; PCA/t-SNE switch",
+    "canvas hit detection, point inspector, projection explanation",
+    "all issues, P0 filter, review labels; mortgage group splits into three with time",
+    "69 attempts, eight output-limit failures, two transport failures; summary citation opens exact fragment",
+    "resource series, full historical protocol, filtered selection export",
+    "390px mobile viewport: no page overflow, map and issues usable",
+    "untrusted source title escaped; zero HTTP requests, zero browser errors"
+  ],
+  "page_errors": [],
+  "http_requests": []
+}
