@@ -46,3 +46,6 @@ alfa_hack.db
 *.egg-info/
 build/
 dist/
+
+# Local cluster merge state
+/data/processed/cluster_merge/

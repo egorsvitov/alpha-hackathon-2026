@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "Disposition": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "used",
+            "duplicate",
+            "service",
+            "unresolved"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "duplicate_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duplicate Of"
+        },
+        "reason": {
+          "default": "",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "kind"
+      ],
+      "title": "Disposition",
+      "type": "object"
+    },
+    "Draft": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "paragraphs": {
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "minItems": 1,
+          "title": "Paragraphs",
+          "type": "array"
+        },
+        "disagreements": {
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "title": "Disagreements",
+          "type": "array"
+        }
+      },
+      "required": [
+        "title",
+        "paragraphs"
+      ],
+      "title": "Draft",
+      "type": "object"
+    },
+    "Paragraph": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Fragment Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "fragment_ids"
+      ],
+      "title": "Paragraph",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Draft"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "coverage": {
+      "items": {
+        "$ref": "#/$defs/Disposition"
+      },
+      "title": "Coverage",
+      "type": "array"
+    }
+  },
+  "required": [
+    "events",
+    "coverage"
+  ],
+  "title": "Answer",
+  "type": "object"
+}

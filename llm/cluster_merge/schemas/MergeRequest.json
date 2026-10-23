@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "Article": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "title": "Article",
+      "type": "object"
+    },
+    "Profile": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "default": "deepseek/deepseek-v4.1-flash",
+          "title": "Model",
+          "type": "string"
+        },
+        "endpoint": {
+          "default": "https://changellenge.up.railway.app/v1",
+          "title": "Endpoint",
+          "type": "string"
+        },
+        "max_input_chars": {
+          "default": 24000,
+          "minimum": 2000,
+          "title": "Max Input Chars",
+          "type": "integer"
+        },
+        "max_output_tokens": {
+          "default": 4096,
+          "exclusiveMinimum": 0,
+          "title": "Max Output Tokens",
+          "type": "integer"
+        },
+        "reasoning": {
+          "default": false,
+          "title": "Reasoning",
+          "type": "boolean"
+        }
+      },
+      "title": "Profile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": "cluster-merge.v1",
+      "default": "cluster-merge.v1",
+      "title": "Format Version",
+      "type": "string"
+    },
+    "cluster_id": {
+      "title": "Cluster Id",
+      "type": "string"
+    },
+    "revision": {
+      "title": "Revision",
+      "type": "string"
+    },
+    "articles": {
+      "items": {
+        "$ref": "#/$defs/Article"
+      },
+      "minItems": 1,
+      "title": "Articles",
+      "type": "array"
+    },
+    "trigger_id": {
+      "title": "Trigger Id",
+      "type": "string"
+    },
+    "profile": {
+      "$ref": "#/$defs/Profile"
+    },
+    "configuration_version": {
+      "default": "1",
+      "title": "Configuration Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cluster_id",
+    "revision",
+    "articles",
+    "trigger_id"
+  ],
+  "title": "MergeRequest",
+  "type": "object"
+}

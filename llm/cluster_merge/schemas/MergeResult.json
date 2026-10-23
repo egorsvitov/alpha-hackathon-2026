@@ -1,0 +1,311 @@
+{
+  "$defs": {
+    "Disposition": {
+      "additionalProperties": false,
+      "properties": {
+        "fragment_id": {
+          "title": "Fragment Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "used",
+            "duplicate",
+            "service",
+            "unresolved"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "duplicate_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duplicate Of"
+        },
+        "reason": {
+          "default": "",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fragment_id",
+        "kind"
+      ],
+      "title": "Disposition",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "embedding_text": {
+          "title": "Embedding Text",
+          "type": "string"
+        },
+        "article_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Article Ids",
+          "type": "array"
+        },
+        "fragments": {
+          "items": {
+            "$ref": "#/$defs/Fragment"
+          },
+          "title": "Fragments",
+          "type": "array"
+        },
+        "disagreements": {
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "title": "Disagreements",
+          "type": "array"
+        },
+        "paragraphs": {
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "title": "Paragraphs",
+          "type": "array"
+        },
+        "was_merged": {
+          "title": "Was Merged",
+          "type": "boolean"
+        },
+        "publication_count": {
+          "title": "Publication Count",
+          "type": "integer"
+        },
+        "source_count": {
+          "title": "Source Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "text",
+        "embedding_text",
+        "article_ids",
+        "fragments",
+        "disagreements",
+        "paragraphs",
+        "was_merged",
+        "publication_count",
+        "source_count"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Fragment": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "article_id": {
+          "title": "Article Id",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "title",
+            "text"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "start": {
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "article_id",
+        "field",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "Fragment",
+      "type": "object"
+    },
+    "Paragraph": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Fragment Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "fragment_ids"
+      ],
+      "title": "Paragraph",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "const": "cluster-merge.v1",
+      "default": "cluster-merge.v1",
+      "title": "Format Version",
+      "type": "string"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "input_hash": {
+      "title": "Input Hash",
+      "type": "string"
+    },
+    "configuration": {
+      "additionalProperties": true,
+      "title": "Configuration",
+      "type": "object"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "partial",
+        "deferred",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "mode": {
+      "anyOf": [
+        {
+          "enum": [
+            "merged",
+            "split",
+            "unchanged"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mode"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "coverage": {
+      "items": {
+        "$ref": "#/$defs/Disposition"
+      },
+      "title": "Coverage",
+      "type": "array"
+    },
+    "unresolved": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "calls": {
+      "title": "Calls",
+      "type": "integer"
+    },
+    "usage": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Usage",
+      "type": "array"
+    },
+    "cache_hit": {
+      "default": false,
+      "title": "Cache Hit",
+      "type": "boolean"
+    },
+    "expected_cluster_id": {
+      "title": "Expected Cluster Id",
+      "type": "string"
+    },
+    "expected_revision": {
+      "title": "Expected Revision",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "operation_id",
+    "input_hash",
+    "configuration",
+    "status",
+    "events",
+    "coverage",
+    "unresolved",
+    "calls",
+    "usage",
+    "expected_cluster_id",
+    "expected_revision"
+  ],
+  "title": "MergeResult",
+  "type": "object"
+}
