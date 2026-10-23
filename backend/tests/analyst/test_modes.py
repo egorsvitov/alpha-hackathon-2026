@@ -172,6 +172,13 @@ class TestSettings(unittest.TestCase):
         s2 = s.with_overrides(mode="cached")
         self.assertEqual((s.mode, s2.mode), ("template", "cached"))
 
+    def test_memory_flag_auto_selects_v11_prompt_unless_overridden(self):
+        s_mem = AnalystSettings.from_env({"ANALYST_MEMORY": "true"})
+        self.assertTrue(s_mem.memory_enabled)
+        self.assertEqual(s_mem.prompt_version, "analyst-v1.1")
+        s_explicit = AnalystSettings.from_env({"ANALYST_MEMORY": "true", "ANALYST_PROMPT_VERSION": "analyst-v1.2"})
+        self.assertEqual(s_explicit.prompt_version, "analyst-v1.2")
+
     def test_fixed_as_of(self):
         svc, _, _ = make_service(mode="cached", with_llm=False)
         self.assertEqual(svc.as_of().isoformat(), AS_OF)
@@ -219,6 +226,7 @@ class TestTemplateMode(UseService):
     def test_upload_keeps_default_topic_and_date(self):
         ev = store.ingest_news("Новость про ставку", "Банк России изменил ставку.")
         self.assertEqual((ev.topic, ev.date, ev.user_uploaded), ("other", "2026-10-21", True))
+        self.assertEqual(store.user_events[-1].get("text"), "Банк России изменил ставку.")
         self.assertEqual(self.fake.requests, [])
 
     def test_metrics_report_template_and_zero_spend(self):
@@ -317,6 +325,11 @@ class TestCachedMode(UseService):
         self.assertEqual(ins.generated_by, "cached")
         self.assertTrue(any(t.tool == "cache_lookup" and "Живой вызов невозможен" in t.summary for t in ins.trace))
 
+    def test_other_prompt_version_or_fewshot_falls_back_to_v10_bundled_cache(self):
+        svc = self.make(extra_env={"ANALYST_PROMPT_VERSION": "analyst-v1.2", "ANALYST_FEWSHOT": "true"})
+        ins = svc.insight(seed_company(CO), "cfo", seed_event("e1_key_rate"), score_fn, lambda: self.fail("офлайн-откат на кэш v1.0 должен сработать"))
+        self.assertEqual(ins.generated_by, "cached")
+
     def test_hide_excluded_flag_changes_feed_size_only(self):
         events = [seed_event(e) for e in ("e1_key_rate", "e2_eu_steel_quota", "e3_rub_weak", "e4_wheat_duty", "e5_coke_supplier", "e6_food_inflation", "e7_noise_sports")]
         hidden = self.make(extra_env={"ANALYST_FEED_HIDE_EXCLUDED": "true"}).feed(seed_company(CO), "cfo", events, score_fn)
@@ -343,6 +356,10 @@ class TestCachedMode(UseService):
         self.assertEqual((rates["topic"], rates["classified_by"]), ("rates", "rules"))
         fx = svc.classify_upload("Курс юаня вырос", "")
         self.assertEqual(fx["topic"], "fx")
+        cp = svc.classify_upload("Поставщик приостановил отгрузки", "Возможен дефолт контрагента.")
+        self.assertEqual((cp["topic"], cp["topic_label"]), ("counterparty", "Контрагенты"))
+        ind = svc.classify_upload("Производство проката в металлургии выросло", "")
+        self.assertEqual((ind["topic"], ind["topic_label"]), ("industry", "Отраслевые события"))
         other = svc.classify_upload("Турнир по шахматам", "Финал пройдёт в выходные.")
         self.assertEqual((other["topic"], other["topic_label"]), ("other", "Пользовательское"))
 

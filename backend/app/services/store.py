@@ -275,11 +275,14 @@ class DataStore:
         run_id: str,
         question: str,
     ) -> QaAnswer:
+        company = next((c for c in self._companies if c["company_id"] == company_id), None)
+        all_events = self.user_events + self._events
+        event = next((ev for ev in all_events if ev.get("event_id") == news_id), None)
+        if company is None or event is None:
+            raise KeyError(f"unknown company_id/news_id: {company_id}/{news_id}")
+
         if self._analyst_enabled():
             try:
-                company = next((c for c in self._companies if c["company_id"] == company_id), self._companies[0])
-                all_events = self.user_events + self._events
-                event = next((ev for ev in all_events if ev.get("event_id") == news_id), self._events[0])
                 return self.analyst.ask(
                     company,
                     role,
@@ -317,6 +320,7 @@ class DataStore:
         event = {
             "event_id": new_id,
             "title": title,
+            "text": text,
             "date": "2026-10-21",
             "topic": "other",
             "topic_label": "Пользовательское",
@@ -334,7 +338,6 @@ class DataStore:
                         "topic": cls["topic"],
                         "topic_label": cls["topic_label"],
                         "date": datetime.now(MSK).isoformat(timespec="seconds"),
-                        "text": text,
                     }
                 )
             except Exception:  # noqa: BLE001

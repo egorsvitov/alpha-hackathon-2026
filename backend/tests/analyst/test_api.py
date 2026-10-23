@@ -311,6 +311,8 @@ class CommonApiChecks:
         base = {"company_id": COMPANIES[0], "news_id": "e1_key_rate", "role": "cfo", "run_id": "r", "question": "?"}
         for broken in ({**base, "role": "boss"}, {k: v for k, v in base.items() if k != "question"}, {**base, "question": None}):
             self.assertEqual(self.client.post(f"{API}/chat/ask", json=broken).status_code, 422, broken)
+        for missing in ({**base, "company_id": "UNKNOWN_CO"}, {**base, "news_id": "unknown_event"}):
+            self.assertEqual(self.client.post(f"{API}/chat/ask", json=missing).status_code, 404, missing)
 
     def test_upload_news_roundtrip(self):
         r = self.client.post(f"{API}/news", json={"title": "Новое регуляторное требование по раскрытию рисков",

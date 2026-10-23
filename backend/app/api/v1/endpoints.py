@@ -60,14 +60,20 @@ async def get_analysis_card(
 
 @api_router.post("/chat/ask", response_model=QaAnswer)
 async def ask_question(body: QaRequest) -> QaAnswer:
-    return await run_in_threadpool(
-        store.ask,
-        company_id=body.company_id,
-        news_id=body.news_id,
-        role=body.role,
-        run_id=body.run_id,
-        question=body.question,
-    )
+    try:
+        return await run_in_threadpool(
+            store.ask,
+            company_id=body.company_id,
+            news_id=body.news_id,
+            role=body.role,
+            run_id=body.run_id,
+            question=body.question,
+        )
+    except KeyError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Company or news event not found",
+        ) from exc
 
 
 @api_router.post(

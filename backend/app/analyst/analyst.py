@@ -376,6 +376,15 @@ class BusinessAnalyst:
     ) -> CandidateOutcome:
         if self.cache:
             record, source = self.cache.get_loose(lkey, prefer_models=[self.model, *self.fallback_models])
+            if record is None and self.prompt_version != prompts.PROMPT_VERSION:
+                fallback_lkey = loose_key(
+                    inp.request.company_id,
+                    cand,
+                    inp.request.role,
+                    inp.company_context.profile_version,
+                    prompts.PROMPT_VERSION,
+                )
+                record, source = self.cache.get_loose(fallback_lkey, prefer_models=[self.model, *self.fallback_models])
             if record is not None:
                 outcome = self._restore(record, inp, cand, base_trace, previous)
                 outcome.run.generated_by = "cached"

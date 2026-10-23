@@ -144,8 +144,13 @@ class AnalystSettings:
             mode = "template"
         runtime_dir = env.get("ANALYST_CACHE_DIR")
         bundled_dir = env.get("ANALYST_BUNDLED_CACHE_DIR")
-        prompt_version = (env.get("ANALYST_PROMPT_VERSION") or DEFAULT_PROMPT_VERSION).strip()
-        if prompt_version not in VALID_PROMPT_VERSIONS:
+        memory_enabled = _bool(env.get("ANALYST_MEMORY"), False)
+        raw_prompt_version = (env.get("ANALYST_PROMPT_VERSION") or "").strip()
+        if raw_prompt_version in VALID_PROMPT_VERSIONS:
+            prompt_version = raw_prompt_version
+        elif memory_enabled:
+            prompt_version = "analyst-v1.1"
+        else:
             prompt_version = DEFAULT_PROMPT_VERSION
         memory_path = env.get("ANALYST_MEMORY_PATH")
         return cls(
