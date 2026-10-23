@@ -55,3 +55,6 @@ dist/
 /data/raw_news/
 *.sqlite-wal
 *.sqlite-shm
+
+# Private news experiment inputs and source texts
+/data/processed/company_news/

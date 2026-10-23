@@ -185,3 +185,15 @@ def test_concurrent_disjoint_apply_cannot_race_profile_guard(tmp_path):
         assert sorted(outcomes) == [False,True]
         assert left.snapshot().generation == 2
         assert left.snapshot() == right.snapshot()
+
+
+def test_partial_external_group_is_never_silently_treated_as_complete(tmp_path):
+    from retriever.models import ClusterSnapshot
+    articles,items,vectors=corpus()
+    cluster=ClusterSnapshot(cluster_id='partial',revision='1',member_revision_ids=['a','b'],
+        provenance={'incomplete_membership':True,'missing_revision_ids':['outside-short-index']})
+    with SQLiteSearchStore(tmp_path/'partial.sqlite3') as store:
+        store.import_bundle(articles=articles,items=items,vectors=vectors,clusters=[cluster],
+            encoder_fingerprint='fp',dimension=2,corpus_id='c')
+        assert store.get_cluster_snapshot('partial').status=='ambiguous'
+        assert store.clusters_for_item('a')[0].status=='ambiguous'

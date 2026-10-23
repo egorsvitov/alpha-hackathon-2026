@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib
 import json
 from pathlib import Path
 import resource
@@ -76,7 +77,7 @@ def verify(output, catalogue, news_index):
                 encoder_fingerprint=identity['encoder_fingerprint'], gpu_required=False)
 
 
-def build(output, catalogue, news_index):
+def build(output, catalogue, news_index, *, encoder_factory=None):
     began = time.perf_counter()
     topics, identity, news = source(catalogue, news_index)
     output.mkdir(parents=True, exist_ok=True)
@@ -86,12 +87,16 @@ def build(output, catalogue, news_index):
     if frozen.exists() and read(frozen) != identity:
         raise ValueError('resume_source_changed_use_a_new_output_directory')
     write_json(frozen, identity)
-    from retriever.raw_encoder import BGEEncoder
-    from retriever.embedding_cache import exact_vector_key
-    from llm.event_pipeline.company_news.contracts import fingerprint
-    if fingerprint(news['profile']) != news['fingerprint']:
+    if encoder_factory is None:
+        raise ValueError('fresh_encoding_requires_explicit_encoder_factory; cached verification needs no model')
+    module, separator, factory = encoder_factory.partition(':')
+    if not separator or not module or not factory or '.' in factory:
+        raise ValueError('encoder_factory_expected_module_colon_function')
+    encoded_profile = json.dumps(news['profile'], ensure_ascii=False, sort_keys=True,
+                                 separators=(',', ':'), allow_nan=False).encode()
+    if hashlib.sha256(encoded_profile).hexdigest() != news['fingerprint']:
         raise ValueError('news_profile_fingerprint_corrupt')
-    encoder = BGEEncoder(output / 'cache.sqlite3', batch_size=8)
+    encoder = getattr(importlib.import_module(module), factory)(cache_path=output / 'cache.sqlite3', batch_size=8)
     try:
         if encoder.fingerprint != news['fingerprint'] or encoder.fingerprint_metadata != news['profile']:
             raise ValueError('encoder_profile_differs_from_existing_news')
@@ -130,7 +135,7 @@ def build(output, catalogue, news_index):
             for topic, vector, length in zip(topics, matrix, lengths):
                 records.append(dict(topic, token_count=length,
                     description_sha256=hashlib.sha256(topic['description'].encode()).hexdigest(),
-                    vector_key=exact_vector_key(encoder.fingerprint, topic['description'], input_kind='query'),
+                    vector_key=encoder.vector_key(topic['description'], input_kind='query'),
                     vector_sha256=hashlib.sha256(vector.astype('<f4', copy=False).tobytes()).hexdigest()))
             with (output / 'interest-vectors.npy.tmp').open('wb') as stream:
                 np.save(stream, matrix, allow_pickle=False)
@@ -144,7 +149,7 @@ def build(output, catalogue, news_index):
     metrics = dict(topics=topic_metrics, including_parity=dict(encoder.metrics),
         elapsed_seconds=time.perf_counter() - began,
         process_peak_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024,
-        gpu_name=__import__('torch').cuda.get_device_name(0),
+        gpu_name=getattr(encoder, 'gpu_name', None),
         topic_inference_vectors_per_second=(topic_metrics['inferred'] / topic_metrics['inference_seconds']
             if topic_metrics['inference_seconds'] else None),
         cache_bytes=cache_bytes, vector_payload_bytes=int(matrix.nbytes),
@@ -168,8 +173,10 @@ def main():
     parser.add_argument('--catalogue', type=Path, default=CATALOGUE)
     parser.add_argument('--news-index', type=Path, default=DEFAULT_NEWS)
     parser.add_argument('--verify-only', action='store_true')
+    parser.add_argument('--encoder-factory', help='Trusted module:function for fresh computation; no old pipeline imports')
     args = parser.parse_args()
-    result = (verify if args.verify_only else build)(args.output, args.catalogue, args.news_index)
+    result = (verify(args.output, args.catalogue, args.news_index) if args.verify_only else
+              build(args.output, args.catalogue, args.news_index, encoder_factory=args.encoder_factory))
     print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
 
 

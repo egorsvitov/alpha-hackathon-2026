@@ -307,3 +307,19 @@ class SelectionIntegrationTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+def test_incomplete_group_with_one_known_member_is_not_a_singleton(tmp_path):
+    from retriever.tests.test_search_import import interests
+    article=ArticleRevision(revision_id='a',article_id='a',text='News')
+    item=SearchItem(item_id='a',text='News',embedding_text='News',source_revision_ids=['a'])
+    vector=VectorRecord(vector_id='a',item_id='a',embedding_text_sha256=text_hash('News'),values=[1.,0.])
+    cluster=ClusterSnapshot(cluster_id='partial',revision='1',member_revision_ids=['a'],
+        provenance={'incomplete_membership':True,'missing_revision_ids':['missing']})
+    profile=interests([Interest(interest_id='q',text='q',vector=[1.,0.])])
+    request=RetrievalRequest(request_id='q',company_id='company',profile_version='p1',corpus_id='c',as_of='2026-10-24T00:00:00Z',k=1)
+    with SQLiteSearchStore(tmp_path/'partial.sqlite3') as store:
+        store.import_bundle(articles=[article],items=[item],vectors=[vector],clusters=[cluster],encoder_fingerprint='fp',dimension=2,corpus_id='c')
+        run=RetrieverService().retrieve(request,interests=profile,store=store)
+        assert not run.batch.candidates
+        assert run.batch.deferred[0]['reason']=='ambiguous_membership'

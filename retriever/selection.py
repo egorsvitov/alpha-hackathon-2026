@@ -168,7 +168,7 @@ class RetrieverService:
                     restart = True
                     break
                 groups = store.clusters_for_item(item.item_id) if item.kind == 'article' else []
-                need = [g for g in groups if g.status != 'resolved' and len(g.member_revision_ids)>1]
+                need = [g for g in groups if g.status != 'resolved' and (len(g.member_revision_ids)>1 or g.status == 'ambiguous')]
                 allow_raw = True
                 if need:
                     ambiguous = len(need)>1 or any(g.status=='ambiguous' for g in need)

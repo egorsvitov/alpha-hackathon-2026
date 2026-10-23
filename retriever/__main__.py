@@ -9,8 +9,9 @@ import sys
 from pydantic import ValidationError
 
 from .importers import read_articles, read_clusters, read_interests, read_vector_bundle
-from .models import RetrievalRequest, canonical
+from .models import RetrievalRequest
 from .search import exact_search
+from .output import write_run
 from .selection import RetrieverService
 from .store import SQLiteSearchStore
 
@@ -145,6 +146,8 @@ def main(argv=None):
                 report = _summary(store.snapshot())
         else:
             _existing(args.store, 'store')
+            if Path(args.output).exists():
+                raise ValueError('output_already_exists_use_new_directory')
             request = RetrievalRequest.model_validate_json(Path(args.request).read_text(encoding='utf-8'))
             interests = read_interests(args.interests)
             request, merge = _merge(args, request)
@@ -152,9 +155,7 @@ def main(argv=None):
             with SQLiteSearchStore(args.store) as store:
                 run = RetrieverService().retrieve(request, interests=interests, store=store, merge=merge, encoder=encoder)
             output = Path(args.output)
-            output.mkdir(parents=True, exist_ok=True)
-            (output/'batch.json').write_text(canonical(run.batch)+'\n', encoding='utf-8')
-            (output/'trace.json').write_text(canonical(run.trace)+'\n', encoding='utf-8')
+            write_run(run, output)
             report = dict(status=run.batch.status, returned=len(run.batch.candidates), stop_reason=run.batch.stop_reason,
                           new_calls=run.trace['calls_new'], output=str(output))
         print(json.dumps(report, ensure_ascii=False, sort_keys=True))

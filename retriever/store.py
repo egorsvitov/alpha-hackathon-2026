@@ -274,7 +274,7 @@ class SQLiteSearchStore:
             if historical and historical[0] != identity:
                 raise ValueError('changed_cluster_same_revision')
             db.execute('INSERT OR IGNORE INTO cluster_history VALUES (?,?,?)', (c.cluster_id, c.revision, identity))
-            ambiguous = any(counts[x] > 1 for x in c.member_revision_ids)
+            ambiguous = bool(c.provenance.get('incomplete_membership')) or any(counts[x] > 1 for x in c.member_revision_ids)
             prev = old.get(c.cluster_id)
             preserve = prev and prev.revision == c.revision and self._cluster_identity(prev) == identity and (prev.status == 'ambiguous') == ambiguous
             new[c.cluster_id] = prev if preserve else c.model_copy(update={'status': 'ambiguous' if ambiguous else 'pending', 'result_id': None})

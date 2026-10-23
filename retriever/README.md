@@ -44,7 +44,7 @@ failures return exit status 2.
 `retrieve` writes the complete `RetrievalCandidateBatch` to `batch.json` and the
 execution trace to `trace.json`. The request's `max_context_bytes` bounds the
 complete serialized batch, including sources and metadata. Trace bytes do not
-consume the downstream analyst batch budget. Existing output files are replaced.
+consume the downstream analyst batch budget. Existing output directories are rejected; use a fresh directory for each run.
 Treat these local artifacts as source-sensitive data.
 
 Default retrieval makes zero new LLM calls. Pending clusters require a merge
@@ -111,3 +111,93 @@ full sources and cluster revision under a transaction. Cluster membership change
 invalidate old event applicability and restore originals; overlaps remain
 ambiguous. Known publication and observation dates constrain availability;
 unknown source/profile availability prevents a historical-validity claim.
+
+## Ручная оценка и завершение интеграции
+
+Сформировать объединённый пул из выдач сравниваемых вариантов:
+
+```bash
+python -m retriever.evaluation pool --batches /local/baseline/batch.json /local/lazy/batch.json --output /local/review.json
+python -m retriever.evaluation evaluate --batch /local/lazy/batch.json --labels /local/review.json --output /local/metrics.json
+```
+
+В `review.json` рецензент заполняет `relevance`, `merge_quality`, `detail_loss`,
+при возможности — общий `story_id` для одного события в разных вариантах.
+Нужно читать реальные интересы компании и исходные новости, не только пересказ.
+Незаполненные метки остаются `null`; это не отрицательные примеры.
+`known_positive_pool_recall` считает размеченные объекты пула и может считать
+разные представления события отдельно. Для сравнения baseline/lazy используйте
+`known_positive_story_recall` с ручными `story_id`. Это полнота только относительно
+известных событий пула. Абсолютная полнота поиска по корпусу не измерена.
+Файл разметки не перезаписывается командой создания пула.
+
+Выдача CLI теперь публикуется атомарно в **новый** каталог: `batch.json`,
+`trace.json`, `manifest.json` с SHA-256 обоих файлов. Существующий каталог
+отклоняется до платных вызовов; для следующего прогона укажите новый путь.
+
+Ветка включает каталог интересов, но сами GPU-матрицы, индекс новостей и рабочий
+encoder остаются локальными артефактами владельца эмбеддингов. Их нельзя заменить
+старыми E5-векторами или BGE-профилем другого окружения без проверки fingerprint.
+Старый скрипт `retriever.experiments.embed_activity_interests` теперь получает
+`--encoder-factory module:function` для **нового** расчёта, без импортов старых
+`llm.event_pipeline` и `retriever.raw_encoder`. Готовый результат по-прежнему
+проверяется через `--verify-only` без модели. Фабрика вызывается с `cache_path`
+и `batch_size=8` и должна вернуть совместимый encoder с полями `fingerprint`,
+`fingerprint_metadata`, `profile`, `metrics`, `cache` и методами `token_lengths`,
+`encode_queries`, `vector_key(text, input_kind=...)`. `cache` предоставляет
+`writer_lock()` и `close()`. Конкретную модель, её загрузку и этот адаптер
+поставляет владелец эмбеддингов. Fingerprint и численная parity обязательны.
+
+Новый пакет — `retrieval-candidate-batch.v1`, а не старый B6-контракт. До
+подключения аналитика потребитель должен валидировать его схему, учитывать
+`status`, `deferred`, происхождение и ограничения. Бизнес-анализ и итоговая
+сортировка не входят в этот модуль.
+
+## Реальный CPU / API прогон и HTML для команды
+
+`CPUEncoder` проверяет хэши весов закреплённого BGE-M3, CLS pooling, отсутствие
+префиксов, FP32 и L2. Затем кодирует восемь сохранённых запросов и восемь новостей:
+cosine должен быть не ниже 0.99999, максимальная ошибка координат — не выше 1e-4.
+Только после проверки encoder получает compatibility alias fingerprint индекса.
+Его настоящий CPU runtime fingerprint и протокол проверки сохраняются отдельно:
+это численно проверенная совместимость, а не заявление об идентичности CPU/CUDA.
+Все новые события проходят этот encoder без обрезания; exact-text CPU-кэш
+не смешивается с GPU-кэшем. Модель загружается только из явно указанного локального
+каталога. Повторный расчёт всего корпуса не требуется.
+
+Зависимости расчёта/отчёта — `requirements-cpu.txt`. PyTorch устанавливается
+отдельно из CPU-индекса; CUDA-зависимости для этой машины не требуются.
+
+```bash
+python -m retriever.experiments.live_cpu \
+  --root /absolute/project-root \
+  --output /absolute/project-root/data/processed/retriever/live-cpu-20261024 \
+  --model-path /absolute/huggingface/snapshot/5617a9f61b028005a4858fdac845db406aefb181 \
+  --k 5 --max-calls 100
+python -m retriever.experiments.report_live \
+  --root /absolute/project-root \
+  --run /absolute/project-root/data/processed/retriever/live-cpu-20261024
+```
+
+Это явно вызванный live-эксперимент по разрешению пользователя: денежное ограничение
+не применяется, каждый вызов записывается до отправки в `reservations.sqlite3`,
+запросы/ответы/usage — в `merge.sqlite3`. Финитный `--max-calls` ограничивает один
+запрос ретривера, не является тарифом или общей командной квотой. Production CLI
+`python -m retriever` сохраняет прежние ограничения общего лимитера. Автоматического
+retry/repair нет. Ключ читается только live CLI из окружения или локального `.env`.
+
+Общий индекс переиспользует карточки между компаниями; персональные оценки не
+сохраняются в событиях. Существующие каталоги результатов компаний пропускаются
+при возобновлении. Для явного повторного отбора сохраните их в отдельной истории:
+уже сохранённые API-ответы и векторы будут использованы без повторных вызовов.
+
+Группы, частично выходящие за короткий корпус, отмечаются `incomplete_membership`
+и остаются `ambiguous`; они не превращаются в полные кластеры или одиночные новости.
+
+`report.html` — самостоятельный файл без CDN и сетевых запросов: PCA/t-SNE,
+синхронные карты до/после, переходы от событий к исходникам, реальные cosine-соседи,
+исходная и итоговая выдачи, отложенные операции, полные ответы и структурные ошибки.
+PCA обучается только на оригиналах; новые объекты проецируются тем же преобразованием.
+t-SNE строится совместно с фиксированным seed; её расстояния не заменяют cosine.
+В HTML включены исходные новости и профили: хранить и передавать его как приватные
+данные проекта. Внешней публикации команда не выполняет.
