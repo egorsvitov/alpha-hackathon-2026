@@ -54,11 +54,11 @@ def select(root, *, reserve=0):
     lookup={(r['company_id'],r['variant']):r for r in retr}
     allrows=retr+rer+[dict(r,variant='G4') for r in rer]
     # Dev reserve ablations keep the same byte and document limits.
-    allrows += [dict(r,variant='R'+str(n),reserve=n) for n in (4,8) for r in rer]
+    allrows += [dict(r,variant='R'+str(n),reserve=n) for n in (0,4,8) for r in rer]
     batches=[];diagnostics=[]
     for row in allrows:
         uid=row['company_id'];variant=row['variant'];pool=row['candidates'][:100];order=pool
-        if variant in ('G3','G4','R4','R8'):
+        if variant in ('G3','G4','R0','R4','R8'):
             order=reserve_order(pool,lookup[uid,base]['candidates'][:100],row.get('reserve',reserve))
         selected,excluded,cost=choose_context(order,docs,groups,as_of=m['as_of'],max_documents=m['budget']['final_documents'],max_bytes=m['budget']['context_utf8_bytes'],grouped=variant=='G4')
         chosen={c['document_id'] for c in selected};included={r['document_id'] for r in pool}|chosen

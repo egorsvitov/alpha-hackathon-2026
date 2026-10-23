@@ -1,5 +1,6 @@
 """Explicit, resumable transport; pinned official LFS identity is authoritative."""
 import concurrent.futures
+import argparse
 import hashlib
 import json
 import shutil
@@ -24,7 +25,12 @@ def main():
     # Mirror is a transport only: the official pinned revision's size+SHA must match.
     transport = f"https://modelscope.cn/models/{MODEL}/resolve/master/model.safetensors"
     started = time.monotonic()
-    info = json.loads(Path('data/processed/company_news/setup/reranker-model-info.json').read_text())
+    info_path=Path('data/processed/company_news/setup/reranker-model-info.json')
+    if not info_path.exists():
+        info_path.parent.mkdir(parents=True,exist_ok=True)
+        with urllib.request.urlopen(f'https://huggingface.co/api/models/{MODEL}/revision/{REVISION}?blobs=true',timeout=90) as response:
+            info_path.write_bytes(response.read())
+    info = json.loads(info_path.read_text())
     if info['sha'] != REVISION:
         raise ValueError('metadata_revision_mismatch')
     metadata = {r['rfilename']: r for r in info['siblings']}
@@ -94,5 +100,22 @@ def main():
     print(json.dumps({"verified": True, "seconds": time.monotonic()-started}))
 
 
+def e5():
+    from retriever.embeddings import MODEL_SHA,TOKENIZER_SHA
+    root=Path('ranking/experiments/cpu_news_embeddings/artifacts/model');root.mkdir(parents=True,exist_ok=True)
+    revision='614241f622f53c4eeff9890bdc4f31cfecc418b3';files={}
+    for name,size,digest in [('model_qint8_avx512_vnni.onnx',118346824,MODEL_SHA),('tokenizer.json',17082730,TOKENIZER_SHA)]:
+        path=root/name
+        if not path.exists():
+            url=f'https://huggingface.co/intfloat/multilingual-e5-small/resolve/{revision}/onnx/{name}'
+            with urllib.request.urlopen(url,timeout=90) as r,path.with_suffix('.tmp').open('wb') as out:
+                while data:=r.read(1024**2):out.write(data)
+            path.with_suffix('.tmp').replace(path)
+        if path.stat().st_size!=size or hashlib.sha256(path.read_bytes()).hexdigest()!=digest:raise ValueError('E5_pinned_identity_mismatch:'+name)
+        files['onnx/'+name]=dict(bytes=size,sha256=digest)
+    (root/'manifest.json').write_text(json.dumps(dict(model_id='intfloat/multilingual-e5-small',revision=revision,files=files),indent=2))
+
+
 if __name__ == "__main__":
-    main()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--e5',action='store_true');args=p.parse_args()
+    e5() if args.e5 else main()

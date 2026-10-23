@@ -89,7 +89,12 @@ def plan(root, corpus, companies, catalogue, *, as_of=AS_OF):
         if uid not in chosen and code not in used:
             chosen.append(uid);used.add(code)
     profiles=[repo.get(uid) for uid in chosen]
-    catrows=read(catalogue); cat={r['okved_code']:r for r in catrows}
+    from retriever.experiments.activity_catalogue import source_inventory,validate_catalogue
+    catmanifest=read(Path(catalogue).with_name('manifest.json'))
+    if catmanifest['source_sha256']!=repo.sha256 or catmanifest['files']['catalogue.json']!=sha(catalogue):
+        raise ValueError('catalogue_provenance_mismatch')
+    activities,_,_=source_inventory(companies)
+    catrows=validate_catalogue(read(catalogue),activities); cat={r['okved_code']:r for r in catrows}
     queries=[];skip=[]
     for p in profiles:
         qs, skips=build_queries(p,cat);queries.extend(q.model_dump() for q in qs)
@@ -100,6 +105,12 @@ def plan(root, corpus, companies, catalogue, *, as_of=AS_OF):
         qs,_=build_queries(repo.get(uid),cat);perf.extend(q.model_dump() for q in qs)
     # Freeze story split before judgments/selection. Unit groups are reading groups, not identities.
     comparison=Path('data/processed/event_pipeline/gpu-experiment/comparisons/full-chosen')
+    comparison_manifest=read(comparison/'manifest.json')
+    for name,digest in comparison_manifest['outputs'].items():
+        if sha(comparison/name)!=digest:raise ValueError('group_snapshot_artifact_changed:'+name)
+    original_plan=read('data/processed/event_pipeline/gpu-experiment/full-run/plan.json')
+    if original_plan['corpus_id']!=source['corpus_id'] or original_plan['run_id']!=comparison_manifest['run_id']:
+        raise ValueError('group_snapshot_incompatible')
     units={u['unit_id']:u['document_id'] for u in rows(comparison/'units.jsonl')}
     groups=[]
     for g in rows(comparison/'semantic_time.groups.jsonl'):
@@ -147,6 +158,8 @@ def index(root, *, batch_size=8):
     from retriever.embeddings import Encoder
     from retriever.representation_contracts import EncoderConfig
     root=Path(root);m=load_plan(root); docs=rows(root/'documents.jsonl');queries=rows(root/'queries.jsonl')+rows(root/'performance-queries.jsonl')
+    if (root/'index.stage.json').exists():
+        return dict(status='cached_verified_stage',metrics=require(root,'index')['metrics'])
     texts=[embedding_text(d) for d in docs]; unique=list(dict.fromkeys(q['text'] for q in queries))
     outputs=[];stats={}
     for name in ('bge','e5'):
