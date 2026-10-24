@@ -166,6 +166,8 @@ class ProjectionBundle(BaseModel):
     sources: list[ProjectionSource] = Field(default_factory=list)
     evidence: list[ProjectionEvidence] = Field(default_factory=list)
     limitations: list[str] = Field(default_factory=list)
+    # Производный merge не входит в claims/evidence и не может стать цитатой QA.
+    derived_context: dict[str, Any] = Field(default_factory=dict)
 
 
 class AnalysisProjection(BaseModel):
@@ -210,6 +212,10 @@ class Candidate(BaseModel):
     # Флаги качества данных, выставленные адаптером (например, ``unreadable_claims`` —
     # текст утверждений повреждён ошибкой кодировки). Учитываются в ``precheck``.
     quality_flags: list[str] = Field(default_factory=list)
+    canonical_event_id: str | None = None
+    reading_group_ids: list[str] = Field(default_factory=list)
+    retrieval_context_hash: str | None = None
+    max_input_tokens: int | None = None
 
 
 class AnalystRequest(BaseModel):
@@ -576,6 +582,7 @@ class ExcludedCandidate(BaseModel):
         "unreadable_source",
         "insufficient_evidence",
         "analysis_failed",
+        "context_too_large",
     ]
     reason: str
     headline: str | None = None
@@ -634,6 +641,7 @@ class RunMetadata(BaseModel):
     latency_ms: int = 0
     json_repairs: int = 0
     candidates: list[CandidateRun] = Field(default_factory=list)
+    input_diagnostics: dict[str, Any] | None = None
 
 
 class AnalystOutput(BaseModel):

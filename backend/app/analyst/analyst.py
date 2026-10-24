@@ -99,12 +99,17 @@ def cache_key(
     parts = [company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version, model]
     if memory_ref:
         parts.append(memory_ref)
+    if cand.retrieval_context_hash:
+        parts.append(cand.retrieval_context_hash)
     return "|".join(parts)
 
 
 def loose_key(company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str) -> str:
     ref = cand.event_bundle_refs[0]
-    return "|".join([company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version])
+    parts = [company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version]
+    if cand.retrieval_context_hash:
+        parts.append(cand.retrieval_context_hash)
+    return "|".join(parts)
 
 
 def _event_refs(cand: Candidate) -> list[EventRef]:
@@ -255,6 +260,16 @@ class BusinessAnalyst:
             )
 
         excluded = self.precheck(inp, cand)
+        if excluded is None and cand.max_input_tokens is not None:
+            from app.analyst.prompt_budget import estimate_prompt_tokens
+
+            tokens = estimate_prompt_tokens(inp, cand, self.base_prompt_version, previous=previous, fewshot=self.fewshot)
+            if tokens > cand.max_input_tokens:
+                excluded = ExcludedCandidate(
+                    candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
+                    reason_code="context_too_large",
+                    reason=f"Полный промпт с памятью: оценка {tokens} токенов превышает лимит {cand.max_input_tokens}",
+                )
         if excluded is not None:
             run = CandidateRun(
                 candidate_id=cand.candidate_id, model=None, prompt_version=pver, generated_by="rules",

@@ -175,6 +175,8 @@ class Validator:
         self.role = role
         self.issues: list[QAIssue] = []
         self.limitations: list[str] = []
+        if (view.data.get("event") or {}).get("canonical_event_id") is not None:
+            self.limitations.extend((view.data.get("event") or {}).get("limitations", []))
         self.extra_unknowns: list[UnknownOut] = []
         self.claim_text = " ".join(c.text for c in view.all_claims()).lower()
         allowed: set[float] = set()
@@ -192,10 +194,12 @@ class Validator:
         for b in view.bank.values():
             allowed |= numbers_in(f"{b.title} {b.quote} {b.published_at or ''}")
         for s in view.sources.values():
-            allowed |= numbers_in(f"{s.published_at or ''} {s.title or ''}")
+            title = s.title if getattr(s, "title_origin", "source") == "source" else ""
+            allowed |= numbers_in(f"{s.published_at or ''} {title or ''}")
         event = view.data.get("event", {}) if isinstance(view.data.get("event"), dict) else {}
-        for title in [event.get("title") or ""] + list(event.get("other_titles") or []):
-            allowed |= numbers_in(title)  # заголовок события — тоже текст источника
+        if event.get("title_origin", "source") == "source":
+            for title in [event.get("title") or ""] + list(event.get("other_titles") or []):
+                allowed |= numbers_in(title)
         allowed |= numbers_in(str(view.data.get("event", {}).get("published_at", "")))
         allowed |= numbers_in(as_of or "")
         self.allowed_numbers = allowed

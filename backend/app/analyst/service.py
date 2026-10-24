@@ -191,18 +191,41 @@ class AnalystService:
         return "an_" + key_hash(f"{company_id}|{role}|{cand_ref}|{self.analyst.prompt_version}")[:16]
 
     # ------------------------------------------------------------------ пакет ретривера
-    def analyze_batch(self, raw_batch: dict[str, Any], role: str | None = None) -> tuple[AnalystOutput, Any]:
-        """``ImpactCandidateBatch v1`` → ``AnalystOutput`` (и результат адаптера для трассы).
+    def analyze_batch(self, raw_batch: dict[str, Any], role: str | None = None, *,
+                      company_profile: dict[str, Any] | None = None,
+                      active_interests: dict[str, Any] | None = None,
+                      analysis_policy: Any = None) -> tuple[AnalystOutput, Any]:
+        """Route legacy impact/new retrieval batches to AnalystOutput and diagnostics.
 
-        Пустой пакет (``status=empty`` или без кандидатов) даёт пустой ответ без вызова LLM.
+        New retrieval batches require explicit profile, interests and role.
+        Empty or held candidates never trigger LLM calls.
         """
-        from app.analyst.batch_adapter import ImpactBatchAdapter
+        from app.analyst.batch_adapter import BatchValidationError, ImpactBatchAdapter
 
-        adapter = ImpactBatchAdapter(prompt_version=self.settings.prompt_version,
-                                     reserve_tokens=600 if self.memory is not None else 0)
-        adapted = adapter.to_analyst_input(raw_batch, role=role)
+        version = raw_batch.get("schema_version")
+        if version == "retrieval-candidate-batch.v1":
+            from app.analyst.retrieval_adapter import adapt_retrieval_batch
+
+            if company_profile is None or active_interests is None or role is None:
+                raise BatchValidationError(["retrieval_context_required: company_profile, active_interests, role"])
+            adapted = adapt_retrieval_batch(raw_batch, company_profile, active_interests, role, analysis_policy,
+                prompt_version=self.settings.prompt_version, fewshot=self.settings.fewshot,
+                reserve_tokens=600 if self.memory is not None else 0)
+        elif version == "impact_candidate_batch.v1":
+            adapter = ImpactBatchAdapter(prompt_version=self.settings.prompt_version,
+                                         reserve_tokens=600 if self.memory is not None else 0)
+            adapted = adapter.to_analyst_input(raw_batch, role=role)
+        else:
+            raise BatchValidationError(["unsupported_batch_schema_version"])
         live, _ = self.live_status()
         output, _results = self.analyst.analyze(adapted.analyst_input, allow_live=live, prefer_cache=self.settings.prefer_cache)
+        if version == "retrieval-candidate-batch.v1":
+            blocked = {e.candidate_id for e in output.excluded_candidates if e.reason_code == "context_too_large"}
+            for diagnostic in adapted.candidates:
+                if diagnostic.get("candidate_id") in blocked:
+                    diagnostic.update(state="context_too_large", omitted="entire_candidate_with_memory")
+                    adapted.status = "partial"
+            output.run_metadata.input_diagnostics = adapted.diagnostics()
         return output, adapted
 
     def insight(

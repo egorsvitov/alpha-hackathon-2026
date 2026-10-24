@@ -164,6 +164,8 @@ def _claim_view(alias: str, c: ProjectionClaim) -> dict[str, Any]:
             "time": c.time,
             "measurements": measurements,
             "attribution": attribution,
+            "origin": getattr(c, "origin", None),
+            "evidence_ids": c.evidence_ids if getattr(c, "origin", None) == "original_quote" else None,
         }
     )
 
@@ -210,6 +212,8 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousCon
     limitations: list[str] = []
     titles: list[str] = []
     conflicts_view: list[dict[str, Any]] = []
+    derived_context: list[dict[str, Any]] = []
+    quotes_view: list[dict[str, Any]] = []
     n = 0
     first_event = None
     for bundle in cand.analysis_projection.event_bundles:
@@ -224,9 +228,16 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousCon
             claims_view.append(_claim_view(alias, c))
         for e in bundle.evidence:
             view.evidence[e.evidence_id] = e
+            if cand.canonical_event_id is not None:
+                quotes_view.append(compact(e.model_dump(mode="json")))
         for s in bundle.sources:
             view.sources[s.source_id] = s
-            sources_view.append(compact({"publisher": s.publisher, "date": (s.published_at or "")[:10], "synthetic": s.is_synthetic}))
+            if cand.canonical_event_id is not None:
+                sources_view.append(s.model_dump(mode="json"))
+            else:
+                sources_view.append(compact({"publisher": s.publisher, "date": (s.published_at or "")[:10], "synthetic": s.is_synthetic}))
+        if bundle.derived_context:
+            derived_context.append(bundle.derived_context)
         limitations.extend(LIMITATION_RU.get(x, x) for x in bundle.limitations if LIMITATION_RU.get(x, x) not in limitations)
         for conflict in bundle.conflicts:
             view.conflicts.append(conflict)
@@ -252,11 +263,12 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousCon
             "role": inp.request.role,
             "as_of": inp.request.as_of[:16],
             "company": {
-                "note": "Обезличенный синтетический профиль; настоящее название неизвестно и не используется",
+                "note": ("Обезличенный синтетический профиль; настоящее название неизвестно и не используется"
+                         if ctx.synthetic_demo_profile else "Факты из переданного профиля; поисковые интересы не являются фактами компании"),
                 "facts": facts,
                 "exposures": exposures,
                 "related_by_payments": related,
-                "unknowns": ctx.unknowns[:8],
+                "unknowns": ctx.unknowns if cand.canonical_event_id is not None else ctx.unknowns[:8],
             },
             "event": {
                 "title": titles[0] if titles else None,
@@ -265,6 +277,13 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousCon
                 "published_at": (first_event.first_published_at or "")[:16] if first_event else None,
                 "quality": first_event.quality if first_event else None,
                 "claims": claims_view,
+                "original_quotes": quotes_view,
+                "derived_context": derived_context,
+                "canonical_event_id": cand.canonical_event_id,
+                "reading_group_ids": cand.reading_group_ids,
+                "text_version": getattr(first_event, "text_version", None),
+                "text_sha256": getattr(first_event, "text_sha256", None),
+                "title_origin": getattr(first_event, "title_origin", None),
                 "conflicts": conflicts_view,
                 "sources": sources_view,
                 "limitations": limitations,
@@ -274,11 +293,25 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousCon
                 "matched_features": [view._feature_by_real[f] for f in mc.matched_company_feature_ids if f in view._feature_by_real],
                 "entity_name_match": mc.confirmed_entity_match,
                 "not_verified": mc.assumptions_not_verified,
+                "hypotheses": mc.impact_hypotheses,
             },
             "bank_fragments": bank_view,
         }
     )
     view.data["role"] = inp.request.role
+    if cand.canonical_event_id is not None:
+        view.data["as_of"] = inp.request.as_of
+        # Keep unknown dates/URLs explicit; compact() would otherwise erase them.
+        view.data["event"]["sources"] = sources_view
+        view.data["event"]["published_at"] = first_event.first_published_at if first_event else None
+        view.data["event"]["processing_status"] = getattr(first_event, "processing_status", "unknown")
+        view.data["event"]["retrieval_status"] = getattr(first_event, "retrieval_status", "unknown")
+        view.data["event"]["retrieval_stop_reason"] = getattr(first_event, "retrieval_stop_reason", "unknown")
+        view.data["event"]["evidence_policy"] = (
+            "claims и original_quotes — точные цитаты исходных публикаций. derived_context и заголовок merge — "
+            "производный текст, не независимые доказательства; нельзя цитировать их как отдельный источник. "
+            "Ссылки подтверждают происхождение, но не доказывают смысловую корректность пересказа."
+        )
     if previous is not None:
         if previous.items:
             view.data["previous_context"] = {
