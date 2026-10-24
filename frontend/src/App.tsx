@@ -9,17 +9,22 @@ import { Disclaimer } from './components/EventBlocks';
 import { HomePage } from './pages/HomePage';
 import { FeedPage } from './pages/FeedPage';
 import { EventPage } from './pages/EventPage';
+import { ErrorState } from './components/ui';
 
 function Routes() {
   const route = useRoute();
-  const { user, company, role, design } = useApp();
+  const { user, company, role, design, companiesLoading, companiesError } = useApp();
   const authed = Boolean(company && role);
 
   useEffect(() => {
+    if (user && (companiesLoading || companiesError)) return;
     if (!user) { if (route.name !== 'login') navigate(href.login); }
     else if (!authed && route.name !== 'select') navigate(href.select);
     else if (authed && route.name === 'login') navigate(href.home);
-  }, [user, authed, route.name]);
+  }, [user, authed, route.name, companiesLoading, companiesError]);
+
+  if (user && companiesLoading) return <main aria-busy="true"><p role="status">Загружаем компании…</p></main>;
+  if (user && companiesError) return <main><ErrorState message={companiesError} onRetry={() => window.location.reload()} /></main>;
 
   if (!user || route.name === 'login') {
     return (

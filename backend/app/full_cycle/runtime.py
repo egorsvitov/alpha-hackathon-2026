@@ -42,7 +42,10 @@ def analyst_runtime(workspace, *, live=False, quota_path=None, quota_limit=None,
     if not quota_path or not quota_limit or quota_limit<1 or budget_rub is None or budget_rub<=0:
         raise PipelineError('live_shared_quota_and_budget_required')
     quota = SQLiteQuota(quota_path,quota_limit)
-    ledger = BudgetLedger(budget_rub,session_cap_rub=budget_rub,state_path=workspace.root/'analyst-budget.json')
+    ledger = BudgetLedger(base.daily_budget_rub,session_cap_rub=budget_rub,state_path=workspace.root/'analyst-budget.json')
+    # /key/info reports total team spend, not this run's spend. Keep the team
+    # ceiling separate; persistently subtract prior local spend on restart.
+    ledger.session_cap_rub = max(0., budget_rub - ledger.spent_window_rub)
     gateway = LLMGateway(api_key=base.api_key,base_url=base.base_url,fallback_base_url='',ledger=ledger,
                          max_retries=0,max_json_repairs=0,timeout_s=base.timeout_s,check_key_info=base.check_key_info)
     return AnalystService(settings,llm=QuotaLLM(gateway,quota,workspace.root),bank_evidence=[]),quota

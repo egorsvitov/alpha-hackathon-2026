@@ -34,6 +34,8 @@ const read = (): Persisted => {
 
 interface AppState {
   companies: CompanyProfile[];
+  companiesLoading: boolean;
+  companiesError: string | null;
   company: CompanyProfile | null;
   role: Role | null;
   theme: Theme;
@@ -63,12 +65,19 @@ const Ctx = createContext<AppState | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [p, setP] = useState<Persisted>(read);
-  const [companies, setCompanies] = useState<CompanyProfile[]>(COMPANIES);
+  const [companies, setCompanies] = useState<CompanyProfile[]>(api.mode === 'http' ? [] : COMPANIES);
+  const [companiesLoading, setCompaniesLoading] = useState(api.mode === 'http');
+  const [companiesError, setCompaniesError] = useState<string | null>(null);
   const [demo, setDemo] = useState<DemoSettings>({ ...demoSettings });
   const [feedVersion, setFeedVersion] = useState(0);
 
   useEffect(() => {
-    api.getCompanies().then(setCompanies).catch(() => undefined);
+    let alive = true;
+    api.getCompanies().then(
+      data => { if (alive) { setCompanies(data); setCompaniesError(null); } },
+      error => { if (alive) setCompaniesError(error instanceof Error ? error.message : 'Не удалось загрузить компании'); },
+    ).finally(() => { if (alive) setCompaniesLoading(false); });
+    return () => { alive = false; };
   }, []);
 
   useEffect(() => {
@@ -80,6 +89,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AppState>(
     () => ({
       companies,
+      companiesLoading,
+      companiesError,
       company: companies.find((c) => c.company_id === p.companyId) ?? null,
       role: p.role,
       theme: p.theme,
@@ -115,7 +126,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       },
       bumpFeed: () => setFeedVersion((v) => v + 1),
     }),
-    [companies, p, demo, feedVersion],
+    [companies, companiesLoading, companiesError, p, demo, feedVersion],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

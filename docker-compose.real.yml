@@ -1,0 +1,37 @@
+name: alfa-real-e2e
+services:
+  backend:
+    image: alfa-news-backend:local
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    restart: unless-stopped
+    environment:
+      FULL_CYCLE_MODE: persisted
+      FULL_CYCLE_DATA: /data/full-cycle
+      FULL_CYCLE_PROFILES: /profiles
+      DATABASE_URL: sqlite+aiosqlite:////data/full-cycle/api.db
+    volumes:
+      - ${FULL_CYCLE_WORKSPACE:?Choose a persistent private directory}:/data/full-cycle
+      - ${FULL_CYCLE_PROFILE_STORE:?Choose a private profile directory}:/profiles:ro
+    ports:
+      - "127.0.0.1:18031:8000"
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 6
+  frontend:
+    image: alfa-news-frontend:local
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      APP_API_MODE: http
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "127.0.0.1:18082:8080"

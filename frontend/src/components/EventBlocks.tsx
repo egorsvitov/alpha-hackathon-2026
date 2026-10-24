@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react';
+import { api } from '../api';
 import { CalendarClock, CheckCircle2, ChevronDown, HelpCircle, Landmark, MessageSquareText, PhoneCall, Scale, Sparkles } from 'lucide-react';
 import type { ActionKind, Evidence, Insight, TraceStep } from '../types';
 import { fmtDate } from './FeedCard';
@@ -181,7 +182,7 @@ function ActionModal({ title, kind, insight, onClose, onSent }: { title: string;
 export function Disclaimer() {
   return (
     <footer className="disclaimer small muted">
-      Материалы носят информационный характер и не являются инвестиционной рекомендацией или офертой. Выводы AI подготовлены моделью и не выражают официальную позицию Альфа-Банка. В демо все данные синтетические.
+      Материалы носят информационный характер и не являются инвестиционной рекомендацией или офертой. Выводы AI подготовлены моделью и не выражают официальную позицию Альфа-Банка. {api.mode === 'mock' ? 'В демо все данные синтетические.' : 'Показаны сохранённые результаты HTTP API.'}
     </footer>
   );
 }

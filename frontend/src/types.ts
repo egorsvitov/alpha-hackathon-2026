@@ -201,6 +201,7 @@ export interface DemoSettings {
 
 export interface ProcessingState {
   status: string;
+  job_id?: string;
   message?: string;
   counts?: Record<string, number>;
   error_code?: string | null;

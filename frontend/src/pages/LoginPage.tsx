@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { href, navigate } from '../router';
 import { DEMO_LOGIN, useApp } from '../store';
+import { api } from '../api';
 import { ArtLogin } from '../components/Illustrations';
 import { BrandLockup } from '../components/Brand';
 
@@ -59,7 +60,7 @@ export function LoginPage() {
         </section>
 
         <p className="small muted login__note">
-          После входа вы выберете компанию из тех, к которым у пользователя есть доступ, и роль. Компании и данные синтетические, настоящий интернет-банк не затрагивается.
+          {api.mode === 'http' ? 'После демо-входа выберите компанию и роль. Компании, лента и карточки загружаются из HTTP API.' : 'После входа вы выберете компанию из тех, к которым у пользователя есть доступ, и роль. Компании и данные синтетические, настоящий интернет-банк не затрагивается.'}
         </p>
       </div>
     </div>

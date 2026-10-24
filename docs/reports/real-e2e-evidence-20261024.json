@@ -1,0 +1,359 @@
+{
+  "job_id": "70c582d1bed716403ad8d334dbc08e13d49f97e71d6d8d6548fdf6690a5b5f0d",
+  "counts": {
+    "deferred": 2,
+    "exclude": 2,
+    "watch": 8
+  },
+  "costs": {
+    "bank_rag_used": false,
+    "cache_hits": 0,
+    "completion_tokens": 7163,
+    "cost_rub": 1.142367,
+    "generated_by": "live",
+    "json_repairs": 0,
+    "latency_ms": 111871,
+    "llm_calls": 10,
+    "model": "z-ai/glm-5.3-flash",
+    "profile_version": "6fff079cc3bedf6d9bd84103d0ca2a989dfa97de3791e0ae24ad67fc719a9544",
+    "prompt_tokens": 42250,
+    "prompt_version": "analyst-v1.2",
+    "qa_status": "passed",
+    "reasoning_tokens": 236
+  },
+  "profile_version": "6fff079cc3bedf6d9bd84103d0ca2a989dfa97de3791e0ae24ad67fc719a9544",
+  "interest_set_version": "378c2c9a680d3654f7319ef908f9cac14731909243fd662487de6761425e8b47",
+  "companies_http_status": 200,
+  "feed_http_status": 200,
+  "processing_http_status": 200,
+  "all_card_http_status": {
+    "03dad01404233fad6bd0b11dd814fa76a2972da48910818682543b4286de949d": 200,
+    "3d5670c2c9f9ccfb8f2b58957ef9b5ab74a8e121caff8d00a6e29468dcfb247f": 200,
+    "480f649b075599d01d9016b1cc83f4c987c07b0009e0faa39fa229c4549ad70a": 200,
+    "5981d59f8544a237762ddc01b108caebd5011b3e942203c1e5f0615cbdbbc370": 200,
+    "b5ddc15278272e39683cbf29699a8e5a965c040e1fe4dbf3e2884ba75a6f183d": 200,
+    "ba9aac3e4be748c71996b7f083e30cf4c288fc98ee41084a908e4e74c753d41f": 200,
+    "e2cd9e18a7b7cfc66caa1657a10d182eefed9e95e34a82ff8d499a8589ac0e69": 200,
+    "e4f42ad4337af0cd208ba2ee651b32fda44c85240d54c0fc49d1c80498070022": 200
+  },
+  "insight_http_status": 200,
+  "card_id": "b5ddc15278272e39683cbf29699a8e5a965c040e1fe4dbf3e2884ba75a6f183d",
+  "candidate_id": "34b0885609cca782c5c7a59e6e6004d0de719d6384f6999e0538a78b54425358",
+  "canonical_event_id": "article:cbr_event:a1387a59890d",
+  "feed_count": 8,
+  "status": "partial",
+  "candidate_processing_status": "ready",
+  "source_revision_ids": [
+    "revision:1815ecde29c925daf5cfbf5f76d6fc29443c5fd1e28a78982f018a0850330980"
+  ],
+  "sources": [
+    {
+      "article_id": "cbr_event:a1387a59890d",
+      "revision_id": "revision:1815ecde29c925daf5cfbf5f76d6fc29443c5fd1e28a78982f018a0850330980",
+      "url": "https://www.cbr.ru/press/event/?id=32919",
+      "text_sha256": "c4a459f1d0e295c67c2c95867f19b7f2f0b5a530667e18d2e43f177445dc6bda"
+    }
+  ],
+  "source_quotes_verified": 1,
+  "api_payload_sha256": "33225070aeb732a95fb8f4bb63532c51316e0258e6d7f1e42bb65ad0db439d7b",
+  "responses_journaled": 10,
+  "created_at": "2026-10-24T17:19:14.428150+00:00",
+  "completed_at": "2026-10-24T17:21:10.124243+00:00",
+  "seconds": 115.69638118499995,
+  "k": 10,
+  "company_id": "U_100090",
+  "role": "cfo",
+  "transitions": [
+    {
+      "rank": 1,
+      "item_id": "revision:09b92b42ef13281f12246f6fafa4e0ffe9d3d662b50e6456f74452b8a3459e32",
+      "candidate_id": "543f1dfb4ab5977175890b91d9797d757e3fbd0905c12a50c8795379368170a3",
+      "canonical_event_id": "article:cbr_event:bcb819b9cb56",
+      "reading_group_ids": [
+        "2d7339455d25928650eecc524fe9aa35de5a8eab75a01f39ee8f849c393ac03f"
+      ],
+      "processing_status": "merge_fallback",
+      "decision": "watch",
+      "card_id": "5981d59f8544a237762ddc01b108caebd5011b3e942203c1e5f0615cbdbbc370",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "cbr_event:bcb819b9cb56",
+          "revision_id": "revision:09b92b42ef13281f12246f6fafa4e0ffe9d3d662b50e6456f74452b8a3459e32",
+          "url": "https://www.cbr.ru/press/event/?id=32772",
+          "text_sha256": "4e2465fa60036e78256098a6cba4db5f625f5c28b7efbe034412d65b396cef93"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "item_id": "revision:4a0afd8819af0af50525c3c4456f5a59c79c3eb347d1852e61fed4c5e6a00d03",
+      "candidate_id": "b2bdeac1bdebf5fcc43fb240878cc9b6fcdd107dc32fe27bb735b9853287853d",
+      "canonical_event_id": "article:cbr_event:0475b99934f5",
+      "reading_group_ids": [
+        "2d7339455d25928650eecc524fe9aa35de5a8eab75a01f39ee8f849c393ac03f"
+      ],
+      "processing_status": "merge_fallback",
+      "decision": "watch",
+      "card_id": "03dad01404233fad6bd0b11dd814fa76a2972da48910818682543b4286de949d",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "cbr_event:0475b99934f5",
+          "revision_id": "revision:4a0afd8819af0af50525c3c4456f5a59c79c3eb347d1852e61fed4c5e6a00d03",
+          "url": "https://www.cbr.ru/press/event/?id=32776",
+          "text_sha256": "74dfe6fac6116b4896236ba3c5033f2695051dbea142b039ce26da318771daad"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "item_id": "revision:3d3f7a9bda1e76c71d6794999466063ba8c4ed9b214450db789dbe6ffe53353d",
+      "candidate_id": "bb137b4c27a117e4aa7ebe023704a1a7bc7e85046a1932ba3e7e7a95ec0eac1a",
+      "canonical_event_id": "article:cbr_event:275c5c7b3955",
+      "reading_group_ids": [
+        "0d9992f2d6213eb8818d8788cde083ddb024dc1cc733b04781968d591c6f027d"
+      ],
+      "processing_status": "ready",
+      "decision": "watch",
+      "card_id": "3d5670c2c9f9ccfb8f2b58957ef9b5ab74a8e121caff8d00a6e29468dcfb247f",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "cbr_event:275c5c7b3955",
+          "revision_id": "revision:3d3f7a9bda1e76c71d6794999466063ba8c4ed9b214450db789dbe6ffe53353d",
+          "url": "https://www.cbr.ru/press/event/?id=32813",
+          "text_sha256": "ed22c44835457f02f5b7f493651366460d1429c02ee222b6625faa172b624906"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "item_id": "revision:1815ecde29c925daf5cfbf5f76d6fc29443c5fd1e28a78982f018a0850330980",
+      "candidate_id": "34b0885609cca782c5c7a59e6e6004d0de719d6384f6999e0538a78b54425358",
+      "canonical_event_id": "article:cbr_event:a1387a59890d",
+      "reading_group_ids": [
+        "76d0f8f6feedcd38bbd033d074b4d199ceed81c2901dca2adaed238ae7fa00d4"
+      ],
+      "processing_status": "ready",
+      "decision": "watch",
+      "card_id": "b5ddc15278272e39683cbf29699a8e5a965c040e1fe4dbf3e2884ba75a6f183d",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "cbr_event:a1387a59890d",
+          "revision_id": "revision:1815ecde29c925daf5cfbf5f76d6fc29443c5fd1e28a78982f018a0850330980",
+          "url": "https://www.cbr.ru/press/event/?id=32919",
+          "text_sha256": "c4a459f1d0e295c67c2c95867f19b7f2f0b5a530667e18d2e43f177445dc6bda"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "item_id": "revision:ac29213cdef3f704ef3daba30d8217df9b3e58122db03e984ebb47652b340067",
+      "candidate_id": "f776e7e466288b4f72f67e9dc5b7f55abb948a5ee60082ba19c1648122d13de3",
+      "canonical_event_id": "article:lenta_ru:64096356d4b4",
+      "reading_group_ids": [
+        "1bdefdbf46e85ca781ddbce7f4179c12b90ca5552072be33dd0cb3a8e3ee00f6"
+      ],
+      "processing_status": "ready",
+      "decision": "watch",
+      "card_id": "ba9aac3e4be748c71996b7f083e30cf4c288fc98ee41084a908e4e74c753d41f",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "lenta_ru:64096356d4b4",
+          "revision_id": "revision:ac29213cdef3f704ef3daba30d8217df9b3e58122db03e984ebb47652b340067",
+          "url": "https://lenta.ru/news/2026/10/22/v-rossii-podeshevela-seledka-pod-shuboy/",
+          "text_sha256": "dcab37152399de7d9de33c5909ff2f35cc89a501c9f8472d45f25759a983bdc8"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "item_id": "revision:c1fbb94112aeea973d58876a6c7c22c49bfc63a92df5fcf109ff01c9ac0925a4",
+      "candidate_id": "d5d9dc1688fe5c9ef79208addc89a04b2b71364f5898a5cb351e9145bf35a123",
+      "canonical_event_id": "article:cbr_event:27dd9804e67e",
+      "reading_group_ids": [
+        "cb3a32e5faa1af6747761e72d42401d11bba4c2bb50c4058f8694f7e1984592b"
+      ],
+      "processing_status": "merge_fallback",
+      "decision": "watch",
+      "card_id": "480f649b075599d01d9016b1cc83f4c987c07b0009e0faa39fa229c4549ad70a",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "cbr_event:27dd9804e67e",
+          "revision_id": "revision:c1fbb94112aeea973d58876a6c7c22c49bfc63a92df5fcf109ff01c9ac0925a4",
+          "url": "https://www.cbr.ru/press/event/?id=32857",
+          "text_sha256": "32de72aff3f5797f40d6869dd41b3f6ae376365422d66601eca9d0aff54ed57d"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "item_id": "revision:005f22c8ed6b1a7714d048a43950520abefc914b0544bdb48528d195d1b054a5",
+      "candidate_id": "3859732542c60aba1218f3a020317c633142f7b6b6fb490ed8df47ff9ca3d409",
+      "canonical_event_id": "article:lenta_ru:b072e83e5575",
+      "reading_group_ids": [
+        "543b1b48e0d9f1e40734396d99d527585a0f04dcf6c9423cc2a8d88fb2b57bd7"
+      ],
+      "processing_status": "ready",
+      "decision": "exclude",
+      "card_id": null,
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "lenta_ru:b072e83e5575",
+          "revision_id": "revision:005f22c8ed6b1a7714d048a43950520abefc914b0544bdb48528d195d1b054a5",
+          "url": "https://lenta.ru/news/2026/10/22/rossiyane-podelilis-poleznymi-layfhakami-po-pokupkam-v-internete/",
+          "text_sha256": "15762f70a13a000145f140e947bc59c3c6802ba90566ffecc2ff2ad38980c78e"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "item_id": "revision:1827c4df43f51888d1a3259262c651331c8d4bfac2e5bf957bf90757b1056fe7",
+      "candidate_id": "1b86885e707c72c4d060ceb62cce1dc9fee889d0cc7dc33d072920f7e5470f0b",
+      "canonical_event_id": "article:retail_news:231668700469",
+      "reading_group_ids": [
+        "85ec5d1bbb7fab769fc36fdea4d3aa9bcb9fa077b4a57a2644c9acfe22aa8906"
+      ],
+      "processing_status": "ready",
+      "decision": "watch",
+      "card_id": "e2cd9e18a7b7cfc66caa1657a10d182eefed9e95e34a82ff8d499a8589ac0e69",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "retail_news:231668700469",
+          "revision_id": "revision:1827c4df43f51888d1a3259262c651331c8d4bfac2e5bf957bf90757b1056fe7",
+          "url": "https://retailer.ru/biznes-lanchi-v-rossii-podorozhali-na-27-5-za-dva-goda/",
+          "text_sha256": "c194fc7523a64b4786a3bce6d55f235065bf6b32456c32a7c011ee0f9a144da4"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "item_id": "revision:0549cc3258c0e5894149c4cc0afce3a42c63d15bf787281504a57c81d1b3e368",
+      "candidate_id": "409d7014b05a5c106924b0158cf0e16edabbe31726aaf944acc223b1147bda2b",
+      "canonical_event_id": "article:cbr_event:e1f753e38361",
+      "reading_group_ids": [
+        "f80bf38ea0b667b914bd08375aa95c6e74f86a2b139c626ac8032f047bce8f6a"
+      ],
+      "processing_status": "ready",
+      "decision": "watch",
+      "card_id": "e4f42ad4337af0cd208ba2ee651b32fda44c85240d54c0fc49d1c80498070022",
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "cbr_event:e1f753e38361",
+          "revision_id": "revision:0549cc3258c0e5894149c4cc0afce3a42c63d15bf787281504a57c81d1b3e368",
+          "url": "https://www.cbr.ru/press/event/?id=32764",
+          "text_sha256": "91917acc1683626dc3ebda7136ac59fedfb8c3527319853f8799cea24500fab6"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "item_id": "revision:45385e5e56583e0eed035a447047e2b076063410c4acb3818baf1887233cb2a5",
+      "candidate_id": "04260630c99ce6b530fc73999d6ca28c409eb2f42dc84628f6a8288aff092fcc",
+      "canonical_event_id": "article:cbr_rss:9d3f7f1b2515",
+      "reading_group_ids": [
+        "f716d66c6e107bd4aacd094c61930512de1c88c9b5163d4c45b602b757718644"
+      ],
+      "processing_status": "ready",
+      "decision": "exclude",
+      "card_id": null,
+      "qa_status": "passed",
+      "sources": [
+        {
+          "article_id": "cbr_rss:9d3f7f1b2515",
+          "revision_id": "revision:45385e5e56583e0eed035a447047e2b076063410c4acb3818baf1887233cb2a5",
+          "url": "https://www.cbr.ru/analytics/dkp/inflationary_expectations/#a_62825",
+          "text_sha256": "9ddee783ed7387b1ab52a804d8d1c537d9642d32daafabbe616227971ef52c3a"
+        }
+      ]
+    }
+  ],
+  "merge_calls": 0,
+  "actual_cost_rub": 1.1423661018770002,
+  "key_info_before": {
+    "http_status": 200,
+    "spend": 296.0846622118175,
+    "max_budget": 500
+  },
+  "key_info_after": {
+    "http_status": 200,
+    "spend": 297.2270283136946,
+    "max_budget": 500
+  },
+  "worker_repeat_reused": true,
+  "new_calls_on_repeat": 0,
+  "quota_reservations": 10,
+  "api_hash_same_after_restart": true,
+  "browser": {
+    "url": "http://127.0.0.1:18082/#/news/b5ddc15278272e39683cbf29699a8e5a965c040e1fe4dbf3e2884ba75a6f183d",
+    "card_id": "b5ddc15278272e39683cbf29699a8e5a965c040e1fe4dbf3e2884ba75a6f183d",
+    "feed_count": 8,
+    "sources": [
+      "https://www.cbr.ru/press/event/?id=32919"
+    ],
+    "cites": 7,
+    "requests": [
+      {
+        "url": "http://127.0.0.1:18082/api/v1/companies",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:18082/api/v1/companies/U_100090/processing-state?role=cfo",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:18082/api/v1/companies/U_100090/news-feed?role=cfo",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:18082/api/v1/news/b5ddc15278272e39683cbf29699a8e5a965c040e1fe4dbf3e2884ba75a6f183d/analysis?company_id=U_100090&role=cfo",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:18082/api/v1/companies",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:18082/api/v1/news/b5ddc15278272e39683cbf29699a8e5a965c040e1fe4dbf3e2884ba75a6f183d/analysis?company_id=U_100090&role=cfo",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:18082/api/v1/companies/U_100090/processing-state?role=cfo",
+        "status": 200
+      },
+      {
+        "url": "http://127.0.0.1:18082/api/v1/companies/U_100090/news-feed?role=cfo",
+        "status": 200
+      }
+    ],
+    "errors": [],
+    "card_reload_preserves_context": true
+  },
+  "ui_controlled_tests": {
+    "loading_skeleton": true,
+    "feed_503_visible": true,
+    "retry_restores_real_feed": true,
+    "status_running_visible": true,
+    "poll_refreshes_feed": true,
+    "feedRequests": 4,
+    "processingRequests": 3,
+    "scope": "Controlled HTTP transport fixtures; model decisions and stored cards unchanged"
+  },
+  "public_source_check": {
+    "http_status": 200,
+    "url": "https://www.cbr.ru/press/event/?id=32919",
+    "public_source_title_found": true
+  },
+  "notes": [
+    "Restored run after loss of /tmp. Original lost run cost cannot be precisely reconciled.",
+    "Prior cap 45 RUB; recovery cap 5 RUB. Recovery actual 1.142367 RUB.",
+    "Projection contains two observed OKVED facts, three unchanged interest vectors."
+  ]
+}

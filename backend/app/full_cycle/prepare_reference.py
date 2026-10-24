@@ -20,7 +20,40 @@ def rows(path):
     return [json.loads(s) for s in Path(path).read_text().splitlines() if s.strip()]
 
 
-def prepare(news,topics_root,output,companies):
+def recover_url(document, raw_root, cache):
+    """Recover only an exact collector original, with file and text hash proofs."""
+    if raw_root is None:
+        return None
+    raw_root = Path(raw_root).resolve()
+    found = set()
+    for origin in document['provenance']:
+        if origin.get('format') != 'collector_jsonl':
+            continue
+        path = (raw_root / origin['file']).resolve()
+        if not path.is_relative_to(raw_root):
+            raise PipelineError('source_path_outside_raw_root')
+        if path not in cache:
+            if file_hash(path) != origin.get('file_sha256'):
+                raise PipelineError('original_collector_hash_mismatch')
+            cache[path] = rows(path)
+        original = cache[path][origin['line'] - 1]
+        reference = document['reference']
+        if (original['article_id'] != reference['article_id'] or original['text'] != document['text']
+            or text_hash(original['text']) != reference['content_hash']):
+            raise PipelineError('original_collector_content_mismatch')
+        if original.get('url'):
+            from urllib.parse import urlsplit
+            url = original['url']
+            parsed = urlsplit(url)
+            if parsed.scheme not in ('http','https') or not parsed.hostname or parsed.username or parsed.password:
+                raise PipelineError('invalid_original_source_url')
+            found.add(url)
+    if len(found) > 1:
+        raise PipelineError('conflicting_original_source_urls')
+    return next(iter(found), None)
+
+
+def prepare(news,topics_root,output,companies,raw_root=None):
     news,topics_root,output=Path(news),Path(topics_root),Path(output)
     output.mkdir(parents=True,exist_ok=True,mode=0o700)
     index=json.loads((news/'bge-index.json').read_text())
@@ -44,14 +77,18 @@ def prepare(news,topics_root,output,companies):
     matrix=np.load(news/'bge-documents.npy',allow_pickle=False)
     if [d['reference']['document_id'] for d in documents]!=index['document_ids'] or matrix.shape!=(len(documents),1024) or matrix.dtype!=np.float32:
         raise PipelineError('reference_mapping_or_matrix_mismatch')
-    articles=[];items=[];vectors=[]
+    articles=[];items=[];vectors=[];revision_map={};raw_cache={}
     for d,v in zip(documents,matrix):
-        r=d['reference'];rid=r['document_id']
-        a=ArticleRevision(revision_id=rid,article_id=r['article_id'],text=d['text'],text_sha256=r['content_hash'],
+        r=d['reference'];legacy_rid=r['document_id']
+        url=recover_url(d,raw_root,raw_cache)
+        # URL enrichment creates an immutable metadata revision, never edits an old ID.
+        rid='revision:'+digest([legacy_rid,'source-url.v1',url]) if url else legacy_rid
+        revision_map[legacy_rid]=rid
+        a=ArticleRevision(revision_id=rid,article_id=r['article_id'],url=url,text=d['text'],text_sha256=r['content_hash'],
             title=d['title'],title_origin=d['title_origin'],source=r['source'],published_at=r['published_at'],
             publication_precision=r['publication_precision'],observed_at=r.get('observed_at'),
             provenance=[dict(kind='explicit_bge_reference_conversion',reference=r,original=d['provenance'])])
-        # The legacy export has no source URL. Preserve null, never reconstruct a link.
+        # Embedding text is unchanged; only source metadata and owner IDs are rebased.
         text=(a.title+'\n\n' if a.title_origin=='source' and a.title else '')+a.text
         item=SearchItem(item_id=rid,item_version=digest(a),title=a.title,text=a.text,embedding_text=text,source_revision_ids=[rid])
         vector=VectorRecord(vector_id=digest([rid,index['fingerprint']]),item_id=rid,item_version=item.item_version,
@@ -60,9 +97,9 @@ def prepare(news,topics_root,output,companies):
     known={a.revision_id for a in articles}
     groups=[]
     for row in rows(news/'groups.jsonl'):
-        present=sorted(set(row['document_ids'])&known);missing=sorted(set(row['document_ids'])-known)
+        present=sorted(revision_map[x] for x in set(row['document_ids']) if x in revision_map);missing=sorted(set(row['document_ids'])-revision_map.keys())
         if not present:continue
-        groups.append(ClusterSnapshot(cluster_id=row['group_id'],revision=digest(row),member_revision_ids=present,
+        groups.append(ClusterSnapshot(cluster_id=row['group_id'],revision=digest([row,present]) if raw_root else digest(row),member_revision_ids=present,
             provenance=dict(interpretation=row['interpretation'],incomplete_membership=bool(missing),missing_revision_ids=missing)))
     corpus_id='bge-reference:'+file_hash(news/'documents.jsonl')
     (output/'articles.jsonl').write_text(''.join(canonical(a)+'\n' for a in articles))
@@ -104,6 +141,8 @@ def prepare(news,topics_root,output,companies):
     summary=dict(articles=len(articles),groups=len(groups),incomplete_groups=sum(bool(g.provenance['incomplete_membership']) for g in groups),
         fingerprint=index['fingerprint'],corpus_id=corpus_id,interests=interest_counts,
         source_urls_missing=sum(a.url is None for a in articles),source_hash=file_hash(news/'documents.jsonl'))
+    summary['source_urls_recovered']=sum(a.url is not None for a in articles)
+    atomic_json(output/'revision-map.json',revision_map)
     atomic_json(output/'preparation-report.json',summary)
     return summary
 
@@ -112,8 +151,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--news',required=True);parser.add_argument('--topics',required=True)
     parser.add_argument('--output',required=True);parser.add_argument('--company',action='append',required=True)
+    parser.add_argument('--raw-root',help='Original collector directory, validated by provenance hashes')
     args=parser.parse_args()
-    print(json.dumps(prepare(args.news,args.topics,args.output,args.company)))
+    print(json.dumps(prepare(args.news,args.topics,args.output,args.company,args.raw_root)))
 
 
 if __name__=='__main__':main()

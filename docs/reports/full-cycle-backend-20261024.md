@@ -1,5 +1,9 @@
 # Приёмка полного backend цикла — 24.10.2026
 
+Обновление: [реальный E2E U_100090](real-e2e-20261024.md) подтверждён через HTTP
+и экран после исправлений: 8 watch, restart/cache проверены. Ниже сохранена
+первоначальная приёмка, включая отдельно обозначенный синтетический прогон.
+
 Ветка `integration/full-cycle-backend`, worktree `/tmp/full-cycle-backend`.
 Upstream refs обновлены перед началом: main `04500c1`, retriever `04bde29`,
 analyst adapter `6cf4bc1`. Локальные изменения исходного worktree не изменялись.

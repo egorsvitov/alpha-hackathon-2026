@@ -357,3 +357,61 @@ def test_lazy_encoder_verifies_actual_fingerprint_before_returning_vectors(tmp_p
         with pytest.raises(PipelineError,match='encoder_profile_mismatch'):
             lazy.encode_event_texts(['new article'])
     assert lazy._encoder is None
+
+
+def test_reference_url_recovery_checks_exact_original_and_hash(tmp_path):
+    from app.full_cycle.prepare_reference import recover_url
+    from retriever.cpu_encoder import file_hash
+    from retriever.models import text_hash
+    original=dict(article_id='public-original',text='Synthetic body',url='https://example.org/original')
+    path=tmp_path/'news.jsonl';path.write_text(json.dumps(original)+'\n')
+    document=dict(text=original['text'],reference=dict(article_id=original['article_id'],content_hash=text_hash(original['text'])),
+        provenance=[dict(format='collector_jsonl',file=path.name,file_sha256=file_hash(path),line=1)])
+    assert recover_url(document,tmp_path,{})==original['url']
+    assert recover_url(document,None,{}) is None
+    changed=json.loads(json.dumps(document));changed['text']='changed'
+    with pytest.raises(PipelineError,match='original_collector_content_mismatch'):recover_url(changed,tmp_path,{})
+    document['provenance'][0]['file_sha256']='0'*64
+    with pytest.raises(PipelineError,match='original_collector_hash_mismatch'):recover_url(document,tmp_path,{})
+
+
+def test_live_budget_uses_team_ceiling_and_persists_run_spend(fixture,monkeypatch):
+    from app.analyst.llm_gateway import BudgetLedger
+    from app.full_cycle.runtime import analyst_runtime
+    f=fixture
+    previous=BudgetLedger(400,session_cap_rub=8,state_path=f.ws.root/'analyst-budget.json')
+    previous.commit(0,0.25)
+    monkeypatch.setenv('LLM_API_KEY','sk-test-not-a-real-key')
+    monkeypatch.setenv('ANALYST_DAILY_BUDGET_RUB','400')
+    service,_=analyst_runtime(f.ws,live=True,quota_path=f.ws.root/'live-quota.db',quota_limit=10,budget_rub=8)
+    service.ledger.update_remote(16.5,500)
+    assert service.ledger.ceiling_rub==400
+    assert service.ledger.session_cap_rub==7.75
+    reserved=service.ledger.reserve(.2)
+    service.ledger.release(reserved)
+    service.llm.gateway._client.close()
+
+
+def test_okved_projection_keeps_only_verified_parent_facts_and_same_vectors(tmp_path):
+    from app.full_cycle.project_okved import project
+    company='U_TEST'
+    features={company+':'+path:dict(feature_id=company+':'+path,path=path,value=value,
+              quality='observed',origin=dict(kind='fixture',source_path='/private/test'))
+              for path,value in [('/okved/code','00.00'),('/okved/name','Test activity'),('/other','not needed')]}
+    parent=dict(company_id=company,profile_version='parent-version',is_synthetic=False,features=features)
+    interests=dict(profile_version='parent-version',interest_set_version='interests-v1',
+                   interests=[dict(vector=[1.,0.],text='Test interest')])
+    atomic_json(tmp_path/'profile.json',parent)
+    atomic_json(tmp_path/'interests.json',interests)
+    atomic_json(tmp_path/'manifest.json',dict(companies=[dict(company_id=company,
+        profile='profile.json',profile_sha256=digest(parent),interests='interests.json',
+        interests_sha256=digest(interests),display={})]))
+    version=project(tmp_path,company)
+    projected=json.loads((tmp_path/'profile.json').read_text())
+    rebased=json.loads((tmp_path/'interests.json').read_text())
+    assert {v['path'] for v in projected['features'].values()}=={'/okved/code','/okved/name'}
+    assert all(parent['features'][k]==v for k,v in projected['features'].items())
+    assert json.loads((tmp_path/(company+'-trusted-parent.json')).read_text())==parent
+    assert rebased['interests']==interests['interests']
+    assert rebased['profile_version']==version
+    assert project(tmp_path,company)==version

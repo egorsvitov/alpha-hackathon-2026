@@ -613,6 +613,7 @@ class LLMGateway(BaseLLM):
         self._client = httpx.Client(
             timeout=httpx.Timeout(timeout_s, connect=10.0),
             transport=transport,
+            trust_env=False,
             follow_redirects=False,
         )
         self.key_info = KeyInfoClient(self.base_url, api_key, self._client, ttl_s=key_info_ttl_s)

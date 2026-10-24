@@ -32,10 +32,35 @@ export function FeedProvider({ children }: { children: ReactNode }) {
     [company?.company_id, role, feedVersion],
   );
 
-  const { data: processing } = useAsync(
+  const { data: processing, reload: reloadProcessing } = useAsync(
     () => company && role ? api.getProcessingState(company.company_id, role) : Promise.resolve(null),
     [company?.company_id, role, feedVersion],
   );
+
+  // Workers publish independently of the browser. Poll the saved status, then
+  // refresh the feed only when that context changes. These are read-only APIs.
+  const latestStatus = useRef(processing);
+  latestStatus.current = processing;
+  useEffect(() => {
+    if (api.mode !== 'http' || !company || !role) return;
+    let alive = true;
+    let pending = false;
+    const poll = async () => {
+      if (pending || document.hidden) return;
+      pending = true;
+      try {
+        const next = await api.getProcessingState(company.company_id, role);
+        if (alive && JSON.stringify(next) !== JSON.stringify(latestStatus.current)) {
+          latestStatus.current = next;
+          reload();
+          reloadProcessing();
+        }
+      } catch { /* A failed status poll preserves the last confirmed feed. */ }
+      finally { pending = false; }
+    };
+    const timer = window.setInterval(poll, 4000);
+    return () => { alive = false; window.clearInterval(timer); };
+  }, [company?.company_id, role, reload, reloadProcessing]);
 
   /* Новое важное событие: ловим появление id, которых не было в прошлой выдаче для той же компании и роли. */
   const seen = useRef<{ key: string; ids: Set<string> } | null>(null);
