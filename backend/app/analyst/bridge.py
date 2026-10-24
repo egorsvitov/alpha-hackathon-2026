@@ -79,7 +79,9 @@ class EvidenceCollector:
         if e is None:
             return None
         src = self.sources.get(e.source_id or "")
-        synthetic = bool(src.is_synthetic) if src and src.is_synthetic is not None else True
+        # Синтетикой считаем только явно помеченный источник: ``is_synthetic=None`` (адаптер нового
+        # ретривера не знает признака) — «неизвестно», и реальная новость не получает пометку демо-данных.
+        synthetic = bool(src and src.is_synthetic is True)
         self.items.append(
             Evidence(
                 evidence_id=evidence_id,
@@ -90,6 +92,9 @@ class EvidenceCollector:
                 url=src.url if src else None,
                 quote=e.quote,
                 is_synthetic=synthetic,
+                # Координаты цитаты в тексте первоисточника (если ретривер их дал) — для подсветки.
+                start=e.start if isinstance(e.start, int) else None,
+                end=e.end if isinstance(e.end, int) else None,
             )
         )
         self._ids.add(evidence_id)

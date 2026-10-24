@@ -139,6 +139,9 @@ class Evidence(BaseModel):
     url: str | None = None
     quote: str
     is_synthetic: bool = False
+    # Необязательные координаты цитаты в тексте первоисточника (символы, [start, end)); фронт может не читать.
+    start: int | None = None
+    end: int | None = None
 
 
 class UnknownItem(BaseModel):

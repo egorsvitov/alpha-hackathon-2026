@@ -218,6 +218,9 @@ class AnalystService:
         """
         from app.analyst.batch_adapter import BatchValidationError, ImpactBatchAdapter
 
+        if not isinstance(raw_batch, dict):
+            # Не-словарь (список, строка, None) — понятная ошибка формата вместо AttributeError.
+            raise BatchValidationError(["batch_object_required"])
         version = raw_batch.get("schema_version")
         if version == "retrieval-candidate-batch.v1":
             from app.analyst.retrieval_adapter import adapt_retrieval_batch
