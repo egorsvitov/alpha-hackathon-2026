@@ -1,0 +1,21 @@
+{
+  "company_id": "SYNTHETIC",
+  "profile_version": "profile-1",
+  "is_synthetic": true,
+  "features": {
+    "SYNTHETIC:/okved/name": {
+      "feature_id": "SYNTHETIC:/okved/name",
+      "path": "/okved/name",
+      "value": "Синтетическое производство",
+      "quality": "observed",
+      "origin": {
+        "kind": "synthetic",
+        "source_path": "public-example"
+      }
+    }
+  },
+  "missing_fields": [],
+  "limitations": [
+    "Полностью синтетический публичный пример."
+  ]
+}

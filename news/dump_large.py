@@ -22,6 +22,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -58,7 +59,7 @@ def main() -> int:
     if args.category:
         sources = registry.enabled(args.category)
     else:
-        sources = registry.sources
+        sources = registry.enabled()
     # Per-source лимит: если передан явно — переопределяем реестр, иначе берём из реестра.
     if args.limit_per_source is not None:
         for s in sources:
@@ -107,12 +108,17 @@ def main() -> int:
             print(f"  [{spec.name}] +0 (всего в корпусе: {len(merged)})", flush=True)
             continue
         new_count = 0
+        article_failures = 0
+        attempted_articles = 0
         for c in candidates:
             existing_art = merged.get(c.url)
             if existing_art is not None and existing_art.text:
                 continue
+            attempted_articles += 1
             res = fetcher.fetch_article(c, source=spec.name)
-            if res.error:
+            if res.error or not res.text.strip():
+                if not str(res.error).startswith("filtered:"):
+                    article_failures += 1
                 continue
             art = pipe._candidate_to_article(
                 spec, c, text=res.text, title=res.title, published_at=res.published_at)
@@ -121,7 +127,10 @@ def main() -> int:
             merged[key] = art
             new_count += 0 if was else 1
         fetched_total += new_count
-        ok_names.append(f"{spec.name}({new_count})")
+        if attempted_articles and article_failures == attempted_articles:
+            fail_list.append((spec.name, "all_article_fetches_failed"))
+        else:
+            ok_names.append(f"{spec.name}({new_count})")
         # Пишем после каждого источника, если появились новые статьи.
         if new_count > 0:
             store.write(list(merged.values()))
@@ -141,7 +150,19 @@ def main() -> int:
         for name, err in fail_list[:15]:
             print(f"  - {name}: {err}")
     print(f"Корпус: {store.corpus_path}")
-    return 0
+    # Cached feed fallback cannot establish source health.
+    failures = getattr(fetcher, "feed_failures", [])
+    healthy = [n for n in ok_names if not any(s.url in failures and n.startswith(s.name+"(") for s in sources)]
+    status = "collected" if fetched_total else "no_new" if healthy else "all_sources_failed"
+    if not healthy:
+        status = "all_sources_failed"
+    summary = dict(status=status, ok=bool(healthy), new_articles=fetched_total, total_articles=len(merged),
+                   healthy_sources=len(healthy), failed_sources=len(fail_list), stale_feed_count=len(failures))
+    tmp = store.out_dir / ".collection-result.tmp"
+    tmp.write_text(json.dumps(summary), encoding="utf-8")
+    tmp.replace(store.out_dir / "collection-result.json")
+    print(json.dumps(summary))
+    return 0 if summary["ok"] else 1
 
 
 if __name__ == "__main__":

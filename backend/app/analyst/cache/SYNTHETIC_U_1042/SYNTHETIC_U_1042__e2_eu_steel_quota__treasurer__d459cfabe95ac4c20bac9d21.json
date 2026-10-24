@@ -1,0 +1,453 @@
+{
+ "key": "SYNTHETIC_U_1042|e2_eu_steel_quota@1#7ec69e2df613|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e2_eu_steel_quota@1#7ec69e2df613|treasurer|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:09:23+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e2_eu_steel_quota:v1",
+   "cluster_id": "cluster:e2_eu_steel_quota",
+   "event_refs": [
+    {
+     "event_id": "e2_eu_steel_quota",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.08,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "demand_revenue",
+    "fx_trade"
+   ],
+   "event_status": "occurred",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "ЕС вводит квоты на российский стальной прокат: прямого канала на компанию пока не видно, но возможен переизбыток металла на внутреннем рынке",
+   "what_happened": "ЕС объявил о введении квот на импорт стального проката из России; размер квот и дата начала действия не раскрыты.",
+   "facts": [
+    {
+     "text": "ЕС объявил о введении квот на импорт стального проката из России; размер квот и дата начала действия не раскрыты.",
+     "kind": "fact",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — производитель стали с ВЭД, но по декларациям контрагент — Казахстан, а не ЕС; прямая связь с квотами ЕС не подтверждена.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "evidence_ids": [
+     "n_e2_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Если компания или её покупатели экспортировали бы в ЕС, квоты могли бы ограничить отгрузки; косвенно вытесненные объёмы могут усилить конкуренцию на внутреннем рынке и давить на цены.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "evidence_ids": [
+     "n_e2_1"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "counterparty.3",
+     "counterparty.4"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Возможное снижение цен на внутреннем рынке из-за переориентации экспортёров ЕС-направления, что может затронуть выручку через покупателей.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "counterparty.3",
+      "counterparty.4"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При ослаблении рубля и переориентации поставок на дружественные рынки (например, Казахстан, ) экспортные условия могут улучшиться.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Наличие экспортных контрактов в ЕС у компании или её покупателей",
+    "Валютная структура ВЭД-расчётов",
+    "Динамика цен на прокат на внутреннем рынке"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить, есть ли у компании или её покупателей поставки в ЕС и доля таких отгрузок.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "counterparty.3",
+      "counterparty.4"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Уточнить параметры квот (объёмы, даты) из официальных источников ЕС.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Оценить валютную позицию по ВЭД-контрактам и при необходимости пересмотреть лимиты на курсовой риск.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Направление и валюта ВЭД неизвестны; Казахстан в декларациях не означает экспорт в ЕС.",
+     "question": "Есть ли у компании поставки в ЕС и в какой валюте расчёты?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Размер квот и дата вступления в силу не раскрыты.",
+     "question": "Каковы параметры квот и затронутые товарные позиции?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Для казначея событие пока фоновое: ВЭД компании привязан к Казахстану, а не к ЕС. Рекомендуется мониторинг цен внутреннего рынка и валютной позиции, действий в ближайшие дни не требуется.",
+    "kind": "inference",
+    "claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "evidence_ids": [
+     "n_e2_1"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "fts.flag",
+     "fts.country",
+     "counterparty.3",
+     "counterparty.4"
+    ],
+    "event_claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e2_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e2_eu_steel_quota:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e2_eu_steel_quota@1#7ec69e2df613|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:09:23+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3111,
+    "completion_tokens": 976,
+    "reasoning_tokens": 25,
+    "cost_rub": 0.111907,
+    "cost_rub_tariff": 0.032458,
+    "latency_ms": 11109,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3111/976, 0.1119 ₽, 11.1 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "demand_revenue",
+     "fx_trade"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "ЕС вводит квоты на российский стальной прокат: прямого канала на компанию пока не видно, но возможен переизбыток металла на внутреннем рынке",
+    "what_happened": [
+     {
+      "text": "ЕС объявил о введении квот на импорт стального проката из России; размер квот и дата начала действия не раскрыты.",
+      "kind": "fact",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — производитель стали (F1, F2) с ВЭД, но по декларациям контрагент — Казахстан (F17), а не ЕС; прямая связь с квотами ЕС не подтверждена.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Если компания или её покупатели экспортировали бы в ЕС, квоты могли бы ограничить отгрузки; косвенно вытесненные объёмы могут усилить конкуренцию на внутреннем рынке и давить на цены.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "counterparty.3",
+      "counterparty.4"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Возможное снижение цен на внутреннем рынке из-за переориентации экспортёров ЕС-направления, что может затронуть выручку через покупателей (F20, F21).",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "counterparty.3",
+       "counterparty.4"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При ослаблении рубля и переориентации поставок на дружественные рынки (например, Казахстан, F17) экспортные условия могут улучшиться.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить, есть ли у компании или её покупателей (F20, F21) поставки в ЕС и доля таких отгрузок.",
+      "kind": "inference",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "counterparty.3",
+       "counterparty.4"
+      ],
+      "roles": [
+       "treasurer",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Уточнить параметры квот (объёмы, даты) из официальных источников ЕС.",
+      "kind": "inference",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Оценить валютную позицию по ВЭД-контрактам (F17) и при необходимости пересмотреть лимиты на курсовой риск.",
+      "kind": "inference",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Наличие экспортных контрактов в ЕС у компании или её покупателей",
+     "Валютная структура ВЭД-расчётов",
+     "Динамика цен на прокат на внутреннем рынке"
+    ],
+    "unknowns": [
+     {
+      "text": "Направление и валюта ВЭД неизвестны; Казахстан в декларациях не означает экспорт в ЕС.",
+      "question": "Есть ли у компании поставки в ЕС и в какой валюте расчёты?"
+     },
+     {
+      "text": "Размер квот и дата вступления в силу не раскрыты.",
+      "question": "Каковы параметры квот и затронутые товарные позиции?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Для казначея событие пока фоновое: ВЭД компании привязан к Казахстану (F17), а не к ЕС. Рекомендуется мониторинг цен внутреннего рынка и валютной позиции, действий в ближайшие дни не требуется.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3111/976, 0.1119 ₽, 11.1 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

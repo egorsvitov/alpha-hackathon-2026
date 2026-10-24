@@ -1,0 +1,451 @@
+{
+ "key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:11:24+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "cluster_id": "cluster:e1_key_rate",
+   "event_refs": [
+    {
+     "event_id": "e1_key_rate",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.11,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.03,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "credit_liquidity"
+   ],
+   "event_status": "occurred",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "Ключевая ставка сохранена на 14%: условия новых гарантий и факторинга для компании не ухудшатся, но и не облегчатся",
+   "what_happened": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+   "facts": [
+    {
+     "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+     "kind": "fact",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания пользуется банковскими гарантиями и факторингом; ставка влияет на стоимость новых лимитов и финансирования, хотя кредитов в банке нет.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.guarantees",
+     "product.factoring",
+     "product.loans"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ставка ЦБ задаёт базу ценообразования новых банковских гарантий и факторингового финансирования; действующие договоры без данных о типе ставки не затронуты.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.guarantees",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "При продлении или выпуске новых гарантий стоимость может остаться повышенной из-за ставки 14%.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.guarantees"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Факторинговое финансирование оборотного капитала может сохраниться дорогим, влияя на маржу.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Пауза по ставке даёт предсказуемость для планирования стоимости новых гарантий и факторинга до конца года.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Тип ставки и условия действующих факторинговых договоров",
+    "График продления банковских гарантий",
+    "Планы нового заёмного финансирования до конца года"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить сроки действия и условия текущих банковских гарантий и факторинговых лимитов, спланировать продления.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Учитывать ставку 14% при оценке стоимости новых обеспечительных инструментов в бюджетах.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.guarantees"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Условия действующих договоров факторинга и гарантий (тип ставки, сроки) неизвестны.",
+     "question": "Привязаны ли ставки по действующим договорам к ключевой ставке?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Прогноз банка о ставке на конец года — прогноз, не факт.",
+     "question": "Каков план потребности в новых гарантиях до конца 2026 года?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_key"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Сохранение ставки на 14% — умеренно нейтральное событие: для компании без кредитов важна стоимость новых гарантий и факторинга; действующие договоры условно не затронуты.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.guarantees",
+     "product.loans",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "product.guarantees",
+     "product.factoring",
+     "product.loans"
+    ],
+    "event_claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e1_1"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:11:24+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3089,
+    "completion_tokens": 925,
+    "reasoning_tokens": 61,
+    "cost_rub": 0.108531,
+    "cost_rub_tariff": 0.031479,
+    "latency_ms": 10491,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3089/925, 0.1085 ₽, 10.5 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "credit_liquidity"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Ключевая ставка сохранена на 14%: условия новых гарантий и факторинга для компании не ухудшатся, но и не облегчатся",
+    "what_happened": [
+     {
+      "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания пользуется банковскими гарантиями и факторингом (F9, F13); ставка влияет на стоимость новых лимитов и финансирования, хотя кредитов в банке нет (F10).",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.factoring",
+      "product.loans"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ставка ЦБ задаёт базу ценообразования новых банковских гарантий и факторингового финансирования; действующие договоры без данных о типе ставки не затронуты.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "При продлении или выпуске новых гарантий (F9) стоимость может остаться повышенной из-за ставки 14%.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.guarantees"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Факторинговое финансирование оборотного капитала (F13) может сохраниться дорогим, влияя на маржу.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.factoring"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Пауза по ставке даёт предсказуемость для планирования стоимости новых гарантий и факторинга до конца года.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.guarantees",
+       "product.factoring"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить сроки действия и условия текущих банковских гарантий и факторинговых лимитов, спланировать продления.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.guarantees",
+       "product.factoring"
+      ],
+      "roles": [
+       "chief_accountant",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Учитывать ставку 14% при оценке стоимости новых обеспечительных инструментов в бюджетах.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.guarantees"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Тип ставки и условия действующих факторинговых договоров",
+     "График продления банковских гарантий",
+     "Планы нового заёмного финансирования до конца года"
+    ],
+    "unknowns": [
+     {
+      "text": "Условия действующих договоров факторинга и гарантий (тип ставки, сроки) неизвестны.",
+      "question": "Привязаны ли ставки по действующим договорам к ключевой ставке?"
+     },
+     {
+      "text": "Прогноз банка о ставке на конец года — прогноз, не факт.",
+      "question": "Каков план потребности в новых гарантиях до конца 2026 года?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_key"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Сохранение ставки на 14% — умеренно нейтральное событие: для компании без кредитов (F10) важна стоимость новых гарантий и факторинга; действующие договоры условно не затронуты.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.loans",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3089/925, 0.1085 ₽, 10.5 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

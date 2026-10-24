@@ -222,7 +222,7 @@ export function SourcesPanel({ evidence, highlight }: { evidence: Evidence[]; hi
   const feats = evidence.filter((e) => e.type === 'company_feature');
   return (
     <section className="sources" aria-labelledby="h-src">
-      <h2 id="h-src" className="sec-title">Источники · {docs.length}</h2>
+      <h2 id="h-src" className="sec-title">Цитаты и источники · {docs.length}</h2>
       <ol className="source-list">
         {docs.map((e, i) => (
           <li key={e.evidence_id} id={`src-${e.evidence_id}`} className={`source${highlight === e.evidence_id ? ' is-highlight' : ''}`}>
@@ -233,6 +233,8 @@ export function SourcesPanel({ evidence, highlight }: { evidence: Evidence[]; hi
                 <span className={`src-type src-type--${e.type}`}>{TYPE_LABEL[e.type]}{e.type === 'bank_research' && e.is_synthetic ? ', демо-цитата' : ''}</span>
                 {' · '}{e.publisher}{e.date ? ` · ${fmtDate(e.date)}` : ''}{e.doc ? ` · ${e.doc}${e.page ? `, стр. ${e.page}` : ''}` : ''}
               </p>
+              {e.url && <a href={e.url} target="_blank" rel="noreferrer">Исходная публикация</a>}
+              {e.revision_id && <p className="small muted">Редакция: {e.revision_id} · {e.field} [{e.start}, {e.end})</p>}
               <blockquote className="source__quote">{e.quote}</blockquote>
             </div>
           </li>

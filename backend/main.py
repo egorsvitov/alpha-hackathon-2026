@@ -1,5 +1,8 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from app.full_cycle.storage import PipelineError
+from app.full_cycle.api import MESSAGES
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.endpoints import api_router
@@ -41,3 +44,10 @@ async def root():
         "service": settings.PROJECT_NAME,
         "docs": "/docs",
     }
+
+
+@app.exception_handler(PipelineError)
+async def pipeline_error(request: Request, exc: PipelineError):
+    status = 404 if exc.code in ("company_profile_missing", "card_not_found") else 409
+    return JSONResponse(status_code=status, content={"detail":{"code":exc.code,
+        "message":MESSAGES.get(exc.code,"Данные полного цикла недоступны: " + exc.code)}})

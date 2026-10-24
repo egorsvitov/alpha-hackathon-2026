@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "Fragment": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "article_id": {
+          "title": "Article Id",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "title",
+            "text"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "start": {
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "article_id",
+        "field",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "Fragment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "input_hash": {
+      "title": "Input Hash",
+      "type": "string"
+    },
+    "fragments": {
+      "items": {
+        "$ref": "#/$defs/Fragment"
+      },
+      "title": "Fragments",
+      "type": "array"
+    },
+    "batches": {
+      "items": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Batches",
+      "type": "array"
+    },
+    "blocked": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocked",
+      "type": "array"
+    }
+  },
+  "required": [
+    "operation_id",
+    "input_hash",
+    "fragments",
+    "batches",
+    "blocked"
+  ],
+  "title": "MergePlan",
+  "type": "object"
+}

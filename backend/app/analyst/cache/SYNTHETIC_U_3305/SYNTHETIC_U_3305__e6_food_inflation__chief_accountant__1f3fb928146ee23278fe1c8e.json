@@ -1,0 +1,477 @@
+{
+ "key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:13:08+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "cluster_id": "cluster:e6_food_inflation",
+   "event_refs": [
+    {
+     "event_id": "e6_food_inflation",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.35,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.03,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "costs",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Продуктовая инфляция в августе опережает общий ИПЦ — для бухгалтера это рост закупочных цен, переоценка резервов и контроль сроков расчётов",
+   "what_happened": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+   "facts": [
+    {
+     "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+     "kind": "fact",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — розничный торговец продуктами, поэтому опережающий рост продовольственных цен напрямую затрагивает её закупочные издержки и ценообразование.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Рост закупочных цен у поставщиков может повышать себестоимость; при ограниченной индексации розничных цен маржа может сжиматься, при успешной индексации — выручка растёт.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Рост закупочных цен у поставщиков (в т.ч. возможного контрагента «Агрохолдинг Север», ) может увеличить себестоимость и потребовать пересмотра резервов и оценки обязательств.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "При росте цен может снизиться спрос и оборачиваемость запасов, что потребует теста на обесценение запасов в отчётности.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Рост цен на продукты может увеличить выручку в номинальном выражении при сохранении объёмов продаж.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Динамика закупочных цен по ключевым поставщикам",
+    "Оборачиваемость и оценка запасов",
+    "Условия индексации цен в договорах поставки"
+   ],
+   "next_steps": [
+    {
+     "text": "Запросить у закупок данные о динамике закупочных цен поставщиков за август–сентябрь для учёта и планирования резервов.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Проверить корректность оценки запасов и при необходимости провести тест на обесценение с учётом роста себестоимости.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Уточнить условия договоров с поставщиками (индексация цен, сроки оплаты) для корректного признания обязательств.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "counterparty.1",
+      "counterparty.2"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Значения индексов в новости не приведены; масштаб опережения неизвестен.",
+     "question": "Каков точный темп роста продовольственных цен в августе 2026?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Структура закупок и договоры с поставщиками не подтверждены.",
+     "question": "Какая доля закупок приходится на «Агрохолдинг Север» и есть ли в договорах индексация цен?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Для главного бухгалтера событие означает контроль закупочных цен, оценку запасов и резервов; влияние заметное, но косвенное и требует проверки фактической динамики цен у поставщиков.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "counterparty.1",
+     "counterparty.2"
+    ],
+    "event_claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e6_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e6_food_inflation@1#bdcde2a04ba5|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:13:08+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2695,
+    "completion_tokens": 847,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.097031,
+    "cost_rub_tariff": 0.028143,
+    "latency_ms": 10597,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2695/847, 0.0970 ₽, 10.6 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "costs",
+     "demand_revenue"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Продуктовая инфляция в августе опережает общий ИПЦ — для бухгалтера это рост закупочных цен, переоценка резервов и контроль сроков расчётов",
+    "what_happened": [
+     {
+      "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+      "kind": "fact",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — розничный торговец продуктами (F1, F2), поэтому опережающий рост продовольственных цен напрямую затрагивает её закупочные издержки и ценообразование.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Рост закупочных цен у поставщиков может повышать себестоимость; при ограниченной индексации розничных цен маржа может сжиматься, при успешной индексации — выручка растёт.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Рост закупочных цен у поставщиков (в т.ч. возможного контрагента «Агрохолдинг Север», F16) может увеличить себестоимость и потребовать пересмотра резервов и оценки обязательств.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "При росте цен может снизиться спрос и оборачиваемость запасов, что потребует теста на обесценение запасов в отчётности.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "company.industry"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Рост цен на продукты может увеличить выручку в номинальном выражении при сохранении объёмов продаж.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "company.industry"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Запросить у закупок данные о динамике закупочных цен поставщиков за август–сентябрь для учёта и планирования резервов.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Проверить корректность оценки запасов и при необходимости провести тест на обесценение с учётом роста себестоимости.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Уточнить условия договоров с поставщиками (индексация цен, сроки оплаты) для корректного признания обязательств.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1",
+       "counterparty.2"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Динамика закупочных цен по ключевым поставщикам",
+     "Оборачиваемость и оценка запасов",
+     "Условия индексации цен в договорах поставки"
+    ],
+    "unknowns": [
+     {
+      "text": "Значения индексов в новости не приведены; масштаб опережения неизвестен.",
+      "question": "Каков точный темп роста продовольственных цен в августе 2026?"
+     },
+     {
+      "text": "Структура закупок и договоры с поставщиками не подтверждены.",
+      "question": "Какая доля закупок приходится на «Агрохолдинг Север» и есть ли в договорах индексация цен?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Для главного бухгалтера событие означает контроль закупочных цен, оценку запасов и резервов; влияние заметное, но косвенное и требует проверки фактической динамики цен у поставщиков.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 2695/847, 0.0970 ₽, 10.6 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

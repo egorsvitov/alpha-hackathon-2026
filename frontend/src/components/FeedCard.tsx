@@ -5,13 +5,15 @@ import { href } from '../router';
 import { TopicArt } from './Illustrations';
 import { Pill, SignificanceBadge } from './ui';
 
-export const fmtDate = (iso: string) => {
+export const fmtDate = (iso: string | null) => {
+  if (!iso) return 'Дата неизвестна';
   const [y, m, d] = iso.slice(0, 10).split('-');
   return `${d}.${m}.${y}`;
 };
 
 const MONTHS = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-export const fmtShort = (iso: string) => {
+export const fmtShort = (iso: string | null) => {
+  if (!iso) return 'Дата неизвестна';
   const [, m, d] = iso.slice(0, 10).split('-');
   return `${Number(d)} ${MONTHS[Number(m) - 1]}`;
 };
@@ -41,9 +43,10 @@ export function FeedCard({ item, read, lead, onHide }: { item: FeedItem; read: b
         <span className="topic-card__why-label">Вам:</span> {item.why_short.replace(/^Связано:\s*/, '')}
       </p>
       <footer className="topic-card__foot">
-        <Pill>{event.sources_count} {plural(event.sources_count, 'источник', 'источника', 'источников')}</Pill>
+        <Pill>{event.sources_count} {plural(event.sources_count, 'публикация', 'публикации', 'публикаций')}</Pill>
         {item.has_bank_position && linked && <Pill tone="dark"><Landmark size={13} aria-hidden /> позиция банка</Pill>}
         {read && <Pill>просмотрено</Pill>}
+        {event.processing_status === 'merge_fallback' && <Pill tone="warn">Без merge · возможны повторы</Pill>}
         {event.user_uploaded && <Pill tone="info">загружено вами</Pill>}
         {event.is_synthetic && !event.user_uploaded && <Pill tone="warn">демо-данные</Pill>}
         <span className="topic-card__votes">

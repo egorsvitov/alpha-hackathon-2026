@@ -6,12 +6,16 @@ name: alfa-news
 services:
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: backend/Dockerfile
     image: alfa-news-backend:local
     restart: unless-stopped
     environment:
       # Не секреты. Ключи LLM и прочие секреты сюда не пишем, они читаются из .env (см. env_file).
-      MOCK_MODE: ${MOCK_MODE:-true}
+      MOCK_MODE: ${MOCK_MODE:-false}
+      FULL_CYCLE_MODE: ${FULL_CYCLE_MODE:-persisted}
+      FULL_CYCLE_DATA: /data/full-cycle
+      FULL_CYCLE_PROFILES: /data/full-cycle/companies
     env_file:
       - path: .env
         required: false
@@ -43,7 +47,7 @@ services:
         condition: service_healthy
     environment:
       # mock: данные из браузера, backend не нужен. http: фронт ходит в backend через /api/ (см. README).
-      APP_API_MODE: ${APP_API_MODE:-mock}
+      APP_API_MODE: ${APP_API_MODE:-http}
       APP_API_URL: ${APP_API_URL:-}
       BACKEND_URL: http://backend:8000
     ports:
@@ -70,10 +74,10 @@ services:
     volumes:
       - news-data:/data
     healthcheck:
-      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      test: ["CMD", "python", "news/healthcheck.py"]
       interval: 30s
       timeout: 5s
-      start_period: 5s
+      start_period: 120s
       retries: 3
     read_only: true
     tmpfs:

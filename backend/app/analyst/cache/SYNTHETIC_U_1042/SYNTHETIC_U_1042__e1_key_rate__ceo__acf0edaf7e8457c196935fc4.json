@@ -1,0 +1,484 @@
+{
+ "key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|ceo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:08:35+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "cluster_id": "cluster:e1_key_rate",
+   "event_refs": [
+    {
+     "event_id": "e1_key_rate",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.38,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.06,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "credit_liquidity",
+    "costs"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ставка ЦБ сохранена на 14%: стоимость нового финансирования и лизинга для металлурга останется высокой",
+   "what_happened": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+   "facts": [
+    {
+     "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+     "kind": "fact",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания имеет кредитные продукты и лизинг в банке, поэтому уровень ключевой ставки определяет стоимость нового заёмного финансирования и обновления основных средств.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ключевая ставка задаёт базовую стоимость нового кредитования и лизинга; сохранение 14% удерживает цену заёмного капитала и доходность депозитов на высоком уровне.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing",
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Новые кредиты и лизинг останутся дорогими, что может сдерживать инвестиционные программы и обновление оборудования.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Если действующие договоры с плавающей ставкой, их обслуживание может оставаться дорогим; условия неизвестны.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При паузе в цикле ставки возможно смягчение к декабрю — можно планировать рефинансирование и новые сделки на более выгодных условиях.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Тип ставки по действующим кредитам (фиксированная/плавающая)",
+    "Планируемые капвложения и лизинговые сделки до конца года"
+   ],
+   "next_steps": [
+    {
+     "text": "Спланировать график новых заимствований и лизинговых сделок с учётом ожидаемой паузы ставки до декабря.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Проверить условия действующих кредитных договоров (тип ставки, сроки) и оценить чувствительность к ставке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Рассмотреть размещение свободной ликвидности на депозит при высоких ставках (сейчас депозитов нет).",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Условия действующих кредитных договоров неизвестны.",
+     "question": "Какой тип ставки и объём долга по действующим кредитам?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Прогноз ЦБ по ставке на конец года — из аналитики банка, не подтверждён ЦБ.",
+     "question": "Подтверждает ли ЦБ ожидания смягчения в декабре?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_key"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Ставка 14% сохраняется: новое кредитование и лизинг останутся дорогими, действующие договоры затронуты только при плавающей ставке. Целесообразно проверить долговую позицию и спланировать заимствования с учётом возможного смягчения к декабрю.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "product.loans",
+     "product.leasing",
+     "product.deposits"
+    ],
+    "event_claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e1_1"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "inference_status": "supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:08:35+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3197,
+    "completion_tokens": 943,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.111485,
+    "cost_rub_tariff": 0.032336,
+    "latency_ms": 10705,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3197/943, 0.1115 ₽, 10.7 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "credit_liquidity",
+     "costs"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ставка ЦБ сохранена на 14%: стоимость нового финансирования и лизинга для металлурга останется высокой",
+    "what_happened": [
+     {
+      "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания имеет кредитные продукты и лизинг в банке (F11, F12), поэтому уровень ключевой ставки определяет стоимость нового заёмного финансирования и обновления основных средств.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ключевая ставка задаёт базовую стоимость нового кредитования и лизинга; сохранение 14% удерживает цену заёмного капитала и доходность депозитов на высоком уровне.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing",
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Новые кредиты и лизинг останутся дорогими, что может сдерживать инвестиционные программы и обновление оборудования.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Если действующие договоры с плавающей ставкой, их обслуживание может оставаться дорогим; условия неизвестны.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При паузе в цикле ставки возможно смягчение к декабрю — можно планировать рефинансирование и новые сделки на более выгодных условиях.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить условия действующих кредитных договоров (тип ставки, сроки) и оценить чувствительность к ставке.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Спланировать график новых заимствований и лизинговых сделок с учётом ожидаемой паузы ставки до декабря.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": [
+       "ceo",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Рассмотреть размещение свободной ликвидности на депозит при высоких ставках (сейчас депозитов нет).",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Тип ставки по действующим кредитам (фиксированная/плавающая)",
+     "Планируемые капвложения и лизинговые сделки до конца года"
+    ],
+    "unknowns": [
+     {
+      "text": "Условия действующих кредитных договоров неизвестны.",
+      "question": "Какой тип ставки и объём долга по действующим кредитам?"
+     },
+     {
+      "text": "Прогноз ЦБ по ставке на конец года — из аналитики банка, не подтверждён ЦБ.",
+      "question": "Подтверждает ли ЦБ ожидания смягчения в декабре?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_key"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Ставка 14% сохраняется: новое кредитование и лизинг останутся дорогими, действующие договоры затронуты только при плавающей ставке. Целесообразно проверить долговую позицию и спланировать заимствования с учётом возможного смягчения к декабрю.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "roles": []
+    },
+    "inference_status": "supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3197/943, 0.1115 ₽, 10.7 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

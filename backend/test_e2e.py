@@ -1,4 +1,5 @@
 import asyncio
+import os
 import sys
 from pathlib import Path
 
@@ -39,7 +40,9 @@ async def run_e2e_tests() -> None:
             )
             assert r.status_code == 200, f"Ошибка /news-feed для {role}: {r.status_code}"
             feed = r.json()
-            assert len(feed) >= 6, f"Ожидалось не менее 6 событий в ленте, получено {len(feed)}"
+            # template показывает все события; cached/llm скрывают decision=exclude (ANALYST_FEED_HIDE_EXCLUDED), поэтому порог ниже
+            min_feed = 6 if os.environ.get("ANALYST_MODE", "template").strip().lower() == "template" else 3
+            assert len(feed) >= min_feed, f"Ожидалось не менее {min_feed} событий в ленте, получено {len(feed)}"
             top_event = feed[0]
             print(
                 f"[OK] Лента для роли {role}: {len(feed)} событий. Топ: «{top_event['event']['title']}» (score: {top_event['relevance']['score']})"

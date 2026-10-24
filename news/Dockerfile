@@ -31,4 +31,4 @@ USER collector
 
 # По умолчанию крутим расписание (каждый час). Для разового прохода:
 #   docker run ... <image> python news/scheduler.py --once
-CMD ["python", "news/scheduler.py", "--every", "3600"]
+CMD ["python", "news/scheduler.py"]

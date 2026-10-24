@@ -1,0 +1,233 @@
+{
+  "schema_version": "retrieval-candidate-batch.v1",
+  "request_id": "synthetic-request",
+  "company_id": "SYNTHETIC",
+  "profile_version": "profile-1",
+  "interest_set_version": "interests-1",
+  "corpus_id": "synthetic-corpus",
+  "index_generation": 1,
+  "encoder_fingerprint": "synthetic-encoder",
+  "as_of": "2026-10-24T00:00:00+03:00",
+  "requested_k": 20,
+  "status": "ready",
+  "stop_reason": "candidate_limit",
+  "trace_id": "synthetic-trace",
+  "candidates": [
+    {
+      "item": {
+        "item_id": "raw",
+        "item_version": "1",
+        "kind": "article",
+        "title": "Синтетическая публикация raw",
+        "text": "СИНТЕТИКА: опубликован проект изменения тарифа на электроэнергию.",
+        "embedding_text": "СИНТЕТИКА: опубликован проект изменения тарифа на электроэнергию.",
+        "source_revision_ids": [
+          "raw"
+        ],
+        "derived_from": {},
+        "was_merged": false,
+        "publication_count": 1,
+        "source_count": 0
+      },
+      "selection_score": 0.8,
+      "embedding_score": 0.8,
+      "score_origin": "cosine",
+      "best_interest_id": "energy",
+      "interest_scores": {
+        "energy": 0.8
+      },
+      "group_ids": [
+        "raw-group"
+      ],
+      "limitations": []
+    },
+    {
+      "item": {
+        "item_id": "synthetic-event-tariff",
+        "item_version": "3c62e86862744cb41c89b8c32d2757bfdf46ecd4a7c2d6fd73c33e9bd13061fa",
+        "kind": "event",
+        "title": "Синтетическое объединённое событие",
+        "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+        "embedding_text": "Синтетическое объединённое событие\n\nПроизводный синтетический пересказ: опубликовано изменение условий.",
+        "source_revision_ids": [
+          "second",
+          "split"
+        ],
+        "was_merged": true,
+        "publication_count": 2,
+        "source_count": 1,
+        "derived_from": {
+          "event": {
+            "id": "synthetic-event-tariff",
+            "title": "Синтетическое объединённое событие",
+            "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+            "embedding_text": "Синтетическое объединённое событие\n\nПроизводный синтетический пересказ: опубликовано изменение условий.",
+            "article_ids": [
+              "second",
+              "split"
+            ],
+            "fragments": [
+              {
+                "id": "c3c3ec9de92013683c1aa57eaea01c86a5125990600f9781c91a2306eda3bf5e",
+                "article_id": "split",
+                "field": "text",
+                "start": 0,
+                "end": 38,
+                "text": "СИНТЕТИКА: объявлено изменение тарифа."
+              },
+              {
+                "id": "4a399911973bd610c3d0c3993a6d31776562c5c7bb93db223963b4107b8618fe",
+                "article_id": "second",
+                "field": "text",
+                "start": 0,
+                "end": 55,
+                "text": "СИНТЕТИКА: второе издание сообщает об изменении тарифа."
+              }
+            ],
+            "paragraphs": [
+              {
+                "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+                "fragment_ids": [
+                  "c3c3ec9de92013683c1aa57eaea01c86a5125990600f9781c91a2306eda3bf5e",
+                  "4a399911973bd610c3d0c3993a6d31776562c5c7bb93db223963b4107b8618fe"
+                ]
+              }
+            ],
+            "disagreements": [],
+            "was_merged": true,
+            "publication_count": 2,
+            "source_count": 1
+          },
+          "cluster_id": "reading-group",
+          "cluster_revision": "1",
+          "operation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "result_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "configuration_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "selection_score": 0.8,
+      "embedding_score": 0.8,
+      "score_origin": "cosine",
+      "best_interest_id": "energy",
+      "interest_scores": {
+        "energy": 0.8
+      },
+      "group_ids": [],
+      "limitations": []
+    },
+    {
+      "item": {
+        "item_id": "synthetic-event-duty",
+        "item_version": "3e7f4f48832ef844a59df5ed5f60ee275efbec0fdf7729cfb851e38a805cd01e",
+        "kind": "event",
+        "title": "Синтетическое объединённое событие",
+        "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+        "embedding_text": "Синтетическое объединённое событие\n\nПроизводный синтетический пересказ: опубликовано изменение условий.",
+        "source_revision_ids": [
+          "split"
+        ],
+        "was_merged": false,
+        "publication_count": 1,
+        "source_count": 1,
+        "derived_from": {
+          "event": {
+            "id": "synthetic-event-duty",
+            "title": "Синтетическое объединённое событие",
+            "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+            "embedding_text": "Синтетическое объединённое событие\n\nПроизводный синтетический пересказ: опубликовано изменение условий.",
+            "article_ids": [
+              "split"
+            ],
+            "fragments": [
+              {
+                "id": "1af38b24c6a9be89ff763cb2e81d4a34e6f2349704135edfb1eb418b8e29f4a5",
+                "article_id": "split",
+                "field": "text",
+                "start": 38,
+                "end": 75,
+                "text": " СИНТЕТИКА: объявлена отмена пошлины."
+              }
+            ],
+            "paragraphs": [
+              {
+                "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+                "fragment_ids": [
+                  "1af38b24c6a9be89ff763cb2e81d4a34e6f2349704135edfb1eb418b8e29f4a5"
+                ]
+              }
+            ],
+            "disagreements": [],
+            "was_merged": false,
+            "publication_count": 1,
+            "source_count": 1
+          },
+          "cluster_id": "reading-group",
+          "cluster_revision": "1",
+          "operation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "result_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "configuration_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "selection_score": 0.8,
+      "embedding_score": 0.8,
+      "score_origin": "cosine",
+      "best_interest_id": "energy",
+      "interest_scores": {
+        "energy": 0.8
+      },
+      "group_ids": [],
+      "limitations": []
+    }
+  ],
+  "sources": [
+    {
+      "revision_id": "raw",
+      "article_id": "synthetic:raw",
+      "text": "СИНТЕТИКА: опубликован проект изменения тарифа на электроэнергию.",
+      "text_sha256": "8a87dd704e1317a2fedd4acb515b6cb16e5d30b0e4dadc96188277b1a9853933",
+      "title": "Синтетическая публикация raw",
+      "title_origin": "source",
+      "source": "SYNTHETIC Publisher",
+      "published_at": "2026-10-23T09:00:00+00:00",
+      "publication_precision": "timestamp",
+      "observed_at": null,
+      "url": "https://example.org/synthetic/raw",
+      "language": "ru",
+      "provenance": []
+    },
+    {
+      "revision_id": "split",
+      "article_id": "synthetic:split",
+      "text": "СИНТЕТИКА: объявлено изменение тарифа. СИНТЕТИКА: объявлена отмена пошлины.",
+      "text_sha256": "ac11ea75d00a8d30d224811f1a7ac413e0fe335c7f6c7feda112993c06ec2716",
+      "title": "Синтетическая публикация split",
+      "title_origin": "source",
+      "source": "SYNTHETIC Publisher",
+      "published_at": "2026-10-23T09:00:00+00:00",
+      "publication_precision": "timestamp",
+      "observed_at": null,
+      "url": "https://example.org/synthetic/split",
+      "language": "ru",
+      "provenance": []
+    },
+    {
+      "revision_id": "second",
+      "article_id": "synthetic:second",
+      "text": "СИНТЕТИКА: второе издание сообщает об изменении тарифа.",
+      "text_sha256": "a6f0878db4c84fb2b9899aa7e793079ff6c752d97e81d3d25dc10eb386977e4d",
+      "title": "Синтетическая публикация second",
+      "title_origin": "source",
+      "source": "SYNTHETIC Publisher",
+      "published_at": "2026-10-23T09:00:00+00:00",
+      "publication_precision": "timestamp",
+      "observed_at": null,
+      "url": "https://example.org/synthetic/second",
+      "language": "ru",
+      "provenance": []
+    }
+  ],
+  "deferred": [],
+  "limitations": [
+    "Сходство при отборе не является бизнес-значимостью."
+  ]
+}

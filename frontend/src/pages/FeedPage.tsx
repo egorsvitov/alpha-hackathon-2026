@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { EyeOff, Info, Newspaper, Undo2, Upload } from 'lucide-react';
 import type { FeedItem, SignificanceLevel } from '../types';
-import { DEMO_TODAY } from '../api';
+import { api, DEMO_TODAY } from '../api';
 import { navigate, href } from '../router';
 import { useApp } from '../store';
 import { profileChips, roleLabel } from '../data/companies';
@@ -28,14 +28,14 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 const DAY = 86_400_000;
-const ageDays = (iso: string) => Math.round((Date.parse(DEMO_TODAY) - Date.parse(iso)) / DAY);
+const ageDays = (iso: string | null) => iso ? Math.round(((api.mode === 'mock' ? Date.parse(DEMO_TODAY) : Date.now()) - Date.parse(iso)) / DAY) : Infinity;
 
 const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-const monthKey = (iso: string) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}`;
+const monthKey = (iso: string | null) => iso ? `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}` : 'Дата неизвестна';
 
 export function FeedPage() {
   const { company, role, demo, hidden, hide, unhide } = useApp();
-  const { items, loading, error, reload } = useFeed();
+  const { items, processing, loading, error, reload } = useFeed();
   const [tab, setTab] = useState<Tab>('feed');
   const [filter, setFilter] = useState<Filter>('all');
   const [upload, setUpload] = useState(false);
@@ -87,6 +87,13 @@ export function FeedPage() {
           ))}
         </div>
 
+        {processing && processing.status !== 'demo' && (
+          <div className="note note--info" role="status"><span>
+            {processing.message} {Object.entries(processing.counts ?? {}).map(([status, count]) => `${status}: ${count}`).join(' · ')}
+            {processing.error_code && ` Код: ${processing.error_code}`}
+            {processing.ingestion?.status === 'failed' && ` Обновление индекса не удалось: ${processing.ingestion.code}.`}
+          </span></div>
+        )}
         {loading && <FeedSkeleton />}
         {error && <ErrorState message={error} onRetry={reload} />}
 
@@ -102,8 +109,8 @@ export function FeedPage() {
             {shown.length === 0 ? (
               <StateBlock
                 icon={<Newspaper size={24} aria-hidden />}
-                title={`Значимых событий для ${company?.name ?? 'компании'} за период нет`}
-                text="Попробуйте сбросить фильтр, посмотрите историю или загрузите свою новость."
+                title={processing && !['ready', 'demo'].includes(processing.status) ? 'Обработка новостей не завершена' : `Значимых событий для ${company?.name ?? 'компании'} за период нет`}
+                text={processing && !['ready', 'demo'].includes(processing.status) ? processing.message ?? 'Проверьте статус задания.' : 'Попробуйте сбросить фильтр или посмотрите историю.'}
                 action={<Button variant="secondary" onClick={() => setFilter('all')}>Сбросить фильтры</Button>}
               />
             ) : (
@@ -113,7 +120,7 @@ export function FeedPage() {
                 ))}
               </div>
             )}
-            <p className="small muted feed-note">{shown.length} {plural(shown.length, 'событие', 'события', 'событий')}. Новости и данные демо — синтетические.</p>
+            <p className="small muted feed-note">{shown.length} {plural(shown.length, 'событие', 'события', 'событий')}. {api.mode === 'mock' ? 'Новости и данные демо — синтетические.' : 'Сохранённые результаты анализа. Полнота и источники указаны в карточке.'}</p>
           </>
         )}
 
@@ -208,7 +215,7 @@ function WeekDigest({ items, companyName }: { items: FeedItem[]; companyName: st
 
 function History({ items, hidden, onUnhide }: { items: FeedItem[]; hidden: string[]; onUnhide(id: string): void }) {
   const groups = useMemo(() => {
-    const sorted = [...items].sort((a, b) => b.event.date.localeCompare(a.event.date));
+    const sorted = [...items].sort((a, b) => (b.event.date ?? '').localeCompare(a.event.date ?? ''));
     const m = new Map<string, FeedItem[]>();
     sorted.forEach((i) => {
       const k = monthKey(i.event.date);

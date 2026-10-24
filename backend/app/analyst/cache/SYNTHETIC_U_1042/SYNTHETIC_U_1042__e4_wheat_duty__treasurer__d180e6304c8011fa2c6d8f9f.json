@@ -1,0 +1,160 @@
+{
+ "key": "SYNTHETIC_U_1042|e4_wheat_duty@1#c0801416248a|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e4_wheat_duty@1#c0801416248a|treasurer|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:09:32+03:00",
+ "record": {
+  "insight": null,
+  "excluded": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "cluster_id": "cluster:e4_wheat_duty",
+   "event_refs": [
+    {
+     "event_id": "e4_wheat_duty",
+     "event_version": 1
+    }
+   ],
+   "reason_code": "not_relevant",
+   "reason": "Событие касается экспортной пошлины на пшеницу; компания — производитель чугуна, стали и ферросплавов (F1), связи с зерновым рынком в признаках нет. Совпадение по факту ВЭД (F16, F17, Казахстан) — лишь тематическое, без товарной связи.",
+   "headline": "Повышение экспортной пошлины на пшеницу не затрагивает бизнес металлургической компании",
+   "facts": [
+    {
+     "text": "Правительство повысило экспортную пошлину на пшеницу.",
+     "kind": "fact",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ]
+  },
+  "run": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e4_wheat_duty@1#c0801416248a|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:09:32+03:00",
+   "qa_status": "failed",
+   "qa_issues": [
+    {
+     "code": "number_not_in_data",
+     "severity": "error",
+     "message": "Числа не из данных: 19.1",
+     "path": "facts[0]"
+    },
+    {
+     "code": "facts_restored",
+     "severity": "warn",
+     "message": "Факты взяты дословно из утверждений источника",
+     "path": "facts"
+    }
+   ],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3111,
+    "completion_tokens": 300,
+    "reasoning_tokens": 13,
+    "cost_rub": 0.072285,
+    "cost_rub_tariff": 0.020966,
+    "latency_ms": 5369,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 3111/300, 0.0723 ₽, 5.4 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: failed; ошибок 1, замечаний 1 (facts_restored, number_not_in_data)",
+     "status": "warn"
+    }
+   ],
+   "draft": {
+    "decision": "exclude",
+    "exclude_reason": "Событие касается экспортной пошлины на пшеницу; компания — производитель чугуна, стали и ферросплавов (F1), связи с зерновым рынком в признаках нет. Совпадение по факту ВЭД (F16, F17, Казахстан) — лишь тематическое, без товарной связи.",
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Повышение экспортной пошлины на пшеницу не затрагивает бизнес металлургической компании",
+    "what_happened": [
+     {
+      "text": "Правительство повысило экспортную пошлину на пшеницу (утверждено 19.10.2026); новый размер и дата вступления в силу не раскрыты.",
+      "kind": "fact",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "risks": [],
+    "opportunities": [],
+    "next_steps": [],
+    "recommended_checks": [],
+    "unknowns": [],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "inference_status": "insufficient_evidence"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 3111/300, 0.0723 ₽, 5.4 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

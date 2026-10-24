@@ -1,0 +1,2008 @@
+{
+ "generated_at": "2026-10-23T08:27:13+03:00",
+ "role": "cfo",
+ "model": "z-ai/glm-5.3-flash",
+ "prompt_version": "analyst-v1.2",
+ "memory": true,
+ "source": "ImpactCandidateBatch v1, 8 компаний × 6 кандидатов (пакеты ретривера вне репозитория)",
+ "summary": {
+  "candidates": 48,
+  "decisions": {
+   "exclude": 38,
+   "watch": 10
+  },
+  "share": {
+   "exclude": 0.792,
+   "watch": 0.208
+  },
+  "analyzed_by_llm": 47,
+  "excluded_by_rules": 1,
+  "valid_json_share": 1.0,
+  "valid_json_first_try_share": 1.0,
+  "statement_ref_coverage": 1.0,
+  "insights_with_feature_refs": 10,
+  "qa_rules_triggered": {
+   "facts_restored": 2,
+   "number_not_in_data": 2
+  },
+  "qa_status": {
+   "passed": 45,
+   "skipped": 1,
+   "failed": 2
+  },
+  "changes_since_previous": {
+   "new": 10
+  },
+  "prompt_tokens": 167854,
+  "completion_tokens": 15785,
+  "cost_rub_usage": 3.8365,
+  "cost_rub_per_llm_candidate": 0.0816,
+  "avg_latency_s": 5.6
+ },
+ "run_cost": {
+  "session_spent_rub": 3.8365,
+  "team_spend_before_rub": 4.398394456956503,
+  "team_spend_after_rub": 7.729472833546754,
+  "wall_s": 118.1
+ },
+ "candidates": [
+  {
+   "company_id": "U_100044",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Банкротство зарубежного фотобанка не связано со строительной деятельностью компании: нет механизма влияния на её бизнес, поставщиков или финансирование.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3565,
+   "completion_tokens": 251,
+   "cost_rub": 0.07659,
+   "latency_ms": 4652,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100044",
+   "candidate_id": "c7686516ad8c7e3baed1f8812bfe3214b55befebf5241e4842bf057be8e60c4e",
+   "event_id": "experiment:12eb21b082d59223d306bccf",
+   "title": "На форуме ТПП обсудили практику борьбы со схемами налоговой оптимизации",
+   "decision": "watch",
+   "reason": "Компания работает в строительстве, где цепочки субподряда традиционно связаны с рисками НДС-вычетов; однако событие — обсуждение на форуме, без новых норм или мер в отношении компании.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:12eb21b082d59223d306bccf:claim"
+    ],
+    "evidence_ids": [
+     "experiment:12eb21b082d59223d306bccf:evidence"
+    ],
+    "feature_ids": [
+     "U_100044:/okved/code",
+     "U_100044:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3561,
+   "completion_tokens": 883,
+   "cost_rub": 0.11318,
+   "latency_ms": 9910,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100044",
+   "candidate_id": "e439378fa9d48096d275c791a0028d789396f3f82d1f8ce2dfa0f19bbf55425d",
+   "event_id": "experiment:7a502e035b8c88e039bec680",
+   "title": "Минфин борется с агрессивными заявками на рынке ОФЗ",
+   "decision": "watch",
+   "reason": "Компания — строительный бизнес с РКО в Альфа-Банке; кредитные продукты в банке не использует, поэтому ситуация на рынке ОФЗ и ожидания по ключевой ставке могут влиять лишь на условия потенциального нового финансирования.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 6,
+   "statements_with_refs": 6,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 3
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:7a502e035b8c88e039bec680:claim"
+    ],
+    "evidence_ids": [
+     "experiment:7a502e035b8c88e039bec680:evidence"
+    ],
+    "feature_ids": [
+     "U_100044:/okved/name",
+     "U_100044:/products/loan",
+     "U_100044:/products/rko"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3564,
+   "completion_tokens": 647,
+   "cost_rub": 0.09955,
+   "latency_ms": 8591,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100044",
+   "candidate_id": "30cb3b90aa7febb0dcf5765ef74f9246d85648dc496b082a7a5a44c83ccce183",
+   "event_id": "experiment:cfac2b83843249fb950202dd",
+   "title": "Аэропорт Калуги приостановил работу",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: приостановка работы аэропорта Калуги не связана с признаками компании — строительной компании из Челябинской области без ВЭД и без данных о зависимости от этого аэропорта.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:cfac2b83843249fb950202dd:claim"
+    ],
+    "evidence_ids": [
+     "experiment:cfac2b83843249fb950202dd:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3517,
+   "completion_tokens": 236,
+   "cost_rub": 0.07489,
+   "latency_ms": 4159,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100044",
+   "candidate_id": "7c24b92208b95c8bc15137d6fb06775c69463afe085799c1bbd2d02d85275d34",
+   "event_id": "experiment:4f0752f2f2a07cf74db69516",
+   "title": "Гол Батракова помог \"Галатасараю\" одержать первую в сезоне победу в ЛЧ",
+   "decision": "exclude",
+   "reason_code": "unreadable_source",
+   "reason": "Текст источника повреждён (ошибка кодировки): утверждения нечитаемы, по одному заголовку выводы не делаем",
+   "ref_counts": {
+    "claim_ids": 0,
+    "evidence_ids": 0,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [],
+    "evidence_ids": [],
+    "feature_ids": []
+   },
+   "qa_status": "skipped",
+   "qa_codes": [],
+   "generated_by": "rules",
+   "model": null,
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "cost_rub": 0.0,
+   "latency_ms": 0,
+   "llm_calls": 0,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100044",
+   "candidate_id": "97f2f595ebff3fb73a25928921a03cbf8f941ebf114458e781d0fdafb1604a43",
+   "event_id": "experiment:baee1a47314ab1ebeeacc5c4",
+   "title": "Эрдоган созвонился с Алиевым",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: телефонный разговор лидеров Турции и Азербайджана о двусторонних отношениях не затрагивает строительный бизнес компании без ВЭД и связей с этими странами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:baee1a47314ab1ebeeacc5c4:claim"
+    ],
+    "evidence_ids": [
+     "experiment:baee1a47314ab1ebeeacc5c4:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3497,
+   "completion_tokens": 250,
+   "cost_rub": 0.07535,
+   "latency_ms": 4494,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100073",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Банкротство зарубежного фотобанка не связано с оптовой торговлей стройматериалами компании — нет механизма влияния на её бизнес.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3614,
+   "completion_tokens": 240,
+   "cost_rub": 0.07681,
+   "latency_ms": 4750,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100073",
+   "candidate_id": "9209d527620fa5e46000962717fcb941527a47a0555c04669e1c712ad798ef95",
+   "event_id": "experiment:e724b83dfe273ef0798423e7",
+   "title": "Хинштейн рассказал об ударе ВСУ по железнодорожному локомотиву в Курской области",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Военное происшествие в Курской области не связано с бизнесом компании: признаков железнодорожной логистики, площадок или контрагентов в регионе нет, совпадение региона и темы ВЭД — не механизм влияния.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:e724b83dfe273ef0798423e7:claim"
+    ],
+    "evidence_ids": [
+     "experiment:e724b83dfe273ef0798423e7:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3611,
+   "completion_tokens": 262,
+   "cost_rub": 0.07803,
+   "latency_ms": 4666,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100073",
+   "candidate_id": "c7686516ad8c7e3baed1f8812bfe3214b55befebf5241e4842bf057be8e60c4e",
+   "event_id": "experiment:12eb21b082d59223d306bccf",
+   "title": "На форуме ТПП обсудили практику борьбы со схемами налоговой оптимизации",
+   "decision": "watch",
+   "reason": "Компания — оптовый торговец, отрасль, где контроль НДС-цепочек значим; но событие — обсуждение на форуме, без принятых решений.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 6,
+   "statements_with_refs": 6,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:12eb21b082d59223d306bccf:claim"
+    ],
+    "evidence_ids": [
+     "experiment:12eb21b082d59223d306bccf:evidence"
+    ],
+    "feature_ids": [
+     "U_100073:/okved/code",
+     "U_100073:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3611,
+   "completion_tokens": 584,
+   "cost_rub": 0.09671,
+   "latency_ms": 7847,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100073",
+   "candidate_id": "91d4aa26ead989ae243cdf5c72508ad8887905b9f28245098f5929019480ade0",
+   "event_id": "experiment:5f1027405313a73fa3fa8785",
+   "title": "Семь человек погибли в ДТП в Тюменской области",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "ДТП в Тюменской области не имеет механизма влияния на бизнес оптового торговца стройматериалами из Липецка: нет связи с его площадками, маршрутами или контрагентами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:5f1027405313a73fa3fa8785:claim"
+    ],
+    "evidence_ids": [
+     "experiment:5f1027405313a73fa3fa8785:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3533,
+   "completion_tokens": 227,
+   "cost_rub": 0.07465,
+   "latency_ms": 4121,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100073",
+   "candidate_id": "e439378fa9d48096d275c791a0028d789396f3f82d1f8ce2dfa0f19bbf55425d",
+   "event_id": "experiment:7a502e035b8c88e039bec680",
+   "title": "Минфин борется с агрессивными заявками на рынке ОФЗ",
+   "decision": "watch",
+   "reason": "Компания размещает свободные средства на депозитах, поэтому доходность размещения может зависеть от динамики ставок на долговом рынке; прямая связь с операционным бизнесом не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:7a502e035b8c88e039bec680:claim"
+    ],
+    "evidence_ids": [
+     "experiment:7a502e035b8c88e039bec680:evidence"
+    ],
+    "feature_ids": [
+     "U_100073:/products/deposit"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3613,
+   "completion_tokens": 667,
+   "cost_rub": 0.10156,
+   "latency_ms": 8451,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100073",
+   "candidate_id": "fe1c12e4df36276e313cc761cfefb183644cc60dd4a61229b67a03793e70c7af",
+   "event_id": "experiment:9a1434a91d0fe5c7f4da36bd",
+   "title": "Доступ к биржевым торгам нефтепродуктами может быть ограничен",
+   "decision": "watch",
+   "reason": "Компания — оптовый трейдер стройматериалов; прямой связи с торговлей нефтепродуктами в признаках нет. Возможна лишь косвенная связь через топливные затраты в логистике поставок.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "scenario",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:9a1434a91d0fe5c7f4da36bd:claim"
+    ],
+    "evidence_ids": [
+     "experiment:9a1434a91d0fe5c7f4da36bd:evidence"
+    ],
+    "feature_ids": [
+     "U_100073:/okved/code",
+     "U_100073:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3619,
+   "completion_tokens": 879,
+   "cost_rub": 0.11396,
+   "latency_ms": 10031,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100215",
+   "candidate_id": "c7686516ad8c7e3baed1f8812bfe3214b55befebf5241e4842bf057be8e60c4e",
+   "event_id": "experiment:12eb21b082d59223d306bccf",
+   "title": "На форуме ТПП обсудили практику борьбы со схемами налоговой оптимизации",
+   "decision": "watch",
+   "reason": "Компания оказывает транспортные услуги; обсуждение практики контроля НДС может затрагивать отрасль, но конкретных мер или решений в событии нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 6,
+   "statements_with_refs": 6,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:12eb21b082d59223d306bccf:claim"
+    ],
+    "evidence_ids": [
+     "experiment:12eb21b082d59223d306bccf:evidence"
+    ],
+    "feature_ids": [
+     "U_100215:/okved/code",
+     "U_100215:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3603,
+   "completion_tokens": 616,
+   "cost_rub": 0.09843,
+   "latency_ms": 8534,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100215",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Банкротство зарубежного фотобанка не связано с перевозками компании: нет признаков использования его сервисов, лицензирования контента или иных зависимостей, механизм влияния отсутствует.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3564,
+   "completion_tokens": 141,
+   "cost_rub": 0.0702,
+   "latency_ms": 4851,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100215",
+   "candidate_id": "f01e27b22fa50b8a07c089714e29ac5b8851c8f7b942fc3edffbed6acd89ea45",
+   "event_id": "experiment:ea3eb1dddfa811809a7743cb",
+   "title": "Правительство РФ рассмотрит поправки в закон \"О связи\"",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: рассмотрение поправок в закон «О связи» о требованиях к лицензиатам связи не затрагивает перевозки и финансовые признаки компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:ea3eb1dddfa811809a7743cb:claim"
+    ],
+    "evidence_ids": [
+     "experiment:ea3eb1dddfa811809a7743cb:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3567,
+   "completion_tokens": 243,
+   "cost_rub": 0.07617,
+   "latency_ms": 4652,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100215",
+   "candidate_id": "d370f1e388a831d8191ca9a1012a2a8bdeb029893af7a82c1da125697463f80c",
+   "event_id": "experiment:1459283f92ca4b0baadff5f4",
+   "title": "ТАСС: в правительстве одобрили проект об ужесточении наказания за езду без прав",
+   "decision": "watch",
+   "reason": "Компания оказывает услуги по перевозкам, поэтому ужесточение ответственности за управление без прав может коснуться её водителей, если такие случаи возникнут; прямая связь с текущей практикой компании данными не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "scenario",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:1459283f92ca4b0baadff5f4:claim"
+    ],
+    "evidence_ids": [
+     "experiment:1459283f92ca4b0baadff5f4:evidence"
+    ],
+    "feature_ids": [
+     "U_100215:/okved/name",
+     "U_100215:/okved/code"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3558,
+   "completion_tokens": 881,
+   "cost_rub": 0.11302,
+   "latency_ms": 10253,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100215",
+   "candidate_id": "6e5a790388170b0dcf43859c98bfb9733bdb30af39d186690ea36126f8edcfae",
+   "event_id": "experiment:4a83b4223559e8e7d32c3325",
+   "title": "Ушаков: переговоры США, Украины и России могут пройти в Абу-Даби",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Политические переговоры без принятого экономического решения, прямого механизма влияния на бизнес перевозчика нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:4a83b4223559e8e7d32c3325:claim"
+    ],
+    "evidence_ids": [
+     "experiment:4a83b4223559e8e7d32c3325:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3584,
+   "completion_tokens": 268,
+   "cost_rub": 0.07791,
+   "latency_ms": 4829,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100215",
+   "candidate_id": "fbb363e94cedc22a4f0d4d801f4443056e59538338ff8da42235c77e870333a2",
+   "event_id": "experiment:a147dca31d779be2e0aec00d",
+   "title": "Уиткофф назвал переговоры с Путиным конструктивными",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Политические переговоры без принятого экономического решения, прямого механизма влияния на бизнес перевозчика нет — совпадение города регистрации не является связью.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:a147dca31d779be2e0aec00d:claim"
+    ],
+    "evidence_ids": [
+     "experiment:a147dca31d779be2e0aec00d:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3566,
+   "completion_tokens": 250,
+   "cost_rub": 0.07655,
+   "latency_ms": 4544,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100587",
+   "candidate_id": "f01e27b22fa50b8a07c089714e29ac5b8851c8f7b942fc3edffbed6acd89ea45",
+   "event_id": "experiment:ea3eb1dddfa811809a7743cb",
+   "title": "Правительство РФ рассмотрит поправки в закон \"О связи\"",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: рассмотрение поправок в закон «О связи» о требованиях к лицензиатам не затрагивает бизнес компании-разработчика ПО, у которой нет признаков связи с телеком-лицензиями.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:ea3eb1dddfa811809a7743cb:claim"
+    ],
+    "evidence_ids": [
+     "experiment:ea3eb1dddfa811809a7743cb:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3593,
+   "completion_tokens": 260,
+   "cost_rub": 0.0776,
+   "latency_ms": 4680,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100587",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Банкротство зарубежной компании Getty Images не связано с деятельностью компании-разработчика ПО в Москве: нет признаков использования её сервисов, контрагентства или экспортных зависимостей.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3590,
+   "completion_tokens": 256,
+   "cost_rub": 0.07732,
+   "latency_ms": 4999,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100587",
+   "candidate_id": "47bbd75c15cfe1e6c54f75ced5b64580bba4026a62268a69e70eceecdfab088a",
+   "event_id": "experiment:9e7c2dc173b4bc1f2e5ef5aa",
+   "title": "Аэропорт Тамбова приостановил работу",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: приостановка работы аэропорта Тамбова не связана с ИТ-компанией из Москвы, у которой нет признаков зависимости от этого аэропорта или авиаперевозок.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:9e7c2dc173b4bc1f2e5ef5aa:claim"
+    ],
+    "evidence_ids": [
+     "experiment:9e7c2dc173b4bc1f2e5ef5aa:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3569,
+   "completion_tokens": 241,
+   "cost_rub": 0.07608,
+   "latency_ms": 4202,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100587",
+   "candidate_id": "30cb3b90aa7febb0dcf5765ef74f9246d85648dc496b082a7a5a44c83ccce183",
+   "event_id": "experiment:cfac2b83843249fb950202dd",
+   "title": "Аэропорт Калуги приостановил работу",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Приостановка работы аэропорта Калуги не связана с бизнесом IT-компании из Москвы: признаков зависимости от авиаперевозок, площадок или маршрутов через Калугу в профиле нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:cfac2b83843249fb950202dd:claim"
+    ],
+    "evidence_ids": [
+     "experiment:cfac2b83843249fb950202dd:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3569,
+   "completion_tokens": 217,
+   "cost_rub": 0.07469,
+   "latency_ms": 4560,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100587",
+   "candidate_id": "70649178278991f9be19772819863ea34103435e6761d52c25b8a8cf7b229c02",
+   "event_id": "experiment:5503d1ca039992c4774c4835",
+   "title": "Дополнительные ограничения введены в аэропорту Геленджика",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Временные ограничения в аэропорту Геленджика не затрагивают ИТ-компанию из Москвы без признаков авиаперевозок, логистики или операций на юге России — механизма влияния нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:5503d1ca039992c4774c4835:claim"
+    ],
+    "evidence_ids": [
+     "experiment:5503d1ca039992c4774c4835:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3591,
+   "completion_tokens": 256,
+   "cost_rub": 0.07734,
+   "latency_ms": 4530,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100587",
+   "candidate_id": "01ecd630379a930948e5f182b481086f9a1df7084ea64a2a4e12b823062157cd",
+   "event_id": "experiment:f459776601d1bb4dc373fe85",
+   "title": "Аэропорт Пскова приостановил работу",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: приостановка работы аэропорта Пскова не связана с ИТ-компанией из Москвы, у которой нет признаков авиаперевозок, ВЭД или зависимостей от этого региона.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:f459776601d1bb4dc373fe85:claim"
+    ],
+    "evidence_ids": [
+     "experiment:f459776601d1bb4dc373fe85:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3603,
+   "completion_tokens": 135,
+   "cost_rub": 0.07053,
+   "latency_ms": 3984,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10061",
+   "candidate_id": "f01e27b22fa50b8a07c089714e29ac5b8851c8f7b942fc3edffbed6acd89ea45",
+   "event_id": "experiment:ea3eb1dddfa811809a7743cb",
+   "title": "Правительство РФ рассмотрит поправки в закон \"О связи\"",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: рассмотрение поправок в закон «О связи» о требованиях к лицензиатам связи не затрагивает стоматологическую практику компании, у которой нет признаков деятельности в телеком-отрасли.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:ea3eb1dddfa811809a7743cb:claim"
+    ],
+    "evidence_ids": [
+     "experiment:ea3eb1dddfa811809a7743cb:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3581,
+   "completion_tokens": 237,
+   "cost_rub": 0.07606,
+   "latency_ms": 4547,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10061",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: банкротство зарубежного фотобанка не связано со стоматологической практикой компании, у неё нет ВЭД и признаков использования изображений Getty Images.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3578,
+   "completion_tokens": 258,
+   "cost_rub": 0.07723,
+   "latency_ms": 4997,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10061",
+   "candidate_id": "d370f1e388a831d8191ca9a1012a2a8bdeb029893af7a82c1da125697463f80c",
+   "event_id": "experiment:1459283f92ca4b0baadff5f4",
+   "title": "ТАСС: в правительстве одобрили проект об ужесточении наказания за езду без прав",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: ужесточение наказания за езду без прав не затрагивает стоматологическую практику компании, у неё нет признаков транспортной деятельности или зависимости от наёмных водителей.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:1459283f92ca4b0baadff5f4:claim"
+    ],
+    "evidence_ids": [
+     "experiment:1459283f92ca4b0baadff5f4:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3557,
+   "completion_tokens": 229,
+   "cost_rub": 0.07518,
+   "latency_ms": 3713,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10061",
+   "candidate_id": "60c2c37c5996d7df94affd045d01f1f5e9194fe4a4930c4753df1bdaa56de002",
+   "event_id": "experiment:c050aed87f2ce7bd94354792",
+   "title": "Reuters: из-за высокого спроса в магазинах появится ограниченное число новых iPhone Duo",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: анонс ограниченных продаж смартфона Apple не затрагивает стоматологическую практику компании ни через спрос, ни через финансирование, ни через логистику.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:c050aed87f2ce7bd94354792:claim"
+    ],
+    "evidence_ids": [
+     "experiment:c050aed87f2ce7bd94354792:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3556,
+   "completion_tokens": 225,
+   "cost_rub": 0.07493,
+   "latency_ms": 4870,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10061",
+   "candidate_id": "c7686516ad8c7e3baed1f8812bfe3214b55befebf5241e4842bf057be8e60c4e",
+   "event_id": "experiment:12eb21b082d59223d306bccf",
+   "title": "На форуме ТПП обсудили практику борьбы со схемами налоговой оптимизации",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: обсуждение налоговых рисков с бумажным НДС на форуме ТПП не содержит принятых решений и не связано с признаками компании — стоматологическая практика без ВЭД и без данных о работе с НДС.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:12eb21b082d59223d306bccf:claim"
+    ],
+    "evidence_ids": [
+     "experiment:12eb21b082d59223d306bccf:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3574,
+   "completion_tokens": 294,
+   "cost_rub": 0.07925,
+   "latency_ms": 5455,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10061",
+   "candidate_id": "a1ab0d06c3b08cbe25baacc076ee0d92044c6b590d70c54624bfece2985929bd",
+   "event_id": "experiment:7739a8a9204d5053c34fdb3a",
+   "title": "Донецкое региональное отделение «Единой России» стало самым крупным в стране",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Новость о численности регионального отделения политической партии не имеет экономического механизма влияния на стоматологическую практику компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:7739a8a9204d5053c34fdb3a:claim"
+    ],
+    "evidence_ids": [
+     "experiment:7739a8a9204d5053c34fdb3a:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3541,
+   "completion_tokens": 221,
+   "cost_rub": 0.07444,
+   "latency_ms": 4762,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100697",
+   "candidate_id": "c7686516ad8c7e3baed1f8812bfe3214b55befebf5241e4842bf057be8e60c4e",
+   "event_id": "experiment:12eb21b082d59223d306bccf",
+   "title": "На форуме ТПП обсудили практику борьбы со схемами налоговой оптимизации",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: обсуждение налоговых рисков на форуме ТПП — общая тема без принятых решений и без связи с конкретным бизнесом компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:12eb21b082d59223d306bccf:claim"
+    ],
+    "evidence_ids": [
+     "experiment:12eb21b082d59223d306bccf:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3601,
+   "completion_tokens": 173,
+   "cost_rub": 0.0727,
+   "latency_ms": 4530,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100697",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Банкротство зарубежного фотобанка не связано с переработкой рыбы и не затрагивает бизнес компании — нет механизма влияния.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3576,
+   "completion_tokens": 248,
+   "cost_rub": 0.07661,
+   "latency_ms": 5145,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100697",
+   "candidate_id": "70649178278991f9be19772819863ea34103435e6761d52c25b8a8cf7b229c02",
+   "event_id": "experiment:5503d1ca039992c4774c4835",
+   "title": "Дополнительные ограничения введены в аэропорту Геленджика",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: временные ограничения в аэропорту Геленджика не связаны с рыбоперерабатывающим бизнесом компании во Владивостоке — ни признаков авиаперевозок, ни связей с Краснодарским краем в профиле нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:5503d1ca039992c4774c4835:claim"
+    ],
+    "evidence_ids": [
+     "experiment:5503d1ca039992c4774c4835:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3577,
+   "completion_tokens": 161,
+   "cost_rub": 0.07158,
+   "latency_ms": 4215,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100697",
+   "candidate_id": "99ac9a82354ad2ade1ed27f7ce36b49bed459ba3436c13497b63ff4871e44196",
+   "event_id": "experiment:66cbdfa264ae05dd3ffd93e1",
+   "title": "От атак ВСУ за полгода погибли 10 сотрудников Запорожской АЭС",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Военные потери персонала на зарубежной АЭС не имеют механизма влияния на бизнес рыбоперерабатывающей компании во Владивостоке.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:66cbdfa264ae05dd3ffd93e1:claim"
+    ],
+    "evidence_ids": [
+     "experiment:66cbdfa264ae05dd3ffd93e1:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "failed",
+   "qa_codes": [
+    "facts_restored",
+    "number_not_in_data"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3563,
+   "completion_tokens": 216,
+   "cost_rub": 0.07453,
+   "latency_ms": 4685,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100697",
+   "candidate_id": "e439378fa9d48096d275c791a0028d789396f3f82d1f8ce2dfa0f19bbf55425d",
+   "event_id": "experiment:7a502e035b8c88e039bec680",
+   "title": "Минфин борется с агрессивными заявками на рынке ОФЗ",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Новость о спросе на ОФЗ и тактике Минфина не затрагивает деятельность компании по переработке рыбы и не содержит механизма влияния на её бизнес.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:7a502e035b8c88e039bec680:claim"
+    ],
+    "evidence_ids": [
+     "experiment:7a502e035b8c88e039bec680:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3575,
+   "completion_tokens": 256,
+   "cost_rub": 0.07706,
+   "latency_ms": 4944,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_100697",
+   "candidate_id": "47bbd75c15cfe1e6c54f75ced5b64580bba4026a62268a69e70eceecdfab088a",
+   "event_id": "experiment:9e7c2dc173b4bc1f2e5ef5aa",
+   "title": "Аэропорт Тамбова приостановил работу",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: приостановка работы аэропорта Тамбова не связана с признаками компании — рыбопереработка во Владивостоке без ВЭД-деклараций и без данных о зависимости от этого аэропорта.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:9e7c2dc173b4bc1f2e5ef5aa:claim"
+    ],
+    "evidence_ids": [
+     "experiment:9e7c2dc173b4bc1f2e5ef5aa:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3528,
+   "completion_tokens": 253,
+   "cost_rub": 0.07607,
+   "latency_ms": 4690,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10080",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Банкротство зарубежного фотобанка не связано с гостиничным бизнесом компании: нет механизма влияния на её спрос, издержки или финансирование.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3572,
+   "completion_tokens": 244,
+   "cost_rub": 0.07631,
+   "latency_ms": 4418,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10080",
+   "candidate_id": "99ac9a82354ad2ade1ed27f7ce36b49bed459ba3436c13497b63ff4871e44196",
+   "event_id": "experiment:66cbdfa264ae05dd3ffd93e1",
+   "title": "От атак ВСУ за полгода погибли 10 сотрудников Запорожской АЭС",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Военные потери персонала Запорожской АЭС не имеют механизма влияния на гостиничный бизнес компании в Ульяновской области; совпадение по региону и ВЭД-признакам случайно.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:66cbdfa264ae05dd3ffd93e1:claim"
+    ],
+    "evidence_ids": [
+     "experiment:66cbdfa264ae05dd3ffd93e1:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "failed",
+   "qa_codes": [
+    "facts_restored",
+    "number_not_in_data"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3559,
+   "completion_tokens": 242,
+   "cost_rub": 0.07597,
+   "latency_ms": 4516,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10080",
+   "candidate_id": "c7686516ad8c7e3baed1f8812bfe3214b55befebf5241e4842bf057be8e60c4e",
+   "event_id": "experiment:12eb21b082d59223d306bccf",
+   "title": "На форуме ТПП обсудили практику борьбы со схемами налоговой оптимизации",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Обсуждение налоговых рисков на форуме ТПП — общественное мероприятие без принятых решений и без механизма влияния на гостиничный бизнес компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:12eb21b082d59223d306bccf:claim"
+    ],
+    "evidence_ids": [
+     "experiment:12eb21b082d59223d306bccf:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3568,
+   "completion_tokens": 258,
+   "cost_rub": 0.07705,
+   "latency_ms": 5099,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10080",
+   "candidate_id": "97f2f595ebff3fb73a25928921a03cbf8f941ebf114458e781d0fdafb1604a43",
+   "event_id": "experiment:baee1a47314ab1ebeeacc5c4",
+   "title": "Эрдоган созвонился с Алиевым",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: телефонный разговор лидеров Турции и Азербайджана без экономических решений не затрагивает гостиничный бизнес компании в Ульяновске без признаков ВЭД.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:baee1a47314ab1ebeeacc5c4:claim"
+    ],
+    "evidence_ids": [
+     "experiment:baee1a47314ab1ebeeacc5c4:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3504,
+   "completion_tokens": 241,
+   "cost_rub": 0.07495,
+   "latency_ms": 4299,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10080",
+   "candidate_id": "1d65c06c28b9ab8e4509493fe4427bfb25198def2c107269b5ad8ca11d387e19",
+   "event_id": "experiment:cbbc896f4b339d9ba4e10560",
+   "title": "Индекс деловой активности МСП в сентябре составил 50,8 пункта",
+   "decision": "watch",
+   "reason": "Компания — малое предприятие в гостиничном секторе; индекс отражает общий деловой климат МСП, но гостиничный сектор в публикации не выделен, прямая связь не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 6,
+   "statements_with_refs": 6,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:cbbc896f4b339d9ba4e10560:claim"
+    ],
+    "evidence_ids": [
+     "experiment:cbbc896f4b339d9ba4e10560:evidence"
+    ],
+    "feature_ids": [
+     "U_10080:/okved/code",
+     "U_10080:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3591,
+   "completion_tokens": 606,
+   "cost_rub": 0.09764,
+   "latency_ms": 7739,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_10080",
+   "candidate_id": "70649178278991f9be19772819863ea34103435e6761d52c25b8a8cf7b229c02",
+   "event_id": "experiment:5503d1ca039992c4774c4835",
+   "title": "Дополнительные ограничения введены в аэропорту Геленджика",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Временные ограничения в аэропорту Геленджика не связаны с гостиничным бизнесом компании в Ульяновске: нет признаков зависимости от этого аэропорта, туристического потока туда или ВЭД.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:5503d1ca039992c4774c4835:claim"
+    ],
+    "evidence_ids": [
+     "experiment:5503d1ca039992c4774c4835:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3546,
+   "completion_tokens": 253,
+   "cost_rub": 0.07638,
+   "latency_ms": 5147,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_101744",
+   "candidate_id": "e430e6810e0a89e9a63c58bcaf9fb927b8b59e31f0d70757407ece3856777ff9",
+   "event_id": "experiment:b1f952fd5e23147e7280b24e",
+   "title": "Getty Images начал процедуру банкротства",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Банкротство зарубежного фотобанка не связано с растениеводством компании: нет механизма влияния на её спрос, затраты или финансирование.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:claim"
+    ],
+    "evidence_ids": [
+     "experiment:b1f952fd5e23147e7280b24e:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3579,
+   "completion_tokens": 253,
+   "cost_rub": 0.07695,
+   "latency_ms": 4763,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_101744",
+   "candidate_id": "93dd22d4520fceb32782ad5d9a1be7e83328a613b224d51d5f834336570a0294",
+   "event_id": "experiment:f5ff1be58a7c14cc5f9495d7",
+   "title": "Производитель пестицидов оспаривает тройной рост таможенной стоимости сырья",
+   "decision": "watch",
+   "reason": "Компания выращивает зерновые и масличные культуры и, вероятно, закупает средства защиты растений; исход спора может косвенно влиять на цены пестицидов на рынке.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "unclear",
+   "inference_status": "hypothesis",
+   "statements": 6,
+   "statements_with_refs": 6,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:f5ff1be58a7c14cc5f9495d7:claim"
+    ],
+    "evidence_ids": [
+     "experiment:f5ff1be58a7c14cc5f9495d7:evidence"
+    ],
+    "feature_ids": [
+     "U_101744:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3589,
+   "completion_tokens": 798,
+   "cost_rub": 0.10874,
+   "latency_ms": 9805,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_101744",
+   "candidate_id": "63ba75978c9dc3180e3c66b70d7ab43bd4cf562c71eb60876777a5a9e3a7386b",
+   "event_id": "experiment:22fb7d0ab2e2d4e4db01cd57",
+   "title": "Недельная инфляция в России замедлилась до 0,05%",
+   "decision": "watch",
+   "reason": "Компания — сельхозпроизводитель; инфляционная динамика может влиять на себестоимость и спрос, но прямой связи через признаки профиля нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 3
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:22fb7d0ab2e2d4e4db01cd57:claim"
+    ],
+    "evidence_ids": [
+     "experiment:22fb7d0ab2e2d4e4db01cd57:evidence"
+    ],
+    "feature_ids": [
+     "U_101744:/okved/code",
+     "U_101744:/okved/name",
+     "U_101744:/products/loan"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3593,
+   "completion_tokens": 597,
+   "cost_rub": 0.09715,
+   "latency_ms": 8389,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_101744",
+   "candidate_id": "c7686516ad8c7e3baed1f8812bfe3214b55befebf5241e4842bf057be8e60c4e",
+   "event_id": "experiment:12eb21b082d59223d306bccf",
+   "title": "На форуме ТПП обсудили практику борьбы со схемами налоговой оптимизации",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Обсуждение налоговых рисков на форуме ТПП — общественное мероприятие без принятых решений или изменений правил, и нет данных о схемах НДС у самой компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:12eb21b082d59223d306bccf:claim"
+    ],
+    "evidence_ids": [
+     "experiment:12eb21b082d59223d306bccf:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3575,
+   "completion_tokens": 255,
+   "cost_rub": 0.077,
+   "latency_ms": 4619,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_101744",
+   "candidate_id": "e439378fa9d48096d275c791a0028d789396f3f82d1f8ce2dfa0f19bbf55425d",
+   "event_id": "experiment:7a502e035b8c88e039bec680",
+   "title": "Минфин борется с агрессивными заявками на рынке ОФЗ",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Новость о спросе на ОФЗ на аукционах Минфина не имеет механизма влияния на бизнес компании — совпадение только по теме финансов, без связи с её деятельностью.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:7a502e035b8c88e039bec680:claim"
+    ],
+    "evidence_ids": [
+     "experiment:7a502e035b8c88e039bec680:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3578,
+   "completion_tokens": 139,
+   "cost_rub": 0.07032,
+   "latency_ms": 4564,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  },
+  {
+   "company_id": "U_101744",
+   "candidate_id": "30cb3b90aa7febb0dcf5765ef74f9246d85648dc496b082a7a5a44c83ccce183",
+   "event_id": "experiment:cfac2b83843249fb950202dd",
+   "title": "Аэропорт Калуги приостановил работу",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: приостановка работы аэропорта Калуги не связана с признаками компании — зерноводство в Новосибирской области без ВЭД и без известных зависимостей от этого аэропорта.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "experiment:cfac2b83843249fb950202dd:claim"
+    ],
+    "evidence_ids": [
+     "experiment:cfac2b83843249fb950202dd:evidence"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.2",
+   "prompt_tokens": 3531,
+   "completion_tokens": 238,
+   "cost_rub": 0.07525,
+   "latency_ms": 5150,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true
+  }
+ ],
+ "previous_run": {
+  "prompt_version": "analyst-v1.1",
+  "summary": {
+   "candidates": 48,
+   "decisions": {
+    "exclude": 37,
+    "watch": 11
+   },
+   "share": {
+    "exclude": 0.771,
+    "watch": 0.229
+   },
+   "analyzed_by_llm": 47,
+   "excluded_by_rules": 1,
+   "valid_json_share": 1.0,
+   "valid_json_first_try_share": 0.851,
+   "statement_ref_coverage": 1.0,
+   "insights_with_feature_refs": 11,
+   "qa_rules_triggered": {
+    "facts_restored": 4,
+    "number_not_in_data": 3,
+    "headline_rewritten": 1
+   },
+   "qa_status": {
+    "passed": 43,
+    "skipped": 1,
+    "passed_with_fixes": 2,
+    "failed": 2
+   },
+   "changes_since_previous": {
+    "new": 11
+   },
+   "prompt_tokens": 188484,
+   "completion_tokens": 19283,
+   "cost_rub_usage": 4.3984,
+   "cost_rub_per_llm_candidate": 0.0936,
+   "avg_latency_s": 6.3
+  },
+  "run_cost": {
+   "session_spent_rub": 4.3984,
+   "team_spend_before_rub": 1.77635683940025e-15,
+   "team_spend_after_rub": 4.309490603453752,
+   "wall_s": 146.3
+  },
+  "found_problems": [
+   "15% ответов требовали ремонта JSON: при exclude модель присылала company_relevance с text=null",
+   "QA отбрасывал факт с числом из заголовка события (50,8)",
+   "в причинах исключения — псевдонимы ID (F8, F9, F10–F15)",
+   "общие знания об отрасли подавались как вывод о компании (налоговое внимание к отрасли, наёмные водители)"
+  ]
+ },
+ "fewshot_comparison": {
+  "candidates": 8,
+  "companies": [
+   "U_100044",
+   "U_100073"
+  ],
+  "first_4_per_company": true,
+  "without": {
+   "decisions": {
+    "exclude": 5,
+    "watch": 3
+   },
+   "ref_coverage": 1.0,
+   "prompt_tokens": 28576,
+   "cost_rub_usage": 0.6904
+  },
+  "with": {
+   "decisions": {
+    "exclude": 6,
+    "watch": 2
+   },
+   "ref_coverage": 1.0,
+   "prompt_tokens": 35123,
+   "cost_rub_usage": 0.7606
+  },
+  "conclusion": "1 из 8 решений изменилось (ОФЗ для компании без кредитов и депозитов: watch → exclude), покрытие ссылками без изменений, токены +23%, ₽ +10%; явного улучшения нет, флаг ANALYST_FEWSHOT оставлен выключенным"
+ }
+}

@@ -160,7 +160,7 @@ export function profileChips(c: CompanyProfile): { label: string; known: boolean
     v === null ? { label: `${label}: неизвестно`, known: false } : { label: `${label}: ${v ? 'есть' : 'нет'}`, known: true };
   return [
     { label: `Отрасль: ${c.industry}`, known: true },
-    { label: `Выручка: ${c.revenue_bn_rub.toLocaleString('ru-RU')} млрд ₽`, known: true },
+    { label: `Выручка: ${(c.revenue_bn_rub?.toLocaleString('ru-RU') ?? 'Неизвестно')} млрд ₽`, known: c.revenue_bn_rub != null },
     { label: `Регион: ${c.region}`, known: true },
     { label: `Возраст: ${c.age_label}`, known: true },
     prod('Кредиты', p.loans),

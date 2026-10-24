@@ -203,3 +203,24 @@ is a build dependency (MIT); its exact isolated build resolution is controlled
 by the build frontend, not a backend runtime dependency. Contract fixtures in
 data/examples/personalization/contracts/ are handcrafted, entirely fictional,
 and contain no supplied company/payment/bank-document derivatives.
+
+## Analyst few-shot example library (2026-10-23)
+
+backend/app/analyst/examples/ contains handcrafted teaching examples. Companies
+are entirely fictional (no case data); "bank position" fragments are synthetic
+and are not Alfa-Bank's view. Event claims paraphrase public sources; only short
+verbatim quotes (1-2 sentences) are kept as evidence, with links and dates in
+backend/app/analyst/examples/sources.json.
+
+- Bank of Russia (cbr.ru) press releases of 2026-09-11 (key rate) and
+  2026-09-21 (commemorative coin) — reproduction allowed with a link to the
+  original source (https://www.cbr.ru/about/).
+- Ministry of Finance of Russia (minfin.gov.ru), press release of 2026-09-24
+  (budget package) — CC BY 4.0, attribution: Минфин России.
+- European Commission, Access2Markets news of 2026-06-30 (EU steel import
+  regime) — CC BY 4.0 under the Commission reuse policy; claims are the team's
+  Russian translation.
+- World Bank Blogs, "The Commodity Markets Outlook in eight charts"
+  (J. Baffes, K. Temaj, 2026-04-30) — page marked All Rights Reserved; two
+  short attributed quotations only. The underlying Commodity Markets Outlook,
+  April 2026 report is published under CC BY 3.0 IGO.

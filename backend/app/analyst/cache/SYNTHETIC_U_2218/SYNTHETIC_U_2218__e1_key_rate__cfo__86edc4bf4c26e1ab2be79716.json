@@ -1,0 +1,476 @@
+{
+ "key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:10:39+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "cluster_id": "cluster:e1_key_rate",
+   "event_refs": [
+    {
+     "event_id": "e1_key_rate",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.35,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.03,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "credit_liquidity"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ставка ЦБ сохранена на 14%: стоимость нового финансирования и факторинга останется высокой, действующие условия не меняются",
+   "what_happened": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+   "facts": [
+    {
+     "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+     "kind": "fact",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания активно пользуется факторингом и банковскими гарантиями, а кредитных продуктов не имеет: решение влияет на стоимость нового оборотного финансирования, но не на действующие договоры.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.guarantees",
+     "product.loans",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ключевая ставка задаёт базовую стоимость нового кредитования и факторинга; при ставке 14% оборотное финансирование сезонных закупок зерна остаётся дорогим, что может сжимать маржу при условии потребности в заёмных средствах.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "При потребности в оборотном финансировании стоимость новых лимитов может оставаться высокой и давить на маржу.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "По аналитике банка ожидается пауза до декабря без снижения — дешевления финансирования в ближайшие месяцы может не произойти.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Отсутствие кредитных продуктов позволяет выбрать момент и условия для первого привлечения; жёсткая ставка — повод торговаться за условия и рассмотреть альтернативные инструменты.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Тип ставки и условия договоров факторинга",
+    "Валютная структура экспортных контрактов с Турцией"
+   ],
+   "next_steps": [
+    {
+     "text": "Оценить потребность в оборотном финансировании на сезон и сравнить ставки факторинга и кредитных лимитов у нескольких банков.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.factoring",
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Проверить условия действующих договоров факторинга и гарантий на привязку к ключевой ставке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Учесть ставку 14% и прогноз паузы до декабря в бюджете финансирования на IV квартал.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Условия действующих договоров факторинга и наличие долга неизвестны.",
+     "question": "Есть ли плавающие ставки, привязанные к ключевой?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Потребность компании в заёмном финансировании не отражена в профиле.",
+     "question": "Планируется ли привлечение кредитов в ближайшие месяцы?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_key"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Для вас событие умеренно значимо: ставка 14% удерживает стоимость нового оборотного финансирования и факторинга высокой; действующие договоры без плавающей ставки не затронуты. Целесообразно заранее спланировать потребность в ликвидности на сезон.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "product.guarantees",
+     "product.loans",
+     "product.factoring",
+     "company.okved"
+    ],
+    "event_claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e1_1"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e1_key_rate@1#792730253cdc|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:10:39+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3081,
+    "completion_tokens": 1011,
+    "reasoning_tokens": 51,
+    "cost_rub": 0.113431,
+    "cost_rub_tariff": 0.0329,
+    "latency_ms": 12401,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3081/1011, 0.1134 ₽, 12.4 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "credit_liquidity"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ставка ЦБ сохранена на 14%: стоимость нового финансирования и факторинга останется высокой, действующие условия не меняются",
+    "what_happened": [
+     {
+      "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания активно пользуется факторингом (F13) и банковскими гарантиями (F9), а кредитных продуктов не имеет (F10): решение влияет на стоимость нового оборотного финансирования, но не на действующие договоры.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.loans",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ключевая ставка задаёт базовую стоимость нового кредитования и факторинга; при ставке 14% оборотное финансирование сезонных закупок зерна остаётся дорогим, что может сжимать маржу при условии потребности в заёмных средствах.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "При потребности в оборотном финансировании стоимость новых лимитов может оставаться высокой и давить на маржу.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "product.factoring"
+      ],
+      "roles": []
+     },
+     {
+      "text": "По аналитике банка ожидается пауза до декабря без снижения — дешевления финансирования в ближайшие месяцы может не произойти.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Отсутствие кредитных продуктов (F10) позволяет выбрать момент и условия для первого привлечения; жёсткая ставка — повод торговаться за условия и рассмотреть альтернативные инструменты.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Оценить потребность в оборотном финансировании на сезон и сравнить ставки факторинга и кредитных лимитов у нескольких банков.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.factoring",
+       "product.loans"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Проверить условия действующих договоров факторинга и гарантий на привязку к ключевой ставке.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.guarantees",
+       "product.factoring"
+      ],
+      "roles": [
+       "cfo",
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Учесть ставку 14% и прогноз паузы до декабря в бюджете финансирования на IV квартал.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": [
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Тип ставки и условия договоров факторинга",
+     "Потребность в новом кредитовании в ближайшие 6 месяцев",
+     "Валютная структура экспортных контрактов с Турцией"
+    ],
+    "unknowns": [
+     {
+      "text": "Условия действующих договоров факторинга и наличие долга неизвестны.",
+      "question": "Есть ли плавающие ставки, привязанные к ключевой?"
+     },
+     {
+      "text": "Потребность компании в заёмном финансировании не отражена в профиле.",
+      "question": "Планируется ли привлечение кредитов в ближайшие месяцы?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_key"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Для вас событие умеренно значимо: ставка 14% удерживает стоимость нового оборотного финансирования и факторинга высокой; действующие договоры без плавающей ставки не затронуты. Целесообразно заранее спланировать потребность в ликвидности на сезон.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3081/1011, 0.1134 ₽, 12.4 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

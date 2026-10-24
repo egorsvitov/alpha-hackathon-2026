@@ -1,0 +1,515 @@
+{
+ "key": "SYNTHETIC_U_3305|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:12:55+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "cluster_id": "cluster:e3_rub_weak",
+   "event_refs": [
+    {
+     "event_id": "e3_rub_weak",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.08,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "fx_trade",
+    "costs",
+    "credit_liquidity"
+   ],
+   "event_status": "occurred",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "Ослабление рубля на 4%: для продуктовой розницы без ВЭД влияние ограничено, но возможен рост цен поставщиков",
+   "what_happened": "За неделю с 11 по 18 октября 2026 рубль ослаб к юаню и доллару США на 4%. Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+   "facts": [
+    {
+     "text": "За неделю с 11 по 18 октября 2026 рубль ослаб к юаню и доллару США на 4%.",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — продуктовая розница без таможенных деклараций, прямого импортного канала в данных нет; связь возможна через цены поставщиков и доходность депозитов.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "product.deposits",
+     "fts.flag"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ослабление рубля может удорожать закупки у поставщиков с валютной составляющей себестоимости и повышать ставки по депозитам; прямого ВЭД-канала у компании нет.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "product.deposits",
+     "fts.flag",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Закупочные цены поставщиков (в т.ч. «Агрохолдинг Север», тип отношений не подтверждён) могут вырасти из-за удорожания импортной составляющей.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "При дальнейшем ослаблении рубля (прогноз ) возможен рост инфляции издержек и давления на маржу розницы.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Ослабление рубля может сопровождаться ростом ставок по рублёвым депозитам — выше доходность размещения свободных средств.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Наличие валютных статей в балансе и авансов в валюте",
+    "Договоры поставщиков на ценовые оговорки/валютную привязку",
+    "Текущие ставки и сроки депозитов"
+   ],
+   "next_steps": [
+    {
+     "text": "Запросить у ключевых поставщиков уведомления о пересмотре цен и проверить договоры на валютную привязку.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "counterparty.1",
+      "counterparty.2"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Проверить оценку и резервы по курсовым разницам: есть ли валютные обязательства или авансы в учёте.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Оценить сроки размещения свободных средств на депозитах с учётом возможного изменения ставок.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant",
+      "cfo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Нет данных о валютных обязательствах и структуре закупок компании.",
+     "question": "Есть ли у компании валютные договоры, авансы или импортные закупки через посредников?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Тип отношений с «Агрохолдинг Север» и «ЛогистикПро» не подтверждён договорами.",
+     "question": "Являются ли получатели платежей поставщиками, и есть ли в договорах ценовые оговорки?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Прямого канала влияния нет (нет ВЭД, ); для бухгалтера актуальны контроль цен поставщиков, курсовые разницы и доходность депозитов. Событие — к отслеживанию.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "product.deposits",
+     "fts.flag",
+     "counterparty.1"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "product.deposits",
+     "fts.flag",
+     "counterparty.1",
+     "counterparty.2"
+    ],
+    "event_claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "event_evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": [
+     "Тип отношений с контрагентом по платежам не подтверждён (это гипотеза)."
+    ]
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:12:55+03:00",
+   "qa_status": "passed_with_fixes",
+   "qa_issues": [
+    {
+     "code": "payment_as_supplier",
+     "severity": "warn",
+     "message": "Тип отношений с контрагентом выведен из платежей",
+     "path": "next_steps[0]"
+    }
+   ],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2743,
+    "completion_tokens": 1110,
+    "reasoning_tokens": 44,
+    "cost_rub": 0.11329,
+    "cost_rub_tariff": 0.032859,
+    "latency_ms": 12295,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2743/1110, 0.1133 ₽, 12.3 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed_with_fixes; ошибок 0, замечаний 1 (payment_as_supplier)",
+     "status": "warn"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "fx_trade",
+     "costs",
+     "credit_liquidity"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Ослабление рубля на 4%: для продуктовой розницы без ВЭД влияние ограничено, но возможен рост цен поставщиков",
+    "what_happened": [
+     {
+      "text": "За неделю с 11 по 18 октября 2026 рубль ослаб к юаню и доллару США на 4%.",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     },
+     {
+      "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — продуктовая розница без таможенных деклараций (F15), прямого импортного канала в данных нет; связь возможна через цены поставщиков и доходность депозитов (F12).",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "product.deposits",
+      "fts.flag"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ослабление рубля может удорожать закупки у поставщиков с валютной составляющей себестоимости и повышать ставки по депозитам (F12); прямого ВЭД-канала у компании нет (F15).",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "product.deposits",
+      "fts.flag",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Закупочные цены поставщиков (в т.ч. «Агрохолдинг Север», тип отношений не подтверждён) могут вырасти из-за удорожания импортной составляющей.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "При дальнейшем ослаблении рубля (прогноз C2) возможен рост инфляции издержек и давления на маржу розницы.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Ослабление рубля может сопровождаться ростом ставок по рублёвым депозитам — выше доходность размещения свободных средств (F12).",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Запросить у ключевых поставщиков (F16, F17) уведомления о пересмотре цен и проверить договоры на валютную привязку.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "counterparty.1",
+       "counterparty.2"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Проверить оценку и резервы по курсовым разницам: есть ли валютные обязательства или авансы в учёте.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Оценить сроки размещения свободных средств на депозитах (F12) с учётом возможного изменения ставок.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "chief_accountant",
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Наличие валютных статей в балансе и авансов в валюте",
+     "Договоры поставщиков на ценовые оговорки/валютную привязку",
+     "Текущие ставки и сроки депозитов"
+    ],
+    "unknowns": [
+     {
+      "text": "Нет данных о валютных обязательствах и структуре закупок компании.",
+      "question": "Есть ли у компании валютные договоры, авансы или импортные закупки через посредников?"
+     },
+     {
+      "text": "Тип отношений с «Агрохолдинг Север» и «ЛогистикПро» не подтверждён договорами.",
+      "question": "Являются ли получатели платежей поставщиками, и есть ли в договорах ценовые оговорки?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Прямого канала влияния нет (нет ВЭД, F15); для бухгалтера актуальны контроль цен поставщиков, курсовые разницы и доходность депозитов (F12). Событие — к отслеживанию.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "product.deposits",
+      "fts.flag",
+      "counterparty.1"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 2743/1110, 0.1133 ₽, 12.3 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

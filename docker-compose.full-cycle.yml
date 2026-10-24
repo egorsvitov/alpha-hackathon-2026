@@ -1,0 +1,40 @@
+# Explicit worker options in a private JSON-free command or .env, never credentials in Git.
+services:
+  worker:
+    image: alfa-news-worker:local
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.encoder
+    restart: unless-stopped
+    command:
+      - python
+      - -m
+      - app.full_cycle
+      - --data
+      - /data/full-cycle
+      - worker
+      - --corpus
+      - /collector/news_bulk/news_corpus.jsonl
+      - --company
+      - ${FULL_CYCLE_COMPANY:?Set FULL_CYCLE_COMPANY}
+      - --as-of
+      - ${FULL_CYCLE_AS_OF:?Set FULL_CYCLE_AS_OF}
+      - --fingerprint
+      - ${FULL_CYCLE_FINGERPRINT:?Set FULL_CYCLE_FINGERPRINT}
+      - --model-path
+      - /models/bge-m3
+      - --encoder-reference
+      - /reference
+      - --every
+      - "60"
+    environment:
+      PYTHONPATH: /app:/app/backend
+    volumes:
+      - backend-data:/data
+      - news-data:/collector:ro
+      - ${BGE_MODEL_PATH:?Set BGE_MODEL_PATH}:/models/bge-m3:ro
+      - ${BGE_REFERENCE_PATH:?Set BGE_REFERENCE_PATH}:/reference:ro
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]

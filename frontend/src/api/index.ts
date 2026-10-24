@@ -1,4 +1,4 @@
-import type { CompanyProfile, DemoSettings, FeedItem, Insight, NewsEvent, QaAnswer, Role } from '../types';
+import type { CompanyProfile, DemoSettings, FeedItem, Insight, NewsEvent, QaAnswer, Role, ProcessingState } from '../types';
 import * as mock from './mock/engine';
 
 /* Единая точка доступа UI к данным. Режим выбирается VITE_API_MODE=mock|http.
@@ -15,13 +15,17 @@ const BASE = (cfg.apiUrl ?? (import.meta.env.VITE_API_URL as string | undefined)
 
 async function http<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}${path}`, { headers: { 'Content-Type': 'application/json' }, ...init });
-  if (!res.ok) throw new Error(`Ошибка сервиса (${res.status})`);
+  if (!res.ok) {
+    const error = await res.json().catch(() => null);
+    throw new Error(error?.detail?.message || `Ошибка сервиса (${res.status})`);
+  }
   const body = await res.text();
   return (body ? JSON.parse(body) : undefined) as T;
 }
 
 export interface Api {
   mode: 'mock' | 'http';
+  getProcessingState(companyId: string, role: Role): Promise<ProcessingState | null>;
   getCompanies(): Promise<CompanyProfile[]>;
   getFeed(companyId: string, role: Role): Promise<FeedItem[]>;
   getInsight(eventId: string, companyId: string, role: Role): Promise<Insight>;
@@ -35,6 +39,7 @@ const q = encodeURIComponent;
 
 const httpApi: Api = {
   mode: 'http',
+  getProcessingState: (companyId, role) => http(`/api/v1/companies/${q(companyId)}/processing-state?role=${role}`),
   getCompanies: () => http('/api/v1/companies'),
   getFeed: (companyId, role) => http(`/api/v1/companies/${q(companyId)}/news-feed?role=${role}`),
   getInsight: (eventId, companyId, role) => http(`/api/v1/news/${q(eventId)}/analysis?company_id=${q(companyId)}&role=${role}`),
@@ -51,6 +56,7 @@ const httpApi: Api = {
 
 const mockApi: Api = {
   mode: 'mock',
+  getProcessingState: async () => null,
   getCompanies: mock.getCompanies,
   getFeed: mock.getFeed,
   getInsight: mock.getInsight,

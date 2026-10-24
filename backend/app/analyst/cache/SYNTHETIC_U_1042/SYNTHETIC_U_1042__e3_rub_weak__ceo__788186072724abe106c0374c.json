@@ -1,0 +1,524 @@
+{
+ "key": "SYNTHETIC_U_1042|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:08:35+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "cluster_id": "cluster:e3_rub_weak",
+   "event_refs": [
+    {
+     "event_id": "e3_rub_weak",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.32,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "fx_trade",
+    "demand_revenue",
+    "costs"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ослабление рубля на 4% может повлиять на условия ВЭД с Казахстаном и стоимость импортных закупок",
+   "what_happened": "За неделю рубль ослаб к юаню и доллару США на 4%. Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+   "facts": [
+    {
+     "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания ведёт ВЭД с Казахстаном; курс рубля может влиять на валютную выручку или стоимость импортных контрактов, направление и валюта расчётов неизвестны.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Через канал fx_trade: при экспортных расчётах ослабление рубля может повысить рублёвую выручку, при импортных — увеличить стоимость закупок; эффект зависит от валюты контрактов.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Если контракты с Казахстаном номинированы в валюте, ослабление рубля может удорожать импортные закупки и давить на себестоимость.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "При дальнейшем ослаблении рубля (прогноз ) возможен рост стоимости заёмного финансирования и лизинга при пересмотре ставок.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Если поставки в Казахстан являются экспортом, ослабление рубля может улучшить рублёвую выручку и ценовую конкурентоспособность.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Валюта и направление контрактов с Казахстаном",
+    "Доля валютной выручки и валютных закупок",
+    "Тип ставок по действующим кредитам"
+   ],
+   "next_steps": [
+    {
+     "text": "Уточнить направление ВЭД (экспорт/импорт), валюту и условия расчётов по контрактам с Казахстаном.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Оценить долю валютных контрактов в выручке и закупках и чувствительность маржи к курсу.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "company.revenue"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    },
+    {
+     "text": "Проверить тип ставок действующих кредитных договоров и целесообразность хеджирования курсового риска.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Направление ВЭД (экспорт или импорт) и валюта контрактов неизвестны.",
+     "question": "В какой валюте и в каком направлении идут расчёты с Казахстаном?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Условия действующих кредитных договоров неизвестны.",
+     "question": "Какой тип ставки (фиксированная/плавающая) и объём долга по действующим кредитам?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Текущая выручка и маржа за 2026 год неизвестны.",
+     "question": "Какова динамика выручки и маржи в 2026 году?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Ослабление рубля затрагивает компанию только через ВЭД с Казахстаном; без данных о направлении и валюте контрактов влияние неопределённое — рекомендуется уточнить структуру расчётов.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "fts.flag",
+     "fts.country",
+     "product.loans",
+     "product.leasing",
+     "company.revenue"
+    ],
+    "event_claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "event_evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e3_rub_weak@1#2f1db66a6138|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:08:35+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3205,
+    "completion_tokens": 1118,
+    "reasoning_tokens": 49,
+    "cost_rub": 0.121882,
+    "cost_rub_tariff": 0.035352,
+    "latency_ms": 11613,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3205/1118, 0.1219 ₽, 11.6 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "fx_trade",
+     "demand_revenue",
+     "costs"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ослабление рубля на 4% может повлиять на условия ВЭД с Казахстаном и стоимость импортных закупок",
+    "what_happened": [
+     {
+      "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     },
+     {
+      "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания ведёт ВЭД с Казахстаном (F16, F17); курс рубля может влиять на валютную выручку или стоимость импортных контрактов, направление и валюта расчётов неизвестны.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Через канал fx_trade: при экспортных расчётах ослабление рубля может повысить рублёвую выручку, при импортных — увеличить стоимость закупок; эффект зависит от валюты контрактов.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Если контракты с Казахстаном номинированы в валюте, ослабление рубля может удорожать импортные закупки и давить на себестоимость.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     },
+     {
+      "text": "При дальнейшем ослаблении рубля (прогноз C2) возможен рост стоимости заёмного финансирования и лизинга при пересмотре ставок.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Если поставки в Казахстан являются экспортом, ослабление рубля может улучшить рублёвую выручку и ценовую конкурентоспособность.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Уточнить направление ВЭД (экспорт/импорт), валюту и условия расчётов по контрактам с Казахстаном.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": [
+       "ceo",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Оценить долю валютных контрактов в выручке и закупках и чувствительность маржи к курсу.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "company.revenue"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Проверить тип ставок действующих кредитных договоров и целесообразность хеджирования курсового риска.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Валюта и направление контрактов с Казахстаном",
+     "Доля валютной выручки и валютных закупок",
+     "Тип ставок по действующим кредитам"
+    ],
+    "unknowns": [
+     {
+      "text": "Направление ВЭД (экспорт или импорт) и валюта контрактов неизвестны.",
+      "question": "В какой валюте и в каком направлении идут расчёты с Казахстаном?"
+     },
+     {
+      "text": "Условия действующих кредитных договоров неизвестны.",
+      "question": "Какой тип ставки (фиксированная/плавающая) и объём долга по действующим кредитам?"
+     },
+     {
+      "text": "Текущая выручка и маржа за 2026 год неизвестны.",
+      "question": "Какова динамика выручки и маржи в 2026 году?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Ослабление рубля затрагивает компанию только через ВЭД с Казахстаном; без данных о направлении и валюте контрактов влияние неопределённое — рекомендуется уточнить структуру расчётов.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3205/1118, 0.1219 ₽, 11.6 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

@@ -1,5 +1,13 @@
 # Новостная аналитика для бизнеса
 
+Полный интеграционный backend, сохранённая HTTP-лента, worker и команды запуска:
+[docs/full-cycle-backend.md](docs/full-cycle-backend.md). Результаты приёмки:
+[отчёт 24.10.2026](docs/reports/full-cycle-backend-20261024.md).
+
+Docker по умолчанию использует `FULL_CYCLE_MODE=persisted`, `APP_API_MODE=http`.
+Для старого демо явно задайте `FULL_CYCLE_MODE=demo APP_API_MODE=mock`.
+Описания seed/mock ниже относятся к прежнему демонстрационному пути.
+
 Основные папки проекта: `backend/`, `frontend/`, `ranking/`, `data/` и `llm/`.
 
 ```text

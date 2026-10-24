@@ -1,0 +1,449 @@
+{
+ "key": "SYNTHETIC_U_2218|e6_food_inflation@1#bdcde2a04ba5|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e6_food_inflation@1#bdcde2a04ba5|ceo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:10:28+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "cluster_id": "cluster:e6_food_inflation",
+   "event_refs": [
+    {
+     "event_id": "e6_food_inflation",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.08,
+   "significance": "low",
+   "priority_breakdown": {
+    "materiality": 0.08,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "costs",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "low",
+   "urgency": "low",
+   "headline": "Продуктовая инфляция в августе опережает общий ИПЦ — для агро-трейдера это двусторонний сигнал по закупочным ценам и выручке",
+   "what_happened": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+   "facts": [
+    {
+     "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+     "kind": "fact",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания торгует зерном и кормами, поэтому рост продовольственных цен может влиять и на закупочные цены, и на выручку; направление эффекта по данным не определено.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Инфляция закупочных цен может повышать стоимость зерна и логистики, но также поддерживать отпускные цены и выручку; итог зависит от эластичности спроса и запасов.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Рост закупочных цен может увеличить потребность в оборотном капитале и стоимость факторинга.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Удорожание логистики и портовых услуг может сжать маржу при фиксированных экспортных контрактах.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "counterparty.3",
+      "counterparty.4"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При наличии запасов рост цен на зерно и корма может поддержать выручку и маржу.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Динамика закупочных цен на зерно и корма",
+    "Индексация цен в договорах с покупателями",
+    "Потребность в оборотном капитале"
+   ],
+   "next_steps": [
+    {
+     "text": "Оценить динамику закупочных и отпускных цен за август–сентябрь и влияние на маржу.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo"
+     ]
+    },
+    {
+     "text": "Проверить достаточность оборотного капитала и лимитов факторинга при удорожании закупок.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "evidence_ids": [
+      "n_e6_1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "ceo",
+      "cfo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Значения индексов в новости не приведены.",
+     "question": "Насколько сильно продовольственная инфляция превысила общий ИПЦ?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Структура закупок и продаж компании неизвестна.",
+     "question": "Какая доля закупок и продаж подвержена росту цен?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Событие релевантно отрасли компании, но влияние двустороннее и не подтверждено данными: следите за маржой и оборотным капиталом, срочных действий не требуется.",
+    "kind": "inference",
+    "claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "evidence_ids": [
+     "n_e6_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry",
+     "product.factoring"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "product.factoring",
+     "counterparty.3",
+     "counterparty.4"
+    ],
+    "event_claim_ids": [
+     "e6_food_inflation:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e6_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e6_food_inflation:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e6_food_inflation@1#bdcde2a04ba5|ceo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:10:28+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3054,
+    "completion_tokens": 859,
+    "reasoning_tokens": 20,
+    "cost_rub": 0.104047,
+    "cost_rub_tariff": 0.030178,
+    "latency_ms": 10445,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3054/859, 0.1040 ₽, 10.4 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "costs",
+     "demand_revenue"
+    ],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Продуктовая инфляция в августе опережает общий ИПЦ — для агро-трейдера это двусторонний сигнал по закупочным ценам и выручке",
+    "what_happened": [
+     {
+      "text": "В августе 2026 года цены на продукты питания росли быстрее общего индекса потребительских цен.",
+      "kind": "fact",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания торгует зерном и кормами (F1, F2), поэтому рост продовольственных цен может влиять и на закупочные цены, и на выручку; направление эффекта по данным не определено.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Инфляция закупочных цен может повышать стоимость зерна и логистики, но также поддерживать отпускные цены и выручку; итог зависит от эластичности спроса и запасов.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Рост закупочных цен может увеличить потребность в оборотном капитале и стоимость факторинга.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.factoring"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Удорожание логистики и портовых услуг может сжать маржу при фиксированных экспортных контрактах.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "counterparty.3",
+       "counterparty.4"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При наличии запасов рост цен на зерно и корма может поддержать выручку и маржу.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "company.industry"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Оценить динамику закупочных и отпускных цен за август–сентябрь и влияние на маржу.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "company.okved",
+       "company.industry"
+      ],
+      "roles": [
+       "ceo"
+      ]
+     },
+     {
+      "text": "Проверить достаточность оборотного капитала и лимитов факторинга при удорожании закупок.",
+      "kind": "inference",
+      "claim_ids": [
+       "e6_food_inflation:c1"
+      ],
+      "feature_ids": [
+       "product.factoring"
+      ],
+      "roles": [
+       "ceo",
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Динамика закупочных цен на зерно и корма",
+     "Индексация цен в договорах с покупателями",
+     "Потребность в оборотном капитале"
+    ],
+    "unknowns": [
+     {
+      "text": "Значения индексов в новости не приведены.",
+      "question": "Насколько сильно продовольственная инфляция превысила общий ИПЦ?"
+     },
+     {
+      "text": "Структура закупок и продаж компании неизвестна.",
+      "question": "Какая доля закупок и продаж подвержена росту цен?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Событие релевантно отрасли компании, но влияние двустороннее и не подтверждено данными: следите за маржой и оборотным капиталом, срочных действий не требуется.",
+     "kind": "inference",
+     "claim_ids": [
+      "e6_food_inflation:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry",
+      "product.factoring"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность low; токены 3054/859, 0.1040 ₽, 10.4 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

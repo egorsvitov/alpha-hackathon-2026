@@ -73,6 +73,8 @@ export function EventPage({ eventId }: { eventId: string }) {
             <p className="note note--warn" role="note"><Link2 size={16} aria-hidden /><span>{ins.event.synthetic_link}</span></p>
           )}
 
+          {ins.event.derived_text && <section className="note note--info"><div><strong>Производный текст merge</strong><p>{ins.event.derived_text}</p><p>Это пересказ модели. Оригинальные цитаты и ссылки указаны в источниках.</p></div></section>}
+          {ins.event.processing_status === 'merge_fallback' && <p className="note note--warn">Merge не завершён: показана отдельная публикация, возможны повторы.</p>}
           <div className="event-grid">
             <article className="event-main">
               {ins.status === 'insufficient_data' ? (

@@ -42,7 +42,9 @@ def _load_state(path: str) -> dict:
 
 def _save_state(path: str, state: dict) -> None:
     Path(path).parent.mkdir(parents=True, exist_ok=True)
-    Path(path).write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    tmp = Path(path).with_suffix(".tmp")
+    tmp.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
+    tmp.replace(path)
 
 
 def _append_run(state: dict, run: dict) -> None:
@@ -67,9 +69,11 @@ def _run_collect(args) -> dict:
     start = time.time()
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=args.collect_timeout)
-        ok = proc.returncode == 0
+        report_path = Path(args.out_dir) / "collection-result.json"
+        report = json.loads(report_path.read_text()) if report_path.exists() and report_path.stat().st_mtime >= start else {}
+        ok = proc.returncode == 0 and report.get("status") in ("collected", "no_new")
         return {
-            "ok": ok, "duration_s": round(time.time() - start, 1),
+            "ok": ok, "collection": report, "duration_s": round(time.time() - start, 1),
             "rc": proc.returncode, "tail": proc.stdout.strip().splitlines()[-12:],
         }
     except subprocess.TimeoutExpired:
@@ -129,8 +133,10 @@ def main() -> int:
     state = _load_state(args.state)
 
     if args.once or args.every == 0 and not args.cron:
+        started_at = datetime.now(timezone.utc).isoformat()
         run = _run_collect(args)
-        run["started_at"] = datetime.now(timezone.utc).isoformat()
+        run["started_at"] = started_at
+        run["completed_at"] = datetime.now(timezone.utc).isoformat()
         _append_run(state, run)
         _save_state(args.state, state)
         print(json.dumps(run, ensure_ascii=False, indent=2))
@@ -148,8 +154,10 @@ def main() -> int:
                 due = True
             if due:
                 print(f"[{now.isoformat()}] запуск сбора…", flush=True)
+                started_at = datetime.now(timezone.utc).isoformat()
                 run = _run_collect(args)
-                run["started_at"] = now.isoformat()
+                run["started_at"] = started_at
+                run["completed_at"] = datetime.now(timezone.utc).isoformat()
                 _append_run(state, run)
                 _save_state(args.state, state)
                 print(f"  ok={run['ok']} duration={run['duration_s']}s", flush=True)

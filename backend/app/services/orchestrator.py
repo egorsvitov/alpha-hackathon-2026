@@ -21,39 +21,54 @@ logger = logging.getLogger(__name__)
 
 
 class BudgetTracker:
-    """Учет расходов токенов и дневного бюджета команды (лимит 500 руб/день, сброс в 00:00 МСК)."""
+    """Учёт расхода LLM для ``/metrics`` — реальные цифры шлюза ``app.analyst.llm_gateway``.
+
+    Бюджет команды 500 ₽ в сутки на общий ключ, сброс в 03:00 МСК (kb/15, п. 2).
+    Все вызовы LLM идут через единый шлюз аналитика: он считает токены и рубли
+    (``usage.cost`` шлюза или тариф из ``app/analyst/models.json``), держит потолок
+    ``ANALYST_DAILY_BUDGET_RUB`` и сверяется с ``GET /key/info``. Шаблонный режим
+    LLM не вызывает и ничего не тратит.
+    """
 
     def __init__(self, daily_limit_rub: float = 500.0) -> None:
         self.daily_limit_rub = daily_limit_rub
-        self.spent_today_rub = 0.0
-        self.total_tokens_consumed = 0
         self.total_orchestrations = 0
-        self.retries_triggered = 0
+        self.template_runs = 0
+        self.llm_runs = 0
 
-    def record_usage(
-        self, prompt_tokens: int, completion_tokens: int, retried: bool = False
-    ) -> None:
+    def record_orchestration(self, mode: str = "template") -> None:
         self.total_orchestrations += 1
-        tokens = prompt_tokens + completion_tokens
-        self.total_tokens_consumed += tokens
-        # Тарификация моделей: ~0.02 руб за 1k prompt, ~0.05 руб за 1k completion
-        cost = (prompt_tokens * 0.00002) + (completion_tokens * 0.00005)
-        self.spent_today_rub = round(self.spent_today_rub + cost, 4)
-        if retried:
-            self.retries_triggered += 1
+        if mode == "template":
+            self.template_runs += 1
+        else:
+            self.llm_runs += 1
 
     def get_metrics(self) -> dict[str, Any]:
+        from app.analyst.service import get_analyst_service
+
+        service = get_analyst_service()
+        service.refresh_team_spend()
+        analyst = service.metrics()
+        budget = analyst["budget"]
+        llm = analyst["llm"]
         return {
             "daily_budget_limit_rub": self.daily_limit_rub,
-            "spent_today_rub": self.spent_today_rub,
-            "budget_remaining_rub": round(
-                max(0.0, self.daily_limit_rub - self.spent_today_rub), 2
-            ),
-            "total_tokens_consumed": self.total_tokens_consumed,
+            "analyst_ceiling_rub": budget["ceiling_rub"],
+            "spent_today_rub": budget["spent_window_rub"],
+            "team_spend_today_rub": budget["team_spend_rub"],
+            "budget_remaining_rub": budget["remaining_rub"],
+            "total_tokens_consumed": llm["prompt_tokens"] + llm["completion_tokens"],
+            "reasoning_tokens": llm["reasoning_tokens"],
+            "llm_calls": llm["llm_calls"],
             "total_orchestrations": self.total_orchestrations,
-            "retries_triggered": self.retries_triggered,
-            "reset_at": "00:00 MSK",
-            "caching_efficiency_pct": 82.5,
+            "template_runs": self.template_runs,
+            "llm_runs": self.llm_runs,
+            "retries_triggered": llm["llm_retries"],
+            "json_repairs": llm["json_repairs"],
+            "reset_at": "03:00 MSK",
+            "next_reset_at": budget["next_reset_at"],
+            "caching_efficiency_pct": analyst["cache"]["hit_ratio_pct"],
+            "analyst": analyst,
         }
 
 
@@ -443,12 +458,8 @@ class AgentOrchestrator:
             )
         ]
 
-        # Учет бюджета и расхода токенов
-        self.budget.record_usage(
-            prompt_tokens=1250 + (retry_count * 520),
-            completion_tokens=340 + (retry_count * 110),
-            retried=(retry_count > 0),
-        )
+        # Шаблонный путь LLM не вызывает: токены и рубли не тратятся.
+        self.budget.record_orchestration("template")
 
         return Insight(
             run_id=f"r_{event_id}_{c_id}_{role}",
@@ -470,6 +481,33 @@ class AgentOrchestrator:
             unknowns=unknowns,
             evidence=draft["evidence"],
             trace=trace,
+        )
+
+
+    # --- LLM-режим (ANALYST_MODE=llm|cached) ---
+
+    def run_llm_pipeline(
+        self,
+        event: dict[str, Any],
+        company: dict[str, Any],
+        role: Role,
+        score_fn: Callable[[dict[str, Any], dict[str, Any], Role], Relevance],
+    ) -> Insight:
+        """Вместо шаблонного ``tool_synthesize_insight``: LLM Business Analyst (``app.analyst``).
+
+        Шаги (адаптер входа → Bank RAG → кэш → LLM → QA → приоритет) попадают в ``trace``.
+        Если ни кэша, ни живого вызова нет — шаблонный ``run_pipeline`` с пометкой в трассе.
+        """
+        from app.analyst.service import get_analyst_service
+
+        service = get_analyst_service()
+        self.budget.record_orchestration(service.mode)
+        return service.insight(
+            company,
+            role,
+            event,
+            score_fn,
+            template_fn=lambda: self.run_pipeline(event=event, company=company, role=role, score_fn=score_fn),
         )
 
 

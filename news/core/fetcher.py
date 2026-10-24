@@ -68,6 +68,7 @@ class Fetcher:
     ) -> None:
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+        self.feed_failures: list[str] = []
         self.timeout = timeout
         self.delay = delay
         self.session = session or requests.Session()
@@ -127,6 +128,7 @@ class Fetcher:
             content = self._decode_response(resp)
         except Exception:
             if kind != "article":
+                self.feed_failures.append(url)
                 cached = self._load_from_cache(kind, url)
                 if cached is not None:
                     return cached
@@ -158,6 +160,8 @@ class Fetcher:
     def _from_rss(self, spec: SourceSpec) -> list[ArticleCandidate]:
         content = self._http_get(spec.url, spec.kind)
         parsed = feedparser.parse(content)
+        if getattr(parsed, "bozo", False) and not parsed.entries:
+            raise ValueError("invalid_feed")
         out: list[ArticleCandidate] = []
         for entry in parsed.entries:
             link = (entry.get("link") or "").strip()

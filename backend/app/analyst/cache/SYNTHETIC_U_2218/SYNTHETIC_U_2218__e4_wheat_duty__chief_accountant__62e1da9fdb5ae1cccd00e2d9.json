@@ -1,0 +1,594 @@
+{
+ "key": "SYNTHETIC_U_2218|e4_wheat_duty@1#c0801416248a|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e4_wheat_duty@1#c0801416248a|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:11:29+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "cluster_id": "cluster:e4_wheat_duty",
+   "event_refs": [
+    {
+     "event_id": "e4_wheat_duty",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.75,
+   "significance": "high",
+   "priority_breakdown": {
+    "materiality": 0.62,
+    "urgency": 0.1,
+    "evidence": 0.03,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "negative",
+   "impact_channels": [
+    "taxes",
+    "fx_trade",
+    "demand_revenue"
+   ],
+   "event_status": "occurred",
+   "materiality": "high",
+   "urgency": "high",
+   "headline": "Повышение экспортной пошлины на пшеницу напрямую затрагивает экспорт зерна компании: нужен пересчёт маржи и учёт пошлин",
+   "what_happened": "Правительство повысило экспортную пошлину на пшеницу; новый размер и дата вступления в силу не раскрыты.",
+   "facts": [
+    {
+     "text": "Правительство повысило экспортную пошлину на пшеницу; новый размер и дата вступления в силу не раскрыты.",
+     "kind": "fact",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — оптовая торговля зерном с экспортной ВЭД (декларации с Турцией), вывозная пошлина на пшеницу прямо влияет на экономику её экспортных операций.",
+    "kind": "inference",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry",
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Повышенная пошлина увеличивает стоимость вывоза пшеницы, снижая экспортную маржу или вынуждая пересматривать цены контрактов; товарная структура (доля пшеницы) не подтверждена.",
+    "kind": "inference",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.industry",
+     "fts.flag"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Снижение маржи по экспортным контрактам на пшеницу при неизменных ценах поставок.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "company.industry",
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Риск пересмотра или срыва контрактов с покупателями (в т.ч. по направлению Турция) из-за изменения условий.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "fts.country",
+      "counterparty.1"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Рост потребности в оборотном капитале при изменении сроков расчётов; факторинг может частично компенсировать.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Возможен сдвиг структуры продаж в пользу внутреннего рынка или других культур при росте пошлины на пшеницу.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Доля пшеницы в экспортной выручке",
+    "Размер и дата вступления в силу новой пошлины",
+    "Условия действующих экспортных контрактов и валюты расчётов",
+    "Корректность учёта вывозных пошлин и резервов"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить точный размер пошлины, дату вступления в силу и товарный охват; пересчитать налоговую нагрузку и цены по действующим экспортным контрактам.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Актуализировать учёт и резервы по пошлинам в отчётности, проверить корректность классификации кодов ТН ВЭД в декларациях.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Проверить условия внешнеторговых контрактов (валюта, форс-мажор, пересмотр цен) по направлению Турция.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Оценить достаточность банковских гарантий и лимитов факторинга при изменении оборотного цикла.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "evidence_ids": [
+      "n_e4_1"
+     ],
+     "feature_ids": [
+      "product.guarantees",
+      "product.factoring"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Новый размер пошлины и дата вступления в силу не указаны в источнике.",
+     "question": "Каков новый размер пошлины и с какой даты она применяется?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Товарная структура экспорта неизвестна.",
+     "question": "Какова доля пшеницы в экспортных поставках компании?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Направление и валюта ВЭД не подтверждены.",
+     "question": "Какая доля расчётов с Турцией в валюте и каковы условия пересмотра цен?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": {
+    "metric": "Экспортная маржа по пшенице",
+    "scenario": "Если доля пшеницы в экспорте значительна, то рост пошлины на X п.п. снижает маржу на соответствующую величину при неизменных контрактных ценах; требуется пересчёт после раскрытия ставки пошлины.",
+    "assumptions": [
+     "Доля пшеницы в экспорте существенна (не подтверждена)",
+     "Контрактные цены не пересматриваются в краткосрочном периоде"
+    ],
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.industry",
+     "fts.flag",
+     "fts.country"
+    ]
+   },
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Событие прямо затрагивает экспортный зерновой бизнес компании: до раскрытия ставки пошлины приоритет — пересчёт налоговой нагрузки, цен контрактов и резервов; связь с пшеницей требует проверки.",
+    "kind": "inference",
+    "claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "evidence_ids": [
+     "n_e4_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "company.industry",
+     "fts.flag"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "company.industry",
+     "fts.flag",
+     "fts.country",
+     "counterparty.1",
+     "product.factoring",
+     "product.guarantees"
+    ],
+    "event_claim_ids": [
+     "e4_wheat_duty:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e4_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e4_wheat_duty:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e4_wheat_duty@1#c0801416248a|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:11:29+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3087,
+    "completion_tokens": 1320,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.131647,
+    "cost_rub_tariff": 0.038184,
+    "latency_ms": 13300,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность high; токены 3087/1320, 0.1316 ₽, 13.3 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "negative",
+    "impact_channels": [
+     "taxes",
+     "fx_trade",
+     "demand_revenue"
+    ],
+    "materiality": "high",
+    "urgency": "high",
+    "headline": "Повышение экспортной пошлины на пшеницу напрямую затрагивает экспорт зерна компании: нужен пересчёт маржи и учёт пошлин",
+    "what_happened": [
+     {
+      "text": "Правительство повысило экспортную пошлину на пшеницу; новый размер и дата вступления в силу не раскрыты.",
+      "kind": "fact",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — оптовая торговля зерном с экспортной ВЭД (декларации с Турцией), вывозная пошлина на пшеницу прямо влияет на экономику её экспортных операций.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry",
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Повышенная пошлина увеличивает стоимость вывоза пшеницы, снижая экспортную маржу или вынуждая пересматривать цены контрактов; товарная структура (доля пшеницы) не подтверждена.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.industry",
+      "fts.flag"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Снижение маржи по экспортным контрактам на пшеницу при неизменных ценах поставок.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "company.industry",
+       "fts.flag"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Риск пересмотра или срыва контрактов с покупателями (в т.ч. по направлению Турция) из-за изменения условий.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "fts.country",
+       "counterparty.1"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Рост потребности в оборотном капитале при изменении сроков расчётов; факторинг может частично компенсировать.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "product.factoring"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Возможен сдвиг структуры продаж в пользу внутреннего рынка или других культур при росте пошлины на пшеницу.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить точный размер пошлины, дату вступления в силу и товарный охват; пересчитать налоговую нагрузку и цены по действующим экспортным контрактам.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": [
+       "chief_accountant",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Актуализировать учёт и резервы по пошлинам в отчётности, проверить корректность классификации кодов ТН ВЭД в декларациях.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Проверить условия внешнеторговых контрактов (валюта, форс-мажор, пересмотр цен) по направлению Турция.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "fts.country"
+      ],
+      "roles": [
+       "chief_accountant",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Оценить достаточность банковских гарантий и лимитов факторинга при изменении оборотного цикла.",
+      "kind": "inference",
+      "claim_ids": [
+       "e4_wheat_duty:c1"
+      ],
+      "feature_ids": [
+       "product.guarantees",
+       "product.factoring"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Доля пшеницы в экспортной выручке",
+     "Размер и дата вступления в силу новой пошлины",
+     "Условия действующих экспортных контрактов и валюты расчётов",
+     "Корректность учёта вывозных пошлин и резервов"
+    ],
+    "unknowns": [
+     {
+      "text": "Новый размер пошлины и дата вступления в силу не указаны в источнике.",
+      "question": "Каков новый размер пошлины и с какой даты она применяется?"
+     },
+     {
+      "text": "Товарная структура экспорта неизвестна.",
+      "question": "Какова доля пшеницы в экспортных поставках компании?"
+     },
+     {
+      "text": "Направление и валюта ВЭД не подтверждены.",
+      "question": "Какая доля расчётов с Турцией в валюте и каковы условия пересмотра цен?"
+     }
+    ],
+    "impact_estimate": {
+     "metric": "Экспортная маржа по пшенице",
+     "scenario": "Если доля пшеницы в экспорте значительна, то рост пошлины на X п.п. снижает маржу на соответствующую величину при неизменных контрактных ценах; требуется пересчёт после раскрытия ставки пошлины.",
+     "assumptions": [
+      "Доля пшеницы в экспорте существенна (не подтверждена)",
+      "Контрактные цены не пересматриваются в краткосрочном периоде"
+     ],
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.industry",
+      "fts.flag",
+      "fts.country"
+     ]
+    },
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Событие прямо затрагивает экспортный зерновой бизнес компании: до раскрытия ставки пошлины приоритет — пересчёт налоговой нагрузки, цен контрактов и резервов; связь с пшеницей требует проверки.",
+     "kind": "inference",
+     "claim_ids": [
+      "e4_wheat_duty:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "company.industry",
+      "fts.flag"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность high; токены 3087/1320, 0.1316 ₽, 13.3 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

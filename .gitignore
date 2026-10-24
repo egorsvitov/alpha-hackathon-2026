@@ -46,3 +46,14 @@ alfa_hack.db
 *.egg-info/
 build/
 dist/
+
+# Full-cycle private workspace and encoder/retrieval artifacts
+/.runtime/
+/data/processed/full-cycle/
+/data/processed/retriever/
+/data/processed/company_news/
+/data/processed/event_pipeline/
+/data/raw_news/
+*.npy
+*.sqlite-wal
+*.sqlite-shm

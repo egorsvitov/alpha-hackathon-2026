@@ -1,0 +1,9 @@
+# Optional CPU worker image; weights/reference are mounted read-only at runtime.
+FROM alfa-news-backend:local
+USER root
+RUN pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+COPY retriever/requirements-cpu.txt /tmp/requirements-cpu.txt
+# requirements-cpu includes a relative requirements.txt; install explicit extras here.
+RUN pip install sentence-transformers==5.7.0 transformers==5.20.2 scipy==1.18.1 scikit-learn==1.9.1 threadpoolctl==3.7.0
+COPY backend /app/backend
+USER app

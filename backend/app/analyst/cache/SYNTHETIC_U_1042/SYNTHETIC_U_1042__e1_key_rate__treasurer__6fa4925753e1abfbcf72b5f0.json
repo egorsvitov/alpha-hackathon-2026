@@ -1,0 +1,487 @@
+{
+ "key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|treasurer|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:09:23+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "cluster_id": "cluster:e1_key_rate",
+   "event_refs": [
+    {
+     "event_id": "e1_key_rate",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.38,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.06,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "credit_liquidity"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ставка ЦБ сохранена на 14%: условия нового кредитования и размещения средств для казначейства остаются жёсткими",
+   "what_happened": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+   "facts": [
+    {
+     "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+     "kind": "fact",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания имеет кредитные продукты и лизинг в Альфа-Банке, поэтому уровень ключевой ставки определяет стоимость нового заёмного финансирования и доходность размещения свободных средств.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ключевая ставка задаёт базу для ставок по новым кредитам и депозитам: сохранение 14% удерживает стоимость нового долга и доходность размещения на текущем уровне.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing",
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Новое кредитование и рефинансирование останутся дорогими; условия действующих договоров зависят от их типа ставки, что требует проверки.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Аналитика банка ожидает паузу до декабря с риском сохранения ставки 14% до конца года — жёсткие условия финансирования могут продлиться.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "При ставке 14% размещение свободной ликвидности в депозиты может давать привлекательную доходность; сейчас депозитов в Альфа-Банке нет.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.deposits",
+      "product.rko"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Тип ставки и объём действующих кредитных договоров и лизинга",
+    "Свободные остатки ликвидности и применимые лимиты размещения",
+    "План потребности в новом финансировании до конца 2026 года"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить тип ставок (фикс/плавающая) и график действующих кредитов и лизинга для оценки чувствительности к ставке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Оценить целесообразность размещения свободного остатка на депозитах при ставке 14% в рамках лимитов.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.deposits"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Спланировать потребность в новом финансировании до конца года с учётом ожидаемой паузы ставки до декабря.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "evidence_ids": [
+      "n_e1_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "treasurer",
+      "cfo"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Условия действующих кредитных договоров (тип ставки, сроки, объём) неизвестны.",
+     "question": "Какая часть долга по плавающей ставке?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Объём свободных средств для размещения неизвестен.",
+     "question": "Каков средний свободный остаток на счетах?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "found",
+    "bank_chunk_ids": [
+     "b_key"
+    ]
+   },
+   "ai_conclusion": {
+    "text": "Ставка сохранена на 14%: стоимость нового кредитования и лизинга останется высокой, но депозиты могут быть доходным инструментом для свободной ликвидности; проверить структуру действующего долга.",
+    "kind": "inference",
+    "claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "evidence_ids": [
+     "n_e1_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "product.leasing",
+     "product.deposits"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "product.loans",
+     "product.leasing",
+     "product.deposits",
+     "product.rko"
+    ],
+    "event_claim_ids": [
+     "e1_key_rate:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e1_1"
+    ],
+    "bank_chunk_ids": [
+     "b_key"
+    ],
+    "inference_status": "supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e1_key_rate:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e1_key_rate@1#792730253cdc|treasurer|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:09:23+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3196,
+    "completion_tokens": 818,
+    "reasoning_tokens": 0,
+    "cost_rub": 0.104141,
+    "cost_rub_tariff": 0.030206,
+    "latency_ms": 9322,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Найдено фрагментов: 1",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3196/818, 0.1041 ₽, 9.3 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "credit_liquidity"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ставка ЦБ сохранена на 14%: условия нового кредитования и размещения средств для казначейства остаются жёсткими",
+    "what_happened": [
+     {
+      "text": "11 сентября 2026 года Банк России сохранил ключевую ставку на уровне 14,00% годовых.",
+      "kind": "fact",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания имеет кредитные продукты и лизинг в Альфа-Банке (F11, F12), поэтому уровень ключевой ставки определяет стоимость нового заёмного финансирования и доходность размещения свободных средств.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ключевая ставка задаёт базу для ставок по новым кредитам и депозитам: сохранение 14% удерживает стоимость нового долга и доходность размещения на текущем уровне.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing",
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Новое кредитование и рефинансирование останутся дорогими; условия действующих договоров зависят от их типа ставки, что требует проверки.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Аналитика банка ожидает паузу до декабря с риском сохранения ставки 14% до конца года — жёсткие условия финансирования могут продлиться.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "При ставке 14% размещение свободной ликвидности в депозиты может давать привлекательную доходность; сейчас депозитов в Альфа-Банке нет (F13).",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.deposits",
+       "product.rko"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить тип ставок (фикс/плавающая) и график действующих кредитов и лизинга для оценки чувствительности к ставке.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": [
+       "treasurer",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Оценить целесообразность размещения свободного остатка на депозитах при ставке 14% в рамках лимитов.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.deposits"
+      ],
+      "roles": [
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Спланировать потребность в новом финансировании до конца года с учётом ожидаемой паузы ставки до декабря.",
+      "kind": "inference",
+      "claim_ids": [
+       "e1_key_rate:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "treasurer",
+       "cfo"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Тип ставки и объём действующих кредитных договоров и лизинга",
+     "Свободные остатки ликвидности и применимые лимиты размещения",
+     "План потребности в новом финансировании до конца 2026 года"
+    ],
+    "unknowns": [
+     {
+      "text": "Условия действующих кредитных договоров (тип ставки, сроки, объём) неизвестны.",
+      "question": "Какая часть долга по плавающей ставке?"
+     },
+     {
+      "text": "Объём свободных средств для размещения неизвестен.",
+      "question": "Каков средний свободный остаток на счетах?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "found",
+     "bank_chunk_ids": [
+      "b_key"
+     ]
+    },
+    "ai_conclusion": {
+     "text": "Ставка сохранена на 14%: стоимость нового кредитования и лизинга останется высокой, но депозиты могут быть доходным инструментом для свободной ликвидности; проверить структуру действующего долга.",
+     "kind": "inference",
+     "claim_ids": [
+      "e1_key_rate:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing",
+      "product.deposits"
+     ],
+     "roles": []
+    },
+    "inference_status": "supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3196/818, 0.1041 ₽, 9.3 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

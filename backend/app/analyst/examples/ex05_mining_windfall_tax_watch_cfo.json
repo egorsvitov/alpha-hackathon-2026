@@ -1,0 +1,626 @@
+{
+ "example_id": "EX05",
+ "slug": "mining_windfall_tax_watch_cfo",
+ "title": "Налог на дополнительный доход «отдельных» добывающих: связь не подтверждена — watch",
+ "kind": "reference",
+ "topics": [
+  "taxes",
+  "industry",
+  "commodities"
+ ],
+ "role": "cfo",
+ "decision": "watch",
+ "teaches": [
+  "Отраслевое совпадение не доказывает, что мера касается компании: watch, а не include",
+  "Предложение — сценарий; шаги — отслеживать критерии и готовить расчёт чувствительности"
+ ],
+ "defect": null,
+ "source_ids": [
+  "minfin-2026-09-24-budget"
+ ],
+ "disclaimer": "Учебный пример: компания синтетическая (не из данных кейса), событие — по открытому источнику на дату примера и может быть устаревшим. Не факты о текущей компании и не текущие новости.",
+ "input": {
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+   "request_id": "EX05-request",
+   "company_id": "EXAMPLE_CO_05",
+   "role": "cfo",
+   "as_of": "2026-09-25T10:00:00+03:00",
+   "news_window_hours": 1440,
+   "max_insights": 10
+  },
+  "company_context": {
+   "profile_version": "example-v1",
+   "profile_snapshot_ref": "seed:EXAMPLE_CO_05@example-v1",
+   "verified_facts": [
+    {
+     "feature_id": "company.okved",
+     "field": "MAINOKVED_CODE/MAINOKVED_NAME",
+     "value": "07.29 Добыча руд прочих цветных металлов",
+     "description": "Основной ОКВЭД",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.industry",
+     "field": "industry",
+     "value": "Добыча полезных ископаемых",
+     "description": "Отрасль (по ОКВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "derived"
+    },
+    {
+     "feature_id": "company.revenue",
+     "field": "REVENUE_COMPANY",
+     "value": "120 млрд ₽",
+     "description": "Выручка за прошлый отчётный год (2025), не за текущий период",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.region",
+     "field": "RC_NAME/CITY_NAME",
+     "value": "Сибирь, Красноярск",
+     "description": "Регион и город обслуживания",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.rko",
+     "field": "CL_PRODUCT_RKO_MARK",
+     "value": "есть",
+     "description": "Расчётно-кассовое обслуживание в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.loans",
+     "field": "CL_PRODUCT_LOA_MARK",
+     "value": "есть",
+     "description": "Кредитные продукты в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.flag",
+     "field": "FTS_FLAG",
+     "value": "есть",
+     "description": "Есть таможенные декларации (ВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.country",
+     "field": "FTS_COUNTRY_NAME",
+     "value": "Китай",
+     "description": "Страна ВЭД по декларациям (направление экспорт/импорт неизвестно)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    }
+   ],
+   "economic_exposures": [
+    {
+     "exposure_id": "exp.loans",
+     "factor": "Стоимость и доступность заёмного финансирования",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "product.loans"
+     ],
+     "description": "Выведено из наличия продукта «Кредитные продукты»; условия договоров неизвестны."
+    },
+    {
+     "exposure_id": "exp.fx_trade",
+     "factor": "Валютный курс и условия внешней торговли",
+     "status": "inferred",
+     "confidence": "medium",
+     "basis_feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "description": "Выведено из наличия таможенных деклараций; направление и валюта контрактов неизвестны."
+    }
+   ],
+   "related_entities": [],
+   "graph_context": {
+    "included": false,
+    "reason": "Платёжный контекст не передан"
+   },
+   "unknowns": [
+    "Условия действующих кредитных договоров (тип ставки, сроки, объём долга) в профиле неизвестны.",
+    "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов, не тип отношений.",
+    "Выручка известна только за прошлый отчётный год; квартальные и месячные показатели неизвестны.",
+    "Наличие продукта «Банковские гарантии» в профиле неизвестно.",
+    "Наличие продукта «Лизинг» в профиле неизвестно.",
+    "Наличие продукта «Депозиты» в профиле неизвестно.",
+    "Наличие продукта «Зарплатный проект» в профиле неизвестно.",
+    "Наличие продукта «Факторинг» в профиле неизвестно.",
+    "Направление ВЭД (экспорт или импорт), валюта контрактов и товарная структура неизвестны."
+   ],
+   "synthetic_demo_profile": true
+  },
+  "candidates": [
+   {
+    "candidate_id": "EX05-cand",
+    "cluster_id": "EX05-cluster",
+    "event_bundle_refs": [
+     {
+      "event_id": "ex05:mining-tax",
+      "event_version": 1,
+      "snapshot_sha256": "da9f2f6d88c5505f49798bc3f85fa3f3a72699f6252a6f3f004c8f033d4a904e"
+     }
+    ],
+    "analysis_projection": {
+     "event_bundles": [
+      {
+       "bundle_schema_version": "example-0.1",
+       "event": {
+        "event_id": "ex05:mining-tax",
+        "event_version": 1,
+        "event_type": "tax_change",
+        "title": "Минфин предлагает налог на дополнительный доход отдельных добывающих организаций",
+        "first_published_at": "2026-09-24T11:00:00+03:00",
+        "quality": "complete"
+       },
+       "claims": [
+        {
+         "claim_id": "ex05:mining-tax:c1",
+         "text": "Минфин в бюджетном пакете предлагает ввести налог для отдельных добывающих организаций в размере 30% от дополнительного дохода от роста мировых цен на твёрдые полезные ископаемые относительно 2025 года.",
+         "modality": "scenario",
+         "polarity": "affirmed",
+         "stage": "proposed",
+         "attribution": {
+          "name": "Минфин России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex05:mining-tax:ev1"
+         ]
+        },
+        {
+         "claim_id": "ex05:mining-tax:c2",
+         "text": "Для золота ставка такого налога предлагается на уровне 20%.",
+         "modality": "scenario",
+         "polarity": "affirmed",
+         "stage": "proposed",
+         "attribution": {
+          "name": "Минфин России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex05:mining-tax:ev2"
+         ]
+        }
+       ],
+       "conflicts": [],
+       "relations": [],
+       "sources": [
+        {
+         "source_id": "minfin-2026-09-24-budget",
+         "title": "Минфин России внес в Правительство РФ бюджетный пакет",
+         "publisher": "Минфин России",
+         "published_at": "2026-09-24T11:00:00+03:00",
+         "url": "https://minfin.gov.ru/ru/press-center/?id_4=40635-minfin_rossii_vnes_v_pravitelstvo_rf_byudzhetnyi_paket",
+         "is_synthetic": false
+        }
+       ],
+       "evidence": [
+        {
+         "evidence_id": "ex05:mining-tax:ev1",
+         "source_id": "minfin-2026-09-24-budget",
+         "quote": "налог для отдельных добывающих организаций в размере 30% от дополнительного дохода",
+         "field": "text"
+        },
+        {
+         "evidence_id": "ex05:mining-tax:ev2",
+         "source_id": "minfin-2026-09-24-budget",
+         "quote": "по золоту – 20%",
+         "field": "text"
+        }
+       ],
+       "limitations": [
+        "Законодательное предложение; перечень организаций в сообщении не раскрыт."
+       ]
+      }
+     ]
+    },
+    "match_context": {
+     "signals": [
+      {
+       "channel": "rules",
+       "profile_facet": "okved",
+       "reason": "ОКВЭД 07.29 (добыча руд); событие — налог для добывающих организаций"
+      }
+     ],
+     "matched_company_feature_ids": [
+      "company.okved"
+     ],
+     "matched_event_claim_ids": [
+      "ex05:mining-tax:c1"
+     ],
+     "confirmed_entity_match": null,
+     "assumptions_not_verified": [
+      "Относится ли компания к «отдельным добывающим организациям» — неизвестно"
+     ],
+     "prior_score": 0.55
+    },
+    "bank_fragments": []
+   }
+  ],
+  "analysis_policy": {}
+ },
+ "draft": {
+  "decision": "watch",
+  "event_status": "scenario",
+  "impact_direction": "negative",
+  "impact_channels": [
+   "taxes"
+  ],
+  "materiality": "medium",
+  "urgency": "low",
+  "headline": "Предложен налог на дополнительный доход отдельных добывающих компаний: касается ли он компании — неизвестно",
+  "what_happened": [
+   {
+    "text": "Сценарий: Минфин предлагает налог 30% с дополнительного дохода от роста мировых цен для отдельных добывающих организаций.",
+    "kind": "fact",
+    "claim_ids": [
+     "C1"
+    ]
+   },
+   {
+    "text": "Для золота предлагается ставка 20% (сценарий).",
+    "kind": "fact",
+    "claim_ids": [
+     "C2"
+    ]
+   }
+  ],
+  "company_relevance": {
+   "text": "Компания добывает руды цветных металлов, но войдёт ли она в число «отдельных» организаций, из предложения не следует.",
+   "kind": "hypothesis",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F1"
+   ]
+  },
+  "impact_mechanism": {
+   "text": "Если компания попадёт под налог, часть дополнительного дохода от роста мировых цен может изыматься.",
+   "kind": "hypothesis",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F1"
+   ]
+  },
+  "risks": [
+   {
+    "text": "При попадании под налог может потребоваться пересмотр бюджета и инвестиционных планов.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F1"
+    ]
+   }
+  ],
+  "opportunities": [],
+  "next_steps": [
+   {
+    "text": "Отслеживать критерии отбора организаций в тексте законопроекта.",
+    "kind": "inference",
+    "claim_ids": [
+     "C1"
+    ],
+    "roles": [
+     "cfo",
+     "chief_accountant"
+    ]
+   },
+   {
+    "text": "Подготовить расчёт чувствительности к налогу на случай попадания под него.",
+    "kind": "inference",
+    "claim_ids": [
+     "C1"
+    ],
+    "feature_ids": [
+     "F1"
+    ],
+    "roles": [
+     "cfo"
+    ]
+   }
+  ],
+  "recommended_checks": [
+   "Какие критерии отнесения к «отдельным добывающим организациям» указаны в законопроекте?"
+  ],
+  "unknowns": [
+   {
+    "text": "Критерии отбора организаций и сроки введения налога неизвестны.",
+    "question": "Относится ли компания к перечню?"
+   }
+  ],
+  "impact_estimate": null,
+  "bank_assessment": {
+   "status": "not_found",
+   "bank_chunk_ids": []
+  },
+  "ai_conclusion": {
+   "text": "Держать на контроле: влияние возможно и может быть заметным, но связь с компанией пока не подтверждена.",
+   "kind": "inference",
+   "claim_ids": [
+    "C1"
+   ],
+   "feature_ids": [
+    "F1"
+   ]
+  },
+  "inference_status": "hypothesis"
+ },
+ "expected_output": {
+  "schema_version": "AnalystOutput.v1-draft",
+  "request_id": "EX05-request",
+  "company_id": "EXAMPLE_CO_05",
+  "role": "cfo",
+  "as_of": "2026-09-25T10:00:00+03:00",
+  "ranked_insights": [
+   {
+    "candidate_id": "EX05-cand",
+    "cluster_id": "EX05-cluster",
+    "event_refs": [
+     {
+      "event_id": "ex05:mining-tax",
+      "event_version": 1
+     }
+    ],
+    "decision": "watch",
+    "priority_score": 0.32,
+    "significance": "medium",
+    "priority_breakdown": {
+     "materiality": 0.32,
+     "urgency": 0.0,
+     "evidence": 0.0,
+     "cap": 0.45,
+     "cap_reason": "решение watch: связь не подтверждена",
+     "penalty": 0.0
+    },
+    "impact_direction": "negative",
+    "impact_channels": [
+     "taxes"
+    ],
+    "event_status": "scenario",
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Предложен налог на дополнительный доход отдельных добывающих компаний: касается ли он компании — неизвестно",
+    "what_happened": "Сценарий: Минфин предлагает налог 30% с дополнительного дохода от роста мировых цен для отдельных добывающих организаций. Для золота предлагается ставка 20% (сценарий).",
+    "facts": [
+     {
+      "text": "Сценарий: Минфин предлагает налог 30% с дополнительного дохода от роста мировых цен для отдельных добывающих организаций.",
+      "kind": "fact",
+      "claim_ids": [
+       "ex05:mining-tax:c1"
+      ],
+      "evidence_ids": [
+       "ex05:mining-tax:ev1"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     },
+     {
+      "text": "Для золота предлагается ставка 20% (сценарий).",
+      "kind": "fact",
+      "claim_ids": [
+       "ex05:mining-tax:c2"
+      ],
+      "evidence_ids": [
+       "ex05:mining-tax:ev2"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания добывает руды цветных металлов, но войдёт ли она в число «отдельных» организаций, из предложения не следует.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "ex05:mining-tax:c1"
+     ],
+     "evidence_ids": [
+      "ex05:mining-tax:ev1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Если компания попадёт под налог, часть дополнительного дохода от роста мировых цен может изыматься.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "ex05:mining-tax:c1"
+     ],
+     "evidence_ids": [
+      "ex05:mining-tax:ev1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "При попадании под налог может потребоваться пересмотр бюджета и инвестиционных планов.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "ex05:mining-tax:c1"
+      ],
+      "evidence_ids": [
+       "ex05:mining-tax:ev1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": true,
+      "roles": []
+     }
+    ],
+    "opportunities": [],
+    "recommended_checks": [
+     "Какие критерии отнесения к «отдельным добывающим организациям» указаны в законопроекте?"
+    ],
+    "next_steps": [
+     {
+      "text": "Отслеживать критерии отбора организаций в тексте законопроекта.",
+      "kind": "inference",
+      "claim_ids": [
+       "ex05:mining-tax:c1"
+      ],
+      "evidence_ids": [
+       "ex05:mining-tax:ev1"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "cfo",
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Подготовить расчёт чувствительности к налогу на случай попадания под него.",
+      "kind": "inference",
+      "claim_ids": [
+       "ex05:mining-tax:c1"
+      ],
+      "evidence_ids": [
+       "ex05:mining-tax:ev1"
+      ],
+      "feature_ids": [
+       "company.okved"
+      ],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": [
+       "cfo"
+      ]
+     }
+    ],
+    "unknowns": [
+     {
+      "text": "Критерии отбора организаций и сроки введения налога неизвестны.",
+      "question": "Относится ли компания к перечню?",
+      "how_to_clarify": null
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Держать на контроле: влияние возможно и может быть заметным, но связь с компанией пока не подтверждена.",
+     "kind": "inference",
+     "claim_ids": [
+      "ex05:mining-tax:c1"
+     ],
+     "evidence_ids": [
+      "ex05:mining-tax:ev1"
+     ],
+     "feature_ids": [
+      "company.okved"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    "support": {
+     "company_feature_ids": [
+      "company.okved"
+     ],
+     "event_claim_ids": [
+      "ex05:mining-tax:c1",
+      "ex05:mining-tax:c2"
+     ],
+     "event_evidence_ids": [
+      "ex05:mining-tax:ev1",
+      "ex05:mining-tax:ev2"
+     ],
+     "bank_chunk_ids": [],
+     "inference_status": "hypothesis",
+     "limitations": []
+    },
+    "changes_since_previous": null
+   }
+  ],
+  "excluded_candidates": [],
+  "run_metadata": {
+   "model": "few-shot-reference",
+   "prompt_version": "analyst-v1.0",
+   "qa_status": "passed",
+   "bank_rag_used": false,
+   "generated_by": "cached",
+   "profile_version": "example-v1",
+   "cache_hits": 0,
+   "llm_calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_rub": 0.0,
+   "latency_ms": 0,
+   "json_repairs": 0,
+   "candidates": [
+    {
+     "candidate_id": "EX05-cand",
+     "model": null,
+     "prompt_version": "analyst-v1.0",
+     "generated_by": "cached",
+     "cache_key": null,
+     "created_at": null,
+     "qa_status": "passed",
+     "qa_issues": [],
+     "usage": {},
+     "trace": [],
+     "draft": null,
+     "llm_trace": [],
+     "memory_ref": null
+    }
+   ]
+  }
+ }
+}

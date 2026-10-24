@@ -1,0 +1,497 @@
+{
+ "key": "SYNTHETIC_U_1042|e2_eu_steel_quota@1#7ec69e2df613|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e2_eu_steel_quota@1#7ec69e2df613|cfo|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:08:58+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e2_eu_steel_quota:v1",
+   "cluster_id": "cluster:e2_eu_steel_quota",
+   "event_refs": [
+    {
+     "event_id": "e2_eu_steel_quota",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.32,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "negative",
+   "impact_channels": [
+    "demand_revenue",
+    "fx_trade"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Квоты ЕС на российский стальной прокат: прямого экспорта в ЕС у компании не подтверждено, но возможны косвенные эффекты на рынок металла",
+   "what_happened": "ЕС объявил о введении квот на импорт стального проката из России; размер квот и дата начала действия не раскрыты.",
+   "facts": [
+    {
+     "text": "ЕС объявил о введении квот на импорт стального проката из России; размер квот и дата начала действия не раскрыты.",
+     "kind": "fact",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания — производитель стали с ВЭД, но подтверждённые декларации относятся к Казахстану, а не к ЕС; связь с событием возможна через рынок металла, но не подтверждена.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "evidence_ids": [
+     "n_e2_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Ограничение доступа в ЕС может усилить перенаправление российских объёмов на другие рынки, включая ЕАЭС, что при условии конкуренции может давить на цены и спрос компании.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "evidence_ids": [
+     "n_e2_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "При конкуренции на рынке Казахстана перенаправленные из ЕС объёмы могут давить на цены проката и маржу компании.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "fts.country",
+      "counterparty.3"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Снижение выручки от продаж могло бы осложнить обслуживание кредитов и продление лизинга, если такая зависимость есть.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "product.leasing"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Если компания не поставляет в ЕС, ограничение может слабо затронуть её напрямую, а сдвиг потоков может открыть ниши на рынке ЕАЭС.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Доля экспорта в ЕС и в Казахстан в выручке",
+    "Тип ставок действующих кредитных договоров",
+    "Договоры с ООО «МеталлТрейд Холдинг» и АО «СтройИндустрия» (тип отношений не подтверждён)"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить, есть ли у компании или группы GRP-0317 экспортные поставки проката в ЕС и их доля в выручке.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "company.group",
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    },
+    {
+     "text": "Оценить структуру продаж в Казахстан и чувствительность цен к росту предложения на рынке ЕАЭС.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "fts.country",
+      "counterparty.3"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo"
+     ]
+    },
+    {
+     "text": "Учесть сценарий давления на маржу в бюджете и проверить ковенанты/лимиты по действующим кредитным линиям.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Неизвестно, экспортирует ли компания в ЕС; декларации подтверждают только Казахстан.",
+     "question": "Есть ли поставки проката в ЕС у компании или группы?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Размер квот и дата вступления в силу не раскрыты.",
+     "question": "Каковы параметры квот и сроки их введения?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Тип отношений по платежам с контрагентами не подтверждён договорами.",
+     "question": "Кто основные покупатели проката компании и какова их доля?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Событие отраслевое: прямого подтверждения экспорта компании в ЕС нет, но как сталепроизводителю с ВЭД стоит проверить структуру экспорта и заложить в бюджет сценарий ценового давления на рынке ЕАЭС.",
+    "kind": "inference",
+    "claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "evidence_ids": [
+     "n_e2_1"
+    ],
+    "feature_ids": [
+     "company.okved",
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "company.okved",
+     "fts.flag",
+     "fts.country",
+     "counterparty.3",
+     "product.loans",
+     "product.leasing",
+     "company.group"
+    ],
+    "event_claim_ids": [
+     "e2_eu_steel_quota:c1"
+    ],
+    "event_evidence_ids": [
+     "n_e2_1"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e2_eu_steel_quota:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e2_eu_steel_quota@1#7ec69e2df613|cfo|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:08:58+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3106,
+    "completion_tokens": 1081,
+    "reasoning_tokens": 36,
+    "cost_rub": 0.117973,
+    "cost_rub_tariff": 0.034218,
+    "latency_ms": 12642,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3106/1081, 0.1180 ₽, 12.6 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "negative",
+    "impact_channels": [
+     "demand_revenue",
+     "fx_trade"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Квоты ЕС на российский стальной прокат: прямого экспорта в ЕС у компании не подтверждено, но возможны косвенные эффекты на рынок металла",
+    "what_happened": [
+     {
+      "text": "ЕС объявил о введении квот на импорт стального проката из России; размер квот и дата начала действия не раскрыты.",
+      "kind": "fact",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания — производитель стали с ВЭД, но подтверждённые декларации относятся к Казахстану, а не к ЕС; связь с событием возможна через рынок металла, но не подтверждена.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Ограничение доступа в ЕС может усилить перенаправление российских объёмов на другие рынки, включая ЕАЭС, что при условии конкуренции может давить на цены и спрос компании.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "При конкуренции на рынке Казахстана перенаправленные из ЕС объёмы могут давить на цены проката и маржу компании.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "fts.country",
+       "counterparty.3"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Снижение выручки от продаж могло бы осложнить обслуживание кредитов и продление лизинга, если такая зависимость есть.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "product.loans",
+       "product.leasing"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Если компания не поставляет в ЕС, ограничение может слабо затронуть её напрямую, а сдвиг потоков может открыть ниши на рынке ЕАЭС.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить, есть ли у компании или группы GRP-0317 экспортные поставки проката в ЕС и их доля в выручке.",
+      "kind": "inference",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "company.group",
+       "fts.flag"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Оценить структуру продаж в Казахстан и чувствительность цен к росту предложения на рынке ЕАЭС.",
+      "kind": "inference",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "fts.country",
+       "counterparty.3"
+      ],
+      "roles": [
+       "cfo"
+      ]
+     },
+     {
+      "text": "Учесть сценарий давления на маржу в бюджете и проверить ковенанты/лимиты по действующим кредитным линиям.",
+      "kind": "inference",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Доля экспорта в ЕС и в Казахстан в выручке",
+     "Тип ставок действующих кредитных договоров",
+     "Договоры с ООО «МеталлТрейд Холдинг» и АО «СтройИндустрия» (тип отношений не подтверждён)"
+    ],
+    "unknowns": [
+     {
+      "text": "Неизвестно, экспортирует ли компания в ЕС; декларации подтверждают только Казахстан.",
+      "question": "Есть ли поставки проката в ЕС у компании или группы?"
+     },
+     {
+      "text": "Размер квот и дата вступления в силу не раскрыты.",
+      "question": "Каковы параметры квот и сроки их введения?"
+     },
+     {
+      "text": "Тип отношений по платежам с контрагентами не подтверждён договорами.",
+      "question": "Кто основные покупатели проката компании и какова их доля?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Событие отраслевое: прямого подтверждения экспорта компании в ЕС нет, но как сталепроизводителю с ВЭД стоит проверить структуру экспорта и заложить в бюджет сценарий ценового давления на рынке ЕАЭС.",
+     "kind": "inference",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "feature_ids": [
+      "company.okved",
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3106/1081, 0.1180 ₽, 12.6 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

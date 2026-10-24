@@ -1,0 +1,22 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "valid": {
+      "title": "Valid",
+      "type": "boolean"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    }
+  },
+  "required": [
+    "valid",
+    "errors"
+  ],
+  "title": "ValidationReport",
+  "type": "object"
+}

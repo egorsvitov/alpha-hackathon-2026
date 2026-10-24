@@ -1,0 +1,533 @@
+{
+ "key": "SYNTHETIC_U_1042|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_1042|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:09:49+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "cluster_id": "cluster:e3_rub_weak",
+   "event_refs": [
+    {
+     "event_id": "e3_rub_weak",
+     "event_version": 1
+    }
+   ],
+   "decision": "watch",
+   "priority_score": 0.32,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.0,
+    "evidence": 0.0,
+    "cap": 0.45,
+    "cap_reason": "решение watch: связь не подтверждена",
+    "penalty": 0.0
+   },
+   "impact_direction": "uncertain",
+   "impact_channels": [
+    "fx_trade",
+    "credit_liquidity"
+   ],
+   "event_status": "occurred",
+   "materiality": "medium",
+   "urgency": "low",
+   "headline": "Ослабление рубля на 4% затрагивает ВЭД-расчёты и учёт компании, но направление и валюта контрактов не подтверждены",
+   "what_happened": "За неделю рубль ослаб к юаню и доллару США на 4%. Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+   "facts": [
+    {
+     "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания ведёт ВЭД с Казахстаном; ослабление рубля может влиять на курсовые разницы и стоимость расчётов, если контракты номинированы в валюте.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Через валютный курс: переоценка валютных требований/обязательств в учёте, изменение рублёвой стоимости импортных/экспортных контрактов и, при плавающих ставках, стоимости нового кредитования.",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "product.loans",
+     "fts.flag"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Курсовые разницы по валютным расчётам с контрагентами могут усложнить учёт и увеличить налоговые обязательства при переоценке.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "При дальнейшем ослаблении рубля (прогноз ) рублёвая стоимость импортных закупок может вырасти.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "Условия нового кредитования могут ухудшиться при ответном движении ставки; по действующим договорам влияние неизвестно.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Если экспортные контракты номинированы в валюте, ослабление рубля может увеличить рублёвую выручку от ВЭД.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Валюта номинации внешнеторговых контрактов",
+    "Тип ставок действующих кредитов",
+    "Порядок переоценки валютных статей в учётной политике"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить валюту и условия расчётов по контрактам с казахстанскими контрагентами и порядок признания курсовых разниц.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Уточнить тип ставок по действующим кредитным договорам для оценки чувствительности к изменению ставок.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "product.loans"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant",
+      "cfo"
+     ]
+    },
+    {
+     "text": "Оценить необходимость резерва/пояснений по курсовым разницам в ближайшей отчётности.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Направление ВЭД (экспорт/импорт) и валюта контрактов неизвестны.",
+     "question": "В какой валюте номинированы контракты с Казахстаном и кто валютная сторона расчётов?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Условия действующих кредитных договоров неизвестны.",
+     "question": "Какой тип ставки (фиксированная/плавающая) и объём долга по действующим кредитам?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Ослабление рубля на 4% потенциально затрагивает ВЭД-расчёты и учёт компании, но без данных о валюте контрактов и направлении торговли влияние остаётся гипотезой; прогноз дальнейшего ослабления — не факт.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country",
+     "product.loans"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "fts.flag",
+     "fts.country",
+     "product.loans"
+    ],
+    "event_claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "event_evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "hypothesis",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_1042|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:09:49+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3207,
+    "completion_tokens": 1147,
+    "reasoning_tokens": 23,
+    "cost_rub": 0.123617,
+    "cost_rub_tariff": 0.035855,
+    "latency_ms": 11902,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 21, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3207/1147, 0.1236 ₽, 11.9 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "watch",
+    "exclude_reason": null,
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [
+     "fx_trade",
+     "credit_liquidity"
+    ],
+    "materiality": "medium",
+    "urgency": "low",
+    "headline": "Ослабление рубля на 4% затрагивает ВЭД-расчёты и учёт компании, но направление и валюта контрактов не подтверждены",
+    "what_happened": [
+     {
+      "text": "За неделю рубль ослаб к юаню и доллару США на 4%.",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     },
+     {
+      "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания ведёт ВЭД с Казахстаном (F16, F17); ослабление рубля может влиять на курсовые разницы и стоимость расчётов, если контракты номинированы в валюте.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Через валютный курс: переоценка валютных требований/обязательств в учёте, изменение рублёвой стоимости импортных/экспортных контрактов и, при плавающих ставках, стоимости нового кредитования (F11).",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "product.loans",
+      "fts.flag"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Курсовые разницы по валютным расчётам с контрагентами могут усложнить учёт и увеличить налоговые обязательства при переоценке.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     },
+     {
+      "text": "При дальнейшем ослаблении рубля (прогноз C2) рублёвая стоимость импортных закупок может вырасти.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": []
+     },
+     {
+      "text": "Условия нового кредитования могут ухудшиться при ответном движении ставки; по действующим договорам влияние неизвестно.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Если экспортные контракты номинированы в валюте, ослабление рубля может увеличить рублёвую выручку от ВЭД.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить валюту и условия расчётов по контрактам с казахстанскими контрагентами и порядок признания курсовых разниц.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Уточнить тип ставок по действующим кредитным договорам для оценки чувствительности к изменению ставок.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "product.loans"
+      ],
+      "roles": [
+       "chief_accountant",
+       "cfo"
+      ]
+     },
+     {
+      "text": "Оценить необходимость резерва/пояснений по курсовым разницам в ближайшей отчётности.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Валюта номинации внешнеторговых контрактов",
+     "Тип ставок действующих кредитов",
+     "Порядок переоценки валютных статей в учётной политике"
+    ],
+    "unknowns": [
+     {
+      "text": "Направление ВЭД (экспорт/импорт) и валюта контрактов неизвестны.",
+      "question": "В какой валюте номинированы контракты с Казахстаном и кто валютная сторона расчётов?"
+     },
+     {
+      "text": "Условия действующих кредитных договоров неизвестны.",
+      "question": "Какой тип ставки (фиксированная/плавающая) и объём долга по действующим кредитам?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Ослабление рубля на 4% потенциально затрагивает ВЭД-расчёты и учёт компании, но без данных о валюте контрактов и направлении торговли влияние остаётся гипотезой; прогноз дальнейшего ослабления — не факт.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country",
+      "product.loans"
+     ],
+     "roles": []
+    },
+    "inference_status": "hypothesis"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: watch, существенность medium; токены 3207/1147, 0.1236 ₽, 11.9 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

@@ -6,3 +6,6 @@ Dockerfile text eol=lf
 *.template text eol=lf
 docker-compose.yml text eol=lf
 .dockerignore text eol=lf
+
+# Preserve upstream catalogue bytes: its manifest hashes the CRLF CSV.
+retriever/catalogues/activity-interests-v1/catalogue.csv whitespace=cr-at-eol

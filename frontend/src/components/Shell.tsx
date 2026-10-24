@@ -3,7 +3,7 @@ import {
   Bell, Check, ChevronDown, FileText, FlaskConical, Home, LogOut, MoreHorizontal, Moon, Newspaper, Radio, Search, Sun, User, Wallet, ArrowLeftRight, X,
 } from 'lucide-react';
 import { api, resetDemoNews, simulateIncoming } from '../api';
-import type { FeedItem } from '../types';
+import type { FeedItem, ProcessingState } from '../types';
 import { ROLES, roleLabel } from '../data/companies';
 import { BrandLockup, CompanyLogo } from './Brand';
 import { href, navigate, type Route } from '../router';
@@ -13,8 +13,8 @@ import { Badge, Button, IconButton, usePopover } from './ui';
 
 /* ---------------- Лента как общий ресурс (виджет, счётчик, страница ленты) ---------------- */
 
-interface FeedCtx { items: FeedItem[] | null; loading: boolean; error: string | null; reload(): void }
-const FeedContext = createContext<FeedCtx>({ items: null, loading: true, error: null, reload: () => undefined });
+interface FeedCtx { processing: ProcessingState | null; items: FeedItem[] | null; loading: boolean; error: string | null; reload(): void }
+const FeedContext = createContext<FeedCtx>({ processing: null, items: null, loading: true, error: null, reload: () => undefined });
 export const useFeed = () => useContext(FeedContext);
 
 const canNotify = () => typeof window !== 'undefined' && 'Notification' in window;
@@ -29,6 +29,11 @@ export function FeedProvider({ children }: { children: ReactNode }) {
   const { company, role, feedVersion, push, hidden } = useApp();
   const { data, loading, error, reload } = useAsync(
     () => (company && role ? api.getFeed(company.company_id, role) : Promise.resolve([] as FeedItem[])),
+    [company?.company_id, role, feedVersion],
+  );
+
+  const { data: processing } = useAsync(
+    () => company && role ? api.getProcessingState(company.company_id, role) : Promise.resolve(null),
     [company?.company_id, role, feedVersion],
   );
 
@@ -51,7 +56,7 @@ export function FeedProvider({ children }: { children: ReactNode }) {
   }, [data]);
 
   return (
-    <FeedContext.Provider value={{ items: data, loading, error, reload }}>
+    <FeedContext.Provider value={{ items: data, processing, loading, error, reload }}>
       {children}
       {fresh && (
         <div className="toast toast--live" role="status">
@@ -186,7 +191,7 @@ function CompanySwitcher() {
               <CompanyLogo company={c} size={32} />
               <span className="option__text">
                 <span className="option__name">{c.name}</span>
-                <span className="option__sub">{c.industry} · {c.revenue_bn_rub.toLocaleString('ru-RU')} млрд ₽</span>
+                <span className="option__sub">{c.industry} · {(c.revenue_bn_rub?.toLocaleString('ru-RU') ?? 'Неизвестно')} млрд ₽</span>
               </span>
               {c.company_id === company.company_id && <Check size={20} aria-hidden />}
             </button>

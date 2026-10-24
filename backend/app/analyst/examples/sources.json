@@ -1,0 +1,91 @@
+{
+ "manifest_version": "1",
+ "checked_at": "2026-10-23",
+ "note": "Открытые источники событий для учебных примеров few-shot. Дословно взяты только короткие фрагменты (поле quotes, ≤ 2 предложений), остальное пересказано командой. Компании в примерах синтетические; фрагменты «позиции банка» в примерах синтетические и не являются позицией Альфа-Банка. Данные кейса во внешние сервисы не передавались.",
+ "sources": [
+  {
+   "source_id": "cbr-2026-09-11-key-rate",
+   "title": "Банк России принял решение сохранить ключевую ставку на уровне 14,00% годовых",
+   "publisher": "Банк России",
+   "url": "https://www.cbr.ru/press/pr/?file=11092026_133000Key.htm",
+   "published_at": "2026-09-11",
+   "quotes": [
+    "Совет директоров Банка России 11 сентября 2026 года принял решение сохранить ключевую ставку на уровне 14,00% годовых.",
+    "Неценовые условия банковского кредитования по-прежнему жесткие.",
+    "Кредитная активность в последние месяцы была повышенной, прежде всего за счет корпоративного сегмента.",
+    "годовая инфляция составит 6,0–7,0% в 2026 году"
+   ],
+   "license": "Материалы cbr.ru можно воспроизводить при условии ссылки на первоисточник (https://www.cbr.ru/about/); в пресс-релизе: «При использовании материала ссылка на Пресс-службу Банка России обязательна». robots.txt раздел /press/ не запрещает.",
+   "used_in": ["EX01", "EX10"],
+   "how_used": "Утверждения C1–C4 события «ставка сохранена» (по одному короткому фрагменту на утверждение)."
+  },
+  {
+   "source_id": "ec-2026-06-30-steel",
+   "title": "New EU safeguards on steel imports from third countries",
+   "publisher": "European Commission, Access2Markets",
+   "url": "https://trade.ec.europa.eu/access-to-markets/en/news/new-eu-safeguards-steel-imports-third-countries",
+   "published_at": "2026-06-30",
+   "quotes": [
+    "From 1 July, Regulation (EU) 2026/1384 of the European Parliament and of the Council establishes a new regulatory framework",
+    "reduces the total volume of duty-free import quotas by approximately 47% compared to the 2024 reference system,",
+    "increases the out-of-quota duty to 50%, as set out in Annex II,",
+    "importers of products subject to the quotas must submit adequate and verifiable evidence"
+   ],
+   "license": "CC BY 4.0 (политика повторного использования Еврокомиссии, решение от 12.12.2011; https://commission.europa.eu/legal-notice_en). Требуется указание источника и отметка об изменениях: утверждения — перевод/пересказ команды.",
+   "used_in": ["EX02", "EX12"],
+   "how_used": "Утверждения о новом режиме импорта стали в ЕС (перевод на русский, цитаты в evidence на английском)."
+  },
+  {
+   "source_id": "minfin-2026-09-24-budget",
+   "title": "Минфин России внес в Правительство РФ бюджетный пакет",
+   "publisher": "Минфин России",
+   "url": "https://minfin.gov.ru/ru/press-center/?id_4=40635-minfin_rossii_vnes_v_pravitelstvo_rf_byudzhetnyi_paket",
+   "published_at": "2026-09-24",
+   "quotes": [
+    "налог для отдельных добывающих организаций в размере 30% от дополнительного дохода",
+    "по золоту – 20%",
+    "В основную налоговую базу по НДФЛ предлагается включить «пассивные» доходы",
+    "Предлагаемая унификация коснется не более 6% населения"
+   ],
+   "license": "CC BY 4.0 (указано на сайте minfin.gov.ru для всех материалов, кроме учебно-методических комплектов по финграмотности). Указание авторства: Минфин России.",
+   "used_in": ["EX05", "EX07"],
+   "how_used": "Законодательные предложения (modality=scenario): налог на дополнительный доход добывающих (watch) и НДФЛ граждан (exclude)."
+  },
+  {
+   "source_id": "wb-2026-04-30-cmo",
+   "title": "The Commodity Markets Outlook in eight charts (J. Baffes, K. Temaj)",
+   "publisher": "World Bank Blogs",
+   "url": "https://blogs.worldbank.org/en/developmenttalk/the-commodity-markets-outlook-in-eight-charts3",
+   "published_at": "2026-04-30",
+   "quotes": [
+    "The index is projected to increase by more than 30 percent in 2026.",
+    "Brent is expected to average $86 a barrel in 2026 and $70 a barrel in 2027."
+   ],
+   "license": "Страница блога: «© 2026 The World Bank Group, All Rights Reserved» — используем только две короткие цитаты с указанием автора и источника (цитирование в информационных целях, ст. 1274 ГК РФ / fair use). Сам доклад Commodity Markets Outlook, April 2026 распространяется по CC BY 3.0 IGO (по поисковой выдаче; текст лицензии в PDF не проверен).",
+   "used_in": ["EX04"],
+   "how_used": "Прогнозные утверждения (modality=forecast) о ценах на удобрения и нефть."
+  },
+  {
+   "source_id": "cbr-2026-09-21-coin",
+   "title": "Золотая антилопа: шедевры мультипликации на монете",
+   "publisher": "Банк России",
+   "url": "https://www.cbr.ru/press/pr/?file=639255787097252846COINS.htm",
+   "published_at": "2026-09-21",
+   "quotes": ["Золотая антилопа: шедевры мультипликации на монете"],
+   "license": "Как у cbr.ru: воспроизведение со ссылкой на первоисточник.",
+   "used_in": ["EX08"],
+   "how_used": "Нерелевантное событие для примера exclude (дословно — только заголовок)."
+  }
+ ],
+ "found_not_used": [
+  {"publisher": "Минфин России", "url": "https://minfin.gov.ru/ru/press-center/?id_4=40324", "reason": "НДС трансграничной торговли (24.04.2026), CC BY 4.0; пример EX03 убран при сокращении библиотеки."},
+  {"publisher": "Минфин России", "url": "https://minfin.gov.ru/ru/press-center/?id_4=40526-o_neftegazovykh_dokhodakh_i_provedenii_operatsii_po_pokupkeprodazhe_inostrannoi_valyuty_i_zolota_na_vnutrennem_valyutnom_rynke", "reason": "Покупки валюты (05.08.2026), CC BY 4.0; пример EX06 убран при сокращении."},
+  {"publisher": "Банк России", "url": "https://www.cbr.ru/press/pr/?file=639268816628825672COINS.htm", "reason": "Монета «Мирожский монастырь» (06.10.2026); пример EX09 убран при сокращении."}
+ ],
+ "rejected": [
+  {"publisher": "Альфа-Банк (alfabank.ru)", "reason": "Условия и robots.txt проверить не удалось (ошибка TLS-сертификата); Alfa Research — закрытый периметр. Позиция банка в примерах только синтетическая."},
+  {"publisher": "Росстат (rosstat.gov.ru)", "reason": "Сайт недоступен для проверки условий (ошибка TLS); данные об инфляции взяты из пресс-релиза Банка России."},
+  {"publisher": "Правительство РФ (government.ru)", "reason": "Сайт недоступен (соединение закрыто) — постановления о квотах не использованы; вторичные пересказы (ppt.ru) не брали."},
+  {"publisher": "СМИ (Интерфакс/finmarket, profinance, The Moscow Times)", "reason": "Вторичные пересказы комментариев банков; перепечатка ограничена условиями изданий."}
+ ]
+}

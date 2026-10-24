@@ -78,7 +78,7 @@ export function scoreEvent(def: EventDef, company: CompanyProfile, role: Role): 
   }));
   const base = matched.reduce((s, d) => s + d.weight, 0);
 
-  const days = daysBetween(def.event.date, DEMO_TODAY);
+  const days = daysBetween(def.event.date ?? DEMO_TODAY, DEMO_TODAY);
   const fresh = +(0.08 * Math.exp(-days / 30)).toFixed(3);
   factors.push({ feature_key: 'meta:freshness', label: 'Свежесть события', contribution: fresh, detail: `событие вышло ${days} дн. назад` });
 
@@ -124,7 +124,7 @@ export async function getFeed(companyId: string, role: Role): Promise<FeedItem[]
         profile_version: company.profile_version,
       };
     })
-    .sort((a, b) => b.relevance.score - a.relevance.score || b.event.date.localeCompare(a.event.date));
+    .sort((a, b) => b.relevance.score - a.relevance.score || (b.event.date ?? '').localeCompare(a.event.date ?? ''));
 }
 
 const sortByRole = (claims: Claim[], role: Role) =>

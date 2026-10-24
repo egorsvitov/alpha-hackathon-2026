@@ -97,7 +97,7 @@ function CabAccount() {
               <CompanyLogo company={c} size={36} />
               <span className="option__text">
                 <span className="option__name">{c.name}</span>
-                <span className="option__sub">{c.industry} · {c.revenue_bn_rub.toLocaleString('ru-RU')} млрд ₽</span>
+                <span className="option__sub">{c.industry} · {(c.revenue_bn_rub?.toLocaleString('ru-RU') ?? 'Неизвестно')} млрд ₽</span>
               </span>
               {c.company_id === company.company_id && <Check size={20} aria-hidden />}
             </button>

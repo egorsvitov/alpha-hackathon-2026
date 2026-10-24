@@ -1,0 +1,147 @@
+{
+ "key": "SYNTHETIC_U_3305|e2_eu_steel_quota@1#7ec69e2df613|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_3305|e2_eu_steel_quota@1#7ec69e2df613|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:12:55+03:00",
+ "record": {
+  "insight": null,
+  "excluded": {
+   "candidate_id": "cand:e2_eu_steel_quota:v1",
+   "cluster_id": "cluster:e2_eu_steel_quota",
+   "event_refs": [
+    {
+     "event_id": "e2_eu_steel_quota",
+     "event_version": 1
+    }
+   ],
+   "reason_code": "not_relevant",
+   "reason": "Компания — розничная торговля продуктами (F1, F2) без таможенных деклараций по ВЭД (F15); квоты на стальной прокат не затрагивают её закупки, продажи или контрагентов по платежам (F16, F17).",
+   "headline": "Квоты ЕС на стальной прокат не влияют на бизнес продуктового ритейлера",
+   "facts": [
+    {
+     "text": "ЕС объявил о введении квот на импорт стального проката из России (анонс, параметры не раскрыты).",
+     "kind": "fact",
+     "claim_ids": [
+      "e2_eu_steel_quota:c1"
+     ],
+     "evidence_ids": [
+      "n_e2_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ]
+  },
+  "run": {
+   "candidate_id": "cand:e2_eu_steel_quota:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_3305|e2_eu_steel_quota@1#7ec69e2df613|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:12:55+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 2650,
+    "completion_tokens": 324,
+    "reasoning_tokens": 18,
+    "cost_rub": 0.065586,
+    "cost_rub_tariff": 0.019023,
+    "latency_ms": 5610,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 17, утверждений события: 1, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 2650/324, 0.0656 ₽, 5.6 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "exclude",
+    "exclude_reason": "Компания — розничная торговля продуктами (F1, F2) без таможенных деклараций по ВЭД (F15); квоты на стальной прокат не затрагивают её закупки, продажи или контрагентов по платежам (F16, F17).",
+    "event_status": "occurred",
+    "impact_direction": "uncertain",
+    "impact_channels": [],
+    "materiality": "low",
+    "urgency": "low",
+    "headline": "Квоты ЕС на стальной прокат не влияют на бизнес продуктового ритейлера",
+    "what_happened": [
+     {
+      "text": "ЕС объявил о введении квот на импорт стального проката из России (анонс, параметры не раскрыты).",
+      "kind": "fact",
+      "claim_ids": [
+       "e2_eu_steel_quota:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "risks": [],
+    "opportunities": [],
+    "next_steps": [],
+    "recommended_checks": [],
+    "unknowns": [],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "",
+     "kind": "inference",
+     "claim_ids": [],
+     "feature_ids": [],
+     "roles": []
+    },
+    "inference_status": "insufficient_evidence"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: exclude, существенность low; токены 2650/324, 0.0656 ₽, 5.6 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

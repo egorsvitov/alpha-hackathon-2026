@@ -33,7 +33,7 @@ export interface CompanyProfile {
   okved_name: string;
   industry: string;
   stage: string;
-  revenue_bn_rub: number;
+  revenue_bn_rub: number | null;
   age_label: string;
   workers_label: string;
   region: string;
@@ -45,13 +45,24 @@ export interface CompanyProfile {
   /** ключи признаков для ранжирования, см. data/features.ts */
   feature_keys: string[];
   profile_version: string;
-  is_synthetic: true;
+  is_synthetic: boolean;
 }
 
 export interface NewsEvent {
   event_id: string;
   title: string;
-  date: string;
+  date: string | null;
+  publication_precision?: 'timestamp' | 'day' | 'unknown';
+  canonical_event_id?: string;
+  candidate_id?: string;
+  reading_group_ids?: string[];
+  revision_ids?: string[];
+  text_version?: string;
+  text_sha256?: string;
+  derived_text?: string | null;
+  derived_text_origin?: string | null;
+  processing_status?: string;
+  limitations?: string[];
   topic: Topic;
   topic_label: string;
   sources_count: number;
@@ -72,7 +83,11 @@ export interface Evidence {
   date: string | null;
   doc?: string;
   page?: number;
-  url?: string;
+  url?: string | null;
+  revision_id?: string | null;
+  field?: string | null;
+  start?: number | null;
+  end?: number | null;
   quote: string;
   /** демо-текст, не материал банка/СМИ */
   is_synthetic: boolean;
@@ -182,4 +197,13 @@ export interface DemoSettings {
   latency: 'fast' | 'normal' | 'slow';
   failNext: boolean;
   budgetExhausted: boolean;
+}
+
+export interface ProcessingState {
+  status: string;
+  message?: string;
+  counts?: Record<string, number>;
+  error_code?: string | null;
+  limitations?: string[];
+  ingestion?: { status?: string; code?: string } | null;
 }

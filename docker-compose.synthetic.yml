@@ -1,0 +1,10 @@
+# Self-contained synthetic acceptance, explicitly using fake services and real HTTP.
+services:
+  backend:
+    environment:
+      FULL_CYCLE_MODE: persisted
+      FULL_CYCLE_DATA: /data/full-cycle
+      FULL_CYCLE_PROFILES: /data/full-cycle/companies
+  frontend:
+    environment:
+      APP_API_MODE: http

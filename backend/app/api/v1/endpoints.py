@@ -1,5 +1,6 @@
 from typing import Any
 from fastapi import APIRouter, HTTPException, Query, Response, status
+from fastapi.concurrency import run_in_threadpool
 
 from app.schemas.base import (
     CompanyProfile,
@@ -12,9 +13,15 @@ from app.schemas.base import (
     QaRequest,
     Role,
 )
-from app.services.store import store
+from app.services.store import store as demo_store
+from app.full_cycle.api import enabled, current_store
+
+store = current_store() if enabled() else demo_store
 
 api_router = APIRouter()
+
+# Обработчики store синхронные; в режиме ANALYST_MODE=llm они ходят в LLM по сети,
+# поэтому выполняются в пуле потоков и не блокируют цикл событий.
 
 
 @api_router.get("/companies", response_model=list[CompanyProfile])
@@ -30,7 +37,10 @@ async def get_news_feed(
     company_id: str,
     role: Role = Query(default="cfo"),
 ) -> list[FeedItem]:
-    return store.get_feed(company_id=company_id, role=role)
+    try:
+        return await run_in_threadpool(store.get_feed, company_id=company_id, role=role)
+    except KeyError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Company not found") from exc
 
 
 @api_router.get(
@@ -43,8 +53,8 @@ async def get_analysis_card(
     role: Role = Query(default="cfo"),
 ) -> Insight:
     try:
-        return store.get_insight(event_id=news_id, company_id=company_id, role=role)
-    except Exception as exc:
+        return await run_in_threadpool(store.get_insight, event_id=news_id, company_id=company_id, role=role)
+    except KeyError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Insight not found",
@@ -53,13 +63,20 @@ async def get_analysis_card(
 
 @api_router.post("/chat/ask", response_model=QaAnswer)
 async def ask_question(body: QaRequest) -> QaAnswer:
-    return store.ask(
-        company_id=body.company_id,
-        news_id=body.news_id,
-        role=body.role,
-        run_id=body.run_id,
-        question=body.question,
-    )
+    try:
+        return await run_in_threadpool(
+            store.ask,
+            company_id=body.company_id,
+            news_id=body.news_id,
+            role=body.role,
+            run_id=body.run_id,
+            question=body.question,
+        )
+    except KeyError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Company or news event not found",
+        ) from exc
 
 
 @api_router.post(
@@ -68,7 +85,7 @@ async def ask_question(body: QaRequest) -> QaAnswer:
     status_code=status.HTTP_201_CREATED,
 )
 async def upload_news(body: NewsUploadRequest) -> NewsEvent:
-    return store.ingest_news(title=body.title, text=body.text)
+    return await run_in_threadpool(store.ingest_news, title=body.title, text=body.text)
 
 
 @api_router.post(
@@ -81,4 +98,18 @@ async def send_feedback(body: FeedbackRequest) -> Response:
 
 @api_router.get("/metrics")
 async def get_metrics() -> dict[str, Any]:
-    return store.get_metrics()
+    return await run_in_threadpool(store.get_metrics)
+
+
+@api_router.get("/companies/{company_id}/processing-state")
+async def processing_state(company_id: str, role: Role = Query(default="cfo")):
+    if not enabled():
+        return {"status": "demo", "mode": "demo"}
+    return await run_in_threadpool(store.processing_state,company_id,role)
+
+
+@api_router.get("/readiness")
+async def readiness():
+    if not enabled():
+        return {"status": "ready", "mode": "demo"}
+    return await run_in_threadpool(store.readiness)

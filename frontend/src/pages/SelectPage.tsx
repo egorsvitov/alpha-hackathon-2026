@@ -38,7 +38,7 @@ export function SelectPage() {
                   <span className="pick-card__text">
                     <span className="pick-card__name"><CompanyLogo company={c} size={26} className="pick-card__logo" /><span>{c.name}</span></span>
                     <span className="pick-card__sub">{c.industry}</span>
-                    <span className="pick-card__sub">{c.region} · {c.revenue_bn_rub.toLocaleString('ru-RU')} млрд ₽</span>
+                    <span className="pick-card__sub">{c.region} · {(c.revenue_bn_rub?.toLocaleString('ru-RU') ?? 'Неизвестно')} млрд ₽</span>
                   </span>
                   <span className="pick-card__check" aria-hidden><Check size={18} /></span>
                 </button>

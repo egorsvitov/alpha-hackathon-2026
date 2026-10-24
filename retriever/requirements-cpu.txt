@@ -1,0 +1,8 @@
+-r requirements.txt
+# Install CPU torch from https://download.pytorch.org/whl/cpu before this file.
+# The encoder verifies actual runtime packages and parity against the reference vectors.
+sentence-transformers==5.7.0
+transformers==5.20.2
+scikit-learn==1.9.1
+scipy==1.18.1
+threadpoolctl==3.7.0

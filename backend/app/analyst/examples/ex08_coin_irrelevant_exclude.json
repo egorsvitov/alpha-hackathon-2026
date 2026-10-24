@@ -1,0 +1,313 @@
+{
+ "example_id": "EX08",
+ "slug": "coin_irrelevant_exclude",
+ "title": "Памятная монета ЦБ для транспортной компании: нерелевантно",
+ "kind": "reference",
+ "topics": [
+  "other"
+ ],
+ "role": "ceo",
+ "decision": "exclude",
+ "teaches": [
+  "Нерелевантная новость исключается коротко, без натянутых связей"
+ ],
+ "defect": null,
+ "source_ids": [
+  "cbr-2026-09-21-coin"
+ ],
+ "disclaimer": "Учебный пример: компания синтетическая (не из данных кейса), событие — по открытому источнику на дату примера и может быть устаревшим. Не факты о текущей компании и не текущие новости.",
+ "input": {
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+   "request_id": "EX08-request",
+   "company_id": "EXAMPLE_CO_08",
+   "role": "ceo",
+   "as_of": "2026-09-22T10:00:00+03:00",
+   "news_window_hours": 1440,
+   "max_insights": 10
+  },
+  "company_context": {
+   "profile_version": "example-v1",
+   "profile_snapshot_ref": "seed:EXAMPLE_CO_08@example-v1",
+   "verified_facts": [
+    {
+     "feature_id": "company.okved",
+     "field": "MAINOKVED_CODE/MAINOKVED_NAME",
+     "value": "49.41 Деятельность автомобильного грузового транспорта",
+     "description": "Основной ОКВЭД",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.industry",
+     "field": "industry",
+     "value": "Транспорт и логистика",
+     "description": "Отрасль (по ОКВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "derived"
+    },
+    {
+     "feature_id": "company.revenue",
+     "field": "REVENUE_COMPANY",
+     "value": "17 млрд ₽",
+     "description": "Выручка за прошлый отчётный год (2025), не за текущий период",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "company.region",
+     "field": "RC_NAME/CITY_NAME",
+     "value": "Центр, Тула",
+     "description": "Регион и город обслуживания",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.rko",
+     "field": "CL_PRODUCT_RKO_MARK",
+     "value": "есть",
+     "description": "Расчётно-кассовое обслуживание в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "product.leasing",
+     "field": "CL_PRODUCT_LEA_MARK",
+     "value": "есть",
+     "description": "Лизинг в Альфа-Банке",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    },
+    {
+     "feature_id": "fts.flag",
+     "field": "FTS_FLAG",
+     "value": "нет",
+     "description": "Есть таможенные декларации (ВЭД)",
+     "origin": {
+      "type": "seed_profile",
+      "ref": "backend/app/services/seed_data.py#COMPANIES_DATA"
+     },
+     "quality": "observed"
+    }
+   ],
+   "economic_exposures": [
+    {
+     "exposure_id": "exp.leasing",
+     "factor": "Стоимость лизинга и обновления основных средств",
+     "status": "inferred",
+     "confidence": "low",
+     "basis_feature_ids": [
+      "product.leasing"
+     ],
+     "description": "Выведено из наличия продукта «Лизинг»; условия договоров неизвестны."
+    }
+   ],
+   "related_entities": [],
+   "graph_context": {
+    "included": false,
+    "reason": "Платёжный контекст не передан"
+   },
+   "unknowns": [
+    "Условия действующих кредитных договоров (тип ставки, сроки, объём долга) в профиле неизвестны.",
+    "Структура закупок и продаж, договоры с контрагентами неизвестны; платежи подтверждают только факт расчётов, не тип отношений.",
+    "Выручка известна только за прошлый отчётный год; квартальные и месячные показатели неизвестны.",
+    "Наличие продукта «Банковские гарантии» в профиле неизвестно.",
+    "Наличие продукта «Кредитные продукты» в профиле неизвестно.",
+    "Наличие продукта «Депозиты» в профиле неизвестно.",
+    "Наличие продукта «Зарплатный проект» в профиле неизвестно.",
+    "Наличие продукта «Факторинг» в профиле неизвестно."
+   ],
+   "synthetic_demo_profile": true
+  },
+  "candidates": [
+   {
+    "candidate_id": "EX08-cand",
+    "cluster_id": "EX08-cluster",
+    "event_bundle_refs": [
+     {
+      "event_id": "ex08:coin",
+      "event_version": 1,
+      "snapshot_sha256": "d74025e81787d94c180b8cc487086cbcafe1f5a2eb7dc45d7fcfa27d914b8c8f"
+     }
+    ],
+    "analysis_projection": {
+     "event_bundles": [
+      {
+       "bundle_schema_version": "example-0.1",
+       "event": {
+        "event_id": "ex08:coin",
+        "event_version": 1,
+        "event_type": "other",
+        "title": "Банк России выпускает памятные монеты «Золотая антилопа»",
+        "first_published_at": "2026-09-21T12:00:00+03:00",
+        "quality": "complete"
+       },
+       "claims": [
+        {
+         "claim_id": "ex08:coin:c1",
+         "text": "Банк России 22 сентября 2026 года выпускает в обращение памятные монеты «Золотая антилопа» серии «Российская (советская) мультипликация».",
+         "modality": "asserted",
+         "polarity": "affirmed",
+         "stage": null,
+         "attribution": {
+          "name": "Банк России"
+         },
+         "measurements": [],
+         "evidence_ids": [
+          "ex08:coin:ev1"
+         ]
+        }
+       ],
+       "conflicts": [],
+       "relations": [],
+       "sources": [
+        {
+         "source_id": "cbr-2026-09-21-coin",
+         "title": "Золотая антилопа: шедевры мультипликации на монете",
+         "publisher": "Банк России",
+         "published_at": "2026-09-21",
+         "url": "https://www.cbr.ru/press/pr/?file=639255787097252846COINS.htm",
+         "is_synthetic": false
+        }
+       ],
+       "evidence": [
+        {
+         "evidence_id": "ex08:coin:ev1",
+         "source_id": "cbr-2026-09-21-coin",
+         "quote": "Золотая антилопа: шедевры мультипликации на монете",
+         "field": "text"
+        }
+       ],
+       "limitations": [
+        "Утверждение — пересказ команды; дословно процитирован только заголовок сообщения."
+       ]
+      }
+     ]
+    },
+    "match_context": {
+     "signals": [
+      {
+       "channel": "dense",
+       "profile_facet": null,
+       "reason": "Слабая лексическая близость («Банк России»)"
+      }
+     ],
+     "matched_company_feature_ids": [],
+     "matched_event_claim_ids": [
+      "ex08:coin:c1"
+     ],
+     "confirmed_entity_match": null,
+     "assumptions_not_verified": [],
+     "prior_score": 0.12
+    },
+    "bank_fragments": []
+   }
+  ],
+  "analysis_policy": {}
+ },
+ "draft": {
+  "decision": "exclude",
+  "exclude_reason": "Выпуск памятных монет не влияет на перевозки, издержки или финансирование компании.",
+  "event_status": "occurred",
+  "headline": "Памятные монеты Банка России — нет связи с бизнесом компании",
+  "what_happened": [
+   {
+    "text": "Банк России 22 сентября 2026 года выпускает памятные монеты «Золотая антилопа».",
+    "kind": "fact",
+    "claim_ids": [
+     "C1"
+    ]
+   }
+  ]
+ },
+ "expected_output": {
+  "schema_version": "AnalystOutput.v1-draft",
+  "request_id": "EX08-request",
+  "company_id": "EXAMPLE_CO_08",
+  "role": "ceo",
+  "as_of": "2026-09-22T10:00:00+03:00",
+  "ranked_insights": [],
+  "excluded_candidates": [
+   {
+    "candidate_id": "EX08-cand",
+    "cluster_id": "EX08-cluster",
+    "event_refs": [
+     {
+      "event_id": "ex08:coin",
+      "event_version": 1
+     }
+    ],
+    "reason_code": "not_relevant",
+    "reason": "Выпуск памятных монет не влияет на перевозки, издержки или финансирование компании.",
+    "headline": "Памятные монеты Банка России — нет связи с бизнесом компании",
+    "facts": [
+     {
+      "text": "Банк России 22 сентября 2026 года выпускает памятные монеты «Золотая антилопа».",
+      "kind": "fact",
+      "claim_ids": [
+       "ex08:coin:c1"
+      ],
+      "evidence_ids": [
+       "ex08:coin:ev1"
+      ],
+      "feature_ids": [],
+      "bank_chunk_ids": [],
+      "conditional": false,
+      "roles": []
+     }
+    ]
+   }
+  ],
+  "run_metadata": {
+   "model": "few-shot-reference",
+   "prompt_version": "analyst-v1.0",
+   "qa_status": "passed",
+   "bank_rag_used": false,
+   "generated_by": "cached",
+   "profile_version": "example-v1",
+   "cache_hits": 0,
+   "llm_calls": 0,
+   "prompt_tokens": 0,
+   "completion_tokens": 0,
+   "reasoning_tokens": 0,
+   "cost_rub": 0.0,
+   "latency_ms": 0,
+   "json_repairs": 0,
+   "candidates": [
+    {
+     "candidate_id": "EX08-cand",
+     "model": null,
+     "prompt_version": "analyst-v1.0",
+     "generated_by": "cached",
+     "cache_key": null,
+     "created_at": null,
+     "qa_status": "passed",
+     "qa_issues": [],
+     "usage": {},
+     "trace": [],
+     "draft": null,
+     "llm_trace": [],
+     "memory_ref": null
+    }
+   ]
+  }
+ }
+}

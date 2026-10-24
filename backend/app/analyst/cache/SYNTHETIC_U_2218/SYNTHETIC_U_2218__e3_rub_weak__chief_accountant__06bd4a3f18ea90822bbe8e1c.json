@@ -1,0 +1,501 @@
+{
+ "key": "SYNTHETIC_U_2218|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+ "loose_key": "SYNTHETIC_U_2218|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0",
+ "model": "z-ai/glm-5.3-flash",
+ "created_at": "2026-10-22T22:11:24+03:00",
+ "record": {
+  "insight": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "cluster_id": "cluster:e3_rub_weak",
+   "event_refs": [
+    {
+     "event_id": "e3_rub_weak",
+     "event_version": 1
+    }
+   ],
+   "decision": "include",
+   "priority_score": 0.39,
+   "significance": "medium",
+   "priority_breakdown": {
+    "materiality": 0.32,
+    "urgency": 0.04,
+    "evidence": 0.03,
+    "cap": null,
+    "cap_reason": null,
+    "penalty": 0.0
+   },
+   "impact_direction": "mixed",
+   "impact_channels": [
+    "fx_trade",
+    "credit_liquidity"
+   ],
+   "event_status": "mixed",
+   "materiality": "medium",
+   "urgency": "medium",
+   "headline": "Ослабление рубля на 4% затрагивает валютные расчёты компании по ВЭД с Турцией: курсовые разницы и переоценка",
+   "what_happened": "За неделю с 11 по 18 октября 2026 рубль ослаб к юаню и доллару США на 4%. Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+   "facts": [
+    {
+     "text": "За неделю с 11 по 18 октября 2026 рубль ослаб к юаню и доллару США на 4%.",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    },
+    {
+     "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+     "kind": "fact",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": []
+    }
+   ],
+   "company_relevance": {
+    "text": "Компания ведёт ВЭД с Турцией по таможенным декларациям, поэтому курсовая динамика может влиять на рублёвую оценку валютных расчётов и курсовые разницы в учёте.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "impact_mechanism": {
+    "text": "Канал fx_trade: при ослаблении рубля рублёвый эквивалент валютных обязательств и требований меняется, возникают курсовые разницы; направление эффекта зависит от того, экспорт или импорт у компании (неизвестно).",
+    "kind": "hypothesis",
+    "claim_ids": [
+     "e3_rub_weak:c1"
+    ],
+    "evidence_ids": [
+     "n_e3_1"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": true,
+    "roles": []
+   },
+   "risks": [
+    {
+     "text": "Если есть валютные обязательства к оплате, их рублёвая стоимость может вырасти, что отразится в курсовых разницах и затребует резервов.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    },
+    {
+     "text": "При дальнейшем ослаблении рубля (прогноз ) волатильность курсовых разниц в отчётности может возрасти.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "opportunities": [
+    {
+     "text": "Если направление ВЭД — экспорт, ослабление рубля может увеличить рублёвую выручку от валютных контрактов.",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": true,
+     "roles": []
+    }
+   ],
+   "recommended_checks": [
+    "Направление ВЭД (экспорт/импорт) и валюта контрактов с Турцией",
+    "Наличие валютных счетов и открытой валютной позиции",
+    "Положение об учётной политике по курсовым разницам"
+   ],
+   "next_steps": [
+    {
+     "text": "Проверить открытую валютную позицию: остатки требований и обязательств в валюте по контрактам с Турцией на дату отчёта.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant",
+      "treasurer"
+     ]
+    },
+    {
+     "text": "Уточнить порядок переоценки и признания курсовых разниц в учётной политике и сроки закрытия периода.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "evidence_ids": [
+      "n_e3_1"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "chief_accountant"
+     ]
+    },
+    {
+     "text": "Оценить необходимость резерва/хеджирования при сохранении тренда ослабления рубля.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c2"
+     ],
+     "evidence_ids": [
+      "n_e3_2"
+     ],
+     "feature_ids": [
+      "fts.flag"
+     ],
+     "bank_chunk_ids": [],
+     "conditional": false,
+     "roles": [
+      "cfo",
+      "treasurer"
+     ]
+    }
+   ],
+   "unknowns": [
+    {
+     "text": "Направление ВЭД (экспорт или импорт) и валюта контрактов неизвестны.",
+     "question": "В какой валюте и в каком направлении компания расчётывается с турецкими контрагентами?",
+     "how_to_clarify": null
+    },
+    {
+     "text": "Доля валютных расчётов в выручке и платежах неизвестна.",
+     "question": "Какова доля валютных операций в обороте компании?",
+     "how_to_clarify": null
+    }
+   ],
+   "impact_estimate": null,
+   "bank_assessment": {
+    "status": "not_found",
+    "bank_chunk_ids": []
+   },
+   "ai_conclusion": {
+    "text": "Ослабление рубля на 4% касается компании через ВЭД с Турцией: главному бухгалтеру следует проверить валютную позицию, порядок переоценки и курсовые разницы; направление эффекта неясно без данных об экспорте/импорте.",
+    "kind": "inference",
+    "claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "bank_chunk_ids": [],
+    "conditional": false,
+    "roles": []
+   },
+   "support": {
+    "company_feature_ids": [
+     "fts.flag",
+     "fts.country"
+    ],
+    "event_claim_ids": [
+     "e3_rub_weak:c1",
+     "e3_rub_weak:c2"
+    ],
+    "event_evidence_ids": [
+     "n_e3_1",
+     "n_e3_2"
+    ],
+    "bank_chunk_ids": [],
+    "inference_status": "partially_supported",
+    "limitations": []
+   }
+  },
+  "excluded": null,
+  "run": {
+   "candidate_id": "cand:e3_rub_weak:v1",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.0",
+   "generated_by": "live",
+   "cache_key": "SYNTHETIC_U_2218|e3_rub_weak@1#2f1db66a6138|chief_accountant|p-2026-10-20-a1|analyst-v1.0|z-ai/glm-5.3-flash",
+   "created_at": "2026-10-22T22:11:24+03:00",
+   "qa_status": "passed",
+   "qa_issues": [],
+   "usage": {
+    "model": "z-ai/glm-5.3-flash",
+    "calls": 1,
+    "prompt_tokens": 3164,
+    "completion_tokens": 1238,
+    "reasoning_tokens": 156,
+    "cost_rub": 0.128195,
+    "cost_rub_tariff": 0.037182,
+    "latency_ms": 12886,
+    "retries": 0,
+    "json_repairs": 0
+   },
+   "trace": [
+    {
+     "step": "input_adapter",
+     "summary": "Сборка AnalystInput.v1-draft (профиль, утверждения события, сигналы отбора)",
+     "result": "Признаков компании: 19, утверждений события: 2, противоречий: 0",
+     "status": "ok"
+    },
+    {
+     "step": "bank_rag_search",
+     "summary": "Поиск фрагментов аналитики банка, опубликованных до момента анализа",
+     "result": "Подходящих материалов банка не найдено — позицию банка не формируем",
+     "status": "ok"
+    },
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3164/1238, 0.1282 ₽, 12.9 с",
+     "status": "ok"
+    },
+    {
+     "step": "qa_validator",
+     "summary": "Проверка ссылок, чисел, модальности и запрещённых формулировок",
+     "result": "Итог: passed; ошибок 0, замечаний 0",
+     "status": "ok"
+    }
+   ],
+   "draft": {
+    "decision": "include",
+    "exclude_reason": null,
+    "event_status": "mixed",
+    "impact_direction": "mixed",
+    "impact_channels": [
+     "fx_trade",
+     "credit_liquidity"
+    ],
+    "materiality": "medium",
+    "urgency": "medium",
+    "headline": "Ослабление рубля на 4% затрагивает валютные расчёты компании по ВЭД с Турцией: курсовые разницы и переоценка",
+    "what_happened": [
+     {
+      "text": "За неделю с 11 по 18 октября 2026 рубль ослаб к юаню и доллару США на 4%.",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [],
+      "roles": []
+     },
+     {
+      "text": "Участники рынка допускают дальнейшее ослабление рубля в ближайшие недели (прогноз, не факт).",
+      "kind": "fact",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [],
+      "roles": []
+     }
+    ],
+    "company_relevance": {
+     "text": "Компания ведёт ВЭД с Турцией по таможенным декларациям, поэтому курсовая динамика может влиять на рублёвую оценку валютных расчётов и курсовые разницы в учёте.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "impact_mechanism": {
+     "text": "Канал fx_trade: при ослаблении рубля рублёвый эквивалент валютных обязательств и требований меняется, возникают курсовые разницы; направление эффекта зависит от того, экспорт или импорт у компании (неизвестно).",
+     "kind": "hypothesis",
+     "claim_ids": [
+      "e3_rub_weak:c1"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "risks": [
+     {
+      "text": "Если есть валютные обязательства к оплате, их рублёвая стоимость может вырасти, что отразится в курсовых разницах и затребует резервов.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": []
+     },
+     {
+      "text": "При дальнейшем ослаблении рубля (прогноз C2) волатильность курсовых разниц в отчётности может возрасти.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": []
+     }
+    ],
+    "opportunities": [
+     {
+      "text": "Если направление ВЭД — экспорт, ослабление рубля может увеличить рублёвую выручку от валютных контрактов.",
+      "kind": "hypothesis",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.country"
+      ],
+      "roles": []
+     }
+    ],
+    "next_steps": [
+     {
+      "text": "Проверить открытую валютную позицию: остатки требований и обязательств в валюте по контрактам с Турцией на дату отчёта.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag",
+       "fts.country"
+      ],
+      "roles": [
+       "chief_accountant",
+       "treasurer"
+      ]
+     },
+     {
+      "text": "Уточнить порядок переоценки и признания курсовых разниц в учётной политике и сроки закрытия периода.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c1"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": [
+       "chief_accountant"
+      ]
+     },
+     {
+      "text": "Оценить необходимость резерва/хеджирования при сохранении тренда ослабления рубля.",
+      "kind": "inference",
+      "claim_ids": [
+       "e3_rub_weak:c2"
+      ],
+      "feature_ids": [
+       "fts.flag"
+      ],
+      "roles": [
+       "cfo",
+       "treasurer"
+      ]
+     }
+    ],
+    "recommended_checks": [
+     "Направление ВЭД (экспорт/импорт) и валюта контрактов с Турцией",
+     "Наличие валютных счетов и открытой валютной позиции",
+     "Положение об учётной политике по курсовым разницам"
+    ],
+    "unknowns": [
+     {
+      "text": "Направление ВЭД (экспорт или импорт) и валюта контрактов неизвестны.",
+      "question": "В какой валюте и в каком направлении компания расчётывается с турецкими контрагентами?"
+     },
+     {
+      "text": "Доля валютных расчётов в выручке и платежах неизвестна.",
+      "question": "Какова доля валютных операций в обороте компании?"
+     }
+    ],
+    "impact_estimate": null,
+    "bank_assessment": {
+     "status": "not_found",
+     "bank_chunk_ids": []
+    },
+    "ai_conclusion": {
+     "text": "Ослабление рубля на 4% (C1) касается компании через ВЭД с Турцией (F14, F15): главному бухгалтеру следует проверить валютную позицию, порядок переоценки и курсовые разницы; направление эффекта неясно без данных об экспорте/импорте.",
+     "kind": "inference",
+     "claim_ids": [
+      "e3_rub_weak:c1",
+      "e3_rub_weak:c2"
+     ],
+     "feature_ids": [
+      "fts.flag",
+      "fts.country"
+     ],
+     "roles": []
+    },
+    "inference_status": "partially_supported"
+   },
+   "llm_trace": [
+    {
+     "step": "llm_analyst",
+     "summary": "Анализ кандидата моделью z-ai/glm-5.3-flash (промпт analyst-v1.0)",
+     "result": "Решение модели: include, существенность medium; токены 3164/1238, 0.1282 ₽, 12.9 с",
+     "status": "ok"
+    }
+   ]
+  }
+ }
+}

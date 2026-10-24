@@ -1,0 +1,43 @@
+{
+  "$id": "urn:retriever:VectorRecord:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "embedding_text_sha256": {
+      "minLength": 1,
+      "title": "Embedding Text Sha256",
+      "type": "string"
+    },
+    "item_id": {
+      "minLength": 1,
+      "title": "Item Id",
+      "type": "string"
+    },
+    "item_version": {
+      "default": "1",
+      "title": "Item Version",
+      "type": "string"
+    },
+    "values": {
+      "items": {
+        "type": "number"
+      },
+      "minItems": 1,
+      "title": "Values",
+      "type": "array"
+    },
+    "vector_id": {
+      "minLength": 1,
+      "title": "Vector Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "vector_id",
+    "item_id",
+    "embedding_text_sha256",
+    "values"
+  ],
+  "title": "VectorRecord",
+  "type": "object"
+}

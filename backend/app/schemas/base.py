@@ -1,5 +1,5 @@
 from typing import Any, Literal
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, SerializationInfo, SerializerFunctionWrapHandler, model_serializer
 
 Role = Literal["ceo", "cfo", "treasurer", "chief_accountant"]
 SignificanceLevel = Literal["high", "medium", "low"]
@@ -53,7 +53,7 @@ class CompanyProfile(BaseModel):
     okved_name: str = ""
     industry: str
     stage: str = ""
-    revenue_bn_rub: float
+    revenue_bn_rub: float | None
     age_label: str
     workers_label: str = ""
     region: str
@@ -64,7 +64,7 @@ class CompanyProfile(BaseModel):
     counterparties: list[CounterpartyLink] = Field(default_factory=list)
     feature_keys: list[str] = Field(default_factory=list)
     profile_version: str = "p-2026-10-20-a1"
-    is_synthetic: Literal[True] = True
+    is_synthetic: bool = True
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -72,7 +72,19 @@ class CompanyProfile(BaseModel):
 class NewsEvent(BaseModel):
     event_id: str
     title: str
-    date: str
+    date: str | None
+    publication_precision: Literal["timestamp", "day", "unknown"] = "unknown"
+    canonical_event_id: str | None = None
+    candidate_id: str | None = None
+    reading_group_ids: list[str] = Field(default_factory=list)
+    revision_ids: list[str] = Field(default_factory=list)
+    text_version: str | None = None
+    text_sha256: str | None = None
+    sources: list[dict[str, Any]] = Field(default_factory=list)
+    derived_text: str | None = None
+    derived_text_origin: str | None = None
+    processing_status: str = "ready"
+    limitations: list[str] = Field(default_factory=list)
     topic: Topic
     topic_label: str
     sources_count: int
@@ -129,6 +141,12 @@ class WhatHappened(BaseModel):
 
 
 class Evidence(BaseModel):
+    revision_id: str | None = None
+    field: str | None = None
+    start: int | None = None
+    end: int | None = None
+    text_sha256: str | None = None
+    publication_precision: str = "unknown"
     evidence_id: str
     type: EvidenceType
     title: str
@@ -173,6 +191,19 @@ class AiConclusion(BaseModel):
     features: list[str] = Field(default_factory=list)
 
 
+class ChangesSincePrevious(BaseModel):
+    """Что изменилось по сравнению с ранее сохранёнными выводами (память аналитика).
+
+    Опциональное поле карточки: фронт может его игнорировать. Формат — как
+    ``changes_since_previous`` в ``llm/agent/contracts/insight.schema.json``.
+    """
+
+    status: Literal["new", "continuation", "escalation", "deescalation", "unknown"]
+    previous_insight_id: str | None = None
+    summary: str | None = None
+    claim_ids: list[str] = Field(default_factory=list)
+
+
 class Insight(BaseModel):
     run_id: str
     company_id: str
@@ -193,6 +224,15 @@ class Insight(BaseModel):
     unknowns: list[UnknownItem] = Field(default_factory=list)
     evidence: list[Evidence] = Field(default_factory=list)
     trace: list[TraceStep] = Field(default_factory=list)
+    changes_since_previous: ChangesSincePrevious | None = None
+
+    @model_serializer(mode="wrap")
+    def _omit_empty_changes(self, handler: SerializerFunctionWrapHandler, info: SerializationInfo):  # без аннотации: схема OpenAPI не меняется
+        """Пустое ``changes_since_previous`` не попадает в JSON-ответ API: прежние ответы не меняются."""
+        data = handler(self)
+        if info.mode_is_json() and isinstance(data, dict) and data.get("changes_since_previous") is None:
+            data.pop("changes_since_previous", None)
+        return data
 
 
 class QaRequest(BaseModel):
