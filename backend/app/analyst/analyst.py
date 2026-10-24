@@ -22,6 +22,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
@@ -35,6 +37,7 @@ from app.analyst.memory import MemoryStore, PreviousContext, schedule_levels
 from app.analyst.qa import QAResult, clean_reason, validate_draft
 from app.analyst.schemas import (
     AnalystInput,
+    AnalysisPolicy,
     AnalystOutput,
     Candidate,
     CandidateOutcome,
@@ -48,7 +51,7 @@ from app.analyst.schemas import (
     Support,
     TraceEntry,
 )
-from app.analyst.view import build_prompt_view
+from app.analyst.view import PromptView, build_prompt_view
 
 logger = get_logger("app.analyst.analyst")
 MSK = timezone(timedelta(hours=3))
@@ -92,20 +95,45 @@ def priority_from(qa: QAResult, materiality: str, urgency: str) -> tuple[float, 
 
 
 def cache_key(
-    company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str, model: str, memory_ref: str | None = None
+    company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str, model: str,
+    memory_ref: str | None = None, input_ref: str | None = None,
 ) -> str:
     """Ключ кэша. ``memory_ref`` — отпечаток блока памяти (версия схемы памяти + содержимое
-    записей, отобранных по дате); без блока ключ совпадает с прежним, сохранённые ответы валидны."""
+    записей, отобранных по дате); ``input_ref`` — отпечаток фактического входа модели, которого раньше
+    в ключе не было (интересы ретривера, набор цитат, неполнота, политика анализа). Без блока/данных
+    ключ совпадает с прежним, сохранённые ответы валидны."""
     ref = cand.event_bundle_refs[0]
     parts = [company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version, model]
     if memory_ref:
         parts.append(memory_ref)
+    if input_ref:
+        parts.append(input_ref)
     return "|".join(parts)
 
 
-def loose_key(company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str) -> str:
+def loose_key(
+    company_id: str, cand: Candidate, role: str, profile_version: str, prompt_version: str, input_ref: str | None = None
+) -> str:
     ref = cand.event_bundle_refs[0]
-    return "|".join([company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version])
+    parts = [company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version]
+    if input_ref:
+        parts.append(input_ref)
+    return "|".join(parts)
+
+
+def input_ref(inp: AnalystInput, view: PromptView) -> str | None:
+    """Отпечаток входа модели, не входившего в ключ раньше: данные extras из промпта (текст и версия
+    ``retrieval_interests``, набор цитат, неполнота) и ``analysis_policy``, если она не по умолчанию.
+    ``None`` — таких данных нет, ключ прежний."""
+    payload: dict[str, Any] = {}
+    if view.extras:
+        payload["extras"] = view.extras
+    if inp.analysis_policy != AnalysisPolicy():
+        payload["policy"] = inp.analysis_policy.model_dump(mode="json")
+    if not payload:
+        return None
+    raw = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return "in:" + hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
 
 
 def _event_refs(cand: Candidate) -> list[EventRef]:
@@ -143,6 +171,8 @@ class BusinessAnalyst:
         if prompt_version not in prompts.SYSTEM_PROMPTS:
             raise ValueError(f"Неизвестная версия промпта: {prompt_version}")
         self.llm = llm
+        # Блоки нового ретривера (цитаты, интересы-гипотезы, неполнота) — только для промптов, которые их описывают.
+        self.extras = prompts.supports_extras(prompt_version)
         self.model = model
         self.cache = cache
         self.max_tokens = max_tokens
@@ -294,8 +324,9 @@ class BusinessAnalyst:
             )
             return CandidateOutcome(excluded=excluded, run=run)
 
-        key = cache_key(company_id, cand, role, pv, pver, self.model, mem_ref)
-        lkey = loose_key(company_id, cand, role, pv, pver)
+        in_ref = input_ref(inp, build_prompt_view(inp, cand, previous=previous, extras=self.extras))
+        key = cache_key(company_id, cand, role, pv, pver, self.model, mem_ref, in_ref)
+        lkey = loose_key(company_id, cand, role, pv, pver, in_ref)
         label = f"{company_id}/{cand.event_bundle_refs[0].event_id}__{role}"
 
         lock = self.cache.key_lock(key) if self.cache else None
@@ -304,12 +335,12 @@ class BusinessAnalyst:
         try:
             if self.cache:
                 for m in [self.model, *self.fallback_models]:
-                    record, source = self.cache.get(cache_key(company_id, cand, role, pv, pver, m, mem_ref))
+                    record, source = self.cache.get(cache_key(company_id, cand, role, pv, pver, m, mem_ref, in_ref))
                     if record is not None and (prefer_cache or source in ("memory", "runtime") or not allow_live):
                         return self._from_cache(record, source or "memory", inp, cand, base_trace, previous,
                                                 allow_live=allow_live and self.llm is not None)
             if not allow_live or self.llm is None:
-                return self._offline(lkey, inp, cand, base_trace, previous, reason="живой вызов LLM недоступен в этом режиме")
+                return self._offline(lkey, inp, cand, base_trace, previous, reason="живой вызов LLM недоступен в этом режиме", in_ref=in_ref)
             outcome, used_model, last_exc = None, self.model, None
             for model in [self.model, *self.fallback_models]:
                 try:
@@ -323,8 +354,8 @@ class BusinessAnalyst:
                     logger.warning("Модель %s не справилась (%s), пробую запасную", model, exc.code)
             if outcome is None:
                 assert last_exc is not None
-                return self._offline(lkey, inp, cand, base_trace, previous, reason=str(last_exc), code=last_exc.code)
-            used_key = cache_key(company_id, cand, role, pv, pver, used_model, mem_ref)
+                return self._offline(lkey, inp, cand, base_trace, previous, reason=str(last_exc), code=last_exc.code, in_ref=in_ref)
+            used_key = cache_key(company_id, cand, role, pv, pver, used_model, mem_ref, in_ref)
             outcome.run.cache_key = used_key
             outcome.run.memory_ref = mem_ref
             if self.cache:
@@ -356,7 +387,7 @@ class BusinessAnalyst:
             draft = LLMDraft.model_validate(stored.run.draft)
         except Exception:  # noqa: BLE001 - старая схема черновика: отдаём как сохранено
             return stored
-        view = build_prompt_view(inp, cand, previous=previous)
+        view = build_prompt_view(inp, cand, previous=previous, extras=self.extras)
         qa = validate_draft(draft, view, inp.request.role, as_of=inp.request.as_of)
         outcome = self._build(inp, cand, draft, qa, list(base_trace) + list(stored.run.llm_trace))
         outcome.run.model = stored.run.model
@@ -404,10 +435,11 @@ class BusinessAnalyst:
         *,
         reason: str,
         code: str = "unavailable",
+        in_ref: str | None = None,
     ) -> CandidateOutcome:
         if self.cache:
             record, source = self.cache.get_loose(lkey, prefer_models=[self.model, *self.fallback_models])
-            if record is None and self.prompt_version != prompts.PROMPT_VERSION:
+            if record is None and self.prompt_version != prompts.PROMPT_VERSION and not in_ref:
                 fallback_lkey = loose_key(
                     inp.request.company_id,
                     cand,
@@ -440,7 +472,7 @@ class BusinessAnalyst:
         previous: PreviousContext | None = None,
     ) -> CandidateOutcome:
         assert self.llm is not None
-        view = build_prompt_view(inp, cand, previous=previous)
+        view = build_prompt_view(inp, cand, previous=previous, extras=self.extras)
         messages = prompts.build_analyst_messages(view.data, version=self.base_prompt_version, fewshot=self.fewshot)
         request = ChatRequest(messages=messages, model=model, max_tokens=self.max_tokens, temperature=0.1, purpose="analysis")
         try:

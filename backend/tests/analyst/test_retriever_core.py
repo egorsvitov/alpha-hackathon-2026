@@ -133,5 +133,31 @@ class TestOutcomes(unittest.TestCase):
             self.assertEqual(ExcludedCandidate(reason_code=code, **base).status, status)
 
 
+class TestBridgeKeepsFailuresOutOfNotRelevant(unittest.TestCase):
+    def _mk(self, code):
+        from app.analyst.schemas import CandidateOutcome, CandidateRun
+
+        ex = ExcludedCandidate(candidate_id="c", cluster_id="k", event_refs=[], reason_code=code, reason="причина")
+        return CandidateOutcome(excluded=ex, run=CandidateRun(candidate_id="c", prompt_version="analyst-v1.0"))
+
+    def test_bridge_does_not_call_failures_irrelevant(self):
+        from app.analyst.bridge import relevance_from
+
+        for code in ("analysis_failed", "budget_exhausted", "context_too_large"):
+            rel = relevance_from(self._mk(code))
+            self.assertTrue(rel.explanation.startswith("Анализ не выполнен"), code)
+            self.assertEqual(rel.evidence_status, "not_analyzed")
+        self.assertTrue(relevance_from(self._mk("not_relevant")).explanation.startswith("Не влияет"))
+
+    def test_service_flags_non_verdict_outcomes(self):
+        from app.analyst.analyst import AnalysisUnavailable
+        from app.analyst.service import AnalystService
+
+        self.assertEqual(AnalystService._no_verdict(AnalysisUnavailable("x", "budget_exhausted")), "budget_exhausted")
+        self.assertEqual(AnalystService._no_verdict(AnalysisUnavailable("x", "unavailable")), "analysis_failed")
+        self.assertEqual(AnalystService._no_verdict(self._mk("context_too_large")), "context_too_large")
+        self.assertIsNone(AnalystService._no_verdict(self._mk("not_relevant")))
+
+
 if __name__ == "__main__":
     unittest.main()
