@@ -20,7 +20,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any, Callable
 
 from app.analyst import prompts
-from app.analyst.analyst import AnalysisUnavailable, BusinessAnalyst
+from app.analyst.analyst import NON_VERDICT_CODES, AnalysisUnavailable, BusinessAnalyst
 from app.analyst.bridge import relevance_from, to_feed_item, to_insight
 from app.analyst.cache import AnalysisCache, key_hash
 from app.analyst.input_adapter import bank_fragments_from_evidence, build_analyst_input, parse_dt
@@ -112,6 +112,20 @@ class AnalystService:
         self._latencies: deque[int] = deque(maxlen=200)
         self._qa_seen: dict[str, tuple[int, int, str, bool]] = {}
         self.fallbacks_to_template = 0
+        # Исходы без инсайта по кодам причин (в т.ч. сбои и отложенные) — в метрики, не в «нерелевантные».
+        self.outcome_counts: dict[str, int] = {}
+
+    @staticmethod
+    def _no_verdict(res: Any) -> str | None:
+        """Код причины, если результат — не вердикт аналитика (сбой, бюджет, слишком большой контекст)."""
+        if isinstance(res, AnalysisUnavailable) or res is None:
+            return "budget_exhausted" if isinstance(res, AnalysisUnavailable) and res.code == "budget_exhausted" else "analysis_failed"
+        exc = res.excluded
+        return exc.reason_code if exc is not None and exc.reason_code in NON_VERDICT_CODES else None
+
+    def _count_outcome(self, code: str) -> None:
+        with self._lock:
+            self.outcome_counts[code] = self.outcome_counts.get(code, 0) + 1
 
     # ------------------------------------------------------------------ режимы
     @property
@@ -169,7 +183,9 @@ class AnalystService:
         items: list[FeedItem] = []
         for ev, cand in zip(events, inp.candidates):
             res = results.get(cand.candidate_id)
-            if isinstance(res, AnalysisUnavailable) or res is None:
+            no_verdict = self._no_verdict(res)
+            if no_verdict is not None:
+                self._count_outcome(no_verdict)
                 with self._lock:
                     self.fallbacks_to_template += 1
                 rel = score_fn(ev, company, role)
@@ -228,6 +244,20 @@ class AnalystService:
                     n=len(insight.trace) + 1, tool="llm_analyst",
                     summary="LLM-аналитик недоступен — показан шаблонный результат без LLM",
                     result=f"Причина: {exc if str(exc) else why}", status="warn",
+                )
+            )
+            return insight
+        no_verdict = self._no_verdict(outcome)
+        if no_verdict is not None:
+            self._count_outcome(no_verdict)
+            with self._lock:
+                self.fallbacks_to_template += 1
+            insight = template_fn()
+            insight.trace.append(
+                TraceStep(
+                    n=len(insight.trace) + 1, tool="llm_analyst",
+                    summary="Кандидат не проанализирован LLM-аналитиком — показан шаблонный результат без LLM",
+                    result=f"Исход: {no_verdict}" + (f"; {outcome.excluded.reason}" if outcome.excluded else ""), status="warn",
                 )
             )
             return insight
@@ -368,6 +398,7 @@ class AnalystService:
             "bank_position_found": sum(1 for x in seen if x[3]),
             "average_latency_ms": round(sum(lat) / len(lat)) if lat else None,
             "fallbacks_to_template": fallbacks,
+            "analyst_outcomes": dict(self.outcome_counts),
         }
 
 

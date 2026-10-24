@@ -30,7 +30,9 @@
    примеры, байты UTF-8 / 4) на кандидата; при превышении целиком отбрасываются
    менее значимые утверждения (не из ``claim_refs`` и не из противоречий) вместе с
    цитатами и источниками, на которые больше никто не ссылается. Цитаты не
-   обрезаются, ID оставшихся утверждений и цитат не меняются.
+   обрезаются, ID оставшихся утверждений и цитат не меняются. Если и после этого
+   оценка выше бюджета (``over_budget``) — кандидат помечается ``context_too_large``
+   и перечнем пропущенного (``omitted_parts``); модели он не отправляется (исход ``deferred``).
 
 Роль задаётся параметром (любая из четырёх); по умолчанию — ``request.role`` пакета.
 """
@@ -556,6 +558,16 @@ class ImpactBatchAdapter:
                 b = cand.analysis_projection.event_bundles[0]
                 b.limitations.append(f"Из-за лимита контекста опущено утверждений источника: {len(dropped_claims)} (целиком, без обрезки цитат).")
                 tokens = self._estimate(inp, cand)
+            if tokens > limit:
+                # Не отправляем модели усечённый «молча» контекст: кандидат откладывается явным исходом.
+                omitted = [f"оценка промпта {tokens} токенов превышает лимит {limit}"]
+                omitted += [f"утверждение {x}" for x in dropped_claims]
+                omitted += [f"цитата {x}" for x in dropped_ev]
+                omitted += [f"источник {x}" for x in dropped_src]
+                cand = cand.model_copy(update={
+                    "quality_flags": list(dict.fromkeys([*cand.quality_flags, "context_too_large"])),
+                    "omitted_parts": omitted,
+                })
             report[cand.candidate_id] = {
                 "tokens_before": before, "tokens_after": tokens, "budget": limit, "over_budget": tokens > limit,
                 "dropped_claim_ids": dropped_claims, "dropped_evidence_ids": dropped_ev, "dropped_source_ids": dropped_src,
@@ -649,7 +661,7 @@ class ImpactBatchAdapter:
             inp, truncation, estimates = self.fit_to_budget(inp, budget)
             over = [cid for cid, r in truncation.items() if r["over_budget"]]
             if over:
-                notes.append(f"Кандидатов выше бюджета {budget} токенов даже после усечения: {len(over)}")
+                notes.append(f"Кандидатов выше бюджета {budget} токенов даже после усечения: {len(over)} (отложены, исход context_too_large)")
         return AdapterResult(
             analyst_input=inp, status=status, empty_reason=empty_reason, notes=notes, rejected=rejected,
             truncation=truncation, token_estimates=estimates,

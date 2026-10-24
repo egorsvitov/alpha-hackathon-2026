@@ -21,7 +21,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from app.analyst.analyst import LEVEL_RU
+from app.analyst.analyst import LEVEL_RU, NON_VERDICT_CODES
 from app.analyst.schemas import CandidateOutcome, Candidate, CompanyContext, ImpactEstimateOut, Statement
 from app.schemas.base import (
     AiConclusion,
@@ -145,6 +145,12 @@ def relevance_from(outcome: CandidateOutcome) -> Relevance:
     ins = outcome.insight
     if ins is None:
         reason = outcome.excluded.reason if outcome.excluded else "Анализ не выполнен"
+        if outcome.excluded is not None and outcome.excluded.reason_code in NON_VERDICT_CODES:
+            # Сбой/бюджет/слишком большой контекст — не вердикт «не влияет на компанию».
+            return Relevance(
+                score=0.0, level="low", factors=[], explanation=f"Анализ не выполнен: {reason}",
+                reasons=[reason], evidence_status="not_analyzed",
+            )
         return Relevance(
             score=0.0, level="low", factors=[],
             explanation=f"Не влияет на компанию: {reason}",
@@ -245,7 +251,11 @@ def to_insight(
             status="ok", generated_by=generated_by,  # type: ignore[arg-type]
             event=NewsEvent.model_validate(event), relevance=relevance,
             what_happened=WhatHappened(summary=(exc.headline if exc and exc.headline else event.get("title", "")), facts=facts),
-            why_it_matters=[Claim(text=f"Аналитик не нашёл механизма влияния на бизнес компании: {reason}", kind="inference", evidence_ids=fact_ev[:2])],
+            why_it_matters=[Claim(
+                text=(f"Анализ не выполнен: {reason}" if exc and exc.reason_code in NON_VERDICT_CODES
+                      else f"Аналитик не нашёл механизма влияния на бизнес компании: {reason}"),
+                kind="inference", evidence_ids=fact_ev[:2],
+            )],
             risks=[], opportunities=[], next_actions=[], impact_estimate=None, bank_position=None, ai_conclusion=None,
             unknowns=[], evidence=col.items, trace=trace,
         )

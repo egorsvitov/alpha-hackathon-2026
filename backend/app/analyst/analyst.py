@@ -22,6 +22,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from typing import Any
@@ -108,7 +109,21 @@ def loose_key(company_id: str, cand: Candidate, role: str, profile_version: str,
 
 
 def _event_refs(cand: Candidate) -> list[EventRef]:
-    return [EventRef(event_id=r.event_id, event_version=r.event_version) for r in cand.event_bundle_refs]
+    return [
+        EventRef(
+            event_id=r.event_id, event_version=r.event_version,
+            reading_group_id=cand.reading_group_id, canonical_event_id=cand.canonical_event_id,
+        )
+        for r in cand.event_bundle_refs
+    ]
+
+
+def _identity(cand: Candidate) -> dict[str, str | None]:
+    return {"reading_group_id": cand.reading_group_id, "canonical_event_id": cand.canonical_event_id}
+
+
+# Коды исходов без инсайта, которые НЕ означают «событие не важно»: сбой, бюджет, слишком большой контекст.
+NON_VERDICT_CODES = frozenset({"analysis_failed", "budget_exhausted", "context_too_large"})
 
 
 class BusinessAnalyst:
@@ -159,6 +174,13 @@ class BusinessAnalyst:
 
     # ------------------------------------------------------------------ один кандидат
     def precheck(self, inp: AnalystInput, cand: Candidate) -> ExcludedCandidate | None:
+        excluded = self._precheck(inp, cand)
+        if excluded is not None:
+            for k, v in _identity(cand).items():
+                setattr(excluded, k, v)
+        return excluded
+
+    def _precheck(self, inp: AnalystInput, cand: Candidate) -> ExcludedCandidate | None:
         as_of = parse_dt(inp.request.as_of)
         bundle = cand.analysis_projection.event_bundles[0] if cand.analysis_projection.event_bundles else None
         if bundle is None or not bundle.claims:
@@ -188,6 +210,15 @@ class BusinessAnalyst:
                     reason_code="outside_window", reason=f"Событие старше окна новостей ({inp.request.news_window_hours} ч)",
                     headline=bundle.event.title,
                 )
+        if "context_too_large" in cand.quality_flags:
+            # Контекст не помещается в бюджет даже после усечения: модели не отправляем и не режем молча.
+            missing = list(cand.omitted_parts) or ["контекст события превышает бюджет промпта"]
+            return ExcludedCandidate(
+                candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
+                reason_code="context_too_large",
+                reason="Контекст кандидата не помещается в бюджет промпта даже после усечения — отложен, без вызова модели",
+                headline=bundle.event.title, status="deferred", missing_parts=missing,
+            )
         return None
 
     def analyze_candidate(
@@ -457,6 +488,7 @@ class BusinessAnalyst:
         run = CandidateRun(
             candidate_id=cand.candidate_id, prompt_version=self.prompt_version, generated_by="live",
             qa_status=qa.status, qa_issues=qa.issues, trace=trace,  # type: ignore[arg-type]
+            **_identity(cand),
         )
         if qa.changes is not None:
             ch = qa.changes
@@ -472,7 +504,7 @@ class BusinessAnalyst:
                     candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
                     reason_code="not_relevant",
                     reason=(clean_reason(draft.exclude_reason or "") or "Аналитик не нашёл механизма влияния на компанию")[:400],
-                    headline=qa.headline, facts=qa.facts,
+                    headline=qa.headline, facts=qa.facts, **_identity(cand),
                 ),
                 run=run,
             )
@@ -494,7 +526,7 @@ class BusinessAnalyst:
         )
         feats, claims, evs, banks = qa.support_ids()
         insight = RankedInsight(
-            candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
+            candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand), **_identity(cand),
             decision=qa.decision,  # type: ignore[arg-type]
             priority_score=score, significance=level,  # type: ignore[arg-type]
             priority_breakdown=breakdown,
@@ -554,15 +586,28 @@ class BusinessAnalyst:
         ranked: list[RankedInsight] = []
         excluded: list[ExcludedCandidate] = []
         runs: list[CandidateRun] = []
+        failed_ids: set[str] = set()
         for cand in inp.candidates:
             res = results.get(cand.candidate_id)
             if isinstance(res, AnalysisUnavailable) or res is None:
+                # Сбой API, таймаут, исчерпанный бюджет — это НЕ вердикт «не важно» (not_relevant).
+                code = "budget_exhausted" if isinstance(res, AnalysisUnavailable) and res.code == "budget_exhausted" else "analysis_failed"
+                reason = f"Анализ не выполнен: {res}" if res else "Анализ не выполнен"
+                if code == "budget_exhausted":
+                    reason = f"Бюджет LLM исчерпан, кандидат не проанализирован: {res}"
                 excluded.append(
                     ExcludedCandidate(
                         candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
-                        reason_code="analysis_failed", reason=f"Анализ не выполнен: {res}" if res else "Анализ не выполнен",
+                        reason_code=code, reason=reason, **_identity(cand),  # type: ignore[arg-type]
                     )
                 )
+                # Кандидат попадает в трассу и метрики прогона, но не считается «сгенерированным правилами».
+                runs.append(CandidateRun(
+                    candidate_id=cand.candidate_id, model=None, prompt_version=self.prompt_version, generated_by="rules",
+                    qa_status="skipped", **_identity(cand),
+                    trace=[TraceEntry(step="llm_analyst", summary="Анализ кандидата не выполнен", result=reason[:300], status="warn")],
+                ))
+                failed_ids.add(cand.candidate_id)
                 continue
             runs.append(res.run)
             if res.insight:
@@ -570,22 +615,34 @@ class BusinessAnalyst:
             elif res.excluded:
                 excluded.append(res.excluded)
         ranked.sort(key=lambda r: (-r.priority_score, r.candidate_id))
-        # Защита от дублей: один кластер/один заголовок — одно уведомление.
+        # Защита от дублей. Если задан canonical_event_id — дубль только при его совпадении
+        # (общий кластер/группа чтения и пересекающиеся источники дублем не считаются).
+        # Без canonical_event_id — прежнее правило: один кластер или один event_id — одно уведомление.
+        seen_canonical: set[str] = set()
         seen_clusters: set[str] = set()
         seen_titles: set[str] = set()
         unique: list[RankedInsight] = []
         for r in ranked:
-            title_key = r.event_refs[0].event_id if r.event_refs else r.candidate_id
-            if r.cluster_id in seen_clusters or title_key in seen_titles:
+            canonical = r.canonical_event_id
+            if canonical:
+                is_dup = canonical in seen_canonical
+            else:
+                title_key = r.event_refs[0].event_id if r.event_refs else r.candidate_id
+                is_dup = r.cluster_id in seen_clusters or title_key in seen_titles
+            if is_dup:
                 excluded.append(
                     ExcludedCandidate(
                         candidate_id=r.candidate_id, cluster_id=r.cluster_id, event_refs=r.event_refs,
                         reason_code="duplicate", reason="Дубликат события, уже показанного выше", headline=r.headline,
+                        reading_group_id=r.reading_group_id, canonical_event_id=canonical,
                     )
                 )
                 continue
-            seen_clusters.add(r.cluster_id)
-            seen_titles.add(title_key)
+            if canonical:
+                seen_canonical.add(canonical)
+            else:
+                seen_clusters.add(r.cluster_id)
+                seen_titles.add(r.event_refs[0].event_id if r.event_refs else r.candidate_id)
             unique.append(r)
         if len(unique) > inp.request.max_insights:
             for r in unique[inp.request.max_insights :]:
@@ -593,13 +650,14 @@ class BusinessAnalyst:
                     ExcludedCandidate(
                         candidate_id=r.candidate_id, cluster_id=r.cluster_id, event_refs=r.event_refs,
                         reason_code="insufficient_evidence", reason="За пределами лимита инсайтов запроса", headline=r.headline,
+                        reading_group_id=r.reading_group_id, canonical_event_id=r.canonical_event_id,
                     )
                 )
             unique = unique[: inp.request.max_insights]
 
         statuses = {r.qa_status for r in runs if r.qa_status != "skipped"}
         qa_status = "failed" if "failed" in statuses else ("passed_with_fixes" if "passed_with_fixes" in statuses else ("passed" if statuses else "skipped"))
-        gens = {r.generated_by for r in runs}
+        gens = {r.generated_by for r in runs if r.candidate_id not in failed_ids}
         generated = gens.pop() if len(gens) == 1 else ("mixed" if gens else "rules")
         usage = [r.usage for r in runs if r.usage]
         meta = RunMetadata(
@@ -616,6 +674,7 @@ class BusinessAnalyst:
             latency_ms=sum(int(u.get("latency_ms", 0)) for u in usage),
             json_repairs=sum(int(u.get("json_repairs", 0)) for u in usage),
             candidates=runs,
+            outcome_counts=dict(sorted(Counter(e.reason_code for e in excluded).items())),
         )
         return AnalystOutput(
             request_id=inp.request.request_id, company_id=inp.request.company_id, role=inp.request.role, as_of=inp.request.as_of,

@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 ANALYST_INPUT_VERSION = "AnalystInput.v1-draft"
 ANALYST_OUTPUT_VERSION = "AnalystOutput.v1-draft"
@@ -94,6 +94,15 @@ class GraphContext(BaseModel):
     reason: str | None = None
 
 
+class RetrievalInterest(BaseModel):
+    """Интерес компании от ретривера: гипотеза о канале влияния, а не проверенный факт."""
+
+    interest_id: str
+    text: str
+    version: str | None = None
+    kind: Literal["hypothesis"] = "hypothesis"
+
+
 class CompanyContext(BaseModel):
     profile_version: str
     profile_snapshot_ref: str | None = None
@@ -103,6 +112,8 @@ class CompanyContext(BaseModel):
     graph_context: GraphContext = Field(default_factory=GraphContext)
     unknowns: list[str] = Field(default_factory=list)
     synthetic_demo_profile: bool = True
+    # Гипотезы ретривера о каналах влияния (отдельно от verified_facts и unknowns).
+    retrieval_interests: list[RetrievalInterest] = Field(default_factory=list)
 
 
 class EventBundleRef(BaseModel):
@@ -210,6 +221,18 @@ class Candidate(BaseModel):
     # Флаги качества данных, выставленные адаптером (например, ``unreadable_claims`` —
     # текст утверждений повреждён ошибкой кодировки). Учитываются в ``precheck``.
     quality_flags: list[str] = Field(default_factory=list)
+    # Идентичность события: группа похожих публикаций и итоговое (каноническое) событие.
+    # Дубликат — только одинаковый ``canonical_event_id``; общий кластер/группа дублем не считается.
+    reading_group_id: str | None = None
+    canonical_event_id: str | None = None
+    # Текст события — производный пересказ (а не дословный текст источника).
+    derived_text: bool | None = None
+    # Полнота кандидата: ``unresolved`` — принадлежность группы не подтверждена, анализируется
+    # лучший переданный документ; ``partial`` — часть материалов группы не передана.
+    completeness: Literal["complete", "unresolved", "partial"] | None = None
+    group_member_refs: list[str | dict[str, Any]] = Field(default_factory=list)
+    # Части контекста, не поместившиеся в бюджет (заполняет адаптер при ``over_budget``).
+    omitted_parts: list[str] = Field(default_factory=list)
 
 
 class AnalystRequest(BaseModel):
@@ -257,8 +280,11 @@ class DraftStatement(BaseModel):
     claim_ids: list[str] = Field(default_factory=list)
     feature_ids: list[str] = Field(default_factory=list)
     roles: list[Role] = Field(default_factory=list)
+    # Алиасы исходных цитат (S1…) и интересов-гипотез (H1…); только для промптов analyst-v1.3+.
+    quote_ids: list[str] = Field(default_factory=list)
+    interest_ids: list[str] = Field(default_factory=list)
 
-    @field_validator("claim_ids", "feature_ids", "roles", mode="before")
+    @field_validator("claim_ids", "feature_ids", "roles", "quote_ids", "interest_ids", mode="before")
     @classmethod
     def _listify(cls, v: Any) -> list[Any]:
         return [str(x).strip() for x in _as_list(v) if str(x).strip()]
@@ -463,6 +489,7 @@ class Statement(BaseModel):
     evidence_ids: list[str] = Field(default_factory=list)
     feature_ids: list[str] = Field(default_factory=list)
     bank_chunk_ids: list[str] = Field(default_factory=list)
+    interest_ids: list[str] = Field(default_factory=list)
     conditional: bool = False
     roles: list[Role] = Field(default_factory=list)
 
@@ -470,6 +497,8 @@ class Statement(BaseModel):
 class EventRef(BaseModel):
     event_id: str
     event_version: int = 1
+    reading_group_id: str | None = None
+    canonical_event_id: str | None = None
 
 
 class UnknownOut(BaseModel):
@@ -537,6 +566,8 @@ class RankedInsight(BaseModel):
     candidate_id: str
     cluster_id: str
     event_refs: list[EventRef]
+    reading_group_id: str | None = None
+    canonical_event_id: str | None = None
     decision: Literal["include", "watch"]
     priority_score: float
     significance: Level
@@ -563,6 +594,10 @@ class RankedInsight(BaseModel):
     changes_since_previous: ChangesSincePrevious | None = None
 
 
+# Статус исхода по коду причины; прочие коды — ``excluded``.
+OUTCOME_STATUS = {"context_too_large": "deferred", "budget_exhausted": "deferred", "analysis_failed": "failed"}
+
+
 class ExcludedCandidate(BaseModel):
     candidate_id: str
     cluster_id: str
@@ -576,10 +611,26 @@ class ExcludedCandidate(BaseModel):
         "unreadable_source",
         "insufficient_evidence",
         "analysis_failed",
+        "budget_exhausted",
+        "context_too_large",
     ]
     reason: str
     headline: str | None = None
     facts: list[Statement] = Field(default_factory=list)
+    reading_group_id: str | None = None
+    canonical_event_id: str | None = None
+    # Исход: ``excluded`` — кандидат осознанно не показывается; ``deferred`` — не обработан
+    # и может быть обработан позже (бюджет, слишком большой контекст); ``failed`` — сбой анализа.
+    # Не заданный явно выводится из ``reason_code``.
+    status: Literal["excluded", "deferred", "failed"] | None = None
+    # Пропущенные части контекста (для ``context_too_large``).
+    missing_parts: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _default_status(self) -> "ExcludedCandidate":
+        if self.status is None:
+            self.status = OUTCOME_STATUS.get(self.reason_code, "excluded")  # type: ignore[assignment]
+        return self
 
 
 class TraceEntry(BaseModel):
@@ -608,6 +659,8 @@ class CandidateRun(BaseModel):
     llm_trace: list[TraceEntry] = Field(default_factory=list)
     # Отпечаток блока «предыдущий контекст» из памяти фактов (None — блока не было).
     memory_ref: str | None = None
+    reading_group_id: str | None = None
+    canonical_event_id: str | None = None
 
 
 class CandidateOutcome(BaseModel):
@@ -634,6 +687,9 @@ class RunMetadata(BaseModel):
     latency_ms: int = 0
     json_repairs: int = 0
     candidates: list[CandidateRun] = Field(default_factory=list)
+    # Сколько кандидатов закончилось без инсайта, по кодам причин (``not_relevant``,
+    # ``analysis_failed``, ``budget_exhausted``, ``context_too_large`` …).
+    outcome_counts: dict[str, int] = Field(default_factory=dict)
 
 
 class AnalystOutput(BaseModel):
