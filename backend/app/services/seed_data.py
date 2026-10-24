@@ -1,19 +1,5 @@
 from typing import Any
-from app.schemas.base import (
-    AiConclusion,
-    BankPosition,
-    Claim,
-    Evidence,
-    ImpactEstimate,
-    Insight,
-    NewsEvent,
-    Relevance,
-    RelevanceFactor,
-    Role,
-    TraceStep,
-    UnknownItem,
-    WhatHappened,
-)
+from app.schemas.base import Evidence
 
 # 3 профиля компаний: Металлургия (SYNTHETIC_U_1042), Агро-экспорт (SYNTHETIC_U_2218), Ритейл (SYNTHETIC_U_3305)
 COMPANIES_DATA: list[dict[str, Any]] = [
@@ -191,7 +177,7 @@ COMPANIES_DATA: list[dict[str, Any]] = [
     },
 ]
 
-# 6 разнородных событий (ставка, квоты/санкции, валюта, пошлины, контрагент, инфляция)
+# 7 разнородных событий (ставка, квоты/санкции, валюта, пошлины, контрагент, инфляция, шум)
 EVENTS_DATA: list[dict[str, Any]] = [
     {
         "event_id": "e1_key_rate",
@@ -261,7 +247,7 @@ EVENTS_DATA: list[dict[str, Any]] = [
     },
 ]
 
-# Общие доказательства (первоисточники и аналитика Альфа-Банка)
+# Доказательства (первоисточники и аналитика Альфа-Банка) по всем темам
 SHARED_EVIDENCE: list[Evidence] = [
     Evidence(
         evidence_id="n_e1_1",
@@ -269,7 +255,7 @@ SHARED_EVIDENCE: list[Evidence] = [
         title="Пресс-релиз Банка России по ключевой ставке",
         publisher="Банк России",
         date="2026-09-11",
-        quote="11 сентября 2026 года совет директоров Банка России принял решение сохранить ключевую ставку на уровне 14,00% годовых.",
+        quote="11 сентября 2026 года Совет директоров Банка России принял решение сохранить ключевую ставку на уровне 14,00% годовых.",
         is_synthetic=False,
     ),
     Evidence(
@@ -281,6 +267,66 @@ SHARED_EVIDENCE: list[Evidence] = [
         doc="ALFA-Macro_Insights-Policy_Rate_11Sep.pdf",
         page=1,
         quote="Мы пересмотрели наш прогноз по ставке на конец года с 12,5% до 14,0%. Ожидаем паузы до декабря.",
+        is_synthetic=False,
+    ),
+    Evidence(
+        evidence_id="n_e2_1",
+        type="synthetic",
+        title="Еврокомиссия ужесточила квотирование импорта металлопродукции",
+        publisher="Металлургический бюллетень (демо)",
+        date="2026-10-15",
+        quote="Новые квоты ограничивают беспошлинный ввоз стального проката и требуют подтверждения цепочки происхождения сырья.",
+        is_synthetic=True,
+    ),
+    Evidence(
+        evidence_id="b_steel",
+        type="bank_research",
+        title="Металлургия РФ: переориентация экспортных потоков на рынки ЕАЭС и Азии",
+        publisher="Отраслевая аналитика Альфа-Банка",
+        date="2026-10-10",
+        doc="ALFA-Metals_Trade_Flows_Oct2026.pdf",
+        page=4,
+        quote="Экспортеры стального проката замещают европейские объемы поставками в страны ЕАЭС (вкл. Казахстан) и Ближний Восток.",
+        is_synthetic=False,
+    ),
+    Evidence(
+        evidence_id="n_e3_1",
+        type="synthetic",
+        title="Биржевой и внебиржевой курс рубля снизился на 4% к CNY и USD",
+        publisher="Финансовый пульс (демо)",
+        date="2026-10-18",
+        quote="По итогам торговой недели ослабление рубля составило 4,1% к юаню на фоне сезонного спроса импортеров на валюту.",
+        is_synthetic=True,
+    ),
+    Evidence(
+        evidence_id="b_fx",
+        type="bank_research",
+        title="Валютный рынок: факторы волатильности рубля и инструменты хеджирования",
+        publisher="Дирекция казначейских операций Альфа-Банка",
+        date="2026-10-16",
+        doc="ALFA-FX_Weekly_Outlook.pdf",
+        page=2,
+        quote="Участникам ВЭД рекомендуется фиксировать форвардные курсы по расчетам в национальных валютах стран-партнеров.",
+        is_synthetic=False,
+    ),
+    Evidence(
+        evidence_id="n_e4_1",
+        type="synthetic",
+        title="Минсельхоз пересмотрел ставку вывозной таможенной пошлины на пшеницу",
+        publisher="АгроИнформ (демо)",
+        date="2026-10-19",
+        quote="Расчетная экспортная пошлина на пшеницу со следующей недели увеличивается на 12% вслед за индикативными ценами.",
+        is_synthetic=True,
+    ),
+    Evidence(
+        evidence_id="b_agro",
+        type="bank_research",
+        title="Агропромышленный комплекс: маржинальность зернового экспорта в 4 кв. 2026",
+        publisher="Центр отраслевой экспертизы Альфа-Банка",
+        date="2026-10-12",
+        doc="ALFA-Agro_Export_Margins.pdf",
+        page=3,
+        quote="Рост вывозной пошлины сжимает маржу трейдеров на 1,5–2,5 п.п., повышая значимость оборотного факторинга и быстрой перевалки в портах Юга.",
         is_synthetic=False,
     ),
     Evidence(
@@ -310,6 +356,26 @@ SHARED_EVIDENCE: list[Evidence] = [
         doc="ALFA-Macro_Insights-Commodities_Performance.pdf",
         page=2,
         quote="Перебои поставок коксующегося угля локально поддерживают спотовые цены на внутреннем рынке.",
+        is_synthetic=False,
+    ),
+    Evidence(
+        evidence_id="n_e6_1",
+        type="synthetic",
+        title="Росстат зафиксировал опережающий рост цен в продовольственном сегменте",
+        publisher="Макроэкономический обзор (демо)",
+        date="2026-09-02",
+        quote="Продовольственная инфляция в августе превысила общий индекс потребительских цен за счет логистических и сезонных издержек.",
+        is_synthetic=True,
+    ),
+    Evidence(
+        evidence_id="b_inflation",
+        type="bank_research",
+        title="Потребительский сектор и ритейл: динамика чека и оборотного капитала",
+        publisher="Центр макроэкономических исследований Альфа-Банка",
+        date="2026-09-05",
+        doc="ALFA-Retail_Inflation_Tracker.pdf",
+        page=5,
+        quote="Федеральные и региональные продуктовые сети адаптируют закупочные контракты и размещают свободную ликвидность в овернайт-депозитах под высокую ставку.",
         is_synthetic=False,
     ),
 ]

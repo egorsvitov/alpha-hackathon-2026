@@ -1,5 +1,6 @@
 from typing import Any
 from fastapi import APIRouter, HTTPException, Query, Response, status
+from starlette.concurrency import run_in_threadpool
 
 from app.schemas.base import (
     CompanyProfile,
@@ -17,9 +18,14 @@ from app.services.store import store
 api_router = APIRouter()
 
 
+@api_router.get("/health")
+async def health_check() -> dict[str, str]:
+    return {"status": "ok"}
+
+
 @api_router.get("/companies", response_model=list[CompanyProfile])
 async def get_companies() -> list[CompanyProfile]:
-    return store.get_companies()
+    return await run_in_threadpool(store.get_companies)
 
 
 @api_router.get(
@@ -30,7 +36,7 @@ async def get_news_feed(
     company_id: str,
     role: Role = Query(default="cfo"),
 ) -> list[FeedItem]:
-    return store.get_feed(company_id=company_id, role=role)
+    return await run_in_threadpool(store.get_feed, company_id=company_id, role=role)
 
 
 @api_router.get(
@@ -43,7 +49,17 @@ async def get_analysis_card(
     role: Role = Query(default="cfo"),
 ) -> Insight:
     try:
-        return store.get_insight(event_id=news_id, company_id=company_id, role=role)
+        return await run_in_threadpool(
+            store.get_insight,
+            event_id=news_id,
+            company_id=company_id,
+            role=role,
+        )
+    except KeyError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Insight not found",
+        ) from exc
     except Exception as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -53,7 +69,8 @@ async def get_analysis_card(
 
 @api_router.post("/chat/ask", response_model=QaAnswer)
 async def ask_question(body: QaRequest) -> QaAnswer:
-    return store.ask(
+    return await run_in_threadpool(
+        store.ask,
         company_id=body.company_id,
         news_id=body.news_id,
         role=body.role,
@@ -68,7 +85,7 @@ async def ask_question(body: QaRequest) -> QaAnswer:
     status_code=status.HTTP_201_CREATED,
 )
 async def upload_news(body: NewsUploadRequest) -> NewsEvent:
-    return store.ingest_news(title=body.title, text=body.text)
+    return await store.ingest_news_async(title=body.title, text=body.text)
 
 
 @api_router.post(
@@ -76,9 +93,10 @@ async def upload_news(body: NewsUploadRequest) -> NewsEvent:
     status_code=status.HTTP_204_NO_CONTENT,
 )
 async def send_feedback(body: FeedbackRequest) -> Response:
+    await store.record_feedback_async(run_id=body.run_id, useful=body.useful)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @api_router.get("/metrics")
 async def get_metrics() -> dict[str, Any]:
-    return store.get_metrics()
+    return await run_in_threadpool(store.get_metrics)

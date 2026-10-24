@@ -1,10 +1,9 @@
-from sqlalchemy import Float, String, Text
+from sqlalchemy import Boolean, Float, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
 
 
-# Базовые наброски таблиц
 class Company(Base):
     __tablename__ = "companies"
 
@@ -20,3 +19,23 @@ class News(Base):
     id: Mapped[str] = mapped_column(String, primary_key=True, index=True)
     title: Mapped[str] = mapped_column(String)
     content: Mapped[str] = mapped_column(Text)
+
+
+class UserEventRecord(Base):
+    __tablename__ = "user_events"
+
+    event_id: Mapped[str] = mapped_column(String, primary_key=True, index=True)
+    title: Mapped[str] = mapped_column(String)
+    text: Mapped[str] = mapped_column(Text, default="")
+    date: Mapped[str] = mapped_column(String)
+    topic: Mapped[str] = mapped_column(String, default="other")
+    topic_label: Mapped[str] = mapped_column(String, default="Пользовательское")
+
+
+class FeedbackRecord(Base):
+    __tablename__ = "feedback"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    run_id: Mapped[str] = mapped_column(String, index=True)
+    useful: Mapped[bool] = mapped_column(Boolean)
+    created_at: Mapped[str] = mapped_column(String)
