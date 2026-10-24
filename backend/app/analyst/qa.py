@@ -170,6 +170,26 @@ def _norm_text(text: str) -> str:
     return re.sub(r"[^\wа-яё]+", " ", (text or "").lower()).strip()
 
 
+# Ограничения нового ретривера для показа пользователю (английские строки и служебные коды пакета).
+LIMITATION_UI_RU = {
+    "Search similarity is not business significance; final ranking belongs to the analyst":
+        "Близость при поиске не означает значимости для бизнеса: решение о важности принимает аналитик.",
+    "Unknown source/profile availability prevents a historical-validity claim":
+        "Неизвестно, когда источник и профиль стали доступны, поэтому историческая достоверность не подтверждена.",
+    "raw_fallback_may_include_duplicates":
+        "Публикации не объединены в события: в выдаче возможны повторы одной новости.",
+}
+CYRILLIC_RE = re.compile(r"[а-яё]", re.I)
+
+
+def ui_limitation(text: str) -> str | None:
+    """Русская формулировка ограничения для карточки; без перевода и без кириллицы — ``None``."""
+    text = (text or "").strip()
+    if text in LIMITATION_UI_RU:
+        return LIMITATION_UI_RU[text]
+    return text if CYRILLIC_RE.search(text) else None
+
+
 class Validator:
     def __init__(self, view: PromptView, role: str, *, as_of: str | None = None) -> None:
         self.view = view
@@ -177,7 +197,12 @@ class Validator:
         self.issues: list[QAIssue] = []
         self.limitations: list[str] = []
         if (view.data.get("event") or {}).get("canonical_event_id") is not None:
-            self.limitations.extend((view.data.get("event") or {}).get("limitations", []))
+            # В карточку («Что неизвестно») — только русские формулировки: служебные коды и английские
+            # строки ретривера переводятся или отбрасываются (в промпт модели они идут как есть).
+            for lim in (view.data.get("event") or {}).get("limitations", []):
+                text = ui_limitation(lim)
+                if text:
+                    self.limitations.append(text)
         self.extra_unknowns: list[UnknownOut] = []
         self.claim_text = " ".join(c.text for c in view.all_claims()).lower()
         self.limitations.extend(view.notes)  # неполнота кандидата, пропущенные цитаты

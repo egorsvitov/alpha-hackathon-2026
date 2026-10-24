@@ -57,6 +57,26 @@ class QuoteCoordinatesTests(unittest.TestCase):
         self.assertEqual({"evidence_id", "type", "title", "publisher", "date", "quote", "is_synthetic"} - set(dumped), set())
 
 
+class UiLimitationTests(unittest.TestCase):
+    def test_english_and_code_limitations_do_not_reach_card(self):
+        from app.analyst.qa import Validator
+        from app.analyst.view import build_prompt_view
+
+        b = batch()
+        b["limitations"] = ["Search similarity is not business significance; final ranking belongs to the analyst",
+                            "raw_fallback_may_include_duplicates", "some_unknown_code"]
+        p, i = contexts()
+        inp = adapt_retrieval_batch(b, p, i, "cfo").analyst_input
+        view = build_prompt_view(inp, inp.candidates[0], extras=True)
+        self.assertIn("raw_fallback_may_include_duplicates", view.data["event"]["limitations"], "модель видит пакет как есть")
+        lims = Validator(view, "cfo").limitations
+        self.assertTrue(lims)
+        for text in lims:
+            self.assertRegex(text, "[а-яё]", f"в карточку попала строка без кириллицы: {text}")
+        self.assertNotIn("some_unknown_code", lims)
+        self.assertTrue(any(t.startswith("Публикации не объединены") for t in lims))
+
+
 class BatchShapeTests(unittest.TestCase):
     def test_non_dict_batch_is_validation_error_not_attribute_error(self):
         service, fake, _ = make_service()
