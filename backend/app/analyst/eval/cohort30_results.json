@@ -1,0 +1,4342 @@
+{
+ "generated_at": "2026-10-24T17:47:35+03:00",
+ "role": "cfo",
+ "model": "z-ai/glm-5.3-flash",
+ "prompt_version": "analyst-v1.3",
+ "memory": true,
+ "source": "RetrievalCandidateBatch.v1 → adapt_retrieval_batch (cohort30, вне репозитория)",
+ "companies": [
+  "U_47078",
+  "U_44564",
+  "U_70106",
+  "U_55223",
+  "U_32829"
+ ],
+ "summary": {
+  "candidates": 100,
+  "decisions": {
+   "watch": 23,
+   "exclude": 75,
+   "include": 2
+  },
+  "share": {
+   "watch": 0.23,
+   "exclude": 0.75,
+   "include": 0.02
+  },
+  "analyzed_by_llm": 100,
+  "excluded_by_rules": 0,
+  "valid_json_share": 1.0,
+  "valid_json_first_try_share": 1.0,
+  "statement_ref_coverage": 1.0,
+  "insights_with_feature_refs": 25,
+  "qa_rules_triggered": {
+   "headline_rewritten": 6,
+   "number_not_in_data": 1,
+   "changes_unsupported": 1
+  },
+  "qa_status": {
+   "passed": 92,
+   "passed_with_fixes": 8
+  },
+  "changes_since_previous": {
+   "new": 17,
+   "continuation": 7,
+   "unknown": 1
+  },
+  "prompt_tokens": 471137,
+  "completion_tokens": 43508,
+  "cost_rub_usage": 10.6445,
+  "cost_rub_per_llm_candidate": 0.1064,
+  "avg_latency_s": 7.0,
+  "by_processing_status": {
+   "merge_fallback": {
+    "candidates": 54,
+    "decisions": {
+     "watch": 11,
+     "exclude": 41,
+     "include": 2
+    }
+   },
+   "ready": {
+    "candidates": 46,
+    "decisions": {
+     "watch": 12,
+     "exclude": 34
+    }
+   }
+  },
+  "wall_s_per_candidate": 3.72
+ },
+ "run_cost": {
+  "session_spent_rub": 10.6445,
+  "team_spend_before_rub": 5.896347223522759,
+  "team_spend_after_rub": 16.42226788078191,
+  "team_spend_delta_rub": 10.5259,
+  "wall_s": 371.9
+ },
+ "candidates": [
+  {
+   "company_id": "U_47078",
+   "candidate_id": "9cb99ebfac2af1c8f384ed27c5a145294742912698b2eecf131ff33a431a46f1",
+   "event_id": "article:telegram:1050820672:401584",
+   "title": "ТАСС — сообщение 401584",
+   "decision": "watch",
+   "reason": "Профиль компании — деятельность по обработке данных и размещению информации, поэтому ограничения PHP-сайтов в Европе могут затрагивать её бизнес, если она обслуживает европейских клиентов или размещает их сайты; такая зависимость в данных не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:8dd88e08ef17f1f7495d518bba36a1bae2aa90ae37f8cdfae29d3f093831a368"
+    ],
+    "evidence_ids": [
+     "quote:8dd88e08ef17f1f7495d518bba36a1bae2aa90ae37f8cdfae29d3f093831a368"
+    ],
+    "feature_ids": [
+     "U_47078:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4452,
+   "completion_tokens": 978,
+   "cost_rub": 0.13323,
+   "latency_ms": 10678,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 1,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "04819f607459f1bc61f2ac0885d62d2a055a1381ac8e1744acf067983b6351b2",
+   "event_id": "article:moex_main:fe6fa05ffbaa",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение риск-параметров НКЦ на фондовом рынке и рынке депозитов не затрагивает деятельность компании по обработке данных, у которой нет признаков работы с ценными бумагами или биржевыми депозитами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:e2bf70defba119f313ea48e672f4697ceacf63a8deeb49bb6f7027016b7759ca"
+    ],
+    "evidence_ids": [
+     "quote:e2bf70defba119f313ea48e672f4697ceacf63a8deeb49bb6f7027016b7759ca"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "headline_rewritten"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4502,
+   "completion_tokens": 311,
+   "cost_rub": 0.09568,
+   "latency_ms": 5655,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 2,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "d09ce77e636812a2330dca62adc98ee62f0ea299abf02c6b8f92277ff9877386",
+   "event_id": "article:telegram:1099860397:159151",
+   "title": "РБК. Новости. Главное — сообщение 159151",
+   "decision": "watch",
+   "reason": "Компания работает в сфере обработки данных и размещения информации, поэтому уязвимости в PHP могут касаться её сервисов, если они используют PHP; подтверждения использования PHP в профиле нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "continuation",
+    "previous_insight_id": "mem:U_47078:cfo:article:telegram:1050820672:401584@v1",
+    "summary": "Развитие той же истории об уязвимостях PHP: добавлено сообщение об угрозе для десятков тысяч сайтов Рунета; вывод прежний — влияние возможно только при использовании PHP.",
+    "claim_ids": [
+     "claim:03547765f0bad82b9ebf841390162a8dffe9e7908e69809f8801cfcb26ba2a36",
+     "claim:8dd88e08ef17f1f7495d518bba36a1bae2aa90ae37f8cdfae29d3f093831a368"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:03547765f0bad82b9ebf841390162a8dffe9e7908e69809f8801cfcb26ba2a36"
+    ],
+    "evidence_ids": [
+     "quote:03547765f0bad82b9ebf841390162a8dffe9e7908e69809f8801cfcb26ba2a36"
+    ],
+    "feature_ids": [
+     "U_47078:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4771,
+   "completion_tokens": 801,
+   "cost_rub": 0.12855,
+   "latency_ms": 10472,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 3,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "cd145d6c3c0e1fd020493caeff982e5a6df282f71307b73b2935897d4b238550",
+   "event_id": "article:moex_main:2c3ef56f7dba",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма: изменение риск-параметров НКЦ на фондовом рынке и рынке депозитов не затрагивает бизнес компании по обработке данных, у которой нет признаков работы с биржевыми инструментами или депозитами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:61d0a8085d6af996f94f76738bc10656e72e9bc50d4ebac4a02cf89350e8f2c6"
+    ],
+    "evidence_ids": [
+     "quote:61d0a8085d6af996f94f76738bc10656e72e9bc50d4ebac4a02cf89350e8f2c6"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4485,
+   "completion_tokens": 330,
+   "cost_rub": 0.09648,
+   "latency_ms": 5895,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 4,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "a4bf30d397346d056a91daf0c6265a62cdf181ee6cdd34d89b0177698710665f",
+   "event_id": "article:moex_main:15050bcaf6c6",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение риск-параметров НКЦ на фондовом рынке и рынке депозитов не затрагивает деятельность компании по обработке данных, у которой нет признаков работы с ценными бумагами или биржевыми депозитами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:9725318c945d798e84ceb9f07b8c30e9598b561cbbfaf8bfd94fc076e015c5cd"
+    ],
+    "evidence_ids": [
+     "quote:9725318c945d798e84ceb9f07b8c30e9598b561cbbfaf8bfd94fc076e015c5cd"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4510,
+   "completion_tokens": 364,
+   "cost_rub": 0.09887,
+   "latency_ms": 6229,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 5,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "9a3691de5a8646bc0e43fdaee5c9f92ef9a5a9b25bf25c58bc87b914ab4bd0b7",
+   "event_id": "article:telegram:1099860397:159027",
+   "title": "РБК. Новости. Главное — сообщение 159027",
+   "decision": "watch",
+   "reason": "Компания работает в сфере обработки данных и размещения информации; если она или её провайдеры используют VMmanager, возможна компрометация учётных данных и доступов.",
+   "significance": "low",
+   "priority_score": 0.12,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:928de50073ba626e2c31d429b585b1c6dfe0fad34dd42b126ec93eef62c0e26c"
+    ],
+    "evidence_ids": [
+     "quote:928de50073ba626e2c31d429b585b1c6dfe0fad34dd42b126ec93eef62c0e26c"
+    ],
+    "feature_ids": [
+     "U_47078:/okved/code",
+     "U_47078:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4628,
+   "completion_tokens": 914,
+   "cost_rub": 0.13258,
+   "latency_ms": 10767,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 6,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "a10e279b62a96c2f3d14e820a8824ffec5a32ccb1ffd395e93aa325172f8fe86",
+   "event_id": "article:moex_rss:1826b05a790a",
+   "title": "Московская Биржа - Об изменении IP-адреса системы ЭДО | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Техническое уведомление Московской Биржи об изменении IP-адреса почтового сервера ЭДО; нет данных о взаимодействии компании с биржей, механизм влияния на её бизнес отсутствует.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:3a88cf1db591ea4c8685f20828df5e67ba9073973b85ffb2fd4bed9e212337fd"
+    ],
+    "evidence_ids": [
+     "quote:3a88cf1db591ea4c8685f20828df5e67ba9073973b85ffb2fd4bed9e212337fd"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4644,
+   "completion_tokens": 251,
+   "cost_rub": 0.09468,
+   "latency_ms": 7485,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 7,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "057728ab9bb636a788fd53fa5f4c9efa78efb0c86d23a7c484d2d1dabf448ac3",
+   "event_id": "article:moex_main:ea93f7bba460",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма: изменение риск-параметров НКЦ на фондовом рынке и рынке депозитов не затрагивает деятельность компании по обработке данных, у которой нет брокерских операций, депозитов или кредитных продуктов в банке.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:0eb4ac43f17b0a6e785f2b0d1ccfc0f1b19df06fdd6de756e9b37a91a471403e"
+    ],
+    "evidence_ids": [
+     "quote:0eb4ac43f17b0a6e785f2b0d1ccfc0f1b19df06fdd6de756e9b37a91a471403e"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4495,
+   "completion_tokens": 341,
+   "cost_rub": 0.09729,
+   "latency_ms": 6134,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 8,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "de8433a9498e6751ee781cb3da8c6edc6eb12d910511f6104ce79469c02668ef",
+   "event_id": "article:moex_main:a424c88ca608",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение биржевых риск-параметров по акциям МосЭнерго и Ленты не затрагивает деятельность компании по обработке данных, у которой нет признаков работы с этими бумагами или фондовым рынком.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:b11c2e7ecd675e8971a480138ead56de7a8bd2f7187ead908a77df8b2ea2bfff"
+    ],
+    "evidence_ids": [
+     "quote:b11c2e7ecd675e8971a480138ead56de7a8bd2f7187ead908a77df8b2ea2bfff"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "headline_rewritten"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4629,
+   "completion_tokens": 201,
+   "cost_rub": 0.09154,
+   "latency_ms": 5204,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 9,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "19e4a04d359460839ee8bb2e325a51cf096a65a54cf16f229aa3f92da5c6c5d0",
+   "event_id": "article:telegram:1050820672:401074",
+   "title": "ТАСС — сообщение 401074",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: политическое заявление о расширении полномочий чиновника без принятого экономического решения, не затрагивающее бизнес компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:e328813fa52b30dccbddee89882863652a1bc36fd6488479021bb286f1f77133"
+    ],
+    "evidence_ids": [
+     "quote:e328813fa52b30dccbddee89882863652a1bc36fd6488479021bb286f1f77133"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4389,
+   "completion_tokens": 237,
+   "cost_rub": 0.08947,
+   "latency_ms": 4782,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 10,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "637d0d8a63e01d099584020786d71550c650b912022267c5dae3ae71c75db734",
+   "event_id": "article:moex_main:91089c35c559",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов и Срочном рынке | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение риск-параметров НКЦ на фондовом и срочном рынках не затрагивает деятельность компании по обработке данных, у которой нет подтверждённых операций с ценными бумагами или депозитами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:c4e9059418ee4b64594575ebf5b8353b3ba77fb9eef2926ee7bda53e37555269"
+    ],
+    "evidence_ids": [
+     "quote:c4e9059418ee4b64594575ebf5b8353b3ba77fb9eef2926ee7bda53e37555269"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4510,
+   "completion_tokens": 290,
+   "cost_rub": 0.09461,
+   "latency_ms": 4817,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 11,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "a46b61d00c1ae509b97cb47b960605fddbe9513e92073e80ff270dbd3cd316c8",
+   "event_id": "article:moex_main:225d62c8a8fa",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение риск-параметров НКЦ на фондовом рынке и рынке депозитов не затрагивает бизнес компании по обработке данных, у которой нет признаков работы с ценными бумагами или биржевыми инструментами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:e378ae42358e944b87ef3843f97056c4c5bb1fb743081c12698e13c37ae23a93"
+    ],
+    "evidence_ids": [
+     "quote:e378ae42358e944b87ef3843f97056c4c5bb1fb743081c12698e13c37ae23a93"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4535,
+   "completion_tokens": 302,
+   "cost_rub": 0.09574,
+   "latency_ms": 5225,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 12,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "42a388fef6e3083c76dfe31b24642102d16bfdcdc164abbf7df53fcff89f8fac",
+   "event_id": "article:moex_main:7abe32eac7c3",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение риск-параметров НКЦ на фондовом рынке и рынке депозитов не затрагивает деятельность компании по обработке данных, у которой нет подтверждённых операций с ценными бумагами или депозитами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:3158057c2af92e8901473a44290c13d26e39e12ded2d669744f82f53be6ac63e"
+    ],
+    "evidence_ids": [
+     "quote:3158057c2af92e8901473a44290c13d26e39e12ded2d669744f82f53be6ac63e"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "headline_rewritten"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4499,
+   "completion_tokens": 285,
+   "cost_rub": 0.09413,
+   "latency_ms": 5813,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 13,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "cec567549b127e9771df81ddcff0eccf8fa81af830b5c9fd71aa6642aaa66c64",
+   "event_id": "article:moex_main:a4cc37b629e3",
+   "title": "Московская Биржа - О дополнительных условиях предоставления доступа клиентам-нерезидентам к рынку акций | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается условий доступа нерезидентов к рынку акций Мосбиржи, а у компании нет признаков владения ценными бумагами, нерезидентных клиентов или операций с ними.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d835e7b64f8b4a81f35747270ec9bf1b312ba3fbaf9c58ef97062e5d9ec0536c"
+    ],
+    "evidence_ids": [
+     "quote:d835e7b64f8b4a81f35747270ec9bf1b312ba3fbaf9c58ef97062e5d9ec0536c"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4668,
+   "completion_tokens": 294,
+   "cost_rub": 0.09757,
+   "latency_ms": 5417,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 14,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "bd1acfd946dfa5a95efd8e53f17d98a85eb5721748e0e3955cd8c3f878769bfd",
+   "event_id": "article:cbr_event:5239b8522ac0",
+   "title": "Противодействие мошенническим переводам: итоги II квартала",
+   "decision": "watch",
+   "reason": "Компания ведёт расчётные операции и работает с обработкой данных; рост атак на юрлиц может касаться её платежей, но прямых признаков пострадавшей компании в данных нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:57d8186419ac21811014888820d70fe58caf126b03a8cbe4dcd8d051558ad12a"
+    ],
+    "evidence_ids": [
+     "quote:57d8186419ac21811014888820d70fe58caf126b03a8cbe4dcd8d051558ad12a"
+    ],
+    "feature_ids": [
+     "U_47078:/okved/name",
+     "U_47078:/products/rko"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4699,
+   "completion_tokens": 908,
+   "cost_rub": 0.13346,
+   "latency_ms": 10454,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 15,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "c169bd7f4ddbf337c250c01be9f35017cc38495aaf6ecab41b262a239843446f",
+   "event_id": "article:telegram:1050820672:401607",
+   "title": "ТАСС — сообщение 401607",
+   "decision": "watch",
+   "reason": "Компания работает в сфере обработки данных и размещения информации; если её сервисы используют PHP, уязвимость может затронуть её инфраструктуру, но использование PHP в данных профиля не подтверждено.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "continuation",
+    "previous_insight_id": "mem:U_47078:cfo:article:telegram:1099860397:159151@v1",
+    "summary": "Развитие той же истории об уязвимости PHP: ранее сообщалось об отключениях в Европе, теперь ТАСС насчитал 13 стран; качественно ситуация не изменилась.",
+    "claim_ids": [
+     "claim:5e2711ea0974993cc0c757daa5d3b1d3588437fc22fa6ded276d38f55a7a1196",
+     "claim:03547765f0bad82b9ebf841390162a8dffe9e7908e69809f8801cfcb26ba2a36"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:5e2711ea0974993cc0c757daa5d3b1d3588437fc22fa6ded276d38f55a7a1196"
+    ],
+    "evidence_ids": [
+     "quote:5e2711ea0974993cc0c757daa5d3b1d3588437fc22fa6ded276d38f55a7a1196"
+    ],
+    "feature_ids": [
+     "U_47078:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4752,
+   "completion_tokens": 848,
+   "cost_rub": 0.13093,
+   "latency_ms": 9599,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 16,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "ea8deba73a5f900afc57697a393b14a3a6bb0e3029d4f38c1777baf81b868f75",
+   "event_id": "article:moex_main:9fc0c8aaa1c4",
+   "title": "Московская Биржа - О значениях риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма: изменение риск-параметров НКЦ на фондовом рынке и рынке депозитов не затрагивает деятельность компании по обработке данных, у которой нет признаков работы с ценными бумагами или биржевыми инструментами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:2a61c8d6703b078f92c6ce9c379184840553834ff599ba1414ac717121fec090"
+    ],
+    "evidence_ids": [
+     "quote:2a61c8d6703b078f92c6ce9c379184840553834ff599ba1414ac717121fec090"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4512,
+   "completion_tokens": 265,
+   "cost_rub": 0.09321,
+   "latency_ms": 5194,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 17,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "1b8a847ac2ed0e87eb366581e6e80f5ecee3bb25a51f7458389e5ec97a8a4128",
+   "event_id": "article:moex_main:6b440de19701",
+   "title": "Московская Биржа - Об установлении риск-параметров на фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: техническое сообщение биржи о риск-параметрах по конкретной облигации ДОМ.РФ не затрагивает деятельность компании по обработке данных и её банковские продукты.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d6e99cc65094f188e4dad824ebcd8c80a64bb13fa7177e40f223974f71331ab3"
+    ],
+    "evidence_ids": [
+     "quote:d6e99cc65094f188e4dad824ebcd8c80a64bb13fa7177e40f223974f71331ab3"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4702,
+   "completion_tokens": 206,
+   "cost_rub": 0.09309,
+   "latency_ms": 5919,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 18,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "5793334e8b4a10ff9c195e85bd02c3ea10faace708097503ffd785b59b713f26",
+   "event_id": "article:moex_main:2b9fa2631cf7",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "нет механизма: изменение риск-параметров Мосбиржи по конкретным облигациям не затрагивает деятельность компании по обработке данных, у которой нет признаков работы с ценными бумагами или фондовым рынком",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:82bd607068ea7674a3f630218f53bbf62e4bef299ec2324aeee75515752eaea6",
+     "claim:c902d1fdfc66c5cfd10df08f08ee1d66d7210eeb747a8a4b8acc2836378cc935"
+    ],
+    "evidence_ids": [
+     "quote:82bd607068ea7674a3f630218f53bbf62e4bef299ec2324aeee75515752eaea6",
+     "quote:c902d1fdfc66c5cfd10df08f08ee1d66d7210eeb747a8a4b8acc2836378cc935"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5438,
+   "completion_tokens": 364,
+   "cost_rub": 0.1149,
+   "latency_ms": 6369,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 19,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_47078",
+   "candidate_id": "81afbfdfae7f9967c01bff7f44515cdd458ea32f0e6d020dfdc63d7ab73987a2",
+   "event_id": "article:telegram:1050820672:401176",
+   "title": "ТАСС — сообщение 401176",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Новость о мошеннических схемах с фишинговыми ссылками при продаже бумажных изданий не имеет механизма влияния на бизнес компании по обработке данных.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:7f2528a9f91d8f502b94a96d1b54a693244ab0bf098535130ba313150a6202e0"
+    ],
+    "evidence_ids": [
+     "quote:7f2528a9f91d8f502b94a96d1b54a693244ab0bf098535130ba313150a6202e0"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4444,
+   "completion_tokens": 273,
+   "cost_rub": 0.09249,
+   "latency_ms": 5152,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 20,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "f5a5f142fb45c00bd4c6a23903a3cf5f268ecf243b362c47c0ac39023804b95b",
+   "event_id": "article:cbr_event:275c5c7b3955",
+   "title": "О чем говорят тренды: временные факторы влияют на рост цен и ВВП",
+   "decision": "watch",
+   "reason": "Компания пользуется кредитом и депозитом в банке, поэтому траектория ключевой ставки и инфляции влияет на стоимость нового финансирования и доходность размещения средств",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "mixed",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "continuation",
+    "previous_insight_id": "mem:U_44564:cfo:article:cbr_event:25ba941d4b4c@v1",
+    "summary": "Развитие макроаналитики ЦБ после июньско-июльских индикаторов: акцент смещен на повышенный рост цен из-за ограничений предложения и необходимость выверенных решений ДКП для возврата инфляции к 4% в 2027",
+    "claim_ids": [
+     "claim:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a",
+     "claim:3c3d9ef0236b3dbfdb34b46e40990694de91db91ac711450be06cfce768d8dfd"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a"
+    ],
+    "evidence_ids": [
+     "quote:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a"
+    ],
+    "feature_ids": [
+     "U_44564:/products/deposit",
+     "U_44564:/products/loan"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4949,
+   "completion_tokens": 954,
+   "cost_rub": 0.14043,
+   "latency_ms": 9814,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 1,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "4eb59524a50c6ef531ff109d41fb21b862a5d0f97260913b342b5bc664fb4bb7",
+   "event_id": "article:telegram:1099860397:159012",
+   "title": "РБК. Новости. Главное — сообщение 159012",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "нет механизма: событие касается условий продаж на маркетплейсе Ozon, а в признаках компании нет данных о работе с маркетплейсами или онлайн-каналах сбыта",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:5b580dfc04f2d50185b5ed27ce054615f6f1181a2f019cafae51091407987db4"
+    ],
+    "evidence_ids": [
+     "quote:5b580dfc04f2d50185b5ed27ce054615f6f1181a2f019cafae51091407987db4"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4578,
+   "completion_tokens": 368,
+   "cost_rub": 0.10028,
+   "latency_ms": 6652,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 2,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "6df36cca23f2fc60098b6e1179bc769913cc42b5052d0d2fd6145a0f0cf02cd1",
+   "event_id": "article:cbr_event:27dd9804e67e",
+   "title": "В августе почти во всех регионах цены выросли меньше, чем в июле, или снизились",
+   "decision": "watch",
+   "reason": "Компания — оптовый торговец компьютерами и ПО; удорожание электроники и компьютеров на фоне ослабления рубля может влиять на её закупочные цены и маржу, но данные о валютной структуре закупок отсутствуют.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "continuation",
+    "previous_insight_id": "mem:U_44564:cfo:article:cbr_event:0f789f619b78@v1",
+    "summary": "Макрофоновая картина ЦБ дополняется ценовым срезом за август: общая инфляция замедлилась, но электроника и компьютеры подорожали из-за ослабления рубля — для компании это та же косвенная связь без новых подтверждённых фактов.",
+    "claim_ids": [
+     "claim:6bb0e955c4f0dcaca9fb6d87f6569aa40b0c58b6820ed7b8aaa9bcbbbb47c931",
+     "claim:31e08bb3a55cff86423eaa2d0ac6bbd6f734d7c2fcdfbf70ccebb6089c9c482d"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:6bb0e955c4f0dcaca9fb6d87f6569aa40b0c58b6820ed7b8aaa9bcbbbb47c931"
+    ],
+    "evidence_ids": [
+     "quote:6bb0e955c4f0dcaca9fb6d87f6569aa40b0c58b6820ed7b8aaa9bcbbbb47c931"
+    ],
+    "feature_ids": [
+     "U_44564:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5047,
+   "completion_tokens": 832,
+   "cost_rub": 0.1351,
+   "latency_ms": 9810,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 3,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "d40ce695fa2810c8fa58874b9ce61847b4159899193458965e3323894bcacdef",
+   "event_id": "article:cbr_event:f33b129c2ae0",
+   "title": "Платежные операции россиян: тренды II квартала",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: общая статистика ЦБ о платежных трендах населения не меняет условия бизнеса оптового продавца компьютерной техники.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:ee06a30920085616174d75f1c554627ac6c6e6fcdaede666200c40a738a216bd",
+     "claim:01822040f93aa16713402fd82154f57f0ac90e3f64dd44c081912d79fedc243b"
+    ],
+    "evidence_ids": [
+     "quote:ee06a30920085616174d75f1c554627ac6c6e6fcdaede666200c40a738a216bd",
+     "quote:01822040f93aa16713402fd82154f57f0ac90e3f64dd44c081912d79fedc243b"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4875,
+   "completion_tokens": 377,
+   "cost_rub": 0.10593,
+   "latency_ms": 6260,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 4,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "b9e65b04e6b5189b47e9fd1ce21aba25839e4d2ec974360328749ab059cd2ba9",
+   "event_id": "article:telegram:1099860397:159027",
+   "title": "РБК. Новости. Главное — сообщение 159027",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: взлом ПО управления виртуальными серверами затрагивает хостинг-провайдеров и их клиентов, а связь компании с этими сервисами или провайдерами в признаках профиля отсутствует.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:928de50073ba626e2c31d429b585b1c6dfe0fad34dd42b126ec93eef62c0e26c"
+    ],
+    "evidence_ids": [
+     "quote:928de50073ba626e2c31d429b585b1c6dfe0fad34dd42b126ec93eef62c0e26c"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4635,
+   "completion_tokens": 384,
+   "cost_rub": 0.10218,
+   "latency_ms": 6265,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 5,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "b03013d0d70564a078732675df7e9ee1294619448f217f55c9a0e2c15addc5b8",
+   "event_id": "article:cbr_event:25ba941d4b4c",
+   "title": "Индикаторы денежно-кредитных условий в июне – июле менялись разнонаправленно",
+   "decision": "watch",
+   "reason": "Компания пользуется кредитом и депозитом в банке; динамика рыночных ставок может влиять на условия нового финансирования и доходность размещения средств.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:3c3d9ef0236b3dbfdb34b46e40990694de91db91ac711450be06cfce768d8dfd"
+    ],
+    "evidence_ids": [
+     "quote:3c3d9ef0236b3dbfdb34b46e40990694de91db91ac711450be06cfce768d8dfd"
+    ],
+    "feature_ids": [
+     "U_44564:/products/deposit",
+     "U_44564:/products/loan"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4606,
+   "completion_tokens": 902,
+   "cost_rub": 0.13151,
+   "latency_ms": 10632,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 6,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "8f9537547cf0a94662beba7562f9c598ddbe8defd202a0325df0cf18a552e27a",
+   "event_id": "article:cbr_event:a1387a59890d",
+   "title": "В большинстве регионов в сентябре цены выросли умеренно",
+   "decision": "watch",
+   "reason": "Компания — оптовый торговец компьютерами и ПО; рост цен на электронику может влиять на закупочные и отпускные цены, но данные о валютных закупках и марже отсутствуют.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "continuation",
+    "previous_insight_id": "mem:U_44564:cfo:article:cbr_event:27dd9804e67e@v1",
+    "summary": "Сентябрьская картина повторяет августовскую: инфляция умеренная, электроника дорожает из-за ослабления рубля; новых факторов нет.",
+    "claim_ids": [
+     "claim:99deb961b47a977011b2f9d2339b2af1904456edc55f648afd74d90ee6cfd8c2",
+     "claim:6bb0e955c4f0dcaca9fb6d87f6569aa40b0c58b6820ed7b8aaa9bcbbbb47c931"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:99deb961b47a977011b2f9d2339b2af1904456edc55f648afd74d90ee6cfd8c2"
+    ],
+    "evidence_ids": [
+     "quote:99deb961b47a977011b2f9d2339b2af1904456edc55f648afd74d90ee6cfd8c2"
+    ],
+    "feature_ids": [
+     "U_44564:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5032,
+   "completion_tokens": 915,
+   "cost_rub": 0.13962,
+   "latency_ms": 9605,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 7,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "918784c6bda4d00782c627d52b4ee0cb67b0d6c71b3e7142ea2c5297001f5a08",
+   "event_id": "article:cbr_event:0f789f619b78",
+   "title": "Доклад «Региональная экономика»: потребительская активность умеренно росла",
+   "decision": "watch",
+   "reason": "Компания — оптовый торговец компьютерами и ПО; умеренный рост потребительской активности может косвенно поддерживать спрос на технику, но прямых данных о её продажах в докладе нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:31e08bb3a55cff86423eaa2d0ac6bbd6f734d7c2fcdfbf70ccebb6089c9c482d"
+    ],
+    "evidence_ids": [
+     "quote:31e08bb3a55cff86423eaa2d0ac6bbd6f734d7c2fcdfbf70ccebb6089c9c482d"
+    ],
+    "feature_ids": [
+     "U_44564:/okved/name",
+     "U_44564:/revenue/raw"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4638,
+   "completion_tokens": 879,
+   "cost_rub": 0.13074,
+   "latency_ms": 11021,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 8,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "985ad4a01e046136fbe45cdf2fdbc6e2d85607c597de3b9fab0cbb77079ed795",
+   "event_id": "article:telegram:1050820672:401074",
+   "title": "ТАСС — сообщение 401074",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: заявление о расширении полномочий чиновника без принятого экономического решения не затрагивает бизнес оптового торговца компьютерами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:e328813fa52b30dccbddee89882863652a1bc36fd6488479021bb286f1f77133"
+    ],
+    "evidence_ids": [
+     "quote:e328813fa52b30dccbddee89882863652a1bc36fd6488479021bb286f1f77133"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4396,
+   "completion_tokens": 235,
+   "cost_rub": 0.08947,
+   "latency_ms": 5024,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 9,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "8860f4ca86d546f9eb8d25f68e0193fe6677cdf11413b30a29e961a81d826fce",
+   "event_id": "article:cbr_event:bb433d732ba3",
+   "title": "Финансовые посредники пересчитают нормативы финансовой устойчивости с учетом криптовалют",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: проект ЦБ касается пруденциальных нормативов профучастников и криптообменников, а компания — оптовый торговец компьютерами без признаков связи с финансовым посредничеством или криптоактивами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:3a1e9b7fb52f2d083c09594e444ed4fcae04e5296ac1748e69ba26b2e3473bdc"
+    ],
+    "evidence_ids": [
+     "quote:3a1e9b7fb52f2d083c09594e444ed4fcae04e5296ac1748e69ba26b2e3473bdc"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4815,
+   "completion_tokens": 265,
+   "cost_rub": 0.09844,
+   "latency_ms": 6507,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 10,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "6ea2459ab1c4ad4bda7ddaffe9bca13e5a7310b9d0870f50b687464d9858422a",
+   "event_id": "article:telegram:1050820672:401498",
+   "title": "ТАСС — сообщение 401498",
+   "decision": "watch",
+   "reason": "Компания активно пользуется расчетно-кассовым обслуживанием; новая мера может затронуть порядок проведения платежей, если переводы осуществляются с мобильных устройств.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "forecast",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:44e21206a1e17ebc5f079801606bc70de4252b560498e3ca145ad83a7c50575b"
+    ],
+    "evidence_ids": [
+     "quote:44e21206a1e17ebc5f079801606bc70de4252b560498e3ca145ad83a7c50575b"
+    ],
+    "feature_ids": [
+     "U_44564:/products/rko"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4463,
+   "completion_tokens": 815,
+   "cost_rub": 0.12403,
+   "latency_ms": 9789,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 11,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "daa11a247c39b842f74133cf5f673bcdf34691c9a9519e455dcd1862233a21fa",
+   "event_id": "article:cbr_rss:9d3f7f1b2515",
+   "title": "Инфляционные ожидания",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Недостаточно данных: утверждение содержит только заголовок отчёта ЦБ об инфляционных ожиданиях без сути события и конкретных цифр, механизм влияния на бизнес компании не прослеживается.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:07509f8bb848bf81a5d527df99f3090f16ae169b561bb61f948e83b1077b4bb4"
+    ],
+    "evidence_ids": [
+     "quote:07509f8bb848bf81a5d527df99f3090f16ae169b561bb61f948e83b1077b4bb4"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4444,
+   "completion_tokens": 361,
+   "cost_rub": 0.09756,
+   "latency_ms": 6051,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 12,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "4e797ed3e080e75b7790cbe6fdf629bc54660abea839ba7193c1215abd52ceb3",
+   "event_id": "article:cbr_event:8172cdee634f",
+   "title": "Рост кредитования в II квартале ускорился во всех сегментах",
+   "decision": "watch",
+   "reason": "Компания пользуется кредитом и депозитом, поэтому динамика корпоративного кредитования и прибыльности банков задает фон для доступности и стоимости нового финансирования.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "continuation",
+    "previous_insight_id": "mem:U_44564:cfo:article:cbr_event:275c5c7b3955@v1",
+    "summary": "Продолжение макрофона ЦБ: после обзора трендов (P1) опубликованы данные об ускорении кредитования во II квартале; решений по ставке по-прежнему нет.",
+    "claim_ids": [
+     "claim:ba4bd0ee62b7a9d02b2e27a78cf8b5da12fa4a15951af55ec58c246a28a3adf1",
+     "claim:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:ba4bd0ee62b7a9d02b2e27a78cf8b5da12fa4a15951af55ec58c246a28a3adf1",
+     "claim:da710e8437f892799c56b3cfc54eb730459c6dd18538abaea3b19ee0bf8b8e8a"
+    ],
+    "evidence_ids": [
+     "quote:ba4bd0ee62b7a9d02b2e27a78cf8b5da12fa4a15951af55ec58c246a28a3adf1",
+     "quote:da710e8437f892799c56b3cfc54eb730459c6dd18538abaea3b19ee0bf8b8e8a"
+    ],
+    "feature_ids": [
+     "U_44564:/products/deposit",
+     "U_44564:/products/loan"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5438,
+   "completion_tokens": 1032,
+   "cost_rub": 0.15337,
+   "latency_ms": 11227,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 13,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "14e8981218fe81daec8316467456b665c3ee7558d13a07e50770ee11a45ca5c2",
+   "event_id": "article:kommersant:f7ea30cfe3ca",
+   "title": "Частота покупок в магазинах дрогери снизилась в августе на 4,8% год к году",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "нет механизма: событие о снижении частоты покупок в розничном сегменте дрогери не связано с оптовой торговлей компьютерами и ПО компании",
+   "ref_counts": {
+    "claim_ids": 3,
+    "evidence_ids": 3,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:bd9d62fb541e8de08a27cea445a9c682cc73263feaebfb79cd4a10c9588e598a",
+     "claim:bd9d62fb541e8de08a27cea445a9c682cc73263feaebfb79cd4a10c9588e598a",
+     "claim:1be591f4c1aa200259be832355d0b5ee108d8ee5e68a45615ecff864da5215b5"
+    ],
+    "evidence_ids": [
+     "quote:bd9d62fb541e8de08a27cea445a9c682cc73263feaebfb79cd4a10c9588e598a",
+     "quote:bd9d62fb541e8de08a27cea445a9c682cc73263feaebfb79cd4a10c9588e598a",
+     "quote:1be591f4c1aa200259be832355d0b5ee108d8ee5e68a45615ecff864da5215b5"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4989,
+   "completion_tokens": 365,
+   "cost_rub": 0.10721,
+   "latency_ms": 6173,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 14,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "252c9fbd2ee7bf7b76f1c4713d56f5b480ab5c9f7c9a4efc8488f2f2b599ca67",
+   "event_id": "article:cbr_event:444d9b180408",
+   "title": "Профучастников «пересчитают» по-новому",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма: событие касается регулирования профучастников финансового рынка (брокеров, управляющих, дилеров, депозитариев), а компания — оптовый торговец компьютерами и ПО без признаков такой деятельности.",
+   "ref_counts": {
+    "claim_ids": 3,
+    "evidence_ids": 3,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:0c0a2b990a52ba1d468861fc710cd5523e4e5ba349c62cb189e72ea5f6a03076",
+     "claim:0c0a2b990a52ba1d468861fc710cd5523e4e5ba349c62cb189e72ea5f6a03076",
+     "claim:541aef05d32e16ca7e2f6393c23afbe835dee7c8d73af433e64ed7bb3d4f9808"
+    ],
+    "evidence_ids": [
+     "quote:0c0a2b990a52ba1d468861fc710cd5523e4e5ba349c62cb189e72ea5f6a03076",
+     "quote:0c0a2b990a52ba1d468861fc710cd5523e4e5ba349c62cb189e72ea5f6a03076",
+     "quote:541aef05d32e16ca7e2f6393c23afbe835dee7c8d73af433e64ed7bb3d4f9808"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4856,
+   "completion_tokens": 382,
+   "cost_rub": 0.10589,
+   "latency_ms": 5818,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 15,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "fc3a1978c2fb88f0287149d31a10ea6e62506798042795ab1c6fc03bf2bb17a8",
+   "event_id": "article:cbr_event:5af18821932c",
+   "title": "Банк России совершенствует квалификационные требования к должностным лицам, ответственным за управление рисками, внутренний контроль, внутренний аудит в ряде финансовых организаций",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "нет механизма: новость ЦБ о квалификационных требованиях к должностным лицам финансовых организаций не затрагивает бизнес оптового торговца компьютерами и не меняет условий его деятельности",
+   "ref_counts": {
+    "claim_ids": 3,
+    "evidence_ids": 3,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d36a4631a8df2c7e7214c72e7ffccfeb1c22842b71d8e93c1bbc87e79874a3f9",
+     "claim:d36a4631a8df2c7e7214c72e7ffccfeb1c22842b71d8e93c1bbc87e79874a3f9",
+     "claim:7f14766109e55c1417365934a81e4d1b9ba417dd5e881856af3a1794de72d35f"
+    ],
+    "evidence_ids": [
+     "quote:d36a4631a8df2c7e7214c72e7ffccfeb1c22842b71d8e93c1bbc87e79874a3f9",
+     "quote:d36a4631a8df2c7e7214c72e7ffccfeb1c22842b71d8e93c1bbc87e79874a3f9",
+     "quote:7f14766109e55c1417365934a81e4d1b9ba417dd5e881856af3a1794de72d35f"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4886,
+   "completion_tokens": 359,
+   "cost_rub": 0.10508,
+   "latency_ms": 6262,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 16,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "c0d0a85babd83554f312c99b8e3640e4620e02b2b13b2b5decab81a2a8c1f3f9",
+   "event_id": "article:telegram:1099860397:158907",
+   "title": "РБК. Новости. Главное — сообщение 158907",
+   "decision": "watch",
+   "reason": "Компания — оптовый торговец компьютерами и ПО; если она использует корпоративную мобильную связь, проект может затронуть её, но признаков о связи и телеком-зависимости в профиле нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "scenario",
+   "inference_status": "hypothesis",
+   "statements": 6,
+   "statements_with_refs": 6,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:26213b88350481e6078d56e1c550c12cb19f9bb3fa371d5257f35914ecb99dea"
+    ],
+    "evidence_ids": [
+     "quote:26213b88350481e6078d56e1c550c12cb19f9bb3fa371d5257f35914ecb99dea"
+    ],
+    "feature_ids": [
+     "U_44564:/okved/code",
+     "U_44564:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4550,
+   "completion_tokens": 827,
+   "cost_rub": 0.12623,
+   "latency_ms": 9752,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 17,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "e519bd36e252630f068c8bc30029429f6ed45165f66d7d8f9a9c4e18eb606b8f",
+   "event_id": "article:telegram:1050820672:401176",
+   "title": "ТАСС — сообщение 401176",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: новость о мошеннических схемах с фишинговыми ссылками при продаже бумажных изданий не связана с оптовой торговлей компьютерами и не затрагивает признаки компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:7f2528a9f91d8f502b94a96d1b54a693244ab0bf098535130ba313150a6202e0"
+    ],
+    "evidence_ids": [
+     "quote:7f2528a9f91d8f502b94a96d1b54a693244ab0bf098535130ba313150a6202e0"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4451,
+   "completion_tokens": 283,
+   "cost_rub": 0.09319,
+   "latency_ms": 5293,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 18,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "d688be52dcd7893ba83c1ab43603085f55fcaa07ebce1020cf1c41582ae368fb",
+   "event_id": "article:cbr_event:6ee9c0b35743",
+   "title": "Почти во всех сегментах рынка ПФИ за последний год наметился рост операций",
+   "decision": "watch",
+   "reason": "Компания — оптовый трейдер компьютеров и ПО; если у неё есть валютные закупки, рост доступности валютных ПФИ может расширить возможности хеджирования, но прямая связь с её операциями данными не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:e3d5d3b2cc4a995a5372811caf0bd5e321d588896ea7972b46567f688e69f315"
+    ],
+    "evidence_ids": [
+     "quote:e3d5d3b2cc4a995a5372811caf0bd5e321d588896ea7972b46567f688e69f315"
+    ],
+    "feature_ids": [
+     "U_44564:/okved/name",
+     "U_44564:/products/loan"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4695,
+   "completion_tokens": 798,
+   "cost_rub": 0.12706,
+   "latency_ms": 9719,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 19,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_44564",
+   "candidate_id": "f3a4a41a81715fc26a33c5158850553806e0933b649d136ad48e90dfd3b5036b",
+   "event_id": "article:moex_rss:59023b2c4001",
+   "title": "Московская Биржа - Maintenance on T0 Securities and FX test environment | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Техническое обслуживание тестовой среды биржи не затрагивает реальные торги и расчёты, связи с бизнесом оптового продавца компьютеров нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:f7e5dc11918884fa27dcc1101af38dfbbb4f319d75ea48250d816f125522de7a"
+    ],
+    "evidence_ids": [
+     "quote:f7e5dc11918884fa27dcc1101af38dfbbb4f319d75ea48250d816f125522de7a"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4580,
+   "completion_tokens": 253,
+   "cost_rub": 0.09369,
+   "latency_ms": 5383,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 20,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "bd89cc863323dc1d0176506b2a333c0278549709bfa2ac411a1b98d1874cb6cb",
+   "event_id": "article:moex_main:fd6c6f07aa4b",
+   "title": "Московская Биржа - Объем торгов драгоценными металлами на Московской бирже в августе вырос в 2,1 раза по сравнению с августом прошлого года — до 506,1 млрд рублей | Новости и пресс-релизы",
+   "decision": "watch",
+   "reason": "Компания по ОКВЭД добывает руды драгоценных металлов, включая золото и металлы платиновой группы; рост биржевой активности на этих металлах может отражать повышенный интерес рынка к её товарной группе, но прямая связь с её выручкой не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.03,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d55382ae3188bfdfc64ae02d770289bfd47c1e11e34b2f0c8a2143cc26e40a9a",
+     "claim:5a3b774a4776bd3ffa739e311f1c9ddd59ed07ddf6d300917aea248debffa679"
+    ],
+    "evidence_ids": [
+     "quote:d55382ae3188bfdfc64ae02d770289bfd47c1e11e34b2f0c8a2143cc26e40a9a",
+     "quote:5a3b774a4776bd3ffa739e311f1c9ddd59ed07ddf6d300917aea248debffa679"
+    ],
+    "feature_ids": [
+     "U_70106:/okved/code",
+     "U_70106:/okved/name"
+    ]
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "number_not_in_data"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5217,
+   "completion_tokens": 1221,
+   "cost_rub": 0.16044,
+   "latency_ms": 13081,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 1,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "8909d23bc7fc19923522b0ab1888daf9a77c23852687d3313f8f95b16f9cb0ae",
+   "event_id": "article:cbr_rss:71fd0e940619",
+   "title": "Финансовые рынки",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: материал описывает исторический порядок установления учетных цен Банка России на драгоценные металлы для бухгалтерского учета кредитных организаций и не меняет условий бизнеса добывающей компании.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d28caf7e16b8b6bba507b01752d00a58e898d2bff032534b9cc84d5dc9c9dad0",
+     "claim:842da273dae3c459cc0a43b1c280ba37935f1191fbb9502937d197d6291ca11b"
+    ],
+    "evidence_ids": [
+     "quote:d28caf7e16b8b6bba507b01752d00a58e898d2bff032534b9cc84d5dc9c9dad0",
+     "quote:842da273dae3c459cc0a43b1c280ba37935f1191fbb9502937d197d6291ca11b"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5051,
+   "completion_tokens": 543,
+   "cost_rub": 0.11853,
+   "latency_ms": 7793,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 2,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "fd84aa5308ab940c1b7b06a020e064b149e90e64af8b92c566af098ca6d2ee83",
+   "event_id": "article:cbr_rss:e929b5ca7abe",
+   "title": "Финансовые рынки",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: материал описывает методологию учетных цен Банка России 2003 года для бухгалтерского учета кредитных организаций, без нового экономического решения, затрагивающего бизнес компании.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:14a206143ae7d0d5b511ddd48318217b9e6df1fa9717bb57cf7215a1ca1698a3",
+     "claim:a19641a0974f449428b0d7299c51fde53dcf50e09709870d7ba6ade5d4eaf362"
+    ],
+    "evidence_ids": [
+     "quote:14a206143ae7d0d5b511ddd48318217b9e6df1fa9717bb57cf7215a1ca1698a3",
+     "quote:a19641a0974f449428b0d7299c51fde53dcf50e09709870d7ba6ade5d4eaf362"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5048,
+   "completion_tokens": 371,
+   "cost_rub": 0.10857,
+   "latency_ms": 6250,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 3,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "3a51a17457979401cc4713c675c05bf533a5bae440cd9cdd05c46a745e939054",
+   "event_id": "article:kommersant:35fbf901e6c7",
+   "title": "Золото опустилось до минимума с 3 августа",
+   "decision": "include",
+   "reason": "Компания по ОКВЭД добывает руды драгоценных металлов, поэтому цена золота напрямую формирует её выручку и маржу.",
+   "significance": "medium",
+   "priority_score": 0.35,
+   "materiality": "medium",
+   "event_status": "occurred",
+   "inference_status": "partially_supported",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:1b0a17ae0e30c660b1b9534a5c0c8c5408a85744cb2ad41c4a058670389572a6"
+    ],
+    "evidence_ids": [
+     "quote:1b0a17ae0e30c660b1b9534a5c0c8c5408a85744cb2ad41c4a058670389572a6"
+    ],
+    "feature_ids": [
+     "U_70106:/okved/name"
+    ]
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "headline_rewritten"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4652,
+   "completion_tokens": 780,
+   "cost_rub": 0.12528,
+   "latency_ms": 10255,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 4,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "8d33bba2cc5ed4a2889ac85b9c4bf1fa668f056cac1fc6282cf0ff5596f490b4",
+   "event_id": "article:moex_main:7a415e36160c",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается риск-параметров Московской Биржи по акциям конкретного эмитента, а связь компании с этими бумагами или фондовым рынком в признаках профиля отсутствует.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d205b651bb56f678611931873a7f8ad6d66a2e7bcf70c2ac4479b1d0d938da58"
+    ],
+    "evidence_ids": [
+     "quote:d205b651bb56f678611931873a7f8ad6d66a2e7bcf70c2ac4479b1d0d938da58"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "headline_rewritten"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5045,
+   "completion_tokens": 311,
+   "cost_rub": 0.10506,
+   "latency_ms": 5706,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 5,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "ae080972c6c61c4b0c4617c65686b13dcfc568ae2c4e8eb0495d5e25dc5c7193",
+   "event_id": "article:moex_main:16dd7de7d827",
+   "title": "Московская Биржа - Цена исполнения фьючерсных контрактов на драгоценные металлы | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: рутинная публикация биржей цен исполнения фьючерсов на драгметаллы не меняет условий бизнеса компании, а связь её выручки с ценами на золото данными профиля не подтверждена.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:904f95e19b590a174347169dbf21d81e4328f8b072746f510103656b36a7832d"
+    ],
+    "evidence_ids": [
+     "quote:904f95e19b590a174347169dbf21d81e4328f8b072746f510103656b36a7832d"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4738,
+   "completion_tokens": 336,
+   "cost_rub": 0.1012,
+   "latency_ms": 5946,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 6,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "6ad62fdf41598146c69db95da07a4e58f711ea3026f80ca6cafd024b00e3af66",
+   "event_id": "article:moex_main:2424f18f28a7",
+   "title": "Московская Биржа - Об изменении дополнительных мер по противодействию дестабилизации цен для ценной бумаги URKZ с торгового дня 21.10.2026 | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается торговых ограничений для акций конкретной сторонней компании (УрКузница), а связи компании с этой бумагой или фондовым рынком в признаках профиля отсутствуют.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:a144d64583b2d18601391deb64d4f8b1ee91332ea823ecf03c0e489f767fba77"
+    ],
+    "evidence_ids": [
+     "quote:a144d64583b2d18601391deb64d4f8b1ee91332ea823ecf03c0e489f767fba77"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4582,
+   "completion_tokens": 181,
+   "cost_rub": 0.08958,
+   "latency_ms": 5610,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 7,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "f11ec94af363fb4389be804daa4787a6d14ad2bd3c624374667954170c98ce23",
+   "event_id": "article:lenta_ru:3037b3d8a21f",
+   "title": "Центробанки уличили в тайном накоплении золота",
+   "decision": "watch",
+   "reason": "Компания по ОКВЭД занимается добычей руд и песков драгоценных металлов, поэтому конъюнктура рынка золота может влиять на её выручку, однако прямая связь с ценой реализации в данных не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:a15193f09bc09685fa4dbb14ed94e5b11c3c057fdca10371936d1c1255ea24fc",
+     "claim:410ef0bf61680b87b5b8ed63a1523a377f7abb4ed3aa30c6845c0998e61d9884"
+    ],
+    "evidence_ids": [
+     "quote:a15193f09bc09685fa4dbb14ed94e5b11c3c057fdca10371936d1c1255ea24fc",
+     "quote:410ef0bf61680b87b5b8ed63a1523a377f7abb4ed3aa30c6845c0998e61d9884"
+    ],
+    "feature_ids": [
+     "U_70106:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4993,
+   "completion_tokens": 1017,
+   "cost_rub": 0.14482,
+   "latency_ms": 11969,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 8,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "4a33771afdce09c244561a176558a920ec69a75a6faef78b2590c20a17beef0f",
+   "event_id": "article:moex_main:6a61f864ee8d",
+   "title": "Московская Биржа - Об изменении дополнительных мер по противодействию дестабилизации цен для ценной бумаги T с торгового дня 12.10.2026 | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: техническое уведомление Московской Биржи о корректировке расчётной цены акций Т-Техно не затрагивает бизнес золотодобывающей компании, у которой нет подтверждённых связей с этой бумагой.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:1d3f60f44dbcf389d48c0eae13885173b7ad03b06b56234b7b8a9e9d0341f1bf"
+    ],
+    "evidence_ids": [
+     "quote:1d3f60f44dbcf389d48c0eae13885173b7ad03b06b56234b7b8a9e9d0341f1bf"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4618,
+   "completion_tokens": 189,
+   "cost_rub": 0.09066,
+   "latency_ms": 10142,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 9,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "db82a9bcfecb1647127e89839e5ccfb3e1922d2f4674438af1dc91eafc9b0345",
+   "event_id": "article:moex_main:2b9fa2631cf7",
+   "title": "Московская Биржа - Об изменении риск-параметров на Фондовом рынке и рынке депозитов | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение риск-параметров биржи по конкретным облигациям не затрагивает бизнес золотодобывающей компании, у которой в профиле нет портфеля ценных бумаг или операций с этими инструментами.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:82bd607068ea7674a3f630218f53bbf62e4bef299ec2324aeee75515752eaea6",
+     "claim:c902d1fdfc66c5cfd10df08f08ee1d66d7210eeb747a8a4b8acc2836378cc935"
+    ],
+    "evidence_ids": [
+     "quote:82bd607068ea7674a3f630218f53bbf62e4bef299ec2324aeee75515752eaea6",
+     "quote:c902d1fdfc66c5cfd10df08f08ee1d66d7210eeb747a8a4b8acc2836378cc935"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5439,
+   "completion_tokens": 248,
+   "cost_rub": 0.10824,
+   "latency_ms": 5161,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 10,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "7cda43bcf2ac37fac32bef4f170c4d043ac373727c95ccb806cdba6b82bdc08a",
+   "event_id": "article:vedomosti:411bd9f00d72",
+   "title": "Цены на золото упали до минимумов с начала августа",
+   "decision": "include",
+   "reason": "Компания по ОКВЭД добывает руды драгоценных металлов, поэтому динамика цен на золото напрямую влияет на её выручку и маржу",
+   "significance": "medium",
+   "priority_score": 0.34,
+   "materiality": "medium",
+   "event_status": "occurred",
+   "inference_status": "partially_supported",
+   "statements": 11,
+   "statements_with_refs": 11,
+   "changes_since_previous": {
+    "status": "unknown",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": [
+     "claim:ae270bf340e7a47110a8ae1d06ae12b644e99dcfac5d62c1959b490f773cfb71",
+     "claim:1b0a17ae0e30c660b1b9534a5c0c8c5408a85744cb2ad41c4a058670389572a6"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 3
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:ae270bf340e7a47110a8ae1d06ae12b644e99dcfac5d62c1959b490f773cfb71",
+     "claim:dcfdeb8230e74c12896937e19b6c2cade24e1181eb8a23860908ee9d11f81600"
+    ],
+    "evidence_ids": [
+     "quote:ae270bf340e7a47110a8ae1d06ae12b644e99dcfac5d62c1959b490f773cfb71",
+     "quote:dcfdeb8230e74c12896937e19b6c2cade24e1181eb8a23860908ee9d11f81600"
+    ],
+    "feature_ids": [
+     "U_70106:/okved/name",
+     "U_70106:/products/guarantee",
+     "U_70106:/products/rko"
+    ]
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "changes_unsupported"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5306,
+   "completion_tokens": 893,
+   "cost_rub": 0.14309,
+   "latency_ms": 9963,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 11,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "62beb23dfac9e9f451d63a9da3c7a9ce97508a14924440f940e9f30791d5177b",
+   "event_id": "article:moex_main:6eae4624130c",
+   "title": "Московская Биржа - Об изменении дополнительных мер по противодействию дестабилизации цен для ценной бумаги URKZ с торгового дня 30.09.2026 | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается торговых ограничений по конкретной ценной бумаге сторонней компании, а связи с её акциями или операциями с ними в признаках компании нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:32189554183368b61df1109a2674fe4a859234d9ac43f44ae2288e7273b8f3bc"
+    ],
+    "evidence_ids": [
+     "quote:32189554183368b61df1109a2674fe4a859234d9ac43f44ae2288e7273b8f3bc"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4597,
+   "completion_tokens": 342,
+   "cost_rub": 0.09911,
+   "latency_ms": 5744,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 12,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "0b46523878f3ed4ba5817087bd373076e132b8b6cfa1d81a21428f58f204a66c",
+   "event_id": "article:moex_main:fc6f8a385f19",
+   "title": "Московская Биржа - Об изменении дополнительных мер по противодействию дестабилизации цен для ценной бумаги URKZ с торгового дня 02.10.2026 | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается торговых ограничений по конкретной ценной бумаге сторонней компании, а связи с ней в признаках компании нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:02a50a483232eb33da8827626f2f5a0d76af9329d48f0b4e9b69f92ba5ef8271"
+    ],
+    "evidence_ids": [
+     "quote:02a50a483232eb33da8827626f2f5a0d76af9329d48f0b4e9b69f92ba5ef8271"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4587,
+   "completion_tokens": 191,
+   "cost_rub": 0.09024,
+   "latency_ms": 4798,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 13,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "3408031572460c4b9ff4b51f0ffef6f658272c20284f1c66e27aa9e575cbf725",
+   "event_id": "article:cbr_rss:ffb00cf22e40",
+   "title": "Прогноз факторов формирования ликвидности банковского сектора: для определения лимита по рыночным операциям Банка России на срок 1 неделя*",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: это технический прогноз факторов ликвидности банковского сектора ЦБ без конкретного решения, ставки или условий, затрагивающих бизнес компании.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:84228f97dab6ceed24c1446d3fbbd619b0dc605cd3eb793895463b4de940ba8a",
+     "claim:3c30f488b47b880fa245012b2392ee40e1811eba1e33fd9973422a4e8c13a245"
+    ],
+    "evidence_ids": [
+     "quote:84228f97dab6ceed24c1446d3fbbd619b0dc605cd3eb793895463b4de940ba8a",
+     "quote:3c30f488b47b880fa245012b2392ee40e1811eba1e33fd9973422a4e8c13a245"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5035,
+   "completion_tokens": 253,
+   "cost_rub": 0.10155,
+   "latency_ms": 6030,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 14,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "347211b857f15142d393da8d8d825f0c17ee1a0a5c783b8a4940a687519d761b",
+   "event_id": "article:moex_main:74e28372d934",
+   "title": "Московская Биржа - Об изменении риск-параметров на срочном и валютном рынках | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: техническое изменение риск-параметров Московской Биржи на срочном и валютном рынках не затрагивает бизнес золотодобывающей компании из Якутии, у которой нет признаков работы с биржевыми инструментами.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:970ffb5570ca29febeec0a024d2db26bc7bbe76596ccc26d57b080429a137cf5"
+    ],
+    "evidence_ids": [
+     "quote:970ffb5570ca29febeec0a024d2db26bc7bbe76596ccc26d57b080429a137cf5"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4506,
+   "completion_tokens": 345,
+   "cost_rub": 0.09771,
+   "latency_ms": 7123,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 15,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "6c443781ab7ad4f5273417228c6f27bf8bb80334e2b1e0140587e590484cfd42",
+   "event_id": "article:moex_main:d76e2796e234",
+   "title": "Московская Биржа - Объем торгов драгметаллами на Московской бирже в сентябре превысил 557 млрд рублей | Новости и пресс-релизы",
+   "decision": "watch",
+   "reason": "Компания по ОКВЭД добывает руды драгоценных металлов; рост ликвидности биржевого рынка золота может упростить реализацию металлов, но прямая связь с каналами сбыта компании данными не подтверждена.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:74906bbad3809a19fcac24c19af17f76e52ecb84b4fe101583e4ffd199116dbc",
+     "claim:498a8542448f8d7c9844bad963a37000fd5f31840aaed488815f8888ccad3e3d"
+    ],
+    "evidence_ids": [
+     "quote:74906bbad3809a19fcac24c19af17f76e52ecb84b4fe101583e4ffd199116dbc",
+     "quote:498a8542448f8d7c9844bad963a37000fd5f31840aaed488815f8888ccad3e3d"
+    ],
+    "feature_ids": [
+     "U_70106:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5042,
+   "completion_tokens": 885,
+   "cost_rub": 0.13806,
+   "latency_ms": 15567,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 16,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "5e969eed1fac1a585e381daa163ddd271aae5f7665fcded595a59027b0d9f1d2",
+   "event_id": "article:moex_main:d7a59caf7868",
+   "title": "Московская Биржа - Об изменении дополнительных мер по противодействию дестабилизации цен для ценной бумаги SIBN с торгового дня 13.10.2026 | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: техническое изменение биржевых торговых мер по акциям сторонней компании не затрагивает признаки профиля (добыча драгметаллов, Якутия) и её финансирование.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:cf2332387dc155946a49931f7fac43ad79b295a2a6ca32b82bd6f7d752041f35"
+    ],
+    "evidence_ids": [
+     "quote:cf2332387dc155946a49931f7fac43ad79b295a2a6ca32b82bd6f7d752041f35"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4626,
+   "completion_tokens": 181,
+   "cost_rub": 0.09034,
+   "latency_ms": 5628,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 17,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "6bf00cd7a376070e36441be500d7264c59430d0e0903126929b73f5b1142c1fb",
+   "event_id": "article:moex_main:f7cd280b9587",
+   "title": "Московская Биржа - Об изменении дополнительных мер по противодействию дестабилизации цен для ценной бумаги MRKS с торгового дня 08.09.2026 | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается ценовых ограничений на акции конкретной компании MRKS на бирже, а связи компании с этой бумагой или фондовым рынком в признаках профиля нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:46ad24d5f6117f4171adf42c3d464b9a5f347b1391b1c383bd77a6adf04724e7"
+    ],
+    "evidence_ids": [
+     "quote:46ad24d5f6117f4171adf42c3d464b9a5f347b1391b1c383bd77a6adf04724e7"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4560,
+   "completion_tokens": 299,
+   "cost_rub": 0.09599,
+   "latency_ms": 5087,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 18,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "66629ae056a795f6a685636a5b10fc8dc42c8b8647ef40db0a4fffb4edc54a43",
+   "event_id": "article:moex_main:07ed8b582edb",
+   "title": "Московская Биржа - Об изменении дополнительных условий проведения торгов для отдельных инвестиционных паёв | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: техническое изменение условий торгов отдельными инвестиционными паями на Московской Бирже не затрагивает бизнес золотодобывающей компании и её банковских продуктов.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:88541992466df3045653a33ac52f6da738f301d8f3027ad9dbf2b94245f9209f"
+    ],
+    "evidence_ids": [
+     "quote:88541992466df3045653a33ac52f6da738f301d8f3027ad9dbf2b94245f9209f"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4590,
+   "completion_tokens": 272,
+   "cost_rub": 0.09496,
+   "latency_ms": 5138,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 19,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_70106",
+   "candidate_id": "22303ad2b9d476b79cd534783e7ce187c165cf95d64af0330824f0a34d441913",
+   "event_id": "article:moex_main:6a90725d9dd3",
+   "title": "Московская Биржа - Об изменении дополнительных условий проведения торгов для отдельных инвестиционных паёв | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение условий торгов отдельными инвестиционными паями на Московской Бирже не затрагивает добычу драгоценных металлов и не связано с признаками компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:c01098a8ec5f3248785cce94598952c4a605a30712b665c5afa4c3d46c7dc87b"
+    ],
+    "evidence_ids": [
+     "quote:c01098a8ec5f3248785cce94598952c4a605a30712b665c5afa4c3d46c7dc87b"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4545,
+   "completion_tokens": 264,
+   "cost_rub": 0.09372,
+   "latency_ms": 5016,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 20,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "211e408764a263bea1410d092ebb832b407195bdccf5de1e853bb02f71ab10ba",
+   "event_id": "article:telegram:1050820672:401462",
+   "title": "ТАСС — сообщение 401462",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: политическое заявление о возможных поставках удобрений на американский рынок без принятого решения и без связи с бизнесом компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:b19306fa5dbde26aebbd4798e254539b500c874edffae8245e89b10931e993e3"
+    ],
+    "evidence_ids": [
+     "quote:b19306fa5dbde26aebbd4798e254539b500c874edffae8245e89b10931e993e3"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4462,
+   "completion_tokens": 270,
+   "cost_rub": 0.09263,
+   "latency_ms": 5373,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 1,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "97a4f2d4eb2d523a9f465f180ded26f41d931be71035108cbf280108dcc75469",
+   "event_id": "article:cbr_event:27dd9804e67e",
+   "title": "В августе почти во всех регионах цены выросли меньше, чем в июле, или снизились",
+   "decision": "watch",
+   "reason": "Компания выращивает овощи; сезонное снижение цен на овощи нового урожая может влиять на выручку, хотя данные приведены на уровне регионов в целом, без отраслевой детализации.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 2
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:6bb0e955c4f0dcaca9fb6d87f6569aa40b0c58b6820ed7b8aaa9bcbbbb47c931"
+    ],
+    "evidence_ids": [
+     "quote:6bb0e955c4f0dcaca9fb6d87f6569aa40b0c58b6820ed7b8aaa9bcbbbb47c931"
+    ],
+    "feature_ids": [
+     "U_55223:/okved/code",
+     "U_55223:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4714,
+   "completion_tokens": 920,
+   "cost_rub": 0.13441,
+   "latency_ms": 10341,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 2,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "1954c46ad93c03cc35bcc13155d73af47d1fb0177938d60b908fae4066e92b4d",
+   "event_id": "article:cbr_event:275c5c7b3955",
+   "title": "О чем говорят тренды: временные факторы влияют на рост цен и ВВП",
+   "decision": "watch",
+   "reason": "Макроконъюнктура влияет на стоимость финансирования и себестоимость, но прямой связи с овощеводством компании в данных нет — только общая макроэкономика",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "mixed",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 3
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a"
+    ],
+    "evidence_ids": [
+     "quote:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a"
+    ],
+    "feature_ids": [
+     "U_55223:/okved/code",
+     "U_55223:/okved/name",
+     "U_55223:/products/leasing"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4660,
+   "completion_tokens": 600,
+   "cost_rub": 0.11505,
+   "latency_ms": 8025,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 3,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "1ed9a7b00578c0aeef24b331a7584e54ceb276dde85422e5615b6d6e062585f6",
+   "event_id": "article:kp_ru:aeafe69b832b",
+   "title": "В Италии из-за протестов водителей фур и фермеров начали пустеть полки магазинов",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается перебоев с поставками продуктов в Италии, а связь компании (выращивание овощей, Хабаровский край) с итальянским рынком или экспортом не подтверждена данными профиля.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:4928fc91a74f1e047cce4ca45c5955731b8d619bad6738c3f5a6fd316e754f05",
+     "claim:db50464e01d6b90a91bfc696ff29d6f7a3422c371599116fbaf53cf0aacf1e37"
+    ],
+    "evidence_ids": [
+     "quote:4928fc91a74f1e047cce4ca45c5955731b8d619bad6738c3f5a6fd316e754f05",
+     "quote:db50464e01d6b90a91bfc696ff29d6f7a3422c371599116fbaf53cf0aacf1e37"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5189,
+   "completion_tokens": 335,
+   "cost_rub": 0.10893,
+   "latency_ms": 5629,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 4,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "11b694d4f069ee6bde8cc4b1370cf1c6e4024fe374b5257d420082d973b880ca",
+   "event_id": "article:vedomosti:116514916a6d",
+   "title": "Комбикорма «Мираторга» получили допуск на рынок Южной Кореи",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается экспортного допуска комбикормов конкретного холдинга на рынок Южной Кореи, у компании-овощевода из Хабаровского края нет признаков связи с комбикормами, свиноводством или этим экспортом.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:2a9f6ae3f45849365a6204efb2a1424359ec23358d7904fd6ef8a75fe5c5c5ac"
+    ],
+    "evidence_ids": [
+     "quote:2a9f6ae3f45849365a6204efb2a1424359ec23358d7904fd6ef8a75fe5c5c5ac"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4986,
+   "completion_tokens": 281,
+   "cost_rub": 0.10232,
+   "latency_ms": 5547,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 5,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "3fb33c2825207b091d2272f2e420f4e9d9c66abb5334b6c27b730cf7b340e6c5",
+   "event_id": "article:telegram:1101170442:348324",
+   "title": "РИА Новости — сообщение 348324",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: сообщение об ограничении рейсов аэропорта Пулково из-за угрозы БПЛА не связано с овощеводческим бизнесом компании в Хабаровском крае.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:c6e21a974aa894bf29593909c4e24af8caba1d4bc8cfd0ae24cdaeadf37eeb43"
+    ],
+    "evidence_ids": [
+     "quote:c6e21a974aa894bf29593909c4e24af8caba1d4bc8cfd0ae24cdaeadf37eeb43"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4479,
+   "completion_tokens": 267,
+   "cost_rub": 0.09275,
+   "latency_ms": 6278,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 6,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "9b08fbbd7e7cd49ae3d0f2f5f0b48d2476b0e8748c68956b4833d57cb9279d45",
+   "event_id": "article:moex_main:b59e940ac0fb",
+   "title": "Московская Биржа - Решением НКО НКЦ (АО) с 23:50 18.09.2026 на срочном рынке изменяются следующие риск-параметры | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: изменение биржевых риск-параметров по фьючерсу на пшеницу касается участников срочного рынка, а у компании-производителя овощей из Хабаровска нет признаков работы с фьючерсами или зерновым хеджированием.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:56b3ef04577f4b705a3c0d544c38612b3eebc641aa732efae5f28301b40865c2"
+    ],
+    "evidence_ids": [
+     "quote:56b3ef04577f4b705a3c0d544c38612b3eebc641aa732efae5f28301b40865c2"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5107,
+   "completion_tokens": 326,
+   "cost_rub": 0.107,
+   "latency_ms": 5755,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 7,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "88761b0849eb6310905cb2a015611ee892b054342620d3ea5add5e6ee27327c8",
+   "event_id": "article:telegram:1050820672:400978",
+   "title": "ТАСС — сообщение 400978",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: сообщение о работе аэропорта Эр-Рияда не связано с выращиванием овощей компанией из Хабаровского края.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:46279722810b9a03be78f6682ebdd02fd3450a5ca5978d4ee827eca2e768e2bc"
+    ],
+    "evidence_ids": [
+     "quote:46279722810b9a03be78f6682ebdd02fd3450a5ca5978d4ee827eca2e768e2bc"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4436,
+   "completion_tokens": 241,
+   "cost_rub": 0.09051,
+   "latency_ms": 6322,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 8,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "6984dd8739acd46b71619456914dde5f5d35f1f174439a3e7e038132542f3701",
+   "event_id": "article:cbr_event:a1387a59890d",
+   "title": "В большинстве регионов в сентябре цены выросли умеренно",
+   "decision": "watch",
+   "reason": "Компания выращивает овощи, поэтому сезонное удешевление овощей может гипотетически влиять на цены реализации; прямых данных о её выручке и ценах в событии нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "continuation",
+    "previous_insight_id": "mem:U_55223:cfo:article:cbr_event:27dd9804e67e@v1",
+    "summary": "Та же серия макроотчётов ЦБ об инфляции: в сентябре, как и в августе, цены растут умеренно, овощи нового урожая продолжают дешеветь.",
+    "claim_ids": [
+     "claim:99deb961b47a977011b2f9d2339b2af1904456edc55f648afd74d90ee6cfd8c2",
+     "claim:6bb0e955c4f0dcaca9fb6d87f6569aa40b0c58b6820ed7b8aaa9bcbbbb47c931"
+    ]
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 3
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:99deb961b47a977011b2f9d2339b2af1904456edc55f648afd74d90ee6cfd8c2"
+    ],
+    "evidence_ids": [
+     "quote:99deb961b47a977011b2f9d2339b2af1904456edc55f648afd74d90ee6cfd8c2"
+    ],
+    "feature_ids": [
+     "U_55223:/okved/code",
+     "U_55223:/okved/name",
+     "U_55223:/region"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5081,
+   "completion_tokens": 777,
+   "cost_rub": 0.13252,
+   "latency_ms": 8600,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 9,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "8d7c8006c43fd91c687459dce164e54c0689f09fbaff524cf3f4689344f914f5",
+   "event_id": "article:telegram:1050820672:401493",
+   "title": "ТАСС — сообщение 401493",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: событие касается перебоев с поставками в Италии из-за протестов перевозчиков, а связь компании (выращивание овощей в Хабаровском крае) с итальянским рынком или логистикой не подтверждена данными профиля.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d6bd614858253dac7f88aa9d2cce1e56016f1e072f312fc98041393f28327a32"
+    ],
+    "evidence_ids": [
+     "quote:d6bd614858253dac7f88aa9d2cce1e56016f1e072f312fc98041393f28327a32"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4558,
+   "completion_tokens": 163,
+   "cost_rub": 0.08813,
+   "latency_ms": 5259,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 10,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "7aa0091fd472c229cbb8e83419484a0efb229a599954cad81289a7f2817d43f0",
+   "event_id": "article:cbr_rss:ffb00cf22e40",
+   "title": "Прогноз факторов формирования ликвидности банковского сектора: для определения лимита по рыночным операциям Банка России на срок 1 неделя*",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: технический прогноз факторов ликвидности банковского сектора ЦБ не меняет условий бизнеса овощеводческой компании и не связан с её признаками.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:84228f97dab6ceed24c1446d3fbbd619b0dc605cd3eb793895463b4de940ba8a",
+     "claim:3c30f488b47b880fa245012b2392ee40e1811eba1e33fd9973422a4e8c13a245"
+    ],
+    "evidence_ids": [
+     "quote:84228f97dab6ceed24c1446d3fbbd619b0dc605cd3eb793895463b4de940ba8a",
+     "quote:3c30f488b47b880fa245012b2392ee40e1811eba1e33fd9973422a4e8c13a245"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 5099,
+   "completion_tokens": 294,
+   "cost_rub": 0.10502,
+   "latency_ms": 5474,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 11,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "e4303f04d2925a4d6212ffcb97f12c2112e19fcdc87f9d15b30bed603f5a2816",
+   "event_id": "article:cbr_event:0f789f619b78",
+   "title": "Доклад «Региональная экономика»: потребительская активность умеренно росла",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Макрообзор потребительской активности ЦБ без конкретных мер или данных, затрагивающих овощеводческую компанию в Хабаровском крае; механизм влияния на её бизнес из признаков не следует.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:31e08bb3a55cff86423eaa2d0ac6bbd6f734d7c2fcdfbf70ccebb6089c9c482d"
+    ],
+    "evidence_ids": [
+     "quote:31e08bb3a55cff86423eaa2d0ac6bbd6f734d7c2fcdfbf70ccebb6089c9c482d"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4696,
+   "completion_tokens": 265,
+   "cost_rub": 0.09638,
+   "latency_ms": 5406,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 12,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "b07f7aabf2171457b3c4844c6320f4a778091600b4b69c672a54c266a48ab0a0",
+   "event_id": "article:telegram:1050820672:400894",
+   "title": "ТАСС — сообщение 400894",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: корректировка расписания вылетов из аэропорта Пулково не связана с признаками компании — овощеводческого предприятия в Хабаровском крае без подтверждённой зависимости от этого аэропорта.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:7a61cb0314679ff825cd07288cf1ac4a4c04557614bcb7eed00b19a49da71ed6"
+    ],
+    "evidence_ids": [
+     "quote:7a61cb0314679ff825cd07288cf1ac4a4c04557614bcb7eed00b19a49da71ed6"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed_with_fixes",
+   "qa_codes": [
+    "headline_rewritten"
+   ],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4477,
+   "completion_tokens": 300,
+   "cost_rub": 0.09462,
+   "latency_ms": 6553,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 13,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "8dbb436ad42964ab8bd4bc47d8901b053435b68e443ed5e3cf337ff645fd9501",
+   "event_id": "article:telegram:1050820672:401034",
+   "title": "ТАСС — сообщение 401034",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: перебои в работе сервисов Авито не затрагивают бизнес компании по выращиванию овощей, связи с платформой в признаках профиля нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:31c9b3406fdeb514036cbe60fb73e20bd34f25ecef20462607bdcd56a5fff0c5"
+    ],
+    "evidence_ids": [
+     "quote:31c9b3406fdeb514036cbe60fb73e20bd34f25ecef20462607bdcd56a5fff0c5"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4502,
+   "completion_tokens": 246,
+   "cost_rub": 0.09194,
+   "latency_ms": 4961,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 14,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "76dfed83706e712a8cc3a4ca3785bbec7128cc897d88c4c35f0b3517133fb03c",
+   "event_id": "article:cbr_event:e1f753e38361",
+   "title": "Профицит счета текущих операций в II квартале 2026 года заметно вырос",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Макростатистика платежного баланса РФ без принятых решений и без признаков экспортно-импортной деятельности или валютной позиции у компании-производителя овощей — механизм влияния на её бизнес не прослеживается.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:a745205e5575f9dc4206713cda891220203ca2bd1e8ac620e0e336ed34eedb1a"
+    ],
+    "evidence_ids": [
+     "quote:a745205e5575f9dc4206713cda891220203ca2bd1e8ac620e0e336ed34eedb1a"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4670,
+   "completion_tokens": 282,
+   "cost_rub": 0.09692,
+   "latency_ms": 5511,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 15,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "1b2aca3925f22ac0f695c699d1c1edc37da4142d7886a8dd9202de521f67500d",
+   "event_id": "article:telegram:1050820672:400879",
+   "title": "ТАСС — сообщение 400879",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: короткие перебои электроэнергии в Ленинградской области не связаны с деятельностью овощеводческой компании в Хабаровском крае.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:e00788c8eed217449f2c9bcf72c84462adc1f1d20b832029af974b75d1d16d59"
+    ],
+    "evidence_ids": [
+     "quote:e00788c8eed217449f2c9bcf72c84462adc1f1d20b832029af974b75d1d16d59"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4493,
+   "completion_tokens": 299,
+   "cost_rub": 0.09484,
+   "latency_ms": 5438,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 16,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "ede0440e4ed8a03db953a3912d446d6e920d6bbfd0b161c98cfc7bb70de57318",
+   "event_id": "article:cbr_event:0475b99934f5",
+   "title": "Рост цен в июле в большинстве регионов замедлился, но остался высоким",
+   "decision": "watch",
+   "reason": "Компания занимается выращиванием овощей, поэтому динамика цен на овощную продукцию напрямую касается её выручки; замедление сезонного снижения цен может быть нейтральным или умеренно позитивным сигналом.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 8,
+   "statements_with_refs": 8,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 3
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:29f7c55daf4adc8e60b2473f1ae34a8c065c79f35b9adafa8042f8c332488de0"
+    ],
+    "evidence_ids": [
+     "quote:29f7c55daf4adc8e60b2473f1ae34a8c065c79f35b9adafa8042f8c332488de0"
+    ],
+    "feature_ids": [
+     "U_55223:/okved/code",
+     "U_55223:/okved/name",
+     "U_55223:/region"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4783,
+   "completion_tokens": 949,
+   "cost_rub": 0.13728,
+   "latency_ms": 13150,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 17,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "4005d5a104311c7b6911e084e1d66bee4b910f614eedbd977f7f595afb05461f",
+   "event_id": "article:telegram:1050820672:401546",
+   "title": "ТАСС — сообщение 401546",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: сообщение о возможной встрече лидеров — политическое заявление без принятого экономического решения, связи с овощеводством компании в данных нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:149d09a4a57dbbe403b6730f889cabc8063f3dff30d393f1249a9299c07ec57e"
+    ],
+    "evidence_ids": [
+     "quote:149d09a4a57dbbe403b6730f889cabc8063f3dff30d393f1249a9299c07ec57e"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4497,
+   "completion_tokens": 249,
+   "cost_rub": 0.09203,
+   "latency_ms": 5014,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 18,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "c68213cd63e0225931906c01ba02cd78b1021c0a3cd3f5832cf776d646b155d1",
+   "event_id": "article:mk_ru:a4f24b87cc40",
+   "title": "В Орле пройдёт большая выставка сельхозтехники",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: региональная выставка сельхозтехники в Орле носит информационно-праздничный характер и не меняет условия бизнеса компании в Хабаровском крае.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:903bd360daa7679b846ae9e45fee0a01962cd064c57a789f960eec77e6249adb"
+    ],
+    "evidence_ids": [
+     "quote:903bd360daa7679b846ae9e45fee0a01962cd064c57a789f960eec77e6249adb"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4616,
+   "completion_tokens": 263,
+   "cost_rub": 0.09489,
+   "latency_ms": 4808,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 19,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_55223",
+   "candidate_id": "02e7ced5af8f2a2471db76d422ab134c805a2ef18f6f2d5ff6609842570b693c",
+   "event_id": "article:news_ru:3935397e18a1",
+   "title": "Жителям Подмосковья рассказали, кто должен убирать опавшие листья",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: новость о порядке уборки листвы в Подмосковье не затрагивает овощеводческую компанию из Хабаровского края.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:40281c7b6b3d58cc51f1919a01122062af0a3f4fa481f4fbb494b104857d2991"
+    ],
+    "evidence_ids": [
+     "quote:40281c7b6b3d58cc51f1919a01122062af0a3f4fa481f4fbb494b104857d2991"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4679,
+   "completion_tokens": 263,
+   "cost_rub": 0.09598,
+   "latency_ms": 5346,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 20,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "655388cdc36596fc1b06b806747f0ad5c1075e5f7d44b8b9e4093ba05a09058d",
+   "event_id": "article:cbr_event:54bd3eb714b5",
+   "title": "Учебник по финансовой грамотности для вузов теперь «в цифре»",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: новость о цифровом учебнике финансовой грамотности для вузов не меняет условия бизнеса компании дополнительного образования детей и взрослых.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:8191fe128f019789108631b9fc69c4dcb92c66a52faa688f2152783f9e6b0c5d",
+     "claim:97bee076bea26dce56783d75f330009d25088f988759911587a08f371b18fe7c"
+    ],
+    "evidence_ids": [
+     "quote:8191fe128f019789108631b9fc69c4dcb92c66a52faa688f2152783f9e6b0c5d",
+     "quote:97bee076bea26dce56783d75f330009d25088f988759911587a08f371b18fe7c"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4891,
+   "completion_tokens": 263,
+   "cost_rub": 0.09964,
+   "latency_ms": 5072,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 1,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "8d755835c1f6ec91da983bbe927fb795a41352cf01fc34c68786188810f2c2e2",
+   "event_id": "article:telegram:1050820672:401166",
+   "title": "ТАСС — сообщение 401166",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: новость МВД о тактиках телефонных мошенников не затрагивает деятельность дополнительного образования и финансовые показатели компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:6a2209a13a0d48a110a6ebe6494da360bbd9c1fca2ce68c0631abb0f97afdc5a"
+    ],
+    "evidence_ids": [
+     "quote:6a2209a13a0d48a110a6ebe6494da360bbd9c1fca2ce68c0631abb0f97afdc5a"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4469,
+   "completion_tokens": 247,
+   "cost_rub": 0.09143,
+   "latency_ms": 4903,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 2,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "5a5dc001913e19eabc31f4712fd28f591d73f685951eadf1bca281179a080fa1",
+   "event_id": "article:telegram:1050820672:401167",
+   "title": "ТАСС — сообщение 401167",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: сообщение о возможной донастройке системы оценки поведения школьников не меняет условия бизнеса дополнительного образования компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:09786f07a57fd630ac20dd5bad31a490e999ae4480ab0aaae184055c6be7714c"
+    ],
+    "evidence_ids": [
+     "quote:09786f07a57fd630ac20dd5bad31a490e999ae4480ab0aaae184055c6be7714c"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4450,
+   "completion_tokens": 248,
+   "cost_rub": 0.09116,
+   "latency_ms": 4797,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 3,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "c199f789b38fa4f291c9b243d20a3d8c22c74332d65148002155bbdd165efa54",
+   "event_id": "article:telegram:1050820672:401084",
+   "title": "ТАСС — сообщение 401084",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "нет механизма: заявление чиновника о расширении списка китайских произведений в школьной программе не является принятым решением и не меняет условий бизнеса дополнительного образования компании",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:c73742f8b3c282d799d05ab773767e7a85fdd429c9ca9b481ed02bb84d7e69b5"
+    ],
+    "evidence_ids": [
+     "quote:c73742f8b3c282d799d05ab773767e7a85fdd429c9ca9b481ed02bb84d7e69b5"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4414,
+   "completion_tokens": 287,
+   "cost_rub": 0.09278,
+   "latency_ms": 5343,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 4,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "03c82baa1b0d237dcde516405e7738e0b87753c5b9c4afd28506ef9fc8281f5c",
+   "event_id": "article:cbr_event:74e64110e295",
+   "title": "С цифрового рубля откроется новый сезон онлайн-уроков",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Новость ЦБ об образовательных онлайн-уроках по финансовой грамотности для школьников не имеет механизма влияния на бизнес компании: это просветительское мероприятие, а не экономическое решение или изменение условий деятельности.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:4434c1f9176a9e285c4d4ca3ccbcdc7405a620f586f83929bd52ae51e5b5d0bf",
+     "claim:4d23f9d101296f8efed42aa2a4f88ddaaabbcd0bad3936cb349863229356b32c"
+    ],
+    "evidence_ids": [
+     "quote:4434c1f9176a9e285c4d4ca3ccbcdc7405a620f586f83929bd52ae51e5b5d0bf",
+     "quote:4d23f9d101296f8efed42aa2a4f88ddaaabbcd0bad3936cb349863229356b32c"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4903,
+   "completion_tokens": 340,
+   "cost_rub": 0.10428,
+   "latency_ms": 5774,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 5,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "6d37c3749d1333d13265bd444a0e8d45710321557668d923225f7b72c1c0b4eb",
+   "event_id": "article:cbr_event:d5ac50f913dc",
+   "title": "Онлайн-занятия по финансовой грамотности для старшего поколения начнутся 13 октября",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Новость ЦБ о бесплатных онлайн-занятиях по финансовой грамотности для старшего поколения не меняет условий бизнеса образовательной компании: нет механизма влияния на её выручку, затраты или финансирование.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:6ef614a1d923dd08aa4302a37b6fd3c3cc138c333aa05ea2c1a5c5e393d72853",
+     "claim:dfd91433903aeefaff176fafd30268c0624eb3762feb6658013de624432282bf"
+    ],
+    "evidence_ids": [
+     "quote:6ef614a1d923dd08aa4302a37b6fd3c3cc138c333aa05ea2c1a5c5e393d72853",
+     "quote:dfd91433903aeefaff176fafd30268c0624eb3762feb6658013de624432282bf"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4945,
+   "completion_tokens": 240,
+   "cost_rub": 0.09925,
+   "latency_ms": 4973,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 6,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "d770052f919ec360e06cf81b6252a260ecd5cbe194598d8d89140ad46e5dd486",
+   "event_id": "article:telegram:1050820672:401074",
+   "title": "ТАСС — сообщение 401074",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: заявление о расширении полномочий чиновника без принятого экономического решения не затрагивает бизнес дополнительного образования компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:e328813fa52b30dccbddee89882863652a1bc36fd6488479021bb286f1f77133"
+    ],
+    "evidence_ids": [
+     "quote:e328813fa52b30dccbddee89882863652a1bc36fd6488479021bb286f1f77133"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4374,
+   "completion_tokens": 277,
+   "cost_rub": 0.09151,
+   "latency_ms": 10497,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 7,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "c5c19aaa7cda9aa5e6b9faa4c6d9a667ad43fa489a43174aee86309a27f2f61b",
+   "event_id": "article:m24_ru:0fdf3459fea8",
+   "title": "Учителям стал доступен новый сервис уведомлений в MAX",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Новость о запуске сервиса уведомлений в платформе MAX для учителей не имеет механизма влияния на финансовые показатели компании: нет связи с её продуктами, банком или экономическими условиями.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:a2659058703cab4d3a4af51e0e6a6a5eabe982d1c359acc9aeee612f959c5bbe"
+    ],
+    "evidence_ids": [
+     "quote:a2659058703cab4d3a4af51e0e6a6a5eabe982d1c359acc9aeee612f959c5bbe"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4839,
+   "completion_tokens": 248,
+   "cost_rub": 0.09788,
+   "latency_ms": 6197,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 8,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "b8751c015d57a0d7ddc06be8afee2df3ff1d38b52081e093dcb7c47421eb0522",
+   "event_id": "article:nalog_ru:ab8ee8bc14ca",
+   "title": "В семейном центре «Согласие» рассказали о финансовой безопасности",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: просветительский семинар налоговой для подростков в стороннем семейном центре не затрагивает бизнес, финансы или регулирование компании.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:8ed3f524f67b853858f2db405535741e5d3468d991476d2bd1fd9657f8f04ce4",
+     "claim:0aa7c2974c5908e0012e9416a96fca824c3e3b6c0c340a665f04ebdf99b742f4"
+    ],
+    "evidence_ids": [
+     "quote:8ed3f524f67b853858f2db405535741e5d3468d991476d2bd1fd9657f8f04ce4",
+     "quote:0aa7c2974c5908e0012e9416a96fca824c3e3b6c0c340a665f04ebdf99b742f4"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4884,
+   "completion_tokens": 318,
+   "cost_rub": 0.10268,
+   "latency_ms": 5350,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 9,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "c66b0b4395775a1371101836ddd1d425af886492a49729078fbbdddced891b03",
+   "event_id": "article:mk_ru:2a458b5d40e8",
+   "title": "Запорожские студенты участвуют во Всероссийской олимпиаде «Я — профессионал»",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: новость о студенческой олимпиаде в Запорожской области не затрагивает бизнес дополнительного образования компании в Краснодарском крае.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:7ec0cd5df7d7d74c92cb10f9c5ab69a1c15d3055c06cba6d841c162de8aee06e"
+    ],
+    "evidence_ids": [
+     "quote:7ec0cd5df7d7d74c92cb10f9c5ab69a1c15d3055c06cba6d841c162de8aee06e"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4605,
+   "completion_tokens": 141,
+   "cost_rub": 0.08767,
+   "latency_ms": 6231,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 10,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "341f4a4e39d7122d552f64403e9cded65db6f7c8ae1b9a4355c0976e648cc015",
+   "event_id": "article:cbr_event:aa72a2265631",
+   "title": "Стандарты для системы учета ценных бумаг: концепция Банка России",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: концепция Банка России о стандартах учета ценных бумаг касается депозитариев и учетной инфраструктуры, а компания — дополнительное образование детей и взрослых без признаков работы с ценными бумагами.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:957b4e2ee8b095b49775d524c86aa043034274da7a0c528af7edf4b68d3cdb5b",
+     "claim:6cb213d3fbc2bac956acced52c94b3ef233997167e07121329874353329087de"
+    ],
+    "evidence_ids": [
+     "quote:957b4e2ee8b095b49775d524c86aa043034274da7a0c528af7edf4b68d3cdb5b",
+     "quote:6cb213d3fbc2bac956acced52c94b3ef233997167e07121329874353329087de"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4920,
+   "completion_tokens": 273,
+   "cost_rub": 0.10072,
+   "latency_ms": 5351,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 11,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "2c127efe194a82751c2cdcdea410e82bcc32deeac9d7192c792955d9128c85d1",
+   "event_id": "article:cbr_event:275c5c7b3955",
+   "title": "О чем говорят тренды: временные факторы влияют на рост цен и ВВП",
+   "decision": "watch",
+   "reason": "Макрокомментарий ЦБ может влиять на стоимость финансирования и спрос, но прямой связи с профилем компании (допобразование детей, Краснодар) в данных нет.",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "mixed",
+   "inference_status": "hypothesis",
+   "statements": 7,
+   "statements_with_refs": 7,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 3
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a"
+    ],
+    "evidence_ids": [
+     "quote:5bfc8f9d418dd45342ff23ba779134521b09b4193d9908b3c7e5c06976ef791a"
+    ],
+    "feature_ids": [
+     "U_32829:/okved/name",
+     "U_32829:/region",
+     "U_32829:/products/loan"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4580,
+   "completion_tokens": 685,
+   "cost_rub": 0.11857,
+   "latency_ms": 9541,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 12,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "08c954afe96d323ffb81b35658f186c6e12e694b7a44f9bcbe9e4c00d06444d8",
+   "event_id": "article:telegram:1050820672:401034",
+   "title": "ТАСС — сообщение 401034",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: перебои в работе сервисов Авито не затрагивают деятельность компании по дополнительному образованию, связи с платформой в признаках профиля нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:31c9b3406fdeb514036cbe60fb73e20bd34f25ecef20462607bdcd56a5fff0c5"
+    ],
+    "evidence_ids": [
+     "quote:31c9b3406fdeb514036cbe60fb73e20bd34f25ecef20462607bdcd56a5fff0c5"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4422,
+   "completion_tokens": 238,
+   "cost_rub": 0.0901,
+   "latency_ms": 4835,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 13,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "ed16454adbdbb133672566f464570b2650b8f128a31acab713325978917ba58e",
+   "event_id": "article:moex_rss:305cae7ff9f6",
+   "title": "Московская Биржа - Технические работы на сетевом оборудовании услуги VPN-доступ | Новости и пресс-релизы",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: технические работы на VPN-доступе Московской Биржи не затрагивают бизнес дополнительного образования компании, связи с биржевыми сервисами в признаках нет.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:d6374992f8d3d24a60d1e9e8a5a280ba1c8b13318b148ee7b6b56fb546707082"
+    ],
+    "evidence_ids": [
+     "quote:d6374992f8d3d24a60d1e9e8a5a280ba1c8b13318b148ee7b6b56fb546707082"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4520,
+   "completion_tokens": 168,
+   "cost_rub": 0.08776,
+   "latency_ms": 4740,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 14,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "d672102b4e0fa6874fccae13b4acd7add3119a690ab58cc453dfa0c38f491dc5",
+   "event_id": "article:cbr_event:e1f753e38361",
+   "title": "Профицит счета текущих операций в II квартале 2026 года заметно вырос",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Макростатистика платежного баланса РФ без принятых решений и без признаков экспортно-импортной деятельности или валютных операций у образовательной компании — механизм влияния на её бизнес отсутствует.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:a745205e5575f9dc4206713cda891220203ca2bd1e8ac620e0e336ed34eedb1a"
+    ],
+    "evidence_ids": [
+     "quote:a745205e5575f9dc4206713cda891220203ca2bd1e8ac620e0e336ed34eedb1a"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4590,
+   "completion_tokens": 261,
+   "cost_rub": 0.09432,
+   "latency_ms": 5387,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 15,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "732ca4f1cc5503ac9b5b97fa22d675c583b993d1b9af1111f535cb98b631b1b8",
+   "event_id": "article:cbr_rss:9d3f7f1b2515",
+   "title": "Инфляционные ожидания",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: публикация ЦБ об инфляционных ожиданиях — общая макростатистика без конкретного решения или события, затрагивающего бизнес дополнительного образования компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:07509f8bb848bf81a5d527df99f3090f16ae169b561bb61f948e83b1077b4bb4"
+    ],
+    "evidence_ids": [
+     "quote:07509f8bb848bf81a5d527df99f3090f16ae169b561bb61f948e83b1077b4bb4"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4422,
+   "completion_tokens": 318,
+   "cost_rub": 0.0947,
+   "latency_ms": 6728,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 16,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "8dc38b8ed2b01f9b1d94a668c22e0939d16015708a5654ced001154c03754718",
+   "event_id": "article:vedomosti:c4428e0c6064",
+   "title": "МВД: мошенники подделывают голоса учителей с помощью ИИ",
+   "decision": "watch",
+   "reason": "Компания работает в дополнительном образовании детей; схема мошенничества использует образ учителей и контакты с родителями, что может затрагивать коммуникации организации с клиентами",
+   "significance": "low",
+   "priority_score": 0.08,
+   "materiality": "low",
+   "event_status": "occurred",
+   "inference_status": "hypothesis",
+   "statements": 9,
+   "statements_with_refs": 9,
+   "changes_since_previous": {
+    "status": "new",
+    "previous_insight_id": null,
+    "summary": null,
+    "claim_ids": []
+   },
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 1
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:da3e2aa2590219534e2910d734838d111e360ca795dad3310f8e0ca2d26abc4e",
+     "claim:26da4eca18ba98ead313e25c2ff62b97bb4abdc21444fb29a08d6d6ad5ed82c2"
+    ],
+    "evidence_ids": [
+     "quote:da3e2aa2590219534e2910d734838d111e360ca795dad3310f8e0ca2d26abc4e",
+     "quote:26da4eca18ba98ead313e25c2ff62b97bb4abdc21444fb29a08d6d6ad5ed82c2"
+    ],
+    "feature_ids": [
+     "U_32829:/okved/name"
+    ]
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4863,
+   "completion_tokens": 923,
+   "cost_rub": 0.13716,
+   "latency_ms": 10887,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 17,
+   "processing_status": "merge_fallback"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "7314c6a442e718c0ef22cb90a1bf11e9a64da79da4da2740fa0109e3a2163914",
+   "event_id": "article:telegram:1050820672:401385",
+   "title": "ТАСС — сообщение 401385",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Сводка разнородных новостей без экономического решения или события, связанного с бизнесом компании; нет механизма влияния на дополнительное образование.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:7e958ef0ed22d2fd973b9f502f5b163eb7f25800b5fdba6fd9e787a9f8ef3345"
+    ],
+    "evidence_ids": [
+     "quote:7e958ef0ed22d2fd973b9f502f5b163eb7f25800b5fdba6fd9e787a9f8ef3345"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4513,
+   "completion_tokens": 310,
+   "cost_rub": 0.09581,
+   "latency_ms": 5780,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 18,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "1a50f27e0cf5758b7b4eb3e9183d709344080b2ed7b3f5d24532f40c7f9a06c0",
+   "event_id": "article:minpromtorg:4bc5f002330a",
+   "title": "Старт отбора по отраслевым программам «доращивания» поставщиков",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: грантовые программы Минпромторга для поставщиков автокомпонентов и транспортного машиностроения не связаны с дополнительным образованием компании.",
+   "ref_counts": {
+    "claim_ids": 2,
+    "evidence_ids": 2,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:70f2f2b7300d61385c4601ad06655ce298117fa58f1ccac732463229d40193b1",
+     "claim:a71821859f1d6f633ba5c18889547065eb168997b4784b0411e35d0741577c91"
+    ],
+    "evidence_ids": [
+     "quote:70f2f2b7300d61385c4601ad06655ce298117fa58f1ccac732463229d40193b1",
+     "quote:a71821859f1d6f633ba5c18889547065eb168997b4784b0411e35d0741577c91"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4899,
+   "completion_tokens": 363,
+   "cost_rub": 0.10554,
+   "latency_ms": 5268,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 19,
+   "processing_status": "ready"
+  },
+  {
+   "company_id": "U_32829",
+   "candidate_id": "06de5e54ca38a34858696ae747c6b2fa5d1e504885146242fa68df3356165f98",
+   "event_id": "article:telegram:1050820672:401561",
+   "title": "ТАСС — сообщение 401561",
+   "decision": "exclude",
+   "reason_code": "not_relevant",
+   "reason": "Нет механизма влияния: заявление о российско-американском диалоге по ИИ-дата-центрам не затрагивает бизнес дополнительного образования компании.",
+   "ref_counts": {
+    "claim_ids": 1,
+    "evidence_ids": 1,
+    "feature_ids": 0
+   },
+   "ref_ids": {
+    "claim_ids": [
+     "claim:ad0ec79f37144199afe7b3ba8997548fe909629ee45c79438355c9ef8308076d"
+    ],
+    "evidence_ids": [
+     "quote:ad0ec79f37144199afe7b3ba8997548fe909629ee45c79438355c9ef8308076d"
+    ],
+    "feature_ids": []
+   },
+   "qa_status": "passed",
+   "qa_codes": [],
+   "generated_by": "live",
+   "model": "z-ai/glm-5.3-flash",
+   "prompt_version": "analyst-v1.3",
+   "prompt_tokens": 4486,
+   "completion_tokens": 299,
+   "cost_rub": 0.09471,
+   "latency_ms": 5412,
+   "llm_calls": 1,
+   "json_repairs": 0,
+   "valid_json": true,
+   "valid_json_first_try": true,
+   "rank": 20,
+   "processing_status": "merge_fallback"
+  }
+ ]
+}
