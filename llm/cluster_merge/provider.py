@@ -56,7 +56,7 @@ class OpenAIProvider:
             api_key=key,
             base_url=profile.endpoint,
             max_retries=0,
-            timeout=httpx.Timeout(60, connect=5),
+            timeout=httpx.Timeout(180, connect=5),
             http_client=httpx.Client(follow_redirects=False, trust_env=False),
         ) as client:
             try:
@@ -64,11 +64,7 @@ class OpenAIProvider:
                     model=profile.model,
                     messages=request,
                     max_tokens=profile.max_output_tokens,
-                    extra_body={
-                        "thinking": {
-                            "type": "enabled" if profile.reasoning else "disabled"
-                        }
-                    },
+                    extra_body={"reasoning": {"enabled": profile.reasoning}},
                 )
                 import json
 

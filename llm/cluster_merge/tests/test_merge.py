@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from llm.cluster_merge import *
 from llm.cluster_merge.core import messages, parse_answer
@@ -143,10 +144,25 @@ class Tests(unittest.TestCase):
             SQLiteQuota(Path(self.tmp.name) / "quota.db", 2)
 
     def test_profile_key(self):
-        changed = self.req.model_copy(update={"profile": Profile(reasoning=True)})
+        changed = self.req.model_copy(
+            update={"profile": Profile(reasoning=not self.req.profile.reasoning)}
+        )
         self.assertNotEqual(
             plan_merge(changed).operation_id, plan_merge(self.req).operation_id
         )
+
+    def test_provider_reasoning_parameter(self):
+        with patch.dict("os.environ", {"LLM_API_KEY": "test-only-key"}), patch(
+            "openai.OpenAI"
+        ) as sdk:
+            client = sdk.return_value.__enter__.return_value
+            client.chat.completions.create.return_value.model_dump.return_value = {}
+            for enabled in (True, False):
+                with self.subTest(reasoning=enabled):
+                    OpenAIProvider().complete([], Profile(reasoning=enabled))
+                    sent = client.chat.completions.create.call_args.kwargs
+                    self.assertEqual(sent["model"], "z-ai/glm-5.3-flash")
+                    self.assertEqual(sent["extra_body"], {"reasoning": {"enabled": enabled}})
 
     def test_embedding_failure_keeps_index(self):
         from llm.cluster_merge.example import ExampleIndex

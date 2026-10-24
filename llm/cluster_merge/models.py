@@ -19,11 +19,11 @@ class Article(Model):
 
 
 class Profile(Model):
-    model: str = "deepseek/deepseek-v4.1-flash"
+    model: str = "z-ai/glm-5.3-flash"
     endpoint: str = "https://changellenge.up.railway.app/v1"
     max_input_chars: int = Field(default=24000, ge=2000)
-    max_output_tokens: int = Field(default=4096, gt=0)
-    reasoning: bool = False
+    max_output_tokens: int = Field(default=16384, gt=0)
+    reasoning: bool = True
 
 
 class MergeRequest(Model):

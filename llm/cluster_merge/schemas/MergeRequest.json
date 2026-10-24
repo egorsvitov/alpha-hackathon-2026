@@ -66,7 +66,7 @@
       "additionalProperties": false,
       "properties": {
         "model": {
-          "default": "deepseek/deepseek-v4.1-flash",
+          "default": "z-ai/glm-5.3-flash",
           "title": "Model",
           "type": "string"
         },
@@ -82,13 +82,13 @@
           "type": "integer"
         },
         "max_output_tokens": {
-          "default": 4096,
+          "default": 16384,
           "exclusiveMinimum": 0,
           "title": "Max Output Tokens",
           "type": "integer"
         },
         "reasoning": {
-          "default": false,
+          "default": true,
           "title": "Reasoning",
           "type": "boolean"
         }

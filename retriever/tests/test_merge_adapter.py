@@ -96,7 +96,7 @@ class AdapterTests(unittest.TestCase):
 
     def test_configuration_and_content_separate_cache(self):
         first = self.resolve(max_calls=2)
-        other = ClusterMergeAdapter(self.service, Profile(reasoning=True))
+        other = ClusterMergeAdapter(self.service, Profile(reasoning=not self.adapter.profile.reasoning))
         self.assertNotEqual(other.configuration_fingerprint, self.adapter.configuration_fingerprint)
         result = other.resolve(self.cluster, self.articles, 'a', max_calls=0)
         self.assertNotEqual(first.operation_id, result.operation_id)

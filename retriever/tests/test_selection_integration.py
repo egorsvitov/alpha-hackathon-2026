@@ -251,7 +251,7 @@ class SelectionIntegrationTests(unittest.TestCase):
         self.provider.mode = 'unchanged'
         self.run_query()
         self.assertEqual(self.store.get_cluster_snapshot('cluster-0').status, 'resolved')
-        self.merge = ClusterMergeAdapter(self.merge.service, Profile(reasoning=True))
+        self.merge = ClusterMergeAdapter(self.merge.service, Profile(reasoning=not self.merge.profile.reasoning))
         with self.assertRaisesRegex(ValueError, 'configuration'):
             self.run_query()
         self.assertEqual(self.provider.calls, 1)
