@@ -237,7 +237,8 @@ class RetrievalAdapterTests(unittest.TestCase):
             self.assertEqual(r.candidates[0]["omitted_source_ids"],["article-a"])
             self.assertFalse(r.analyst_input.candidates)
             self.assertEqual(fake.stats.calls,0)
-            self.assertFalse(out.excluded_candidates)
+            # отложенный адаптером кандидат - явный исход в выводе, а не только запись в диагностике
+            self.assertEqual([(e.reason_code,e.status) for e in out.excluded_candidates],[("context_too_large","deferred")])
 
     def test_bad_candidate_does_not_poison_good_candidate(self):
         b=batch();bad=copy.deepcopy(b["candidates"][0]);bad["item"]["source_revision_ids"]=["missing"]

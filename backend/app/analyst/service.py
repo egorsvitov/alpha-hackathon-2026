@@ -15,7 +15,7 @@ from __future__ import annotations
 import re
 import threading
 import time
-from collections import deque
+from collections import Counter, deque
 from datetime import datetime, timedelta, timezone
 from typing import Any, Callable
 
@@ -35,7 +35,7 @@ from app.analyst.llm_gateway import (
 )
 from app.analyst.memory import MemoryStore
 from app.analyst.qa import numbers_in
-from app.analyst.schemas import AnalystOutput, CandidateOutcome, ChatDraft, ClassifyDraft
+from app.analyst.schemas import AnalystOutput, CandidateOutcome, ChatDraft, ClassifyDraft, EventRef, ExcludedCandidate
 from app.analyst.settings import AnalystSettings
 from app.schemas.base import Evidence, FeedItem, Insight, QaAnswer, TraceStep
 
@@ -241,8 +241,37 @@ class AnalystService:
                 if diagnostic.get("candidate_id") in blocked:
                     diagnostic.update(state="context_too_large", omitted="entire_candidate_with_memory")
                     adapted.status = "partial"
+            self._add_held_outcomes(output, adapted)
             output.run_metadata.input_diagnostics = adapted.diagnostics()
         return output, adapted
+
+    @staticmethod
+    def _add_held_outcomes(output: AnalystOutput, adapted: Any) -> None:
+        """Кандидаты, которые адаптер не пропустил к аналитику из-за размера (``context_too_large``), —
+        явный исход в ``excluded_candidates`` (status=deferred, что именно не передано), а не только запись
+        в ``input_diagnostics``: потребитель вывода не должен принять отсутствие инсайта за «не важно»."""
+        known = {e.candidate_id for e in output.excluded_candidates}
+        added = False
+        for d in adapted.candidates:
+            if d.get("state") != "context_too_large" or d.get("omitted") != "entire_candidate" or d.get("candidate_id") in known:
+                continue
+            canonical = d.get("canonical_event_id")
+            groups = list(d.get("reading_group_ids") or [])
+            ident = {"reading_group_id": groups[0] if groups else None, "reading_group_ids": groups or None,
+                     "canonical_event_id": canonical}
+            sources, claims = d.get("omitted_source_ids") or [], d.get("omitted_claim_ids") or []
+            output.excluded_candidates.append(ExcludedCandidate(
+                candidate_id=d["candidate_id"], cluster_id=canonical or d["candidate_id"],
+                event_refs=[EventRef(event_id=canonical or d["candidate_id"], **ident)],
+                reason_code="context_too_large",
+                reason=(f"Контекст кандидата не помещается в бюджет ({d.get('estimated_prompt_tokens')} из "
+                        f"{d.get('token_budget')} токенов): отложен без вызова модели, ничего не усечено"),
+                status="deferred", missing_parts=[f"публикации: {', '.join(sources)}; утверждений: {len(claims)}"],
+                **ident,
+            ))
+            added = True
+        if added:
+            output.run_metadata.outcome_counts = dict(sorted(Counter(e.reason_code for e in output.excluded_candidates).items()))
 
     def insight(
         self,
