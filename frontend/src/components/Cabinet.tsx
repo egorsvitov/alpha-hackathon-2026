@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { ROLES, roleLabel } from '../data/companies';
 import { href, navigate, type Route } from '../router';
-import { useApp } from '../store';
+import { useActions, useDemo, usePrefs, useSession } from '../store';
 import { AlfaLogo, BrandLockup, CompanyLogo } from './Brand';
 import { Disclaimer } from './EventBlocks';
 import { plural } from './FeedCard';
@@ -43,7 +43,7 @@ function Dummy({ icon: I, label, tag }: { icon: Icon; label: string; tag?: strin
 }
 
 function CabSidebar({ route }: { route: Route }) {
-  const { setDesign } = useApp();
+  const { setDesign } = useActions();
   const high = useHighCount();
   const newsActive = route.name === 'feed' || route.name === 'event';
   return (
@@ -75,7 +75,8 @@ function CabSidebar({ route }: { route: Route }) {
 
 /** Чип компании, как «ООО … / ФИО» в шапке банка: логотип-плитка, название, сотрудник. Внутри — смена компании и роли. */
 function CabAccount() {
-  const { user, companies, company, role, setCompany, setRole } = useApp();
+  const { user, companies, company, role } = useSession();
+  const { setCompany, setRole } = useActions();
   const { open, setOpen, ref } = usePopover();
   if (!company) return null;
   const short = user ? (() => { const [f, m, l] = user.name.split(' '); return `${l ?? f} ${f[0]}.${m ? ` ${m[0]}.` : ''}`; })() : '';
@@ -120,7 +121,9 @@ function CabAccount() {
 }
 
 function CabTopbar() {
-  const { demo, theme, toggleTheme } = useApp();
+  const { demo } = useDemo();
+  const { theme } = usePrefs();
+  const { toggleTheme } = useActions();
   return (
     <header className="cab-top">
       <a className="cab-top__logo" href={href.home} aria-label="Альфа-Бизнес, главная"><AlfaLogo size={36} /></a>
@@ -273,7 +276,7 @@ function SmartCardArt() {
 }
 
 function Hero({ masked }: { masked: boolean }) {
-  const { company } = useApp();
+  const { company } = useSession();
   const [offer, setOffer] = useState(true);
   return (
     <section className="cab-hero" aria-label="Счета и дела компании">
@@ -371,7 +374,7 @@ function Requests() {
 
 /** «Новости и аналитика» на главной: дополнительный сервис в сводке — счётчик, 3 события, вход в ленту. */
 function NewsCard() {
-  const { company } = useApp();
+  const { company } = useSession();
   const { items, loading, error, reload } = useFeed();
   const top = (items ?? []).slice(0, 3);
   const high = (items ?? []).filter((i) => i.relevance.level === 'high').length;

@@ -32,19 +32,32 @@ const read = (): Persisted => {
   return { companyId: null, role: null, theme: dark ? 'dark' : 'light', user: null, hidden: {}, push: false, design: 'cabinet' };
 };
 
-interface AppState {
+/** Что выбрано и кто вошёл: меняется при смене компании, роли, входе и скрытии карточек. */
+interface SessionState {
   companies: CompanyProfile[];
   company: CompanyProfile | null;
   role: Role | null;
-  theme: Theme;
   user: DemoUser | null;
   /** event_id скрытых карточек текущей компании */
   hidden: string[];
-  push: boolean;
+}
+
+/** Оформление и уведомления: меняется редко. */
+interface PrefsState {
+  theme: Theme;
   design: Design;
+  push: boolean;
+}
+
+/** Состояние демо-панели и счётчик перезапроса ленты. */
+interface DemoState {
   demo: DemoSettings;
   /** увеличивается при загрузке новой новости — лента и виджет перезапрашиваются */
   feedVersion: number;
+}
+
+/** Действия: ссылки стабильны, компонент, который берёт только их, не перерисовывается при смене состояния. */
+interface Actions {
   login(login: string, password: string): boolean;
   logout(): void;
   hide(eventId: string): void;
@@ -59,7 +72,12 @@ interface AppState {
   bumpFeed(): void;
 }
 
-const Ctx = createContext<AppState | null>(null);
+const SessionCtx = createContext<SessionState | null>(null);
+const PrefsCtx = createContext<PrefsState | null>(null);
+const DemoCtx = createContext<DemoState | null>(null);
+const ActionsCtx = createContext<Actions | null>(null);
+
+const NO_HIDDEN: string[] = [];
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [p, setP] = useState<Persisted>(read);
@@ -77,18 +95,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try { localStorage.setItem(KEY, JSON.stringify(p)); } catch { /* ignore */ }
   }, [p]);
 
-  const value = useMemo<AppState>(
+  const hidden = (p.companyId && p.hidden[p.companyId]) || NO_HIDDEN;
+  const session = useMemo<SessionState>(
+    () => ({ companies, company: companies.find((c) => c.company_id === p.companyId) ?? null, role: p.role, user: p.user, hidden }),
+    [companies, p.companyId, p.role, p.user, hidden],
+  );
+  const prefs = useMemo<PrefsState>(() => ({ theme: p.theme, design: p.design, push: p.push }), [p.theme, p.design, p.push]);
+  const demoState = useMemo<DemoState>(() => ({ demo, feedVersion }), [demo, feedVersion]);
+
+  const actions = useMemo<Actions>(
     () => ({
-      companies,
-      company: companies.find((c) => c.company_id === p.companyId) ?? null,
-      role: p.role,
-      theme: p.theme,
-      user: p.user,
-      hidden: (p.companyId && p.hidden[p.companyId]) || [],
-      push: p.push,
-      design: p.design,
-      demo,
-      feedVersion,
       login: (login, password) => {
         const ok = login.trim().toLowerCase() === DEMO_LOGIN.login && password === DEMO_LOGIN.password;
         if (ok) setP((s) => ({ ...s, user: { login: DEMO_LOGIN.login, name: DEMO_LOGIN.name } }));
@@ -115,17 +131,29 @@ export function AppProvider({ children }: { children: ReactNode }) {
       },
       bumpFeed: () => setFeedVersion((v) => v + 1),
     }),
-    [companies, p, demo, feedVersion],
+    [],
   );
 
-  return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+  return (
+    <ActionsCtx.Provider value={actions}>
+      <SessionCtx.Provider value={session}>
+        <PrefsCtx.Provider value={prefs}>
+          <DemoCtx.Provider value={demoState}>{children}</DemoCtx.Provider>
+        </PrefsCtx.Provider>
+      </SessionCtx.Provider>
+    </ActionsCtx.Provider>
+  );
 }
 
-export function useApp(): AppState {
-  const v = useContext(Ctx);
+function need<T>(v: T | null): T {
   if (!v) throw new Error('AppProvider отсутствует');
   return v;
 }
+
+export const useSession = (): SessionState => need(useContext(SessionCtx));
+export const usePrefs = (): PrefsState => need(useContext(PrefsCtx));
+export const useDemo = (): DemoState => need(useContext(DemoCtx));
+export const useActions = (): Actions => need(useContext(ActionsCtx));
 
 /* ---------- простой async-хук ---------- */
 

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { href, navigate } from '../router';
-import { DEMO_LOGIN, useApp } from '../store';
+import { DEMO_LOGIN, useActions } from '../store';
 import { ArtLogin } from '../components/Illustrations';
 import { BrandLockup } from '../components/Brand';
 
@@ -8,7 +8,7 @@ import { BrandLockup } from '../components/Brand';
     серые поля, тёмная кнопка, серая карточка с картинкой. В банке логин и пароль принадлежат физлицу, а доступ к компаниям
     определяется его правами; здесь проверка условная, данные для входа показаны на экране, чтобы эксперты могли пройти сценарий. */
 export function LoginPage() {
-  const { login } = useApp();
+  const { login } = useActions();
   const [name, setName] = useState('');
   const [pass, setPass] = useState('');
   const [error, setError] = useState(false);

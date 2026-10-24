@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 import type { Role } from '../types';
 import { ROLES } from '../data/companies';
 import { href, navigate } from '../router';
-import { useApp } from '../store';
+import { useActions, useSession } from '../store';
 import { ArtChart, CompanyArt } from '../components/Illustrations';
 import { Button } from '../components/ui';
 import { BrandLockup, CompanyLogo } from '../components/Brand';
@@ -13,7 +13,8 @@ const TINTS = ['cyan', 'lime', 'peach', 'blue'];
 /** Экран выбора клиента и роли (в проде — результат входа в интернет-банк; здесь — демо-вход).
     Размеры карточек фиксированы: выбор не меняет раскладку, страница не прыгает. */
 export function SelectPage() {
-  const { companies, company, role, select } = useApp();
+  const { companies, company, role } = useSession();
+  const { select } = useActions();
   const [cid, setCid] = useState<string>(company?.company_id ?? companies[0].company_id);
   const [r, setR] = useState<Role>(role ?? 'cfo');
 

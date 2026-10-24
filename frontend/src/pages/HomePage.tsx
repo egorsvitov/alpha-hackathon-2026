@@ -1,5 +1,5 @@
 import { ArrowDownLeft, ArrowUpRight, FileSignature, Globe, PiggyBank, Wallet } from 'lucide-react';
-import { useApp } from '../store';
+import { useSession } from '../store';
 import { NewsWidget } from '../components/NewsWidget';
 import { Button, IconTile, Pill } from '../components/ui';
 
@@ -16,7 +16,7 @@ const PAYMENTS = [
 
 /** Главный экран интернет-банка (имитация). Заметная точка входа — виджет «Новости и аналитика» справа. */
 export function HomePage() {
-  const { company } = useApp();
+  const { company } = useSession();
   return (
     <div className="home">
       <header className="home__head">

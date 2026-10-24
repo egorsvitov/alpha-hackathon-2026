@@ -3,7 +3,7 @@ import { EyeOff, Info, Newspaper, Undo2, Upload } from 'lucide-react';
 import type { FeedItem, SignificanceLevel } from '../types';
 import { DEMO_TODAY } from '../api';
 import { navigate, href } from '../router';
-import { useApp } from '../store';
+import { useActions, useDemo, useSession } from '../store';
 import { profileChips, roleLabel } from '../data/companies';
 import { FeedCard, fmtShort, plural } from '../components/FeedCard';
 import { useFeed } from '../components/Shell';
@@ -27,6 +27,9 @@ const TABS: { id: Tab; label: string }[] = [
   { id: 'history', label: 'История' },
 ];
 
+/** Сколько карточек и строк истории показываем сразу; остальное подгружается по кнопке. */
+const PAGE = 20;
+
 const DAY = 86_400_000;
 const ageDays = (iso: string) => Math.round((Date.parse(DEMO_TODAY) - Date.parse(iso)) / DAY);
 
@@ -34,15 +37,19 @@ const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', '�
 const monthKey = (iso: string) => `${MONTHS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}`;
 
 export function FeedPage() {
-  const { company, role, demo, hidden, hide, unhide } = useApp();
+  const { company, role, hidden } = useSession();
+  const { demo } = useDemo();
+  const { hide, unhide } = useActions();
   const { items, loading, error, reload } = useFeed();
   const [tab, setTab] = useState<Tab>('feed');
   const [filter, setFilter] = useState<Filter>('all');
+  const [limit, setLimit] = useState(PAGE);
   const [upload, setUpload] = useState(false);
   const [undo, setUndo] = useState<{ id: string; title: string } | null>(null);
   const undoTimer = useRef<number>();
 
   useEffect(() => () => window.clearTimeout(undoTimer.current), []);
+  useEffect(() => { setLimit(PAGE); }, [filter, company?.company_id, role]);
 
   const onHide = (it: FeedItem) => {
     hide(it.event.event_id);
@@ -108,12 +115,21 @@ export function FeedPage() {
               />
             ) : (
               <div className="feed-grid">
-                {shown.map((it, i) => (
+                {shown.slice(0, limit).map((it, i) => (
                   <FeedCard key={it.event.event_id} item={it} lead={i === 0 && filter === 'all'} read={readEvents.has(it.event.event_id)} onHide={() => onHide(it)} />
                 ))}
               </div>
             )}
-            <p className="small muted feed-note">{shown.length} {plural(shown.length, 'событие', 'события', 'событий')}. Новости и данные демо — синтетические.</p>
+            {shown.length > limit && (
+              <div className="feed-more">
+                <Button variant="secondary" onClick={() => setLimit((n) => n + PAGE)}>
+                  Показать ещё {Math.min(PAGE, shown.length - limit)}
+                </Button>
+              </div>
+            )}
+            <p className="small muted feed-note">
+              {shown.length > limit ? `Показано ${limit} из ${shown.length}` : `${shown.length} ${plural(shown.length, 'событие', 'события', 'событий')}`}. Новости и данные демо — синтетические.
+            </p>
           </>
         )}
 
@@ -207,15 +223,16 @@ function WeekDigest({ items, companyName }: { items: FeedItem[]; companyName: st
 /* ---------------- История ---------------- */
 
 function History({ items, hidden, onUnhide }: { items: FeedItem[]; hidden: string[]; onUnhide(id: string): void }) {
+  const [limit, setLimit] = useState(PAGE * 2);
   const groups = useMemo(() => {
-    const sorted = [...items].sort((a, b) => b.event.date.localeCompare(a.event.date));
+    const sorted = [...items].sort((a, b) => b.event.date.localeCompare(a.event.date)).slice(0, limit);
     const m = new Map<string, FeedItem[]>();
     sorted.forEach((i) => {
       const k = monthKey(i.event.date);
       m.set(k, [...(m.get(k) ?? []), i]);
     });
     return [...m.entries()];
-  }, [items]);
+  }, [items, limit]);
 
   if (groups.length === 0) {
     return <StateBlock icon={<Newspaper size={24} aria-hidden />} title="История пока пуста" text="События появятся здесь, как только они будут обработаны." />;
@@ -242,6 +259,11 @@ function History({ items, hidden, onUnhide }: { items: FeedItem[]; hidden: strin
           </ul>
         </section>
       ))}
+      {items.length > limit && (
+        <div className="feed-more">
+          <Button variant="secondary" onClick={() => setLimit((n) => n + PAGE * 2)}>Показать ещё {Math.min(PAGE * 2, items.length - limit)}</Button>
+        </div>
+      )}
     </div>
   );
 }

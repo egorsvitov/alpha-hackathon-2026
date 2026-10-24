@@ -1,6 +1,6 @@
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { href } from '../router';
-import { useApp } from '../store';
+import { useSession } from '../store';
 import { roleLabel } from '../data/companies';
 import { useFeed } from './Shell';
 import { plural } from './FeedCard';
@@ -9,7 +9,7 @@ import { ErrorState, SignalMark, SIG_LABEL, Skeleton } from './ui';
 
 /** Точка входа на главном экране (критерий 09): яркая пастельная карточка, sticky справа. */
 export function NewsWidget() {
-  const { company, role } = useApp();
+  const { company, role } = useSession();
   const { items, loading, error, reload } = useFeed();
   const top = (items ?? []).slice(0, 3);
   const high = (items ?? []).filter((i) => i.relevance.level === 'high').length;

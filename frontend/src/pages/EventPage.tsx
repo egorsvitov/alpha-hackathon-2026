@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link2, ListChecks, MessageCircleQuestion, Newspaper, Target, ThumbsDown, ThumbsUp, TrendingUp, TriangleAlert } from 'lucide-react';
 import { api } from '../api';
 import { href } from '../router';
-import { useApp, useAsync } from '../store';
+import { useAsync, useSession } from '../store';
 import { CiteContext, ClaimList, KindLegend } from '../components/Claims';
 import { ActionsBlock, AiBlock, BankBlock, ImpactBlock, RelevanceBadge, Sec, SourcesPanel, TraceBlock, UnknownBlock } from '../components/EventBlocks';
 import { fmtShort, plural } from '../components/FeedCard';
@@ -12,7 +12,7 @@ import { Button, ErrorState, Pill, Skeleton, StateBlock } from '../components/ui
 import { readEvents } from './readState';
 
 export function EventPage({ eventId }: { eventId: string }) {
-  const { company, role } = useApp();
+  const { company, role } = useSession();
   const { data: ins, loading, error, reload } = useAsync(
     () => api.getInsight(eventId, company!.company_id, role!),
     [eventId, company?.company_id, role],

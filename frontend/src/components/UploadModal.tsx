@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Upload } from 'lucide-react';
 import { api } from '../api';
-import { useApp } from '../store';
+import { useActions } from '../store';
 import { Button, Modal } from './ui';
 
 const SAMPLES = [
@@ -24,7 +24,7 @@ const SAMPLES = [
 
 /** Загрузка новой тестовой новости: идёт через тот же алгоритм, что и остальные (критерий 05). */
 export function UploadModal({ onClose, onDone }: { onClose(): void; onDone(eventId: string): void }) {
-  const { bumpFeed } = useApp();
+  const { bumpFeed } = useActions();
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(false);

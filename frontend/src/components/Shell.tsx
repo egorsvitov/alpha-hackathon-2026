@@ -7,7 +7,7 @@ import type { FeedItem } from '../types';
 import { ROLES, roleLabel } from '../data/companies';
 import { BrandLockup, CompanyLogo } from './Brand';
 import { href, navigate, type Route } from '../router';
-import { useApp, useAsync } from '../store';
+import { useActions, useAsync, useDemo, usePrefs, useSession } from '../store';
 import { readEvents } from '../pages/readState';
 import { Badge, Button, IconButton, usePopover } from './ui';
 
@@ -26,7 +26,9 @@ function pushNotify(title: string) {
 }
 
 export function FeedProvider({ children }: { children: ReactNode }) {
-  const { company, role, feedVersion, push, hidden } = useApp();
+  const { company, role, hidden } = useSession();
+  const { feedVersion } = useDemo();
+  const { push } = usePrefs();
   const { data, loading, error, reload } = useAsync(
     () => (company && role ? api.getFeed(company.company_id, role) : Promise.resolve([] as FeedItem[])),
     [company?.company_id, role, feedVersion],
@@ -68,7 +70,9 @@ export function FeedProvider({ children }: { children: ReactNode }) {
 /* ---------------- Уведомления ---------------- */
 
 export function NotificationsBell() {
-  const { push, setPush, hidden } = useApp();
+  const { hidden } = useSession();
+  const { push } = usePrefs();
+  const { setPush } = useActions();
   const { items } = useFeed();
   const { open, setOpen, ref } = usePopover();
   const [denied, setDenied] = useState(false);
@@ -120,7 +124,9 @@ export function NotificationsBell() {
 
 /** Меню профиля. variant="pill" — тёмная «пилюля» с именем, как в шапке Альфа-Бизнеса (оформление «Кабинет»). */
 export function UserMenu({ variant = 'avatar' }: { variant?: 'avatar' | 'pill' }) {
-  const { user, logout, design, setDesign } = useApp();
+  const { user } = useSession();
+  const { design } = usePrefs();
+  const { logout, setDesign } = useActions();
   const { open, setOpen, ref } = usePopover();
   if (!user) return null;
   const initials = user.name.split(' ').map((w) => w[0]).slice(0, 2).join('');
@@ -158,7 +164,8 @@ export function UserMenu({ variant = 'avatar' }: { variant?: 'avatar' | 'pill' }
 /* ---------------- Переключатели компании и роли ---------------- */
 
 function CompanySwitcher() {
-  const { companies, company, role, setCompany } = useApp();
+  const { companies, company, role } = useSession();
+  const { setCompany } = useActions();
   const { open, setOpen, ref } = usePopover();
   if (!company) return null;
   return (
@@ -199,7 +206,8 @@ function CompanySwitcher() {
 }
 
 function RoleSwitcher() {
-  const { role, setRole } = useApp();
+  const { role } = useSession();
+  const { setRole } = useActions();
   const { open, setOpen, ref } = usePopover();
   if (!role) return null;
   return (
@@ -233,7 +241,8 @@ function RoleSwitcher() {
 /* ---------------- Демо-панель ---------------- */
 
 export function DemoControls() {
-  const { demo, updateDemo, bumpFeed } = useApp();
+  const { demo } = useDemo();
+  const { updateDemo, bumpFeed } = useActions();
   const { open, setOpen, ref } = usePopover();
   return (
     <div className="switcher" ref={ref}>
@@ -272,7 +281,9 @@ export function DemoControls() {
 /* ---------------- Шапка ---------------- */
 
 export function Header() {
-  const { theme, toggleTheme, demo } = useApp();
+  const { demo } = useDemo();
+  const { theme } = usePrefs();
+  const { toggleTheme } = useActions();
   return (
     <header className="app-header">
       <a className="brand" href={href.home} aria-label="Альфа-Бизнес, главная">

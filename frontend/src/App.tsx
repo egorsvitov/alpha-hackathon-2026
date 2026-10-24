@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { AppProvider, useApp } from './store';
+import { AppProvider, usePrefs, useSession } from './store';
 import { href, navigate, useRoute } from './router';
 import { BottomNav, FeedProvider, Header, Sidebar } from './components/Shell';
 import { LoginPage } from './pages/LoginPage';
@@ -12,7 +12,8 @@ import { EventPage } from './pages/EventPage';
 
 function Routes() {
   const route = useRoute();
-  const { user, company, role, design } = useApp();
+  const { user, company, role } = useSession();
+  const { design } = usePrefs();
   const authed = Boolean(company && role);
 
   useEffect(() => {
