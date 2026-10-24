@@ -48,6 +48,7 @@ HEDGE_RE = re.compile(
 FORECAST_MARK_RE = re.compile(r"(прогноз\w*|ожида\w*|допуска\w*|предполага\w*|может|могут|сценари\w*|оценк\w*|по мнению|по оценк\w*)", re.I)
 NEGATION_MARK_RE = re.compile(r"(опроверг\w*|не подтвер\w*|отрица\w*|не\s)", re.I)
 ALIAS_RE = re.compile(r"\s*[\[(]\s*(?:[CFBЕ]\d+\s*[,;]?\s*)+[\])]|\b[CFB]\d{1,3}\b")
+EXTRA_ALIAS_RE = re.compile(r"\s*[\[(]\s*(?:[SH]\d+\s*[,;]?\s*)+[\])]|\b[SH]\d{1,3}\b")
 NUMBER_RE = re.compile(r"(?<![\w.])(\d+(?:[.,]\d+)?)")
 
 DAMAGE_PATTERNS = [
@@ -177,6 +178,7 @@ class Validator:
         self.limitations: list[str] = []
         self.extra_unknowns: list[UnknownOut] = []
         self.claim_text = " ".join(c.text for c in view.all_claims()).lower()
+        self.limitations.extend(view.notes)  # неполнота кандидата, пропущенные цитаты
         allowed: set[float] = set()
         for c in view.all_claims():
             allowed |= numbers_in(c.text)
@@ -193,6 +195,10 @@ class Validator:
             allowed |= numbers_in(f"{b.title} {b.quote} {b.published_at or ''}")
         for s in view.sources.values():
             allowed |= numbers_in(f"{s.published_at or ''} {s.title or ''}")
+        for q in view.quotes.values():
+            allowed |= numbers_in(q.quote)  # дословные цитаты первоисточника — тоже данные
+        for h in view.interests.values():
+            allowed |= numbers_in(h.text)
         event = view.data.get("event", {}) if isinstance(view.data.get("event"), dict) else {}
         for title in [event.get("title") or ""] + list(event.get("other_titles") or []):
             allowed |= numbers_in(title)  # заголовок события — тоже текст источника
@@ -208,10 +214,14 @@ class Validator:
         claim_ids, evidence_ids, feature_ids = self._resolve_full(st, path)[:3]
         return claim_ids, evidence_ids, feature_ids
 
-    def _resolve_full(self, st: DraftStatement, path: str) -> tuple[list[str], list[str], list[str], list[str]]:
-        """Псевдонимы → исходные ID. Модель иногда кладёт F/B в claim_ids и наоборот — принимаем."""
-        claim_ids, evidence_ids, feature_ids, bank_ids = [], [], [], []
-        for ref in list(st.claim_ids) + list(st.feature_ids):
+    def _resolve_full(self, st: DraftStatement, path: str) -> tuple[list[str], list[str], list[str], list[str], list[str]]:
+        """Псевдонимы → исходные ID. Модель иногда кладёт F/B в claim_ids и наоборот — принимаем.
+
+        Пятый элемент — интересы-гипотезы (H*). Цитаты первоисточника (S*) добавляют свои
+        ``evidence_id``; ссылка на несуществующий алиас цитаты/интереса отбрасывается (``unknown_ref``).
+        """
+        claim_ids, evidence_ids, feature_ids, bank_ids, interest_ids = [], [], [], [], []
+        for ref in list(st.claim_ids) + list(st.feature_ids) + list(st.quote_ids) + list(st.interest_ids):
             c = self.view.resolve_claim(ref)
             if c is not None:
                 claim_ids.append(c.claim_id)
@@ -225,8 +235,16 @@ class Validator:
             if b is not None:
                 bank_ids.append(b.bank_chunk_id)
                 continue
+            q = self.view.resolve_quote(ref)
+            if q is not None:
+                evidence_ids.append(q.evidence_id)
+                continue
+            h = self.view.resolve_interest(ref)
+            if h is not None:
+                interest_ids.append(h.interest_id)
+                continue
             self.issue("unknown_ref", f"Ссылка {ref} не существует и отброшена", "warn", path)
-        return _uniq(claim_ids), _uniq(evidence_ids), _uniq(feature_ids), _uniq(bank_ids)
+        return _uniq(claim_ids), _uniq(evidence_ids), _uniq(feature_ids), _uniq(bank_ids), _uniq(interest_ids)
 
     def _unsupported_numbers(self, text: str, extra_allowed: set[float] | None = None) -> set[float]:
         allowed = self.allowed_numbers | (extra_allowed or set())
@@ -315,10 +333,16 @@ class Validator:
         if st is None or not (st.text or "").strip():
             return None
         text = clean_text(st.text)
+        if text and (self.view.quotes or self.view.interests):
+            text = clean_text(EXTRA_ALIAS_RE.sub("", text))  # алиасы S*/H* — только если такие блоки были в промпте
         if not text:
             return None
-        claim_ids, evidence_ids, feature_ids, bank_ids = self._resolve_full(st, path)
+        claim_ids, evidence_ids, feature_ids, bank_ids, interest_ids = self._resolve_full(st, path)
         kind = st.kind
+        if section != "facts" and interest_ids and not (claim_ids or feature_ids or bank_ids or evidence_ids) and kind == "fact":
+            # Интерес ретривера — гипотеза о канале влияния: опираясь только на него, фактом быть нельзя.
+            self.issue("interest_as_fact", "Утверждение опирается только на интерес-гипотезу — понижено до гипотезы", "warn", path)
+            kind = "hypothesis"
         if section == "facts":
             kind = "fact"
             if not claim_ids:
@@ -327,7 +351,7 @@ class Validator:
         elif kind == "fact" and not evidence_ids:
             # Контракт фронта: «факт» — только с цитатой источника (evidence_ids).
             kind = "inference"
-        if section != "facts" and not (claim_ids or feature_ids or bank_ids):
+        if section != "facts" and not (claim_ids or feature_ids or bank_ids or interest_ids or evidence_ids):
             self.issue("unsupported_statement", "Вывод без ссылок на данные", "error", path)
             return None
 
@@ -357,6 +381,7 @@ class Validator:
             evidence_ids=evidence_ids,
             feature_ids=feature_ids,
             bank_chunk_ids=bank_ids if section != "facts" else [],
+            interest_ids=interest_ids if section != "facts" else [],
             conditional=conditional or kind2 == "hypothesis",
             roles=roles,  # type: ignore[arg-type]
         )
@@ -627,5 +652,5 @@ def _finish(result: QAResult, v: Validator) -> QAResult:
         result.status = "passed"
     stmts = result.all_statements()
     result.statements_total = len(stmts)
-    result.statements_with_refs = sum(1 for s in stmts if s.claim_ids or s.feature_ids or s.evidence_ids or s.bank_chunk_ids)
+    result.statements_with_refs = sum(1 for s in stmts if s.claim_ids or s.feature_ids or s.evidence_ids or s.bank_chunk_ids or s.interest_ids)
     return result

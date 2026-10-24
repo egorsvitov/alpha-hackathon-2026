@@ -153,17 +153,38 @@ ANALYST_SYSTEM_PROMPT_V12 = (
     .replace("\n\nСХЕМА ОТВЕТА", "\n" + _V12_RULES, 1)
 )
 
+# analyst-v1.3: вход нового ретривера. Блоки source_quotes (дословные цитаты первоисточника, S1…),
+# possible_impact_channels (интересы-гипотезы, H1…) и event.completeness/derived_text появляются в
+# данных только при наличии (старый вход без них даёт тот же промпт, что и v1.2).
+PROMPT_VERSION_V13 = "analyst-v1.3"
+_V13_RULES = """27. Если в данных есть блок source_quotes — это дословные цитаты первоисточника (S1…) с источником, датой и координатами. Опирайся на них как на первоисточник: при расхождении утверждения C и цитаты верь цитате. Выводы привязывай к алиасам: указывай цитаты в quote_ids вместе с claim_ids. Если derived_text=true, заголовок и утверждения события — производный пересказ, а не текст источника: числа и формулировки проверяй по цитатам.
+28. Если есть блок possible_impact_channels — это возможные каналы влияния (гипотезы ретривера H1…), НЕ факты о компании и не данные профиля. Утверждение, опирающееся только на H (interest_ids), — kind "hypothesis" с «возможно/если»; факты о компании берутся только из F.
+29. Если в event есть completeness: "unresolved" — принадлежность кандидата к группе материалов не подтверждена: анализируй только переданные утверждения и цитаты, и не считай, что все материалы группы описывают одно событие; "partial" — передана лишь часть материалов группы. В обоих случаях назови неполноту данных в unknowns.
+
+СХЕМА ОТВЕТА"""
+ANALYST_SYSTEM_PROMPT_V13 = (
+    ANALYST_SYSTEM_PROMPT_V12.replace("\n\nСХЕМА ОТВЕТА", "\n" + _V13_RULES, 1)
+    + ' Необязательные поля утверждений (только если есть соответствующие блоки данных): "quote_ids": ["S1"], "interest_ids": ["H1"].'
+)
+
 SYSTEM_PROMPTS: dict[str, str] = {
     PROMPT_VERSION: ANALYST_SYSTEM_PROMPT,
     PROMPT_VERSION_V11: ANALYST_SYSTEM_PROMPT_V11,
     PROMPT_VERSION_V12: ANALYST_SYSTEM_PROMPT_V12,
+    PROMPT_VERSION_V13: ANALYST_SYSTEM_PROMPT_V13,
 }
 # Версии, которые умеют работать с блоком previous_context (память фактов).
-MEMORY_AWARE_VERSIONS = frozenset({PROMPT_VERSION_V11, PROMPT_VERSION_V12})
+MEMORY_AWARE_VERSIONS = frozenset({PROMPT_VERSION_V11, PROMPT_VERSION_V12, PROMPT_VERSION_V13})
+# Версии, в данных которых допустимы блоки source_quotes / possible_impact_channels / completeness.
+EXTRAS_VERSIONS = frozenset({PROMPT_VERSION_V13})
 
 
 def supports_memory(version: str) -> bool:
     return version in MEMORY_AWARE_VERSIONS
+
+
+def supports_extras(version: str) -> bool:
+    return version in EXTRAS_VERSIONS
 
 
 FEWSHOT_SUFFIX = "+fewshot"

@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
@@ -20,8 +21,31 @@ from app.analyst.schemas import (
     ProjectionClaim,
     ProjectionEvidence,
     ProjectionSource,
+    RetrievalInterest,
     VerifiedFact,
 )
+
+# Лимит на цитаты первоисточника в промпте одного кандидата (оценка: байты UTF-8 / 4).
+QUOTE_TOKEN_LIMIT = 1500
+MAX_QUOTES_PER_CLAIM = 3
+DERIVED_TEXT_NOTE = (
+    "Заголовок и утверждения события — производный пересказ, не текст источника; "
+    "числа и формулировки проверяй по цитатам."
+)
+COMPLETENESS_NOTES = {
+    "unresolved": "Принадлежность кандидата к группе материалов не подтверждена: анализируется лучший переданный "
+                  "документ; членство в группе не означает, что все материалы описывают одно событие.",
+    "partial": "Передана только часть материалов группы.",
+}
+COMPLETENESS_LIMITATIONS = {
+    "unresolved": "Данные неполны: кандидат не разрешён до конца, проанализирован лучший из переданных документов; "
+                  "принадлежность к группе не подтверждает, что все материалы описывают одно событие.",
+    "partial": "Данные неполны: передана только часть материалов группы.",
+}
+
+
+def _tokens(obj: Any) -> int:
+    return len(json.dumps(obj, ensure_ascii=False, separators=(",", ":")).encode("utf-8")) // 4
 
 RELATION_RU = {"payment_out": "исходящие платежи компании", "payment_in": "входящие платежи компании"}
 # Служебные ограничения бандлов ретривера (англ.) → кратко по-русски для модели.
@@ -57,6 +81,15 @@ class PromptView:
     conflicts: list[dict[str, Any]] = field(default_factory=list)
     # Блок «предыдущий контекст» из памяти фактов (None — блок в промпт не передавался).
     previous: "PreviousContext | None" = None
+    # Цитаты первоисточника (S1…) и интересы-гипотезы (H1…): только в промптах с extras.
+    quotes: dict[str, ProjectionEvidence] = field(default_factory=dict)
+    interests: dict[str, RetrievalInterest] = field(default_factory=dict)
+    # Пояснения для выхода (ограничения): пропущенные цитаты, неполнота кандидата.
+    notes: list[str] = field(default_factory=list)
+    # Данные extras, реально попавшие в промпт (для отпечатка ключа кэша); пусто — extras нет.
+    extras: dict[str, Any] = field(default_factory=dict)
+    _quote_by_real: dict[str, str] = field(default_factory=dict)
+    _interest_by_real: dict[str, str] = field(default_factory=dict)
     _claim_by_real: dict[str, str] = field(default_factory=dict)
     _feature_by_real: dict[str, str] = field(default_factory=dict)
     _bank_by_real: dict[str, str] = field(default_factory=dict)
@@ -85,6 +118,20 @@ class PromptView:
             return self.bank[alias]
         real = self._bank_by_real.get(ref.strip())
         return self.bank.get(real) if real else None
+
+    def resolve_quote(self, ref: str) -> ProjectionEvidence | None:
+        alias = self._norm(ref)
+        if alias in self.quotes:
+            return self.quotes[alias]
+        real = self._quote_by_real.get(ref.strip())
+        return self.quotes.get(real) if real else None
+
+    def resolve_interest(self, ref: str) -> RetrievalInterest | None:
+        alias = self._norm(ref)
+        if alias in self.interests:
+            return self.interests[alias]
+        real = self._interest_by_real.get(ref.strip())
+        return self.interests.get(real) if real else None
 
     def alias_of_feature(self, feature_id: str) -> str | None:
         return self._feature_by_real.get(feature_id)
@@ -115,6 +162,12 @@ class PromptView:
         p = self.resolve_previous_claim(ref)
         if p is not None:
             return p.claim_id
+        q = self.resolve_quote(ref)
+        if q is not None:
+            return q.evidence_id
+        h = self.resolve_interest(ref)
+        if h is not None:
+            return h.interest_id
         return ref
 
     def realias_draft(self, draft: dict[str, Any]) -> dict[str, Any]:
@@ -128,7 +181,7 @@ class PromptView:
             if isinstance(obj, dict):
                 out = {}
                 for k, v in obj.items():
-                    if k in ("claim_ids", "feature_ids", "bank_chunk_ids") and isinstance(v, list):
+                    if k in ("claim_ids", "feature_ids", "bank_chunk_ids", "quote_ids", "interest_ids") and isinstance(v, list):
                         out[k] = [self.to_real(str(x)) for x in v]
                     elif k == "previous_insight_id" and isinstance(v, str):
                         item = self.resolve_previous_item(v)
@@ -168,8 +221,98 @@ def _claim_view(alias: str, c: ProjectionClaim) -> dict[str, Any]:
     )
 
 
-def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousContext | None" = None) -> PromptView:
-    """``previous`` — блок памяти фактов; ``None`` — промпт без блока (как в analyst-v1.0)."""
+def _select_quotes(view: PromptView, cand: Candidate) -> tuple[list[dict[str, Any]], list[str]]:
+    """1–3 точных фрагмента ``evidence.quote`` на утверждение в пределах ``QUOTE_TOKEN_LIMIT``.
+
+    Менее значимые цитаты (утверждения вне отбора ретривера и без измерений, с конца) отбрасываются
+    ЦЕЛИКОМ, цитата никогда не режется посередине. Возвращает (элементы блока, id пропущенных цитат).
+    """
+    matched = set(cand.match_context.matched_event_claim_ids)
+    order = list(view.claims.items())  # (алиас, утверждение) в исходном порядке
+    ranked = sorted(
+        enumerate(order),
+        key=lambda t: (0 if t[1][1].claim_id in matched else 1, 0 if t[1][1].measurements else 1, t[0]),
+    )
+    chosen: dict[str, tuple[int, int, dict[str, Any]]] = {}
+    omitted: list[str] = []
+    used = 0
+    for idx, (alias, claim) in ranked:
+        for pos, ev_id in enumerate(claim.evidence_ids[:MAX_QUOTES_PER_CLAIM]):
+            ev = view.evidence.get(ev_id)
+            if ev is None or not (ev.quote or "").strip() or ev_id in chosen or ev_id in omitted:
+                continue
+            src = view.sources.get(ev.source_id or "")
+            item = compact({
+                "claim": alias, "source_id": ev.source_id,
+                "publisher": src.publisher if src else None,
+                "date": ((src.published_at or "")[:10] if src else None),
+                "start": ev.start, "end": ev.end, "quote": ev.quote,
+            })
+            cost = _tokens(item) + 6  # + служебный id
+            if used + cost > QUOTE_TOKEN_LIMIT:
+                omitted.append(ev_id)
+                continue
+            used += cost
+            chosen[ev_id] = (idx, pos, item)
+    items = []
+    for n, (ev_id, (_idx, _pos, item)) in enumerate(sorted(chosen.items(), key=lambda kv: kv[1][:2]), start=1):
+        alias = f"S{n}"
+        view.quotes[alias] = view.evidence[ev_id]
+        view._quote_by_real[ev_id] = alias
+        items.append({"id": alias, **item})
+    return items, omitted
+
+
+def _add_extras(view: PromptView, inp: AnalystInput, cand: Candidate, completeness: str | None) -> None:
+    event = view.data.setdefault("event", {})
+    if cand.derived_text:
+        event["derived_text"] = True
+        view.extras["derived_text"] = True
+    if completeness:
+        block: dict[str, Any] = {"status": completeness, "note": COMPLETENESS_NOTES[completeness]}
+        if cand.group_member_refs:
+            block["group_size"] = len(cand.group_member_refs)
+        event["completeness"] = block
+        view.extras["completeness"] = block
+    items, omitted = _select_quotes(view, cand)
+    if items or omitted:
+        qblock: dict[str, Any] = {
+            "note": "Дословные цитаты первоисточника; ссылайся на них по id (quote_ids)."
+                    + (" " + DERIVED_TEXT_NOTE if cand.derived_text else ""),
+            "items": items,
+        }
+        if omitted:
+            qblock["omitted"] = len(omitted)
+            view.notes.append(
+                f"Из-за лимита контекста (~{QUOTE_TOKEN_LIMIT} токенов) цитаты источника опущены целиком: {', '.join(omitted)}."
+            )
+        view.data["source_quotes"] = qblock
+        view.extras["source_quotes"] = qblock
+    interests = inp.company_context.retrieval_interests
+    if interests:
+        listed = []
+        for i, it in enumerate(interests, start=1):
+            alias = f"H{i}"
+            view.interests[alias] = it
+            view._interest_by_real[it.interest_id] = alias
+            listed.append(compact({"id": alias, "text": it.text, "version": it.version}))
+        iblock = {
+            "note": "Возможные каналы влияния (гипотезы ретривера, не факты о компании и не данные профиля)",
+            "items": listed,
+        }
+        view.data.setdefault("company", {})["possible_impact_channels"] = iblock
+        view.extras["interests"] = iblock
+
+
+def build_prompt_view(
+    inp: AnalystInput, cand: Candidate, previous: "PreviousContext | None" = None, *, extras: bool = False
+) -> PromptView:
+    """``previous`` — блок памяти фактов; ``None`` — промпт без блока (как в analyst-v1.0).
+
+    ``extras`` — блоки нового ретривера (``source_quotes``, ``possible_impact_channels``,
+    ``event.completeness``/``derived_text``); включаются только при наличии данных и только для
+    версий промпта, которые их описывают (``prompts.supports_extras``). Без данных — прежний вид.
+    """
     view = PromptView(data={}, previous=previous)
     ctx = inp.company_context
 
@@ -279,6 +422,11 @@ def build_prompt_view(inp: AnalystInput, cand: Candidate, previous: "PreviousCon
         }
     )
     view.data["role"] = inp.request.role
+    completeness = cand.completeness if cand.completeness in COMPLETENESS_LIMITATIONS else None
+    if completeness:
+        view.notes.append(COMPLETENESS_LIMITATIONS[completeness])
+    if extras:
+        _add_extras(view, inp, cand, completeness)
     if previous is not None:
         if previous.items:
             view.data["previous_context"] = {

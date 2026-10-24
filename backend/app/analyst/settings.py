@@ -24,7 +24,8 @@
 * ``ANALYST_FEED_HIDE_EXCLUDED`` — скрывать из ленты события с ``decision=exclude``.
 * ``ANALYST_MAX_PARALLEL`` — сколько кандидатов ленты анализировать параллельно.
 * ``ANALYST_PROMPT_VERSION`` — версия промпта: ``analyst-v1.0`` (по умолчанию, под неё
-  сохранены ответы в ``app/analyst/cache``) или ``analyst-v1.1``/``analyst-v1.2`` (вход ретривера, память фактов; v1.2 — после живой оценки).
+  сохранены ответы в ``app/analyst/cache``) или ``analyst-v1.1``/``analyst-v1.2`` (вход ретривера, память фактов; v1.2 — после живой оценки)
+  или ``analyst-v1.3`` (+ цитаты первоисточника, интересы-гипотезы, неразрешённые кандидаты).
 * ``ANALYST_MEMORY`` — память фактов и «что изменилось с прошлого» (по умолчанию выключена;
   работает с промптом ``analyst-v1.1``). ``ANALYST_MEMORY_PATH`` — файл SQLite
   (по умолчанию ``/data/analyst_memory.sqlite3`` или временная папка ОС).
@@ -49,7 +50,7 @@ DEFAULT_MODEL = "z-ai/glm-5.3-flash"
 DEFAULT_FALLBACK_MODEL = "deepseek/deepseek-v4.1-flash"
 VALID_MODES = ("template", "llm", "cached")
 DEFAULT_PROMPT_VERSION = "analyst-v1.0"
-VALID_PROMPT_VERSIONS = ("analyst-v1.0", "analyst-v1.1", "analyst-v1.2")
+VALID_PROMPT_VERSIONS = ("analyst-v1.0", "analyst-v1.1", "analyst-v1.2", "analyst-v1.3")
 
 _dotenv_loaded = False
 
