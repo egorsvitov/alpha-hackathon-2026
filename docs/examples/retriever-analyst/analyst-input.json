@@ -1,0 +1,456 @@
+{
+  "schema_version": "AnalystInput.v1-draft",
+  "request": {
+    "request_id": "synthetic-request",
+    "company_id": "SYNTHETIC",
+    "role": "cfo",
+    "as_of": "2026-10-24T00:00:00+03:00",
+    "news_window_hours": 0,
+    "max_insights": 20
+  },
+  "company_context": {
+    "profile_version": "profile-1",
+    "profile_snapshot_ref": "sha256:ea6b1972f70c3c004566b045039c8d925d18e2d6970d98d96882ba7029f2655a",
+    "verified_facts": [
+      {
+        "feature_id": "SYNTHETIC:/okved/name",
+        "field": "/okved/name",
+        "value": "Синтетическое производство",
+        "description": "/okved/name",
+        "origin": {
+          "type": "synthetic",
+          "ref": "public-example"
+        },
+        "quality": "observed"
+      }
+    ],
+    "economic_exposures": [],
+    "related_entities": [],
+    "graph_context": {
+      "included": false,
+      "reason": null
+    },
+    "unknowns": [
+      "Полностью синтетический публичный пример."
+    ],
+    "synthetic_demo_profile": true
+  },
+  "candidates": [
+    {
+      "candidate_id": "4213f8c64730d9f4e85db121a8a0d422aec325719d667c65812bbb5f930ea2c3",
+      "cluster_id": "article:synthetic:raw",
+      "event_bundle_refs": [
+        {
+          "event_id": "article:synthetic:raw",
+          "event_version": 1,
+          "snapshot_sha256": "6a521d15f1cc2101f0aafe1ef9c33d4e9771e7b14d8b58560a6c4ff7b7acc644",
+          "snapshot_ref": "retrieval-item:raw@1"
+        }
+      ],
+      "analysis_projection": {
+        "event_bundles": [
+          {
+            "bundle_schema_version": "retrieval-candidate-batch.v1",
+            "event": {
+              "event_id": "article:synthetic:raw",
+              "event_type": null,
+              "event_version": 1,
+              "first_published_at": "2026-10-23T09:00:00+00:00",
+              "quality": "partial",
+              "title": "Синтетическая публикация raw",
+              "text_version": "1",
+              "text_sha256": "8a87dd704e1317a2fedd4acb515b6cb16e5d30b0e4dadc96188277b1a9853933",
+              "title_origin": "source",
+              "processing_status": "ready",
+              "retrieval_status": "ready",
+              "retrieval_stop_reason": "candidate_limit"
+            },
+            "claims": [
+              {
+                "claim_id": "claim:e9fa41c97bee89d732181211533fe53355000de7085899a9cd6a091d3a066632",
+                "text": "СИНТЕТИКА: опубликован проект изменения тарифа на электроэнергию.",
+                "action": null,
+                "object": null,
+                "attribution": null,
+                "participants": [],
+                "geographies": [],
+                "measurements": [],
+                "modality": "unknown",
+                "polarity": "unknown",
+                "stage": null,
+                "scenario": null,
+                "time": null,
+                "evidence_ids": [
+                  "quote:e9fa41c97bee89d732181211533fe53355000de7085899a9cd6a091d3a066632"
+                ],
+                "field_evidence": null,
+                "origin": "original_quote"
+              }
+            ],
+            "conflicts": [],
+            "relations": [],
+            "sources": [
+              {
+                "source_id": "raw",
+                "title": "Синтетическая публикация raw",
+                "publisher": "SYNTHETIC Publisher",
+                "published_at": "2026-10-23T09:00:00+00:00",
+                "url": "https://example.org/synthetic/raw",
+                "is_synthetic": null,
+                "article_id": "synthetic:raw",
+                "publication_precision": "timestamp",
+                "text_sha256": "8a87dd704e1317a2fedd4acb515b6cb16e5d30b0e4dadc96188277b1a9853933",
+                "title_origin": "source"
+              }
+            ],
+            "evidence": [
+              {
+                "evidence_id": "quote:e9fa41c97bee89d732181211533fe53355000de7085899a9cd6a091d3a066632",
+                "quote": "СИНТЕТИКА: опубликован проект изменения тарифа на электроэнергию.",
+                "source_id": "raw",
+                "start": 0,
+                "end": 65,
+                "field": "text",
+                "origin": "original_quote"
+              }
+            ],
+            "limitations": [
+              "Проверены существование ссылок, хэши и точные срезы оригиналов. Истинность публикаций, смысловая полнота merge и следование пересказа из цитат автоматически не доказаны. Модальность и полярность исходных цитат не размечены.",
+              "Сходство при отборе не является бизнес-значимостью.",
+              "Идентичность статьи не доказывает тождество событий в разных статьях; межстатейная дедупликация не выполнена."
+            ],
+            "derived_context": {}
+          }
+        ]
+      },
+      "match_context": {
+        "signals": [],
+        "matched_company_feature_ids": [],
+        "matched_event_claim_ids": [],
+        "confirmed_entity_match": null,
+        "impact_hypotheses": [
+          "Поисковая гипотеза, не факт компании: Возможное влияние тарифов; зависимость компании неизвестна"
+        ],
+        "assumptions_not_verified": [
+          "Cosine и inherited_trigger описывают отбор, а не значимость, уверенность или подтвержденную экспозицию компании.",
+          "Требует проверки энергозатрат",
+          "Гипотеза по виду деятельности"
+        ],
+        "prior_score": null
+      },
+      "bank_fragments": [],
+      "quality_flags": [],
+      "canonical_event_id": "article:synthetic:raw",
+      "reading_group_ids": [
+        "raw-group"
+      ],
+      "retrieval_context_hash": "bbbba400ecf4d9c9b19583d9f2ccce71436b35be62c0a9ba219bd315c53ecd42",
+      "max_input_tokens": 8000
+    },
+    {
+      "candidate_id": "7f5fcff5ca68ac99d2850279269f75825f984f85052475ccf5529db4f342e26d",
+      "cluster_id": "event:synthetic-event-tariff",
+      "event_bundle_refs": [
+        {
+          "event_id": "event:synthetic-event-tariff",
+          "event_version": 1,
+          "snapshot_sha256": "f248ddfee5cb0e8724ed097d0046c23947f5ae1a96fa1a952271d17564771423",
+          "snapshot_ref": "retrieval-item:synthetic-event-tariff@3c62e86862744cb41c89b8c32d2757bfdf46ecd4a7c2d6fd73c33e9bd13061fa"
+        }
+      ],
+      "analysis_projection": {
+        "event_bundles": [
+          {
+            "bundle_schema_version": "retrieval-candidate-batch.v1",
+            "event": {
+              "event_id": "event:synthetic-event-tariff",
+              "event_type": null,
+              "event_version": 1,
+              "first_published_at": "2026-10-23T09:00:00+00:00",
+              "quality": "partial",
+              "title": "Синтетическое объединённое событие",
+              "text_version": "3c62e86862744cb41c89b8c32d2757bfdf46ecd4a7c2d6fd73c33e9bd13061fa",
+              "text_sha256": "4e66f20c40781a7374a8b4fcb081bab9c4c801d86273b2be6f3b820420c52395",
+              "title_origin": "derived_merge",
+              "processing_status": "ready",
+              "retrieval_status": "ready",
+              "retrieval_stop_reason": "candidate_limit"
+            },
+            "claims": [
+              {
+                "claim_id": "claim:c3c3ec9de92013683c1aa57eaea01c86a5125990600f9781c91a2306eda3bf5e",
+                "text": "СИНТЕТИКА: объявлено изменение тарифа.",
+                "action": null,
+                "object": null,
+                "attribution": null,
+                "participants": [],
+                "geographies": [],
+                "measurements": [],
+                "modality": "unknown",
+                "polarity": "unknown",
+                "stage": null,
+                "scenario": null,
+                "time": null,
+                "evidence_ids": [
+                  "quote:c3c3ec9de92013683c1aa57eaea01c86a5125990600f9781c91a2306eda3bf5e"
+                ],
+                "field_evidence": null,
+                "origin": "original_quote"
+              },
+              {
+                "claim_id": "claim:4a399911973bd610c3d0c3993a6d31776562c5c7bb93db223963b4107b8618fe",
+                "text": "СИНТЕТИКА: второе издание сообщает об изменении тарифа.",
+                "action": null,
+                "object": null,
+                "attribution": null,
+                "participants": [],
+                "geographies": [],
+                "measurements": [],
+                "modality": "unknown",
+                "polarity": "unknown",
+                "stage": null,
+                "scenario": null,
+                "time": null,
+                "evidence_ids": [
+                  "quote:4a399911973bd610c3d0c3993a6d31776562c5c7bb93db223963b4107b8618fe"
+                ],
+                "field_evidence": null,
+                "origin": "original_quote"
+              }
+            ],
+            "conflicts": [],
+            "relations": [],
+            "sources": [
+              {
+                "source_id": "second",
+                "title": "Синтетическая публикация second",
+                "publisher": "SYNTHETIC Publisher",
+                "published_at": "2026-10-23T09:00:00+00:00",
+                "url": "https://example.org/synthetic/second",
+                "is_synthetic": null,
+                "article_id": "synthetic:second",
+                "publication_precision": "timestamp",
+                "text_sha256": "a6f0878db4c84fb2b9899aa7e793079ff6c752d97e81d3d25dc10eb386977e4d",
+                "title_origin": "source"
+              },
+              {
+                "source_id": "split",
+                "title": "Синтетическая публикация split",
+                "publisher": "SYNTHETIC Publisher",
+                "published_at": "2026-10-23T09:00:00+00:00",
+                "url": "https://example.org/synthetic/split",
+                "is_synthetic": null,
+                "article_id": "synthetic:split",
+                "publication_precision": "timestamp",
+                "text_sha256": "ac11ea75d00a8d30d224811f1a7ac413e0fe335c7f6c7feda112993c06ec2716",
+                "title_origin": "source"
+              }
+            ],
+            "evidence": [
+              {
+                "evidence_id": "quote:c3c3ec9de92013683c1aa57eaea01c86a5125990600f9781c91a2306eda3bf5e",
+                "quote": "СИНТЕТИКА: объявлено изменение тарифа.",
+                "source_id": "split",
+                "start": 0,
+                "end": 38,
+                "field": "text",
+                "origin": "original_quote"
+              },
+              {
+                "evidence_id": "quote:4a399911973bd610c3d0c3993a6d31776562c5c7bb93db223963b4107b8618fe",
+                "quote": "СИНТЕТИКА: второе издание сообщает об изменении тарифа.",
+                "source_id": "second",
+                "start": 0,
+                "end": 55,
+                "field": "text",
+                "origin": "original_quote"
+              }
+            ],
+            "limitations": [
+              "Проверены существование ссылок, хэши и точные срезы оригиналов. Истинность публикаций, смысловая полнота merge и следование пересказа из цитат автоматически не доказаны. Модальность и полярность исходных цитат не размечены.",
+              "Сходство при отборе не является бизнес-значимостью."
+            ],
+            "derived_context": {
+              "origin": "derived_merge",
+              "independent_evidence": false,
+              "semantic_entailment_checked": false,
+              "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+              "paragraphs": [
+                {
+                  "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+                  "fragment_ids": [
+                    "c3c3ec9de92013683c1aa57eaea01c86a5125990600f9781c91a2306eda3bf5e",
+                    "4a399911973bd610c3d0c3993a6d31776562c5c7bb93db223963b4107b8618fe"
+                  ]
+                }
+              ],
+              "disagreements": [],
+              "title_fragment_ids": [],
+              "operation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "result_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "configuration_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            }
+          }
+        ]
+      },
+      "match_context": {
+        "signals": [],
+        "matched_company_feature_ids": [],
+        "matched_event_claim_ids": [],
+        "confirmed_entity_match": null,
+        "impact_hypotheses": [
+          "Поисковая гипотеза, не факт компании: Возможное влияние тарифов; зависимость компании неизвестна"
+        ],
+        "assumptions_not_verified": [
+          "Cosine и inherited_trigger описывают отбор, а не значимость, уверенность или подтвержденную экспозицию компании.",
+          "Требует проверки энергозатрат",
+          "Гипотеза по виду деятельности"
+        ],
+        "prior_score": null
+      },
+      "bank_fragments": [],
+      "quality_flags": [],
+      "canonical_event_id": "event:synthetic-event-tariff",
+      "reading_group_ids": [
+        "reading-group"
+      ],
+      "retrieval_context_hash": "465ca0f2e7c266f399e9c535f95d79b106a20a11a4116e922954e1495a7c9881",
+      "max_input_tokens": 8000
+    },
+    {
+      "candidate_id": "7401587f757b3ebd28fa7d0cee18e4d179b2816d91e4de6283a56dae5b3a3094",
+      "cluster_id": "event:synthetic-event-duty",
+      "event_bundle_refs": [
+        {
+          "event_id": "event:synthetic-event-duty",
+          "event_version": 1,
+          "snapshot_sha256": "b706d4945bfbafe60d0b83782b173cb2a513501fc44b7020c9d7ed7ee62d1f2f",
+          "snapshot_ref": "retrieval-item:synthetic-event-duty@3e7f4f48832ef844a59df5ed5f60ee275efbec0fdf7729cfb851e38a805cd01e"
+        }
+      ],
+      "analysis_projection": {
+        "event_bundles": [
+          {
+            "bundle_schema_version": "retrieval-candidate-batch.v1",
+            "event": {
+              "event_id": "event:synthetic-event-duty",
+              "event_type": null,
+              "event_version": 1,
+              "first_published_at": "2026-10-23T09:00:00+00:00",
+              "quality": "partial",
+              "title": "Синтетическое объединённое событие",
+              "text_version": "3e7f4f48832ef844a59df5ed5f60ee275efbec0fdf7729cfb851e38a805cd01e",
+              "text_sha256": "4e66f20c40781a7374a8b4fcb081bab9c4c801d86273b2be6f3b820420c52395",
+              "title_origin": "derived_merge",
+              "processing_status": "ready",
+              "retrieval_status": "ready",
+              "retrieval_stop_reason": "candidate_limit"
+            },
+            "claims": [
+              {
+                "claim_id": "claim:1af38b24c6a9be89ff763cb2e81d4a34e6f2349704135edfb1eb418b8e29f4a5",
+                "text": " СИНТЕТИКА: объявлена отмена пошлины.",
+                "action": null,
+                "object": null,
+                "attribution": null,
+                "participants": [],
+                "geographies": [],
+                "measurements": [],
+                "modality": "unknown",
+                "polarity": "unknown",
+                "stage": null,
+                "scenario": null,
+                "time": null,
+                "evidence_ids": [
+                  "quote:1af38b24c6a9be89ff763cb2e81d4a34e6f2349704135edfb1eb418b8e29f4a5"
+                ],
+                "field_evidence": null,
+                "origin": "original_quote"
+              }
+            ],
+            "conflicts": [],
+            "relations": [],
+            "sources": [
+              {
+                "source_id": "split",
+                "title": "Синтетическая публикация split",
+                "publisher": "SYNTHETIC Publisher",
+                "published_at": "2026-10-23T09:00:00+00:00",
+                "url": "https://example.org/synthetic/split",
+                "is_synthetic": null,
+                "article_id": "synthetic:split",
+                "publication_precision": "timestamp",
+                "text_sha256": "ac11ea75d00a8d30d224811f1a7ac413e0fe335c7f6c7feda112993c06ec2716",
+                "title_origin": "source"
+              }
+            ],
+            "evidence": [
+              {
+                "evidence_id": "quote:1af38b24c6a9be89ff763cb2e81d4a34e6f2349704135edfb1eb418b8e29f4a5",
+                "quote": " СИНТЕТИКА: объявлена отмена пошлины.",
+                "source_id": "split",
+                "start": 38,
+                "end": 75,
+                "field": "text",
+                "origin": "original_quote"
+              }
+            ],
+            "limitations": [
+              "Проверены существование ссылок, хэши и точные срезы оригиналов. Истинность публикаций, смысловая полнота merge и следование пересказа из цитат автоматически не доказаны. Модальность и полярность исходных цитат не размечены.",
+              "Сходство при отборе не является бизнес-значимостью."
+            ],
+            "derived_context": {
+              "origin": "derived_merge",
+              "independent_evidence": false,
+              "semantic_entailment_checked": false,
+              "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+              "paragraphs": [
+                {
+                  "text": "Производный синтетический пересказ: опубликовано изменение условий.",
+                  "fragment_ids": [
+                    "1af38b24c6a9be89ff763cb2e81d4a34e6f2349704135edfb1eb418b8e29f4a5"
+                  ]
+                }
+              ],
+              "disagreements": [],
+              "title_fragment_ids": [],
+              "operation_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "result_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "configuration_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            }
+          }
+        ]
+      },
+      "match_context": {
+        "signals": [],
+        "matched_company_feature_ids": [],
+        "matched_event_claim_ids": [],
+        "confirmed_entity_match": null,
+        "impact_hypotheses": [
+          "Поисковая гипотеза, не факт компании: Возможное влияние тарифов; зависимость компании неизвестна"
+        ],
+        "assumptions_not_verified": [
+          "Cosine и inherited_trigger описывают отбор, а не значимость, уверенность или подтвержденную экспозицию компании.",
+          "Требует проверки энергозатрат",
+          "Гипотеза по виду деятельности"
+        ],
+        "prior_score": null
+      },
+      "bank_fragments": [],
+      "quality_flags": [],
+      "canonical_event_id": "event:synthetic-event-duty",
+      "reading_group_ids": [
+        "reading-group"
+      ],
+      "retrieval_context_hash": "15d7ca496c63c2f8517ea7a9fb012cd30c4adfb534157e2967c5d0c6353bda14",
+      "max_input_tokens": 8000
+    }
+  ],
+  "analysis_policy": {
+    "separate_facts_inferences_and_assumptions": true,
+    "require_supporting_claim_and_feature_ids": true,
+    "allow_exclude_and_insufficient_evidence": true,
+    "bank_rag_policy": "optional_tool_if_relevant",
+    "do_not_infer_supplier_from_payment": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "company_id": "SYNTHETIC",
+  "profile_version": "profile-1",
+  "interest_set_version": "interests-1",
+  "encoder_fingerprint": "synthetic-encoder",
+  "dimension": 2,
+  "interests": [
+    {
+      "interest_id": "energy",
+      "text": "Возможное влияние тарифов; зависимость компании неизвестна",
+      "family": "activity",
+      "active": true,
+      "vector": [
+        1.0,
+        0.0
+      ],
+      "applicable_when": "Требует проверки энергозатрат",
+      "applicability_basis": "Гипотеза по виду деятельности"
+    }
+  ]
+}

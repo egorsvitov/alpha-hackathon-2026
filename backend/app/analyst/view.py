@@ -217,6 +217,8 @@ def _claim_view(alias: str, c: ProjectionClaim) -> dict[str, Any]:
             "time": c.time,
             "measurements": measurements,
             "attribution": attribution,
+            "origin": getattr(c, "origin", None),
+            "evidence_ids": c.evidence_ids if getattr(c, "origin", None) == "original_quote" else None,
         }
     )
 
@@ -242,11 +244,16 @@ def _select_quotes(view: PromptView, cand: Candidate) -> tuple[list[dict[str, An
             if ev is None or not (ev.quote or "").strip() or ev_id in chosen or ev_id in omitted:
                 continue
             src = view.sources.get(ev.source_id or "")
+            # Утверждение нового ретривера само является точным фрагментом оригинала (origin=original_quote):
+            # текст не повторяем, помечаем совпадение — блок даёт источник, дату и координаты.
+            same = getattr(claim, "origin", None) == "original_quote" and claim.text == ev.quote
             item = compact({
                 "claim": alias, "source_id": ev.source_id,
                 "publisher": src.publisher if src else None,
                 "date": ((src.published_at or "")[:10] if src else None),
-                "start": ev.start, "end": ev.end, "quote": ev.quote,
+                "start": ev.start, "end": ev.end,
+                "same_as_claim": True if same else None,
+                "quote": None if same else ev.quote,
             })
             cost = _tokens(item) + 6  # + служебный id
             if used + cost > QUOTE_TOKEN_LIMIT:
@@ -278,6 +285,8 @@ def _add_extras(view: PromptView, inp: AnalystInput, cand: Candidate, completene
     if items or omitted:
         qblock: dict[str, Any] = {
             "note": "Дословные цитаты первоисточника; ссылайся на них по id (quote_ids)."
+                    + (" Если same_as_claim=true, текст цитаты совпадает с текстом утверждения (claim)."
+                       if any(i.get("same_as_claim") for i in items) else "")
                     + (" " + DERIVED_TEXT_NOTE if cand.derived_text else ""),
             "items": items,
         }
@@ -353,6 +362,8 @@ def build_prompt_view(
     limitations: list[str] = []
     titles: list[str] = []
     conflicts_view: list[dict[str, Any]] = []
+    derived_context: list[dict[str, Any]] = []
+    quotes_view: list[dict[str, Any]] = []
     n = 0
     first_event = None
     for bundle in cand.analysis_projection.event_bundles:
@@ -367,9 +378,16 @@ def build_prompt_view(
             claims_view.append(_claim_view(alias, c))
         for e in bundle.evidence:
             view.evidence[e.evidence_id] = e
+            if cand.canonical_event_id is not None:
+                quotes_view.append(compact(e.model_dump(mode="json")))
         for s in bundle.sources:
             view.sources[s.source_id] = s
-            sources_view.append(compact({"publisher": s.publisher, "date": (s.published_at or "")[:10], "synthetic": s.is_synthetic}))
+            if cand.canonical_event_id is not None:
+                sources_view.append(s.model_dump(mode="json"))
+            else:
+                sources_view.append(compact({"publisher": s.publisher, "date": (s.published_at or "")[:10], "synthetic": s.is_synthetic}))
+        if bundle.derived_context:
+            derived_context.append(bundle.derived_context)
         limitations.extend(LIMITATION_RU.get(x, x) for x in bundle.limitations if LIMITATION_RU.get(x, x) not in limitations)
         for conflict in bundle.conflicts:
             view.conflicts.append(conflict)
@@ -389,17 +407,22 @@ def build_prompt_view(
             compact({"id": alias, "date": fr.published_at, "title": fr.title, "quote": fr.quote, "applicability": fr.applicability})
         )
 
+    if extras:
+        # Единственный блок цитат в промпте v1.3+ — ``source_quotes`` (S1…): он же даёт алиасы для quote_ids.
+        # Блок ``original_quotes`` нового ретривера дублировал бы те же фрагменты, поэтому не выводится.
+        quotes_view = []
     mc = cand.match_context
     view.data = compact(
         {
             "role": inp.request.role,
             "as_of": inp.request.as_of[:16],
             "company": {
-                "note": "Обезличенный синтетический профиль; настоящее название неизвестно и не используется",
+                "note": ("Обезличенный синтетический профиль; настоящее название неизвестно и не используется"
+                         if ctx.synthetic_demo_profile else "Факты из переданного профиля; поисковые интересы не являются фактами компании"),
                 "facts": facts,
                 "exposures": exposures,
                 "related_by_payments": related,
-                "unknowns": ctx.unknowns[:8],
+                "unknowns": ctx.unknowns if cand.canonical_event_id is not None else ctx.unknowns[:8],
             },
             "event": {
                 "title": titles[0] if titles else None,
@@ -408,6 +431,13 @@ def build_prompt_view(
                 "published_at": (first_event.first_published_at or "")[:16] if first_event else None,
                 "quality": first_event.quality if first_event else None,
                 "claims": claims_view,
+                "original_quotes": quotes_view,
+                "derived_context": derived_context,
+                "canonical_event_id": cand.canonical_event_id,
+                "reading_group_ids": cand.reading_group_ids,
+                "text_version": getattr(first_event, "text_version", None),
+                "text_sha256": getattr(first_event, "text_sha256", None),
+                "title_origin": getattr(first_event, "title_origin", None),
                 "conflicts": conflicts_view,
                 "sources": sources_view,
                 "limitations": limitations,
@@ -417,6 +447,7 @@ def build_prompt_view(
                 "matched_features": [view._feature_by_real[f] for f in mc.matched_company_feature_ids if f in view._feature_by_real],
                 "entity_name_match": mc.confirmed_entity_match,
                 "not_verified": mc.assumptions_not_verified,
+                "hypotheses": mc.impact_hypotheses if cand.canonical_event_id is not None else [],
             },
             "bank_fragments": bank_view,
         }
@@ -427,6 +458,20 @@ def build_prompt_view(
         view.notes.append(COMPLETENESS_LIMITATIONS[completeness])
     if extras:
         _add_extras(view, inp, cand, completeness)
+    if cand.canonical_event_id is not None:
+        view.data["as_of"] = inp.request.as_of
+        # Keep unknown dates/URLs explicit; compact() would otherwise erase them.
+        view.data["event"]["sources"] = sources_view
+        view.data["event"]["published_at"] = first_event.first_published_at if first_event else None
+        view.data["event"]["processing_status"] = getattr(first_event, "processing_status", "unknown")
+        view.data["event"]["retrieval_status"] = getattr(first_event, "retrieval_status", "unknown")
+        view.data["event"]["retrieval_stop_reason"] = getattr(first_event, "retrieval_stop_reason", "unknown")
+        quotes_name = "source_quotes" if extras else "original_quotes"
+        view.data["event"]["evidence_policy"] = (
+            f"claims и {quotes_name} — точные цитаты исходных публикаций. derived_context и заголовок merge — "
+            "производный текст, не независимые доказательства; нельзя цитировать их как отдельный источник. "
+            "Ссылки подтверждают происхождение, но не доказывают смысловую корректность пересказа."
+        )
     if previous is not None:
         if previous.items:
             view.data["previous_context"] = {

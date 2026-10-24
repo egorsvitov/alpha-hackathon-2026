@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_serializer, model_validator
 
 ANALYST_INPUT_VERSION = "AnalystInput.v1-draft"
 ANALYST_OUTPUT_VERSION = "AnalystOutput.v1-draft"
@@ -115,6 +115,13 @@ class CompanyContext(BaseModel):
     # Гипотезы ретривера о каналах влияния (отдельно от verified_facts и unknowns).
     retrieval_interests: list[RetrievalInterest] = Field(default_factory=list)
 
+    @model_serializer(mode="wrap")
+    def _omit_empty_interests(self, handler: Any) -> dict[str, Any]:
+        data = handler(self)
+        if not data.get("retrieval_interests"):
+            data.pop("retrieval_interests", None)
+        return data
+
 
 class EventBundleRef(BaseModel):
     event_id: str
@@ -177,6 +184,8 @@ class ProjectionBundle(BaseModel):
     sources: list[ProjectionSource] = Field(default_factory=list)
     evidence: list[ProjectionEvidence] = Field(default_factory=list)
     limitations: list[str] = Field(default_factory=list)
+    # Производный merge не входит в claims/evidence и не может стать цитатой QA.
+    derived_context: dict[str, Any] = Field(default_factory=dict)
 
 
 class AnalysisProjection(BaseModel):
@@ -223,8 +232,11 @@ class Candidate(BaseModel):
     quality_flags: list[str] = Field(default_factory=list)
     # Идентичность события: группа похожих публикаций и итоговое (каноническое) событие.
     # Дубликат — только одинаковый ``canonical_event_id``; общий кластер/группа дублем не считается.
-    reading_group_id: str | None = None
+    reading_group_id: str | None = None  # основная группа чтения (для вывода)
     canonical_event_id: str | None = None
+    # Все группы чтения, в которые входит событие (адаптер нового ретривера); основная группа — ``reading_group_id``
+    # или первая из списка. Членство в группе дублем не считается.
+    reading_group_ids: list[str] = Field(default_factory=list)
     # Текст события — производный пересказ (а не дословный текст источника).
     derived_text: bool | None = None
     # Полнота кандидата: ``unresolved`` — принадлежность группы не подтверждена, анализируется
@@ -233,6 +245,19 @@ class Candidate(BaseModel):
     group_member_refs: list[str | dict[str, Any]] = Field(default_factory=list)
     # Части контекста, не поместившиеся в бюджет (заполняет адаптер при ``over_budget``).
     omitted_parts: list[str] = Field(default_factory=list)
+    # Хэш всего входа кандидата от адаптера нового ретривера (входит в ключ кэша), и бюджет входных токенов.
+    retrieval_context_hash: str | None = None
+    max_input_tokens: int | None = None
+
+    @model_serializer(mode="wrap")
+    def _omit_unused_extensions(self, handler: Any) -> dict[str, Any]:
+        """Необязательные поля нового ретривера, которых вход не задаёт, не попадают в дамп:
+        опубликованная форма ``AnalystInput`` (и примеры ``docs/examples``) остаётся прежней."""
+        data = handler(self)
+        for key in ("reading_group_id", "derived_text", "completeness", "group_member_refs", "omitted_parts"):
+            if key in data and data[key] in (None, []):
+                del data[key]
+        return data
 
 
 class AnalystRequest(BaseModel):
@@ -498,6 +523,7 @@ class EventRef(BaseModel):
     event_id: str
     event_version: int = 1
     reading_group_id: str | None = None
+    reading_group_ids: list[str] | None = None  # все группы чтения (None — не задано входом)
     canonical_event_id: str | None = None
 
 
@@ -567,6 +593,7 @@ class RankedInsight(BaseModel):
     cluster_id: str
     event_refs: list[EventRef]
     reading_group_id: str | None = None
+    reading_group_ids: list[str] | None = None  # все группы чтения (None — не задано входом)
     canonical_event_id: str | None = None
     decision: Literal["include", "watch"]
     priority_score: float
@@ -618,6 +645,7 @@ class ExcludedCandidate(BaseModel):
     headline: str | None = None
     facts: list[Statement] = Field(default_factory=list)
     reading_group_id: str | None = None
+    reading_group_ids: list[str] | None = None  # все группы чтения (None — не задано входом)
     canonical_event_id: str | None = None
     # Исход: ``excluded`` — кандидат осознанно не показывается; ``deferred`` — не обработан
     # и может быть обработан позже (бюджет, слишком большой контекст); ``failed`` — сбой анализа.
@@ -660,6 +688,7 @@ class CandidateRun(BaseModel):
     # Отпечаток блока «предыдущий контекст» из памяти фактов (None — блока не было).
     memory_ref: str | None = None
     reading_group_id: str | None = None
+    reading_group_ids: list[str] | None = None  # все группы чтения (None — не задано входом)
     canonical_event_id: str | None = None
 
 
@@ -690,6 +719,7 @@ class RunMetadata(BaseModel):
     # Сколько кандидатов закончилось без инсайта, по кодам причин (``not_relevant``,
     # ``analysis_failed``, ``budget_exhausted``, ``context_too_large`` …).
     outcome_counts: dict[str, int] = Field(default_factory=dict)
+    input_diagnostics: dict[str, Any] | None = None
 
 
 class AnalystOutput(BaseModel):

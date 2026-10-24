@@ -108,6 +108,8 @@ def cache_key(
         parts.append(memory_ref)
     if input_ref:
         parts.append(input_ref)
+    if cand.retrieval_context_hash:
+        parts.append("rc:" + cand.retrieval_context_hash)
     return "|".join(parts)
 
 
@@ -118,6 +120,8 @@ def loose_key(
     parts = [company_id, f"{ref.event_id}@{ref.event_version}#{ref.snapshot_sha256[:12]}", role, profile_version, prompt_version]
     if input_ref:
         parts.append(input_ref)
+    if cand.retrieval_context_hash:
+        parts.append("rc:" + cand.retrieval_context_hash)
     return "|".join(parts)
 
 
@@ -140,14 +144,20 @@ def _event_refs(cand: Candidate) -> list[EventRef]:
     return [
         EventRef(
             event_id=r.event_id, event_version=r.event_version,
-            reading_group_id=cand.reading_group_id, canonical_event_id=cand.canonical_event_id,
+            **_identity(cand),
         )
         for r in cand.event_bundle_refs
     ]
 
 
-def _identity(cand: Candidate) -> dict[str, str | None]:
-    return {"reading_group_id": cand.reading_group_id, "canonical_event_id": cand.canonical_event_id}
+def _identity(cand: Candidate) -> dict[str, Any]:
+    """Идентичность события для вывода. Основная группа — ``reading_group_id`` или первая из
+    ``reading_group_ids`` (новый ретривер); полный список групп — ``reading_group_ids`` (None, если не задан)."""
+    groups = list(cand.reading_group_ids)
+    primary = cand.reading_group_id or (groups[0] if groups else None)
+    if primary and primary not in groups and groups:
+        groups.insert(0, primary)
+    return {"reading_group_id": primary, "reading_group_ids": groups or None, "canonical_event_id": cand.canonical_event_id}
 
 
 # Коды исходов без инсайта, которые НЕ означают «событие не важно»: сбой, бюджет, слишком большой контекст.
@@ -316,6 +326,20 @@ class BusinessAnalyst:
             )
 
         excluded = self.precheck(inp, cand)
+        if excluded is None and cand.max_input_tokens is not None:
+            from app.analyst.prompt_budget import estimate_prompt_tokens
+
+            tokens = estimate_prompt_tokens(inp, cand, self.base_prompt_version, previous=previous, fewshot=self.fewshot)
+            if tokens > cand.max_input_tokens:
+                excluded = ExcludedCandidate(
+                    candidate_id=cand.candidate_id, cluster_id=cand.cluster_id, event_refs=_event_refs(cand),
+                    reason_code="context_too_large",
+                    reason=f"Полный промпт с памятью: оценка {tokens} токенов превышает лимит {cand.max_input_tokens}",
+                    status="deferred", missing_parts=["контекст события превышает бюджет промпта с памятью"],
+                    headline=(cand.analysis_projection.event_bundles[0].event.title
+                              if cand.analysis_projection.event_bundles else None),
+                    **_identity(cand),  # type: ignore[arg-type]
+                )
         if excluded is not None:
             run = CandidateRun(
                 candidate_id=cand.candidate_id, model=None, prompt_version=pver, generated_by="rules",
@@ -666,7 +690,7 @@ class BusinessAnalyst:
                     ExcludedCandidate(
                         candidate_id=r.candidate_id, cluster_id=r.cluster_id, event_refs=r.event_refs,
                         reason_code="duplicate", reason="Дубликат события, уже показанного выше", headline=r.headline,
-                        reading_group_id=r.reading_group_id, canonical_event_id=canonical,
+                        reading_group_id=r.reading_group_id, reading_group_ids=r.reading_group_ids, canonical_event_id=canonical,
                     )
                 )
                 continue
@@ -682,7 +706,7 @@ class BusinessAnalyst:
                     ExcludedCandidate(
                         candidate_id=r.candidate_id, cluster_id=r.cluster_id, event_refs=r.event_refs,
                         reason_code="insufficient_evidence", reason="За пределами лимита инсайтов запроса", headline=r.headline,
-                        reading_group_id=r.reading_group_id, canonical_event_id=r.canonical_event_id,
+                        reading_group_id=r.reading_group_id, reading_group_ids=r.reading_group_ids, canonical_event_id=r.canonical_event_id,
                     )
                 )
             unique = unique[: inp.request.max_insights]

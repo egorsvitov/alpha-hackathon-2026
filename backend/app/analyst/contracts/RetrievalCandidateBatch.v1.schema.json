@@ -1,0 +1,362 @@
+{
+  "$defs": {
+    "ArticleRevision": {
+      "additionalProperties": false,
+      "properties": {
+        "article_id": {
+          "minLength": 1,
+          "title": "Article Id",
+          "type": "string"
+        },
+        "language": {
+          "default": "und",
+          "title": "Language",
+          "type": "string"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        },
+        "provenance": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Provenance",
+          "type": "array"
+        },
+        "publication_precision": {
+          "default": "unknown",
+          "enum": [
+            "timestamp",
+            "day",
+            "unknown"
+          ],
+          "title": "Publication Precision",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Published At"
+        },
+        "revision_id": {
+          "minLength": 1,
+          "title": "Revision Id",
+          "type": "string"
+        },
+        "source": {
+          "default": "",
+          "title": "Source",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "default": "",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "title_origin": {
+          "default": "source",
+          "enum": [
+            "source",
+            "generated_identifier",
+            "unknown"
+          ],
+          "title": "Title Origin",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "required": [
+        "revision_id",
+        "article_id",
+        "text"
+      ],
+      "title": "ArticleRevision",
+      "type": "object"
+    },
+    "Candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "best_interest_id": {
+          "title": "Best Interest Id",
+          "type": "string"
+        },
+        "embedding_score": {
+          "title": "Embedding Score",
+          "type": "number"
+        },
+        "group_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Group Ids",
+          "type": "array"
+        },
+        "interest_scores": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Interest Scores",
+          "type": "object"
+        },
+        "item": {
+          "$ref": "#/$defs/SearchItem"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "score_origin": {
+          "default": "cosine",
+          "enum": [
+            "cosine",
+            "inherited_trigger"
+          ],
+          "title": "Score Origin",
+          "type": "string"
+        },
+        "selection_score": {
+          "title": "Selection Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "item",
+        "selection_score",
+        "embedding_score",
+        "best_interest_id",
+        "interest_scores"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    },
+    "SearchItem": {
+      "additionalProperties": false,
+      "properties": {
+        "derived_from": {
+          "additionalProperties": true,
+          "title": "Derived From",
+          "type": "object"
+        },
+        "embedding_text": {
+          "minLength": 1,
+          "title": "Embedding Text",
+          "type": "string"
+        },
+        "item_id": {
+          "minLength": 1,
+          "title": "Item Id",
+          "type": "string"
+        },
+        "item_version": {
+          "default": "1",
+          "title": "Item Version",
+          "type": "string"
+        },
+        "kind": {
+          "default": "article",
+          "enum": [
+            "article",
+            "event"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "publication_count": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Publication Count",
+          "type": "integer"
+        },
+        "source_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Source Count",
+          "type": "integer"
+        },
+        "source_revision_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Revision Ids",
+          "type": "array"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "title": {
+          "default": "",
+          "title": "Title",
+          "type": "string"
+        },
+        "was_merged": {
+          "default": false,
+          "title": "Was Merged",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "item_id",
+        "text",
+        "embedding_text",
+        "source_revision_ids"
+      ],
+      "title": "SearchItem",
+      "type": "object"
+    }
+  },
+  "$id": "urn:retriever:RetrievalCandidateBatch:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "as_of": {
+      "title": "As Of",
+      "type": "string"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/Candidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "company_id": {
+      "title": "Company Id",
+      "type": "string"
+    },
+    "corpus_id": {
+      "title": "Corpus Id",
+      "type": "string"
+    },
+    "deferred": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Deferred",
+      "type": "array"
+    },
+    "encoder_fingerprint": {
+      "title": "Encoder Fingerprint",
+      "type": "string"
+    },
+    "index_generation": {
+      "title": "Index Generation",
+      "type": "integer"
+    },
+    "interest_set_version": {
+      "title": "Interest Set Version",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "profile_version": {
+      "title": "Profile Version",
+      "type": "string"
+    },
+    "request_id": {
+      "title": "Request Id",
+      "type": "string"
+    },
+    "requested_k": {
+      "title": "Requested K",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": "retrieval-candidate-batch.v1",
+      "default": "retrieval-candidate-batch.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/ArticleRevision"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "partial",
+        "empty"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "stop_reason": {
+      "title": "Stop Reason",
+      "type": "string"
+    },
+    "trace_id": {
+      "title": "Trace Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "company_id",
+    "profile_version",
+    "interest_set_version",
+    "corpus_id",
+    "index_generation",
+    "encoder_fingerprint",
+    "as_of",
+    "requested_k",
+    "status",
+    "stop_reason",
+    "candidates",
+    "sources",
+    "trace_id"
+  ],
+  "title": "RetrievalCandidateBatch",
+  "type": "object"
+}
